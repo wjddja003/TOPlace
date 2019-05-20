@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	김동천 형상관리 확인용입니다.
 </body>
 </html>
