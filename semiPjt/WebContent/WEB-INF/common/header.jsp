@@ -15,9 +15,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <title>Insert title here</title>
     <style>
+    	body{
+    		position: relative;
+    	}
     	*{
     		margin:0;
-    		color:black;
+    		color:#ffffff;
     		font-size:20px;
     		font-weight:bold;
     	}
@@ -31,7 +34,7 @@
             box-sizing: border-box;
             height: 100%;
             line-height: 100px;
-            background-color: #846FE8;
+            background-color: black;
             padding: 0;
         }
         .logo{
@@ -55,30 +58,37 @@
             width:25%;
         }
         .navi li:hover{
-            font-size: 18px;
+            font-size: 23px;
             cursor: pointer;
         }
         #test{
-            
-            height: 818px;
-            z-index: 1;
-            position: relative;
-            
+            width:100%;
+            height: 864px;
+            background-color: azure;
         }
         #header-search{
-            background-color: blue;
-            z-index: 0;
-            height: 500px;
+            background-color: floralwhite;
+            display:none;
+            width:100%;
+            height: 700px;
             position: absolute;
-            top: 150px;
+            top: 100px;
         }
         #header-mypage{
-            background-color: darkmagenta;
+            background-color: floralwhite;
             width: 300px;
-            height: 968px;
-            z-index: 0;
-            position: fixed;
-            float: right;
+            height: 964px;
+            display:none;
+            position: absolute;
+            right:0px;
+            top:0px;
+        }
+        .back{
+        	float: right;
+        	font-size:30px;
+        	background-color: black;
+        	color:white;
+        	border:0px;
         }
     </style>
 </head>
@@ -92,29 +102,32 @@
                 <a href="/"><li class="navi-li">공간등록</li></a>
             </ul>
         </div>
-        <div class="header realtime" style="width:10%;">실시간</div>
-        <div class="header search" style="width:7.5%;">검색</div>
-        <div class="header mypage" style="width:7.5%;">마이페이지</div>
+        <div class="header realtime" style="width:9.6%;">실시간</div>
+        <div class="header search" style="width:7.7%;">검색</div>
+        <div class="header mypage" style="width:7.7%;">마이페이지</div>
     </header>
-   
-    <div id="test">
-        
-    </div>
     <div id="header-search">
-        
+        <button class="back">X</button>
     </div>
     <div id="header-mypage">
-        
+        <button class="back">></button>
     </div>
     <script>
         
         $(".search").click(function(){
-            $("#header-search").css("z-index","2");
+        	$("#header-mypage").css("display","none");
+            $("#header-search").css("display","block");
             $("#test").css("opacity","0.5");
         });
         $(".mypage").click(function(){
-            $("#header-mypage").css("z-index","2");
+        	$("#header-search").css("display","none");
+            $("#header-mypage").css("display","block");
             $("#test").css("opacity","0.5");
+        });
+        $(".back").click(function(){
+        	$("#header-search").css("display","none");
+        	$("#header-mypage").css("display","none");
+        	$("#test").css("opacity","1");
         });
     </script>
 
