@@ -12,6 +12,7 @@
 <script src="../Calendar/moment.min.js"></script>
 <script src="../Calendar/jquery.daterangepicker.js"></script>
 <script src="../Calendar/demo.js"></script>
+<script>var jc = jQuery.noConflict();</script>
 <style>
 #wrapper {
 	width: 800px;
@@ -50,18 +51,20 @@
 </style>
 </head>
 <body>
+	<%@ include file="/WEB-INF/common/header.jsp" %>
 	<div id="wrapper">
 		<div class="demo">
 			Single Month Mode: <input id="date-range23" size="30" value="">
 		</div>
 	</div>
 		<script>
+		 	
 	$(function()
 	{
-		$('a.show-option').click(function(evt)
+		jc('a.show-option').click(function(evt)
 		{
 			evt.preventDefault();
-			$(this).siblings('.options').slideToggle();
+			jc(this).siblings('.options').slideToggle();
 		});
 	})
 	</script>

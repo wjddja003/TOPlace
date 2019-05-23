@@ -11,7 +11,7 @@ $(function()
 	define a new language named "custom"
 	*/
 
-	$.dateRangePickerLanguages['custom'] = 
+	jc.dateRangePickerLanguages['custom'] = 
 	{
 		'selected': 'Choosed:',
 		'days': 'Days',
@@ -42,7 +42,7 @@ $(function()
 		'default-default': 'This is costom language'
 	};
 	
-	$('#date-range23').dateRangePicker(
+	jc('#date-range23').dateRangePicker(
 	{
 		singleMonth: true,
 		showShortcuts: false,
