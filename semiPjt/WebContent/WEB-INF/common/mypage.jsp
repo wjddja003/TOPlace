@@ -15,7 +15,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <title>Insert title here</title>
     <style>
+        
         #mypage{
+            position: fixed; 
             background-color: floralwhite;
             width: 300px;
             height: 964px;
@@ -23,7 +25,7 @@
             right:0px;
             top:0px;
         }
-        #aside-login{
+        #aside-login_t{
             padding-top: 25%;
             border: 1px solid black;
             background-color: darkgray;
@@ -32,46 +34,126 @@
             text-align: center;
             
         }
-        #aside-login li{
+        #aside-login_t li{
+            
             list-style-type: none;
             float: left;
         }
+        #aside-login_t li a{
+            color: black;
+            text-decoration: none;
+        }
         .aside-mng{
-            border: 1px solid black;
+            border: 1px solid gray;
             width: 100%;
             height: 10%;
             box-sizing: border-box;
+            border-bottom: none;
         }
         .aside-mng_1{
-            border: 1px solid black;
+            border: 1px solid gray;
             height: 100%;
             width: 50%;
             float: left;
-            
+            color: gray;
+            border-bottom: none;
         }
-        .aside-mng_2{
-            border:1px solid black;
-            height: 100%;
-            width: 50%;
-            float: left;
+        .aside-list ul{
+            padding: 0;
+            margin: 0;
+        }
+        .aside-list li{
+            padding-top: 25px;
+            padding-left: 20px;
+            color: black;
+            list-style-type: none;
+            border: 1px solid gray;
+            width: 300px;
+            height: 80px;
+            border-bottom: none;
+        }
+        .aside-list a{
+            text-decoration: none;
+        }
+        #aside-login_b{
+            border: 1px solid gray;
+            width: 100%;
+            height: 20%;
+            position: relative;
+            border-bottom: none;
+        }
+        #aside-login_b a{
+            text-decoration: none;
+            color: gray;
+            position: absolute;
+            top: 60px;
+            left: 120px;
+        }
+        #aside-host{
+            border: 1px solid gray;
+            width: 100%;
+            height: 20%;
+            position: relative;
+        }
+        #aside-host a{
+            text-decoration: none;
+            color: gray;
+            position: absolute;
+            top: 60px;
+            left: 65px;
         }
     </style>
 </head>
 <body>
 	
     <div id="mypage">
-        <div id="aside-login">
+        <div id="aside-login_t">
             <ul>
                 <li><a><img src="img/img_profile_default.jpg"</a></li>
                 <li><a href="#">로그인이 필요합니다.</a></li>
             </ul>
         </div>
         <div class="aside-mng">
-            <a href="#"><div class="aside-mng_1">예약리스트</div></a>
-            <a href="#"><div class="aside-mng_2">이용후기/Q＆A관리</div></a>
+            <a href="#"><div class="aside-mng_1 r">예약리스트</div></a>
+            <a href="#"><div class="aside-mng_1 l">이용후기/Q＆A관리</div></a>
         </div>
-        <div class="aside-"></div>
+        <div class="aside-list">
+            <ul>
+                <a href="#"><li>공지사항&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ></li></a>
+               <a href="#"> <li>도움말&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ></li></a>
+               <a href="#"> <li>1:1문의&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ></li></a>
+               <a href="#"> <li>서비스정보&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ></li></a>
+            </ul>
+        </div>
+        <div id="aside-login_b">
+            <a href="#">로그인</a>
+        </div>
+        <div id="aside-host">
+            <a href="#">호스트센터로 이동</a>
+        </div>
        
     </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </body>
 </html>
