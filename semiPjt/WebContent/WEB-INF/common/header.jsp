@@ -17,12 +17,17 @@
     <style>
     	body{
     		position: relative;
+    		color:#fff;
+    		font-size:20px;
+    		font-weight:bold;
+    	}
+    	#navi-bar a{
+    		color:#fff;
+    		font-size:20px;
+    		font-weight:bold;
     	}
     	*{
     		margin:0;
-    		color:#ffffff;
-    		font-size:20px;
-    		font-weight:bold;
     	}
         header{
         	width: 100%;
