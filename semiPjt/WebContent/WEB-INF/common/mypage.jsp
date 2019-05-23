@@ -102,11 +102,14 @@
             top: 60px;
             left: 65px;
         }
+      
+        }
     </style>
 </head>
 <body>
 	
     <div id="mypage">
+        <button class="back">></button>
         <div id="aside-login_t">
             <ul>
                 <li><a><img src="img/img_profile_default.jpg"</a></li>
