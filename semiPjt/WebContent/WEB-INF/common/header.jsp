@@ -27,6 +27,7 @@
         header{
         	width: 100%;
             height: 100px;
+            position: fixed;
         }
         .header{
             text-align: center;
@@ -80,8 +81,10 @@
             height: 964px;
             display:none;
             position: absolute;
+            position: fixed;
             right:0px;
             top:0px;
+            
         }
         .back{
         	float: right;
@@ -111,6 +114,7 @@
     </div>
     <div id="header-mypage">
         <button class="back">></button>
+        <%@ include file="/WEB-INF/common/mypage.jsp" %>
     </div>
     <script>
         
