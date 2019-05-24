@@ -99,9 +99,11 @@
 		</div>
 	</div>
 	<script>
+		
 		$('.placeType').click(function(){
-			var type = $(this).text();
-			location.href="/headerSearchPlace?type="+type;
+			var index = $('.placeType').index(this);
+			var type = $('.placeType').eq(index).text();
+			location.href="/headerSearchPlace?type="+type+"&index="+index;
 		});
 		$("#searchInput").keydown(function(key) {
 			if(key.keyCode == 13){
@@ -111,7 +113,13 @@
 	                $("#searchAlert").slideUp(700);
 	           } else {
 	   				var type = $(this).val();
-	   				location.href="/headerSearchPlace?type="+type;
+	   				var index = 0;
+	   				for(var i=0;i<$('.placeType').length;i++){
+	   					if($('.placeType').eq(i).text()==type){
+	   						index=i;
+	   					}
+	   				}
+	   				location.href="/headerSearchPlace?type="+type+"&index="+index;
 	           }
 			}
         });
@@ -122,7 +130,13 @@
                 $("#searchAlert").slideUp(700);
            } else {
    				var type = $("#searchInput").val();
-   				location.href="/headerSearchPlace?type="+type;
+   				var index = 0;
+   				for(var i=0;i<$('.placeType').length;i++){
+   					if($('.placeType').eq(i).text()==type){
+   						index=i;
+   					}
+   				}
+   				location.href="/headerSearchPlace?type="+type+"&index="+index;
            }
         });
 	</script>

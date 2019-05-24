@@ -1,6 +1,8 @@
 package toplace.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,8 +29,13 @@ public class HeaderSearchPlaceServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		int index = Integer.parseInt(request.getParameter("index"));
 		String type = request.getParameter("type");
-		System.out.println(type);
+		System.out.println(type+","+index);
+		request.setAttribute("type", type);
+		request.setAttribute("index", index);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/detailSearch.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
