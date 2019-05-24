@@ -131,11 +131,11 @@
         <div class="header mypage" style="width:7.7%;">마이페이지</div>
     </header>
     <div id="header-search">
-        <%@ include file="/views/headerSearch.jsp" %>
+        <jsp:include page="/views/headerSearch.jsp"/>
     </div>
     <div id="header-mypage">
         <button class="back">></button>
-        <%@ include file="/WEB-INF/common/mypage.jsp" %>
+        <jsp:include page="/WEB-INF/common/mypage.jsp"/>
     </div>
     <script>
         
