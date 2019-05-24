@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 	<style type="text/css">
 		#navi-bar a:first-child{
-			color: red;
+			color: gainsboro;
+            background-color: purple
 		}
 	</style>
 </head>
