@@ -116,10 +116,23 @@
 				<li>전신거울</li>
 				<li>바베큐시설</li>
 				<li>도어락</li>
-			</ul><br><br><br><br><br>
+			</ul><br><br><br><br><br><br>
 			<input type="hidden" name="kategorie2" id="kategorie2">
 			
-			이메일
+			웹사이트<br>
+			<input type="text" name="placeWeb" id="placeWeb" class="form-control" placeholder="웹사이트 URL을 입력해주세요.(예시:http://toplace.com)">
+			<br>
+			
+			대표이미지<span class="red"> *</span><br>
+			<span style="border:1px solid lightgray;">이미지.jpg</span>
+			<button type="button" class="btn btn-outline-primary condition">파일첨부</button>
+			<br><br>
+			
+			이미지<br>
+			<span style="border:1px solid lightgray;">이미지.jpg</span>
+			<br><br>
+			
+			주소(위치)<span class="red"> *</span>
 		</div>
 		<!-- 프로세스2 -->
 		<div id="process-2">두번째</div>
@@ -245,48 +258,54 @@
 				$('#bt-1').css("visibility","hidden");
 				state = 1;
 			}
-			function next(state){
-				$('#processBar-'+state).css("background-color","white");
-				$('#process-'+state).css("display","none");
-				$('#processBar-'+state+1).css("background-color","lightblue");
-				$('#process-'+state+1).css("display","block");
-			}
 			$("#bt-2").click(function(){
 				if(state==1){
 					$("#kategorie1").val(kategorie1.join(',')); //val
 					alert($("#kategorie1").val());
 					$("#kategorie2").val(kategorie2.join(','));
 					alert($("#kategorie2").val());
-					next(state);
+					$('#processBar-1').css("background-color","white");
+					$('#process-1').css("display","none");
+					$('#processBar-2').css("background-color","lightblue");
+					$('#process-2').css("display","block");
 					$('#bt-1').css("visibility","visible");
 					state=2;
 				}else if(state==2){
-					next(state);
+					$('#processBar-2').css("background-color","white");
+					$('#process-2').css("display","none");
+					$('#processBar-3').css("background-color","lightblue");
+					$('#process-3').css("display","block");
 					state=3;
 				}else if(state==3){
-					next(state);
+					$('#processBar-3').css("background-color","white");
+					$('#process-3').css("display","none");
+					$('#processBar-4').css("background-color","lightblue");
+					$('#process-4').css("display","block");
 					$("#bt-2").css("display","none");
 					$("#bt-submit").css("display","inline");
 					state=4;
 				}
 			});
-			function prev(state){
-				$('#processBar-'+state).css("background-color","white");
-				$('#process-'+state).css("display","none");
-				$('#processBar-'+state-1).css("background-color","lightblue");
-				$('#processBar-'+state-1).css("display","block");
-			}
 			$("#bt-1").click(function(){
 				if(state==4){
-					prev(state);
+					$('#processBar-4').css("background-color","white");
+					$('#process-4').css("display","none");
+					$('#processBar-3').css("background-color","lightblue");
+					$('#process-3').css("display","block");
 					$("#bt-2").css("display","inline");
 					$("#bt-submit").css("display","none");
 					state=3;
 				}else if(state==3){
-					prev(state);
+					$('#processBar-3').css("background-color","white");
+					$('#process-3').css("display","none");
+					$('#processBar-2').css("background-color","lightblue");
+					$('#process-2').css("display","block");
 					state=2;
 				}else if(state==2){
-					prev(state);
+					$('#processBar-2').css("background-color","white");
+					$('#process-2').css("display","none");
+					$('#processBar-1').css("background-color","lightblue");
+					$('#process-1').css("display","block");
 					$('#bt-1').css("visibility","hidden");
 					state=1;
 				}
