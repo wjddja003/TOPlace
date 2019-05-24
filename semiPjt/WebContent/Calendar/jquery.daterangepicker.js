@@ -1258,7 +1258,7 @@
 		{
 			date = moment(date).toDate();
 			var monthName = nameMonth(date.getMonth());
-			box.find('.'+month+' .month-name').html(monthName+' '+date.getFullYear());
+			box.find('.'+month+' .month-name').html(date.getFullYear()+' '+monthName);
 			box.find('.'+month+' tbody').html(createMonthHTML(date));
 			opt[month] = date;
 			updateSelectableRange();
