@@ -22,9 +22,16 @@
 	line-height: 1.5;
 	font-size: 14px;
 }
-
+.caption th{
+	color:black;
+}
+th{
+	color:black;
+	font-weight:normal;
+}
 .demo {
 	margin: 30px 0;
+	color: black;
 }
 
 .date-picker-wrapper .month-wrapper table .day.lalala {
@@ -48,6 +55,7 @@
 .date-picker-wrapper.date-range-picker19 .day.last-date-selected {
 	background-color: orange !important;
 }
+
 </style>
 </head>
 <body>
