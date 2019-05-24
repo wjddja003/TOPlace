@@ -7,6 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<style type="text/css">
+		.container{
+			margin : 50px 0 0 0;
+			
+		}
+	</style>
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
 
 </head>
@@ -15,7 +21,8 @@
 <center>
 	<section>
 		<form action="/" method="post">
-			<table>
+		<div class="container">
+			<table class="table">
 				<tr>
 					<td><label>아이디</label></td>
                     <td><input type="text" id="userId" style="width:200px; height:30px" maxlength="16"><span id="idMsg">  ID는 영문소문자와 숫자만 입력 가능합니다.</span>
@@ -68,8 +75,10 @@
 				</tr>
 				<tr>
 					<td>이메일</td>
-					<td><input type="text" name="email" id="email"> <button type="button" class="btn1">인증</button></td>
-					<td><label id="eTxt"></label></td>
+					<td>
+						<input type="text" name="email" id="email"> <button type="button" class="btn1">인증</button><br>
+						<label id="eTxt"></label>
+					</td>
 				</tr>
 				<tr>
 					<td>휴대폰</td>
@@ -90,6 +99,7 @@
 				</tr>
 				
 			</table>
+		</div>
 		</form>
 	</section>
 </center>

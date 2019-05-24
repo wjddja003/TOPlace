@@ -25,7 +25,7 @@
 <body>
 	<%@ include file="/WEB-INF/common/header.jsp" %>
 	<div class=container>
-	<form action="#" method="post">
+	<form action="/login" method="post">
 		<div class="login">
 			<table>
 				<tr>
@@ -45,7 +45,7 @@
 					<td><button type="submit" style="width:100%;">로그인</button></td>
 				</tr>
 				<tr>
-					<td>로그인 상태 유지 </td><td><a href="/join.jsp">회원가입</a></td><td>아이디/비밀번호찾기</td>
+					<td>로그인 상태 유지 </td><td><a href="/views/join.jsp">회원가입</a></td><td>아이디/비밀번호찾기</td>
 				</tr>
 			
 			</table>
