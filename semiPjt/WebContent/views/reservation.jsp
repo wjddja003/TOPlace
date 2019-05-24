@@ -12,7 +12,7 @@
 <script src="../Calendar/moment.min.js"></script>
 <script src="../Calendar/jquery.daterangepicker.js"></script>
 <script src="../Calendar/demo.js"></script>
-<script>var jc = jQuery.noConflict();</script>
+<script>var jc = jQuery.noConflict();</script> <%-- 제이쿼리 충돌 해결코드 --%>
 <style>
 #wrapper {
 	width: 800px;
@@ -59,18 +59,20 @@ th{
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/common/header.jsp" %>
 	<br><br><br><br>
 	<div id="wrapper">
+		<div class="demo">
+			Single date Mode: <input id="date-range13" size="30" value="">
+		</div>
 		<div class="demo">
 			Single Month Mode: <input id="date-range23" size="30" value="">
 		</div>
 		<div class="time">
-			Single Time Mode: <input id="time-range01" size="30" value="">
+			
 		</div>
 	</div>
 	<script>
-		$(function()
+		jc(function()
 		{
 			jc('a.show-option').click(function(evt)
 			{
@@ -78,13 +80,6 @@ th{
 				jc(this).siblings('.options').slideToggle();
 			});
 		})
-		
-		$(document).ready(function(){
-			$('#time-range01').click(function(){
-				
-				
-			});
-		});
 	</script>
 </body>
 </html>

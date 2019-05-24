@@ -24,18 +24,18 @@
 		'default':  //default language: English
 		{
 			'selected': 'Selected:',
-			'day':'일',
-			'days': '일',
+			'day':'Day',
+			'days': 'Days',
 			'apply': 'Close',
-			'week-1' : '월',
-			'week-2' : '화',
-			'week-3' : '수',
-			'week-4' : '목',
-			'week-5' : '금',
-			'week-6' : '토',
-			'week-7' : '일',
+			'week-1' : 'mon',
+			'week-2' : 'tue',
+			'week-3' : 'wed',
+			'week-4' : 'thu',
+			'week-5' : 'fri',
+			'week-6' : 'sat',
+			'week-7' : 'sun',
 			'week-number': 'W',
-			'month-name': ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			'month-name': ['01','02','03','04','05','06','07','08','09','10','11','12'],
 			'shortcuts' : 'Shortcuts',
 			'custom-values': 'Custom Values',
 			'past': 'Past',
@@ -620,7 +620,7 @@
 			var w1 = box.find('.month1').width();
 			var w2 = box.find('.gap').width() + ( gapMargin ? gapMargin*2 : 0 );
 			var w3 = box.find('.month2').width();
-			box.find('.month-wrapper');
+			box.find('.month-wrapper').width(w1 + w2 + w3);
 		}
 
 		function renderTime (name, date) {
@@ -1258,7 +1258,7 @@
 		{
 			date = moment(date).toDate();
 			var monthName = nameMonth(date.getMonth());
-			box.find('.'+month+' .month-name').html(date.getFullYear()+' '+monthName);
+			box.find('.'+month+' .month-name').html(date.getFullYear()+'.'+monthName+'.');
 			box.find('.'+month+' tbody').html(createMonthHTML(date));
 			opt[month] = date;
 			updateSelectableRange();
@@ -1388,12 +1388,12 @@
 
 			var _colspan = opt.showWeekNumbers ? 6 : 5;
 			html += '<div class="month-wrapper">'
-				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:130px;height:50px;font-size: 30px;"><span class="prev">&lt;</span></th><th colspan="'+_colspan+'" class="month-name" style="width:130px;height:50px;font-size: 30px;"></th><th style="width:130px;height:50px;font-size: 30px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
+				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="'+_colspan+'" class="month-name" style="font-size:30px;"></th><th style="width:27px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
 
 			if ( hasMonth2() )
 			{
 				html += '<div class="gap">'+getGapHTML()+'</div>'
-					+'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:80px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
+					+'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
 			}
 				//+'</div>'
 			html +=	'<div style="clear:both;height:0;font-size:0;"></div>'
