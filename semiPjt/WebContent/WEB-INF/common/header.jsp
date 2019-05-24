@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="toplace.model.vo.Commit"%>
+    <%
+    	Commit c = (Commit)session.getAttribute("member");
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -89,14 +92,35 @@
         .back{
         	float: right;
         	font-size:30px;
+        	width:50px;
+        	height:50px;
         	background-color: black;
         	color:white;
         	border:0px;
         }
+        .search:hover{
+            font-size: 23px;
+            cursor: pointer;
+        }
+        .mypage:hover{
+            font-size: 23px;
+            cursor: pointer;
+        }
+        #searchAlert{
+			width:100%;
+			height:100px;
+			text-align:center;
+			line-height:100px;
+			font-size:30px;
+			background-color: black;
+			letter-spacing: 5px;
+			display: none;
+		}
     </style>
 </head>
 <body> 
 	<header>
+		<div id="searchAlert">검색어를 입력해주세요</div>
         <a href="/"><div class="header logo" style="width:15%;"></div></a>
         <div class="header navi" style="width:60%;">
             <ul id="navi-bar">
@@ -110,7 +134,7 @@
         <div class="header mypage" style="width:7.7%;">마이페이지</div>
     </header>
     <div id="header-search">
-        <button class="back">X</button>
+        <%@ include file="/views/headerSearch.jsp" %>
     </div>
     <div id="header-mypage">
         <button class="back">></button>

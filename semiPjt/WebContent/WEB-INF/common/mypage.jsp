@@ -125,7 +125,7 @@
         <div id="aside-login_t">
             <ul>
                 <li><a><img src="img/img_profile_default.jpg"</a></li>
-                <li><a href="#">로그인이 필요합니다.</a></li>
+                <li><a href="/views/login.jsp">로그인이 필요합니다.</a></li>
             </ul>
         </div>
         <div class="aside-mng">
