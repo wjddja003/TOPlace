@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import noticeSy.model.service.NoticeService;
-import noticeSy.model.vo.NoticePageData;
-
 /**
- * Servlet implementation class NoticeListServlet
+ * Servlet implementation class QaMngmentServlet
  */
-@WebServlet(name = "NoticeList", urlPatterns = { "/noticeList" })
-public class NoticeListServlet extends HttpServlet {
+@WebServlet(name = "QaMngment", urlPatterns = { "/qaMngment" })
+public class QaMngmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeListServlet() {
+    public QaMngmentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +29,8 @@ public class NoticeListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int reqPage;
-		try {
-			reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		}catch (NumberFormatException e) {
-			reqPage = 1;
-		}
-		NoticePageData pd = new NoticeService().selectList(reqPage);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp");
-		request.setAttribute("pd", pd);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qaMngment.jsp");
 		rd.forward(request, response);
-		
 	}
 
 	/**

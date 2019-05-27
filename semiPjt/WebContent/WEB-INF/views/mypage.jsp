@@ -124,18 +124,18 @@
         <button class="back">></button>
         <div id="aside-login_t">
             <ul>
-                <li><a><img src="img/img_profile_default.jpg"</a></li>
+                <li><a><img src="img/logo.jpg"></a></li>
                 <li><a href="/views/login.jsp">로그인이 필요합니다.</a></li>
             </ul>
         </div>
         <div class="aside-mng">
             <a href="#"><div class="aside-mng_1 r">예약리스트</div></a>
-            <a href="#"><div class="aside-mng_1 l">이용후기/Q＆A관리</div></a>
+            <a href="/qaMngment"><div class="aside-mng_1 l">Q＆A관리</div></a>
         </div>
         <div class="aside-list">
             <ul class="aside-navi">
                 <li><a href="/noticeList">공지사항<span>></span></a></li>
-                <li><a href="#">도움말<span>></span></a></li>
+                <li><a href="/help">도움말<span>></span></a></li>
                 <li><a href="#">1:1문의<span>></span></a></li>
                 <li class="service"><a href="#">서비스정보<span>v</span></a></li>
                 <div style="display:none" id="sv_list">
