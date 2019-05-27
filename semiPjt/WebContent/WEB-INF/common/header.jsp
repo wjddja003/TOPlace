@@ -18,7 +18,7 @@
 <body> 
 	<header>
        <div class="header logo" style="width:15%;">
-           <a href="/index.jsp"><img src="img/logo.png" width="200px" height="100px"></a>
+           <a href="/index.jsp"><img src="../img/logo.png" width="200px" height="100px"></a>
         </div>
         <!--logo Fin-->
         <div class="header navi" style="width:60%;">
