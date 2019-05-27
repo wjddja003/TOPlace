@@ -25,7 +25,7 @@
             <ul id="navi-bar">
                <li class="navi-li"> <a href="/views/testmenu.jsp">베스트</a></li>
                 <li class="navi-li"><a href="#">핫딜/이벤트</a></li>
-                <li class="navi-li"><a href="#">공간등록</a></li>
+                <li class="navi-li"><a href="/views/insertSpace.jsp">공간등록</a></li>
             </ul>
         </div>
         <div class="header realtime" style="width:9.6%;">실시간</div>

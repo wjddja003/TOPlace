@@ -29,6 +29,29 @@
 		height:60px;
 		border: 1px solid black;
 		}
+	.filebox label { 
+		display: inline-block; 
+		padding: .5em .75em; 
+		color: #7bc143; 
+		font-size: inherit; 
+		line-height: normal; 
+		vertical-align: middle; 
+		background-color: #fdfdfd; 
+		cursor: pointer; 
+		border: 1px solid #7bc143; 
+		border-bottom-color: #7bc143; 
+		border-radius: .25em; } 
+	.filebox input[type="file"] { /* 파일 필드 숨기기 */ 
+		position: absolute; 
+		width: 1px; 
+		height: 1px; 
+		padding: 0; 
+		margin: -1px; 
+		overflow: hidden; 
+		clip:rect(0,0,0,0); 
+		border: 0; 
+		}
+	
 	</style>
 </head>
 <body>
@@ -124,12 +147,21 @@
 			<br>
 			
 			대표이미지<span class="red"> *</span><br>
-			<span style="border:1px solid lightgray;">이미지.jpg</span>
-			<button type="button" class="btn btn-outline-primary condition">파일첨부</button>
+				<img id="img1img" width="400px" height="200px" style="display:none;">
+				<input id="img1text" type="text" class="form-control" style="background:white;width:400px;height:200px;display:inline" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)" readonly>
+			<div class="filebox condition" style="display:inline; border:0;"> 
+			<label for="img1" class="btn btn-outline-success">업로드</label> 
+			<input type="file" id="img1" name="img1" onchange="loadImg1(this)"> 
+			</div>
 			<br><br>
 			
 			이미지<br>
-			<span style="border:1px solid lightgray;">이미지.jpg</span>
+				<img id="img2img" width="400px" height="200px" style="display:none;">
+				<input id="img2text" type="text" class="form-control" style="background:white;width:500px;height:200px;display:inline" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)" readonly>
+			<div class="filebox condition" style="display:inline; border:0;"> 
+			<label for="img2" class="btn btn-outline-success">업로드</label> 
+			<input type="file" id="img2" name="img2" onchange="loadImg2(this)" multiple="multiple"> 
+			</div>
 			<br><br>
 			
 			주소(위치)<span class="red"> *</span>
@@ -250,6 +282,47 @@
 					$(this).css("background-color","white");
 				}
 			});
+			//img1
+			function loadImg1(f){
+				if(f.files.length!=0 && f.files[0]!=0){ //f.file -> 선택한 파일을 가져옴 (배열형태로) , f.files[0] -> 0번재 파일의 크기
+					var reader = new FileReader();	//JS의 FileReader 객체 -> 객체 내부의 result 속성에 파일 컨텐츠가 있음
+					reader.readAsDataURL(f.files[0]);	//선택한 파일의 경로를 읽어옴
+					reader.onload = function(e){
+						$("#img1img").attr("src",e.target.result);
+						$("#img1img").css("display","inline");
+						$("#img1text").css("display","none");
+						alert($("#img1").val());
+					}
+				} else{ //파일을 뺄 경우
+					$("#img1img").attr("src","");
+					$("#img1img").css("display","none");
+					$("#img1text").css("display","inline");
+				}
+			}
+			//img2
+			function loadImg2(f){
+				var text = "";
+				
+				if(f.files.length!=0){
+					for(var i = 0; i<f.files.length;i++){
+						var reader = new FileReader();
+						reader.readAsDataURL(f.files[i]);	//선택한 파일의 경로를 읽어옴
+						reader.onload = function(e){
+							$("#img2img").attr("src",e.target.result);
+							$("#img2img").css("display","inline");
+							$("#img2text").css("display","none");
+						}
+						text += $("#img2").val();
+						alert(text);
+					}
+				}else{ //파일을 뺄 경우
+					$("#img2img").attr("src","");
+					$("#img2img").css("display","none");
+					$("#img2text").css("display","inline");
+					alert($("#img2").val());
+				}
+					
+			}
 		//프로세스 이전,다음 로직
 			var state = 0;
 			window.onload = function(){
