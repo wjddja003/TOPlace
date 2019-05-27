@@ -7,49 +7,61 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 	<style type="text/css">
-		*{
-			margin: 0 auto;
-		}	
-		.container{
-			position: absolute;
-			top: 150px;
+		.logincontainer{
+			background-color: ivory;
+			padding: 80px 0 0 0;
 			width: 100%;
-					
+			height: 800px;		
 		}
-		.login{
-			width: 700px;
-			
+		.loginLogo{
+			margin: 0 0 50px 0;
+		}
+		.loginTxt{
+			padding: 0 10px 0 0;
+			color:black;
+		}
+		input{
+			padding : 0 0 10px;
+			margin: 0 0 20px 0;
+		}
+		.insert{
+			line-height: 50px;
+			width:100%;
+			margin: 0 0 10px;
+			height: 50px;
 		}
 	</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/common/header.jsp" %>
-	<div class=container>
+	<center>
+	<div class="logincontainer">
 	<form action="/login" method="post">
-		<div class="login">
+		<div class="logincontainer login">
 			<table>
 				<tr>
-					<td style="text-align: center;">logo</td>
+					<td style="text-align: center;" colspan="3"><img class="loginLogo" src="../img/logo.png"></td>
 				</tr>
 				<tr>
-					<td>
-						<input type="text" name="userId" placeholder="아이디">
+					<td colspan="3">
+						<input class="insert" type="text" name="userId" placeholder="아이디" >
 					</td>
 				</tr>
 				<tr>
-					<td>
-						<input type="password" name="userPw" placeholder="비밀번호">
+					<td colspan="3">
+						<input class="insert" type="password" name="userPw" placeholder="비밀번호">
 					</td>
 				</tr>
 				<tr>
-					<td><button type="submit" style="width:100%;">로그인</button></td>
+					<td colspan="3"><button type="submit" style="width:100%;">로그인</button></td>
 				</tr>
 				<tr>
-					<td>로그인 상태 유지 </td><td><a href="/views/join.jsp">회원가입</a></td><td>아이디/비밀번호찾기</td>
+					<td><a href="/views/join.jsp"><span class="loginTxt">회원가입</span></a></td><td><a href="#"><span class="loginTxt" style="padding:0;">아이디</span></a><span>·</span><a href="#"><span class="loginTxt">비밀번호찾기</span></a></td><td><span>로그인 상태 유지</span></td>
 				</tr>
 			
 			</table>
 		</div>
+		
 	<!--  <a id="kakao-login-btn"></a>
 		<a href="http://developers.kakao.com/logout"></a>
 		<script type='text/javascript'>
@@ -70,5 +82,6 @@
 		</script> 카카오 로그인 미완성 --> 
 	</form>
 	</div>
+	</center>
 </body>
 </html>

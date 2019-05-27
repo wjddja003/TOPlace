@@ -1,0 +1,39 @@
+@charset "UTF-8";
+.headerInnerSearch{
+			width:1180px;
+			padding-top: 50px;
+			padding-bottom: 50px;
+			margin-left:370px;
+			margin-right:370px;
+		}
+		.selectArea{
+			margin-top:30px;
+		}
+		.typeOutline{
+			width:100%;
+			clear:left;
+			height:50px;
+		}
+		.searchP{
+			margin-bottom : 10px;
+		}
+		.placeType{
+			box-sizing: border-box;
+			border: 1px solid gainsboro;	
+			width:16.66%;
+			height:100%;
+			float: left;
+			text-align: center;
+			line-height: 50px;
+			font-size:17px;
+			color: darkgrey;
+		}
+		.placeType:hover{
+			cursor: pointer;
+			background-color:purple;
+			color:black;
+			font-size:20px;
+		}
+		.searchIcon:hover{
+			cursor: pointer;
+		}

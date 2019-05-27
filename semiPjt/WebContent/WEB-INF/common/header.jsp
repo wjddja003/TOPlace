@@ -1,24 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
+
 <link rel="stylesheet" type="text/css" href="/css/index.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script
       src="https://code.jquery.com/jquery-3.4.0.js"
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
-      crossorigin="anonymous">   
+      crossorigin="anonymous">
 </script>
 <!--JS-->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<title>Insert title here</title>
-   
-</head>
-<body> 
+<script type="text/javascript" src="/js/headerSearch.js"></script>
+<script type="text/javascript" src="/js/header.js"></script>
 	<header>
+		<div id="searchAlert">검색어를 입력해주세요.</div>
        <div class="header logo" style="width:15%;">
-           <a href="/index.jsp"><img src="img/logo.png" width="200px" height="100px"></a>
+           <a href="/index.jsp"><img src="../img/logo.png" width="200px" height="100px"></a>
         </div>
         <!--logo Fin-->
         <div class="header navi" style="width:60%;">
@@ -33,7 +31,7 @@
         <div class="header mypage" style="width:7.7%;">마이페이지</div>
     </header>
     <div id="header-search">
-        <button class="back">X</button>
+        <jsp:include page="/views/headerSearch.jsp"/>
     </div>
     <div id="header-mypage">
         <button class="back">></button>
@@ -41,23 +39,7 @@
     </div>
     <script>
         
-        $(".search").click(function(){
-        	$("#header-mypage").css("display","none");
-            $("#header-search").css("display","block");
-            $("#test").css("opacity","0.5");
-        });
-        $(".mypage").click(function(){
-        	$("#header-search").css("display","none");
-            $("#header-mypage").css("display","block");
-            $("#test").css("opacity","0.5");
-        });
-        $(".back").click(function(){
-        	$("#header-search").css("display","none");
-        	$("#header-mypage").css("display","none");
-        	$("#test").css("opacity","1");
-        });
+       
     </script>
 
-</body>
-</html>
     

@@ -1,0 +1,17 @@
+$(document).ready(function(){
+	 $(".search").click(function(){
+     	$("#header-mypage").css("display","none");
+         $("#header-search").css("display","block");
+         $("#test").css("opacity","0.5");
+     });
+     $(".mypage").click(function(){
+     	$("#header-search").css("display","none");
+         $("#header-mypage").css("display","block");
+         $("#test").css("opacity","0.5");
+     });
+     $(".back").click(function(){
+     	$("#header-search").css("display","none");
+     	$("#header-mypage").css("display","none");
+     	$("#test").css("opacity","1");
+     });
+});
