@@ -136,7 +136,7 @@
             <ul class="aside-navi">
                 <li><a href="/noticeList">공지사항<span>></span></a></li>
                 <li><a href="/help">도움말<span>></span></a></li>
-                <li><a href="#">1:1문의<span>></span></a></li>
+                <li><a href="https://talk.naver.com/ct/wc89we">1:1문의<span>></span></a></li>
                 <li class="service"><a href="#">서비스정보<span>v</span></a></li>
                 <div style="display:none" id="sv_list">
                         <ul>

@@ -136,7 +136,7 @@ section {
 }
 /*section 전체 틀 fin*/
 .wrap {
-	background: url(img/main_background.jpg) no-repeat left top;
+	background: url(/img/main_background.jpg) no-repeat left top;
 	background-size: cover;
 	background-repeat: no-repeat;
 	width: 100%;
