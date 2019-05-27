@@ -111,6 +111,18 @@ header {
 	color: white;
 	border: 0px;
 }
+.realtime:hover {
+	font-size: 23px;
+	cursor: pointer;
+}
+.search:hover {
+	font-size: 23px;
+	cursor: pointer;
+}
+.mypage:hover {
+	font-size: 23px;
+	cursor: pointer;
+}
 /*header fin*/
 
 section {
@@ -123,6 +135,39 @@ section {
 	margin: 0 auto;
 }
 /*section 전체 틀 fin*/
+.wrap {
+	background: url(img/main_background.jpg) no-repeat left top;
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+}
+
+.content {
+	width: 800px;
+	margin: 0 auto;
+}
+
+#search {
+	width: 400px;
+	float: left;
+}
+
+#search input[type="type"] {
+	width: 400px;
+	height: 60px;
+}
+
+#search input[type="submit"] {
+	background: url(img/main_search_icon.png) no-repeat center center;
+	position: absolute;
+	top: 89%;
+	left: 59%;
+	margin: 0px;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+}
 
 footer {
 	height: 200px;
