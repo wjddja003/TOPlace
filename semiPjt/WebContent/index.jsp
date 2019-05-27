@@ -13,39 +13,6 @@
     </script>
 <title>Insert title here</title>
 </head>
-<style>
-    .wrap{
-        background: url(img/background2.jpg) no-repeat left top;
-        background-size: cover;
-        background-repeat: no-repeat;
-        width:100%;  
-        height: 100%;
-    }
-    .content{
-        width: 800px;
-        margin: 0 auto;
-    }
-    #search{
-        width: 400px;
-        float: left;
-    }
-    #search input[type="type"]{
-        width: 400px;
-        height: 60px;
-    }
-      #search input[type="submit"]{
-        background: url(img/main_search_icon.png) no-repeat center center;
-        position: absolute;
-        top: 89%;
-        left: 59%;
-        margin: 0px;
-        outline: none;
-        border:0;
-        cursor: pointer;
-        
-    }
-	
-</style>
 <body>
     
 		<div class="wrap">
