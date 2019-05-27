@@ -8,9 +8,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 	<style type="text/css">
-		.container{
-			margin : 50px 0 0 0;
+		.joincontainer{
+			background-color: ivory;
+			height: 840px;
 			
+		}
+		.join{
+			width:70%;
+		}
+		.joinheader{
+			padding: 40px 0 0 0;
+			text-align: left;
+			font-size: 30px;
+			font-weight: 900;
 		}
 	</style>
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
@@ -19,9 +29,13 @@
 <body>
 	<%@ include file="/WEB-INF/common/header.jsp" %>
 <center>
-	<section>
-		<form action="/" method="post">
-		<div class="container">
+	<div class="joincontainer">
+		<form action="/join" method="post">
+			
+			<div class="joincontainer join">
+			<div class="joinheader">
+				<p>회원가입</p>
+			</div>
 			<table class="table">
 				<tr>
 					<td><label>아이디</label></td>
@@ -83,13 +97,13 @@
 				<tr>
 					<td>휴대폰</td>
 					<td>
-						<select style="width:70px; height:30px;">
+						<select style="width:70px; height:30px;" name="phone">
                             <option>선택</option>
                         	<option>010</option>
                             <option>011</option>
                         </select>
-                        <span style="margin:0 5px 0 5px;"> - </span><input type="text" id="phone1" style="width:70px; height:30px" maxlength="4">
-                        <span style="margin:0 5px 0 5px;"> - </span><input type="text" id="phone2" style="width:70px; height:30px" maxlength="4"> 
+                        <span style="margin:0 5px 0 5px;"> - </span><input type="text" id="phone1" name="phone1" style="width:70px; height:30px" maxlength="4">
+                        <span style="margin:0 5px 0 5px;"> - </span><input type="text" id="phone2" name="phone2" style="width:70px; height:30px" maxlength="4"> 
                         <br><label id="phoneMsg"></label>
                     </td>
 				</tr>
@@ -97,11 +111,10 @@
 					<td>주소</td>
 					<td><input type="text" id="addrNum" name="addrNum" style="width:100px; height:20px;"><button type="button" class="addressinsert" >우편주소</button><br><input type="text" id="address" name="address" style="width:350px; height:20px; font-size:10px;"></td>				
 				</tr>
-				
 			</table>
-		</div>
+			</div>
 		</form>
-	</section>
+	</div>
 </center>
 	<script type="text/javascript">
 	$(".btn1").click(function(){
@@ -111,10 +124,6 @@
 		pop.location.href=url+"?email="+email;
 		
 	});
-	$(".addressinsert").click(function(){
-		var pop = window.open("/jusoPopup.jsp","주소찾기",'width=600,height=700');
-		pop.location.href;
-	})
 	$(document).ready(function(){
 		 var userName = /^[가-힣]([가-힣]{1,3})$/;
 		 var userId = /^[a-z0-9]([a-z0-9]{3,11})$/;

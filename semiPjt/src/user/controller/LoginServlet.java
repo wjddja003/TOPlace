@@ -1,4 +1,4 @@
-package toplace.controller;
+package user.controller;
 
 import java.io.IOException;
 
@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import toplace.model.vo.Commit;
+import user.model.service.UserService;
+import user.model.vo.User;
 
 /**
  * Servlet implementation class LoginServlet
@@ -33,10 +34,10 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("userId");
 		String pw = request.getParameter("userPw");
-		Commit c = new Commit().login(id,pw);
-		if(c!=null) {
+		User u = new UserService().login(id,pw);
+		if(u!=null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("Member", c);
+			session.setAttribute("User", u);
 		}
 		
 	}
