@@ -24,7 +24,6 @@
 	                    <input type="submit" value="">
                     </div>
                 </div>
-         
         </section>
         </div>
       
