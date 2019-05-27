@@ -26,10 +26,10 @@ public class JDBCTemplate {
 			e.printStackTrace();
 		}
 	}
-	public static void close(ResultSet rstmt) {
+	public static void close(ResultSet rset) {
 		try {
-			if(rstmt !=null && !rstmt.isClosed()) {
-				rstmt.close();
+			if(rset !=null && !rset.isClosed()) {
+				rset.close();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
