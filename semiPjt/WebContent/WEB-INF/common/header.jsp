@@ -37,7 +37,7 @@
     </div>
     <div id="header-mypage">
         <button class="back">></button>
-        <jsp:include page="/WEB-INF/common/mypage.jsp"/>
+        <jsp:include page="/WEB-INF/views/mypage.jsp"/>
     </div>
     <script>
         
