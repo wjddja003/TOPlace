@@ -1,14 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/css/index.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script
+      src="https://code.jquery.com/jquery-3.4.0.js"
+      integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+      crossorigin="anonymous">   
+    </script>
 <title>Insert title here</title>
 </head>
+<style>
+    .wrap{
+        background: url(img/background2.jpg) no-repeat left top;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width:100%;  
+        height: 100%;
+    }
+    .content{
+        width: 800px;
+        margin: 0 auto;
+    }
+    #search{
+        width: 400px;
+        float: left;
+    }
+    #search input[type="type"]{
+        width: 400px;
+        height: 60px;
+    }
+      #search input[type="submit"]{
+        background: url(img/main_search_icon.png) no-repeat center center;
+        position: absolute;
+        top: 89%;
+        left: 59%;
+        margin: 0px;
+        outline: none;
+        border:0;
+        cursor: pointer;
+        
+    }
+	
+</style>
 <body>
-
-	<jsp:include page="/WEB-INF/common/header.jsp"/>
+    
+		<div class="wrap">
+		   <jsp:include page="/WEB-INF/common/header.jsp"/>  
+        <section>
+                <div class="section_content">
+                	<div id="search">
+	                    <input type="text" placeholder="검색어를 입력해주세요">
+	                    <input type="submit" value="">
+                    </div>
+                </div>
+         
+        </section>
+        </div>
+      
+	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 
 </body>
 </html>
