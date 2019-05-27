@@ -8,8 +8,6 @@
 <title>Insert title here</title>
 	<style>
 	
-	body *{box-sizing: border-box;}
-	#thisPageDiv div{border:1px solid black;}
 	#processBar div{ float:left; width:25%;}
 	#process div:not(#process-bt){display:none;}
 	
@@ -57,11 +55,11 @@
 <body>
 <!-- 헤더파일포함 -->
 		<jsp:include page="/WEB-INF/common/header.jsp"/>
-		<br><br><br><br><br><br><br>
-<!-- 헤더를 제외한 이 페이지의 가장 큰 Div -->
-<div id="thisPageDiv">
+		<br><br>
+<section>
+<div class="section content">
 	<!-- 프로세스바 -->
-	<div id="processBar" style="margin:0 auto;width:80%;text-align:center;">
+	<div id="processBar" style="text-align:center;">
 		<div id="processBar-1">1.기본 정보<br>공간정보를 입력해주세요</div>
 		<div id="processBar-2">2.연락처 정보<br>연락처 정보를 입력해주세요.</div>
 		<div id="processBar-3">3.이용 안내<br>이용 정보를 입력해주세요.</div>
@@ -71,10 +69,10 @@
 		<br>
 		<br>
 		<br>
-		<span class="red condition" style="margin-right:10%;">* 필수입력</span>
+		<span class="red condition">* 필수입력</span>
 		<br>
 	<!-- 프로세스를 담는 Div -->	
-	<div id="process" style="margin:0 auto;width:80%;">
+	<div id="process"">
 	
 		<!-- 프로세스1 -->
 		<div id="process-1">
@@ -151,16 +149,21 @@
 				<input id="img1text" type="text" class="form-control" style="background:white;width:400px;height:200px;display:inline" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)" readonly>
 			<div class="filebox condition" style="display:inline; border:0;"> 
 			<label for="img1" class="btn btn-outline-success">업로드</label> 
-			<input type="file" id="img1" name="img1" onchange="loadImg1(this)"> 
+			<input type="file" id="img1" name="img1" onchange="loadImg1(this)" accept="image/*"> 
 			</div>
 			<br><br>
 			
 			이미지<br>
-				<img id="img2img" width="400px" height="200px" style="display:none;">
+				<%for(int i = 0; i<10; i++){%>
+				<%if(i==5){%>
+				<br>
+				<% }%>
+				<img id="img2img<%=i %>" width="100px" height="100px" style="display:none;">
+				<%} %>
 				<input id="img2text" type="text" class="form-control" style="background:white;width:500px;height:200px;display:inline" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)" readonly>
 			<div class="filebox condition" style="display:inline; border:0;"> 
 			<label for="img2" class="btn btn-outline-success">업로드</label> 
-			<input type="file" id="img2" name="img2" onchange="loadImg2(this)" multiple="multiple"> 
+			<input type="file" id="img2" name="img2" onchange="loadImg2(this)" multiple="multiple" accept="image/*"> 
 			</div>
 			<br><br>
 			
@@ -183,6 +186,8 @@
 		</div>
 	</div>
 </div>
+</section>
+<jsp:include page="/WEB-INF/common/footer.jsp"/> <!-- footer 추가 -->
 
 
 		<script>
@@ -194,9 +199,11 @@
 				if(optimizer.test(value)){
 					$("#opspan1").text("사용가능한 공간명입니다.");
 					$("#opspan1").css("color","blue");
+					check1[0] = true;
 				}else{
 					$("#opspan1").text("사용불가한 공간명입니다.");
 					$("#opspan1").css("color","red");
+					check1[0] = false;
 				}
 			});
 		//kategorie1	
@@ -301,27 +308,27 @@
 			}
 			//img2
 			function loadImg2(f){
-				var text = "";
-				
-				if(f.files.length!=0){
-					for(var i = 0; i<f.files.length;i++){
+				if(f.files.length!=0 && f.files[0]!=0){
+					$("#img2text").css("display","none");
+					for(var i=0;i<10;i++){
+						$("#img2img"+i).css("display","inline");
+					}
+					for(var j = 0; j<f.files.length; j++){
 						var reader = new FileReader();
-						reader.readAsDataURL(f.files[i]);	//선택한 파일의 경로를 읽어옴
 						reader.onload = function(e){
-							$("#img2img").attr("src",e.target.result);
-							$("#img2img").css("display","inline");
-							$("#img2text").css("display","none");
+							$("#img2img"+j).attr("src",e.target.result);
+							reader.readAsDataURL(f.files[j]);//선택한 파일의 경로를 읽어옴
+							alert($("#img2").val());
 						}
-						text += $("#img2").val();
-						alert(text);
 					}
 				}else{ //파일을 뺄 경우
-					$("#img2img").attr("src","");
-					$("#img2img").css("display","none");
 					$("#img2text").css("display","inline");
-					alert($("#img2").val());
+					for(var k=0;k<10;k++){
+						$("#img2img"+k).attr("src","");
+						$("#img2img"+k).css("display","none");
+						
+					}
 				}
-					
 			}
 		//프로세스 이전,다음 로직
 			var state = 0;
@@ -330,13 +337,23 @@
 				$('#process-1').css("display","block");
 				$('#bt-1').css("visibility","hidden");
 				state = 1;
-			}
+			};
+			
+//			var check1 = [false];
+//			var check11 = ["#placeName"];
+			
 			$("#bt-2").click(function(){
 				if(state==1){
-					$("#kategorie1").val(kategorie1.join(',')); //val
-					alert($("#kategorie1").val());
-					$("#kategorie2").val(kategorie2.join(','));
-					alert($("#kategorie2").val());
+//					for(var i = 0 ; i<check1.length;i++){
+//						if(check1[i]==false){
+//							$(check11[i]).focus();
+//							return;
+//						}
+//					}
+					//$("#kategorie1").val(kategorie1.join(',')); //val
+					//alert($("#kategorie1").val());
+					//$("#kategorie2").val(kategorie2.join(','));
+					//alert($("#kategorie2").val());
 					$('#processBar-1').css("background-color","white");
 					$('#process-1').css("display","none");
 					$('#processBar-2').css("background-color","lightblue");
