@@ -4,19 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Insert title here</title>
 	<style>
-		div{
-			box-sizing: border-box;
-		}
-		#detailSearchDiv{
-			width:1180px;
-			padding-top: 50px;
-			padding-bottom: 50px;
-			margin-left:370px;
-			margin-right:370px;
-			height: 864px;
-		}
 		.searchInfo{
 			width:100%;
 			height:100px;
@@ -56,7 +46,9 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
-	<div id="detailSearchDiv">
+	
+	<section>
+	<div class="section_content">
 		<div class="searchInfo">
 			<span style="color:blue;font-weight:bold;font-size:30px;"><u>${type }</u></span><span style="font-weight:100;font-size:30px;"> (으)로 검색한 결과입니다.</sapn>
 		</div>
@@ -116,32 +108,32 @@
 			<button id="detailSearchFilter" class="detailSearchBtn">필터</button>
 		</div>
 	</div>
-	<script>
-		$(document).ready(function(){
-			var index = ${index};
-			if(index>=0 && index<12){
-				$('.selectBox').eq(0).html('${type }<span>▽</span>');
-				$('.placeTypeDetail').eq(index).css("background-color","blue");
-			} else if(index>=12 && index<18){
-				$('.selectBox').eq(1).html('${type }<span>▽</span>');
-				$('.placeTypeDetail').eq(index).css("background-color","blue");
-			} else{
-				$('.selectBox').eq(2).html('${type }<span>▽</span>');
+	</section>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var index = '${index	}';
+		if (index >= 0 && index < 12) {
+			$('.selectBox').eq(0).html('${type }<span>▽</span>');
+			$('.placeTypeDetail').eq(index).css("background-color", "blue");
+		} else if (index >= 12 && index < 18) {
+			$('.selectBox').eq(1).html('${type }<span>▽</span>');
+			$('.placeTypeDetail').eq(index).css("background-color", "blue");
+		} else {
+			$('.selectBox').eq(2).html('${type }<span>▽</span>');
+		}
+		var count = 0;
+		$('.selectBox').click(function() {
+			if (count == 0) {
+				$(this).find('span').html('▲');
+				count = 1;
+				$(this).next().css("display", "block");
+			} else {
+				$(this).find('span').html('▽');
+				count = 0;
+				$(this).next().css("display", "none");
 			}
-			var count = 0;
-			$('.selectBox').click(function(){
-				if(count == 0){
-					$(this).find('span').html('▲');
-					count = 1;
-					$(this).next().css("display","block");
-				}else{
-					$(this).find('span').html('▽');
-					count = 0;
-					$(this).next().css("display","none");
-				}
-			});
 		});
-		
+	});
 	</script>
 </body>
 </html>
