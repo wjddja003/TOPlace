@@ -20,8 +20,8 @@
         <section>
                 <div class="section_content">
                 	<div id="main_search">
-	                    <input type="text" placeholder="검색어를 입력해주세요">
-	                    <input type="submit" value="">
+	                    <input class="searchInput" type="text" placeholder="검색어를 입력해주세요">
+	                    <input class="searchIcon" type="submit" value="">
                     </div>
                 </div>
 
