@@ -306,30 +306,23 @@
 					$("#img1text").css("display","inline");
 				}
 			}
-			//img2
-			function loadImg2(f){
-				if(f.files.length!=0 && f.files[0]!=0){
-					$("#img2text").css("display","none");
-					for(var i=0;i<10;i++){
-						$("#img2img"+i).css("display","inline");
-					}
-					for(var j = 0; j<f.files.length; j++){
-						var reader = new FileReader();
-						reader.onload = function(e){
-							$("#img2img"+j).attr("src",e.target.result);
-							reader.readAsDataURL(f.files[j]);//선택한 파일의 경로를 읽어옴
-							alert($("#img2").val());
-						}
-					}
-				}else{ //파일을 뺄 경우
-					$("#img2text").css("display","inline");
-					for(var k=0;k<10;k++){
-						$("#img2img"+k).attr("src","");
-						$("#img2img"+k).css("display","none");
-						
-					}
+			//img2////////////////////////////////////////////////////////////////////////////
+			var file = document.getElementById("img2");
+			file.onchange = function(e){
+				$("#img2text").css("display","none");
+				var fileReader = new FileReader();
+				for(var i =0; i<e.target.files.length;i++){
+				fileReader.readAsText(e.target.files[i]);
+				fileReader.onload = function(e){
+					console.log(e.target.result);
+					$("#img2img"+i).css("display","inline");
+					$("#img2img"+i).attr("src",e.target.result[i]);
+				}
 				}
 			}
+			
+			
+			
 		//프로세스 이전,다음 로직
 			var state = 0;
 			window.onload = function(){
