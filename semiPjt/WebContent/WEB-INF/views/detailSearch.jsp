@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <title>Insert title here</title>
 	<style>
 		.searchInfo{
@@ -29,6 +28,11 @@
 			color: darkgrey;
 			text-align: center;
 			width:40%;
+			cursor: pointer;
+		}
+		.placeTypeDetail:hover{
+			background-color:purple;
+			color:black;
 		}
 		.typeOutlineDetail{
 			clear:left;
@@ -42,6 +46,29 @@
 		.selectBox:hover{
 			cursor: pointer;
 		}
+		.detailSearch {
+			width: 1160px;
+			margin: 0 auto;
+		    position: relative;
+		}
+		.detailSearch input[type="text"]{
+			width: 800px;
+			height: 60px;
+		    padding: 10px;
+		    position: relative;
+    	}
+    	.detailSearch input[type="submit"]{
+			background: url(../img/main_search_icon.png) no-repeat center center;
+			position: absolute;
+		    width: 60px;
+		    height: 60px;
+			margin: 0px;
+			outline: none;
+			border: 0;
+			cursor: pointer;
+		    padding: 0;
+		    right: 300px;
+		}
 	</style>
 </head>
 <body>
@@ -52,6 +79,10 @@
 		<div class="searchInfo">
 			<span style="color:blue;font-weight:bold;font-size:30px;"><u>${type }</u></span><span style="font-weight:100;font-size:30px;"> (으)로 검색한 결과입니다.</sapn>
 		</div>
+		<div class="detailSearch">
+            <input class="searchInput" type="text" placeholder="검색어를 입력해주세요">
+            <input class="searchIcon" type="submit" value="">
+        </div>
 		<div>
 			<div class="detailSearchList">공간유형
 				<div class="selectBox">모든공간<span>▽</span></div>
@@ -98,6 +129,10 @@
 						<div class="placeTypeDetail">강남</div>
 						<div class="placeTypeDetail">건대입구</div>
 					</div>
+					<div class="typeOutlineDetail">
+						<div class="placeTypeDetail">사당</div>
+						<div class="placeTypeDetail">서울역</div>
+					</div>
 				</div>
 			</div>
 			
@@ -133,6 +168,11 @@
 				$(this).next().css("display", "none");
 			}
 		});
+	});
+	$('.placeTypeDetail').click(function() {
+		var index = $('.placeTypeDetail').index(this);
+		var type = $('.placeTypeDetail').eq(index).text();
+		location.href = "/headerSearchPlace?type=" + type + "&index=" + index;
 	});
 	</script>
 </body>
