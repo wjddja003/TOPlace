@@ -3,22 +3,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <link rel="stylesheet" type="text/css" href="/css/index.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<title>Insert title here</title>
-
+<title>공간 등록</title>
 
 	<style>
+	#S_processBar div{ float:left; width:25%;}  
+	#S_process div:not(#S_process-bt){display:none;} 
 	
-	#S_processBar div{ float:left; width:25%;}
-	#S_process div:not(#S_process-bt){display:none;}
+	.S_red{color:red;} 
+	.S_condition{float:right;} 
 	
-	.S_red{color:red;}
-	.S_condition{float:right;}
-	
-	#S_ul1{list-style: none;}
+	#S_ul1{list-style: none;} 
 	#S_ul1 li{display: block;
 		float: left;
 		width:30%;
@@ -60,12 +60,13 @@
 
 <body>
 <!-- 헤더파일포함 -->
-		<jsp:include page="/WEB-INF/common/header.jsp"/>
+<jsp:include page="/WEB-INF/common/header.jsp"/>
+		
 		<br><br>
 		
 <section>
 <!-- section content -->
-<div class="section content"">
+<div class="section_content"">
 	<!-- 프로세스바 -->
 	<div id="S_processBar" style="text-align:center;">
 		<div id="S_processBar-1">1.기본 정보<br>공간정보를 입력해주세요</div>
@@ -119,8 +120,8 @@
 			<span id="S_opspan3"></span><br><br>
 			
 			공간 태그 <span class="S_red">*</span><span class="S_condition">최대 5개</span><br>
-			<input type="text" id ="S_placeTag" class="form-control" placeholder="태그를 입력해 주세요" style="width:94%;float:left;"><button id="S_tagbt" class="btn btn-outline-primary" style="width:6%;">추가</button>
-			<span id="S_opspan4" name="S_placeTag"></span><button id="S_init" style="display:none;" class="btn btn-outline-primary">초기화</button>
+			<input type="text" id ="S_placeTag" class="form-control" placeholder="태그를 입력해 주세요" style="width:94%;float:left;"><button type="button" id="S_tagbt" class="btn btn-outline-primary" style="width:6%;">추가</button>
+			<span id="S_opspan4" name="S_placeTag"></span><button type="button" id="S_init" style="display:none;" class="btn btn-outline-primary">초기화</button>
 			<br><br><br>
 			
 			편의시설<br><span class="S_condition">구비된 편의시설을 선택해주세요</span><br>
@@ -178,31 +179,109 @@
 			<br><br>
 			
 			주소(위치)<span class="S_red"> *</span><br>
-			<input type="text" id="addrNum" name="addrNum" class="form-control" placeholder="주소를 등록해주세요." style="width:94%;float:left;background:white;" readonly">
+			<input type="text" id="addrNum" name="addrNum" class="form-control" placeholder="주소를 등록해주세요." style="width:94%;float:left;background:white;" readonly>
 			<button type="button" class="addressinsert btn btn-outline-primary" style="width:6%;">등록</button>
 			<input type="text" id="address" name="address" class="form-control" placeholder="상세주소를 등록해주세요.">
 			<br>
 			
 		</div><!-- 프로세스1 -->
 		<!-- 프로세스2 -->
-		<div id="S_process-2">두번째</div><!-- 프로세스2 -->
+		<div id="S_process-2">
+		
+			이메일 <span class="S_red"> *</span><br>
+			<input type="text" id="S_idemail" class="form-control" style="width:40%;display:inline"> @ 
+			<input type="text" id="S_inputemail" value="naver.com" class="form-control" style="background:white;width:28%;display:inline" readonly> 
+			<select id="S_selectemail" class="form-control" style="width:28%;display:inline">
+				<option selected>naver.com</option>
+				<option>chol.com</option>
+				<option>dreamwiz.com</option>
+				<option>empal.com</option>
+				<option>gmail.com</option>
+				<option>hanafos.com</option>
+				<option>hanmail.net</option>
+				<option>hanmir.com</option>
+				<option>hitel.net</option>
+				<option>hotmail.com</option>
+				<option>korea.com</option>
+				<option>lycos.co.kr</option>
+				<option>nate.com</option>
+				<option>직접입력</option>
+			</select>
+			<input type="hidden" name="S_email" id="S_email"> 
+		<br>
+		<br>
+		
+		<div style="display:block;float:left;width:50%;">
+		휴대폰 <span class="S_red"> *</span><br>
+		<select id="S_phone1_1" class="form-control" style="width:30%;display:inline;">
+			<option selected>010</option>
+			<option>011</option>
+			<option>016</option>
+			<option>017</option>
+			<option>018</option>
+			<option>019</option>
+		</select>
+		 - 
+		<input id="S_phone1_2" type="text" class="form-control" style="width:30%;display:inline;" numberOnly maxlength="4">
+		 - 
+		<input id="S_phone1_3" type="text" class="form-control" style="width:30%;display:inline;" numberOnly maxlength="4">
+		</div>
+		<input type="hidden" id="S_phone1" name="S_phone1">
+		
+		
+		<div style="display:block;float:left;width:50%;">
+		대표전화 <span class="S_red"> *</span> <span class="S_condition"> <input id="S_phonecheck" type="checkbox"> 휴대폰과 동일</span><br>
+		<input id="S_phone2_1" type="text" class="form-control" style="width:30%;display:inline;" numberOnly maxlength="4">
+		 - 
+		<input id="S_phone2_2" type="text" class="form-control" style="width:30%;display:inline;" numberOnly maxlength="4">
+		 - 
+		<input id="S_phone2_3" type="text" class="form-control" style="width:30%;display:inline;" numberOnly maxlength="4">
+		</div>
+		<input type="hidden" id="S_phone2" name="S_phone2">
+		<br>
+		<br>
+		<br>
+		</div><!-- 프로세스2 -->
 		<!-- 프로세스3 -->
-		<div id="S_process-3">세번째</div><!-- 프로세스3 -->
+		<div id="S_process-3">
+		
+		<div style="width:50%;float:left;display:block;">
+		이용시간 <span class="S_red">*</span><br>
+		<select class="form-control">
+		<% for(int i = 0 ; i<25; i++){ %>
+			<%if(i==0){%>
+				<option selected><%=i %>시</option>
+			<% continue;}%>
+			<option><%=i %>시</option>
+			<%} %>
+		</select>
+		</div>
+		
+		<div style="width:50%;float:left;display:block;">
+		정기휴무 <span class="S_red">*</span><br>
+		</div>
+		
+		</div><!-- 프로세스3 -->
 		<!-- 프로세스4 -->
 		<div id="S_process-4">네번째</div><!-- 프로세스4 -->
 		
+		<br>
+		<br>
+		<br>
 		<!-- 프로세스버튼-->
 		<div id="S_process-bt" style="text-align:center;">
-			<button id="S_bt-1" type="button" class="btn btn-outline-primary" >이전</button>
+			<button id="S_bt-1" type="button" class="btn btn-outline-primary btn-lg" >이전</button>
 			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button id="S_bt-2" type="button" class="btn btn-outline-primary" >다음</button>
-			<button id="S_bt-submit" type="submit" class="btn btn-outline-primary"
+			<button id="S_bt-2" type="button" class="btn btn-outline-primary btn-lg" >다음</button>
+			<button id="S_bt-submit" type="submit" class="btn btn-outline-primary btn-lg"
 			style="display:none;">등록완료</button>
 		</div><!-- 프로세스버튼-->
 	</div><!-- 프로세스를 담는 Div -->	
 </div><!-- section content -->
 </section>
-
+<br>
+<br>
+<br>
 <jsp:include page="/WEB-INF/common/footer.jsp"/> <!-- footer 추가 -->
 
 
@@ -211,7 +290,7 @@
 			$("#S_placeName").keyup(function(){
 				var value = $(this).val();
 				$("#S_lengthspan1").text(value.length+"자/18자");
-				var optimizer = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣0-9\(\)\[\]\-\.\,]{1,18}$/;
+				var optimizer = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣0-9\(\)\[\]\-\.\,\ ]{1,18}$/;
 				if(optimizer.test(value)){
 					$("#S_opspan1").text("사용가능한 공간명입니다.");
 					$("#S_opspan1").css("color","blue");
@@ -359,25 +438,55 @@
 					}
 				}
 			}
+			
 			//addrNum, address
 			$(".addressinsert").click(function(){
       		var pop = window.open("/views/jusoPopup.jsp","주소찾기",'width=600,height=700');
       		pop.location.href;
    			});
+			
+			//S_email
+			$("#S_selectemail").change(function(){
+				if($("#S_selectemail option:selected").text()=="직접입력"){
+					$("#S_inputemail").val("");
+					$("#S_inputemail").removeAttr("readonly");
+					$("#S_inputemail").focus();
+				}else{
+					$("#S_inputemail").val($("#S_selectemail option:selected").text());
+					$("#S_inputemail").attr("readonly","true");
+				}
+			});
+			
+			//S_phone1
+			//숫자만 입력하게 하는 것
+			$("input:text[numberOnly]").on("keyup", function() {
+    			$(this).val($(this).val().replace(/[^0-9]/g,""));
+    			});
+			$("#S_phonecheck").change(function(){
+				if($("#S_phonecheck").is(":checked")){
+					$("#S_phone2_1").val($("#S_phone1_1 option:selected").text());
+					$("#S_phone2_2").val($("#S_phone1_2").val());
+					$("#S_phone2_3").val($("#S_phone1_3").val());
+				}
+			})
 		//프로세스 이전,다음 로직
 			var state = 0;
 			window.onload = function(){
-				$('#S_processBar-1').css("background-color","lightblue");
-				$('#S_process-1').css("display","block");
-				$('#S_bt-1').css("visibility","hidden");
-				state = 1;
+				$('#S_processBar-3').css("background-color","lightblue");
+				$('#S_process-3').css("display","block");
+				$('#S_bt-1').css("visibility","visible");
+				state = 3;
+//				$('#S_processBar-1').css("background-color","lightblue");
+//				$('#S_process-1').css("display","block");
+//				$('#S_bt-1').css("visibility","hidden");
+//				state = 1;
 			};
 			
 			var check1 = [false,0,false,false,0,false,0,0]; //다음버튼 가기 전 체크용
-			var check11 = ["#S_placeName","#S_kategorie1","#S_placeIntroduce1","#S_placeIntroduce2","#S_placeTag","#S_img1"]; //다음버튼 가기 전 체크용
+			var check11 = ["#S_placeName","#S_kategorie1","#S_placeIntroduce1","#S_placeIntroduce2","#S_placeTag","#S_img1","#addrNum","#address"]; //다음버튼 가기 전 체크용
 			
-			$("#S_bt-2").click(function(){
-				if(state==1){
+			$("#S_bt-2").click(function(){ //다음 버튼 클릭 시
+				if(state==1){ //프로세스 1일 때, 다음 버튼 클릭 시
 					$("#S_kategorie1").val(S_kategorie1.join(','));
 					$("#S_kategorie2").val(S_kategorie2.join(','));
 					for(var i = 0 ; i<check1.length;i++){ 
@@ -386,29 +495,26 @@
 						case 2:
 						case 3:
 							if(check1[i]==false){
-								$(check11[i]).focus();
-								return;
-							}
+								$(check11[i]).focus(); return;}
 							break;
 						case 1:
 							if($("#S_kategorie1").val()=="0,0,0,0,0,0,0,0,0,0,0,0"){
 								alert("공간유형은 최소한 한 개 이상 선택하여야 합니다.");
-								$(check11[i]).focus();
-								return;
-							}
+								$(check11[i]).focus(); return;}
 							break;
 						case 4:
 							if($("#S_opspan4").text()==""){
-								$(check11[i]).focus();
-								return;
-							}
+								$(check11[i]).focus(); return;}
 							break;
 						case 5:
 							if(check1[i]==false){
 								alert("대표사진은 최소한 한 장 이상 등록하여야 합니다.");
-								$("#S_img1text").focus();
-								return;
-							}
+								$("#S_img1text").focus(); return;}
+							break;
+						case 6:
+						case 7:
+							if($(check11[i]).val()==""){
+								$(check11[i]).focus(); return;}
 							break;
 						}
 					}
@@ -418,24 +524,54 @@
 					$('#S_process-2').css("display","block");
 					$('#S_bt-1').css("visibility","visible");
 					state=2;
-				}else if(state==2){
+				}else if(state==2){ //프로세스 2일 때, 다음 버튼 클릭 시
+					if($("#S_idemail").val()==""){
+						$("#S_idemail").focus();
+						return;
+					}else if($("#S_inputemail").val()==""){
+						$("#S_inputemail").focus();
+						return;
+					}
+					var S_email = $("#S_idemail").val()+"@"+$("#S_inputemail").val();
+					$("#S_email").val(S_email);
+					if($("#S_phone1_2").val()==""){
+						$("#S_phone1_2").focus();
+						return;
+					}else if($("#S_phone1_3").val()==""){
+						$("#S_phone1_3").focus();
+						return;
+					}else if($("#S_phone2_1").val()==""){
+						$("#S_phone2_1").focus();
+						return;
+					}else if($("#S_phone2_2").val()==""){
+						$("#S_phone2_2").focus();
+						return;
+					}else if($("#S_phone2_3").val()==""){
+						$("#S_phone2_3").focus();
+						return;
+					}
+					var S_phone1 = $("#S_phone1_1 option:selected").text()+$("#S_phone1_2").val()+$("#S_phone1_3").val();
+					$("#S_phone1").val(S_phone1);
+					var S_phone2 = $("#S_phone2_1").val()+$("#S_phone2_2").val()+$("#S_phone2_3").val();
+					$("#S_phone2").val(S_phone2);
+					
 					$('#S_processBar-2').css("background-color","white");
 					$('#S_process-2').css("display","none");
 					$('#S_processBar-3').css("background-color","lightblue");
 					$('#S_process-3').css("display","block");
 					state=3;
-				}else if(state==3){
+				}else if(state==3){ //프로세스 3일 때, 다음 버튼 클릭 시
 					$('#S_processBar-3').css("background-color","white");
 					$('#S_process-3').css("display","none");
 					$('#S_processBar-4').css("background-color","lightblue");
 					$('#S_process-4').css("display","block");
 					$("#S_bt-2").css("display","none");
-					$("#S_bt-submit").css("display","inline");
+					$("#S_bt-submit").css("display","inline"); //프로세스 4가 되면서 서브밋 버튼 활성화
 					state=4;
 				}
 			});
-			$("#S_bt-1").click(function(){
-				if(state==4){
+			$("#S_bt-1").click(function(){ //이전 버튼 클릭 시,
+				if(state==4){ //프로세스 4일 때, 이전 버튼 클릭 시
 					$('#S_processBar-4').css("background-color","white");
 					$('#S_process-4').css("display","none");
 					$('#S_processBar-3').css("background-color","lightblue");
@@ -443,18 +579,18 @@
 					$("#S_bt-2").css("display","inline");
 					$("#S_bt-submit").css("display","none");
 					state=3;
-				}else if(state==3){
+				}else if(state==3){ //프로세스 3일 때, 이전 버튼 클릭 시
 					$('#S_processBar-3').css("background-color","white");
 					$('#S_process-3').css("display","none");
 					$('#S_processBar-2').css("background-color","lightblue");
 					$('#S_process-2').css("display","block");
 					state=2;
-				}else if(state==2){
+				}else if(state==2){ //프로세스 2일 때, 이전 버튼 클릭 시
 					$('#S_processBar-2').css("background-color","white");
 					$('#S_process-2').css("display","none");
 					$('#S_processBar-1').css("background-color","lightblue");
 					$('#S_process-1').css("display","block");
-					$('#S_bt-1').css("visibility","hidden");
+					$('#S_bt-1').css("visibility","hidden"); //프로세스 1일 때, 이전 버튼은 사라짐
 					state=1;
 				}
 			});
