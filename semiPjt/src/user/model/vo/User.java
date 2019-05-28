@@ -1,37 +1,46 @@
 package user.model.vo;
 
+import java.util.Date;
+
 public class User {
 	private int userNo;
 	private String userId;
 	private String userPw;
 	private String userName;
+	private String userGender;
 	private String userPhone;
 	private String userBirthday;
 	private String userEmail;
 	private String userGrade;
-	private String userNickname;
-	private int userTOS;
-	private int userprivacy;
-	private int userSMS;
+	private int userAddressNumber;
+	private String userAddress;
+	private String userTOS;
+	private String userprivacy;
+	private String userSMS;
+	private Date enrollDate;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public User(int userNo, String userId, String userPw, String userName, String userPhone, String userBirthday,
-			String userEmail, String userGrade, String userNickname, int userTOS, int userprivacy, int userSMS) {
+	public User(int userNo, String userId, String userPw, String userName, String userGender, String userPhone,
+			String userBirthday, String userEmail, String userGrade, int userAddressNumber, String userAddress,
+			String userTOS, String userprivacy, String userSMS, Date enrollDate) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
 		this.userPw = userPw;
 		this.userName = userName;
+		this.userGender = userGender;
 		this.userPhone = userPhone;
 		this.userBirthday = userBirthday;
 		this.userEmail = userEmail;
 		this.userGrade = userGrade;
-		this.userNickname = userNickname;
+		this.userAddressNumber = userAddressNumber;
+		this.userAddress = userAddress;
 		this.userTOS = userTOS;
 		this.userprivacy = userprivacy;
 		this.userSMS = userSMS;
+		this.enrollDate = enrollDate;
 	}
 	public int getUserNo() {
 		return userNo;
@@ -57,6 +66,12 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	public String getUserGender() {
+		return userGender;
+	}
+	public void setUserGender(String userGender) {
+		this.userGender = userGender;
+	}
 	public String getUserPhone() {
 		return userPhone;
 	}
@@ -81,29 +96,41 @@ public class User {
 	public void setUserGrade(String userGrade) {
 		this.userGrade = userGrade;
 	}
-	public String getUserNickname() {
-		return userNickname;
+	public int getUserAddressNumber() {
+		return userAddressNumber;
 	}
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
+	public void setUserAddressNumber(int userAddressNumber) {
+		this.userAddressNumber = userAddressNumber;
 	}
-	public int getUserTOS() {
+	public String getUserAddress() {
+		return userAddress;
+	}
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
+	public String getUserTOS() {
 		return userTOS;
 	}
-	public void setUserTOS(int userTOS) {
+	public void setUserTOS(String userTOS) {
 		this.userTOS = userTOS;
 	}
-	public int getUserprivacy() {
+	public String getUserprivacy() {
 		return userprivacy;
 	}
-	public void setUserprivacy(int userprivacy) {
+	public void setUserprivacy(String userprivacy) {
 		this.userprivacy = userprivacy;
 	}
-	public int getUserSMS() {
+	public String getUserSMS() {
 		return userSMS;
 	}
-	public void setUserSMS(int userSMS) {
+	public void setUserSMS(String userSMS) {
 		this.userSMS = userSMS;
+	}
+	public Date getEnrollDate() {
+		return enrollDate;
+	}
+	public void setEnrollDate(Date enrollDate) {
+		this.enrollDate = enrollDate;
 	}
 	
 }

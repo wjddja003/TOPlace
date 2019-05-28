@@ -6,9 +6,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script
+      src="https://code.jquery.com/jquery-3.4.0.js"
+      integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+      crossorigin="anonymous">
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
 <style type="text/css">
 	#layerPopup{
 	  padding:20px; 
@@ -42,8 +46,8 @@
 		</form>
 	</div>
 	
-	 <div id="layerPopup">
-	   <p id="checkMsg">인증 시간이 초과 되었습니다.</p>
+	 <div id="layerPopup" style="display:none">
+	   <p id="checkMsg"></p>
 	   <button type="button">닫기</button>
 	 </div>
 	
@@ -111,6 +115,7 @@
 	    	self.close();
 	    }
 	});
+	
 	
 </script>
 </html>
