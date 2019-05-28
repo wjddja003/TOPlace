@@ -72,7 +72,7 @@ public class EmailCheckServlet extends HttpServlet {
 			System.out.println("이메일 전송 성공");
 			System.out.println(buffer);
 			request.setAttribute("buffer", buffer);
-			RequestDispatcher rd = request.getRequestDispatcher("/emailCheck.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/views/emailCheck.jsp");
 			rd.forward(request, response);
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
