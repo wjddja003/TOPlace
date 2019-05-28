@@ -39,4 +39,15 @@ public class NoticeService {
 	JDBCTemplate.close(conn);
 	return pd;
 	}
+	public int insertNotice(Notice n) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new NoticeDao().insertNotice(conn,n);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }
