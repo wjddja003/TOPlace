@@ -136,7 +136,7 @@ th{
 	left: 0px;
 	display: none; 
 	background-color:#000;
-	opacity: 0.8;
+	opacity: 0.6;
 }
 /* reservation페이지 팝업시 배경 css */
 /*reservation css fin*/
@@ -275,7 +275,7 @@ th{
    				</div>
     		</div>
     	<%-- 달력 DIV --%>
-			<div id="wrapper">
+			<div style="clear: both;">
 			</div>
 		</div>
 	</section>
