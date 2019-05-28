@@ -42,6 +42,13 @@ $(function()
 		'default-default': 'This is costom language'
 	};
 	
+	jc('#date-range13').dateRangePicker(
+	{
+		autoClose: true,
+		singleDate : true,
+		showShortcuts: false
+	});
+	
 	jc('#date-range23').dateRangePicker(
 	{
 		singleMonth: true,

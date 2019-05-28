@@ -13,4 +13,15 @@ public class UserService {
 		JDBCTemplate.close(conn);
 		return u;
 	}
+	public int join(User u) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new UserDao().join(u,conn);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }

@@ -22,16 +22,21 @@
 			font-size: 30px;
 			font-weight: 900;
 		}
+		#birthdayMsg{
+			color : red;
+		}
+		#genderMsg{
+			color : red;
+		}
 	</style>
-<script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
 
 </head>
 <body>
 	<%@ include file="/WEB-INF/common/header.jsp" %>
 <center>
 	<div class="joincontainer">
-		<form action="/join" method="post">
-			
+		<form action="/join" method="get">
+			<input type="hidden" name="termsEmail" value='${param.termsEmail}'>
 			<div class="joincontainer join">
 			<div class="joinheader">
 				<p>회원가입</p>
@@ -39,13 +44,13 @@
 			<table class="table">
 				<tr>
 					<td><label>아이디</label></td>
-                    <td><input type="text" id="userId" style="width:200px; height:30px" maxlength="16"><span id="idMsg">  ID는 영문소문자와 숫자만 입력 가능합니다.</span>
+                    <td><input type="text" id="userId" name="userId" style="width:200px; height:30px" maxlength="16"><span id="idMsg">  ID는 영문소문자와 숫자만 입력 가능합니다.</span>
                     <p>※ 4~16자까지 영문자(소문자), 숫자만 가능합니다. [한글 및 특수문자 (스페이스 포함) 등은 사용할 수 없습니다.]</p>
                     </td>
 				</tr>
 				<tr>
 					 <td><label>비밀번호</label></td>
-                     <td><input type="password" id="userPw" style="width:200px; height:30px"><span id="pwMsg">  </span>
+                     <td><input type="password" id="userPw" name="userPw" style="width:200px; height:30px"><span id="pwMsg">  </span>
                      <p>※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-</p>
                      <p style="margin: 5px 0 5px 0;">※ 타인이 계정정보를 도용하지 않도록 회원 본인의 안전한 비밀번호 관리가 필요합니다.</p></td>
 				</tr>
@@ -60,8 +65,8 @@
 				<tr>
 					<td>생년월일</td>
 					<td>
-						<input type="text" name="year" style="width:70px;">
-						<select name=month style="width:70px;height:20px;">
+						<input type="text" name="year" id="year" style="width:70px;" maxlength="4">
+						<select name=month id="month" style="width:70px;height:20px;">
 							<option>월</option>
 							<option value="01">1</option>
 							<option value="02">2</option>
@@ -76,16 +81,19 @@
 							<option value="11">11</option>
 							<option value="12">12</option>	
 						</select>
-						<input type="text" name="day" style="width:70px;">
+						<input type="text" name="day" id="day" style="width:70px;" maxlength="2"><br><span id="birthdayMsg"></span>
 					</td>
 				</tr>
 				<tr>
 					<td>성별</td>
-					<td><select style="width:70px; height:30px;">
-                            <option value="">성별</option>
+					<td><select id="gender" name="gender" style="width:70px; height:30px;">
+                            <option>성별</option>
                         	<option value="M">남자</option>
                             <option value="F">여자</option>
-                        </select></td>
+                        </select>
+                        <br>
+                        <span id="genderMsg"></span>
+                        </td>
 				</tr>
 				<tr>
 					<td>이메일</td>
@@ -109,7 +117,14 @@
 				</tr>
 				<tr>
 					<td>주소</td>
-					<td><input type="text" id="addrNum" name="addrNum" style="width:100px; height:20px;"><button type="button" class="addressinsert" >우편주소</button><br><input type="text" id="address" name="address" style="width:350px; height:20px; font-size:10px;"></td>				
+					<td>
+						<input type="text" id="addrNum" name="addrNum" style="width:100px; height:20px;"><button type="button" class="addressinsert" >우편주소</button>
+						<br>
+						<input type="text" id="address" name="address" style="width:350px; height:20px; font-size:10px;">
+					</td>				
+				</tr>
+				<tr>
+					<td ><button type="submit">가입하기</button></td>
 				</tr>
 			</table>
 			</div>
@@ -120,15 +135,20 @@
 	$(".btn1").click(function(){
 		var email = $("input[name=email]").val();
 		var url = "/emailCheck";
-		var pop = window.open("emailCheck.jsp","emailCheck","width=300,height=300");
+		var pop = window.open("/views/emailCheck.jsp","emailCheck","width=300,height=300");
 		pop.location.href=url+"?email="+email;
 		
 	});
+	$(".addressinsert").click(function(){
+		var pop = window.open("/views/jusoPopup.jsp","주소찾기",'width=600,height=700');
+		pop.location.href;
+	})
 	$(document).ready(function(){
 		 var userName = /^[가-힣]([가-힣]{1,3})$/;
 		 var userId = /^[a-z0-9]([a-z0-9]{3,11})$/;
          var userPw = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
          var phone = /^[0-9]*$/;
+         var year = /^[0-9]*$/;
          $('#userName').focusout(function(){
         	if(!userName.test($('#userName').val())){
         		 $('#nameMsg').css("color","red");
@@ -191,6 +211,45 @@
                  $('#phoneMsg').text("");
              }
          });
+         var month_day = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+         
+         $('#year').focusout(function(){
+    		 if(!year.test($(this).val()) || $(this).val().length < 4){
+    		 	$('#birthdayMsg').text("태어난 년도 4자리를 정확하게 입력하세요.");
+    		 	$(this).val("");
+    		 }else{
+    			$('#birthdayMsg').text("");
+    		 }
+    	 });
+         var index = 0;
+         $('#month').focusout(function(){
+        	 index = $("#month option").index($("#month option:selected"));
+			 if(index == 0){
+				 $('#birthdayMsg').text("생년월일을 다시 확인해주세요.");
+				 $(this).val("");
+    		 }
+			 else{
+				 $('#birthdayMsg').text("");
+			 }
+         });
+         $('#day').focusout(function(){
+        	 if($(this).val() > month_day[index-1]){
+        		 $('#birthdayMsg').text("생년월일을 다시 확인해주세요.");
+				 $(this).val("");
+        	 }
+        	 else{
+        		 $('#birthdayMsg').text("");
+        	 }
+         });
+         $('#gender').focusout(function(){
+        	 var gender = $("#gender option").index($("#gender option:selected"));
+        	 if(gender == 0){
+        		$('#genderMsg').text("필수입력 정보입니다.");
+        	 }else{
+        		$('#genderMsg').text(""); 
+        	 }
+        		
+         })
          
 	})
 	</script>
