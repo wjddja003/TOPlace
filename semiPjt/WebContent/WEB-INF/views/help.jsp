@@ -97,6 +97,9 @@
                 </tr>
             </table>
             <div>페이징</div>
+            <div>
+                <a class="btn btn-outline-primary btn-sm" href="#">글쓰기</a>
+            </div>
         </div>
         </div>
 	</section>
