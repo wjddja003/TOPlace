@@ -28,6 +28,28 @@ public class UserDao {
 			e.printStackTrace();
 		}
 	}
+	public String checkId(String id, Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String result = "";
+		String query = "select * from user_db where user_id=?";
+		System.out.println(id);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rset= pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getString("user_id");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	public int join(User u, Connection conn) {
 		PreparedStatement pstmt = null;
 		int result = 0;
