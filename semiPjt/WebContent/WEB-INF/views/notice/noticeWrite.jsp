@@ -11,8 +11,8 @@
 	<section>
 		<div class="section_content" style="margin: 0 auto;">
 			<center>
-			<form action="/insertNotice">
-				<table>
+			<form action="/insertNotice" method="post" enctype="multipart/form-data">
+				<table border="1">
 					<tr>
 						<th>공지사항 작성</th>
 					</tr>

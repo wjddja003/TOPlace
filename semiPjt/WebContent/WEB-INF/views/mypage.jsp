@@ -45,6 +45,7 @@
             height: 10%;
             box-sizing: border-box;
             border-bottom: none;
+            
         }
         .aside-mng_1{
             border: 1px solid gray;
@@ -53,6 +54,7 @@
             float: left;
             color: gray;
             border-bottom: none;
+            text-align: center;
         }
         .aside-navi{
             padding: 0;
@@ -113,6 +115,7 @@
             float: right;
             padding-right: 40px;
         }
+        
     </style>
 
 	
@@ -125,8 +128,18 @@
             </ul>
         </div>
         <div class="aside-mng">
-            <a href="#"><div class="aside-mng_1 r">예약리스트</div></a>
-            <a href="/qaMngment"><div class="aside-mng_1 l">Q＆A관리</div></a>
+            <a href="#">
+            	<div class="aside-mng_1 r">
+            		<div><img src="../../img/KakaoTalk_20190528_121506545.png"></div>
+           			예약리스트
+            	</div>
+            </a>
+            <a href="/qaMngment">
+            	<div class="aside-mng_1 l">
+            		<div><img src="../../img/KakaoTalk_20190528_121506674.png"></div>
+            		Q＆A관리
+            	</div>
+            </a>
         </div>
         <div class="aside-list">
             <ul class="aside-navi">
@@ -136,8 +149,8 @@
                 <li class="service"><a href="#">서비스정보<span>v</span></a></li>
                 <div style="display:none" id="sv_list">
                         <ul>
-                            <a href="/mypage/introduction.jsp"><li>서비스 소개</li></a>
-                            <a href="#"><li>이용약관</li></a>
+                            <a href="/views/mypage/introduction.jsp"><li>서비스 소개</li></a>
+                            <a href="/views/mypage/TermsOfService.jsp"><li>이용약관</li></a>
                             <a href="#"><li>개인정보처리방침</li></a>
                             <a href="#"><li>운영정책</li></a>
                         </ul>
