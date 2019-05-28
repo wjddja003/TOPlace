@@ -7,9 +7,13 @@ $(document).ready(function(){
 	$('.searchInput').keydown(function(key) {
 				if (key.keyCode == 13) {
 					if ($(this).val() == "") {
+						$('#detach_div').slideUp(700);
 						$("#searchAlert").slideDown(700);
 						$("#searchAlert").delay(1300);
+						$('#detach_div').delay(1300);
+						$('#detach_div').slideDown(700);
 						$("#searchAlert").slideUp(700);
+						
 					} else {
 						var type = $(this).val();
 						var index = 0;
@@ -25,8 +29,11 @@ $(document).ready(function(){
 			});
 	$('.searchIcon').click(function() {
 		if ($(".searchInput").val() == "") {
+			$('#detach_div').slideUp(700);
 			$("#searchAlert").slideDown(700);
 			$("#searchAlert").delay(1300);
+			$('#detach_div').delay(1300);
+			$('#detach_div').slideDown(700);
 			$("#searchAlert").slideUp(700);
 		} else {
 			var type = $(".searchInput").val();
