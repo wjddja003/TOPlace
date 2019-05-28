@@ -254,6 +254,7 @@ th{
 				<div>￦<span>돈</span></div>
 				<button id="payment">결제하기</button>
 			</div>
+
 		<%-- 예약 정보 창 --%>
 		<%-- 팝업 배경 DIV--%>
 			<div id ="reservation_popup_mask" >
@@ -277,7 +278,6 @@ th{
     	<%-- 달력 DIV --%>
 			<div style="clear: both;">
 			</div>
-		</div>
 	</section>
 	<script>
 		$(document).ready(function(){

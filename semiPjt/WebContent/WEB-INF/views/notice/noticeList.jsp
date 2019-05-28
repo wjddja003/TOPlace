@@ -13,6 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %>
 <style>
     
     .box_search{
@@ -49,6 +51,13 @@
         position: absolute;
         top: 40%;
     }
+    .nc_tr{
+        visibility: collapse;
+    }
+    .d_img{
+        width: 25px;
+        height: 25px;
+    }
 </style>
 </head>
 <body>
@@ -62,29 +71,36 @@ prefix="c" %>
                     <label style="font-weight:bold">공지사항 검색</label>
                 </div>
                 <div>
-                    <input type="text" placeholder="     검색어를 입력해주세요."style="height:49px" id="notice_search">
-                    <button type="submit" class="searchbtn">검색</button>
-
+                    <form action="/searchKeyword">
+                        <input type="text" placeholder="     검색어를 입력해주세요."style="height:49px" id="notice_search" name="keyword">
+                        <button type="submit" class="searchbtn">검색</button>
+                    </form>
                 </div>
             </div>
 
          <div class="table-wrapper">
             <table class="table table-striped">
                 <tr>
-                    <th colspan="4" style="font-size:20px; font-weight:bold">공지사항 리스트</th>
+                    <th colspan="5" style="font-size:20px; font-weight:bold">공지사항 리스트</th>
                 </tr>
                 <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성일</th>
+                    <th>번호</th><th>제목</th><th>작성자</th><th>작성일</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
+                
+                <c:forEach items="${pd.list }" var="n">
+               		<tr class="n_tr">
+	                    <td>${n.noticeNo }</td>
+	                    <td>${n.noticeTitle }</td>
+	                    <td>${n.noticeWriter }</td>
+	                    <td>${n.noticeDate }</td>
+                        <td><img src="/img/chevrondown.png" class="d_img"></td>
+                    </tr>
+					<tr class="nc_tr">
+						<td colspan="5">
+							${n.noticeContent }
+						</td>
+					</tr>
+                </c:forEach>
             </table>
             <div><%= pd.getPageNavi() %></div>
             <div>
@@ -93,5 +109,22 @@ prefix="c" %>
         </div>
     </div>
 	</section>
+	<script>
+        var count = 0;
+		$(".n_tr").click(function(){
+            var status =  $(this).next().css("visibility");
+            if(status == 'collapse'){
+                $(this).next().css("visibility","visible");
+                $(".d_img").attr("src","/img/chevronup.png");
+            } else{
+                $(this).next().css("visibility","collapse");
+                $(".d_img").attr("src","/img/chevrondown.png");
+            }
+        });
+        $(".n_tr").click(function(){
+            $(this).child().attr("src","/img/chevronup.png");
+        })
+        
+	</script>
 </body>
 </html>

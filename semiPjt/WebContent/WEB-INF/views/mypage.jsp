@@ -115,7 +115,14 @@
             float: right;
             padding-right: 40px;
         }
-        
+        .r_img{
+            width: 30px;
+            height: 30px;
+        }
+        .d_img{
+            width: 30px;
+            height: 30px;
+        }
     </style>
 
 	
@@ -143,10 +150,11 @@
         </div>
         <div class="aside-list">
             <ul class="aside-navi">
-                <li><a href="/noticeList">공지사항<span>></span></a></li>
-                <li><a href="/help">도움말<span>></span></a></li>
-                <li><a href="https://talk.naver.com/ct/wc89we">1:1문의<span>></span></a></li>
-                <li class="service"><a href="#">서비스정보<span>v</span></a></li>
+                <li><a href="#">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="/noticeList">공지사항<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="/help">도움말<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="https://talk.naver.com/ct/wc89we">1:1문의<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li class="service"><a href="#">서비스정보<span><img src="/img/chevrondown.png" class="d_img"></span></a></li>
                 <div style="display:none" id="sv_list">
                         <ul>
                             <a href="/views/mypage/introduction.jsp"><li>서비스 소개</li></a>
@@ -169,13 +177,13 @@
     var count =0;
     $(".service").click(function(){
         if(count==0){
-            $(".service span").text("^");
+            $(".service img").attr("src","/img/chevronup.png");
             $("#sv_list").css("display","block");
             $("#sv_list > ul").css("background","lightgrey");
             count=1;
             $('#mypage').css("overflow-y","scroll");
         }else if(count==1){
-            $(".service span").text("v");
+            $(".service img").attr("src","/img/chevrondown.png");
             $("#sv_list").css("display","none")
             count=0;
             $('#mypage').css("overflow-y","hidden");
