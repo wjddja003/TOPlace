@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+    <script
+      src="https://code.jquery.com/jquery-3.4.0.js"
+      integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+      crossorigin="anonymous">   
+    </script>
+    <style>
+        td{
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        tr{
+            text-align: center;
+        }
+        tr>td:first-child{
+            color:red;
+        }tr>td:last-child{
+            color:skyblue;
+        }
+    </style>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <td colspan="7"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <button id="btn">다시 선택하기</button>
+    <span></span><br>
+    <button id="prevbtn">뒤로</button>
+    <button id="nextbtn">다음</button>
+    <br>
+    <button id="strCheck">확인하기</button>
+    <div></div>
+    <script>
+        var today = "201905283";
+        var year = today.substring(0,4);
+        var month = today.substring(4,6);
+        var day = today.substring(6,8);
+        var DOW = today.substring(8,9);
+        var nextDOW = 0;
+        var prevDOW = [0,0,0,0,0,0,0,0,0,0,0,0];
+        var monthEndDay = [31,28,31,30,31,30,31,31,30,31,30,31];
+        $('tr').eq(0).text(year+month+"월");
+        console.log(DOW);
+        var weeknum = 1;
+        for(var i=1;i<monthEndDay[month-1]+1;i++){
+            $('tr').eq(weeknum).find('td').eq(DOW).text(i);
+            if(i==monthEndDay[month-1]){
+                nextDOW = DOW;
+            } else if(i==1){
+                prevDOW[month-1] = DOW;
+            }
+            if(DOW==6){
+                weeknum++;
+                DOW=0;
+                continue;
+            }
+            DOW++
+        }
+        
+        $('#nextbtn').click(function(){
+            $('td').css("background-color","white");
+            month++;
+            if(month>12){
+                month=1;
+                year++;
+            }
+            $('td').text("");
+            weeknum = 1;
+            if(nextDOW==6){
+                DOW= 0;
+            }else{
+                DOW= nextDOW+1;
+            }
+            
+            $('tr').eq(0).text(month+"월");
+            console.log(DOW);
+            console.log(prevDOW);
+            for(var i=1;i<monthEndDay[month-1]+1;i++){
+                $('tr').eq(weeknum).find('td').eq(DOW).text(i);
+                if(i==monthEndDay[month-1]){
+                    nextDOW = DOW;
+                } else if(i==1){
+                    prevDOW[month-1] = DOW;
+                }
+                if(DOW==6){
+                    weeknum++;
+                    DOW=0;
+                    continue;
+                }
+            DOW++
+        }
+        });
+        $('#prevbtn').click(function(){
+            $('td').css("background-color","white");
+            if(today.substring(0,4)==year && (month-1)<today.substring(4,6)){
+                alert("지난 예약은 불가능합니다.")
+                return;
+            }
+            
+            $('td').text("");
+            month--;
+            if(month==0){
+                month=12;
+                year--;
+            }
+            weeknum = 1;
+            if(prevDOW==0){
+                DOW= 6;
+            }else{
+                DOW= prevDOW[month-1];
+            }
+            
+            $('tr').eq(0).text(month+"월");
+            for(var i=1;i<monthEndDay[month-1]+1;i++){
+                $('tr').eq(weeknum).find('td').eq(DOW).text(i);
+                if(i==monthEndDay[month-1]){
+                    nextDOW = DOW;
+                } else if(i==1){
+                    prevDOW[month-1] = DOW;
+                }
+                if(DOW==6){
+                    weeknum++;
+                    DOW=0;
+                    continue;
+                }
+            DOW++
+        }
+        });
+        
+        var count = 0;
+        var during = 0;
+        $('td').click(function(){
+            
+            if(count==0){
+                startDay = $('td').index(this);
+                $(this).css("background-color","green");
+                $(this).addClass("selectDay");
+                count=1;
+            } else{
+                endDay = $('td').index(this);
+                $(this).css("background-color","red");
+                $(this).addClass("selectDay");
+                count = 0;
+            }
+//            if($("td").eq(endDay).hasClass("selectDay") === true){
+//                for(var i =startDay; i<endDay+1;i++){
+//                    $('td').eq(i).css("background-color","green");
+//                    $('td').eq(i).addClass("selectDay");
+//                }
+//                during = endDay-startDay+1;
+//                $('span').text(during);
+//                endDay=null;
+//            }
+        });
+        
+//        if(endDay!=null){
+                
+
+        $('#btn').click(function(){
+            $('td').css("background-color","white");
+            during = 0;
+            $('span').text(during);
+        });
+        $("#strCheck").click(function(){
+            array = new Array();
+            for(var i =0;i<$('.selectDay').length;i++){
+                array[i] = year+month+$('.selectDay').eq(i).text();
+            }
+            console.log(array);
+        });
+    </script>
+</body>
+</html>

@@ -39,17 +39,10 @@
 				<div class="placeType">강남</div>
 				<div class="placeType">건대입구</div>
 			</div>
-		</div>
-		<br>
-		<div class="">
-			<p class="searchP"><b>지하철역으로 찾아보기</p>
 			<div class="typeOutline">
-				<div class="placeType">신촌역</div>
-				<div class="placeType">성수역</div>
-				<div class="placeType">사당역</div>
-				<div class="placeType">홍대입구역</div>
-				<div class="placeType">이태원역</div>
-				<div class="placeType">강남역</div>
+				<div class="placeType">사당</div>
+				<div class="placeType">서울역</div>
 			</div>
 		</div>
+		<br>
 	</div>
