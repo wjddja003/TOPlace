@@ -120,7 +120,7 @@
         <button class="back">></button>
         <div id="aside-login_t">
             <ul>
-                <li><a><img src="img/logo.jpg"></a></li>
+                <li><a><img src="../img/logo.png" style="width:60px; height:40px;"></a></li>
                 <li><a href="/views/login.jsp">로그인이 필요합니다.</a></li>
             </ul>
         </div>
@@ -132,7 +132,7 @@
             <ul class="aside-navi">
                 <li><a href="/noticeList">공지사항<span>></span></a></li>
                 <li><a href="/help">도움말<span>></span></a></li>
-                <li><a href="#">1:1문의<span>></span></a></li>
+                <li><a href="https://talk.naver.com/ct/wc89we">1:1문의<span>></span></a></li>
                 <li class="service"><a href="#">서비스정보<span>v</span></a></li>
                 <div style="display:none" id="sv_list">
                         <ul>

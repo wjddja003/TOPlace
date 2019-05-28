@@ -10,7 +10,7 @@
       src="https://code.jquery.com/jquery-3.4.0.js"
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
       crossorigin="anonymous">   
-    </script>
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -19,11 +19,13 @@
 		   <jsp:include page="/WEB-INF/common/header.jsp"/>  
         <section>
                 <div class="section_content">
-                	<div id="search">
+                	<div id="main_search">
 	                    <input type="text" placeholder="검색어를 입력해주세요">
 	                    <input type="submit" value="">
                     </div>
                 </div>
+
+                <!-- section fin -->
         </section>
         </div>
       

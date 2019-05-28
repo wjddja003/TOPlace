@@ -35,7 +35,6 @@ public class NoticeService {
 	if(pageNo <= totalPage) {
 		pageNavi +="<a class='btn' href='/noticeList?reqPage="+pageNo+"'>다음</a>";
 	}
-	System.out.println(pageNavi);
 	NoticePageData pd = new NoticePageData(list,pageNavi);
 	JDBCTemplate.close(conn);
 	return pd;

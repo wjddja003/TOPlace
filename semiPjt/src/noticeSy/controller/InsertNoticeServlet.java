@@ -1,27 +1,25 @@
-package toplace.controller;
+package noticeSy.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import toplace.model.vo.Commit;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class InsertNoticeServlet
  */
-@WebServlet(name = "Login", urlPatterns = { "/login" })
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "InsertNotice", urlPatterns = { "/insertNotice" })
+public class InsertNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public InsertNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,14 +29,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String id = request.getParameter("userId");
-		String pw = request.getParameter("userPw");
-		Commit c = new Commit().login(id,pw);
-		if(c!=null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("Member", c);
-		}
-		
+		if(!ServletFileUpload.is)
 	}
 
 	/**

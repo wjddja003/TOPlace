@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 /*@font-face {
  font-family: 'NanumSquareRoundR';
  src: url(images/NanumSquareRoundR.eot);
@@ -154,32 +154,40 @@ section {
 	height: 100%;
 }
 
-.content {
-	width: 800px;
+
+
+#main_search {
+	width: 1160px;
 	margin: 0 auto;
+    text-align: center;
+    position: relative;
 }
 
-#search {
-	width: 400px;
-	float: left;
-}
 
-#search input[type="type"] {
-	width: 400px;
+#main_search input[type="text"]{
+	width: 600px;
 	height: 60px;
+    padding: 10px;
+    position: relative;
+    top: 300px;
+    
+    
 }
 
-#search input[type="submit"] {
-	background: url(img/main_search_icon.png) no-repeat center center;
+#main_search input[type="submit"]{
+	background: url(../img/main_search_icon.png) no-repeat center center;
 	position: absolute;
-	top: 89%;
-	left: 59%;
+    width: 60px;
+    height: 60px;
 	margin: 0px;
 	outline: none;
 	border: 0;
 	cursor: pointer;
+    padding: 0;
+    right: 280px;
+    top: 300px;
 }
-
+/*main section fin*/
 footer {
 	height: 200px;
 	 margin-top: 0px;
