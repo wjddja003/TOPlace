@@ -120,7 +120,7 @@
         <button class="back">></button>
         <div id="aside-login_t">
             <ul>
-                <li><a><img src="img/logo.jpg"></a></li>
+                <li><a><img src="../img/logo.png" style="width:60px; height:40px;"></a></li>
                 <li><a href="/views/login.jsp">로그인이 필요합니다.</a></li>
             </ul>
         </div>
