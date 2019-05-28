@@ -27,6 +27,7 @@
 	font-family: 'Noto Sans KR', sans-serif;
 }
 */
+
 html, body {
   height: 100%;
   margin: 0;
@@ -149,6 +150,7 @@ section {
 
 .section_content {
 	width: 1160px;
+	min-height: 100vh;
 	margin: 0 auto;
 }
 /*section 전체 틀 fin*/
@@ -195,7 +197,7 @@ section {
 }
 /*main section fin*/
 footer {
-	height: 200px;
+	 height: 200px;
 	 margin-top: 0px;
-	 background: #000;
+	 background: #000;  
 }

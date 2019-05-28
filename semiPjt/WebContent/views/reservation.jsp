@@ -237,7 +237,7 @@ label span{
 				<div>￦<span>돈</span></div>
 				<button>결제하기</button>
 			</div>
-			<div id="wrapper">
+			<div style="clear: both;">
 			</div>
 		</div>
 	</section>

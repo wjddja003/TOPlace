@@ -16,7 +16,9 @@
 	<header>
 		<div id="searchAlert">검색어를 입력해주세요.</div>
        <div class="header logo" style="width:15%;">
-           <a href="/index.jsp"><img src="../../img/logo.png" width="200px" height="100px"></a>
+           <a href="/index.jsp">
+               <img src="../../img/logo.png" width="100px" height="80px" style="padding-top:10px;">
+           </a>
 
         </div>
         <!--logo Fin-->
