@@ -7,9 +7,11 @@ $(document).ready(function(){
 	$('.searchInput').keydown(function(key) {
 				if (key.keyCode == 13) {
 					if ($(this).val() == "") {
+						$('header').css("opacity","0");
 						$("#searchAlert").slideDown(700);
 						$("#searchAlert").delay(1300);
 						$("#searchAlert").slideUp(700);
+						$('header').css("opacity","1");
 					} else {
 						var type = $(this).val();
 						var index = 0;
