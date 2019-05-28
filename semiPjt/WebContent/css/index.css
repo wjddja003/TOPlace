@@ -20,23 +20,29 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
 */
 
+/*
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 * {
 	font-family: 'Noto Sans KR', sans-serif;
 }
+*/
 html, body {
   height: 100%;
   margin: 0;
 }
+ol,ul{
+    padding: 0;
+    margin: 0;
+}
 #navi-bar li a {
-	color: #000;
-	font-size: 18px;
+	color: #2e2e2e;
+	font-size: 16px;
 	text-decoration: none;
 }
 
 #navi-bar li a:hover {
-	font-size: 23px;
+	font-size: 18px;
 	cursor: pointer;
 }
 
@@ -46,8 +52,8 @@ header {
 	position: fixed;
 	position: relative;
 	color:;
-	font-size: 18px;
-	font-weight: bold;
+	font-size: 16px;
+/*	font-weight: bold;*/
 }
 
 .header {
@@ -56,7 +62,7 @@ header {
 	box-sizing: border-box;
 	height: 100%;
 	line-height: 100px;
-	background-color: #fff;
+/*	background-color: #fff;*/
 	background: rgba(0, 0,) padding: 0;
 }
 
@@ -112,15 +118,15 @@ header {
 	border: 0px;
 }
 .realtime:hover {
-	font-size: 23px;
+	font-size: 18px;
 	cursor: pointer;
 }
 .search:hover {
-	font-size: 23px;
+	font-size: 18px;
 	cursor: pointer;
 }
 .mypage:hover {
-	font-size: 23px;
+	font-size: 18px;
 	cursor: pointer;
 }
 #searchAlert{
