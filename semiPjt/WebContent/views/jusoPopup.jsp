@@ -81,6 +81,8 @@ function init(){
 				, "<%=lnbrMnnm%>"
 				, "<%=lnbrSlno%>"
 				, "<%=emdNo%>");
+		opener.$("#addrMsg").text("");
+		opener.addrFlag = true;
 		window.close();
 		}
 

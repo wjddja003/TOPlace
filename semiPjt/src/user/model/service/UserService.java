@@ -24,4 +24,10 @@ public class UserService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	public String checkId(String id) {
+		Connection conn = JDBCTemplate.getConnection();
+		String result = new UserDao().checkId(id,conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }
