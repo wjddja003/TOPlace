@@ -17,7 +17,7 @@
         background-color: red;
         position: absolute;
         top: 0px;
-        display: inline;
+        display: none;
     }
     .viewpage_content{
         width: 100%;
@@ -278,10 +278,15 @@
             }).scroll();
         });   
         $(document).ready(function(){
-           $("#like").click(function(){
-             $("#viewpage_alert").css('display','none');
-           });
+           $("#like").on('click',function(){
+        	   $("#viewpage_alert").slideDown(700);
+               $("#viewpage_alert").delay(1300);
+                $("#viewpage_alert").css("display","inline");
+                $("#viewpage_alert").delay(1300);
+                $("#viewpage_alert").slideUp(700);     
         });
+    });
+            
         </script>
 	
     <jsp:include page="/WEB-INF/common/footer.jsp"/>
