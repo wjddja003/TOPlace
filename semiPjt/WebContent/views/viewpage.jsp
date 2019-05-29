@@ -14,10 +14,23 @@
     #viewpage_alert{
         width: 100%;
         height: 100px;
-        background-color: red;
+        background-color: #ffd014;
         position: absolute;
         top: 0px;
         display: none;
+        text-align: center;
+        font-size: 22px;
+        padding: 30px 0px 30px 0px;
+        color: #6d3bff;
+    }
+    #like_full{
+        position: absolute;
+        display: none;
+        right: 0px;
+        top: 0px;
+    }
+    #like{
+        z-index: 1;
     }
     .viewpage_content{
         width: 100%;
@@ -35,7 +48,7 @@
     }
     #viewpage_icon a:last-child{
         position: absolute;
-        right: 0;
+        right: 0px;
         top: 450px;
     }
     /*viewpage_icon Fin*/
@@ -112,12 +125,14 @@
 <body>
     <jsp:include page="/WEB-INF/common/header.jsp"/>  
     <section>
-        <div id="viewpage_alert">sdfsdfd</div>
+        <div id="viewpage_alert"><p></p></div>
         <div class="viewpage_content">
             <div class="section_content">
                 <div id="viewpage_icon">
                     <a href="#"><img src="../img/share_icon.png"></a>
-                    <a href="#"><img src="../img/like_icon.png" id="like"></a>
+                    <a href="#"><img src="../img/like_icon.png" id="like">
+                    <img src="../img/like_full_icon.png" id="like_full">
+                    </a>
                 </div>
             </div>
         </div>
@@ -278,15 +293,26 @@
             }).scroll();
         });   
         $(document).ready(function(){
-           $("#like").on('click',function(){
-        	   $("#viewpage_alert").slideDown(700);
-               $("#viewpage_alert").delay(1300);
-                $("#viewpage_alert").css("display","inline");
-                $("#viewpage_alert").delay(1300);
-                $("#viewpage_alert").slideUp(700);     
+           $("#like").click(function(){   
+                    $("#viewpage_alert").slideDown(700);
+                    $("#viewpage_alert").delay(1300);
+                    $("#viewpage_alert").css("display","inline");
+                    $("#viewpage_alert").delay(1300);
+                    $("#viewpage_alert").slideUp(700); 
+                    $("#like_full").css("display","inline");
+                    $("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");
+        });
+        $("#like_full").click(function(){
+                    $("#viewpage_alert").slideDown(700);
+                    $("#viewpage_alert").delay(1300);
+                    $("#viewpage_alert").css("display","inline");
+                    $("#viewpage_alert").delay(1300);
+                    $("#viewpage_alert").slideUp(700); 
+                    $("#like_full").css("display","none"); 
+                    $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
+
         });
     });
-            
         </script>
 	
     <jsp:include page="/WEB-INF/common/footer.jsp"/>
