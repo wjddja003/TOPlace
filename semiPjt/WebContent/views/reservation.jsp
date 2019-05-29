@@ -14,6 +14,8 @@
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
       crossorigin="anonymous">
 </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script><%-- 아임포트 --%>
 <script src="../Calendar/jquery-1.11.2.min.js"></script>
 <script src="../Calendar/moment.min.js"></script>
@@ -139,6 +141,26 @@ th{
 	opacity: 0.6;
 }
 /* reservation페이지 팝업시 배경 css */
+/*스와이프 css 시작*/
+.swiper-container {
+	height:250px;
+	border:5px solid silver;
+	border-radius:7px;
+	box-shadow:0 0 20px #ccc inset;
+}
+.swiper-slide {
+	text-align:center;
+	display:flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
+	align-items:center; /* 위아래 기준 중앙정렬 */
+	justify-content:center; /* 좌우 기준 중앙정렬 */
+}
+.swiper-slide button {
+	width:100px;
+	height:80px;
+	box-shadow:0 0 5px #555;
+	max-width:100%; 
+}
+/*스와이프 css 끝*/
 /*reservation css fin*/
 
 </style>
@@ -167,36 +189,28 @@ th{
 				<span class="reservation_title">시간 선택</span>
 				<span class="reservation_sub">시간</span>
 				<div class="reservation_content">
-				<div class="time">
-				Single Time mode:
-				<div class="timeSel">
-					<button>0</button>
-					<button>1</button>
-					<button>2</button>
-					<button>3</button>
-					<button>4</button>
-					<button>5</button>
-					<button>6</button>
-					<button>7</button>
-					<button>8</button>
-					<button>9</button>
-					<button>10</button>
-					<button>11</button>
-					<button>12</button>
-					<button>13</button>
-					<button>14</button>
-					<button>15</button>
-					<button>16</button>
-					<button>17</button>
-					<button>18</button>
-					<button>19</button>
-					<button>20</button>
-					<button>21</button>
-					<button>22</button>
-					<button>23</button>
-					<button>24</button>
-				</div>
-			</div>
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide"><button>1</button></div>
+							<div class="swiper-slide"><button>2</button></div>
+							<div class="swiper-slide"><button>3</button></div>
+							<div class="swiper-slide"><button>4</button></div>
+							<div class="swiper-slide"><button>5</button></div>
+							<div class="swiper-slide"><button>6</button></div>
+							<div class="swiper-slide"><button>7</button></div>
+							<div class="swiper-slide"><button>8</button></div>
+							<div class="swiper-slide"><button>9</button></div>
+							<div class="swiper-slide"><button>10</button></div>
+							<div class="swiper-slide"><button>11</button></div>
+							<div class="swiper-slide"><button>12</button></div>
+							<div class="swiper-slide"><button>13</button></div>
+							<div class="swiper-slide"><button>14</button></div>
+							<div class="swiper-slide"><button>15</button></div>
+							<div class="swiper-slide"><button>16</button></div>
+							<div class="swiper-slide"><button>17</button></div>
+							<div class="swiper-slide"><button>18</button></div>
+						</div>
+					</div>
 				</div>
 		<%-- 예약페이지 인원선택 --%>
 				<span class="reservation_title">인원 선택</span>
@@ -278,6 +292,7 @@ th{
     	<%-- 달력 DIV --%>
 			<div style="clear: both;">
 			</div>
+		</div>
 	</section>
 	<script>
 		$(document).ready(function(){
@@ -288,29 +303,29 @@ th{
 			var count = 0; // 버튼 클릭
 			var start=-1; // 시작 시간
 			var end=-1; // 끝 시간
-	        $('.timeSel button').click(function(){
+	        $('.swiper-slide button').click(function(){
 	        	count++;
 	        	if(count==1){
-	        		start = $('.timeSel button').index(this);
+	        		start = $('.swiper-slide button').index(this);
 	            	$(this).css('background','black');
 	    			$(this).css('color','white');
 	        	}else if(count==2){
-	        		end = $('.timeSel button').index(this);
+	        		end = $('.swiper-slide button').index(this);
 	        		for(var i=start; i<end+1; i++){
-	        			$('.timeSel button').eq(i).css('background-color','black');
-	        			$('.timeSel button').eq(i).css('color','white');
-	        			$('.timeSel button').eq(i).addClass('tSel');
+	        			$('.swiper-slide button').eq(i).css('background-color','black');
+	        			$('.swiper-slide button').eq(i).css('color','white');
+	        			$('.swiper-slide button').eq(i).addClass('tSel');
 	        		}
 	        		for(var i=start; i>end-1; i--){
-	        			$('.timeSel button').eq(i).css('background-color','black');
-	        			$('.timeSel button').eq(i).css('color','white');
-	        			$('.timeSel button').eq(i).addClass('tSel');
+	        			$('.swiper-slide button').eq(i).css('background-color','black');
+	        			$('.swiper-slide button').eq(i).css('color','white');
+	        			$('.swiper-slide button').eq(i).addClass('tSel');
 	        		}
 	        	}else if(count>2){
 	        		count = 0;
-	        		$('.timeSel button').css('background','#ccc');
-	    			$('.timeSel button').css('color','black');
-	    			$('.timeSel button').eq(i).removeClass('tSel');
+	        		$('.swiper-slide button').css('background','#ccc');
+	    			$('.swiper-slide button').css('color','black');
+	    			$('.swiper-slide button').eq(i).removeClass('tSel');
 	        	}
 	     	});
 			<%-- 전체 체크박스 선택 스크립트 --%>
@@ -426,6 +441,24 @@ th{
 		               } 
 		            });
 		         });
+			<%-- 스와이프 스크립트 --%>
+			new Swiper('.swiper-container', {
+				slidesPerView : 10, // 동시에 보여줄 슬라이드 갯수
+				spaceBetween : 10, // 슬라이드간 간격
+				slidesPerGroup : 10, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+				// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+				// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+				loopFillGroupWithBlank : true,
+				loop : false, // 무한 반복
+				pagination : { // 페이징
+					el : '.swiper-pagination',
+					clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+				},
+				navigation : { // 네비게이션
+					nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+					prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+				},
+			});
 		});
 	</script>
 	<%-- 달력 스크립트 --%>
