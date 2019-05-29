@@ -291,7 +291,6 @@
         		$("#emailMsg").text("이메일 주소를 다시 확인해주세요.");
         	}else{
         		$("#emailMsg").text("");
-        		emailFlag = true;
         	} 
          });
          
@@ -364,7 +363,7 @@
 				$('#addrMsg').text("필수입력 정보입니다.");
 			}
 			if(emailFlag == false){
-				$('#emailMsg').text("필수입력 정보입니다.");
+				$('#emailMsg').text("인증이 필요합니다.");
 			}
 		}
 	});
