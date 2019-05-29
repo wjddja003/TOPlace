@@ -17,7 +17,7 @@ import noticeSy.model.vo.Notice;
 public class NoticeDao {
 	private Properties prop = new Properties();
 	public NoticeDao() {
-		String fileName = Notice.class.getResource("/sql/notice/noticeQuery.properties").getPath();
+		String fileName = Notice.class.getResource("/sql/notice/noticeQuery2.properties").getPath();
 		System.out.println(fileName);
 		try {
 			prop.load(new FileReader(fileName));
@@ -157,7 +157,24 @@ public class NoticeDao {
 		return list;
 		
 	}
-	
+	public int deleteNotice(Connection conn, int noticeNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("deleteNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, noticeNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
 	
 	
 	
