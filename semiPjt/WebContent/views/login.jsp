@@ -55,7 +55,7 @@
 							<td colspan="3"><button type="button" style="width:100%;" class="btnlogin">로그인</button></td>
 						</tr>
 						<tr>
-							<td><a href="/views/userTerms.jsp"><span class="loginTxt">회원가입</span></a></td><td><a href="#"><span class="loginTxt" style="padding:0;">아이디</span></a><span>·</span><a href="#"><span class="loginTxt">비밀번호찾기</span></a></td><td><span>로그인 상태 유지</span></td>
+							<td><a href="/views/userTerms.jsp"><span class="loginTxt">회원가입</span></a></td><td><a href="/views/idSearch.jsp"><span class="loginTxt" style="padding:0;">아이디</span></a><span>·</span><a href="/views/pwSearch.jsp"><span class="loginTxt">비밀번호찾기</span></a></td><td><span>로그인 상태 유지</span></td>
 						</tr>
 					
 					</table>
