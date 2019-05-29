@@ -33,7 +33,7 @@
 	<section>
 		<div class="section_content">
 			<div class="joincontainer">
-				<form action="/join" method="get" id="joinform">
+				<form action="/join" method="post" id="joinform">
 					<input type="hidden" name="termsEmail" value='${param.termsEmail}'>
 					<div class="joincontainer join">
 					<div class="joinheader">
@@ -96,7 +96,7 @@
 						<tr>
 							<td>이메일</td>
 							<td>
-								<input type="text" name="email" id="email"> <button type="button" class="btn1">인증</button><br>
+								<input type="text" name="email" id="email"> <button type="button" class="btn1" disabled="disabled">인증</button><br>
 								<span id="emailMsg"></span>
 								<span id="eTxt" style="color:blue"></span>
 							</td>
@@ -132,8 +132,8 @@
 			</div>
 		</div>
 	</section>
-
-	<script type="text/javascript">
+</body>
+<script type="text/javascript">
 	$(".btn1").click(function(){
 		var email = $("input[name=email]").val();
 		var url = "/emailCheck";
@@ -156,12 +156,10 @@
 	var addrFlag = false;
 	var emailFlag = false;
 	$(document).ready(function(){
-		
 		 var userName = /^[가-힣]([가-힣]{1,3})$/;
          var userPw = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
          var phone = /^[0-9]*$/;
          var year = /^[0-9]*$/;
-         var email = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
          $('#userName').focusout(function(){
         	if(!userName.test($('#userName').val())){
         		 $('#nameMsg').css("color","red");
@@ -287,15 +285,37 @@
         	}
          });
          $('#email').focusout(function(){
-        	if(!email.test($(this).val())){
-        		$("#emailMsg").text("이메일 주소를 다시 확인해주세요.");
-        	}else{
-        		$("#emailMsg").text("");
-        		emailFlag = true;
-        	} 
+             idFlag=false;
+             checkEmail();
          });
          
-	})
+         
+	});
+	function checkEmail(){
+		
+		var email = $("#email").val();
+		
+		var userEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		if(!userEmail.test(email)){
+    		$("#emailMsg").text("이메일 주소를 다시 확인해주세요.");
+    		$(".btn1").prop("disabled", true);
+    		return false;
+    	}
+  		
+	 	$.ajax({
+     		type:"GET",
+     		url: "/emailAjax?email="+email ,
+     		success : function(data){
+     			var result = decodeURIComponent(data);
+     			if(result == 'Y'){
+     				$("#emailMsg").text("사용가능한 이메일 입니다.");
+     				$(".btn1").prop("disabled", false);
+     			} else{
+     				$("#emailMsg").text("이미 가입한 이메일 입니다.");
+     			}
+     		}
+   		 });
+	}
 	function checkId(event){
      	 if(idFlag) return true;
      	 
@@ -364,12 +384,11 @@
 				$('#addrMsg').text("필수입력 정보입니다.");
 			}
 			if(emailFlag == false){
-				$('#emailMsg').text("필수입력 정보입니다.");
+				$('#emailMsg').text("인증이 필요합니다.");
 			}
 		}
 	});
 	</script>
-</body>
 
 
 </html>

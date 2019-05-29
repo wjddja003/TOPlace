@@ -103,7 +103,8 @@
 		if(form.authnum.value==authNum){
 			opener.$("#email").attr("readonly",true);
 			opener.$("#eTxt").text("인증완료");
-			opener.$("#eTxt").css("color","blue");
+			opener.$("#emailMsg").text("");
+			opener.emailFlag = true;
 			self.close();
 		}
 	}

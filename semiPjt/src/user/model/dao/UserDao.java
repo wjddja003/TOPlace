@@ -28,6 +28,58 @@ public class UserDao {
 			e.printStackTrace();
 		}
 	}
+	public int pwSearch(String buf ,String id,String email,Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update user_db set user_pw = ? where user_id=? and email=?";
+		pstmt = conn.prepareStatement(query);
+		pstmt.setString(1, buf);
+		pstmt.setString(2, id);
+		pstmt.setString(3, email);
+		result = pstmt.executeUpdate();
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
+	public User idSearch(String name,String email,Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		User u = null;
+		String query = "select * from user_db where user_name=? and email=?";
+		pstmt = conn.prepareStatement(query);
+		pstmt.setString(1, name);
+		pstmt.setString(2, email);
+		rset= pstmt.executeQuery();
+		if(rset.next()) {
+			u = new User();
+			u.setUserId(rset.getString("user_name"));
+			u.setEnrollDate(rset.getDate("enroll_date"));
+		}
+		JDBCTemplate.close(rset);
+		JDBCTemplate.close(pstmt);
+		
+		return u;
+	}
+	public String checkEmail(String email,Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String result = "";
+		String query = "select * from user_db where email=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email);
+			rset= pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getString("email");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	public String checkId(String id, Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -91,16 +143,16 @@ public class UserDao {
 				u.setUserId(rset.getString("user_id"));
 				u.setUserPw(rset.getString("user_pw"));
 				u.setUserName(rset.getString("user_name"));
-				u.setUserPhone(rset.getString("user_phone"));
-				u.setUserBirthday(rset.getString("user_birthday"));
-				u.setUserEmail(rset.getString("user_email"));
+				u.setUserPhone(rset.getString("phone"));
+				u.setUserBirthday(rset.getString("birthday"));
+				u.setUserEmail(rset.getString("email"));
 				u.setUserGender(rset.getString("gender"));
 				u.setUserAddressNumber(rset.getInt("addressNumber"));
 				u.setUserAddress(rset.getString("address"));
-				u.setUserGrade(rset.getString("user_grade"));
-				u.setUserTOS(rset.getString("user_tos"));
-				u.setUserprivacy(rset.getString("user_privacy"));
-				u.setUserSMS(rset.getString("user_sms"));
+				u.setUserGrade(rset.getString("grade"));
+				u.setUserTOS(rset.getString("tos"));
+				u.setUserprivacy(rset.getString("privacy"));
+				u.setUserSMS(rset.getString("sms"));
 				u.setEnrollDate(rset.getDate("enroll_date"));
 			}
 		} catch (SQLException e) {
