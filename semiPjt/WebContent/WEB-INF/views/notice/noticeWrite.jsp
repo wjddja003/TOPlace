@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="user.model.vo.User" %>
+    <% 
+    	 User u = (User)session.getAttribute("User");
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,8 +27,8 @@
 					<tr>
 						<th>작성자</th>
 						<td>
-							겟작성자아디
-							<input type="hidden" name="noticeWriter" value="겟작성자아디">
+							<%=u.getUserId()%>
+							<input type="hidden" name="noticeWriter" value="<%=u.getUserId()%>">
 						</td>
 					</tr>
 					<tr>
@@ -41,7 +45,7 @@
 					</tr>
 					<tr style="text-align: center;">
 						<th colspan="2">
-							<button type="submit">등록하기</button>
+							<button type="submit" class="btn btn-outline-primary">등록하기</button>
 						</th>
 					</tr>
 				</table>

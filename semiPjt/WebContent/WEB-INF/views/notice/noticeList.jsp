@@ -3,11 +3,12 @@
     <%@ page import="noticeSy.model.vo.Notice" %>
     <%@ page import="java.util.ArrayList" %>
     <%@ page import="noticeSy.model.vo.NoticePageData" %>
+    <%@ page import="user.model.vo.User" %>
     <%
           NoticePageData pd = (NoticePageData)request.getAttribute("pd");
         ArrayList<Notice> list = pd.getList();
+        User u = (User)session.getAttribute("User");
     %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,7 +31,7 @@ prefix="c" %>
     
     .searchbtn{
         position: absolute;
-        right: 80px;
+        right: 30px;
         width: 134px;
         height: 50px;
         background-color: #704de4;
@@ -57,6 +58,9 @@ prefix="c" %>
     .d_img{
         width: 25px;
         height: 25px;
+    }
+    .btn1{
+        float: right;
     }
 </style>
 </head>
@@ -97,7 +101,22 @@ prefix="c" %>
                     </tr>
 					<tr class="nc_tr">
 						<td colspan="5">
+						<!-- <span>멤버 : ${sessionScope.u.userId} </span>
+							<span>로그인 : ${u.userId }</span>
+							<span>작성자 : ${n.noticeWriter }</span>
+							<br> -->
+							
 							${n.noticeContent }
+							<!--<c:if test="${u.userId == n.noticeWriter}">
+							</c:if>  -->
+							
+								<a class="btn btn-outline-primary btn-sm btn1" href="/noticeDelete?noticeNo=${n.noticeNo }">삭제</a>
+								<a class="btn btn-outline-primary btn-sm btn1" href="/noticeUpdate?noticeNo=${n.noticeNo }">수정</a>
+							
+							<br>
+							<c:if test="${n.filename != null }">
+								<img src="/upload/notice/${n.filename }">
+							</c:if>
 						</td>
 					</tr>
                 </c:forEach>
@@ -115,16 +134,12 @@ prefix="c" %>
             var status =  $(this).next().css("visibility");
             if(status == 'collapse'){
                 $(this).next().css("visibility","visible");
-                $(".d_img").attr("src","/img/chevronup.png");
+                $(this).children().find('img').attr("src","/img/chevronup.png");
             } else{
                 $(this).next().css("visibility","collapse");
-                $(".d_img").attr("src","/img/chevrondown.png");
+                $(this).children().find('img').attr("src","/img/chevrondown.png");
             }
-        });
-        $(".n_tr").click(function(){
-            $(this).child().attr("src","/img/chevronup.png");
-        })
-        
+        }); 
 	</script>
 </body>
 </html>

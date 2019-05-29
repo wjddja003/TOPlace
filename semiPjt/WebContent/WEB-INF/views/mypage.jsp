@@ -1,5 +1,8 @@
+<%@page import="user.model.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script
@@ -17,15 +20,14 @@
             position: fixed; 
             background-color: floralwhite;
             width: 300px;
-            height: 964px;
+            height: 970px;
             position: absolute;
             right:0px;
             top:0px;
         }
         #aside-login_t{
-            padding-top: 25%;
-            border: 1px solid black;
-            background-color: darkgray;
+            padding:70px 20px 0px 20px;
+            background-color: #f69b02;
             width: 100%;
             height: 20%;
             text-align: center;
@@ -33,7 +35,6 @@
         }
         #aside-login_t li{
             list-style-type: none;
-            float: left;
         }
         #aside-login_t li a{
             color: black;
@@ -130,8 +131,18 @@
         <button class="back">></button>
         <div id="aside-login_t">
             <ul>
-                <li><a><img src="../img/logo.png" style="width:60px; height:40px;"></a></li>
-                <li><a href="/views/login.jsp">로그인이 필요합니다.</a></li>
+                <li><a><img src="../img/logo_2.png" style="width:80px; height:40px;"></a></li>
+                <li>
+                	<c:choose>
+                		<c:when test="${empty sessionScope.User}">
+                			<a href="/views/login.jsp">로그인이 필요합니다.</a>		
+                		</c:when>
+                		<c:otherwise>
+                			<a href="#">${sessionScope.User.userName}</a>
+                		</c:otherwise>
+                	</c:choose>	
+                </li>
+                
             </ul>
         </div>
         <div class="aside-mng">
@@ -166,7 +177,14 @@
             </ul>
         </div>
         <div id="aside-login_b">
-            <a href="#">로그인</a>
+        	<c:choose>
+				<c:when test="${empty sessionScope.User}">
+	       			<a href="/views/login.jsp">로그인</a>		
+	       		</c:when>
+	       		<c:otherwise>
+	       			<a href="/logout">로그아웃</a>
+	       		</c:otherwise>
+	       	</c:choose>
         </div>
         <div id="aside-host">
             <a href="#">호스트센터로 이동</a>

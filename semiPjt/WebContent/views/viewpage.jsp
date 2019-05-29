@@ -11,6 +11,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>뷰페이지</title>
 <style>
+    #viewpage_alert{
+        width: 100%;
+        height: 100px;
+        background-color: #f69b02;
+        position: absolute;
+        top: 0px;
+        display: none;
+        text-align: center;
+        font-size: 22px;
+        padding: 30px 0px 30px 0px;
+        color: #fff;
+    }
+    #like_full{
+        position: absolute;
+        display: none;
+        right: 0px;
+        top: 0px;
+    }
+    #like{
+        z-index: 1;
+    }
     .viewpage_content{
         width: 100%;
         height: 520px;
@@ -27,7 +48,7 @@
     }
     #viewpage_icon a:last-child{
         position: absolute;
-        right: 0;
+        right: 0px;
         top: 450px;
     }
     /*viewpage_icon Fin*/
@@ -97,16 +118,21 @@
         font-weight:100;
         
     }
+    /*viewpage content Fin*/
+    
 </style>
 </head>
 <body>
     <jsp:include page="/WEB-INF/common/header.jsp"/>  
     <section>
+        <div id="viewpage_alert"><p></p></div>
         <div class="viewpage_content">
             <div class="section_content">
                 <div id="viewpage_icon">
                     <a href="#"><img src="../img/share_icon.png"></a>
-                    <a href="#"><img src="../img/like_icon.png"></a>
+                    <a href="#"><img src="../img/like_icon.png" id="like">
+                    <img src="../img/like_full_icon.png" id="like_full">
+                    </a>
                 </div>
             </div>
         </div>
@@ -250,14 +276,13 @@
                         <div>￦<span>돈</span></div>
                         <button>결제하기</button>			
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
         <%-- 메뉴바 스크롤 따라오기 스크립트 --%>
         <script>
-        $(document).ready(function() {
+       $(document).ready(function() {
             var floatPosition = parseInt($(".viewpage_right").css('top'));
             $(window).scroll(function() {
                 var scrollTop = $(window).scrollTop();
@@ -266,7 +291,28 @@
                     "top" : newPosition
                 }, 500);
             }).scroll();
+        });   
+        $(document).ready(function(){
+           $("#like").click(function(){   
+                    $("#viewpage_alert").slideDown(700);
+                    $("#viewpage_alert").delay(1300);
+                    $("#viewpage_alert").css("display","inline");
+                    $("#viewpage_alert").delay(1300);
+                    $("#viewpage_alert").slideUp(700); 
+                    $("#like_full").css("display","inline");
+                    $("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");
         });
+        $("#like_full").click(function(){
+                    $("#viewpage_alert").slideDown(700);
+                    $("#viewpage_alert").delay(1300);
+                    $("#viewpage_alert").css("display","inline");
+                    $("#viewpage_alert").delay(1300);
+                    $("#viewpage_alert").slideUp(700); 
+                    $("#like_full").css("display","none"); 
+                    $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
+
+        });
+    });
         </script>
 	
     <jsp:include page="/WEB-INF/common/footer.jsp"/>

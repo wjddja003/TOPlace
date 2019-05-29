@@ -2,6 +2,7 @@ package noticeSy.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +40,9 @@ public class SearchKeywordServlet extends HttpServlet {
 			reqPage = 1;
 		}
 		NoticePageData pd = new NoticeService().searchKeyword(keyword,reqPage);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp");
+		request.setAttribute("pd", pd);
+		rd.forward(request, response);
 	}
 
 	/**

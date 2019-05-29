@@ -8,22 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import user.model.service.UserService;
-import user.model.vo.User;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class EmailAjaxSetvlet
  */
-@WebServlet(name = "Login", urlPatterns = { "/login" })
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "EmailAjax", urlPatterns = { "/emailAjax" })
+public class EmailAjaxSetvlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public EmailAjaxSetvlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +30,15 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		User u = new UserService().login(id,pw);
+		request.setCharacterEncoding("UTF-8");
+		String email = request.getParameter("email");
+		String result = new UserService().checkEmail(email);
 		PrintWriter out = response.getWriter();
-		if(u!=null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("User", u);
-			out.print(1);
+		if(result.equals(email)) {
+			out.print("N");
 		}else {
-			out.print(0);
+			out.print("Y");
 		}
-		
 	}
 
 	/**

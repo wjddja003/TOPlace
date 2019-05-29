@@ -2,6 +2,7 @@ package noticeSy.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,6 +51,7 @@ public class InsertNoticeServlet extends HttpServlet {
 		String filepath = mRequest.getFilesystemName("noticefilename");
 		Notice n = new Notice(0,noticeTitle,noticeWriter,noticeContent,null,filename,filepath);
 		int result = new NoticeService().insertNotice(n);
+		System.out.println(result);
 		if(result>0) {
 			System.out.println("성공");
 		}else {
