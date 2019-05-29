@@ -1,6 +1,7 @@
 package user.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,12 +33,16 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String id = request.getParameter("userId");
-		String pw = request.getParameter("userPw");
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
 		User u = new UserService().login(id,pw);
+		PrintWriter out = response.getWriter();
 		if(u!=null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("User", u);
+			out.print(1);
+		}else {
+			out.print(0);
 		}
 		
 	}
