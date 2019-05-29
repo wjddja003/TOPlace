@@ -115,16 +115,12 @@ prefix="c" %>
             var status =  $(this).next().css("visibility");
             if(status == 'collapse'){
                 $(this).next().css("visibility","visible");
-                $(".d_img").attr("src","/img/chevronup.png");
+                $(this).children().find('img').attr("src","/img/chevronup.png");
             } else{
                 $(this).next().css("visibility","collapse");
-                $(".d_img").attr("src","/img/chevrondown.png");
+                $(this).children().find('img').attr("src","/img/chevrondown.png");
             }
-        });
-        $(".n_tr").click(function(){
-            $(this).child().attr("src","/img/chevronup.png");
-        })
-        
+        }); 
 	</script>
 </body>
 </html>
