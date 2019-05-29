@@ -11,6 +11,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>뷰페이지</title>
 <style>
+    #viewpage_alert{
+        width: 100%;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+        top: 0px;
+        display: none;
+    }
     .viewpage_content{
         width: 100%;
         height: 520px;
@@ -97,16 +105,19 @@
         font-weight:100;
         
     }
+    /*viewpage content Fin*/
+    
 </style>
 </head>
 <body>
     <jsp:include page="/WEB-INF/common/header.jsp"/>  
     <section>
+        <div id="viewpage_alert">sdfsdfd</div>
         <div class="viewpage_content">
             <div class="section_content">
                 <div id="viewpage_icon">
                     <a href="#"><img src="../img/share_icon.png"></a>
-                    <a href="#"><img src="../img/like_icon.png"></a>
+                    <a href="#"><img src="../img/like_icon.png" id="like"></a>
                 </div>
             </div>
         </div>
@@ -250,14 +261,13 @@
                         <div>￦<span>돈</span></div>
                         <button>결제하기</button>			
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
         <%-- 메뉴바 스크롤 따라오기 스크립트 --%>
         <script>
-        $(document).ready(function() {
+       $(document).ready(function() {
             var floatPosition = parseInt($(".viewpage_right").css('top'));
             $(window).scroll(function() {
                 var scrollTop = $(window).scrollTop();
@@ -266,7 +276,17 @@
                     "top" : newPosition
                 }, 500);
             }).scroll();
+        });   
+        $(document).ready(function(){
+           $("#like").on('click',function(){
+        	   $("#viewpage_alert").slideDown(700);
+               $("#viewpage_alert").delay(1300);
+                $("#viewpage_alert").css("display","inline");
+                $("#viewpage_alert").delay(1300);
+                $("#viewpage_alert").slideUp(700);     
         });
+    });
+            
         </script>
 	
     <jsp:include page="/WEB-INF/common/footer.jsp"/>
