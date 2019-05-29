@@ -140,7 +140,7 @@
                 			<a href="/views/login.jsp">로그인이 필요합니다.</a>		
                 		</c:when>
                 		<c:otherwise>
-                			<a href="#">${sessionScope.User.userId}</a>
+                			<a href="#">${sessionScope.User.userName}</a>
                 		</c:otherwise>
                 	</c:choose>	
                 </li>
@@ -181,10 +181,10 @@
         <div id="aside-login_b">
         	<c:choose>
 				<c:when test="${empty sessionScope.User}">
-	       			<a href="#">로그인</a>		
+	       			<a href="/views/login.jsp">로그인</a>		
 	       		</c:when>
 	       		<c:otherwise>
-	       			<a href="#">로그아웃</a>
+	       			<a href="/logout">로그아웃</a>
 	       		</c:otherwise>
 	       	</c:choose>
         </div>

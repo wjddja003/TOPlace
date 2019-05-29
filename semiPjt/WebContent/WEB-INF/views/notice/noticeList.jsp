@@ -30,7 +30,7 @@ prefix="c" %>
     
     .searchbtn{
         position: absolute;
-        right: 80px;
+        right: 30px;
         width: 134px;
         height: 50px;
         background-color: #704de4;
