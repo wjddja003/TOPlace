@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ page import="user.model.vo.User" %>
     <% 
-    	 User u = new User();
+    	 User u = (User)session.getAttribute("User");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

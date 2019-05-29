@@ -34,19 +34,16 @@ public class NoticeWriteServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession(false);
 		if(session != null) {
-			String userId = ((User)session.getAttribute("user")).getUserId();
+			String userId = ((User)session.getAttribute("User")).getUserId();
+			System.out.println(userId);
 			if(userId.equals("tndyd2")) {
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeWrite.jsp");
 				rd.forward(request, response);
-			}else {
-				
 			}
 		}else {
 			response.sendRedirect("/");
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeWrite.jsp");
-		rd.forward(request, response);
 	}
 
 	/**
