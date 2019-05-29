@@ -17,7 +17,7 @@
             position: fixed; 
             background-color: floralwhite;
             width: 300px;
-            height: 964px;
+            height: 970px;
             position: absolute;
             right:0px;
             top:0px;
