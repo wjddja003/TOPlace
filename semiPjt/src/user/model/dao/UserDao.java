@@ -91,16 +91,16 @@ public class UserDao {
 				u.setUserId(rset.getString("user_id"));
 				u.setUserPw(rset.getString("user_pw"));
 				u.setUserName(rset.getString("user_name"));
-				u.setUserPhone(rset.getString("user_phone"));
-				u.setUserBirthday(rset.getString("user_birthday"));
-				u.setUserEmail(rset.getString("user_email"));
+				u.setUserPhone(rset.getString("phone"));
+				u.setUserBirthday(rset.getString("birthday"));
+				u.setUserEmail(rset.getString("email"));
 				u.setUserGender(rset.getString("gender"));
 				u.setUserAddressNumber(rset.getInt("addressNumber"));
 				u.setUserAddress(rset.getString("address"));
-				u.setUserGrade(rset.getString("user_grade"));
-				u.setUserTOS(rset.getString("user_tos"));
-				u.setUserprivacy(rset.getString("user_privacy"));
-				u.setUserSMS(rset.getString("user_sms"));
+				u.setUserGrade(rset.getString("grade"));
+				u.setUserTOS(rset.getString("tos"));
+				u.setUserprivacy(rset.getString("privacy"));
+				u.setUserSMS(rset.getString("sms"));
 				u.setEnrollDate(rset.getDate("enroll_date"));
 			}
 		} catch (SQLException e) {
