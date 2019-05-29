@@ -31,6 +31,13 @@
 		height:60px;
 		border: 1px solid black;
 		}
+	#S_ul3{list-style: none;text-align : center;}
+	#S_ul3 li{ display:block;
+		float:left;
+		width:5%;
+		height:30px;
+		border: 1px solid lightgray;
+		}
 	.S_filebox label { 
 		display: inline-block; 
 		padding: .5em .75em; 
@@ -82,7 +89,7 @@
 		<br>
 	<!-- 프로세스를 담는 Div -->	
 	<div id="S_process"">
-	
+	<form action="/insertSpace" method="post" enctype="multipart/form-data">
 		<!-- 프로세스1 -->
 		<div id="S_process-1">
 			<br>
@@ -245,25 +252,87 @@
 		<!-- 프로세스3 -->
 		<div id="S_process-3">
 		
-		<div style="width:50%;float:left;display:block;">
+		예약 유형 <span class="S_red"> *</span><br>
+		<div style="width:50%;float:left;display:block;text-align:center;"><input class="S_type1" type="radio" name="S_type1" value="time"> 시간단위</div>
+		<div style="width:50%;float:left;display:block;text-align:center;"><input class="S_type1" type="radio" name="S_type1" value="day"> 일단위</div>
+		<br><br>
+		<input type="hidden" id="S_type" name="S_type">
+		
 		이용시간 <span class="S_red">*</span><br>
-		<select class="form-control">
+		<select class="form-control" style="display:inline;width:45%;" id="S_start">
 		<% for(int i = 0 ; i<25; i++){ %>
 			<%if(i==0){%>
-				<option selected><%=i %>시</option>
+				<option value="<%=i%>" selected><%=i %>시</option>
 			<% continue;}%>
-			<option><%=i %>시</option>
+			<option value="<%=i%>"><%=i %>시</option>
+			<%} %>
+		</select> 
+		  부터  
+		 <select class="form-control" style="display:inline;width:45%;" id="S_end">
+		<% for(int i = 0 ; i<25; i++){ %>
+			<%if(i==24){%>
+				<option value="<%=i%>" selected><%=i %>시</option>
+			<% continue;}%>
+			<option value="<%=i%>"><%=i %>시</option>
 			<%} %>
 		</select>
-		</div>
+		 까지
+		<input type="hidden" id="S_starthidden" name="S_start" value="0">
+		<input type="hidden" id="S_endhidden" name="S_end" value="24">
+		<br>
+		<br>
 		
-		<div style="width:50%;float:left;display:block;">
+		
 		정기휴무 <span class="S_red">*</span><br>
-		</div>
+		<select class="form-control" id="S_holiday">
+			<option value="0" selected>휴무없음</option>
+			<option value="1">공휴일</option>
+			<option value="2">매주</option>
+			<option value="3">직접지정</option>
+		</select>
+		<ul id="S_ul3" style="display:none;">
+			<li>월</li>
+			<li>화</li>
+			<li>수</li>
+			<li>목</li>
+			<li>금</li>
+			<li>토</li>
+			<li>일</li>
+		</ul>
+		<span id="S_holispan" style="display:none;">
+		<input id="S_holispan1" type="text" type="form-control" numberOnly maxlength="2"> 월
+		<input id="S_holispan2" type="text" type="form-control" numberOnly maxlength="2"> 일
+		</span>
+		<input type="hidden" id="S_holiday1" name="S_holiday">
+		<br><br>
+		
+		최대 수용 인원 <span class="S_red"> *</span>
+		<input id="S_people" name="S_people" type="text" class="form-control" style="width:40%;display:inline;" numberOnly> 명
+		<br><br>
+		
+		예약 시 주의사항 <span class="S_red"> *</span>
+		<input id="S_warning" type="text" class="form-control" style="width:93%;display:inline;" placeholder="예약 시 주의사항을 입력해 주세요.">
+		<button type="button" id="S_warbt" class="btn btn-outline-primary" style="width:6%;display:inline;">추가</button>
+		<span id="S_warspan"></span><button type="button" id="S_warinit" style="display:none;" class="btn btn-outline-primary">초기화</button>
+		<input type="hidden" id="S_warninghidden" name="S_warning">
+		
+		
 		
 		</div><!-- 프로세스3 -->
 		<!-- 프로세스4 -->
-		<div id="S_process-4">네번째</div><!-- 프로세스4 -->
+		<br>
+		<div id="S_process-4">
+			
+			<span id="S_whattype"></span>
+			<span class="S_red"> *</span><br> 
+			<input type="text" id="S_price1" name="S_price1" class="form-control" required>
+
+			<br>
+			
+			1인당 추가 가격 <span class="S_red"> *</span><br>
+			<input type="text" id="S_price2" name="S_price2" class="form-control" required>
+			
+		</div><!-- 프로세스4 -->
 		
 		<br>
 		<br>
@@ -276,6 +345,7 @@
 			<button id="S_bt-submit" type="submit" class="btn btn-outline-primary btn-lg"
 			style="display:none;">등록완료</button>
 		</div><!-- 프로세스버튼-->
+		</form>
 	</div><!-- 프로세스를 담는 Div -->	
 </div><!-- section content -->
 </section>
@@ -457,7 +527,7 @@
 				}
 			});
 			
-			//S_phone1
+			//S_phone1, S_phone2
 			//숫자만 입력하게 하는 것
 			$("input:text[numberOnly]").on("keyup", function() {
     			$(this).val($(this).val().replace(/[^0-9]/g,""));
@@ -469,17 +539,123 @@
 					$("#S_phone2_3").val($("#S_phone1_3").val());
 				}
 			})
+			
+			//S_type
+			$(".S_type1").change(function(){
+				
+				$("#S_type").val($('input[name="S_type1"]:checked').val());
+				alert($("#S_type").val());
+			});
+			
+			//S_start,S_end
+			$("#S_start").change(function(){
+				$("#S_starthidden").val($("#S_start option:selected").val());
+				alert($("#S_starthidden").val());
+				
+			});
+			$("#S_end").change(function(){
+				$("#S_endhidden").val($("#S_end option:selected").val());
+				alert($("#S_endhidden").val());
+			});
+			
+			//S_holiday
+			var S_holiday = [0,0,0,0,0,0,0,0];
+			$("#S_holiday").change(function(){
+				if($("#S_holiday option:selected").val()==0){
+					S_holiday = [0,0,0,0,0,0,0,0];
+					$("#S_holispan").css("display","none");
+					$("#S_ul3").css("display","none");
+					alert(S_holiday);
+				}else if($("#S_holiday option:selected").val()==1){
+					S_holiday = [1,0,0,0,0,0,0,0];
+					$("#S_holispan").css("display","none");
+					$("#S_ul3").css("display","none");
+					alert(S_holiday);
+				}else if($("#S_holiday option:selected").val()==2){
+					S_holiday = [2,0,0,0,0,0,0,0];
+					$("#S_holispan").css("display","none");
+					$("#S_ul3").css("display","inline");
+					$("#S_ul3 li").css("background","white");
+					alert(S_holiday);
+				}else{
+					S_holiday = [3,0,0,0,0,0,0,0];
+					$("#S_holispan").css("display","inline");
+					$("#S_ul3").css("display","none");
+					$("#S_holispan1").val("");
+					$("#S_holispan2").val("");
+					alert(S_holiday);
+				}
+			});
+			$("#S_ul3 li").click(function(){
+						var index = $(this).index();
+						if(S_holiday[index+1]==0){
+							S_holiday[index+1]=1;
+							$(this).css("background","lightgray");
+							alert(S_holiday);
+						}else{
+							S_holiday[index+1]=0;
+							$(this).css("background","white");
+							alert(S_holiday);
+						}
+			});
+			$("#S_holispan1").blur(function(){
+				if($(this).val()==""){
+					S_holiday[1] = 0;
+					alert(S_holiday);
+					return;
+				}
+				S_holiday[1] = $(this).val();
+				alert(S_holiday);
+			});
+			$("#S_holispan2").blur(function(){
+				if($(this).val()==""){
+					S_holiday[2] = 0;
+					alert(S_holiday);
+					return;
+				}
+				S_holiday[2] = $(this).val();
+				alert(S_holiday);
+			});
+			
+			//S_warning
+			var warnum = 0;
+			var warningmsg = "";
+			var warning = new Array(10);
+			$("#S_warbt").click(function(){
+				if($("#S_warning").val()==""){
+					return;
+				}else{
+					if(warnum==10){
+						alert("더 이상 등록 할 수 없습니다.");
+						return;
+					}
+					$("#S_warinit").css("display","inline");
+					warnum +=1;
+					warning[warnum-1] = $("#S_warning").val(); //배열에 들어가는 값
+					warningmsg += warnum+". "+warning[warnum-1]+"<br>";
+					$("#S_warspan").html(warningmsg);
+					$("#S_warning").val("");
+					alert(warning);
+				}
+			});
+			$("#S_warinit").click(function(){
+				$("#S_warinit").css("display","none");
+				warning = new Array(10);
+				warnum=0;
+				warningmsg="";
+				$("#S_warspan").html("");
+				$("#S_warning").val("");
+				alert(warning);
+			});
+			
+			
 		//프로세스 이전,다음 로직
 			var state = 0;
 			window.onload = function(){
-				$('#S_processBar-3').css("background-color","lightblue");
-				$('#S_process-3').css("display","block");
-				$('#S_bt-1').css("visibility","visible");
-				state = 3;
-//				$('#S_processBar-1').css("background-color","lightblue");
-//				$('#S_process-1').css("display","block");
-//				$('#S_bt-1').css("visibility","hidden");
-//				state = 1;
+				$('#S_processBar-1').css("background-color","lightblue");
+				$('#S_process-1').css("display","block");
+				$('#S_bt-1').css("visibility","hidden");
+				state = 1;
 			};
 			
 			var check1 = [false,0,false,false,0,false,0,0]; //다음버튼 가기 전 체크용
@@ -560,13 +736,33 @@
 					$('#S_processBar-3').css("background-color","lightblue");
 					$('#S_process-3').css("display","block");
 					state=3;
+					
 				}else if(state==3){ //프로세스 3일 때, 다음 버튼 클릭 시
+					$("#S_holiday1").val(S_holiday.join(","));
+					$("#S_warninghidden").val(warning.join(","));
+					if($("#S_type").val()==""){
+						alert("예약 유형을 선택하여 주십시오.");
+						return;
+					}else if($("#S_people").val()==""){
+						alert("최대 수용 인원을 입력해주십시오.");
+						$("#S_people").focus();
+						return;
+					}else if(warning.join(",")==",,,,,,,,,"){
+						alert("주의사항을 적어도 한 개 이상 입력해 주세요.");
+						$("#S_warning").focus();
+						return;
+					}
 					$('#S_processBar-3').css("background-color","white");
 					$('#S_process-3').css("display","none");
 					$('#S_processBar-4').css("background-color","lightblue");
 					$('#S_process-4').css("display","block");
 					$("#S_bt-2").css("display","none");
 					$("#S_bt-submit").css("display","inline"); //프로세스 4가 되면서 서브밋 버튼 활성화
+					if($("#S_type").val()=="time"){
+						$("#S_whattype").text("시간당 대여 가격");
+					}else{
+						$("#S_whattype").text("종일 대여 가격");
+					}
 					state=4;
 				}
 			});
