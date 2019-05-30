@@ -188,8 +188,9 @@ section {
     
 }
 
-#main_search input[type="submit"]{
-	background: url(../img/main_search_icon.png) no-repeat center center;
+
+#main_search button{
+    background: none;
 	position: absolute;
     width: 60px;
     height: 60px;
@@ -201,6 +202,7 @@ section {
     right: 280px;
     top: 300px;
 }
+
 /*main section fin*/
 footer {
 	 height: 200px;
