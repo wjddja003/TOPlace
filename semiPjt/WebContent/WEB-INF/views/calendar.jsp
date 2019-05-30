@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-    <script
+<script
       src="https://code.jquery.com/jquery-3.4.0.js"
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
       crossorigin="anonymous">   
@@ -12,6 +14,7 @@
         .calendar{
             visibility: collapse;
         }
+
         td{
             width: 40px;
             height: 40px;
@@ -28,13 +31,11 @@
     </style>
 </head>
 <body>
-    <table border="1">
+	<table border="1">
         <thead>
-            <tr>
-                <th><button id="prevbtn">뒤로</button></th>
-                <th colspan="5"></th>
-                <th><button id="nextbtn">다음</button></th>
-            </tr>
+            <th><button id="prevbtn">뒤로</button></th>
+            <th colspan="5"></th>
+            <th><button id="nextbtn">다음</button></th>
         </thead>
         <tbody class="calendar">
             <tr>
@@ -816,17 +817,16 @@
                 <td></td>
             </tr>
         </tbody>
-        <tfoot>
-            <tr>
-                <th colspan="7">
-                <button id="btn">다시 선택하기</button>
-                <span></span><br>
-                <button id="strCheck">확인하기</button>
-                <div></div>
-                </th>
-            </tr>
-        </tfoot>
+        <tfooter>
+            <button id="btn">다시 선택하기</button>
+            <span id="duringSpan"></span><br>
+            <br>
+            <button id="strCheck">확인하기</button>
+            <div></div>
+        </tfooter>
     </table>
+    
+    
     
     <script>
     $(document).ready(function(){
