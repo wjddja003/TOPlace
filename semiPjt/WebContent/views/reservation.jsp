@@ -45,7 +45,7 @@ th{
 	color: black;
 }
 .date-picker-wrapper .month-wrapper table .day.lalala {
-	background-color: orange;
+	background-color: #f69b02;
 }
 .options {
 	display: none;
@@ -60,11 +60,15 @@ th{
 	background-color: red !important;
 }
 .date-picker-wrapper.date-range-picker19 .day.last-date-selected {
-	background-color: orange !important;
+	background-color: #f69b02 !important;
 }
 /* 달력 css fin */
 
 /*reservation css start*/
+.reservation{
+	overflow:hidden;
+	position:relative;
+}
 .reservation_lMenu{
 	float: left;
 	width: 800px;
@@ -72,23 +76,26 @@ th{
 }
 /* reservation_lMenu css fin */
 .reservation_rMenu{
-	margin:40px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
 	float: left;
-	width: 350px;
-	top: 120px;
-	right:350px;
+	width: 300px;
+	top: 60px;
+	right:0px;
 	position: absolute;
 	overflow-y:auto;
+}
+.rMenu_list:first-of-type{
+	border-top:3px solid #183058;
 }
 .rMenu_list{
 	background: white;
 	line-height: 50px;
-	border-bottom:1px solid;
+	border-bottom:2px solid #183058;
 }
 .rMenu_price{
 	background: white;
 	line-height: 80px;
-	border-top:3px solid;
+	border-top:3px solid #183058;
 	font-size:28px;
 }
 #payment{
@@ -96,17 +103,20 @@ th{
 	width: 100%;
 	border:none;
 	outline:none;
+	background: #183058;
+	color: white;
 	
 }
 /* reservation_rMenu  css fin */
 .reservation_head{
 	margin:50px 0px 0px 0px;
-	background:#f69b02;
+	background:white;
 }
 /* reservation_head css fin */
 .reservation_content{
-	background: lightgrey;
+	background: #f7f7f7;
 	margin:0px 0px 20px 0px;
+	border-top:2px solid #183058;
 	padding: 20px;
 	clear: both;
 	position: relative;
@@ -152,16 +162,20 @@ th{
 	z-index:99;
     top : 0px;
     position: absolute;
-    background: blue;
+    background: white;
     width: 500px;
-    display: none; 
+    
+    display: block; 
+ }
+ .reservation_popCloseBtn_1{
+ 	text-align: right;
  }
  /* reservation페이지 팝업창 css */ 
 #reservation_popup_mask { 
 	z-index:98;
 	position: fixed;
 	width: 100%;
-	height: 1000px;
+	height: 100%;
 	top: 0px;
 	left: 0px;
 	display: none; 
@@ -173,9 +187,9 @@ th{
 /*스와이프 css 시작*/
 .swiper-container {
 	height:250px;
-	border:5px solid silver;
+	border:5px solid white;
 	border-radius:7px;
-	box-shadow:0 0 20px #ccc inset;
+	box-shadow:0 0 20px white inset;
 }
 .swiper-slide {
 	text-align:center;
@@ -199,8 +213,8 @@ th{
 </head>
 <body>
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
-	<section style="background:#fffaf0;">
-		<div class="section_content">
+	<section style="background:white">
+		<div class="section_content" style="background: white">
 			<div class="reservation">
 			<%-- 예약페이지 컨텐츠 --%>
 				<div class="reservation_lMenu">
@@ -368,7 +382,7 @@ th{
 				</div>
 			<%-- 결제 메뉴 창 --%>
 				<div class="reservation_rMenu">
-					<span class="reservation_title">결제 예정 금액</span><br><br>
+					<span class="payment_title">결제 예정 금액</span><br><br>
 					<div class="rMenu_list">예약날짜<span>??</span></div>
 					<div class="rMenu_list">예약시간<span>??</span></div>
 					<div class="rMenu_list">예약인원<span>명</span></div>
@@ -381,7 +395,7 @@ th{
 				</div> 
 			<%-- 팝업 DIV--%>
 	   			<div id="reservation_popupDiv">
-	   				<div><button class="reservation_popCloseBtn">x</button></div>
+	   				<div><button class="reservation_popCloseBtn_1">x</button></div>
 	   				<div><h1>결제하시겠습니까?</h1></div>
 	   				<div>예약공간</div>
 	   				<div>예약날짜</div>
@@ -415,23 +429,23 @@ th{
 	        	count++;
 	        	if(count==1){
 	        		start = $('.swiper-slide button').index(this);
-	            	$(this).css('background','black');
+	            	$(this).css('background','#183058');
 	    			$(this).css('color','white');
 	        	}else if(count==2){
 	        		end = $('.swiper-slide button').index(this);
 	        		for(var i=start; i<end+1; i++){
-	        			$('.swiper-slide button').eq(i).css('background-color','black');
+	        			$('.swiper-slide button').eq(i).css('background-color','#183058');
 	        			$('.swiper-slide button').eq(i).css('color','white');
 	        			$('.swiper-slide button').eq(i).addClass('tSel');
 	        		}
 	        		for(var i=start; i>end-1; i--){
-	        			$('.swiper-slide button').eq(i).css('background-color','black');
+	        			$('.swiper-slide button').eq(i).css('background-color','#183058');
 	        			$('.swiper-slide button').eq(i).css('color','white');
 	        			$('.swiper-slide button').eq(i).addClass('tSel');
 	        		}
 	        	}else if(count>2){
 	        		count = 0;
-	        		$('.swiper-slide button').css('background','#ccc');
+	        		$('.swiper-slide button').css('background','#f69b02');
 	    			$('.swiper-slide button').css('color','black');
 	    			$('.swiper-slide button').eq(i).removeClass('tSel');
 	        	}
@@ -498,6 +512,11 @@ th{
 								 $("body").css("overflow","auto");
 								<%-- 예약 정보 확인 창 닫기 --%>
 								 $(".reservation_popCloseBtn").click(function(event){
+							           $("#reservation_popup_mask").css("display","none"); 
+							           $("#reservation_popupDiv").css("display","none"); 
+							           $("body").css("overflow","auto");
+							       });
+								 $(".reservation_popCloseBtn_1").click(function(event){
 							           $("#reservation_popup_mask").css("display","none"); 
 							           $("#reservation_popupDiv").css("display","none"); 
 							           $("body").css("overflow","auto");
