@@ -8,7 +8,8 @@
 	<style>
 		.searchInfo{
 			width:100%;
-			height:100px;
+			height:70px;
+			margin-top: 30px;
 		}
 		.detailSearchList{
 			width:29%;
@@ -51,6 +52,10 @@
 			margin: 0 auto;
 		    position: relative;
 		}
+		.detailSearchList{
+			padding-left: 10px;
+			width: 25%;
+		}
 		.detailSearch input[type="text"]{
 			width: 800px;
 			height: 60px;
@@ -69,6 +74,24 @@
 		    padding: 0;
 		    right: 300px;
 		}
+		.filterOutBox{
+			width:100%;
+			height:200px;
+			background-color: beige;
+		}
+		.filterOutLine{
+			margin-top:50px;
+			display: none;
+			clear: both;
+		}
+		.detailSearchBtn{
+			background-color: white;
+			width: 80px;
+			height: 40px;
+		}
+		.detailBox{
+			margin-top:30px;
+		}
 	</style>
 </head>
 <body>
@@ -77,15 +100,15 @@
 	<section>
 	<div class="section_content">
 		<div class="searchInfo">
-			<span style="color:blue;font-weight:bold;font-size:30px;"><u>${type }</u></span><span style="font-weight:100;font-size:30px;"> (으)로 검색한 결과입니다.</sapn>
+			<span style="color:blue;font-weight:bold;font-size:30px; border-bottom:4px solid blue">${type }</span><span style="font-weight:100;font-size:20px;"> (으)로 검색한 결과입니다.</sapn>
 		</div>
 		<div class="detailSearch">
             <input class="searchInput" type="text" placeholder="검색어를 입력해주세요">
             <input class="searchIcon" type="submit" value="">
         </div>
-		<div>
+		<div class="detailBox">
 			<div class="detailSearchList">공간유형
-				<div class="selectBox">모든공간<span>▽</span></div>
+				<div class="selectBox">모든공간&nbsp;&nbsp;&nbsp;&nbsp;<span>▽</span></div>
 				<div class="selectBoxInner">
 					<div class="typeOutlineDetail">
 						<div class="placeTypeDetail">회의실</div>
@@ -138,15 +161,27 @@
 			
 			<div class="detailSearchList">이용일
 				<div class="selectBox">모든날짜<span>▽</span></div>
+				<div class="selectBoxInner">
+					<jsp:include page="/WEB-INF/views/calendar.jsp"/>
+				</div>
 			</div>
-			<button id="detailSearchMap" class="detailSearchBtn">지도</button>
-			<button id="detailSearchFilter" class="detailSearchBtn">필터</button>
+			<div class="detailSearchList">
+				<button id="detailSearchMap" class="detailSearchBtn">지도</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button id="detailSearchFilter" class="detailSearchBtn">필터</button>
+			</div>
+			<div class="filterOutLine">
+				<button id="filterBack" style="float:right;")>X</button>
+				<div class="filterOutBox">
+					<div class="filterBox">이태원</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	</section>
 	<script type="text/javascript">
 	$(document).ready(function() {
-		var index = '${index	}';
+		var index = '${index }';
 		if (index >= 0 && index < 12) {
 			$('.selectBox').eq(0).html('${type }<span>▽</span>');
 			$('.placeTypeDetail').eq(index).css("background-color", "blue");
@@ -156,23 +191,39 @@
 		} else {
 			$('.selectBox').eq(2).html('${type }<span>▽</span>');
 		}
-		var count = 0;
+		
 		$('.selectBox').click(function() {
-			if (count == 0) {
-				$(this).find('span').html('▲');
-				count = 1;
-				$(this).next().css("display", "block");
-			} else {
-				$(this).find('span').html('▽');
-				count = 0;
-				$(this).next().css("display", "none");
-			}
+			var selectNum = $('.selectBox').index(this);
+			
+				$('.selectBox').find('span').html('▽');
+				$('.selectBox').next().css("display", "none");
+				$('.filterOutLine').css("display","none");
+				
+				$('.selectBox').eq(selectNum).find('span').html('▲');
+				$('.selectBox').eq(selectNum).next().css("display", "block");
+				filterCount = 0;
 		});
 	});
 	$('.placeTypeDetail').click(function() {
 		var index = $('.placeTypeDetail').index(this);
 		var type = $('.placeTypeDetail').eq(index).text();
 		location.href = "/headerSearchPlace?type=" + type + "&index=" + index;
+	});
+	var filterCount = 0;
+	$('#detailSearchFilter').click(function(){
+		if(filterCount==0){
+			$('.selectBox').find('span').html('▽');
+			$('.selectBox').next().css("display", "none");
+			$('.filterOutLine').css("display", "block");	
+			filterCount = 1;
+		} else if(filterCount==1){
+			$('.filterOutLine').css("display", "none");	
+			filterCount = 0;
+		}
+	});
+	$('#filterBack').click(function() {
+	     	$('.filterOutLine').css("display","none");
+	     	filterCount = 0;
 	});
 	</script>
 </body>
