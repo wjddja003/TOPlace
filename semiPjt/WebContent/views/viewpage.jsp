@@ -14,14 +14,14 @@
     #viewpage_alert{
         width: 100%;
         height: 100px;
-        background-color: #ffd014;
+        background-color: #f69b02;
         position: absolute;
         top: 0px;
         display: none;
         text-align: center;
         font-size: 22px;
         padding: 30px 0px 30px 0px;
-        color: #6d3bff;
+        color: #fff;
     }
     #like_full{
         position: absolute;
@@ -87,8 +87,8 @@
         background-color: white;
         border: 1px solid #6d3bff;
         position: absolute;
-        right: 356px;
-        top: 670px;
+        right: 0px;
+        top: 0px;
     }
     .viewpage_left{
        width: 775px;
@@ -119,6 +119,13 @@
         
     }
     /*viewpage content Fin*/
+
+    .viewpage_cover{
+        width: 1160px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+    }
     
 </style>
 </head>
@@ -152,6 +159,7 @@
                         </ul>
                      </div>
                      <!--viewpage_section Fin-->
+                    <div class="viewpage_cover">
                     <div class="viewpage_left">
                         <div class="viewpage_photo">
                             <a href="#"><img src="../img/viewpage_eximg.jpg" width="773px;"></a>
@@ -268,6 +276,7 @@
                             <div></div>
                         </article>
                     </div>
+
                      <div class="viewpage_right">
                         <span class="reservation_title">결제 예정 금액</span><br><br>
                         <div>예약날짜<span>??</span></div>
@@ -276,6 +285,7 @@
                         <div>￦<span>돈</span></div>
                         <button>결제하기</button>			
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -286,10 +296,13 @@
             var floatPosition = parseInt($(".viewpage_right").css('top'));
             $(window).scroll(function() {
                 var scrollTop = $(window).scrollTop();
-                var newPosition = scrollTop + floatPosition + "px";
-                $(".viewpage_right").stop().animate({
-                    "top" : newPosition
-                }, 500);
+                console.log(scrollTop);
+                if(!scrollTop<500 && scrollTop<=3000){
+                	 var newPosition = scrollTop + floatPosition + "px";
+                     $(".viewpage_right").stop().animate({
+                         "top" : newPosition
+                     }, 1000);
+                }
             }).scroll();
         });   
         $(document).ready(function(){

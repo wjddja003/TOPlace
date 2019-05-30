@@ -21,7 +21,7 @@
                 <div class="section_content">
                 	<div id="main_search">
 	                    <input class="searchInput" type="text" placeholder="검색어를 입력해주세요">
-	                    <input class="searchIcon" type="submit" value="">
+                        <button class="searchIcon" type="submit" value=""><img src="../img/main_search_icon.png"></button>
                     </div>
                 </div>
 

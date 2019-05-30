@@ -26,9 +26,8 @@
             top:0px;
         }
         #aside-login_t{
-            padding-top: 25%;
-            border: 1px solid black;
-            background-color: darkgray;
+            padding:70px 20px 0px 20px;
+            background-color: #f69b02;
             width: 100%;
             height: 20%;
             text-align: center;
@@ -36,7 +35,6 @@
         }
         #aside-login_t li{
             list-style-type: none;
-            float: left;
         }
         #aside-login_t li a{
             color: black;
@@ -133,7 +131,7 @@
         <button class="back">></button>
         <div id="aside-login_t">
             <ul>
-                <li><a><img src="../img/logo.png" style="width:60px; height:40px;"></a></li>
+                <li><a><img src="../img/logo_2.png" style="width:80px; height:40px;"></a></li>
                 <li>
                 	<c:choose>
                 		<c:when test="${empty sessionScope.User}">

@@ -66,7 +66,7 @@ header {
 	box-sizing: border-box;
 	height: 100%;
 	line-height: 100px;
-    background-color: #fff;
+    background-color: #f7f7f7;
 }
 
 .navi {
@@ -114,6 +114,7 @@ header {
 	font-size: 30px;
 	background-color: black;
 	color: white;
+	width:50px;
 	border: 0px;
 }
 .realtime:hover {
@@ -187,8 +188,9 @@ section {
     
 }
 
-#main_search input[type="submit"]{
-	background: url(../img/main_search_icon.png) no-repeat center center;
+
+#main_search button{
+    background: none;
 	position: absolute;
     width: 60px;
     height: 60px;
@@ -200,6 +202,7 @@ section {
     right: 280px;
     top: 300px;
 }
+
 /*main section fin*/
 footer {
 	 height: 200px;

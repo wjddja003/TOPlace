@@ -9,6 +9,9 @@
       crossorigin="anonymous">   
     </script>
     <style>
+        .calendar{
+            visibility: collapse;
+        }
         td{
             width: 40px;
             height: 40px;
@@ -26,89 +29,860 @@
 </head>
 <body>
     <table border="1">
-        <tr>
-            <td colspan="7"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+        <thead>
+            <th><button id="prevbtn">뒤로</button></th>
+            <th colspan="5"></th>
+            <th><button id="nextbtn">다음</button></th>
+        </thead>
+        <tbody class="calendar">
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody class="calendar">
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody class="calendar">
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody class="calendar">
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody class="calendar">
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody class="calendar">
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody class="calendar">
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody class="calendar">
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody class="calendar">
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody class="calendar">
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody class="calendar">
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody class="calendar">
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <button id="btn">다시 선택하기</button>
+            <span></span><br>
+            <br>
+            <button id="strCheck">확인하기</button>
+            <div></div>
+        </tfoot>
     </table>
-    <button id="btn">다시 선택하기</button>
-    <span></span><br>
-    <button id="prevbtn">뒤로</button>
-    <button id="nextbtn">다음</button>
-    <br>
-    <button id="strCheck">확인하기</button>
-    <div></div>
+    
+    
+    
     <script>
-        var today = "201905283";
-        var year = today.substring(0,4);
-        var month = today.substring(4,6);
-        var day = today.substring(6,8);
-        var DOW = today.substring(8,9);
+    $(document).ready(function(){
+            
+        var sysday = new Date();
+        var year = sysday.getFullYear();
+        var month = sysday.getMonth()+1;
+        var day = sysday.getDate();
+        var strOneDay = year+"-"+month+"-1";
+        var oneDay = new Date(strOneDay);
+        var DOW = oneDay.getDay();
+        var visibleMonth = month-1;
+        month = visibleMonth+1
         var nextDOW = 0;
-        var prevDOW = [0,0,0,0,0,0,0,0,0,0,0,0];
+        var prevDOWM = new Array(12);
+        var prevDOWY = new Array();
+        var yearIndex = 0;
         var monthEndDay = [31,28,31,30,31,30,31,31,30,31,30,31];
-        $('tr').eq(0).text(year+month+"월");
-        console.log(DOW);
+        var leapYear = 2020;
+        var count = 0;
+        var during = 0;
+        var startDay = -1;
+        var endDay = -1;
+        var startMonth = 0;
+        var endMonth = 0;
+        var startYear = 0;
+        var endYear = 0;
+        var clickEndDay = 0;
+        var holiday = [sysday.getFullYear()+"0101",sysday.getFullYear()+"0301",sysday.getFullYear()+"0505",sysday.getFullYear()+"0512",sysday.getFullYear()+"0606",sysday.getFullYear()+"0815",sysday.getFullYear()+"1003",sysday.getFullYear()+"1009",sysday.getFullYear()+"1225"];
+        var selectInhibitDay = new Array();
+        selectInhibitDay.push("20191002");
+        
+        //나중에 조건나오면 if 걸어서 제외할 날들 배열 합치기 inhibitDay가 최종 배열
+        //조건 나오면 정렬 돌려서 넣기
+        var inhibitDay = holiday.concat(selectInhibitDay);
+        
+        console.log(inhibitDay);
+        $(".calendar").eq(visibleMonth).css("visibility","visible");
+       
+        $('th').eq(1).text(year+"년 "+month+"월");
         var weeknum = 1;
         for(var i=1;i<monthEndDay[month-1]+1;i++){
-            $('tr').eq(weeknum).find('td').eq(DOW).text(i);
+            $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).text(i);
+            if(month==parseInt(sysday.getMonth()+1) && i<day){
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+            }
+            for(var k = 0; k<inhibitDay.length; k++){
+                if(month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                }
+            }
             if(i==monthEndDay[month-1]){
                 nextDOW = DOW;
             } else if(i==1){
-                prevDOW[month-1] = DOW;
+                prevDOWM[month-1] = DOW;
             }
             if(DOW==6){
                 weeknum++;
@@ -118,30 +892,58 @@
             DOW++
         }
         
+        var whileIndex = 0;
+        
         $('#nextbtn').click(function(){
-            $('td').css("background-color","white");
+            
+            $(".calendar").eq(visibleMonth).css("visibility","collapse");
             month++;
+            visibleMonth++;
+            
             if(month>12){
+                prevDOWY.push(prevDOWM);
+                prevDOWM = new Array(12);
                 month=1;
+                visibleMonth=month-1;
                 year++;
+                yearIndex++;
+                if(year==leapYear){
+                    monthEndDay[1]=29;
+                    leapYear=leapYear+4;
+                }else{
+                    monthEndDay[1]=28;
+                }
+                console.log(yearIndex);
             }
-            $('td').text("");
+            $(".calendar").eq(visibleMonth).css("visibility","visible");
+            $(".calendar").eq(visibleMonth).find('td').text("");
+            
             weeknum = 1;
             if(nextDOW==6){
                 DOW= 0;
             }else{
                 DOW= nextDOW+1;
             }
-            
-            $('tr').eq(0).text(month+"월");
-            console.log(DOW);
-            console.log(prevDOW);
+            $('th').eq(1).text(year+"년 "+month+"월");
             for(var i=1;i<monthEndDay[month-1]+1;i++){
-                $('tr').eq(weeknum).find('td').eq(DOW).text(i);
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).text(i);
+                if(month==parseInt(sysday.getMonth()+1) && i<day){
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+            }
+                for(var k = 0; k<inhibitDay.length; k++){
+                if(month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                }
+            }
+                
                 if(i==monthEndDay[month-1]){
                     nextDOW = DOW;
                 } else if(i==1){
-                    prevDOW[month-1] = DOW;
+                    prevDOWM[month-1] = DOW;
                 }
                 if(DOW==6){
                     weeknum++;
@@ -149,35 +951,59 @@
                     continue;
                 }
             DOW++
-        }
+            }
+            console.log(prevDOWM);
+            console.log(prevDOWY);
         });
         $('#prevbtn').click(function(){
-            $('td').css("background-color","white");
-            if(today.substring(0,4)==year && (month-1)<today.substring(4,6)){
+            
+            if(sysday.getFullYear()==year && (month-1)<sysday.getMonth()+1){
                 alert("지난 예약은 불가능합니다.")
                 return;
             }
             
-            $('td').text("");
+            $(".calendar").eq(visibleMonth).css("visibility","collapse");
             month--;
+            visibleMonth--;
+            
             if(month==0){
                 month=12;
+                visibleMonth=month-1;
                 year--;
+                yearIndex--;
+                prevDOWM=prevDOWY[yearIndex];
+                if(year==leapYear){
+                    monthEndDay[1]=29;
+                    leapYear=leapYear-4;
+                }else{
+                    monthEndDay[1]=28;
+                }
             }
-            weeknum = 1;
-            if(prevDOW==0){
-                DOW= 6;
-            }else{
-                DOW= prevDOW[month-1];
-            }
+            $(".calendar").eq(visibleMonth).css("visibility","visible");
+            $(".calendar").eq(visibleMonth).find('td').text("");
             
-            $('tr').eq(0).text(month+"월");
+            weeknum = 1;
+                DOW= prevDOWM[month-1];
+           
+            $('th').eq(1).text(year+"년 "+month+"월");
             for(var i=1;i<monthEndDay[month-1]+1;i++){
-                $('tr').eq(weeknum).find('td').eq(DOW).text(i);
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).text(i);
+                if(month==parseInt(sysday.getMonth()+1) && i<day){
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+            }
+                for(var k = 0; k<inhibitDay.length; k++){
+                if(month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                }
+            }
                 if(i==monthEndDay[month-1]){
                     nextDOW = DOW;
                 } else if(i==1){
-                    prevDOW[month-1] = DOW;
+                    prevDOWM[month-1] = DOW;
                 }
                 if(DOW==6){
                     weeknum++;
@@ -185,50 +1011,154 @@
                     continue;
                 }
             DOW++
-        }
+            }
+            console.log(prevDOWM);
+            console.log(prevDOWY);
         });
         
-        var count = 0;
-        var during = 0;
-        $('td').click(function(){
+        
+        $('td').not('td.inhibitDay').click(function(){
             
-            if(count==0){
+            if($(this).hasClass("inhibitDay") === false && count==0){
+                $('td').not('td.inhibitDay').css("background-color","white");
+                $('td').removeClass("selectDay");
                 startDay = $('td').index(this);
                 $(this).css("background-color","green");
                 $(this).addClass("selectDay");
+                startMonth = month;
+                startYear = year;
                 count=1;
-            } else{
+            } else if($(this).hasClass("inhibitDay") === false && count==1){
                 endDay = $('td').index(this);
                 $(this).css("background-color","red");
                 $(this).addClass("selectDay");
+                endMonth = month;
+                endYear = year;
+                clickEndDay = $(this).text();
                 count = 0;
             }
-//            if($("td").eq(endDay).hasClass("selectDay") === true){
-//                for(var i =startDay; i<endDay+1;i++){
-//                    $('td').eq(i).css("background-color","green");
-//                    $('td').eq(i).addClass("selectDay");
-//                }
-//                during = endDay-startDay+1;
-//                $('span').text(during);
-//                endDay=null;
-//            }
-        });
-        
-//        if(endDay!=null){
-                
 
+            console.log("1번"+startDay);
+            console.log("2번"+endDay);
+            console.log("카운트상태:"+count);
+            if($("td").eq(endDay).hasClass("selectDay") === true && count==0){
+                
+                for(var i =startDay; i<endDay+1;i++){
+                    during = $('.selectDay').length;
+                    if(during>30){
+                        resetfn();
+                        break;
+                    }
+                    if($("td").eq(i).hasClass("inhibitDay") === false && $('td').eq(i).text()!=""){
+                        $('td').eq(i).css("background-color","green");
+                        $('td').eq(i).addClass("selectDay");
+                    }
+                    
+                }
+                for(var i =endDay; i<startDay+1;i++){
+                    during = $('.selectDay').length;
+                    if(during>30){
+                        resetfn();
+                        break;
+                    }
+                    if($("td").eq(i).hasClass("inhibitDay") === false && $('td').eq(i).text()!=""){
+                        $('td').eq(i).css("background-color","green");
+                        $('td').eq(i).addClass("selectDay");
+                    }
+                    
+                }
+                
+                $('span').text(during);
+                endDay=null;
+            }
+        });
+        resetfn = sample;	
+        function sample(){
+            alert("예약일은 30일을 초과할수 없습니다.")
+            $('td').not('td.inhibitDay').css("background-color","white");
+            during = 0;
+            $('span').text(during);
+        }
+            
         $('#btn').click(function(){
-            $('td').css("background-color","white");
+            $('td').not('td.inhibitDay').css("background-color","white");
             during = 0;
             $('span').text(during);
         });
         $("#strCheck").click(function(){
-            array = new Array();
-            for(var i =0;i<$('.selectDay').length;i++){
-                array[i] = year+month+$('.selectDay').eq(i).text();
+            if(startMonth>endMonth){
+                alert("이전 날짜부터 선택해주십시오.")
+                $('td').not('td.inhibitDay').css("background-color","white");
+                return;
+            }
+            if(startMonth!=endMonth || startYear!=endYear){
+                array = new Array();
+                var prepareEndDay = monthEndDay[startMonth-1];
+                for(var k = inhibitDay.length-1; k>=0; k--){
+                    if(startMonth==parseInt(inhibitDay[k].substring(4,6)) && prepareEndDay==parseInt(inhibitDay[k].substring(6,8))){
+                        prepareEndDay--;
+                    }
+                }
+                var strMonth1 = startMonth.toString();
+                var strMonth2 = endMonth.toString();
+                var strDay = "";
+                if(strMonth1.length<2){
+                    strMonth1="0"+strMonth1;
+                }
+                if(strMonth2.length<2){
+                    strMonth2="0"+strMonth2;
+                }
+                var i = 0;
+                
+                while(true){
+                    if($('.selectDay').eq(i).text().length<2){
+                        strDay = "0"+$('.selectDay').eq(i).text();
+                    }else { 
+                        strDay = $('.selectDay').eq(i).text();
+                    }
+                    
+                    array[i] = year+strMonth1+strDay;
+                    if(($('.selectDay').eq(i).text())==prepareEndDay){
+                        i++;
+                        break;
+                    }
+                    i++;
+                }
+                while(true){
+                    if($('.selectDay').eq(i).text().length<2){
+                        strDay = "0"+$('.selectDay').eq(i).text();
+                    }else { 
+                        strDay = $('.selectDay').eq(i).text();
+                    }
+                    
+                    array[i] = year+strMonth2+strDay;
+                    if(($('.selectDay').eq(i).text())==clickEndDay){
+                        break;
+                    }
+                    i++;
+                }
+             
+            }else{
+                array = new Array();
+                var strMonth = month.toString()
+                var strDay = "";
+                if(strMonth.length<2){
+                    strMonth="0"+strMonth;
+                }
+
+                console.log(month);
+                for(var i =0;i<$('.selectDay').length;i++){
+                    if($('.selectDay').eq(i).text().length<2){
+                        strDay = "0"+$('.selectDay').eq(i).text();
+                    }else { 
+                        strDay = $('.selectDay').eq(i).text();
+                    }
+                    array[i] = year+strMonth+strDay;
+                }
             }
             console.log(array);
         });
+    });
     </script>
 </body>
 </html>
