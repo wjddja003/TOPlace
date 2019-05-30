@@ -41,7 +41,7 @@ public class InsertNoticeServlet extends HttpServlet {
 			
 		}
 		String root = getServletContext().getRealPath("/");
-		String saveDirectory = root+"upload/notice";
+		String saveDirectory = root+"upload\\notice";
 		int maxSize = 10*1024*1024;
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory,maxSize,"utf-8",new DefaultFileRenamePolicy());
 		String noticeTitle = mRequest.getParameter("noticeTitle");
