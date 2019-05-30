@@ -53,10 +53,12 @@ public class InsertNoticeServlet extends HttpServlet {
 		int result = new NoticeService().insertNotice(n);
 		System.out.println(result);
 		if(result>0) {
-			System.out.println("성공");
+			request.setAttribute("msg","공지사항 등록 성공");
 		}else {
-			System.out.println("실패");
+			request.setAttribute("msg", "공지사항 등록 실패");
 		}
+		request.setAttribute("loc", "/noticeList");
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		
 	}
 

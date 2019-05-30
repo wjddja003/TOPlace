@@ -8,22 +8,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script>
-	$(document).ready(function(){
-		$("#fileDelBtn").click(function(){
-			if(confirm("첨부파일을 삭제하시겠습니까?")){
-				$(".delFile").hide();
-				$("#file").show();
-				$("#status").val("delete");
-			}
-		})
-	})
-		
-	</script>
+
+	
 </head>
 <body>
 <jsp:include page="/WEB-INF/common/header.jsp"/>
+
+<!--  -->
 	<section>
 		<div class="table-wrapper" style="text-align: center;width:80%;margin:0 auto;">
 		<form action="/noticeUpdateEnd" method="post" enctype="multipart/form-data">
@@ -34,7 +25,7 @@
 					</tr>
 					<tr>
 						<th>제목</th>
-						<td><input type="text" class="form-control" name="noticeTitle" value="<%=n.getNoticeTitle() %>"></td>
+						<td><input type="text" class="form-control" name="noticeTitle" value="<%=n.getNoticeTitle()%>"></td>
 					</tr>
 					<tr>					
 						<th>작성자</th>
@@ -48,9 +39,9 @@
 							<img class="delFile" src="/img/file.png" width="16px">
 							<input type="file" name="filename" id="file" style="display:none">
 							<span class="delFile"><%=n.getFilename() %></span>
-							<button type="button" id="fileDelBtn" class="btn btn-primary btn-sm delFile">삭제</button> <!-- 버튼눌렀을때 위에 히든줬던것을 나타나게 -->
-							<input type="hidden" name="oldFilename" value="<%=n.getFilename() %>">
-							<input type="hidden" name="oldFilepath" value="<%=n.getFilepath() %>">
+							<button type="button" id="fileDelBtn" class="btn btn-primary btn-sm delFile">삭제</button> 
+							<input type="hidden" name="oldFilename" value="<%=n.getFilename()%>">
+							<input type="hidden" name="oldFilepath" value="<%=n.getFilepath()%>">
 							<%} else {%>
 							<input type="file" name="filename">
 							<%} %>
@@ -71,4 +62,16 @@
 		</div>
 	</section>
 </body>
+<script>
+	$(document).ready(function(){
+		$("#fileDelBtn").click(function(){
+			if(confirm("첨부파일을 삭제하시겠습니까?")){
+				$(".delFile").hide();
+				$("#file").show();
+				$("#status").val("delete");
+			}
+		})
+	})
+		
+	</script>
 </html>

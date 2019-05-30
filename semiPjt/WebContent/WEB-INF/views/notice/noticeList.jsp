@@ -7,7 +7,6 @@
     <%
           NoticePageData pd = (NoticePageData)request.getAttribute("pd");
         ArrayList<Notice> list = pd.getList();
-        User u = (User)session.getAttribute("User");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -101,17 +100,15 @@ prefix="c" %>
                     </tr>
 					<tr class="nc_tr">
 						<td colspan="5">
-						<!-- <span>멤버 : ${sessionScope.u.userId} </span>
-							<span>로그인 : ${u.userId }</span>
-							<span>작성자 : ${n.noticeWriter }</span>
-							<br> -->
+						
 							
 							${n.noticeContent }
-							<!--<c:if test="${u.userId == n.noticeWriter}">
-							</c:if>  -->
+							<c:if test="${sessionScope.User.userId == n.noticeWriter}">
+							<a class="btn btn-outline-primary btn-sm btn1" href="/noticeDelete?noticeNo=${n.noticeNo }">삭제</a>
+								<a class="btn btn-outline-primary btn-sm btn1" href="/noticeUpdate?noticeNo=${n.noticeNo }">수정</a>
+							</c:if>
 							
-								<a class="btn btn-outline-primary btn-sm btn1" href="/noticeDelete?noticeNo=${n.noticeNo }">삭제</a>
-								<a class="btn btn-outline-primary btn-sm btn1" href="/noticeUpdate">수정</a>
+								
 							
 							<br>
 							<c:if test="${n.filename != null }">

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="user.model.vo.User" %>
+    <%@ page import="noticeSy.model.vo.Notice" %>
     <% 
     	 User u = (User)session.getAttribute("User");
     %>
@@ -17,10 +18,12 @@
 			<center>
 			<form action="/insertNotice" method="post" enctype="multipart/form-data">
 				<table class="table table-bordered" style="text-align:left;">
-					
+					<tr>
+						<th colspan="2" style="font-size:20px;font-weight:bold">공지사항</th>				
+					</tr>
 					<tr>
 						<th>제목</th>
-						<td><input type="text" name="noticeTitle"></td>
+						<td><input type="text" name="noticeTitle" style="width:1050px"></td>
 					</tr>
 					<tr>
 						<th>작성자</th>
@@ -32,13 +35,13 @@
 					<tr>
 						<th>첨부파일</th>
 						<td>
-							<input type="file" name="noticefilename">
+							<input type="file" name="noticefilename" value="filname">
 						</td>
 					</tr>
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea name="noticeContent" rows="3" cols="40"></textarea>
+							<textarea name="noticeContent" rows="3" cols="40" style="width:1050px;overflow:visible"></textarea>
 						</td>
 					</tr>
 					<tr style="text-align: center;">
@@ -51,5 +54,6 @@
 			</center>
 		</div>
 	</section>
+
 </body>
 </html>
