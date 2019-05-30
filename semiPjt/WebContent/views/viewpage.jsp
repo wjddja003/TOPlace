@@ -14,14 +14,14 @@
     #viewpage_alert{
         width: 100%;
         height: 100px;
-        background-color: #ffd014;
+        background-color: #f69b02;
         position: absolute;
         top: 0px;
         display: none;
         text-align: center;
         font-size: 22px;
         padding: 30px 0px 30px 0px;
-        color: #6d3bff;
+        color: #fff;
     }
     #like_full{
         position: absolute;
