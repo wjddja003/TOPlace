@@ -36,7 +36,7 @@ public class InsertSpaceServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String root = getServletContext().getRealPath("/"); //절대경로 읽어옴
-		String saveDirectory = root+"upload/space";
+		String saveDirectory = root+"upload\\space";
 		System.out.println(saveDirectory);
 		int maxSize = 110*1024*1024; //(10MB)x11
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory,maxSize,"UTF-8",new DefaultFileRenamePolicy());
