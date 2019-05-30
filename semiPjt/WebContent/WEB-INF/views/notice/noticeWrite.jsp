@@ -16,10 +16,8 @@
 		<div class="section_content" style="margin: 0 auto;">
 			<center>
 			<form action="/insertNotice" method="post" enctype="multipart/form-data">
-				<table border="1">
-					<tr>
-						<th>공지사항 작성</th>
-					</tr>
+				<table class="table table-bordered" style="text-align:left;">
+					
 					<tr>
 						<th>제목</th>
 						<td><input type="text" name="noticeTitle"></td>

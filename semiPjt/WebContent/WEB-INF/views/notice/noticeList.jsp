@@ -111,7 +111,7 @@ prefix="c" %>
 							</c:if>  -->
 							
 								<a class="btn btn-outline-primary btn-sm btn1" href="/noticeDelete?noticeNo=${n.noticeNo }">삭제</a>
-								<a class="btn btn-outline-primary btn-sm btn1" href="/noticeUpdate?noticeNo=${n.noticeNo }">수정</a>
+								<a class="btn btn-outline-primary btn-sm btn1" href="/noticeUpdate">수정</a>
 							
 							<br>
 							<c:if test="${n.filename != null }">

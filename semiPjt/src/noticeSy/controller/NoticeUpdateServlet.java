@@ -1,6 +1,8 @@
 package noticeSy.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,8 +30,10 @@ public class NoticeUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
-		int result = new NoticeService().updateNotice();
+//		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+//		int result = new NoticeService().updateNotice(noticeNo);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeUpdate.jsp");
+		rd.forward(request, response);
 		
 	}
 
