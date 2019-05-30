@@ -92,6 +92,9 @@
 	<form action="/insertSpace" method="post" enctype="multipart/form-data">
 		<!-- 프로세스1 -->
 		<div id="S_process-1">
+			<!-- 세션에서 호스트(멤버)정보 하나를 가져옴 -->
+			<input type="hidden" name="S_hostNum" value="1">
+			
 			<br>
 			공간명 <span class="S_red">*</span><span class="S_condition" id="S_lengthspan1">0자/18자</span> <br>
 			<input type="text" id="S_placeName" name="S_placeName" class="form-control" placeholder="공간명을 입력해주세요.">
@@ -128,7 +131,8 @@
 			
 			공간 태그 <span class="S_red">*</span><span class="S_condition">최대 5개</span><br>
 			<input type="text" id ="S_placeTag" class="form-control" placeholder="태그를 입력해 주세요" style="width:94%;float:left;"><button type="button" id="S_tagbt" class="btn btn-outline-primary" style="width:6%;">추가</button>
-			<span id="S_opspan4" name="S_placeTag"></span><button type="button" id="S_init" style="display:none;" class="btn btn-outline-primary">초기화</button>
+			<span id="S_opspan4"></span><button type="button" id="S_init" style="display:none;" class="btn btn-outline-primary">초기화</button>
+			<input type="hidden" id="S_hiddentag" name="S_placeTag">
 			<br><br><br>
 			
 			편의시설<br><span class="S_condition">구비된 편의시설을 선택해주세요</span><br>
@@ -171,23 +175,27 @@
 			<br><br>
 			
 			이미지<span class="S_condition">한 장당 최대 10MB <span class="S_red"> (최대 10장)</span></span><br>
-			<div class="S_filebox S_condition" style="display:inline; border:0;"> 
-			<br>
-			<label for="S_img2" class="btn btn-outline-success">업로드</label> 
-			<input type="file" id="S_img2" name="S_img2" onchange="loadImg2(this)" multiple="multiple" accept="image/*"> 
-			</div>
-				<%for(int i = 0; i<10; i++){ %>
-				<% if(i==5){%>
+			<%for(int i=1; i<11; i++){ %>	
+				
+				<div style="display:inline;float:left;height:140px;margin-top:10px;margin-right:10px;">
+				<img id="S_img2img<%=i %>" width="100px" height="100px" >
+				<img id="S_img2x<%=i %>" width="100px" height="100px" style="display:none;">
 				<br>
-				<% }%>
-				<img id="S_img2img<%=i %>" width="100px" height="100px" style="display:none; margin-top:3px;" >
-				<%} %>
-				<input id="S_img2text" type="text" class="form-control" style="background:white;width:500px;height:200px;display:inline" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)" readonly>
+				<div class="S_filebox" style="display:inline; border:0;"> 
+				<label for="S_img2<%=i %>" class="btn btn-outline-success" style="width:100px;"><%=i %>.업로드</label> 
+				<input type="file" id="S_img2<%=i %>" name="S_img2<%=i %>" onchange="loadImg2(this,<%=i %>)" accept="image/*">
+				</div>
+				</div>
+			<%} %>
+			
+			<br><br>
+			<br><br>
+			<br><br>
 			<br><br>
 			
 			주소(위치)<span class="S_red"> *</span><br>
 			<input type="text" id="addrNum" name="addrNum" class="form-control" placeholder="주소를 등록해주세요." style="width:94%;float:left;background:white;" readonly>
-			<button type="button" class="addressinsert btn btn-outline-primary" style="width:6%;">등록</button>
+			<button type="button" class="addressinsert btn btn-outline-primary" style="width:6%;float:left;">등록</button>
 			<input type="text" id="address" name="address" class="form-control" placeholder="상세주소를 등록해주세요.">
 			<br>
 			
@@ -381,13 +389,11 @@
 						$(this).css("background-color","lightgray");
 						S_kategorie1[index] = 1;
 						stack1 +=1;
-						alert(S_kategorie1);
 					}else{
 						alert('5개까지 선택할 수 있습니다.');
 					}
 				}else{
 					S_kategorie1[index] = 0;
-					alert(S_kategorie1);
 					$(this).css("background-color","white");
 					stack1-=1;
 				}
@@ -451,10 +457,8 @@
 				if(S_kategorie2[index] == 0){
 						$(this).css("background-color","lightgray");
 						S_kategorie2[index] = 1;
-						alert(S_kategorie2);
 				}else{
 					S_kategorie2[index] = 0;
-					alert(S_kategorie2);
 					$(this).css("background-color","white");
 				}
 			});
@@ -468,7 +472,6 @@
 						$("#S_img1img").attr("src",e.target.result);
 						$("#S_img1img").css("display","inline");
 						$("#S_img1text").css("display","none");
-						alert($("#S_img1").val());
 						check1[5] = true;
 					}
 				} else{ //파일을 뺄 경우
@@ -479,36 +482,22 @@
 				}
 			}
 			//S_img2
-			function loadImg2(e){
-				if(e.files.length!=0 && e.files[0]!=0){
-					if(e.files.length>10){
-						alert("파일은 10장까지만 삽입 가능합니다.");
-						return;
+			function loadImg2(f,i){
+				if(f.files.length!=0 && f.files[0]!=0){ //f.file -> 선택한 파일을 가져옴 (배열형태로) , f.files[0] -> 0번재 파일의 크기
+					$("#S_img2x"+i).css("display","none");
+					$("#S_img2img"+i).css("display","inline");
+					var reader = new FileReader();	//JS의 FileReader 객체 -> 객체 내부의 result 속성에 파일 컨텐츠가 있음
+					reader.readAsDataURL(f.files[0]);	//선택한 파일의 경로를 읽어옴
+					console.log(f.files[0]);
+					reader.onload = function(e){
+						$("#S_img2img"+i).attr("src",e.target.result);
 					}
-					$("#S_img2text").css("display","none");
-					for(var i = 0; i<10; i++){
-						$("#S_img2img"+i).attr("src","");
-					}
-					var index = 0;
-					var filesArr = Array.prototype.slice.call(e.files);
-					filesArr.forEach(function(f){
-						var reader = new FileReader();
-						reader.onload=function(e){
-							$("#S_img2img"+index).css("display","inline");
-							$("#S_img2img"+index).attr("src",e.target.result);
-							index++;
-						}
-						reader.readAsDataURL(f);
-					});
-				}else{
-					$("#S_img2text").css("display","inline");
-					for(var i = 0; i<10; i++){
-						$("#S_img2img"+i).attr("src","");
-						$("#S_img2img"+i).css("display","none");
-					}
+				} else{ //파일을 뺄 경우
+					$("#S_img2img"+i).attr("src","");
+					$("#S_img2x"+i).css("display","inline");
+					$("#S_img2img"+i).css("display","none");
 				}
 			}
-			
 			//addrNum, address
 			$(".addressinsert").click(function(){
       		var pop = window.open("/views/jusoPopup.jsp","주소찾기",'width=600,height=700');
@@ -544,18 +533,14 @@
 			$(".S_type1").change(function(){
 				
 				$("#S_type").val($('input[name="S_type1"]:checked').val());
-				alert($("#S_type").val());
 			});
 			
 			//S_start,S_end
 			$("#S_start").change(function(){
 				$("#S_starthidden").val($("#S_start option:selected").val());
-				alert($("#S_starthidden").val());
-				
 			});
 			$("#S_end").change(function(){
 				$("#S_endhidden").val($("#S_end option:selected").val());
-				alert($("#S_endhidden").val());
 			});
 			
 			//S_holiday
@@ -565,25 +550,21 @@
 					S_holiday = [0,0,0,0,0,0,0,0];
 					$("#S_holispan").css("display","none");
 					$("#S_ul3").css("display","none");
-					alert(S_holiday);
 				}else if($("#S_holiday option:selected").val()==1){
 					S_holiday = [1,0,0,0,0,0,0,0];
 					$("#S_holispan").css("display","none");
 					$("#S_ul3").css("display","none");
-					alert(S_holiday);
 				}else if($("#S_holiday option:selected").val()==2){
 					S_holiday = [2,0,0,0,0,0,0,0];
 					$("#S_holispan").css("display","none");
 					$("#S_ul3").css("display","inline");
 					$("#S_ul3 li").css("background","white");
-					alert(S_holiday);
 				}else{
 					S_holiday = [3,0,0,0,0,0,0,0];
 					$("#S_holispan").css("display","inline");
 					$("#S_ul3").css("display","none");
 					$("#S_holispan1").val("");
 					$("#S_holispan2").val("");
-					alert(S_holiday);
 				}
 			});
 			$("#S_ul3 li").click(function(){
@@ -591,30 +572,24 @@
 						if(S_holiday[index+1]==0){
 							S_holiday[index+1]=1;
 							$(this).css("background","lightgray");
-							alert(S_holiday);
 						}else{
 							S_holiday[index+1]=0;
 							$(this).css("background","white");
-							alert(S_holiday);
 						}
 			});
 			$("#S_holispan1").blur(function(){
 				if($(this).val()==""){
 					S_holiday[1] = 0;
-					alert(S_holiday);
 					return;
 				}
 				S_holiday[1] = $(this).val();
-				alert(S_holiday);
 			});
 			$("#S_holispan2").blur(function(){
 				if($(this).val()==""){
 					S_holiday[2] = 0;
-					alert(S_holiday);
 					return;
 				}
 				S_holiday[2] = $(this).val();
-				alert(S_holiday);
 			});
 			
 			//S_warning
@@ -635,7 +610,6 @@
 					warningmsg += warnum+". "+warning[warnum-1]+"<br>";
 					$("#S_warspan").html(warningmsg);
 					$("#S_warning").val("");
-					alert(warning);
 				}
 			});
 			$("#S_warinit").click(function(){
@@ -645,7 +619,6 @@
 				warningmsg="";
 				$("#S_warspan").html("");
 				$("#S_warning").val("");
-				alert(warning);
 			});
 			
 			
@@ -665,6 +638,7 @@
 				if(state==1){ //프로세스 1일 때, 다음 버튼 클릭 시
 					$("#S_kategorie1").val(S_kategorie1.join(','));
 					$("#S_kategorie2").val(S_kategorie2.join(','));
+					$("#S_hiddentag").val($("#S_opspan4").text());
 					for(var i = 0 ; i<check1.length;i++){ 
 						switch(i){
 						case 0: 
