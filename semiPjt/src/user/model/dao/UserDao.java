@@ -28,6 +28,23 @@ public class UserDao {
 			e.printStackTrace();
 		}
 	}
+	public int gradeUpdate(int userNo,Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update user_db set grade='호스트' where user_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		} 
+		return result;
+		
+	}
 	public int pwSearch(String buf ,String id,String email,Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		int result = 0;
