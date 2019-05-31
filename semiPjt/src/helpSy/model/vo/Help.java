@@ -75,4 +75,19 @@ public class Help {
 	public void setFilepath(String filepath) {
 		this.filepath = filepath;
 	}
+	public String getHelpCategoryName() {
+		if(helpCategory.equals("member")) {
+			return "회원";
+		}else if(helpCategory.equals("pay")) {
+			return "예약 및 결제";
+		}else if(helpCategory.equals("cancel")) {
+			return "취소 및 환불";
+		}else if(helpCategory.equals("use")) {
+			return "공간이용 및 후기";
+		}else if(helpCategory.equals("all")) {
+			return "전체";
+		}else {
+			return "기타";
+		}
+	}
 }

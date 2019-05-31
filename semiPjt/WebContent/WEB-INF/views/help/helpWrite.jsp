@@ -19,7 +19,20 @@
 			<form action="/insertHelp" method="post" enctype="multipart/form-data">
 				<table class="table table-bordered" style="text-align:left;">
 					<tr>
-						<th colspan="2" style="font-size:20px;font-weight:bold">공지사항</th>				
+						<th colspan="2" style="font-size:20px;font-weight:bold">도움말</th>				
+					</tr>
+					<tr>
+						<th>카테고리</th>
+						<td>
+						<select id="help_cat" name="type">
+	                        <option value="all">전체</option>
+	                        <option value="member">회원</option>
+	                        <option value="pay">예약 및 결제</option>
+	                        <option value="cancel">취소 및 환불</option>
+	                        <option value="use">공간이용 및 후기</option>
+	                        <option value="other">기타</option>
+	                    </select>
+	                    </td>
 					</tr>
 					<tr>
 						<th>제목</th>
