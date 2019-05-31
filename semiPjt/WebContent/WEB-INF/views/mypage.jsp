@@ -57,6 +57,13 @@
             border-bottom: none;
             text-align: center;
         }
+        .aside-mng_1 div{
+            padding-top: 15px;
+        }
+        .aside-mng_1 div img{
+            width: 40px;
+            height: 40px;
+        }
         .aside-navi{
             padding: 0;
             margin: 0;
@@ -147,15 +154,19 @@
         </div>
         <div class="aside-mng">
             <a href="#">
-            	<div class="aside-mng_1 r">
-            		<div><img src="../../img/KakaoTalk_20190528_121506545.png"></div>
-           			예약리스트
+            	<div class="aside-mng_1">
+            		<div>
+                        <img src="../../img/mypage_reservation_icon.png">
+                    </div>
+           			<p>예약리스트</p>
             	</div>
             </a>
             <a href="/qaMngment">
-            	<div class="aside-mng_1 l">
-            		<div><img src="../../img/KakaoTalk_20190528_121506674.png"></div>
-            		Q＆A관리
+            	<div class="aside-mng_1">
+            		<div>
+                        <img src="../../img/mypage_qna_icon.png">
+                    </div>
+            		<p>Q＆A관리</p>
             	</div>
             </a>
         </div>

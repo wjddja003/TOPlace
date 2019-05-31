@@ -7,25 +7,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-	<style type="text/css">
-		.joincontainer{
-			background-color: ivory;
-			height: 840px;
-			
-		}
-		.join{
-			width:70%;
-		}
-		.joinheader{
-			padding: 40px 0 0 0;
-			text-align: left;
-			font-size: 30px;
-			font-weight: 900;
-		}
-		span{
-			color : red;
-		}
-	</style>
+<style type="text/css">
+	.joincontainer{
+		width:80%;
+		margin: 0 auto;
+	}
+	.joinheader{
+		padding: 40px 0 0 0;
+		text-align: left;
+		font-size: 30px;
+		font-weight: 900;
+	}
+	span{
+		color : red;
+	}
+	.joinpopup{
+		top:0;
+		left:0;
+		border:1px solid black;
+		z-index:99;
+		position: fixed;
+		width: 100%;
+		height: 1000px;
+		background-color: black;
+		opacity: 0.6;
+		display:none;
+	}
+</style>
 
 </head>
 <body>
@@ -49,7 +57,7 @@
 						<tr>
 							 <td><label>비밀번호</label></td>
 		                     <td><input type="password" id="userPw" name="userPw" style="width:200px; height:30px"><span id="pwMsg">  </span>
-		                     <p>※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-</p>
+		                     <p style="font-size: 12px">※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-</p>
 		                    
 						</tr>
 						<tr>
@@ -109,8 +117,8 @@
 		                        	<option>010</option>
 		                            <option>011</option>
 		                        </select>
-		                        <span style="margin:0 5px 0 5px;"> - </span><input type="text" id="phone1" name="phone1" style="width:70px; height:30px" maxlength="4">
-		                        <span style="margin:0 5px 0 5px;"> - </span><input type="text" id="phone2" name="phone2" style="width:70px; height:30px" maxlength="4"> 
+		                        <span style="margin:0 5px 0 5px; color:black;" > - </span><input type="text" id="phone1" name="phone1" style="width:70px; height:30px" maxlength="4">
+		                        <span style="margin:0 5px 0 5px; color:black;"> - </span><input type="text" id="phone2" name="phone2" style="width:70px; height:30px" maxlength="4"> 
 		                        <br><span id="phoneMsg"></span>
 		                    </td>
 						</tr>
@@ -124,27 +132,51 @@
 							</td>				
 						</tr>
 						<tr>
-							<td ><button type="button" class="btnjoin">가입하기</button></td>
+							<td colspan="3"><button type="button" class="btnjoin">가입하기</button></td>
 						</tr>
 					</table>
 					</div>
 				</form>
 			</div>
 		</div>
+		<div class="joinpopup">
+		
+		</div>
 	</section>
+	
 </body>
 <script type="text/javascript">
 	$(".btn1").click(function(){
+		$(".joinpopup").css("display","block");
+		var windowW = 350;  // 창의 가로 길이
+	    var windowH = 300;  // 창의 세로 길이
+		var left = Math.ceil((window.screen.width - windowW)/2);
+        var top = Math.ceil((window.screen.height - windowH)/2);
 		var email = $("input[name=email]").val();
 		var url = "/emailCheck";
-		var pop = window.open("/views/emailCheck.jsp","emailCheck","width=300,height=300");
+		pop = window.open("/views/emailCheck.jsp","이메일 인증","top="+top+", left="+left+", height="+windowH+", width="+windowW);
 		pop.location.href=url+"?email="+email;
-		
+		var popclose = setInterval(function() {
+            if (pop == null || pop.closed) {
+                $(".joinpopup").css("display","none");
+                clearInterval(popclose);
+            }
+		  }, 500);
 	});
 	
 	$(".addressinsert").click(function(){
-		var pop = window.open("/views/jusoPopup.jsp","주소찾기",'width=600,height=700');
-		pop.location.href;
+		$(".joinpopup").css("display","block");
+		var windowW = 600;  // 창의 가로 길이
+	    var windowH = 600;  // 창의 세로 길이
+		var left = Math.ceil((window.screen.width - windowW)/2);
+        var top = Math.ceil((window.screen.height - windowH)/2);
+		var josu = window.open("/views/jusoPopup.jsp","주소찾기","top="+top+", left="+left+", height="+windowH+", width="+windowW);
+		var josuclose = setInterval(function() {
+            if (josu == null || josu.closed) {
+                $(".joinpopup").css("display","none");
+                clearInterval(josuclose);
+            }
+		  }, 500);
 	})
 	var idFlag = false;
 	var pwFlag = false;
