@@ -12,11 +12,12 @@
 			margin-top: 30px;
 		}
 		.detailSearchList{
-			width:29%;
+			width:25%;
 			float:left;
 			padding-left:5%;
 			padding-right:5%;
 			font-size:18px;
+			padding-left: 10px;
 		}
 		.detailSearchBtn{
 			width:5%;
@@ -43,6 +44,7 @@
 		}
 		.selectBoxInner{
 			display:none;
+			width: 800px;
 		}
 		.selectBox:hover{
 			cursor: pointer;
@@ -51,10 +53,6 @@
 			width: 1160px;
 			margin: 0 auto;
 		    position: relative;
-		}
-		.detailSearchList{
-			padding-left: 10px;
-			width: 25%;
 		}
 		.detailSearch input[type="text"]{
 			width: 800px;
@@ -191,17 +189,21 @@
 		} else {
 			$('.selectBox').eq(2).html('${type }<span>▽</span>');
 		}
-		
+		var prepareNum=-1;
 		$('.selectBox').click(function() {
 			var selectNum = $('.selectBox').index(this);
 			
 				$('.selectBox').find('span').html('▽');
 				$('.selectBox').next().css("display", "none");
 				$('.filterOutLine').css("display","none");
-				
+			if(prepareNum!=selectNum){
 				$('.selectBox').eq(selectNum).find('span').html('▲');
 				$('.selectBox').eq(selectNum).next().css("display", "block");
-				filterCount = 0;
+				prepareNum = selectNum;
+			}else{
+				prepareNum=-1;
+			}
+			filterCount = 0;
 		});
 	});
 	$('.placeTypeDetail').click(function() {
@@ -225,6 +227,7 @@
 	     	$('.filterOutLine').css("display","none");
 	     	filterCount = 0;
 	});
+	$("input:radio[name='testradio']:radio[value='2']").prop('checked', true);
 	</script>
 </body>
 </html>
