@@ -95,8 +95,9 @@
     .viewpage_textbox h3{
         font-size: 18px;
         margin-top: 45px;
-        padding-bottom: 16px;
+        padding-bottom: 6px;
         font-weight: bold;
+        border-bottom: 3px solid #f69b02;
     }
     .viewpage_textbox p{
         font-weight: 100;
@@ -130,4 +131,8 @@
         margin: 0 auto;
         overflow: hidden;
         position: relative;
+    }
+    .viewpage_kategorie{
+        width: 257px;
+        float: left;
     }

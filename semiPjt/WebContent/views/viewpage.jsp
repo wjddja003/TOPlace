@@ -5,6 +5,8 @@
     	String[] holiday = (s.getS_holiday()).split(",");
     	String[] day = {"월","화","수","목","금","토","일"};
     	String[] img2 = s.getS_img2().split(",");
+    	String[] kg = (s.getS_kategorie2()).split(",");
+    	String[] kg2 = {"TV/프로젝터","인터넷/WIFI","복사/인쇄기","화이트보드","음향/마이크","취사시설","음식물반입가능","주류반입가능","샤워시설","주차","금연","반려동물 동반 가능","PC/노트북","의자/테이블","내부화장실","탈의실","테라스/루프탑","공용라운지","전신거울","바베큐시설","도어락"};
     %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -62,15 +64,16 @@
                             <h2>${s.s_placeIntroduce1 }</h2>
                             <h3>공간 소개</h3>
 
-                            <p><%=s.getS_placeIntroduce2().replaceAll("\r\n", "<br>") %></p>
+                            <p style="padding: 10px 0px 70px 0px;"><%=s.getS_placeIntroduce2().replaceAll("\r\n", "<br>") %></p>
+                            <h3>운영정보</h3>
                             <ul>
-                                <li>
-                                    <span>이용시간</span>
-                                    <span>${s.s_start } ~ ${s.s_end }</span>
+                                <li style="padding: 20px 0px 20px 0px;">
+                                    <span style="font-size:16px">이용시간 :</span>
+                                    <span style="margin-left:15px;">${s.s_start } ~ ${s.s_end }</span>
                                 </li>
-                                <li>
-                                    <span>휴무일</span>
-                                    <span>
+                                <li style="padding: 20px 0px 10px 0px;">
+                                    <span style="font-size:16px">휴무일 :</span>
+                                    <span style="margin-left:15px;">
                                     		<%if(holiday[0].equals("0")){ %>
                                     			휴무없음
                              				<%}else if(holiday[0].equals("1")){ %>
@@ -102,46 +105,32 @@
                         	</div>
                         </div>
                         <div class="viewpage_textbox">
-                            <h3>시설안내</h3>
+                            <h3>편의시설</h3>
                             <ul>
-                                <li>
-                                
-                                    <span>건물 6층에 위치한 탁트인 루프탑 공간입니다.</span>
+                                <li style="padding:20px 0px 20px 0px; text-align:center">                               
+                                    <%for(int i = 0; i<kg.length; i++) {%>
+                                    	<%if(kg[i].equals("1")){ %>
+                                    			<div class="viewpage_kategorie"><img src="/upload/space/kategorie2/<%=i+1 %>.jpg">
+                                    				<p><%=kg2[i] %></p>
+                                    			</div>
+                                    	<%} %>
+                                    <%} %>
                                 </li>
+                            </ul>
+                        </div>
+                        <div class="viewpage_textbox">
+                            <h3>예약시 주의사항</h3>
+                            <ul>
+                              <c:forTokens items="${s.s_warning }" delims="," var="warning" varStatus="i" >
+	                            <strong style="float:left; margin-right:15px;">${i.count }.</strong>
+	                            <li style="margin: 10px 0px 10px 0px; font-size: 16px;">
+	                            	${warning}
+	                            </li>
+                         	</c:forTokens>
                             </ul>
                         </div>
                         <div class="viewpage_photo">
                             <a href="#"><img src="../img/viewpage_eximg3.jpg" width="773px;"></a>
-                        </div>
-                        <div class="viewpage_textbox">
-                            <h2>도심 속 자유를 느끼는 우리만의 옥상 정원</h2>
-                            <h3>공간 소개</h3>
-                            <ul>
-                                <li>
-                                    <strong>1</strong>
-                                    <span>건물 6층에 위치한 탁트인 루프탑 공간입니다.</span>
-                                </li>
-                                <li>
-                                    <strong>2</strong>
-                                    <span>캠핑 텐트와 감성 소품으로 꾸며진 아늑한 옥상 정원입니다.</span>
-                                </li>
-                                <li>
-                                    <strong>3</strong>
-                                    <span>캠핑 용품 대여 가능하며, 예약시 사전 요청주시기 바랍니다.</span>
-                                </li>
-                                <li>
-                                    <strong>4</strong>
-                                    <span>빔프로젝터와 대형스크린, 블루투스 스피커, 포인터 대여 가능합니다.</span>
-                                </li>
-                                <li>
-                                    <strong>5</strong>
-                                    <span>해당 건물 3층에 음료 및 간편식을 판매하는 스낵바가 있습니다.</span>
-                                </li>
-                                <li>
-                                    <strong>6</strong>
-                                    <span>주차 가능하나 공간이 협소하니 사전 문의 주시기 바랍니다.(1대당 2,000원/시간)</span>
-                                </li>
-                            </ul>
                         </div>
                          <div class="viewpage_photo">
                             <a href="#"><img src="../img/viewpage_eximg4.jpg" width="773px;"></a>
