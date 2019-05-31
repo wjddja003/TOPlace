@@ -57,6 +57,13 @@
             border-bottom: none;
             text-align: center;
         }
+        .aside-mng_1 div{
+            padding-top: 15px;
+        }
+        .aside-mng_1 div img{
+            width: 40px;
+            height: 40px;
+        }
         .aside-navi{
             padding: 0;
             margin: 0;
@@ -147,15 +154,19 @@
         </div>
         <div class="aside-mng">
             <a href="#">
-            	<div class="aside-mng_1 r">
-            		<div><img src="../../img/KakaoTalk_20190528_121506545.png"></div>
-           			예약리스트
+            	<div class="aside-mng_1">
+            		<div>
+                        <img src="../../img/mypage_reservation_icon.png">
+                    </div>
+           			<p>예약리스트</p>
             	</div>
             </a>
             <a href="/qaMngment">
-            	<div class="aside-mng_1 l">
-            		<div><img src="../../img/KakaoTalk_20190528_121506674.png"></div>
-            		Q＆A관리
+            	<div class="aside-mng_1">
+            		<div>
+                        <img src="../../img/mypage_qna_icon.png">
+                    </div>
+            		<p>Q＆A관리</p>
             	</div>
             </a>
         </div>
@@ -163,7 +174,7 @@
             <ul class="aside-navi">
                 <li><a href="#">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li><a href="/noticeList">공지사항<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <li><a href="/help">도움말<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="/helpList">도움말<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li><a href="https://talk.naver.com/ct/wc89we">1:1문의<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li class="service"><a href="#">서비스정보<span><img src="/img/chevrondown.png" class="d_img"></span></a></li>
                 <div style="display:none" id="sv_list">

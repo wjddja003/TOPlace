@@ -39,6 +39,10 @@ public class NoticeWriteServlet extends HttpServlet {
 			if(userId.equals("tndyd2")) {
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeWrite.jsp");
 				rd.forward(request, response);
+			}else {
+				request.setAttribute("msg", "잘못된경로입니다");
+				request.setAttribute("loc", "/");
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 			}
 		}else {
 			response.sendRedirect("/");

@@ -87,7 +87,7 @@ public class NoticeService {
 		if(pageNo <= totalPage) {
 			pageNavi +="<a class='btn' href='/searchKeyword?reqPage="+pageNo+"&keyword="+keyword+"'>다음</a>";
 		}
-		System.out.println(pageNavi);
+		
 		NoticePageData pd = new NoticePageData(list,pageNavi);
 		
 		JDBCTemplate.close(conn);
@@ -105,5 +105,21 @@ public class NoticeService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-	
+	public int updateNotice(Notice n) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new NoticeDao().updateNotice(conn,n);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public Notice selectOne(int noticeNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Notice n = new NoticeDao().selectOne(conn,noticeNo);
+		JDBCTemplate.close(conn);
+		return n;
+	}
 }
