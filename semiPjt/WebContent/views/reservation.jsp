@@ -47,9 +47,12 @@
    border-top: 3px solid #183058;
 }
 .rMenu_list {
-   background: white;
-   line-height: 50px;
-   border-bottom: 2px solid #183058;
+	border-bottom: 1px solid #ccc;
+   	height: 50px;
+   	line-height: 50px;
+   	font-size: 16px;
+   	background: white;
+   	clear:both;
 }
 .rMenu_price {
    background: white;
@@ -173,7 +176,6 @@
    height: 50px;
    line-height: 50px;
    font-size: 16px;
-   width: 80%;
 }
 .pop_list_left {
    text-align: left;
@@ -300,103 +302,105 @@
                   </div>
                </div>
                <%-- 예약페이지 시간선택 --%>
-               <div class="reservation_head">
-                  <span class="reservation_title">시간 선택</span> 
-                  <span class="reservation_sub">
-                     <span id="selTime"></span>
-                  </span>
-               </div>
-               <div class="reservation_content">
-                  <div class="swiper-container">
-                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                           <button>0</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>1</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>2</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>3</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>4</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>5</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>6</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>7</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>8</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>9</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>10</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>11</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>12</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>13</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>14</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>15</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>16</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>17</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>18</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>19</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>20</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>21</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>22</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>23</button>
-                        </div>
-                        <div class="swiper-slide">
-                           <button>24</button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+               <div id="reservation_time" style="display: ;">
+	               <div class="reservation_head">
+	                  <span class="reservation_title">시간 선택</span> 
+	                  <span class="reservation_sub">
+	                     <span class="selTime"></span>
+	                  </span>
+	               </div>
+	               <div class="reservation_content">
+	                  <div class="swiper-container">
+	                     <div class="swiper-wrapper">
+	                        <div class="swiper-slide">
+	                           <button>0</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>1</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>2</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>3</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>4</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>5</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>6</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>7</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>8</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>9</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>10</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>11</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>12</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>13</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>14</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>15</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>16</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>17</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>18</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>19</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>20</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>21</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>22</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>23</button>
+	                        </div>
+	                        <div class="swiper-slide">
+	                           <button>24</button>
+	                        </div>
+                     	</div>
+                  	</div>
+               	</div>
+              </div>
                <%-- 예약페이지 인원선택 --%>
                <div class="reservation_head">
                   <span class="reservation_title">인원 선택</span> 
-                  <span class="reservation_sub"><span id="reservation_people2"></span></span>
+                  <span class="reservation_sub"><span class="reservation_people2"></span></span>
                </div>
                <div class="reservation_content">
                   <div class="reservation_person">
                      <div id="reservation_people" style="clear:both">
                         <div style="float:left"><button id="person_minus">-</button></div>
-                        <span id="people" style="color:black; line-height:50px; font-size:18px;">5</span>
+                        <span class="people" style="color:black; line-height:50px; font-size:18px;">5</span>
                         <div style="float:right"><button id="person_plus">+</button></div>
                      </div>
                   </div>
@@ -498,16 +502,20 @@
                <span class="payment_title">결제 예정 금액</span><br>
                <br>
                <div class="rMenu_list">
-                  예약날짜<span>??</span>
+               		<div class="pop_list_left">예약날짜</div>
+               		<div class="pop_list_right">????</div>
                </div>
                <div class="rMenu_list">
-                  예약시간<span>??</span>
+               		<div class="pop_list_left">예약시간</div>
+               		<div class="pop_list_right"><span class="selTime"></span></div>
                </div>
                <div class="rMenu_list">
-                  예약인원<span>명</span>
+               		<div class="pop_list_left">예약인원</div>
+               		<div class="pop_list_right"><span class="reservation_people2"></span></div>
                </div>
                <div class="rMenu_price">
-                  ￦<span>돈</span>
+                  	<div class="pop_list_left">￦</div>
+                  	<div class="pop_list_right">????</div>
                </div>
                <button id="payment">결제하기</button>
             </div>
@@ -531,11 +539,11 @@
                </div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">예약시간</div>
-                  <div class="pop_list_right">????</div>
+                  <div class="pop_list_right"><span class="selTime"></span></div>
                </div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">예약인원</div>
-                  <div class="pop_list_right">????</div>
+                  <div class="pop_list_right"><span class="people"></span>명</div>
                </div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">결제예정금액</div>
@@ -548,8 +556,8 @@
                </div>
                <br>
                <div id="reservation_popup_footer">
-                  <button class="reservation_popCloseBtn">수정하기</button>
-                  <button id="pop_payment">예약하기</button>
+                  <button class="reservation_popCloseBtn">예약 수정</button>
+                  <button id="pop_payment">예약 하기</button>
                </div>
             </div>
             <%-- div 기준 초기화--%>
@@ -570,6 +578,7 @@
       var startTime; // 시간 시작 값
       var endTime; // 시간 끝 값
       var hapTime; // 총 시간 값(실제 금액 계산)
+      var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
       $('.swiper-slide button').click(function() {
          count++;
          if (count == 1) {
@@ -578,26 +587,28 @@
             $(this).css('color','white');
             startTime = parseInt($(this).text());
             hapTime = 1;
-            $("#selTime").text(startTime+"~"+(startTime+1)+",  "+hapTime+"시간");
+            $(".selTime").text(startTime+"~"+(startTime+1)+",  "+hapTime+"시간");
             } else if (count == 2) {
                endTime = parseInt($(this).text());
                if(startTime<endTime){
                   hapTime = (endTime-startTime)+1;
-                  $("#selTime").text(startTime+"~"+(endTime+1)+",  "+hapTime+"시간");
+                  $(".selTime").text(startTime+"~"+(endTime+1)+",  "+hapTime+"시간");
                }else{
                   hapTime = (startTime-endTime)+1;
-                  $("#selTime").text(endTime+"~"+(startTime+1)+",  "+hapTime+"시간");
+                  $(".selTime").text(endTime+"~"+(startTime+1)+",  "+hapTime+"시간");
                }
                end = $('.swiper-slide button').index(this);
                   for (var i = start; i < end + 1; i++) {
                      $('.swiper-slide button').eq(i).css('background-color','#183058');
                      $('.swiper-slide button').eq(i).css('color','white');
                      $('.swiper-slide button').eq(i).addClass('tSel');
+                     selTimeArray[i]=1;
                      }
                   for (var i = start; i > end - 1; i--) {
                      $('.swiper-slide button').eq(i).css('background-color','#183058');
                      $('.swiper-slide button').eq(i).css('color','white');
                      $('.swiper-slide button').eq(i).addClass('tSel');
+                     selTimeArray[i]=1;
                      }
                }else if (count > 2) {
                   count = 0;
@@ -607,7 +618,7 @@
                }
          });
    <%-- 인원 선택 스크립트 --%>
-      var person = parseInt($('#people').text());
+      var person = parseInt($('.people').text());
       $('#person_minus').click(function(){
          if(person<=1){
             $('#person_minus').attr("button",false);
@@ -616,8 +627,8 @@
          }else{
             person = person-1;
             console.log(person);
-            $('#people').text(person);
-            $('#reservation_people2').text(person+"명");
+            $('.people').text(person);
+            $('.reservation_people2').text(person+"명");
          }
       });
       $('#person_plus').click(function(){
@@ -627,8 +638,8 @@
             alert("최대인원은"+"5"+ "명입니다.");
          }else{
             person = person+1;
-            $('#people').text(person);
-            $('#reservation_people2').text(person+"명");
+            $('.people').text(person);
+            $('.reservation_people2').text(person+"명");
          }
       });
    <%-- 전체 체크박스 선택 스크립트 --%>
