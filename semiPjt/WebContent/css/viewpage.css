@@ -23,8 +23,7 @@
     }
     .viewpage_content{
         width: 100%;
-        height: 520px;
-        background-size: cover;
+        height: 520px;    
     }
     #viewpage_icon{
         position: relative;
@@ -106,6 +105,22 @@
     .viewpage_textbox ul li{
         list-style: none;
         font-weight:100;
+        
+    }
+    .viewpage_photo2{
+        width: 773px;
+    }
+    #viewpage_photo2_l{
+   		 padding-top: 2px;
+   		 float: left;
+   		 margin-right:5px;
+    }
+    #viewpage_photo2_r{
+        padding-top: 2px;
+    }
+    .viewpage_photo{
+        width: 773px;
+        padding-bottom: 2px;
         
     }
     /*viewpage_content Fin*/

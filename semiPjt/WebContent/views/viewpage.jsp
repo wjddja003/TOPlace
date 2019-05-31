@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="space.model.vo.Space"%>
-    <% Space s = (Space)request.getAttribute("s");%>
+    <%
+    	Space s = (Space)request.getAttribute("s");
+    	String[] holiday = (s.getS_holiday()).split(",");
+    	String[] day = {"월","화","수","목","금","토","일"};
+    	String[] img2 = s.getS_img2().split(",");
+    %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -19,11 +24,9 @@
 <body>
     <jsp:include page="/WEB-INF/common/header.jsp"/>  
     <section>
-    	<%=s.getAddrNum() %>
         <div id="viewpage_alert"><p></p></div>
         <div class="viewpage_content">
             <div class="section_content">
-            	<img src="/upload/space/<%=s.getS_img1()%>">
                 <div id="viewpage_icon">
                     <a href="#"><img src="../img/share_icon.png"></a>
                     <a href="#"><img src="../img/like_icon.png" id="like">
@@ -37,75 +40,73 @@
         	<div class="section_position">
                 <div class="viewpage_detail">
                     <div class="viewpage_section">
-                        <h1>업타운 SKY 루프탑 파티공간</h1>
-                        <p>도심 속 자유를 느끼는 우리만의 옥상 정원</p>
+                        <h1>${s.s_placeName }</h1>
+                        <p>${s.s_placeIntroduce1 }</p>
                         <ul>
-                            <li><a href="#">#루프탑</a></li>
-                            <li><a href="#">#파티</a></li>
-                            <li><a href="#">#옥상</a></li>
-                            <li><a href="#">#안암</a></li>
-                            <li><a href="#">#동대문구</a></li>
+                    
+                        <c:forTokens items="${s.s_placeTag }" delims="#" var="t">
+                            <li>
+                            	<a href="#">#${t}</a>
+                            </li>
+                         </c:forTokens>
+              
                         </ul>
                      </div>
                      <!--viewpage_section Fin-->
                     <div class="viewpage_cover">
                     <div class="viewpage_left">
                         <div class="viewpage_photo">
-                            <a href="#"><img src="../img/viewpage_eximg.jpg" width="773px;"></a>
+                            <a href="#"><img src="/upload/space/${s.s_img1 }" width="773px;"></a>
                         </div>
                         <div class="viewpage_textbox">
-                            <h2>도심 속 자유를 느끼는 우리만의 옥상 정원</h2>
+                            <h2>${s.s_placeIntroduce1 }</h2>
                             <h3>공간 소개</h3>
 
-                            <p>UPTOWN SKY는 독립된 루프탑 파티 공간으로 남산타워를 감상할 수 있는
-                            전망과 쾌적하고 아늑한 환경을 제공합니다.<br>
-                            파란 하늘과 달, 별을 바라보며 소중한 분들과 특별한 시간을 만드세요.<br>
-                            하늘 자연을 벗 삼아 오늘의 자유를 누리세요.<br><br>
-                            네트워킹 모임, 소규모 파티, 특별한 이벤트에 적합합니다.<br>
-                            은은한 조명과 함께 야외에서 색다른 경험을 하고 싶으신 분들께 추천합니다.<br><br>
-                            모임을 더욱 특별하게 만드는 UPTOWN SKY에서<br> 소중한 사람들과 평생 잊지 못할 추억을 만들어 보세요.
-                            </p>
+                            <p><%=s.getS_placeIntroduce2().replaceAll("\r\n", "<br>") %></p>
                             <ul>
                                 <li>
                                     <span>이용시간</span>
-                                    <span>0~24시</span>
+                                    <span>${s.s_start } ~ ${s.s_end }</span>
                                 </li>
                                 <li>
                                     <span>휴무일</span>
-                                    <span>없음</span>
+                                    <span>
+                                    		<%if(holiday[0].equals("0")){ %>
+                                    			휴무없음
+                             				<%}else if(holiday[0].equals("1")){ %>
+                             					공휴일 휴무
+                             				<%}else if(holiday[0].equals("2")){ %>
+                             					매주 
+                             					<%for(int j = 1;j<holiday.length;j++){ %>
+                             						<%if(holiday[j].equals("1")){ %>
+                             							<%=day[j-1] %>요일.
+                             						<%} %>
+                             					<%} %>
+                             					휴무
+                             				<%}else{ %>
+                             					<%=holiday[1] %> 월 <%=holiday[2] %> 일 휴무
+                             				<%}%>
+                                    </span>
                                 </li>
                             </ul>
                         </div>
                         <div class="viewpage_photo">
-                            <a href="#"><img src="../img/viewpage_eximg2.jpg" width="773px;"></a>
+                            <img src="/upload/space/<%=img2[0] %>" width="773px;" height="480px;">
+                        </div>
+                        <div class="viewpage_photo2">
+                        	<div id="viewpage_photo2_l">
+                                <img src="/upload/space/<%=img2[1] %>" width="384px;">
+                        	</div>
+                        	<div id="viewpage_photo2_r">
+                                <img src="/upload/space/<%=img2[2] %>" width="383px;">
+                        	</div>
                         </div>
                         <div class="viewpage_textbox">
-                            <h2>도심 속 자유를 느끼는 우리만의 옥상 정원</h2>
-                            <h3>공간 소개</h3>
+                            <h3>시설안내</h3>
                             <ul>
                                 <li>
-                                    <strong>1</strong>
+                                
                                     <span>건물 6층에 위치한 탁트인 루프탑 공간입니다.</span>
-                                </li>
-                                <li>
-                                    <strong>2</strong>
-                                    <span>캠핑 텐트와 감성 소품으로 꾸며진 아늑한 옥상 정원입니다.</span>
-                                </li>
-                                <li>
-                                    <strong>3</strong>
-                                    <span>캠핑 용품 대여 가능하며, 예약시 사전 요청주시기 바랍니다.</span>
-                                </li>
-                                <li>
-                                    <strong>4</strong>
-                                    <span>빔프로젝터와 대형스크린, 블루투스 스피커, 포인터 대여 가능합니다.</span>
-                                </li>
-                                <li>
-                                    <strong>5</strong>
-                                    <span>해당 건물 3층에 음료 및 간편식을 판매하는 스낵바가 있습니다.</span>
-                                </li>
-                                <li>
-                                    <strong>6</strong>
-                                    <span>주차 가능하나 공간이 협소하니 사전 문의 주시기 바랍니다.(1대당 2,000원/시간)</span>
                                 </li>
                             </ul>
                         </div>
@@ -198,9 +199,8 @@
                      }, 1000);
                 }
             }).scroll();
-        });   
-        $(document).ready(function(){
-           $("#like").click(function(){   
+           
+            $("#like").click(function(){   
                     $("#viewpage_alert").slideDown(700);
                     $("#viewpage_alert").delay(1300);
                     $("#viewpage_alert").css("display","inline");
@@ -208,8 +208,8 @@
                     $("#viewpage_alert").slideUp(700); 
                     $("#like_full").css("display","inline");
                     $("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");
-        });
-        $("#like_full").click(function(){
+            });
+           $("#like_full").click(function(){
                     $("#viewpage_alert").slideDown(700);
                     $("#viewpage_alert").delay(1300);
                     $("#viewpage_alert").css("display","inline");
@@ -218,8 +218,12 @@
                     $("#like_full").css("display","none"); 
                     $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
 
-        });
-    });
+            });
+           $(".viewpage_content").css("background","url(/upload/space/${s.s_img1})no-repeat center center");
+           $(".viewpage_content").css("background-size","cover");
+           
+        });   
+
         </script>
 	
     <jsp:include page="/WEB-INF/common/footer.jsp"/>

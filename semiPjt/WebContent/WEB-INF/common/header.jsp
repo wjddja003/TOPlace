@@ -25,7 +25,7 @@
 	        <div class="header navi" style="width:60%;">
 	            <ul id="navi-bar">
 	               <li class="navi-li"> <a href="/views/testmenu.jsp">베스트</a></li>
-	                <li class="navi-li"><a href="/selectOneSpace?S_no=2">핫딜/이벤트(윤주테스트용)</a></li>
+	                <li class="navi-li"><a href="/selectOneSpace?S_no=2">핫딜/이벤트(윤주)</a></li>
 	                <li class="navi-li"><a href="/views/insertSpace.jsp">공간등록</a></li>
 	            </ul>
 	        </div>
