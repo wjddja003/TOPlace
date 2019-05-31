@@ -846,6 +846,7 @@
                 <div></div>
                 <input type="radio" value="1" name="testradio" checked>날짜별
             	<input type="radio" value="2" name="testradio">시간별
+            	<input type="radio" value="3" name="testradio">불규칙선택
                 </th>
             </tr>
             
@@ -904,6 +905,9 @@
         //예약선택 마지막 년도
         var clickEndDay = 0;    
         //선택된 마지막날 비교용
+        var multiSelectCount = 0;
+        //불규칙 다중 선택 날짜용 인덱스 변수
+        var MultiSelectArray = new Array();
         var booktypeValue = 0;
         var whileIndex = 0;
         var strOneDay="";
@@ -915,7 +919,7 @@
         
         //나중에 조건나오면 if 걸어서 제외할 날들 배열 합치기 inhibitDay가 최종 배열
         //조건 나오면 정렬 돌려서 넣기
-        var inhibitDay = holiday.concat(selectInhibitDay); //예약 불가날자용 배열
+        var inhibitDay = selectInhibitDay; //예약 불가날자용 배열
         
         console.log(inhibitDay);
         $(".calendar").eq(visibleMonth).css("visibility","visible"); // 온로드시 보여줘야 될 캘린더 인덱스
@@ -930,7 +934,7 @@
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
             } //오늘 이전의 날들은 예약불가 처리 하는 로직
             for(var k = 0; k<inhibitDay.length; k++){
-                if(month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
+                if(year == parseInt(inhibitDay[k].substring(0,4)) && month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
@@ -1009,7 +1013,7 @@
                 }//td체크하여 날짜가 들어가있지않은 td
                 
                 for(var k = 0; k<inhibitDay.length; k++){
-                    if(month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
+                    if(year == parseInt(inhibitDay[k].substring(0,4)) && month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
@@ -1093,7 +1097,7 @@
                 }
                 
                 for(var k = 0; k<inhibitDay.length; k++){
-                    if(month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
+                    if(year == parseInt(inhibitDay[k].substring(0,4)) && month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
@@ -1118,13 +1122,6 @@
                 }
             DOW++
             }//이전달도 날짜를 뷰시키는 로직은 같다.
-        });
-        
-        $('.book_type').click(function(){
-            if(this.checked){
-                booktypeValue = this.value;
-            }
-            console.log(booktypeValue);
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //이전달 버튼 로직 종료
@@ -1195,9 +1192,15 @@
 	                if(strMonth1.length<2){
 	                    strMonth1="0"+strMonth1;
 	                }
-                    strOneDay = year+strMonth1+$('td').eq(startDay).text();
+	                if($('.selectDay').eq(i).text().length<2){
+                        strDay = "0"+$('td').eq(startDay).text();
+                    }else { 
+                        strDay = $('td').eq(startDay).text();
+                    }
+                    strOneDay = year+strMonth1+strDay;
                     count=1;
                 }
+        		
                 if($("td").eq(startDay).hasClass("selectDay") === true && count==1){
 					//마커 
 					//여기 윤호랑 맞춰서 아이디 클래스 변수명 변경 해야함
@@ -1215,7 +1218,43 @@
 					}
 					$('.selDay').text(strOneDay);
 					count=0;
-                }              
+                }
+                console.log(strOneDay);
+        	} else if($('input[name="testradio"]:checked').val()==3 && $(this).text() != ""){
+        		
+        		if($(this).hasClass("inhibitDay") === false && $(this).attr("class") != "selectDay"){
+                    startDay = $('td').index(this);
+                   	$(this).css("background-color","green");
+                    $(this).addClass("selectDay");
+                    var strMonth1 = month.toString();
+	                if(strMonth1.length<2){
+	                    strMonth1="0"+strMonth1;
+	                }
+	                if($('.selectDay').eq(i).text().length<2){
+                        strDay = "0"+$('td').eq(startDay).text();
+                    }else { 
+                        strDay = $('td').eq(startDay).text();
+                    }
+                    strOneDay = year+strMonth1+strDay;
+                    array.push(strOneDay);
+                } else if($(this).hasClass("inhibitDay") === false && $(this).attr("class") == "selectDay"){
+                	$(this).css("background-color","white");
+                    $(this).removeClass("selectDay");
+                    startDay = $('td').index(this);
+                    var strMonth1 = month.toString();
+	                if(strMonth1.length<2){
+	                    strMonth1="0"+strMonth1;
+	                }
+	                if($('.selectDay').eq(i).text().length<2){
+                        strDay = "0"+$('td').eq(startDay).text();
+                    }else { 
+                        strDay = $('td').eq(startDay).text();
+                    }
+                    strOneDay = year+strMonth1+strDay;
+                    const idx = array.indexOf(strOneDay); 
+                    if (idx > -1) array.splice(idx, 1)
+                }
+                 console.log(array);            
         	}
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1235,11 +1274,11 @@
             $('td').not('td.inhibitDay').css("background-color","white");
             during = 0;
             $('#duringSpan').text(during);
+            multiSelectCount = 0;
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //선택된 날짜 길이 확인용 메소드
 		createSelectDay = function(){
-			if($('input[name="testradio"]:checked').val()==1){
 	            if(startMonth>endMonth){
 	                alert("이전 날짜부터 선택해주십시오.")
 	                $('td').not('td.inhibitDay').css("background-color","white");
@@ -1311,7 +1350,6 @@
 	                }
 	            }
 	            console.log(array);
-        	}
 		}
         $("#strCheck").click(function(){
         	createSelectDay
@@ -1335,7 +1373,10 @@
                   nextEl : '.swiper-button-next', // 다음 버튼 클래스명
                   prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
                   },
-               });
+          });
+        $('input[name="testradio"]').click(function(){
+        	array = new Array();
+        });
     });
     </script>
 </body>
