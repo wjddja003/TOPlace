@@ -323,8 +323,8 @@
 			<li>일</li>
 		</ul>
 		<span id="S_holispan" style="display:none;">
-		<input id="S_holispan1" type="text" type="form-control" numberOnly maxlength="2"> 월
-		<input id="S_holispan2" type="text" type="form-control" numberOnly maxlength="2"> 일
+		<input id="S_holispan1" type="text" type="form-control" numberOnly maxlength="2" class="form-control" style="display:inline;width:10%;"> 월
+		<input id="S_holispan2" type="text" type="form-control" numberOnly maxlength="2" class="form-control" style="display:inline;width:10%;"> 일
 		</span>
 		<input type="hidden" id="S_holiday1" name="S_holiday">
 		<br><br><br>
@@ -348,12 +348,12 @@
 			
 			<span id="S_whattype"></span>
 			<span class="S_red"> *</span><br> 
-			<input type="text" id="S_price1" name="S_price1" class="form-control" required>
+			<input type="text" id="S_price1" name="S_price1" class="form-control" required placeholder="가격을 입력해 주세요." style="display:inline;width:98%;">원
 
-			<br>
+			<br><br>
 			
 			1인당 추가 가격 <span class="S_red"> *</span><br>
-			<input type="text" id="S_price2" name="S_price2" class="form-control" required>
+			<input type="text" id="S_price2" name="S_price2" class="form-control" required placeholder="1인당 추가 가격을 입력해 주세요." style="display:inline;width:98%;">원
 			
 		</div><!-- 프로세스4 -->
 		
@@ -641,7 +641,7 @@
 			var state = 0;
 			window.onload = function(){
 				$('#S_processBar-1').css("background-color","#f69b02");
-				$('#S_process-3').css("display","block");
+				$('#S_process-1').css("display","block");
 				$('#S_bt-1').css("visibility","hidden");
 				state = 1;
 			};
