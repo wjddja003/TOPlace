@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+<script
+   src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
 <title>Insert title here</title>
 <script
       src="https://code.jquery.com/jquery-3.4.0.js"
@@ -840,36 +844,9 @@
             
         </tfooter>
     </table>
-    <div id="timetest">
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    	<div class="timebar"></div>
-    </div>
-    <div id="strtest"></div>
     <script>
     $(document).ready(function(){
-            
+         
         var sysday = new Date();         
         //오늘날짜 객체로 받아오기
         var year = sysday.getFullYear(); 
@@ -1133,6 +1110,7 @@
         
         $('td').not('td.inhibitDay').click(function(){
         	if($('input[name="testradio"]:checked').val()==1){ //기간별 선택 됐을때
+        		//위의 인풋타입으로 들어온조건 수정해야함 수정용 마커
                 if($(this).hasClass("inhibitDay") === false && count==0){ //예약 불가 날짜는 제외
                     $('td').not('td.inhibitDay').css("background-color","white");
                     $('td').removeClass("selectDay");
@@ -1200,15 +1178,19 @@
                 if($("td").eq(startDay).hasClass("selectDay") === true && count==1){
 					//마커 
 					//여기 윤호랑 맞춰서 아이디 클래스 변수명 변경 해야함
-					$('#timetest').css("display","block");
+					$('#reservation_time').slideDown(500);
 					var test12 = "000001111100000111111111";
+					var dbDay='20190531';
 					
-					for(var i=0;i<$('.timebar').length;i++){
-						$('.timebar').eq(i).text(test12.charAt(i));
-						//css변경구문으로 교체하면 됨.
+					if(dbDay==strOneDay){
+						for(var i=0;i<$('.swiper-slide').length;i++){
+							if(test12.charAt(i)==1){
+							$('.swiper-slide').eq(i).children().css('background','#183058');
+							$('.swiper-slide').eq(i).children().css('color','white');//css변경구문으로 교체하면 됨.
+							}
+						}
 					}
-					
-					$('#strtest').text(strOneDay);
+					$('.selDay').text(strOneDay);
 					count=0;
                 }              
         	}
@@ -1310,11 +1292,28 @@
         	}else{
         		
         	}
+        	
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //선택된 예약 날짜 배열에 저장하는 로직 종료
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        new Swiper('.swiper-container', {
+            slidesPerView : 10, // 동시에 보여줄 슬라이드 갯수
+            spaceBetween : 0, // 슬라이드간 간격
+            slidesPerGroup : 10, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+            // 그룹수가 맞지 않을 경우 빈칸으로 메우기
+            // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+            loopFillGroupWithBlank : true,
+            loop : false, // 무한 반복
+            pagination : { // 페이징
+               el : '.swiper-pagination',
+               clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+               },
+               navigation : { // 네비게이션
+                  nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+                  prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+                  },
+               });
     });
     </script>
 </body>
-</html>

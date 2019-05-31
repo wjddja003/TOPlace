@@ -301,8 +301,9 @@
                      <jsp:include page="/WEB-INF/views/calendar.jsp" />
                   </div>
                </div>
+      <%-- 나중에 if문으로 시간용 공간 설정해주어야함 --%>
                <%-- 예약페이지 시간선택 --%>
-               <div id="reservation_time" style="display: ;">
+               <div id="reservation_time" style="display:none">
 	               <div class="reservation_head">
 	                  <span class="reservation_title">시간 선택</span> 
 	                  <span class="reservation_sub">
@@ -383,9 +384,6 @@
 	                        </div>
 	                        <div class="swiper-slide">
 	                           <button>23</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>24</button>
 	                        </div>
                      	</div>
                   	</div>
@@ -503,7 +501,7 @@
                <br>
                <div class="rMenu_list">
                		<div class="pop_list_left">예약날짜</div>
-               		<div class="pop_list_right">????</div>
+               		<div class="pop_list_right"><span class="selDay"></span></div>
                </div>
                <div class="rMenu_list">
                		<div class="pop_list_left">예약시간</div>
