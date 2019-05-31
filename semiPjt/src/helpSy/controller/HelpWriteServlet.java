@@ -1,4 +1,4 @@
-package noticeSy.controller;
+package helpSy.controller;
 
 import java.io.IOException;
 
@@ -13,16 +13,16 @@ import javax.servlet.http.HttpSession;
 import user.model.vo.User;
 
 /**
- * Servlet implementation class NoticeWriteServlet
+ * Servlet implementation class HelpWriteServlet
  */
-@WebServlet(name = "NoticeWrite", urlPatterns = { "/noticeWrite" })
-public class NoticeWriteServlet extends HttpServlet {
+@WebServlet(name = "HelpWrite", urlPatterns = { "/helpWrite" })
+public class HelpWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeWriteServlet() {
+    public HelpWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,9 +35,9 @@ public class NoticeWriteServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if(session != null) {
 			String userId = ((User)session.getAttribute("User")).getUserId();
-			
+			System.out.println(userId);
 			if(userId.equals("tndyd2")) {
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeWrite.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/help/helpWrite.jsp");
 				rd.forward(request, response);
 			}else {
 				request.setAttribute("msg", "잘못된경로입니다");
@@ -47,7 +47,6 @@ public class NoticeWriteServlet extends HttpServlet {
 		}else {
 			response.sendRedirect("/");
 		}
-		
 	}
 
 	/**
