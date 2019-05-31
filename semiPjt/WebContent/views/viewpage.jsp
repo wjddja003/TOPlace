@@ -83,12 +83,14 @@
         overflow: hidden;
     }
     .viewpage_right{
+    	display:block;
         width: 370px;
         background-color: white;
         border: 1px solid #6d3bff;
         position: absolute;
         right: 0px;
-        top: 0px;
+        top: -500px;
+        z-index:99;
     }
     .viewpage_left{
        width: 775px;
@@ -297,7 +299,12 @@
             $(window).scroll(function() {
                 var scrollTop = $(window).scrollTop();
                 console.log(scrollTop);
-                if(!scrollTop<500 && scrollTop<=3000){
+                if(scrollTop>500){
+                	$(".viewpage_right").css("display","block");
+                }else{
+                	$(".viewpage_right").css("display","none");
+                }
+                if(scrollTop>500){
                 	 var newPosition = scrollTop + floatPosition + "px";
                      $(".viewpage_right").stop().animate({
                          "top" : newPosition
