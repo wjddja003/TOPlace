@@ -18,4 +18,10 @@ public class SpaceService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	public Space selectOneSpace(int S_no) {
+		Connection conn = JDBCTemplate.getConnection();
+		Space s = new SpaceDao().selectOneSpace(conn,S_no);
+		JDBCTemplate.close(conn);
+		return s;
+	}
 }
