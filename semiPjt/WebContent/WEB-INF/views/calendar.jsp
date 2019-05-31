@@ -1180,6 +1180,7 @@
                             $('td').eq(i).addClass("selectDay");
                         }
                     }//for가 두개인 이유는 날짜 거꾸로 선택 가능 하게 하기위해서
+                    createSelectDay();
                     $('#duringSpan').text(during);
                     endDay=null;
                 }              
@@ -1237,8 +1238,8 @@
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //선택된 날짜 길이 확인용 메소드
-        $("#strCheck").click(function(){
-        	if($('input[name="testradio"]:checked').val()==1){
+		createSelectDay = function(){
+			if($('input[name="testradio"]:checked').val()==1){
 	            if(startMonth>endMonth){
 	                alert("이전 날짜부터 선택해주십시오.")
 	                $('td').not('td.inhibitDay').css("background-color","white");
@@ -1310,10 +1311,10 @@
 	                }
 	            }
 	            console.log(array);
-        	}else{
-        		
         	}
-        	
+		}
+        $("#strCheck").click(function(){
+        	createSelectDay
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //선택된 예약 날짜 배열에 저장하는 로직 종료
