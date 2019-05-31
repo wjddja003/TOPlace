@@ -18,7 +18,7 @@
         
         #mypage{
             position: fixed; 
-            background-color: floralwhite;
+            background-color: #e2e2e2;
             width: 300px;
             height: 970px;
             position: absolute;
@@ -37,25 +37,34 @@
             list-style-type: none;
         }
         #aside-login_t li a{
-            color: black;
+            color: #183058;
+            font-weight: bold;
             text-decoration: none;
         }
         .aside-mng{
-            border: 1px solid gray;
             width: 100%;
             height: 10%;
             box-sizing: border-box;
             border-bottom: none;
             
         }
+        .aside-mng_1:first-child{
+            border-right: 1px solid #f7f7f7;
+        }
         .aside-mng_1{
-            border: 1px solid gray;
             height: 100%;
             width: 50%;
             float: left;
-            color: gray;
-            border-bottom: none;
+            color: #183058;
             text-align: center;
+            border-bottom: 1px solid #f7f7f7;
+        }
+        .aside-mng_1 div{
+            padding-top: 15px;
+        }
+        .aside-mng_1 div img{
+            width: 40px;
+            height: 40px;
         }
         .aside-navi{
             padding: 0;
@@ -131,7 +140,7 @@
         <button class="back">></button>
         <div id="aside-login_t">
             <ul>
-                <li><a><img src="../img/logo_2.png" style="width:80px; height:40px;"></a></li>
+                <li><a><img src="../img/logo_2.png" style="width:100px; height:50px;"></a></li>
                 <li>
                 	<c:choose>
                 		<c:when test="${empty sessionScope.User}">
@@ -147,15 +156,19 @@
         </div>
         <div class="aside-mng">
             <a href="#">
-            	<div class="aside-mng_1 r">
-            		<div><img src="../../img/KakaoTalk_20190528_121506545.png"></div>
-           			예약리스트
+            	<div class="aside-mng_1">
+            		<div>
+                        <img src="../../img/mypage_reservation_icon.png">
+                    </div>
+           			<p style="font-weight: normal; font-size:16px;">예약리스트</p>
             	</div>
             </a>
             <a href="/qaMngment">
-            	<div class="aside-mng_1 l">
-            		<div><img src="../../img/KakaoTalk_20190528_121506674.png"></div>
-            		Q＆A관리
+            	<div class="aside-mng_1">
+            		<div>
+                        <img src="../../img/mypage_qna_icon.png">
+                    </div>
+            		<p style="font-weight: normal; font-size:16px;">Q＆A관리</p>
             	</div>
             </a>
         </div>

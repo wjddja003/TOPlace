@@ -1,4 +1,4 @@
-package noticeSy.controller;
+package space.controller;
 
 import java.io.IOException;
 
@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import user.model.vo.User;
+import space.model.service.SpaceService;
+import space.model.vo.Space;
 
 /**
- * Servlet implementation class NoticeWriteServlet
+ * Servlet implementation class SelectOneSpaceServlet
  */
-@WebServlet(name = "NoticeWrite", urlPatterns = { "/noticeWrite" })
-public class NoticeWriteServlet extends HttpServlet {
+@WebServlet(name = "SelectOneSpace", urlPatterns = { "/selectOneSpace" })
+public class SelectOneSpaceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeWriteServlet() {
+    public SelectOneSpaceServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +32,17 @@ public class NoticeWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession(false);
-		if(session != null) {
-			String userId = ((User)session.getAttribute("User")).getUserId();
-			
-			if(userId.equals("tndyd2")) {
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeWrite.jsp");
-				rd.forward(request, response);
-			}else {
-				request.setAttribute("msg", "잘못된경로입니다");
-				request.setAttribute("loc", "/");
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-			}
+		int S_no = Integer.parseInt(request.getParameter("S_no"));
+		System.out.println(S_no);
+		Space s = new SpaceService().selectOneSpace(S_no);
+		if(s!=null) {
+			System.out.println("가져오기 성공");
+			request.setAttribute("s",s);
+			RequestDispatcher rd = request.getRequestDispatcher("/views/viewpage.jsp");
+			rd.forward(request, response);
 		}else {
-			response.sendRedirect("/");
+			System.out.println("가져오기 실패");
 		}
-		
 	}
 
 	/**

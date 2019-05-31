@@ -142,6 +142,60 @@ public class HelpDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return list;
-		
+	}
+	public int mCount(Connection conn, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("mCount");
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, keyword);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	public ArrayList<Help> searchKeywordM(Connection conn, String keyword,int start, int end ){
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("searchNumM");
+		ArrayList<Help> list = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, keyword);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Help>();
+			while(rset.next()) {
+				Help h = new Help();
+				h.setHelpNo(rset.getInt("help_no"));
+				h.setHelpCategory(rset.getString("help_category"));
+				h.setHelpTitle(rset.getString("help_title"));
+				h.setHelpWriter(rset.getString("help_writer"));
+				h.setHelpContent(rset.getString("help_content"));
+				h.setHelpDate(rset.getDate("help_date"));
+				h.setFilename(rset.getString("filename"));
+				h.setFilepath(rset.getString("filepath"));
+				list.add(h);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
 	}
 }
