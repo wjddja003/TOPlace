@@ -1,5 +1,11 @@
+<%@page import="space.model.vo.Space"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+    <% Space s = (Space)request.getAttribute("s");
+    	String[] kg1 = s.getS_kategorie1().split(",");
+    	String[] pt = s.getS_placeTag().split("#");
+    	String[] kg2 = s.getS_kategorie2().split(",");
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -88,13 +94,13 @@
 <section>
 <!-- section content -->
 <div class="section_content">
-	<button type="button" onclick="location.href='/selectOneSpace2?S_no=23'">공간수정</button><button type="button" >공간삭제</button>
+
 	<!-- 프로세스바 -->
 	<div id="S_processBar" style="text-align:center;">
-		<div id="S_processBar-1">1. 공간 정보<br>공간 정보를 입력해주세요.</div>
-		<div id="S_processBar-2">2. 연락처 정보<br>연락처 정보를 입력해주세요.</div>
-		<div id="S_processBar-3">3. 이용 안내<br>이용 정보를 입력해주세요.</div>
-		<div id="S_processBar-4">4. 결제 사항<br>결제 사항을 입력해주세요.</div>
+		<div id="S_processBar-1">1. 공간 정보 수정<br>수정할 공간 정보를 입력해주세요.</div>
+		<div id="S_processBar-2">2. 연락처 정보 수정<br>수정할 연락처 정보를 입력해주세요.</div>
+		<div id="S_processBar-3">3. 이용 안내 수정<br>수정할 이용 정보를 입력해주세요.</div>
+		<div id="S_processBar-4">4. 결제 사항 수정<br>수정할 결제 사항을 입력해주세요.</div>
 	</div><!-- 프로세스바 -->
 		<br>
 		<br>
@@ -111,12 +117,12 @@
 			<input type="hidden" name="S_hostNum" value="1">
 			
 			<br>
-			공간명 <span class="S_red">*</span><span class="S_condition" id="S_lengthspan1">0자/18자</span> <br>
-			<input type="text" id="S_placeName" name="S_placeName" class="form-control" placeholder="공간명을 입력해주세요.">
+			수정할 공간명 <span class="S_red">*</span><span class="S_condition" id="S_lengthspan1">0자/18자</span> <br>
+			<input type="text" id="S_placeName" name="S_placeName" class="form-control" placeholder="공간명을 입력해주세요." value="${s.s_placeName }">
 			<span id="S_opspan1"></span><span class="S_condition">사용가능 특수문자 : ( , ) , [ , ] , - , .(마침표), ,(쉼표)</span>
 			<br><br><br>
 			
-			<input type="hidden" name="S_kategorie1" id="S_kategorie1">
+			<input type="hidden" name="S_kategorie1" id="S_kategorie1" value="${s.s_kategorie1 }">
 			공간유형 <span class="S_red">*</span><br><span class="S_condition" style="color:blue;">&nbsp;최대5개선택</span><span class="S_condition S_red">최소1개선택</span>
 			<br>
 			<ul id="S_ul1">
@@ -137,17 +143,17 @@
 			
 			
 			공간 한줄 소개  <span class="S_red">*</span><span class="S_condition" id="S_lengthspan2">0자/27자</span>
-			<input type="text" id="S_placeIntroduce1" name="S_placeIntroduce1" class="form-control" placeholder="공간을 소개하는 한 줄 문장을 입력해주세요.">
+			<input type="text" id="S_placeIntroduce1" name="S_placeIntroduce1" class="form-control" placeholder="공간을 소개하는 한 줄 문장을 입력해주세요." value="${s.s_placeIntroduce1 }">
 			<span id="S_opspan2"></span><br><br>
 			
 			공간 소개 <span class="S_red">*</span><span class="S_red S_condition">(최소 20자)</span><span class="S_condition" id="S_lengthspan3">0자/500자</span>
-			<textarea id="S_placeIntroduce2" name="S_placeIntroduce2" class="form-control" placeholder="공간을 상세하게 소개해주세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다." style="height:150px;"></textarea>
+			<textarea id="S_placeIntroduce2" name="S_placeIntroduce2" class="form-control" placeholder="공간을 상세하게 소개해주세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다." style="height:150px;"><%=s.getS_placeIntroduce2()%></textarea>
 			<span id="S_opspan3"></span><br><br>
 			
 			공간 태그 <span class="S_red">*</span><span class="S_condition">최대 5개</span><br>
 			<input type="text" id ="S_placeTag" class="form-control" placeholder="태그를 입력해 주세요" style="width:94%;float:left;"><button type="button" id="S_tagbt" class="btn btn-outline-warning" style="width:6%;">추가</button>
 			<span id="S_opspan4"></span> <button type="button" id="S_init" style="display:none;" class="btn btn-outline-warning"> 초기화</button>
-			<input type="hidden" id="S_hiddentag" name="S_placeTag">
+			<input type="hidden" id="S_hiddentag" name="S_placeTag" value="${s.s_placeTag }">
 			<br><br><br><br>
 			
 			편의 시설<br><span class="S_condition">구비된 편의시설을 선택해주세요</span><br>
@@ -174,11 +180,11 @@
 				<li>바베큐시설<br><img src="/upload/space/kategorie2/20.jpg" ></li>
 				<li>도어락<br><img src="/upload/space/kategorie2/21.jpg" ></li>
 			</ul><br><br><br><br><br><br>
-			<input type="hidden" name="S_kategorie2" id="S_kategorie2">
+			<input type="hidden" name="S_kategorie2" id="S_kategorie2" value="${s.s_kategorie2 }">
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			
 			웹사이트<br>
-			<input type="text" name="S_placeWeb" id="S_placeWeb" class="form-control" placeholder="웹사이트 URL을 입력해주세요.(예시:http://toplace.com)">
+			<input type="text" name="S_placeWeb" id="S_placeWeb" class="form-control" placeholder="웹사이트 URL을 입력해주세요.(예시:http://toplace.com)" value="${s.s_placeWeb }">
 			<br><br><br>
 			
 			대표이미지<span class="S_red"> *</span><span class="S_condition">최대 10MB</span><br>
@@ -651,6 +657,37 @@
 				$('#S_process-1').css("display","block");
 				$('#S_bt-1').css("visibility","hidden");
 				state = 1;
+				
+				check1[0]=true; // placeName 을 true값으로
+				
+				<% for(int i = 0; i<kg1.length;i++){%> //카테고리1을 배열로 만들고  
+					<%if(kg1[i].equals("1")){ %> //1인곳을
+						S_kategorie1[<%=i%>] = 1; //S_kategorie배열에도 1로 만들어 줌.
+						$("#S_ul1 li").eq(<%=i%>).css("background","#f69b02"); //그런 위치의 박스에 색칠
+						stack1 += 1; //선택가능개수 +
+					<% }%>
+				<% }%>
+				
+				check1[2] = true; //placeIntroduce1 을 true 값으로
+				check1[3] = true; //placeIntroduce2 를 true 값으로
+				
+				tagmsg = $("#S_hiddentag").val(); //S_placeTag네임을 지닌 히든인풋태그에 값을 설정
+				$("#S_opspan4").html(tagmsg); // 그 값을 태그보여주는 스판에 설정
+				$("#S_init").css("display","inline"); //초기화버튼 켜준다.
+				tagnum = <%=pt.length-1%> //현재 태그갯수를 설정해놓음.
+				
+			<% for(int i = 0; i<kg2.length;i++){%> //카테고리2을 배열로 만들고  
+				<%if(kg2[i].equals("1")){ %> //1인곳을
+					S_kategorie2[<%=i%>] = 1; //S_kategorie배열에도 1로 만들어 줌.
+					$("#S_ul2 li").eq(<%=i%>).css("background","#f69b02"); //그런 위치의 박스에 색칠
+				<% }%>
+			<% }%>
+			
+			//사진은 우선 img태그에 src를 통해 집어 넣고 타입이 file인 input들에는 파일 명을 value값으로 지정해 놓는다.
+			// 혹시 로드된 것이 있으면 true 없으면 false img2도 마찬가지로!!
+			//멀티플 객체로 만들어야 하긴 함 왜냐하면 form이 enctype 이므로!!
+			//true 라면 서블릿에서는 filename을 getfilesystem으로 false라면 겟파라미터로 받아옴.(수정이안된것이므로)
+			//만약 업데이트 완료하면 모든 파일네임을 검사하고 실제파일과 비교하여 삭제!
 			};
 			
 			var check1 = [false,0,false,false,0,false,0,0]; //다음버튼 가기 전 체크용
