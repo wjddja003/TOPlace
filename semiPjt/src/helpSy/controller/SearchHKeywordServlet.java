@@ -1,4 +1,4 @@
-package noticeSy.controller;
+package helpSy.controller;
 
 import java.io.IOException;
 
