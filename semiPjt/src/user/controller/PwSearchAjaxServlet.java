@@ -79,7 +79,7 @@ public class PwSearchAjaxServlet extends HttpServlet {
 		    }
 
 		}
-
+		
 		try {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(user));
@@ -111,9 +111,9 @@ public class PwSearchAjaxServlet extends HttpServlet {
 							"                                <p style=\"padding:15px; font-size: 30px; font-weight: 900;\"><span style=\"color:blue;\">TOPlace</span> 비밀번호 찾기 </p>\r\n" + 
 							"                                <div class=\"mailContent\" style=\"background: white; border : 1px solid gray; width:85%\">\r\n" + 
 							"                                    <p style=\"padding:30px 0 0 0; font-weight: 700;\">안녕하세요 <span style=\"color:blue;\">고객님</span><br>TOPlace 비밀번호 찾기 위한  메일입니다.</p>\r\n" + 
-							"                                    <p style=\"padding:20px 0 30px 0;\">입력해주신 정보에대한 임시비밀번호 입니다.</p>\r\n" + 
+							"                                    <p style=\"padding:20px 0 30px 0;\">입력해주신 정보에대한 임시비밀번호 입니다. <br> 꼭 로그인후 비밀번호 수정을 해주시기 바랍니다.</p>\r\n" + 
 							"                                    <div class=\"number\" style=\"width:90%; border-top:1px solid gray; height:100px; line-height:100px;\">\r\n" + 
-							"                                        <p style=\"font-size:20px; font-weight:700;\">임시 비밀번호 :"+ buf +" <br> 꼭 로그인후 비밀번호 수정을 해주시기 바랍니다.</p>\r\n" + 
+							"                                        <p style=\"font-size:20px; font-weight:700;\">임시 비밀번호 :"+ buf +"</p>\r\n" + 
 							"                                    </div>\r\n" + 
 							"                                </div>\r\n" + 
 							"                                <div class=\"mailfooter\" style=\"padding:10px; width:85%; font-size:12px; text-align:left;\">\r\n" + 

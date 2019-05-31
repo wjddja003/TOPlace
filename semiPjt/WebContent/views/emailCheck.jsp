@@ -30,18 +30,25 @@
 	#layerPopup button{
 	  cursor:pointer;
 	}
+	.countTimeMinute{
+		color:red;
+	}
+	.countTimeSecond{
+		color:red;
+	}
 </style>
 </head>
 
-<body>
+<body >
 <center>
-<h5>인증 번호 7자리를 입력하세요</h5>
+<h4>인증 번호 7자리를 입력하세요</h4>
 	<div class="container">
 		<form method="post" name="authenform" onsubmit="return check();">
 			<input type="text" name="authnum">
 			<input type="submit" class="btn btn-info" value="인증">
-			<span class="countTimeMinute"></span>분
-			<span class="countTimeSecond"></span>초
+			<span class="countTimeMinute"></span>
+			<span>:</span>
+			<span class="countTimeSecond"></span>
 
 		</form>
 	</div>
@@ -54,13 +61,13 @@
 
 
 </center>
-</body>
+</body >
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#layerPopup").hide();
 	
-		var minute = 0;
-		var second = 50;
+		var minute = 3;
+		var second = 0;
 		
 		$(".countTimeMinute").html(minute);
 		$(".countTimeSecond").html(second);
@@ -104,6 +111,7 @@
 			opener.$("#email").attr("readonly",true);
 			opener.$("#eTxt").text("인증완료");
 			opener.$("#emailMsg").text("");
+			opener.$(".joinpopup").css("display","none");
 			opener.emailFlag = true;
 			self.close();
 		}
@@ -111,8 +119,10 @@
 	$("#layerPopup button").click(function(){
 	    $("#layerPopup").hide();
 	    if($("#checkMsg").html() == "인증 시간이 초과 되었습니다."){
+	    	opener.$("#emailMsg").text("");
 	    	opener.$("#eTxt").text("인증실패");
 	    	opener.$("#eTxt").css("color","red");
+	    	opener.$(".joinpopup").css("display","none");
 	    	self.close();
 	    }
 	});
