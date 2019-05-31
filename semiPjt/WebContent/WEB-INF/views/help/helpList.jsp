@@ -89,14 +89,13 @@ prefix="c" %>
                 <div>
                 	<form action="/searchHKeyword">
 	                    <select id="help_cat" name="type">
-	                        <option>전체</option>
+	                        <option value="all">전체</option>
 	                        <option value="member">회원</option>
 	                        <option value="pay">예약 및 결제</option>
 	                        <option value="cancel">취소 및 환불</option>
 	                        <option value="use">공간이용 및 후기</option>
 	                        <option value="other">기타</option>
 	                    </select>
-                    
 	                    <input type="text" placeholder="     검색어를 입력해주세요."style="height:49px" id="help_search" name="keyword">
 	                    <button type="submit" class="searchbtn">검색</button>
                     </form>
@@ -114,7 +113,7 @@ prefix="c" %>
                 </tr>
                 <c:forEach items="${pd.list }" var="h">
                 <tr class="c_tr">
-                    <td>${h.helpCategory }</td>
+                    <td>${h.helpCategoryName }</td>
                     <td>${h.helpTitle }</td>
                     <td>${h.helpDate }</td>
                     <td><img src="/img/chevrondown.png" class="d1_img"></td>
@@ -123,8 +122,8 @@ prefix="c" %>
 						<td colspan="5">
 							${h.helpContent }
 							<c:if test="${sessionScope.User.userId == h.helpWriter}">
-							<a class="btn btn-outline-primary btn-sm btn1" href="/noticeDelete?noticeNo=${n.noticeNo }">삭제</a>
-								<a class="btn btn-outline-primary btn-sm btn1" href="/noticeUpdate?noticeNo=${n.noticeNo }">수정</a>
+							<a class="btn btn-outline-primary btn-sm btn1" href="/helpDelete?helpNo=${h.helpNo }">삭제</a>
+								<a class="btn btn-outline-primary btn-sm btn1" href="/helpUpdate?helpNo=${h.helpNo }">수정</a>
 							</c:if>
 							<br>
 							<c:if test="${h.filename != null }">

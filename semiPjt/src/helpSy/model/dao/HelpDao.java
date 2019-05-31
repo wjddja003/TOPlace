@@ -18,7 +18,7 @@ import noticeSy.model.vo.Notice;
 public class HelpDao {
 	private Properties prop = new Properties();
 	public HelpDao() {
-		String fileName = Help.class.getResource("/sql/help/help2.properties").getPath();
+		String fileName = Help.class.getResource("/sql/help/help4.properties").getPath();
 		System.out.println(fileName);
 		try {
 			prop.load(new FileReader(fileName));
@@ -143,10 +143,10 @@ public class HelpDao {
 		}
 		return list;
 	}
-	public int mCount(Connection conn, String keyword) {
+	public int tCount(Connection conn, String keyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("mCount");
+		String query = prop.getProperty("typeCount");
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -165,16 +165,18 @@ public class HelpDao {
 		}
 		return result;
 	}
-	public ArrayList<Help> searchKeywordM(Connection conn, String keyword,int start, int end ){
+
+	public ArrayList<Help> searchKeywordT(String type,Connection conn, String keyword,int start, int end ){
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("searchNumM");
+		String query = prop.getProperty("searchNum");
 		ArrayList<Help> list = null;
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, keyword);
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
+			pstmt.setString(1, type);
+			pstmt.setString(2, "%"+keyword+"%");
+			pstmt.setInt(3, start);
+			pstmt.setInt(4, end);
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Help>();
 			while(rset.next()) {
@@ -197,5 +199,101 @@ public class HelpDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return list;
+	}
+	public int insertHelp(Connection conn, Help h) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("insertHelp");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, h.getHelpCategory());
+			pstmt.setString(2, h.getHelpTitle());
+			pstmt.setString(3, h.getHelpWriter());
+			pstmt.setString(4, h.getHelpContent());
+			pstmt.setString(5, h.getFilename());
+			pstmt.setString(6, h.getFilepath());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
+	public int deleteHelp(Connection conn, int helpNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("deleteHelp");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, helpNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
+	public Help selectOne(Connection conn, int helpNo) {
+		Help h = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectOne");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, helpNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				h = new Help();
+				h.setHelpNo(rset.getInt("help_no"));
+				h.setHelpCategory(rset.getString("help_category"));
+				h.setHelpTitle(rset.getString("help_title"));
+				h.setHelpContent(rset.getString("help_content"));
+				h.setHelpDate(rset.getDate("help_date"));
+				h.setFilename(rset.getString("filename"));
+				h.setFilepath(rset.getString("filepath"));
+			}
+					
+					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return h;
+		
+	}
+	public int updateHelp(Connection conn, Help h) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateHelp");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, h.getHelpCategory());
+			pstmt.setString(2, h.getHelpTitle());
+			pstmt.setString(3, h.getHelpContent());
+			pstmt.setString(4, h.getFilename());
+			pstmt.setString(5, h.getFilepath());
+			pstmt.setInt(6, h.getHelpNo());
+			System.out.println(h.getHelpCategory());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
 	}
 }
