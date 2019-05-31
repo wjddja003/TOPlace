@@ -88,6 +88,7 @@
 <section>
 <!-- section content -->
 <div class="section_content"">
+	<button type="button" onclick="location.href='/selectOneSpace?S_no=23'">공간수정</button><button type="button" >공간삭제</button>
 	<!-- 프로세스바 -->
 	<div id="S_processBar" style="text-align:center;">
 		<div id="S_processBar-1">1. 공간 정보<br>공간 정보를 입력해주세요.</div>
@@ -116,7 +117,7 @@
 			<br><br><br>
 			
 			<input type="hidden" name="S_kategorie1" id="S_kategorie1">
-			공간유형 <span class="S_red">*</span><br><span class="S_condition S_red">&nbsp;필수선택</span><span class="S_condition" style="color:blue;">최대5개선택&nbsp;</span>
+			공간유형 <span class="S_red">*</span><br><span class="S_condition" style="color:blue;">&nbsp;최대5개선택</span><span class="S_condition S_red">최소1개선택</span>
 			<br>
 			<ul id="S_ul1">
 				<li>회의실</li>
@@ -189,7 +190,7 @@
 			</div>
 			<br><br><br>
 			
-			이미지<span class="S_condition">한 장당 최대 10MB <span class="S_red"> (최대 10장)</span></span><br>
+			이미지 <span class="S_red"> *</span><span class="S_condition">한 장당 최대 10MB <span class="S_red">(최소 3장)</span><span style="color:blue;"> (최대 10장)</span></span><br>
 			<%for(int i=1; i<11; i++){ %>	
 				
 				<div style="display:inline;float:left;height:140px;margin-top:10px;margin-right:10px;">
@@ -500,6 +501,7 @@
 				}
 			}
 			//S_img2
+			var imgcheck = 0;
 			function loadImg2(f,i){
 				if(f.files.length!=0 && f.files[0]!=0){ //f.file -> 선택한 파일을 가져옴 (배열형태로) , f.files[0] -> 0번재 파일의 크기
 					$("#S_img2x"+i).css("display","none");
@@ -509,11 +511,13 @@
 					console.log(f.files[0]);
 					reader.onload = function(e){
 						$("#S_img2img"+i).attr("src",e.target.result);
+						imgcheck +=1;
 					}
 				} else{ //파일을 뺄 경우
 					$("#S_img2img"+i).attr("src","");
 					$("#S_img2x"+i).css("display","inline");
 					$("#S_img2img"+i).css("display","none");
+					imgcheck -=1;
 				}
 			}
 			//addrNum, address
@@ -685,6 +689,10 @@
 								$(check11[i]).focus(); return;}
 							break;
 						}
+					}
+					if(imgcheck<3){
+						alert("공간의 이미지는 최소 3장 이상 등록하여야 합니다.");
+						return;
 					}
 					$('#S_processBar-1').css("background-color","white");
 					$('#S_process-1').css("display","none");
