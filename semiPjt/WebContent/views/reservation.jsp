@@ -43,6 +43,9 @@
    position: absolute;
    overflow-y: auto;
 }
+.payment_title{
+	font-size:20px;
+}
 .rMenu_list:first-of-type {
    border-top: 3px solid #183058;
 }
@@ -301,8 +304,9 @@
                      <jsp:include page="/WEB-INF/views/calendar.jsp" />
                   </div>
                </div>
+      <%-- 나중에 if문으로 시간용 공간 설정해주어야함 --%>
                <%-- 예약페이지 시간선택 --%>
-               <div id="reservation_time" style="display: ;">
+               <div id="reservation_time" style="display:none">
 	               <div class="reservation_head">
 	                  <span class="reservation_title">시간 선택</span> 
 	                  <span class="reservation_sub">
@@ -383,9 +387,6 @@
 	                        </div>
 	                        <div class="swiper-slide">
 	                           <button>23</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>24</button>
 	                        </div>
                      	</div>
                   	</div>
@@ -499,11 +500,11 @@
             </div>
             <%-- 결제 메뉴 창 --%>
             <div class="reservation_rMenu">
-               <span class="payment_title">결제 예정 금액</span><br>
+               <span class="payment_title" style="font-size:20px;">결제 예정 금액</span><br>
                <br>
                <div class="rMenu_list">
                		<div class="pop_list_left">예약날짜</div>
-               		<div class="pop_list_right">????</div>
+               		<div class="pop_list_right"><span class="selDay"></span></div>
                </div>
                <div class="rMenu_list">
                		<div class="pop_list_left">예약시간</div>
@@ -514,8 +515,8 @@
                		<div class="pop_list_right"><span class="reservation_people2"></span></div>
                </div>
                <div class="rMenu_price">
-                  	<div class="pop_list_left">￦</div>
-                  	<div class="pop_list_right">????</div>
+                  	<div class="pop_list_left" style="color:#183058">￦</div>
+                  	<div class="pop_list_right" style="color:#183058">????</div>
                </div>
                <button id="payment">결제하기</button>
             </div>
@@ -578,7 +579,7 @@
       var startTime; // 시간 시작 값
       var endTime; // 시간 끝 값
       var hapTime; // 총 시간 값(실제 금액 계산)
-      var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+      var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // 시간 값 배열로 전달하여 디비 저장 할 값
       $('.swiper-slide button').click(function() {
          count++;
          if (count == 1) {
@@ -616,6 +617,7 @@
                   $('.swiper-slide button').css('color','black');
                   $('.swiper-slide button').eq(i).removeClass('tSel');
                }
+         console.log(selTimeArray);
          });
    <%-- 인원 선택 스크립트 --%>
       var person = parseInt($('.people').text());

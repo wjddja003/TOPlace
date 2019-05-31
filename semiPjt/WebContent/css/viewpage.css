@@ -23,8 +23,7 @@
     }
     .viewpage_content{
         width: 100%;
-        height: 520px;
-        background-size: cover;
+        height: 520px;    
     }
     #viewpage_icon{
         position: relative;
@@ -96,8 +95,9 @@
     .viewpage_textbox h3{
         font-size: 18px;
         margin-top: 45px;
-        padding-bottom: 16px;
+        padding-bottom: 6px;
         font-weight: bold;
+        border-bottom: 3px solid #f69b02;
     }
     .viewpage_textbox p{
         font-weight: 100;
@@ -108,6 +108,22 @@
         font-weight:100;
         
     }
+    .viewpage_photo2{
+        width: 773px;
+    }
+    #viewpage_photo2_l{
+   		 padding-top: 2px;
+   		 float: left;
+   		 margin-right:5px;
+    }
+    #viewpage_photo2_r{
+        padding-top: 2px;
+    }
+    .viewpage_photo{
+        width: 773px;
+        padding-bottom: 2px;
+        
+    }
     /*viewpage_content Fin*/
 
     .viewpage_cover{
@@ -115,4 +131,8 @@
         margin: 0 auto;
         overflow: hidden;
         position: relative;
+    }
+    .viewpage_kategorie{
+        width: 257px;
+        float: left;
     }
