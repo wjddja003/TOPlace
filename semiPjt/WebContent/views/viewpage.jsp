@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="space.model.vo.Space"%>
+    <% Space s = (Space)request.getAttribute("s");%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,135 +10,20 @@
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
       crossorigin="anonymous">
 </script>
+<link rel="stylesheet" type="text/css" href="/css/viewpage.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>뷰페이지</title>
-<style>
-    #viewpage_alert{
-        width: 100%;
-        height: 100px;
-        background-color: #f69b02;
-        position: absolute;
-        top: 0px;
-        display: none;
-        text-align: center;
-        font-size: 22px;
-        padding: 30px 0px 30px 0px;
-        color: #fff;
-    }
-    #like_full{
-        position: absolute;
-        display: none;
-        right: 0px;
-        top: 0px;
-    }
-    #like{
-        z-index: 1;
-    }
-    .viewpage_content{
-        width: 100%;
-        height: 520px;
-        background: url(../img/viewpage_background.jpg) no-repeat center center;
-        background-size: cover;
-    }
-    #viewpage_icon{
-        position: relative;
-    }
-    #viewpage_icon a:first-child{
-        position: absolute;
-        right: 80px;
-        top: 450px;
-    }
-    #viewpage_icon a:last-child{
-        position: absolute;
-        right: 0px;
-        top: 450px;
-    }
-    /*viewpage_icon Fin*/
-    .viewpage_section{
-        margin-top: 20px;
-    }
-    .viewpage_section h1{
-        font-weight: bold;
-    }
-    .viewpage_section p{
-        font-size: 22px;
-        font-weight: 100;
-    }
-    .viewpage_section ul li{
-        list-style: none;
-        display: inline-block;
-        margin: 6px 6px 6px 0;
-        padding: 0 15px;
-        border: 1px solid #e0e0e0;
-        border-radius: 10px;
-    }
-    .viewpage_section ul li a{
-        text-decoration: none;
-        color: #656565;
-        font-weight: 100;
-        font-size: 16px;
-    }
-    /*.viewpage_section Fin*/
-    .viewpage_detail{
-        width: 1160px;
-        margin-top: 30px;
-        overflow: hidden;
-    }
-    .viewpage_right{
-    	display:block;
-        width: 370px;
-        background-color: white;
-        border: 1px solid #6d3bff;
-        position: absolute;
-        right: 0px;
-        top: -500px;
-        z-index:99;
-    }
-    .viewpage_left{
-       width: 775px;
-       float: left;
-    }
-    .viewpage_textbox{
-        margin-bottom: 45px;
-    }
-    .viewpage_textbox h2{
-        padding: 50px 100px 0 0;
-        font-size: 48px;
-        line-height: 60px;
-        font-weight: 100;
-    }
-    .viewpage_textbox h3{
-        font-size: 18px;
-        margin-top: 45px;
-        padding-bottom: 16px;
-        font-weight: bold;
-    }
-    .viewpage_textbox p{
-        font-weight: 100;
-        color: #656565;
-    }
-    .viewpage_textbox ul li{
-        list-style: none;
-        font-weight:100;
-        
-    }
-    /*viewpage content Fin*/
 
-    .viewpage_cover{
-        width: 1160px;
-        margin: 0 auto;
-        overflow: hidden;
-        position: relative;
-    }
-    
-</style>
+<title>뷰페이지</title>
+
 </head>
 <body>
     <jsp:include page="/WEB-INF/common/header.jsp"/>  
     <section>
+    	<%=s.getAddrNum() %>
         <div id="viewpage_alert"><p></p></div>
         <div class="viewpage_content">
             <div class="section_content">
+            	<img src="/upload/space/<%=s.getS_img1()%>">
                 <div id="viewpage_icon">
                     <a href="#"><img src="../img/share_icon.png"></a>
                     <a href="#"><img src="../img/like_icon.png" id="like">

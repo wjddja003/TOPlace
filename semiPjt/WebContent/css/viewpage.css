@@ -1,2 +1,118 @@
 @charset "UTF-8";
 
+    #viewpage_alert{
+        width: 100%;
+        height: 100px;
+        background-color: #f69b02;
+        position: absolute;
+        top: 0px;
+        display: none;
+        text-align: center;
+        font-size: 22px;
+        padding: 30px 0px 30px 0px;
+        color: #fff;
+    }
+    #like_full{
+        position: absolute;
+        display: none;
+        right: 0px;
+        top: 0px;
+    }
+    #like{
+        z-index: 1;
+    }
+    .viewpage_content{
+        width: 100%;
+        height: 520px;
+        background-size: cover;
+    }
+    #viewpage_icon{
+        position: relative;
+    }
+    #viewpage_icon a:first-child{
+        position: absolute;
+        right: 80px;
+        top: 450px;
+    }
+    #viewpage_icon a:last-child{
+        position: absolute;
+        right: 0px;
+        top: 450px;
+    }
+    /*viewpage_icon Fin*/
+    .viewpage_section{
+        margin-top: 20px;
+    }
+    .viewpage_section h1{
+        font-weight: bold;
+    }
+    .viewpage_section p{
+        font-size: 22px;
+        font-weight: 100;
+    }
+    .viewpage_section ul li{
+        list-style: none;
+        display: inline-block;
+        margin: 6px 6px 6px 0;
+        padding: 0 15px;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+    }
+    .viewpage_section ul li a{
+        text-decoration: none;
+        color: #656565;
+        font-weight: 100;
+        font-size: 16px;
+    }
+    /*.viewpage_section Fin*/
+    .viewpage_detail{
+        width: 1160px;
+        margin-top: 30px;
+        overflow: hidden;
+    }
+    .viewpage_right{
+    	display:block;
+        width: 370px;
+        background-color: white;
+        border: 1px solid #6d3bff;
+        position: absolute;
+        right: 0px;
+        top: -500px;
+        z-index:99;
+    }
+    .viewpage_left{
+       width: 775px;
+       float: left;
+    }
+    .viewpage_textbox{
+        margin-bottom: 45px;
+    }
+    .viewpage_textbox h2{
+        padding: 50px 100px 0 0;
+        font-size: 48px;
+        line-height: 60px;
+        font-weight: 100;
+    }
+    .viewpage_textbox h3{
+        font-size: 18px;
+        margin-top: 45px;
+        padding-bottom: 16px;
+        font-weight: bold;
+    }
+    .viewpage_textbox p{
+        font-weight: 100;
+        color: #656565;
+    }
+    .viewpage_textbox ul li{
+        list-style: none;
+        font-weight:100;
+        
+    }
+    /*viewpage_content Fin*/
+
+    .viewpage_cover{
+        width: 1160px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+    }
