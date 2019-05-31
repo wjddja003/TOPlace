@@ -20,16 +20,19 @@
             position: fixed; 
             background-color: #e2e2e2;
             width: 300px;
-            height: 970px;
             position: absolute;
             right:0px;
             top:0px;
         }
+        #mypage1{
+            width: 300px;
+            height: 830px;
+        }
         #aside-login_t{
-            padding:70px 20px 0px 20px;
+            padding:47px 20px 0px 20px;
             background-color: #f69b02;
             width: 100%;
-            height: 20%;
+            height: 145px;
             text-align: center;
             
         }
@@ -80,6 +83,11 @@
             width: 300px;
             height: 80px;
             border-bottom: none;
+            border-left: none;
+            border-right: none;
+        }
+        .aside-navi a{
+            color: black;
         }
         .aside-list a{
             text-decoration: none;
@@ -87,29 +95,33 @@
         #aside-login_b{
             border: 1px solid gray;
             width: 100%;
-            height: 20%;
+            height: 140px;
             position: relative;
             border-bottom: none;
+            border-left: none;
+            border-right: none;
         }
         #aside-login_b a{
             text-decoration: none;
             color: gray;
             position: absolute;
-            top: 60px;
+            top: 40px;
             left: 120px;
         }
         #aside-host{
             border: 1px solid gray;
             width: 100%;
-            height: 20%;
-            position: relative;
+            height: 80px;
+            line-height:80px;
+            top: 900px;
+            position: fixed;
+            background-color: #183058;
         }
         #aside-host a{
             text-decoration: none;
-            color: gray;
-            position: absolute;
-            top: 60px;
-            left: 65px;
+            color: #f69b02;
+            margin-left: 73px;
+
         }
         .aside-navi ul{
             opacity: 1;
@@ -137,7 +149,8 @@
 
 	
     <div id="mypage">
-        <button class="back">></button>
+       
+   		 <button class="back">></button>
         <div id="aside-login_t">
             <ul>
                 <li><a><img src="../img/logo_2.png" style="width:100px; height:50px;"></a></li>
@@ -154,6 +167,9 @@
                 
             </ul>
         </div>
+       
+        
+        <div id="mypage1">    
         <div class="aside-mng">
             <a href="#">
             	<div class="aside-mng_1">
@@ -174,7 +190,7 @@
         </div>
         <div class="aside-list">
             <ul class="aside-navi">
-                <li><a href="#">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="/bookmark">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li><a href="/noticeList">공지사항<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li><a href="/helpList">도움말<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li><a href="https://talk.naver.com/ct/wc89we">1:1문의<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
@@ -199,10 +215,10 @@
 	       		</c:otherwise>
 	       	</c:choose>
         </div>
-        <div id="aside-host">
-            <a href="#">호스트센터로 이동</a>
         </div>
-       
+        <div id="aside-host">
+            <div id="aside-host1"><a href="#">호스트등록으로 이동</a></div>
+        </div>
     </div>
 <script>
     var count =0;
@@ -212,12 +228,12 @@
             $("#sv_list").css("display","block");
             $("#sv_list > ul").css("background","lightgrey");
             count=1;
-            $('#mypage').css("overflow-y","scroll");
+            $('#mypage1').css("overflow-y","scroll");
         }else if(count==1){
             $(".service img").attr("src","/img/chevrondown.png");
             $("#sv_list").css("display","none")
             count=0;
-            $('#mypage').css("overflow-y","hidden");
+            $('#mypage1').css("overflow-y","hidden");
         }
        
 //        $("#sv_list").css("display","block");

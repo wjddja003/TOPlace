@@ -20,9 +20,13 @@
         }
 
         td{
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 50px;
             cursor: pointer;
+        }
+        th{
+        	width: 50px;
+            height: 50px;
         }
         tr{
             text-align: center;
@@ -41,14 +45,17 @@
         #timetest{
         	display :none;
         }
+        .movebtn{
+        	width:50px;
+        }
     </style>
 </head>
 <body>
 	<table border="1">
         <thead>
-            <th><button id="prevbtn">뒤로</button></th>
+            <th><button class="movebtn" id="prevbtn"><</button></th>
             <th colspan="5"></th>
-            <th><button id="nextbtn">다음</button></th>
+            <th><button class="movebtn" id="nextbtn">></button></th>
         </thead>
         <tbody class="calendar">
             <tr>
@@ -903,6 +910,7 @@
         var timetestArray=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         var holiday = [sysday.getFullYear()+"0101",sysday.getFullYear()+"0301",sysday.getFullYear()+"0505",sysday.getFullYear()+"0512",sysday.getFullYear()+"0606",sysday.getFullYear()+"0815",sysday.getFullYear()+"1003",sysday.getFullYear()+"1009",sysday.getFullYear()+"1225"];
         var selectInhibitDay = new Array();
+        var array = new Array();
         selectInhibitDay.push("20191002");
         
         //나중에 조건나오면 if 걸어서 제외할 날들 배열 합치기 inhibitDay가 최종 배열
@@ -1007,6 +1015,13 @@
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
                     }
                 }//예약불가 날짜 처리 로직
+                if(array.length>0){
+                	for(var k2=0; k2<array.length; k2++){
+                    	if(month==parseInt(array[k2].substring(4,6)) && i==parseInt(array[k2].substring(6,8))){
+                    		$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","green");
+                    	}
+                    }
+                }
                 
                 if(i==monthEndDay[month-1]){
                     nextDOW = DOW;
@@ -1084,6 +1099,13 @@
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
                     }
                 }
+                if(array.length>0){
+                	for(var k2=0; k2<array.length; k2++){
+                    	if(month==parseInt(array[k2].substring(4,6)) && i==parseInt(array[k2].substring(6,8))){
+                    		$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","green");
+                    	}
+                    }
+                }
                 if(i==monthEndDay[month-1]){
                     nextDOW = DOW;
                 } else if(i==1){
@@ -1109,7 +1131,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         $('td').not('td.inhibitDay').click(function(){
-        	if($('input[name="testradio"]:checked').val()==1){ //기간별 선택 됐을때
+        	if($('input[name="testradio"]:checked').val()==1 && $(this).text() != ""){ //기간별 선택 됐을때
         		//위의 인풋타입으로 들어온조건 수정해야함 수정용 마커
                 if($(this).hasClass("inhibitDay") === false && count==0){ //예약 불가 날짜는 제외
                     $('td').not('td.inhibitDay').css("background-color","white");
@@ -1158,15 +1180,16 @@
                             $('td').eq(i).addClass("selectDay");
                         }
                     }//for가 두개인 이유는 날짜 거꾸로 선택 가능 하게 하기위해서
+                    createSelectDay();
                     $('#duringSpan').text(during);
                     endDay=null;
                 }              
-        	} else if($('input[name="testradio"]:checked').val()==2){
+        	} else if($('input[name="testradio"]:checked').val()==2 && $(this).text() != ""){
                 if($(this).hasClass("inhibitDay") === false && count==0){
                     $('td').not('td.inhibitDay').css("background-color","white");
                     $('td').removeClass("selectDay");
                     startDay = $('td').index(this);
-                    $(this).css("background-color","green");
+                   	$(this).css("background-color","green");
                     $(this).addClass("selectDay");
                     var strMonth1 = month.toString();
 	                if(strMonth1.length<2){
@@ -1215,9 +1238,8 @@
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //선택된 날짜 길이 확인용 메소드
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $("#strCheck").click(function(){
-        	if($('input[name="testradio"]:checked').val()==1){
+		createSelectDay = function(){
+			if($('input[name="testradio"]:checked').val()==1){
 	            if(startMonth>endMonth){
 	                alert("이전 날짜부터 선택해주십시오.")
 	                $('td').not('td.inhibitDay').css("background-color","white");
@@ -1289,10 +1311,10 @@
 	                }
 	            }
 	            console.log(array);
-        	}else{
-        		
         	}
-        	
+		}
+        $("#strCheck").click(function(){
+        	createSelectDay
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //선택된 예약 날짜 배열에 저장하는 로직 종료
