@@ -18,6 +18,9 @@
 	.S_red{color:red;} 
 	.S_condition{float:right;} 
 	
+	#S_process li:hover{
+		background: #e2e2e2;
+	}
 	#S_ul1{list-style: none; margin:0 auto;width:90%;} 
 	#S_ul1 li{display: block;
 		float: left;
@@ -33,7 +36,7 @@
 	#S_ul2 li{display: block;
 		float: left;
 		width:14%;
-		height:80px;
+		height:140px;
 		border: 2px solid black;
 		text-align:center;
 		cursor:pointer;
@@ -148,34 +151,34 @@
 			
 			편의 시설<br><span class="S_condition">구비된 편의시설을 선택해주세요</span><br>
 			<ul id="S_ul2">
-				<li>TV/프로젝터</li>
-				<li>인터넷/WIFI</li>
-				<li>복사/인쇄기</li>
-				<li>화이트보드</li>
-				<li>음향/마이크</li>
-				<li>취사시설</li>
-				<li>음식물반입가능</li>
-				<li>주류반입가능</li>
-				<li>샤워시설</li>
-				<li>주차</li>
-				<li>금연</li>
-				<li>반려동물 동반 가능</li>
-				<li>PC/노트북</li>
-				<li>의자/테이블</li>
-				<li>내부화장실</li>
-				<li>탈의실</li>
-				<li>테라스/루프탑</li>
-				<li>공용라운지</li>
-				<li>전신거울</li>
-				<li>바베큐시설</li>
-				<li>도어락</li>
+				<li>TV/프로젝터<br><img src="/upload/space/kategorie2/1.jpg" ></li>
+				<li>인터넷/WIFI<br><img src="/upload/space/kategorie2/2.jpg" ></li>
+				<li>복사/인쇄기<br><img src="/upload/space/kategorie2/3.jpg" ></li>
+				<li>화이트보드<br><img src="/upload/space/kategorie2/4.jpg" ></li>
+				<li>음향/마이크<br><img src="/upload/space/kategorie2/5.jpg" ></li>
+				<li>취사시설<br><img src="/upload/space/kategorie2/6.jpg" ></li>
+				<li>음식물반입가능<br><img src="/upload/space/kategorie2/7.jpg" ></li>
+				<li>주류반입가능<br><img src="/upload/space/kategorie2/8.jpg" ></li>
+				<li>샤워시설<br><img src="/upload/space/kategorie2/9.jpg" ></li>
+				<li>주차<br><img src="/upload/space/kategorie2/10.jpg" ></li>
+				<li>금연<br><img src="/upload/space/kategorie2/11.jpg" ></li>
+				<li>반려동물 동반 가능<br><img src="/upload/space/kategorie2/12.jpg" ></li>
+				<li>PC/노트북<br><img src="/upload/space/kategorie2/13.jpg" ></li>
+				<li>의자/테이블<br><img src="/upload/space/kategorie2/14.jpg" ></li>
+				<li>내부화장실<br><img src="/upload/space/kategorie2/15.jpg" ></li>
+				<li>탈의실<br><img src="/upload/space/kategorie2/16.jpg" ></li>
+				<li>테라스/루프탑<br><img src="/upload/space/kategorie2/17.jpg" ></li>
+				<li>공용라운지<br><img src="/upload/space/kategorie2/18.jpg" ></li>
+				<li>전신거울<br><img src="/upload/space/kategorie2/19.jpg" ></li>
+				<li>바베큐시설<br><img src="/upload/space/kategorie2/20.jpg" ></li>
+				<li>도어락<br><img src="/upload/space/kategorie2/21.jpg" ></li>
 			</ul><br><br><br><br><br><br>
 			<input type="hidden" name="S_kategorie2" id="S_kategorie2">
-			<br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			
 			웹사이트<br>
 			<input type="text" name="S_placeWeb" id="S_placeWeb" class="form-control" placeholder="웹사이트 URL을 입력해주세요.(예시:http://toplace.com)">
-			<br><br>
+			<br><br><br>
 			
 			대표이미지<span class="S_red"> *</span><span class="S_condition">최대 10MB</span><br>
 				<img id="S_img1img" width="400px" height="200px" style="display:none;">
@@ -323,8 +326,8 @@
 			<li>일</li>
 		</ul>
 		<span id="S_holispan" style="display:none;">
-		<input id="S_holispan1" type="text" type="form-control" numberOnly maxlength="2"> 월
-		<input id="S_holispan2" type="text" type="form-control" numberOnly maxlength="2"> 일
+		<input id="S_holispan1" type="text" type="form-control" numberOnly maxlength="2" class="form-control" style="display:inline;width:10%;"> 월
+		<input id="S_holispan2" type="text" type="form-control" numberOnly maxlength="2" class="form-control" style="display:inline;width:10%;"> 일
 		</span>
 		<input type="hidden" id="S_holiday1" name="S_holiday">
 		<br><br><br>
@@ -348,12 +351,12 @@
 			
 			<span id="S_whattype"></span>
 			<span class="S_red"> *</span><br> 
-			<input type="text" id="S_price1" name="S_price1" class="form-control" required>
+			<input type="text" id="S_price1" name="S_price1" class="form-control" required placeholder="가격을 입력해 주세요." style="display:inline;width:98%;">원
 
-			<br>
+			<br><br>
 			
 			1인당 추가 가격 <span class="S_red"> *</span><br>
-			<input type="text" id="S_price2" name="S_price2" class="form-control" required>
+			<input type="text" id="S_price2" name="S_price2" class="form-control" required placeholder="1인당 추가 가격을 입력해 주세요." style="display:inline;width:98%;">원
 			
 		</div><!-- 프로세스4 -->
 		
@@ -409,7 +412,7 @@
 					}
 				}else{
 					S_kategorie1[index] = 0;
-					$(this).css("background-color","white");
+					$(this).css("background-color","");
 					stack1-=1;
 				}
 			});
@@ -474,7 +477,7 @@
 						S_kategorie2[index] = 1;
 				}else{
 					S_kategorie2[index] = 0;
-					$(this).css("background-color","white");
+					$(this).css("background-color","");
 				}
 			});
 			//S_img1
@@ -573,7 +576,7 @@
 					S_holiday = [2,0,0,0,0,0,0,0];
 					$("#S_holispan").css("display","none");
 					$("#S_ul3").css("display","inline");
-					$("#S_ul3 li").css("background","white");
+					$("#S_ul3 li").css("background","");
 				}else{
 					S_holiday = [3,0,0,0,0,0,0,0];
 					$("#S_holispan").css("display","inline");
@@ -589,7 +592,7 @@
 							$(this).css("background","#f69b02");
 						}else{
 							S_holiday[index+1]=0;
-							$(this).css("background","white");
+							$(this).css("background","");
 						}
 			});
 			$("#S_holispan1").blur(function(){
@@ -641,7 +644,7 @@
 			var state = 0;
 			window.onload = function(){
 				$('#S_processBar-1').css("background-color","#f69b02");
-				$('#S_process-3').css("display","block");
+				$('#S_process-1').css("display","block");
 				$('#S_bt-1').css("visibility","hidden");
 				state = 1;
 			};
