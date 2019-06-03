@@ -238,4 +238,20 @@ public class Space {
 		}
 		S_kategorieList =list; 
 	}
+	public String[] getS_kategorieName() {
+		String[] list = {"TV/프로젝터","인터넷/WIFI","복사/인쇄기","화이트보드","음향/마이크","취사시설","음식물반입가능","주류반입가능","샤워시설","주차","금연","반려동물 동반 가능","PC/노트북","의자/테이블","내부화장실","탈의실","테라스/루프탑","공용라운지","전신거울","바베큐시설","도어락"};
+		return list;
+	}
+	
+	public String[] getDelImg() {
+	      StringTokenizer st = new StringTokenizer(S_img2, ",");
+	      
+	      String[] list = new String[st.countTokens()];
+	      int i=0;
+	      while(st.hasMoreTokens()) {
+	         list[i] = st.nextToken();
+	         i++;
+	      }
+	      return list;
+	   }
 }
