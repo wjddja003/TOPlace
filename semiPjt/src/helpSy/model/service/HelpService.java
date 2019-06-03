@@ -79,7 +79,7 @@ public class HelpService {
 			end = reqPage*numPerPage;
 			list = new HelpDao().searchKeywordT(type,conn,keyword,start,end);
 			break;
-		case "cancle" :
+		case "cancel" :
 			totalCount = new HelpDao().tCount(conn,keyword);
 			totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 			start = (reqPage-1)*numPerPage + 1;

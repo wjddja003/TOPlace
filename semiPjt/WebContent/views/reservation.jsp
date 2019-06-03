@@ -441,12 +441,6 @@
                      class="reservation_sub">&nbsp;</span>
                </div>
                <div class="reservation_content"></div>
-               <%-- 예약페이지 환불규정안내 --%>
-               <div class="reservation_head">
-                  <span class="reservation_title">환불규정 안내</span> <span
-                     class="reservation_sub">&nbsp;</span>
-               </div>
-               <div class="reservation_content"></div>
                <%-- 서비스 동의--%>
                <div class="reservation_head">
                   <span class="reservation_title">서비스 동의</span> <label
@@ -504,11 +498,11 @@
                <br>
                <div class="rMenu_list">
                		<div class="pop_list_left">예약날짜</div>
-               		<div class="pop_list_right"><span class="selDay"></span></div>
+               		<div class="pop_list_right"><span class="selDay">-</span></div>
                </div>
                <div class="rMenu_list">
                		<div class="pop_list_left">예약시간</div>
-               		<div class="pop_list_right"><span class="selTime"></span></div>
+               		<div class="pop_list_right"><span class="selTime">-</span></div>
                </div>
                <div class="rMenu_list">
                		<div class="pop_list_left">예약인원</div>
@@ -516,7 +510,7 @@
                </div>
                <div class="rMenu_price">
                   	<div class="pop_list_left" style="color:#183058">￦</div>
-                  	<div class="pop_list_right" style="color:#183058">????</div>
+                  	<div class="pop_list_right" style="color:#183058"><span class="price">0</span></div>
                </div>
                <button id="payment">결제하기</button>
             </div>
@@ -536,7 +530,7 @@
                </div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">예약날짜</div>
-                  <div class="pop_list_right">????</div>
+                  <div class="pop_list_right"><span class="selDay"></span></div>
                </div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">예약시간</div>
@@ -544,11 +538,11 @@
                </div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">예약인원</div>
-                  <div class="pop_list_right"><span class="people"></span>명</div>
+                  <div class="pop_list_right"><span class="reservation_people2"></span></div>
                </div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">결제예정금액</div>
-                  <div class="pop_list_right">????</div>
+                  <div class="pop_list_right"><span class="price"></span></div>
                </div>
                <br>
                <div class="reservation_popupDiv_info">
@@ -621,7 +615,9 @@
          });
    <%-- 인원 선택 스크립트 --%>
       var person = parseInt($('.people').text());
+      $('.reservation_people2').text(person+"명");
       $('#person_minus').click(function(){
+    	  $('#reservation_time').css("display","block");
          if(person<=1){
             $('#person_minus').attr("button",false);
             $('#person_plus').attr("button",true);

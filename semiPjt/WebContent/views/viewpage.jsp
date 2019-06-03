@@ -107,10 +107,10 @@
                         <div class="viewpage_textbox">
                             <h3>편의시설</h3>
                             <ul>
-                                <li style="padding:20px 0px 20px 0px; text-align:center">                               
+                                <li style="padding:50px 0px 20px 0px; text-align:center; overflow:hidden;">                               
                                     <%for(int i = 0; i<kg.length; i++) {%>
                                     	<%if(kg[i].equals("1")){ %>
-                                    			<div class="viewpage_kategorie"><img src="/upload/space/kategorie2/<%=i+1 %>.jpg">
+                                    			<div class="viewpage_kategorie"><img src="/upload/space/kategorie2/<%=i+1 %>.png" width="50px;">
                                     				<p><%=kg2[i] %></p>
                                     			</div>
                                     	<%} %>

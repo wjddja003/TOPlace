@@ -22,7 +22,7 @@
       
 /*        left: 191px;*/
         padding: 30px;
-        border: 4px solid #704de4;
+        border: 4px solid #f69b02;
         background: white;
     }
     
@@ -31,7 +31,7 @@
         right: 30px;
         width: 134px;
         height: 50px;
-        background-color: #704de4;
+        background-color: #f69b02;
         color: white;
         border:none;
         font-size: 20px;
