@@ -20,7 +20,7 @@
         }
 
         td{
-            width: 60px;
+            width: 65.7px;
             height: 50px;
             cursor: pointer;
         }
