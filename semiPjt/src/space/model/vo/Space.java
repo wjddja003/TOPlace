@@ -1,5 +1,7 @@
 package space.model.vo;
 
+import java.util.StringTokenizer;
+
 public class Space {
 	private int S_no;
 	private int S_hostNum;
@@ -27,6 +29,7 @@ public class Space {
 	private int S_price2;
 	private int S_hit;
 	private int S_like;
+	private String[] S_kategorieList;
 	public Space() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -220,5 +223,35 @@ public class Space {
 	public void setS_like(int s_like) {
 		S_like = s_like;
 	}
+	public String[] getS_kategorieList(){
+		
+		
+		return S_kategorieList;
+	}
+	public void setS_kategorieList(String str) {
+		StringTokenizer st = new StringTokenizer(str,","); 
+		String[] list = new String[21];
+		int i = 0;
+		while(st.hasMoreTokens()) { 
+			list[i] = st.nextToken();
+			i++;
+		}
+		S_kategorieList =list; 
+	}
+	public String[] getS_kategorieName() {
+		String[] list = {"TV/프로젝터","인터넷/WIFI","복사/인쇄기","화이트보드","음향/마이크","취사시설","음식물반입가능","주류반입가능","샤워시설","주차","금연","반려동물 동반 가능","PC/노트북","의자/테이블","내부화장실","탈의실","테라스/루프탑","공용라운지","전신거울","바베큐시설","도어락"};
+		return list;
+	}
 	
+	public String[] getDelImg() {
+	      StringTokenizer st = new StringTokenizer(S_img2, ",");
+	      
+	      String[] list = new String[st.countTokens()];
+	      int i=0;
+	      while(st.hasMoreTokens()) {
+	         list[i] = st.nextToken();
+	         i++;
+	      }
+	      return list;
+	   }
 }

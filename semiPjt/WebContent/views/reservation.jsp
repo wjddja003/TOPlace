@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,6 @@
    <%-- 아임포트 --%>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
-
 <style>
 /*reservation css start*/
 .reservation {
@@ -42,6 +42,9 @@
    right: 0px;
    position: absolute;
    overflow-y: auto;
+}
+.payment_title{
+	font-size:20px;
 }
 .rMenu_list:first-of-type {
    border-top: 3px solid #183058;
@@ -282,11 +285,51 @@
             <div class="reservation_lMenu">
                <%-- 예약페이지 공간소개 --%>
                <div class="reservation_head">
-                  <span class="reservation_title">예약 공간</span> <span
-                     class="reservation_sub">금액/시간</span> <span
-                     class="reservation_sub">금액/일</span>
+                  <span class="reservation_title">예약 공간</span> 
+                  <c:if test="${s.s_type eq 'day'}">
+                  	<span class="reservation_sub"  style="color:red;">${s.s_price1}<span>/일</span></span>
+                  </c:if>
+                  <c:if test="${s.s_type eq 'time'}">
+                  	<span class="reservation_sub"  style="color:red;">${s.s_price1}<span>/시간</span></span>
+                  </c:if>
                </div>
-               <div class="reservation_content"></div>
+               <div class="reservation_content">
+               		<div class="reservation_space_info">
+	               		<div class="reservation_space_img" style="width:20%; float:left">
+	               			<img src="/upload/space/${s.s_img1 }">
+	               		</div>
+	               		<div class="reservation_space_tit" style="width:80%; float:left">
+	               			<span>${s.s_placeName} </span>
+	               		</div>
+	               		<div class="reservation_space_tit" style="width:80%; float:left">
+	               			<span>${s.s_placeIntroduce1}</span>
+	               			<span>${s.s_placeIntroduce2}</span>
+	               		</div>
+	               		<div class="reservation_space_tit">
+	               			<span>${s.s_kategorie2}</span>
+	               		</div>
+	               		<div class="viewpage_textbox">
+                            <h3>편의시설</h3>
+                            <ul>
+                                <li style="padding:30px 0px 20px 0px; text-align:center; overflow:hidden;">                               
+                                    <c:forEach items="${s.s_kategorieList}" var="list" varStatus="i">
+                                    	<c:if test="${list == '1'}">
+                                    		<div class="viewpage_kategorie"><img src="/upload/space/kategorie2/${i.index+1}.png" width="50px;">
+                                    			<p>"${list}"</p>
+                                    		</div>
+                                    	</c:if>
+                                    </c:forEach>
+                                </li>
+                            </ul>
+                        </div>
+               		</div>
+               </div>
+               <%-- 예약 단위 선택  --%>
+               <div class="reservation_head">
+                  <span class="reservation_title">예약 단위 선택</span> 
+                  <span class="reservation_sub" style="color:red;">*VAT 가격 포함</span>
+                  <div class="reservation_content"></div>
+               </div>
                <%-- 예약페이지 날짜선택 --%>
                <div class="reservation_head">
                   <span class="reservation_title">날짜 선택</span>
@@ -301,8 +344,10 @@
                      <jsp:include page="/WEB-INF/views/calendar.jsp" />
                   </div>
                </div>
+      <%-- 나중에 if문으로 시간용 공간 설정해주어야함 --%>
+     		<c:if test="${s.s_type eq 'time'}">
                <%-- 예약페이지 시간선택 --%>
-               <div id="reservation_time" style="display: ;">
+               <div id="reservation_time" style="display:none">
 	               <div class="reservation_head">
 	                  <span class="reservation_title">시간 선택</span> 
 	                  <span class="reservation_sub">
@@ -384,13 +429,11 @@
 	                        <div class="swiper-slide">
 	                           <button>23</button>
 	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>24</button>
-	                        </div>
                      	</div>
                   	</div>
                	</div>
               </div>
+            </c:if>
                <%-- 예약페이지 인원선택 --%>
                <div class="reservation_head">
                   <span class="reservation_title">인원 선택</span> 
@@ -400,7 +443,7 @@
                   <div class="reservation_person">
                      <div id="reservation_people" style="clear:both">
                         <div style="float:left"><button id="person_minus">-</button></div>
-                        <span class="people" style="color:black; line-height:50px; font-size:18px;">5</span>
+                        <span class="people" style="color:black; line-height:50px; font-size:18px;">${s.s_people}</span>
                         <div style="float:right"><button id="person_plus">+</button></div>
                      </div>
                   </div>
@@ -439,13 +482,15 @@
                   <span class="reservation_title">예약시 주의사항</span> <span
                      class="reservation_sub">&nbsp;</span>
                </div>
-               <div class="reservation_content"></div>
-               <%-- 예약페이지 환불규정안내 --%>
-               <div class="reservation_head">
-                  <span class="reservation_title">환불규정 안내</span> <span
-                     class="reservation_sub">&nbsp;</span>
+               <div class="reservation_content">
+               		<ol style="margin-left:15px;">
+               			<c:forTokens items="${s.s_warning }" delims="," var="warning" varStatus="i" >
+                          <li style="margin: 10px 0px 10px 0px; font-size: 16px;">
+                          	${warning}
+                          </li>
+                      	</c:forTokens>
+                    </ol>
                </div>
-               <div class="reservation_content"></div>
                <%-- 서비스 동의--%>
                <div class="reservation_head">
                   <span class="reservation_title">서비스 동의</span> <label
@@ -499,23 +544,23 @@
             </div>
             <%-- 결제 메뉴 창 --%>
             <div class="reservation_rMenu">
-               <span class="payment_title">결제 예정 금액</span><br>
+               <span class="payment_title" style="font-size:20px;">결제 예정 금액</span><br>
                <br>
                <div class="rMenu_list">
                		<div class="pop_list_left">예약날짜</div>
-               		<div class="pop_list_right">????</div>
+               		<div class="pop_list_right"><span class="selDay">-</span></div>
                </div>
                <div class="rMenu_list">
                		<div class="pop_list_left">예약시간</div>
-               		<div class="pop_list_right"><span class="selTime"></span></div>
+               		<div class="pop_list_right"><span class="selTime">-</span></div>
                </div>
                <div class="rMenu_list">
                		<div class="pop_list_left">예약인원</div>
                		<div class="pop_list_right"><span class="reservation_people2"></span></div>
                </div>
                <div class="rMenu_price">
-                  	<div class="pop_list_left">￦</div>
-                  	<div class="pop_list_right">????</div>
+                  	<div class="pop_list_left" style="color:#183058">￦</div>
+                  	<div class="pop_list_right" style="color:#183058"><span class="price">0</span></div>
                </div>
                <button id="payment">결제하기</button>
             </div>
@@ -535,7 +580,7 @@
                </div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">예약날짜</div>
-                  <div class="pop_list_right">????</div>
+                  <div class="pop_list_right"><span class="selDay"></span></div>
                </div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">예약시간</div>
@@ -543,11 +588,11 @@
                </div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">예약인원</div>
-                  <div class="pop_list_right"><span class="people"></span>명</div>
+                  <div class="pop_list_right"><span class="reservation_people2"></span></div>
                </div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">결제예정금액</div>
-                  <div class="pop_list_right">????</div>
+                  <div class="pop_list_right"><span class="price"></span></div>
                </div>
                <br>
                <div class="reservation_popupDiv_info">
@@ -578,7 +623,7 @@
       var startTime; // 시간 시작 값
       var endTime; // 시간 끝 값
       var hapTime; // 총 시간 값(실제 금액 계산)
-      var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+      var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // 시간 값 배열로 전달하여 디비 저장 할 값
       $('.swiper-slide button').click(function() {
          count++;
          if (count == 1) {
@@ -616,10 +661,13 @@
                   $('.swiper-slide button').css('color','black');
                   $('.swiper-slide button').eq(i).removeClass('tSel');
                }
+         console.log(selTimeArray);
          });
    <%-- 인원 선택 스크립트 --%>
       var person = parseInt($('.people').text());
+      $('.reservation_people2').text(person+"명");
       $('#person_minus').click(function(){
+    	  $('#reservation_time').css("display","block");
          if(person<=1){
             $('#person_minus').attr("button",false);
             $('#person_plus').attr("button",true);
@@ -632,10 +680,10 @@
          }
       });
       $('#person_plus').click(function(){
-         if(person>=5){
+         if(person>="${s.s_people}"){
             $('#person_minus').attr("button",true);
             $('#person_plus').attr("button",false);
-            alert("최대인원은"+"5"+ "명입니다.");
+            alert("최대인원은"+"${s.s_people}"+ "명입니다.");
          }else{
             person = person+1;
             $('.people').text(person);

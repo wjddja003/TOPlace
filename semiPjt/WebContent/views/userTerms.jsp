@@ -50,6 +50,7 @@ input[type="checkbox"]:checked + label span {
 		border : 1px solid black;
 		height: 150px;
 		overflow: auto;
+		bor
 	}
 	.terms_box{
 		padding: 10px;
