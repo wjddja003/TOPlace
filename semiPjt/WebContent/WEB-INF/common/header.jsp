@@ -27,6 +27,8 @@
 	               <li class="navi-li"> <a href="/views/testmenu.jsp">베스트</a></li>
 	                <li class="navi-li"><a href="/selectOneSpace?S_no=2">핫딜/이벤트(윤주테스트용)</a></li>
 	                <li class="navi-li"><a href="/views/insertSpace.jsp">공간등록</a></li>
+	                <li class="navi-li"><a href="/hostPage?ShostNum=1">(동천)</a>
+	                
 	            </ul>
 	        </div>
 	        <div class="header realtime" style="width:9.6%;">실시간</div>
