@@ -57,6 +57,7 @@
     #help_label{
         padding-left: 234px;
     }
+        
     .table-wrapper{
         text-align: center;
         width: 1160px;
@@ -73,6 +74,22 @@
     }
     .btn1{
         float: right;
+    }
+    .table_toggle{
+         margin-top: 60px;
+         font-size:15px;
+         width:100%;
+    }
+        .table_toggle tbody tr{
+            height: 60px;
+        }
+        .table_toggle tbody tr:nth-child(2n+1){
+            background-color: #f7f7f7;
+        }
+        .table_toggle>tbody>tr:first-child>td{
+            border-top: 2px solid #656565;
+        }
+    
 </style>
 </head>
 <body>
@@ -101,40 +118,40 @@ prefix="c" %>
                     </form>
                 </div>
             </div>
-                     <div class="table-wrapper">
-            <table class="table table-striped">
-                <tr>
-                    <th colspan="4" style="font-size:20px; font-weight:bold">도움말</th>
-                </tr>
-                <tr>
-                    <th>카테고리</th>
-                    <th>제목</th>
-                    <th>작성일</th>
-                </tr>
-                <c:forEach items="${pd.list }" var="h">
-                <tr class="c_tr">
-                    <td>${h.helpCategoryName }</td>
-                    <td>${h.helpTitle }</td>
-                    <td>${h.helpDate }</td>
-                    <td><img src="/img/chevrondown.png" class="d1_img"></td>
-                </tr>
-                	<tr class="hc_tr">
-						<td colspan="5">
-							${h.helpContent }
-							<c:if test="${sessionScope.User.userId == h.helpWriter}">
-							<a class="btn btn-outline-primary btn-sm btn1" href="/helpDelete?helpNo=${h.helpNo }">삭제</a>
-								<a class="btn btn-outline-primary btn-sm btn1" href="/helpUpdate?helpNo=${h.helpNo }">수정</a>
-							</c:if>
-							<br>
-							<c:if test="${h.filename != null }">
-								<img src="/upload/notice/${h.filename }">
-							</c:if>
-						</td>
-                </c:forEach>
-            </table>
+            <div class="table-wrapper">
+                <table class="table_toggle">
+                    <tr>
+                        <th colspan="4" style="font-size:20px; font-weight:bold; color:#f7f7f7; background:#183058">도움말</th>
+                    </tr>
+                    <tr>
+                        <th>카테고리</th>
+                        <th>제목</th>
+                        <th>작성일</th>
+                    </tr>
+                    <c:forEach items="${pd.list }" var="h">
+                    <tr class="c_tr">
+                        <td>${h.helpCategoryName }</td>
+                        <td>${h.helpTitle }</td>
+                        <td>${h.helpDate }</td>
+                        <td><img src="/img/chevrondown.png" class="d1_img"></td>
+                    </tr>
+                        <tr class="hc_tr">
+                            <td colspan="5">
+                                ${h.helpContent }
+                                <c:if test="${sessionScope.User.userId == h.helpWriter}">
+                                <a class="btn btn-outline-primary btn-sm btn1" href="/helpDelete?helpNo=${h.helpNo }">삭제</a>
+                                    <a class="btn btn-outline-primary btn-sm btn1" href="/helpUpdate?helpNo=${h.helpNo }">수정</a>
+                                </c:if>
+                                <br>
+                                <c:if test="${h.filename != null }">
+                                    <img src="/upload/notice/${h.filename }">
+                                </c:if>
+                            </td>
+                    </c:forEach>
+                </table>
             <div><%= pd.getPageNavi() %></div>
             <div>
-                <a class="btn btn-outline-primary btn-sm" href="/helpWrite">글쓰기</a>
+                <a class="btn btn-outline-primary btn-sm" href="/helpWrite" style="color:#f69b02; border-color:#f69b02">글쓰기</a>
             </div>
         </div>
         </div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +22,6 @@
    src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
    <%-- 아임포트 --%>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
 
 <style>
 /*reservation css start*/
@@ -136,6 +137,22 @@
    color: white;
    outline:none;
 }
+#option_minus{
+	width:50px;
+   	height:50px;
+   	border: 1px; solid #ccc;
+   	background : #f69b02;
+   	color: white;
+   	outline:none;
+}
+#option_plus{
+	width:50px;
+   	height:50px;
+   	border: 1px; solid #ccc;
+   	background : #f69b02;
+   	color: white;
+   	outline:none;
+}
 /* reservation페이지 label태그 css fin */
 .reservation_content label span {
    color: red;
@@ -197,7 +214,7 @@
    margin-top:5px;
    margin-left:40px;
    color: red;
-   font-size:10px;
+   font-size:12px;
    text-align: left;
 }
 #reservation_popup_footer {
@@ -273,6 +290,14 @@
    outline: none;
 }
 /*스와이프 css 끝*/
+.viewpage_kategorie{
+	width: 20%;
+	margin-bottom:10px;
+	float: left;
+}
+.viewpage_textbox{
+	clear:both;
+}
 /*reservation css fin*/
 </style>
 </head>
@@ -285,11 +310,60 @@
             <div class="reservation_lMenu">
                <%-- 예약페이지 공간소개 --%>
                <div class="reservation_head">
-                  <span class="reservation_title">예약 공간</span> <span
-                     class="reservation_sub">금액/시간</span> <span
-                     class="reservation_sub">금액/일</span>
+                  <span class="reservation_title">예약 공간</span> 
+                  <c:if test="${s.s_type eq 'day'}">
+                  	<span class="reservation_sub"  style="color:red;">${s.s_price1}<span>/일</span></span>
+                  </c:if>
+                  <c:if test="${s.s_type eq 'time'}">
+                  	<span class="reservation_sub"  style="color:red;">${s.s_price1}<span>/시간</span></span>
+                  </c:if>
                </div>
-               <div class="reservation_content"></div>
+               <div class="reservation_content">
+               		<div class="reservation_space_info">
+	               		<div class="reservation_space_img" style="width:20%; float:left">
+	               			<img src="/upload/space/${s.s_img1 }">
+	               		</div>
+	               		<div class="reservation_space_tit" style="width:80%; float:left">
+	               			<span>${s.s_placeName} </span>
+	               		</div>
+	               		<div class="reservation_space_tit" style="width:80%; float:left">
+	               			<span>${s.s_placeIntroduce1}</span>
+	               			<span>${s.s_placeIntroduce2}</span>
+	               		</div>
+	               		<div class="reservation_space_tit">
+	               			<span>${s.s_kategorie2}</span>
+	               		</div>
+	               		<div class="viewpage_textbox">
+                            <h3>편의시설</h3>
+                            <ul>
+                                <li style="padding:30px 0px 20px 0px; text-align:center; overflow:hidden;">                               
+                                    <c:forEach items="${s.s_kategorieList}" var="list" varStatus="i">
+                                    
+                                    	<c:if test="${list == '1'}">
+                                    		<div class="viewpage_kategorie"><img src="/upload/space/kategorie2/${i.index+1}.png" width="50px;">
+                                    			<p>"${s.s_kategorieName[i.index]}"</p>
+                                    		</div>
+                                    	</c:if>
+                                    </c:forEach>
+                                </li>
+                            </ul>
+                        </div>
+               		</div>
+               </div>
+               <%-- 예약 단위 선택  --%>
+               <div class="reservation_head">
+                  <span class="reservation_title">예약 단위 선택</span> 
+                  <span class="reservation_sub" style="color:red;">*VAT 가격 포함</span>
+                  <div class="reservation_content">
+                  	<c:if test="${s.s_type eq 'day'}">
+                  		<button class="daySelBtn" value="1">기간 선택</button>
+                  	</c:if>
+                  	<c:if test="${s.s_type eq 'time'}">
+                  		<button class="daySelBtn" value="2">시간 선택</button>
+                  		<button class="daySelBtn" value="3">원하는 날짜 선택</button>
+                  	</c:if>
+                  </div>
+               </div>
                <%-- 예약페이지 날짜선택 --%>
                <div class="reservation_head">
                   <span class="reservation_title">날짜 선택</span>
@@ -305,8 +379,9 @@
                   </div>
                </div>
       <%-- 나중에 if문으로 시간용 공간 설정해주어야함 --%>
+     		<c:if test="${s.s_type eq 'time'}">
                <%-- 예약페이지 시간선택 --%>
-               <div id="reservation_time" style="display:none">
+               <div id="reservation_time">
 	               <div class="reservation_head">
 	                  <span class="reservation_title">시간 선택</span> 
 	                  <span class="reservation_sub">
@@ -392,6 +467,7 @@
                   	</div>
                	</div>
               </div>
+            </c:if>
                <%-- 예약페이지 인원선택 --%>
                <div class="reservation_head">
                   <span class="reservation_title">인원 선택</span> 
@@ -401,8 +477,22 @@
                   <div class="reservation_person">
                      <div id="reservation_people" style="clear:both">
                         <div style="float:left"><button id="person_minus">-</button></div>
-                        <span class="people" style="color:black; line-height:50px; font-size:18px;">5</span>
+                        <span class="people" style="color:black; line-height:50px; font-size:18px;">${s.s_people}</span>
                         <div style="float:right"><button id="person_plus">+</button></div>
+                     </div>
+                  </div>
+               </div>
+               <%-- 예약페이지 추가옵션 --%>
+               <div class="reservation_head">
+                  <span class="reservation_title">추가 옵션 선택</span> 
+                  <span class="reservation_sub"><span class="option1"></span></span>
+               </div>
+               <div class="reservation_content">
+                  <div class="reservation_person">
+                     <div id="reservation_people" style="clear:both; width:50%">
+                        <div style="float:left"><button id="option_minus">-</button></div>
+                        	<span id="option2" style="color:black; line-height:50px; font-size:18px;">0</span>
+                        <div style="float:right"><button id="option_plus">+</button></div>
                      </div>
                   </div>
                </div>
@@ -413,7 +503,7 @@
                </div>
                <div class="reservation_content">
                   <label>예약자 <span>*</span><input type="text" name="booker"
-                     value="" required="required"></label><br> <label>연락처
+                     value="${sessionScope.User.userName}" required="required"></label><br> <label>연락처
                      <span>*</span> <select name="phone" required="required">
                         <option>010</option>
                         <option>011</option>
@@ -421,8 +511,8 @@
                         <option>017</option>
                         <option>018</option>
                         <option>019</option>
-                  </select>- <input type="text" name="phone1" value="" required="required"
-                     maxlength="4">- <input type="text" name="phone2" value=""
+                  </select>- <input type="text" name="phone1" value=" ${sessionScope.User.userPhone.substring(3,7)}" required="required"
+                     maxlength="4">- <input type="text" name="phone2" value="${sessionScope.User.userPhone.substring(7,11)}"
                      required="required" maxlength="4">
                   </label><br> <label>이메일 <span></span><input type="text"
                      name="email" placeholder="이메일 주소를 남겨주세요."></label><br> <label>요청사항
@@ -440,7 +530,15 @@
                   <span class="reservation_title">예약시 주의사항</span> <span
                      class="reservation_sub">&nbsp;</span>
                </div>
-               <div class="reservation_content"></div>
+               <div class="reservation_content">
+               		<ol style="margin-left:15px;">
+               			<c:forTokens items="${s.s_warning }" delims="," var="warning" varStatus="i" >
+                          <li style="margin: 10px 0px 10px 0px; font-size: 16px;">
+                          	${warning}
+                          </li>
+                      	</c:forTokens>
+                    </ol>
+               </div>
                <%-- 서비스 동의--%>
                <div class="reservation_head">
                   <span class="reservation_title">서비스 동의</span> <label
@@ -509,6 +607,7 @@
                		<div class="pop_list_right"><span class="reservation_people2"></span></div>
                </div>
                <div class="rMenu_price">
+               		<div clas="pop_list_left" style="color:red;font-size:16px;" id="reservation_price"></div>
                   	<div class="pop_list_left" style="color:#183058">￦</div>
                   	<div class="pop_list_right" style="color:#183058"><span class="price">0</span></div>
                </div>
@@ -540,14 +639,19 @@
                   <div class="pop_list_left">예약인원</div>
                   <div class="pop_list_right"><span class="reservation_people2"></span></div>
                </div>
+
+               <div class="reservation_popupDiv_list">
+                  <div class="pop_list_left">추가인원</div>
+                  <div class="pop_list_right"><span class="option1"></span></div>
+               </div>
+
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">결제예정금액</div>
                   <div class="pop_list_right"><span class="price"></span></div>
                </div>
                <br>
                <div class="reservation_popupDiv_info">
-                  <div class="pop_list_info"><img src="../img/icon_warning.png" width="13px" height="13px">&nbsp;결제후 2시간....</div>
-                  <div class="pop_list_info"><img src="../img/icon_warning.png" width="13px" height="13px">&nbsp;결제 전에 ...</div>
+                  <div class="pop_list_info"><img src="../img/icon_warning.png" width="13px" height="13px">&nbsp;결제 전에, 환불기준과 예약내용을 반드시 확인해주세요!</div>
                </div>
                <br>
                <div id="reservation_popup_footer">
@@ -617,27 +721,48 @@
       var person = parseInt($('.people').text());
       $('.reservation_people2').text(person+"명");
       $('#person_minus').click(function(){
-    	  $('#reservation_time').css("display","block");
          if(person<=1){
             $('#person_minus').attr("button",false);
             $('#person_plus').attr("button",true);
             alert("최소인원은"+"1"+ "명입니다.");
          }else{
             person = person-1;
-            console.log(person);
             $('.people').text(person);
             $('.reservation_people2').text(person+"명");
          }
       });
       $('#person_plus').click(function(){
-         if(person>=5){
+         if(person>="${s.s_people}"){
             $('#person_minus').attr("button",true);
             $('#person_plus').attr("button",false);
-            alert("최대인원은"+"5"+ "명입니다.");
+            alert("최대인원은"+"${s.s_people}"+ "명입니다.");
          }else{
             person = person+1;
             $('.people').text(person);
             $('.reservation_people2').text(person+"명");
+         }
+      });
+      <%-- 추가옵션 선택 스크립트 --%>
+      var option = 0;
+      $('#option_minus').click(function(){
+         if(option<=0){
+            $('#option_minus').attr("button",false);
+            $('#option_plus').attr("button",true);
+         }else{
+        	 option = option-1;
+            $('#option2').text(option);
+            $('.option1').text(option+"명");
+         }
+      });
+      $('#option_plus').click(function(){
+         if(option>=100){
+            $('#option_minus').attr("button",true);
+            $('#option_plus').attr("button",false);
+            alert("최대 추가 옵션 인원은"+"100"+ "명입니다.");
+         }else{
+        	 option = option+1;
+            $('#option2').text(option);
+            $('.option1').text(option+"명");
          }
       });
    <%-- 전체 체크박스 선택 스크립트 --%>
