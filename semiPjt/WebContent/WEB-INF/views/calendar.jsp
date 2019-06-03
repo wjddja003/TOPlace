@@ -1021,7 +1021,7 @@
                 }//예약불가 날짜 처리 로직
                 if(array.length>0){
                 	for(var k2=0; k2<array.length; k2++){
-                    	if(month==parseInt(array[k2].substring(4,6)) && i==parseInt(array[k2].substring(6,8))){
+                    	if(year == parseInt(array[k2].substring(0,4)) && month==parseInt(array[k2].substring(4,6)) && i==parseInt(array[k2].substring(6,8))){
                     		$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","green");
                     	}
                     }
@@ -1105,7 +1105,7 @@
                 }
                 if(array.length>0){
                 	for(var k2=0; k2<array.length; k2++){
-                    	if(month==parseInt(array[k2].substring(4,6)) && i==parseInt(array[k2].substring(6,8))){
+                    	if(year == parseInt(array[k2].substring(0,4)) && month==parseInt(array[k2].substring(4,6)) && i==parseInt(array[k2].substring(6,8))){
                     		$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","green");
                     	}
                     }
@@ -1159,7 +1159,7 @@
                     	during = $('.selectDay').length;
                         if(during>30){
                             resetfn();
-                            break;
+                            return;
                         }       
                         if($("td").eq(i).hasClass("inhibitDay") === false && $('td').eq(i).text()!=""){
                             $('td').eq(i).css("background-color","green");
@@ -1170,7 +1170,7 @@
                     	during = $('.selectDay').length;
                         if(during>30){
                             resetfn();
-                            break;
+                            return;
                         }
                         if($("td").eq(i).hasClass("inhibitDay") === false && $('td').eq(i).text()!=""){
                             $('td').eq(i).css("background-color","green");
@@ -1192,7 +1192,7 @@
 	                if(strMonth1.length<2){
 	                    strMonth1="0"+strMonth1;
 	                }
-	                if($('.selectDay').eq(i).text().length<2){
+	                if($('td').eq(startDay).text().length<2){
                         strDay = "0"+$('td').eq(startDay).text();
                     }else { 
                         strDay = $('td').eq(startDay).text();
@@ -1230,7 +1230,7 @@
 	                if(strMonth1.length<2){
 	                    strMonth1="0"+strMonth1;
 	                }
-	                if($('.selectDay').eq(i).text().length<2){
+	                if($('td').eq(startDay).text().length<2){
                         strDay = "0"+$('td').eq(startDay).text();
                     }else { 
                         strDay = $('td').eq(startDay).text();
@@ -1245,7 +1245,7 @@
 	                if(strMonth1.length<2){
 	                    strMonth1="0"+strMonth1;
 	                }
-	                if($('.selectDay').eq(i).text().length<2){
+	                if($('td').eq(startDay).text().length<2){
                         strDay = "0"+$('td').eq(startDay).text();
                     }else { 
                         strDay = $('td').eq(startDay).text();
@@ -1264,6 +1264,11 @@
         function sample(){
             alert("예약일은 30일을 초과할수 없습니다.")
             $('td').not('td.inhibitDay').css("background-color","white");
+            for(var i = 0; i<$('td').not('td.inhibitDay').length;i++){
+            	if($('td').not('td.inhibitDay').eq(i).attr("class")=="selectDay"){
+            		$('td').not('td.inhibitDay').eq(i).removeClass("selectDay")
+            	}
+            }
             during = 0;
             $('#duringSpan').text(during);
         }

@@ -162,7 +162,7 @@
                         <div>예약시간<span>??</span></div>
                         <div>예약인원<span>명</span></div>
                         <div>￦<span>돈</span></div>
-                        <button>결제하기</button>			
+                        <button><a href="/selectOneReservation?S_no=2">결제하기</a></button>			
                     </div>
                 </div>
                 </div>
@@ -212,6 +212,7 @@
            $(".viewpage_content").css("background-size","cover");
            
         });   
+       
 
         </script>
 	
