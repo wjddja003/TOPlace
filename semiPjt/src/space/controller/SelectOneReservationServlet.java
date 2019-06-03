@@ -38,6 +38,7 @@ public class SelectOneReservationServlet extends HttpServlet {
 		if(s!=null) {
 			System.out.println("가져오기 성공");
 			request.setAttribute("s",s);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/views/reservation.jsp");
 			rd.forward(request, response);
 		}else {
