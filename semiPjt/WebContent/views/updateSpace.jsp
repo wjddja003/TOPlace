@@ -5,6 +5,17 @@
     	String[] kg1 = s.getS_kategorie1().split(",");
     	String[] pt = s.getS_placeTag().split("#");
     	String[] kg2 = s.getS_kategorie2().split(",");
+    	String[] img2img = s.getS_img2().split(",");
+    	String[] img2 = new String[img2img.length];
+    	for(int i = 0 ; i<img2.length;i++){
+    		img2[i] = "/upload/space/"+img2img[i];
+    		System.out.println(img2[i]);
+    	}
+    	String email = s.getS_email().split("@")[0];
+    	String com = s.getS_email().split("@")[1];
+    	String[] comlist = {"naver.com","chol.com","dreamwiz.com","empal.com","gmail.com","hanafos.com","hanmail.net","hanmir.com","hitel.net","hotmail.com","korea.com","lycos.co.kr","nate.com","직접입력"};
+    	String[] holiday = s.getS_holiday().split(",");
+    	String[] warning = s.getS_warning().split(",");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -42,7 +53,7 @@
 	#S_ul2 li{display: block;
 		float: left;
 		width:14%;
-		height:140px;
+		height:90px;
 		border: 2px solid black;
 		text-align:center;
 		cursor:pointer;
@@ -110,20 +121,21 @@
 		<br>
 	<!-- 프로세스를 담는 Div -->	
 	<div id="S_process"">
-	<form action="/insertSpace" method="post" enctype="multipart/form-data">
+	<form action="/updateSpace" method="post" enctype="multipart/form-data">
 		<!-- 프로세스1 -->
 		<div id="S_process-1">
 			<!-- 세션에서 호스트(멤버)정보 하나를 가져옴 -->
-			<input type="hidden" name="S_hostNum" value="1">
+			<input type="hidden" name="S_no" value="${s.s_no }">
+			<input type="hidden" name="S_hostNum" value="${s.s_hostNum }">
 			
 			<br>
-			수정할 공간명 <span class="S_red">*</span><span class="S_condition" id="S_lengthspan1">0자/18자</span> <br>
+			공간명(수정) <span class="S_red">*</span><span class="S_condition" id="S_lengthspan1">0자/18자</span> <br>
 			<input type="text" id="S_placeName" name="S_placeName" class="form-control" placeholder="공간명을 입력해주세요." value="${s.s_placeName }">
 			<span id="S_opspan1"></span><span class="S_condition">사용가능 특수문자 : ( , ) , [ , ] , - , .(마침표), ,(쉼표)</span>
 			<br><br><br>
 			
 			<input type="hidden" name="S_kategorie1" id="S_kategorie1" value="${s.s_kategorie1 }">
-			공간유형 <span class="S_red">*</span><br><span class="S_condition" style="color:blue;">&nbsp;최대5개선택</span><span class="S_condition S_red">최소1개선택</span>
+			공간유형(수정) <span class="S_red">*</span><br><span class="S_condition" style="color:blue;">&nbsp;최대5개선택</span><span class="S_condition S_red">최소1개선택</span>
 			<br>
 			<ul id="S_ul1">
 				<li>회의실</li>
@@ -142,52 +154,52 @@
 			
 			
 			
-			공간 한줄 소개  <span class="S_red">*</span><span class="S_condition" id="S_lengthspan2">0자/27자</span>
+			공간 한줄 소개(수정)  <span class="S_red">*</span><span class="S_condition" id="S_lengthspan2">0자/27자</span>
 			<input type="text" id="S_placeIntroduce1" name="S_placeIntroduce1" class="form-control" placeholder="공간을 소개하는 한 줄 문장을 입력해주세요." value="${s.s_placeIntroduce1 }">
 			<span id="S_opspan2"></span><br><br>
 			
-			공간 소개 <span class="S_red">*</span><span class="S_red S_condition">(최소 20자)</span><span class="S_condition" id="S_lengthspan3">0자/500자</span>
+			공간 소개(수정) <span class="S_red">*</span><span class="S_red S_condition">(최소 20자)</span><span class="S_condition" id="S_lengthspan3">0자/500자</span>
 			<textarea id="S_placeIntroduce2" name="S_placeIntroduce2" class="form-control" placeholder="공간을 상세하게 소개해주세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다." style="height:150px;"><%=s.getS_placeIntroduce2()%></textarea>
 			<span id="S_opspan3"></span><br><br>
 			
-			공간 태그 <span class="S_red">*</span><span class="S_condition">최대 5개</span><br>
+			공간 태그(수정) <span class="S_red">*</span><span class="S_condition">최대 5개</span><br>
 			<input type="text" id ="S_placeTag" class="form-control" placeholder="태그를 입력해 주세요" style="width:94%;float:left;"><button type="button" id="S_tagbt" class="btn btn-outline-warning" style="width:6%;">추가</button>
 			<span id="S_opspan4"></span> <button type="button" id="S_init" style="display:none;" class="btn btn-outline-warning"> 초기화</button>
 			<input type="hidden" id="S_hiddentag" name="S_placeTag" value="${s.s_placeTag }">
 			<br><br><br><br>
 			
-			편의 시설<br><span class="S_condition">구비된 편의시설을 선택해주세요</span><br>
+			편의 시설(수정)<br><span class="S_condition">구비된 편의시설을 선택해주세요</span><br>
 			<ul id="S_ul2">
-				<li>TV/프로젝터<br><img src="/upload/space/kategorie2/1.jpg" ></li>
-				<li>인터넷/WIFI<br><img src="/upload/space/kategorie2/2.jpg" ></li>
-				<li>복사/인쇄기<br><img src="/upload/space/kategorie2/3.jpg" ></li>
-				<li>화이트보드<br><img src="/upload/space/kategorie2/4.jpg" ></li>
-				<li>음향/마이크<br><img src="/upload/space/kategorie2/5.jpg" ></li>
-				<li>취사시설<br><img src="/upload/space/kategorie2/6.jpg" ></li>
-				<li>음식물반입가능<br><img src="/upload/space/kategorie2/7.jpg" ></li>
-				<li>주류반입가능<br><img src="/upload/space/kategorie2/8.jpg" ></li>
-				<li>샤워시설<br><img src="/upload/space/kategorie2/9.jpg" ></li>
-				<li>주차<br><img src="/upload/space/kategorie2/10.jpg" ></li>
-				<li>금연<br><img src="/upload/space/kategorie2/11.jpg" ></li>
-				<li>반려동물 동반 가능<br><img src="/upload/space/kategorie2/12.jpg" ></li>
-				<li>PC/노트북<br><img src="/upload/space/kategorie2/13.jpg" ></li>
-				<li>의자/테이블<br><img src="/upload/space/kategorie2/14.jpg" ></li>
-				<li>내부화장실<br><img src="/upload/space/kategorie2/15.jpg" ></li>
-				<li>탈의실<br><img src="/upload/space/kategorie2/16.jpg" ></li>
-				<li>테라스/루프탑<br><img src="/upload/space/kategorie2/17.jpg" ></li>
-				<li>공용라운지<br><img src="/upload/space/kategorie2/18.jpg" ></li>
-				<li>전신거울<br><img src="/upload/space/kategorie2/19.jpg" ></li>
-				<li>바베큐시설<br><img src="/upload/space/kategorie2/20.jpg" ></li>
-				<li>도어락<br><img src="/upload/space/kategorie2/21.jpg" ></li>
+				<li>TV/프로젝터<br><img src="/upload/space/kategorie2/1.png" ></li>
+				<li>인터넷/WIFI<br><img src="/upload/space/kategorie2/2.png" ></li>
+				<li>복사/인쇄기<br><img src="/upload/space/kategorie2/3.png" ></li>
+				<li>화이트보드<br><img src="/upload/space/kategorie2/4.png" ></li>
+				<li>음향/마이크<br><img src="/upload/space/kategorie2/5.png" ></li>
+				<li>취사시설<br><img src="/upload/space/kategorie2/6.png" ></li>
+				<li>음식물반입가능<br><img src="/upload/space/kategorie2/7.png" ></li>
+				<li>주류반입가능<br><img src="/upload/space/kategorie2/8.png" ></li>
+				<li>샤워시설<br><img src="/upload/space/kategorie2/9.png" ></li>
+				<li>주차<br><img src="/upload/space/kategorie2/10.png" ></li>
+				<li>금연<br><img src="/upload/space/kategorie2/11.png" ></li>
+				<li>반려동물 동반 가능<br><img src="/upload/space/kategorie2/12.png" ></li>
+				<li>PC/노트북<br><img src="/upload/space/kategorie2/13.png" ></li>
+				<li>의자/테이블<br><img src="/upload/space/kategorie2/14.png" ></li>
+				<li>내부화장실<br><img src="/upload/space/kategorie2/15.png" ></li>
+				<li>탈의실<br><img src="/upload/space/kategorie2/16.png" ></li>
+				<li>테라스/루프탑<br><img src="/upload/space/kategorie2/17.png" ></li>
+				<li>공용라운지<br><img src="/upload/space/kategorie2/18.png" ></li>
+				<li>전신거울<br><img src="/upload/space/kategorie2/19.png" ></li>
+				<li>바베큐시설<br><img src="/upload/space/kategorie2/20.png" ></li>
+				<li>도어락<br><img src="/upload/space/kategorie2/21.png" ></li>
 			</ul><br><br><br><br><br><br>
 			<input type="hidden" name="S_kategorie2" id="S_kategorie2" value="${s.s_kategorie2 }">
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br>
 			
-			웹사이트<br>
+			웹사이트(수정)<br>
 			<input type="text" name="S_placeWeb" id="S_placeWeb" class="form-control" placeholder="웹사이트 URL을 입력해주세요.(예시:http://toplace.com)" value="${s.s_placeWeb }">
 			<br><br><br>
 			
-			대표이미지<span class="S_red"> *</span><span class="S_condition">최대 10MB</span><br>
+			대표이미지(수정)<span class="S_red"> *</span><span class="S_condition">최대 10MB</span><br>
 				<img id="S_img1img" width="400px" height="200px" style="display:none;">
 				<input id="S_img1text" type="text" class="form-control" style="background:white;width:400px;height:200px;display:inline" placeholder="대표 이미지 파일 1장을 추가해 주세요." readonly>
 			<div class="S_filebox S_condition" style="display:inline; border:0;"> 
@@ -196,7 +208,7 @@
 			</div>
 			<br><br><br>
 			
-			이미지 <span class="S_red"> *</span><span class="S_condition">한 장당 최대 10MB <span class="S_red">(최소 3장)</span><span style="color:blue;"> (최대 10장)</span></span><br>
+			이미지(수정) <span class="S_red"> *</span><span class="S_condition">한 장당 최대 10MB <span class="S_red">(최소 3장)</span><span style="color:blue;"> (최대 10장)</span></span><br>
 			<%for(int i=1; i<11; i++){ %>	
 				
 				<div style="display:inline;float:left;height:140px;margin-top:10px;margin-right:10px;">
@@ -216,7 +228,7 @@
 			<br><br>
 			<br>
 			
-			주소(위치)<span class="S_red"> *</span><br>
+			주소(위치)(수정)<span class="S_red"> *</span><br>
 			<input type="text" id="addrNum" name="addrNum" class="form-control" placeholder="주소를 등록해주세요." style="width:94%;float:left;background:white;" readonly>
 			<button type="button" class="addressinsert btn btn-outline-warning" style="width:6%;float:left;">등록</button>
 			<input type="text" id="address" name="address" class="form-control" placeholder="상세주소를 등록해주세요.">
@@ -226,7 +238,7 @@
 		<!-- 프로세스2 -->
 		<div id="S_process-2">
 		
-			이메일 <span class="S_red"> *</span><br>
+			이메일(수정) <span class="S_red"> *</span><br>
 			<input type="text" id="S_idemail" class="form-control" style="width:47%;display:inline" placeholder="이메일을 입력해 주세요."> @ 
 			<input type="text" id="S_inputemail" value="naver.com" class="form-control" style="background:white;width:25%;display:inline" readonly> 
 			<select id="S_selectemail" class="form-control" style="width:25%;display:inline">
@@ -250,7 +262,8 @@
 		<br>
 		
 		<div style="display:block;float:left;width:49%;">
-		휴대폰 <span class="S_red"> *</span><br>
+		휴대폰(수정) <span class="S_red"> *</span><button id="btphone1" type="button" class="btn btn-outline-warning">수정</button><br>
+		<div id="beforephone1">
 		<select id="S_phone1_1" class="form-control" style="width:30%;display:inline;">
 			<option selected>010</option>
 			<option>011</option>
@@ -264,18 +277,22 @@
 		 - 
 		<input id="S_phone1_3" type="text" class="form-control" style="width:30%;display:inline;" numberOnly maxlength="4">
 		</div>
-		<input type="hidden" id="S_phone1" name="S_phone1">
+		<input type="text" id="S_phone1" name="S_phone1" class="form-control" value="<%=s.getS_phone1()%>" readonly>
+		</div>
+		
 		
 		
 		<div style="display:block;float:left;width:50%;">
-		대표전화 <span class="S_red"> *</span> <span class="S_condition"> <input id="S_phonecheck" type="checkbox"> 휴대폰과 동일</span><br>
+		대표전화(수정) <span class="S_red"> *</span><button id="btphone2" type="button" class="btn btn-outline-warning">수정</button><div id="beforephone2"> <span class="S_condition"> <input id="S_phonecheck" type="checkbox"> 휴대폰과 동일</span><br>
+		
 		<input id="S_phone2_1" type="text" class="form-control" style="width:31%;display:inline;" numberOnly maxlength="4">
 		 - 
 		<input id="S_phone2_2" type="text" class="form-control" style="width:31%;display:inline;" numberOnly maxlength="4">
 		 - 
 		<input id="S_phone2_3" type="text" class="form-control" style="width:31%;display:inline;" numberOnly maxlength="4">
 		</div>
-		<input type="hidden" id="S_phone2" name="S_phone2">
+		<input type="text" id="S_phone2" name="S_phone2" class="form-control" value="<%=s.getS_phone1()%>" readonly>
+		</div>
 		<br>
 		<br>
 		<br>
@@ -283,14 +300,14 @@
 		<!-- 프로세스3 -->
 		<div id="S_process-3">
 		
-		예약 유형 <span class="S_red"> *</span><br>
+		예약 유형(수정) <span class="S_red"> *</span><br>
 		<div style="width:50%;float:left;display:block;text-align:center;"><input class="S_type1" type="radio" name="S_type1" value="time"> 시간단위</div>
 		<div style="width:50%;float:left;display:block;text-align:center;"><input class="S_type1" type="radio" name="S_type1" value="day"> 일단위</div>
 		<br><br>
 		<input type="hidden" id="S_type" name="S_type">
 		<br>
 		
-		이용시간 <span class="S_red">*</span><br>
+		이용시간(수정) <span class="S_red">*</span><br>
 		<select class="form-control" style="display:inline;width:46%;" id="S_start">
 		<% for(int i = 0 ; i<25; i++){ %>
 			<%if(i==0){%>
@@ -309,14 +326,14 @@
 			<%} %>
 		</select>
 		 까지
-		<input type="hidden" id="S_starthidden" name="S_start" value="0">
-		<input type="hidden" id="S_endhidden" name="S_end" value="24">
+		<input type="hidden" id="S_starthidden" name="S_start" value="<%=s.getS_start()%>">
+		<input type="hidden" id="S_endhidden" name="S_end" value="<%=s.getS_end()%>">
 		<br>
 		<br>
 		<br>
 		
 		
-		정기휴무 <span class="S_red">*</span><br>
+		정기휴무(수정) <span class="S_red">*</span><br>
 		<select class="form-control" id="S_holiday">
 			<option value="0" selected>휴무없음</option>
 			<option value="1">공휴일</option>
@@ -336,14 +353,14 @@
 		<input id="S_holispan1" type="text" type="form-control" numberOnly maxlength="2" class="form-control" style="display:inline;width:10%;"> 월
 		<input id="S_holispan2" type="text" type="form-control" numberOnly maxlength="2" class="form-control" style="display:inline;width:10%;"> 일
 		</span>
-		<input type="hidden" id="S_holiday1" name="S_holiday">
+		<input type="hidden" id="S_holiday1" name="S_holiday" value="${s.s_holiday }">
 		<br><br><br>
 		
-		최대 수용 인원 <span class="S_red"> *</span><br>
-		<input id="S_people" name="S_people" type="text" class="form-control" style="width:98%;display:inline;" numberOnly placeholder="최대 수용 인원을 입력해 주세요."> 명
+		최대 수용 인원(수정) <span class="S_red"> *</span><br>
+		<input id="S_people" name="S_people" type="text" class="form-control" style="width:98%;display:inline;" numberOnly placeholder="최대 수용 인원을 입력해 주세요." value="${s.s_people }"> 명
 		<br><br><br>
 		
-		예약 시 주의사항 <span class="S_red"> *</span>
+		예약 시 주의사항(수정) <span class="S_red"> *</span><span class="S_condition" style="color:blue;"><span class="S_red">(최소 1개)</span>(최대 10개)</span>
 		<input id="S_warning" type="text" class="form-control" style="width:93%;display:inline;" placeholder="예약 시 주의사항을 입력해 주세요.">
 		<button type="button" id="S_warbt" class="btn btn-outline-warning" style="width:6%;display:inline;">추가</button>
 		<span id="S_warspan"></span><button type="button" id="S_warinit" style="display:none;" class="btn btn-outline-warning">초기화</button>
@@ -358,12 +375,12 @@
 			
 			<span id="S_whattype"></span>
 			<span class="S_red"> *</span><br> 
-			<input type="text" id="S_price1" name="S_price1" class="form-control" required placeholder="가격을 입력해 주세요." style="display:inline;width:98%;">원
+			<input type="text" id="S_price1" name="S_price1" class="form-control" required placeholder="가격을 입력해 주세요." style="display:inline;width:98%;" value="${s.s_price1 }">원
 
 			<br><br>
 			
-			1인당 추가 가격 <span class="S_red"> *</span><br>
-			<input type="text" id="S_price2" name="S_price2" class="form-control" required placeholder="1인당 추가 가격을 입력해 주세요." style="display:inline;width:98%;">원
+			1인당 추가 가격(수정) <span class="S_red"> *</span><br>
+			<input type="text" id="S_price2" name="S_price2" class="form-control" required placeholder="1인당 추가 가격을 입력해 주세요." style="display:inline;width:98%;" value="${s.s_price2 }">원
 			
 		</div><!-- 프로세스4 -->
 		
@@ -556,7 +573,20 @@
 					$("#S_phone2_3").val($("#S_phone1_3").val());
 				}
 			})
-			
+			var pcheck1 = false;
+			var pcheck2 = false;
+			$("#btphone1").click(function(){
+				$("#beforephone1").css("display","inline");
+				$("#S_phone1").attr("type","hidden");
+				$(this).css("display","none");
+				pcheck1 = true;
+			});
+			$("#btphone2").click(function(){
+				$("#beforephone2").css("display","inline");
+				$("#S_phone2").attr("type","hidden");
+				$(this).css("display","none");
+				pcheck2 = true;
+			});
 			//S_type
 			$(".S_type1").change(function(){
 				
@@ -683,11 +713,83 @@
 				<% }%>
 			<% }%>
 			
+			$("#S_img1img").css("display","inline");
+			$("#S_img1text").css("display","none");
+			$("#S_img1img").attr("src","/upload/space/"+"<%=s.getS_img1()%>");
+			
+			check1[5] = true;
+			<%for (int i = 0 ; i<img2.length;i++){ %>
+				<%--alert("<%=img2[i]%>");--%>
+				$("#S_img2img"+<%=i+1%>).attr("src","<%=img2[i]%>");
+			<%}%>
+			imgcheck = <%=img2.length%>;
 			//사진은 우선 img태그에 src를 통해 집어 넣고 타입이 file인 input들에는 파일 명을 value값으로 지정해 놓는다.
 			// 혹시 로드된 것이 있으면 true 없으면 false img2도 마찬가지로!!
 			//멀티플 객체로 만들어야 하긴 함 왜냐하면 form이 enctype 이므로!!
 			//true 라면 서블릿에서는 filename을 getfilesystem으로 false라면 겟파라미터로 받아옴.(수정이안된것이므로)
 			//만약 업데이트 완료하면 모든 파일네임을 검사하고 실제파일과 비교하여 삭제!
+			
+			$("#addrNum").val(<%=s.getAddrNum()%>);
+			$("#address").val("<%=s.getAddress()%>");
+			
+			$("#S_idemail").val("<%=email%>");
+			<%for(int i = 0; i<14; i++){%>
+				<%if(com.equals(comlist[i])){%>
+					$("#S_selectemail").find("option:eq(<%=i%>)").prop("selected", true);
+					$("#S_inputemail").val("<%=com%>");
+				<%break;}else if(i==13){%>
+					$("#S_selectemail").find("option:eq(<%=i%>)").prop("selected", true);
+					$("#S_inputemail").val("<%=com%>");
+				<%break;}%>
+			<%}%>
+			
+			if("${s.s_type}"=="time"){
+				$(".S_type1").eq(0).prop("checked", true);
+				$("#S_type").val("time");
+			}else{
+				$(".S_type1").eq(1).prop("checked", true);
+				$("#S_type").val("day");
+			}
+			
+			$("#S_start").find("option:eq(<%=s.getS_start()%>)").prop("selected","true");
+			$("#S_end").find("option:eq(<%=s.getS_end()%>)").prop("selected","true");
+			
+			<% for(int i = 0; i<holiday.length;i++){ %>
+				S_holiday[<%=i%>] = <%=holiday[i]%>;
+			<%}%>
+			if(S_holiday[0]==0){
+				$("#S_holiday").find("option:eq(0)").prop("selected", true);
+			}else if(S_holiday[0]==1){
+				$("#S_holiday").find("option:eq(1)").prop("selected", true);
+			}else if(S_holiday[0]==2){
+				$("#S_holiday").find("option:eq(2)").prop("selected", true);
+				$("#S_ul3").css("display","inline");
+				for(var i = 1; i<S_holiday.length;i++){
+					if(S_holiday[i]==1){
+						$("#S_ul3 li").eq(i-1).css("background","#f69b02");
+					}
+				}
+			}else if(S_holiday[0]==3){
+				$("#S_holiday").find("option:eq(3)").prop("selected", true);
+				$("#S_holispan").css("display","inline");
+				$("#S_holispan1").val(S_holiday[1]);
+				$("#S_holispan2").val(S_holiday[2]);
+			}
+			/////////
+			$("#S_warinit").css("display","inline");
+			<%for(int i = 0 ; i<warning.length;i++){%>
+				warning[<%=i%>] = "<%=warning[i]%>";
+			<%}%>
+			for(var i =0; i<warning.length;i++){
+				if(warning[i]!=null){
+					warnum+=1;
+					warningmsg+=warnum+". "+warning[i]+"<br>";
+					$("#S_warspan").html(warningmsg);
+					$("#S_warning").val("");
+				}else{
+					break;
+				}
+			}
 			};
 			
 			var check1 = [false,0,false,false,0,false,0,0]; //다음버튼 가기 전 체크용
@@ -747,27 +849,31 @@
 					}
 					var S_email = $("#S_idemail").val()+"@"+$("#S_inputemail").val();
 					$("#S_email").val(S_email);
-					if($("#S_phone1_2").val()==""){
-						$("#S_phone1_2").focus();
-						return;
-					}else if($("#S_phone1_3").val()==""){
-						$("#S_phone1_3").focus();
-						return;
-					}else if($("#S_phone2_1").val()==""){
-						$("#S_phone2_1").focus();
-						return;
-					}else if($("#S_phone2_2").val()==""){
-						$("#S_phone2_2").focus();
-						return;
-					}else if($("#S_phone2_3").val()==""){
-						$("#S_phone2_3").focus();
-						return;
+					if(pcheck1 == true){
+						if($("#S_phone1_2").val()==""){
+							$("#S_phone1_2").focus();
+							return;
+						}else if($("#S_phone1_3").val()==""){
+							$("#S_phone1_3").focus();
+							return;
+						}
+						var S_phone1 = $("#S_phone1_1 option:selected").text()+$("#S_phone1_2").val()+$("#S_phone1_3").val();
+						$("#S_phone1").val(S_phone1);
 					}
-					var S_phone1 = $("#S_phone1_1 option:selected").text()+$("#S_phone1_2").val()+$("#S_phone1_3").val();
-					$("#S_phone1").val(S_phone1);
-					var S_phone2 = $("#S_phone2_1").val()+$("#S_phone2_2").val()+$("#S_phone2_3").val();
-					$("#S_phone2").val(S_phone2);
-					
+					if(pcheck2 == true){
+						if($("#S_phone2_1").val()==""){
+							$("#S_phone2_1").focus();
+							return;
+						}else if($("#S_phone2_2").val()==""){
+							$("#S_phone2_2").focus();
+							return;
+						}else if($("#S_phone2_3").val()==""){
+							$("#S_phone2_3").focus();
+							return;
+						}
+						var S_phone2 = $("#S_phone2_1").val()+$("#S_phone2_2").val()+$("#S_phone2_3").val();
+						$("#S_phone2").val(S_phone2);
+					}	
 					$('#S_processBar-2').css("background-color","white");
 					$('#S_process-2').css("display","none");
 					$('#S_processBar-3').css("background-color","#f69b02");
@@ -796,9 +902,9 @@
 					$("#S_bt-2").css("display","none");
 					$("#S_bt-submit").css("display","inline"); //프로세스 4가 되면서 서브밋 버튼 활성화
 					if($("#S_type").val()=="time"){
-						$("#S_whattype").text("시간당 대여 가격");
+						$("#S_whattype").text("시간당 대여 가격(수정)");
 					}else{
-						$("#S_whattype").text("종일 대여 가격");
+						$("#S_whattype").text("종일 대여 가격(수정)");
 					}
 					state=4;
 				}
