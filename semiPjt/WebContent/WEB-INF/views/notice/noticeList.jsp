@@ -61,6 +61,24 @@ prefix="c" %>
     .btn1{
         float: right;
     }
+     .table_toggle{
+         margin-top: 60px;
+         font-size:15px;
+         width:100%;
+    }
+        .table_toggle tbody tr{
+            height: 60px;
+        }
+        .table_toggle tbody tr:nth-child(2n+1){
+            background-color: #f7f7f7;
+        }
+        .table_toggle>tbody>tr:first-child>td{
+            border-top: 2px solid #656565;
+        }
+    #nlist{
+        background-color: #183058;
+        color: #f7f7f7;
+    }
 </style>
 </head>
 <body>
@@ -82,9 +100,9 @@ prefix="c" %>
             </div>
 
          <div class="table-wrapper">
-            <table class="table table-striped">
+            <table class="table_toggle">
                 <tr>
-                    <th colspan="5" style="font-size:20px; font-weight:bold">공지사항 리스트</th>
+                    <th colspan="5" style="font-size:20px; font-weight:bold" id="nlist">공지사항</th>
                 </tr>
                 <tr>
                     <th>번호</th><th>제목</th><th>작성자</th><th>작성일</th>
@@ -120,7 +138,7 @@ prefix="c" %>
             </table>
             <div><%= pd.getPageNavi() %></div>
             <div>
-                <a class="btn btn-outline-primary btn-sm" href="/noticeWrite">글쓰기</a>
+                <a class="btn btn-outline-primary btn-sm" href="/noticeWrite"style="color:#f69b02; border-color:#f69b02">글쓰기</a>
             </div>
         </div>
     </div>

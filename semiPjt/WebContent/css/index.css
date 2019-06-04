@@ -39,6 +39,9 @@ ol,ul{
     padding: 0;
     margin: 0;
 }
+a{
+	text-decoration: none;
+}
 #navi-bar li a {
 	color: #605f5d;
 	font-size: 18px;
