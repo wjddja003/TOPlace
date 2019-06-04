@@ -29,7 +29,7 @@
 			border: 1px solid gainsboro;
 			color: darkgrey;
 			text-align: center;
-			width:40%;
+			width:45%;
 			cursor: pointer;
 		}
 		.placeTypeDetail:hover{
@@ -43,8 +43,11 @@
 			text-align: right;
 		}
 		.selectBoxInner{
+			padding:20px;
 			display:none;
-			width: 800px;
+			width: 500px;
+			border: 1px solid black;
+			overflow: hidden;
 		}
 		.selectBox:hover{
 			cursor: pointer;
@@ -72,15 +75,12 @@
 		    padding: 0;
 		    right: 300px;
 		}
-		.filterOutBox{
-			width:100%;
-			height:200px;
-			background-color: beige;
-		}
 		.filterOutLine{
-			margin-top:50px;
+			padding:20px;
 			display: none;
 			clear: both;
+			border: 1px solid black;
+			
 		}
 		.detailSearchBtn{
 			background-color: white;
@@ -89,6 +89,35 @@
 		}
 		.detailBox{
 			margin-top:30px;
+			
+		}
+
+		.filterBox{
+			margin:0 auto;
+			float:left;
+			box-sizing: border-box;
+			border: 1px solid gainsboro;
+			color: darkgrey;
+			text-align: center;
+			width:13.7%;
+			height:90px;
+			cursor: pointer;
+		}
+		.filterBox:hover{
+			background-color:purple;
+			color:black;
+		}
+		.filterOutBox{
+			clear:left;
+			overflow: hidden;
+		}
+		#filterBack{
+			font-size: 20px;
+    		background-color: black;
+    		color: white;
+    		width: 30px;
+    		border: 0px;
+    		float:right;
 		}
 	</style>
 </head>
@@ -108,6 +137,9 @@
 			<div class="detailSearchList">공간유형
 				<div class="selectBox">모든공간&nbsp;&nbsp;&nbsp;&nbsp;<span>▽</span></div>
 				<div class="selectBoxInner">
+					<div class="typeOutlineDetail">
+						<button id="filterBack")>X</button>
+					</div>
 					<div class="typeOutlineDetail">
 						<div class="placeTypeDetail">회의실</div>
 						<div class="placeTypeDetail">세미나실</div>
@@ -139,6 +171,9 @@
 				<div class="selectBox">모든지역<span>▽</span></div>
 				<div class="selectBoxInner">
 					<div class="typeOutlineDetail">
+						<button id="filterBack")>X</button>
+					</div>
+					<div class="typeOutlineDetail">
 						<div class="placeTypeDetail">이태원</div>
 						<div class="placeTypeDetail">홍대입구</div>
 					</div>
@@ -158,7 +193,7 @@
 			</div>
 			
 			<div class="detailSearchList">이용일
-				<div class="selectBox">모든날짜<span>▽</span></div>
+				<div class="selectBox" style="width:800px")>모든날짜<span>▽</span></div>
 				<div class="selectBoxInner">
 					<jsp:include page="/WEB-INF/views/calendar.jsp"/>
 				</div>
@@ -169,9 +204,36 @@
 				<button id="detailSearchFilter" class="detailSearchBtn">필터</button>
 			</div>
 			<div class="filterOutLine">
-				<button id="filterBack" style="float:right;")>X</button>
 				<div class="filterOutBox">
-					<div class="filterBox">이태원</div>
+					<span>편의시설을 선택하세요.</span>
+					<button id="filterBack")>X</button>
+				</div>
+				<div class="filterOutBox">
+					<div class="filterBox">TV/프로젝터<br><img src="/upload/space/kategorie2/1.png" ></div>
+					<div class="filterBox">인터넷/Wifi<br><img src="/upload/space/kategorie2/2.png" ></div>
+					<div class="filterBox">복사/인쇄기<br><img src="/upload/space/kategorie2/3.png" ></div>
+					<div class="filterBox">화이트보드<br><img src="/upload/space/kategorie2/4.png" ></div>
+					<div class="filterBox">음향/마이크<br><img src="/upload/space/kategorie2/5.png" ></div>
+					<div class="filterBox">취사시설<br><img src="/upload/space/kategorie2/6.png" ></div>
+					<div class="filterBox">음식물반입가능<br><img src="/upload/space/kategorie2/7.png" ></div>
+				</div>
+				<div class="filterOutBox">
+					<div class="filterBox">주류반입가능<br><img src="/upload/space/kategorie2/8.png" ></div>
+					<div class="filterBox">샤워시설<br><img src="/upload/space/kategorie2/9.png" ></div>
+					<div class="filterBox">주차<br><img src="/upload/space/kategorie2/10.png" ></div>
+					<div class="filterBox">금연<br><img src="/upload/space/kategorie2/11.png" ></div>
+					<div class="filterBox">반려동물 동반가능<br><img src="/upload/space/kategorie2/12.png" ></div>
+					<div class="filterBox">PC/노트북<br><img src="/upload/space/kategorie2/13.png" ></div>
+					<div class="filterBox">의자/테이블<br><img src="/upload/space/kategorie2/14.png" ></div>
+				</div>
+				<div class="filterOutBox">
+					<div class="filterBox">내부화장실<br><img src="/upload/space/kategorie2/15.png" ></div>
+					<div class="filterBox">탈의실<br><img src="/upload/space/kategorie2/16.png" ></div>
+					<div class="filterBox">테라스/루프탑<br><img src="/upload/space/kategorie2/17.png" ></div>
+					<div class="filterBox">공용라운지<br><img src="/upload/space/kategorie2/18.png" ></div>
+					<div class="filterBox">전신거울<br><img src="/upload/space/kategorie2/19.png" ></div>
+					<div class="filterBox">바베큐시설<br><img src="/upload/space/kategorie2/20.png" ></div>
+					<div class="filterBox">도어락<br><img src="/upload/space/kategorie2/21.png" ></div>
 				</div>
 			</div>
 		</div>
@@ -181,13 +243,20 @@
 	$(document).ready(function() {
 		var index = '${index }';
 		if (index >= 0 && index < 12) {
-			$('.selectBox').eq(0).html('${type }<span>▽</span>');
-			$('.placeTypeDetail').eq(index).css("background-color", "blue");
+			if($('.placeTypeDetail').eq(index).text()=='${type}'){
+				$('.selectBox').eq(0).html('${type }<span>▽</span>');
+				$('.placeTypeDetail').eq(index).css("background-color", "blue");
+			}
+			
 		} else if (index >= 12 && index < 18) {
-			$('.selectBox').eq(1).html('${type }<span>▽</span>');
-			$('.placeTypeDetail').eq(index).css("background-color", "blue");
+			if($('.placeTypeDetail').eq(index).text()=='${type}'){
+				$('.selectBox').eq(1).html('${type }<span>▽</span>');
+				$('.placeTypeDetail').eq(index).css("background-color", "blue");
+			}
 		} else {
-			$('.selectBox').eq(2).html('${type }<span>▽</span>');
+			if($('.placeTypeDetail').eq(index).text()=='${type}'){
+				$('.selectBox').eq(2).html('${type }<span>▽</span>');
+			}
 		}
 		var prepareNum=-1;
 		$('.selectBox').click(function() {
@@ -224,10 +293,20 @@
 		}
 	});
 	$('#filterBack').click(function() {
-	     	$('.filterOutLine').css("display","none");
+	     	$(this).parent().parent().css("display","none");
 	     	filterCount = 0;
 	});
 	$("input:radio[name='testradio']:radio[value='2']").prop('checked', true);
+	var filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var filterCount = 0;
+	$('.filterBox').click(function(){
+		if(filterCount>5){
+			alert("")
+		}
+		var filterIndex = $('.filterBox').index(this);
+		filterArray[filterIndex] = 1;
+		filtercount++
+	});
 	</script>
 </body>
 </html>
