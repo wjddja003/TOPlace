@@ -1,5 +1,6 @@
 package space.model.vo;
 
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Space {
@@ -243,14 +244,15 @@ public class Space {
 		return list;
 	}
 	
-	public String[] getDelImg() {
+	public ArrayList<String> getDelImg() {
 	      StringTokenizer st = new StringTokenizer(S_img2, ",");
 	      
-	      String[] list = new String[st.countTokens()];
-	      int i=0;
+	      ArrayList<String> list = new ArrayList<String>();
+	      
 	      while(st.hasMoreTokens()) {
-	         list[i] = st.nextToken();
-	         i++;
+	    	    
+	    	  list.add(st.nextToken());
+	        
 	      }
 	      return list;
 	   }

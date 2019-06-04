@@ -29,6 +29,7 @@
 	                <li class="navi-li"><a href="/selectOneSpace?S_no=2">핫딜/이벤트(윤주)</a></li>
 
 	                <li class="navi-li"><a href="/views/insertSpace.jsp">공간등록</a></li>
+	                
 	                <li class="navi-li"><a href="/hostPage?ShostNum=1">(동천)</a>
 	                
 	            </ul>
