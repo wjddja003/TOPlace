@@ -29,7 +29,7 @@ public class QaMngmentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qaMngment.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qaList.jsp");
 		rd.forward(request, response);
 	}
 

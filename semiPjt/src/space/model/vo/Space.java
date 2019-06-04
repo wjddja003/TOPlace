@@ -248,11 +248,8 @@ public class Space {
 	      StringTokenizer st = new StringTokenizer(S_img2, ",");
 	      
 	      ArrayList<String> list = new ArrayList<String>();
-	      
 	      while(st.hasMoreTokens()) {
-	    	    
-	    	  list.add(st.nextToken());
-	        
+	         list.add(st.nextToken());
 	      }
 	      return list;
 	   }

@@ -1,7 +1,7 @@
 <%@page import="user.model.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -113,7 +113,7 @@
             width: 100%;
             height: 80px;
             line-height:80px;
-            top: 900px;
+            bottom : 0px;
             position: fixed;
             background-color: #183058;
         }
@@ -145,22 +145,39 @@
             width: 30px;
             height: 30px;
         }
+        .dimmed{
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding-bottom: 50px;
+            background-color: rgba(0,0,0,0.5);
+        }
     </style>
-
-	
+     <div class="dimmed" style="display:block;"></div>
+    
     <div id="mypage">
        
    		 <button class="back">></button>
         <div id="aside-login_t">
             <ul>
-                <li><a><img src="../img/logo_2.png" style="width:100px; height:50px;"></a></li>
+                <li><a><img src="../../img/logo_2.png" style="width:100px; height:50px;"></a></li>
                 <li>
                 	<c:choose>
                 		<c:when test="${empty sessionScope.User}">
                 			<a href="/views/login.jsp">로그인이 필요합니다.</a>		
                 		</c:when>
                 		<c:otherwise>
-                			<a href="#">${sessionScope.User.userName}</a>
+                			<c:choose>
+                				<c:when test="${empty sessionScope.host}">
+                					<a href="/views/hostprofile.jsp">${sessionScope.User.userName}</a>
+                				</c:when>
+                				<c:otherwise>
+                					<a href="/views/hostprofileUpdate.jsp">${sessionScope.User.userName}</a>
+                				</c:otherwise>
+                			</c:choose>
                 		</c:otherwise>
                 	</c:choose>	
                 </li>
@@ -199,8 +216,8 @@
                         <ul>
                             <a href="/views/mypage/introduction.jsp"><li>서비스 소개</li></a>
                             <a href="/views/mypage/TermsOfService.jsp"><li>이용약관</li></a>
-                            <a href="#"><li>개인정보처리방침</li></a>
-                            <a href="#"><li>운영정책</li></a>
+                            <a href="/views/mypage/policyPerson.jsp"><li>개인정보처리방침</li></a>
+                            <a href="/views/mypage/policyOperate.jsp"><li>운영정책</li></a>
                         </ul>
                 </div>
             </ul>
@@ -217,7 +234,16 @@
         </div>
         </div>
         <div id="aside-host">
-            <div id="aside-host1"><a href="#">호스트등록으로 이동</a></div>
+            <div id="aside-host1">
+            	<c:choose>
+       				<c:when test="${empty sessionScope.host}">
+       					<a href="/views/hostprofile.jsp">호스트 등록으로 이동</a>
+       				</c:when>
+       				<c:otherwise>
+       					<a href="/views/hostprofileUpdate.jsp">호스트 정보 수정으로 이동</a>
+       				</c:otherwise>
+       			</c:choose>
+            </div>
         </div>
     </div>
 <script>

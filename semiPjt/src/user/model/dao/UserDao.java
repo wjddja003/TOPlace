@@ -157,6 +157,7 @@ public class UserDao {
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				u = new User();
+				u.setUserNo(rset.getInt("user_no"));
 				u.setUserId(rset.getString("user_id"));
 				u.setUserPw(rset.getString("user_pw"));
 				u.setUserName(rset.getString("user_name"));
