@@ -38,7 +38,7 @@
 .reservation_rMenu {
    margin: 0px 0px 0px 0px;
    float: left;
-   width: 300px;
+   width: 330px;
    top: 60px;
    right: 0px;
    position: absolute;
@@ -136,6 +136,16 @@
    background : #f69b02;
    color: white;
    outline:none;
+}
+.startDay{
+	font-size:16px;
+}
+.endDay{
+	font-size:16px;
+}
+.hapDay{
+	font-size:18px;
+	color:red;
 }
 #option_minus{
 	width:50px;
@@ -312,36 +322,32 @@
                <div class="reservation_head">
                   <span class="reservation_title">예약 공간</span> 
                   <c:if test="${s.s_type eq 'day'}">
-                  	<span class="reservation_sub"  style="color:red;">${s.s_price1}<span>/일</span></span>
+                  	<span class="reservation_sub"  style="color:red;">￦ ${s.s_price1}<span style="font-size:14px">/일</span></span>
                   </c:if>
                   <c:if test="${s.s_type eq 'time'}">
-                  	<span class="reservation_sub"  style="color:red;">${s.s_price1}<span>/시간</span></span>
+                  	<span class="reservation_sub"  style="color:red;">￦ ${s.s_price1}<span style="font-size:14px">/시간</span></span>
                   </c:if>
                </div>
                <div class="reservation_content">
                		<div class="reservation_space_info">
 	               		<div class="reservation_space_img" style="width:20%; float:left">
-	               			<img src="/upload/space/${s.s_img1 }">
+	               			<img src="/upload/space/${s.s_img1 }" width='100%;'>
 	               		</div>
-	               		<div class="reservation_space_tit" style="width:80%; float:left">
-	               			<span>${s.s_placeName} </span>
+	               		<div class="reservation_space_tit" style="width:80%; float:left; border-bottom:1px solid #183058;">
+	               			<h3>${s.s_placeName} </h3>
 	               		</div>
 	               		<div class="reservation_space_tit" style="width:80%; float:left">
 	               			<span>${s.s_placeIntroduce1}</span>
 	               			<span>${s.s_placeIntroduce2}</span>
 	               		</div>
-	               		<div class="reservation_space_tit">
-	               			<span>${s.s_kategorie2}</span>
-	               		</div>
 	               		<div class="viewpage_textbox">
-                            <h3>편의시설</h3>
+                            <div style="border-bottom:1px solid #183058"></div>
                             <ul>
                                 <li style="padding:30px 0px 20px 0px; text-align:center; overflow:hidden;">                               
                                     <c:forEach items="${s.s_kategorieList}" var="list" varStatus="i">
-                                    
                                     	<c:if test="${list == '1'}">
-                                    		<div class="viewpage_kategorie"><img src="/upload/space/kategorie2/${i.index+1}.png" width="50px;">
-                                    			<p>"${s.s_kategorieName[i.index]}"</p>
+                                    		<div class="viewpage_kategorie"><img src="/upload/space/kategorie2/${i.index+1}.png" width="30px;">
+                                    			<p>${s.s_kategorieName[i.index]}</p>
                                     		</div>
                                     	</c:if>
                                     </c:forEach>
@@ -368,9 +374,9 @@
                <div class="reservation_head">
                   <span class="reservation_title">날짜 선택</span>
                   <span class="reservation_sub">
-                     <span id="startDay"></span>
-                     <span id="endDay"></span>
-                     <span id="hapDay"></span>
+                     <span class="startDay"></span>
+                     <span class="endDay"></span>
+                     <span class="hapDay"></span>
                   </span>
                </div>
                <div class="reservation_content">
@@ -594,20 +600,42 @@
             <div class="reservation_rMenu">
                <span class="payment_title" style="font-size:20px;">결제 예정 금액</span><br>
                <br>
+               <c:if test="${s.s_type eq 'day'}">
                <div class="rMenu_list">
                		<div class="pop_list_left">예약날짜</div>
-               		<div class="pop_list_right"><span class="selDay">-</span></div>
+               		<div class="pop_list_right">
+               			<span class="startDay">-</span>
+               			<span class="endDay"></span>
+               			<span class="hapDay"></span>
+               		</div>
                </div>
+               </c:if>
+               <c:if test="${s.s_type eq 'time'}">
+               <div class="rMenu_list">
+               		<div class="pop_list_left">예약날짜</div>
+               		<div class="pop_list_right">
+               			<span class="startDay">-</span>
+               		</div>
+               </div>
+               </c:if>
+               <c:if test="${s.s_type eq 'day'}">
+               <div class="rMenu_list">
+               		<div class="pop_list_left">이용시간</div>
+               		<div class="pop_list_right"><span>${s.s_start}시~${s.s_end}시</span></div>
+               </div>
+               </c:if>
+               <c:if test="${s.s_type eq 'time'}">
                <div class="rMenu_list">
                		<div class="pop_list_left">예약시간</div>
                		<div class="pop_list_right"><span class="selTime">-</span></div>
                </div>
+               </c:if>
                <div class="rMenu_list">
                		<div class="pop_list_left">예약인원</div>
                		<div class="pop_list_right"><span class="reservation_people2"></span></div>
                </div>
                <div class="rMenu_price">
-               		<div clas="pop_list_left" style="color:red;font-size:16px;" id="reservation_price"></div>
+               		<div class="pop_list_left" style="color:red;font-size:16px;" id="reservation_price"></div>
                   	<div class="pop_list_left" style="color:#183058">￦</div>
                   	<div class="pop_list_right" style="color:#183058"><span class="price">0</span></div>
                </div>
@@ -625,7 +653,7 @@
                <div id="reservation_popupDiv_content">예약 내용을 확인해주세요.</div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">예약공간</div>
-                  <div class="pop_list_right">????</div>
+                  <div class="pop_list_right">${s.s_placeName}</div>
                </div>
                <div class="reservation_popupDiv_list">
                   <div class="pop_list_left">예약날짜</div>
@@ -785,15 +813,18 @@
    <%-- 결제버튼 클릭 스크립트--%>
       $('#payment').click(function() {
    <%-- 날짜 체크 확인--%>
-      if ($('#daySel').val() == "") {
-         alert("날짜를 선택해주세요.");
-         } else {
+      if ($('#hapDay').val() == "") {
+         alert("예약 날짜를 선택해주세요.");
+         }else {
    <%-- 시간 체크 확인 --%>
-   if (count == 1) {
-      alert("최소 두시간 이상 예약이 가능합니다.");
-      } else if (count != 2) {
-         alert("시간을 선택해주세요.");
-         } else {
+   <%-- 넘어온 타입이 시간일때 --%>
+   if("${s.s_type == 'time'}"){
+	   if (count == 1) {
+	      alert("최소 두시간 이상 예약이 가능합니다.");
+	      } else if (count != 2) {
+	         alert("시간을 선택해주세요.");
+	      }
+	   } else {
    <%-- 예약정보 체크 --%>
       if (!bookerCheck.test($('input[name=booker]').val())) {
          alert("예약자 정보를 확인해주세요(예약자명 두글자 이상)");
@@ -915,8 +946,6 @@
          });
       });
    </script>
-   <%-- 달력 스크립트 --%>
-
    <jsp:include page="/WEB-INF/common/footer.jsp" />
 </body>
 </html>
