@@ -88,7 +88,6 @@
 <section>
 <!-- section content -->
 <div class="section_content">
-	<button type="button" onclick="location.href='/selectOneSpace2?S_no=23'">공간수정</button><button type="button" >공간삭제</button>
 	<!-- 프로세스바 -->
 	<div id="S_processBar" style="text-align:center;">
 		<div id="S_processBar-1">1. 공간 정보<br>공간 정보를 입력해주세요.</div>
@@ -108,7 +107,7 @@
 		<!-- 프로세스1 -->
 		<div id="S_process-1">
 			<!-- 세션에서 호스트(멤버)정보 하나를 가져옴 -->
-			<input type="hidden" name="S_hostNum" value="1">
+			<input type="hidden" name="S_hostNum" value="0">
 			
 			<br>
 			공간명 <span class="S_red">*</span><span class="S_condition" id="S_lengthspan1">0자/18자</span> <br>
