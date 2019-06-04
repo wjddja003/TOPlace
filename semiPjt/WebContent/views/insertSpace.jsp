@@ -36,7 +36,7 @@
 	#S_ul2 li{display: block;
 		float: left;
 		width:14%;
-		height:140px;
+		height:90px;
 		border: 2px solid black;
 		text-align:center;
 		cursor:pointer;
@@ -87,8 +87,8 @@
 		
 <section>
 <!-- section content -->
-<div class="section_content"">
-	<button type="button" onclick="location.href='/selectOneSpace?S_no=23'">공간수정</button><button type="button" >공간삭제</button>
+<div class="section_content">
+	<button type="button" onclick="location.href='/selectOneSpace2?S_no=23'">공간수정</button><button type="button" >공간삭제</button>
 	<!-- 프로세스바 -->
 	<div id="S_processBar" style="text-align:center;">
 		<div id="S_processBar-1">1. 공간 정보<br>공간 정보를 입력해주세요.</div>
@@ -175,7 +175,7 @@
 				<li>도어락<br><img src="/upload/space/kategorie2/21.png" ></li>
 			</ul><br><br><br><br><br><br>
 			<input type="hidden" name="S_kategorie2" id="S_kategorie2">
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br>
 			
 			웹사이트<br>
 			<input type="text" name="S_placeWeb" id="S_placeWeb" class="form-control" placeholder="웹사이트 URL을 입력해주세요.(예시:http://toplace.com)">
