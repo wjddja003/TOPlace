@@ -22,10 +22,24 @@
 		display: inline-block;
 		float: right;
 	}
-	.hstprofile_content{
+	.hstprofile_content_profile{
+		margin : 0 2% 0 0;
+		float: left;
+		width: 49%;
+		height: 200px;
+		
+	}
+	.hstprofile_content_name{
+		float: left;
+		width: 49%;
+		height: 200px;
+		
+	}
+	.hstprofile_content_text{
+		clear: left;
 		width: 100%;
 		height: 200px;
-		border: 1px solid;
+		
 	}
 	.hstprofile_footer{
 		width: 100%;
@@ -158,10 +172,10 @@
 					<div class="tit_content">
 						<span class="hostprofile_option">*필수입력</span>	
 						<h3>호스트 정보를 입력해 주세요</h3>
-						<input type="hidden" name="userNo" value="">
+						<input type="hidden" id="userNo" name="userNo" value="${sessionScope.User.userNo}">
 					</div>
 				</div>
-				<div class="hstprofile_content">
+				<div class="hstprofile_content_profile">
 					<div class="content_header">
 						<h5>프로필 이미지</h5>
 					</div>
@@ -182,7 +196,7 @@
 						
 					</div>
 				</div>
-				<div class="hstprofile_content">
+				<div class="hstprofile_content_name">
 					<div class="content_header">
 						<span class="hostprofile_option"><label id="nameLength"></label>/10자</span>
 						<h5>프로필 명<span>*</span></h5>
@@ -192,7 +206,7 @@
 						<p style="display: none;" id="nameErrorMsg">프로필명은 필수 입력입니다.</p>
 					</div>
 				</div>
-				<div class="hstprofile_content">
+				<div class="hstprofile_content_text">
 					<div class="content_header">
 						<span class="hostprofile_option"><label id="contentLength"></label>/30자</span>
 						<h5>소개말<span>*</span></h5>
@@ -256,6 +270,7 @@
 		}
 	});
 	$("#hostName").keyup(function(){
+		console.log($('#userNo').val());
 		var count = $("#hostName").val().length;
 		console.log(count);
 		$("#nameLength").text(count);

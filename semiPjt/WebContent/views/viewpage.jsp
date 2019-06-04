@@ -7,6 +7,8 @@
     	String[] img2 = s.getS_img2().split(",");
     	String[] kg = (s.getS_kategorie2()).split(",");
     	String[] kg2 = {"TV/프로젝터","인터넷/WIFI","복사/인쇄기","화이트보드","음향/마이크","취사시설","음식물반입가능","주류반입가능","샤워시설","주차","금연","반려동물 동반 가능","PC/노트북","의자/테이블","내부화장실","탈의실","테라스/루프탑","공용라운지","전신거울","바베큐시설","도어락"};
+    	String[] place1 = (s.getS_kategorie1()).split(",");
+    	String[] kg1 = {"회의실","세미나실","다목적홀","작업실","레저시설","파티룸","공연장","연습실","카페","스터디룸","엠티장소","루프탑"};
     %>
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=33qm1u5uje&submodules=geocoder"> //네이버 지도 스크립트
 	</script>
@@ -14,21 +16,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script
-      src="https://code.jquery.com/jquery-3.4.0.js"
-      integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
-      crossorigin="anonymous">
-</script>
-<script type="text/javascript" src="/css/slick.min.js"></script>
+<!--  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
+<!--   <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+<!--   <script type="text/javascript" src="/js/slick.min.js"></script>  -->
 <link rel="stylesheet" type="text/css" href="/css/viewpage.css">
 <link rel="stylesheet" type="text/css" href="/css/slick.css"/>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <title>뷰페이지</title>
 
 </head>
 <body>
-    <jsp:include page="/WEB-INF/common/header.jsp"/>  
+      <jsp:include page="/WEB-INF/common/header.jsp"/>
     <section>
         <div id="viewpage_alert"><p></p></div>
         <div class="viewpage_content">
@@ -136,11 +135,27 @@
 <!--                          <div class="viewpage_photo"> -->
 <!--                             <a href="#"><img src="../img/viewpage_eximg4.jpg" width="773px;"></a> -->
 <!--                         </div> -->
-                        <div class=".single-item-rtl" width="773px;">
-						  <div><img src="../img/viewpage_eximg4.jpg"></div>
-						  <div><img src="../img/viewpage_eximg3.jpg"></div>
-						  <div><img src="../img/viewpage_eximg2.jpg"></div>
-						</div>
+                          <div id="slider-wrap">
+				          <ul id="slider">
+				          <c:forTokens items="${s.s_img2 }" delims="," var="sliderimg"> 
+				             <li data-color="#1abc9c">				                          
+									<img src="/upload/space/${sliderimg }">
+				             </li>	   
+				           </c:forTokens>          		             
+				          </ul>
+				          
+           <!--controls-->
+          <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
+          <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
+          <div id="counter"></div>
+          
+          <div id="pagination-wrap">
+            <ul>
+            </ul>
+          </div>
+          <!--controls-->  
+                 
+      </div>
                         <div class="viewpage_host_info">
                             <div class="viewpage_host_addr">
                                 <div class="viewpage_host_first">
@@ -171,7 +186,32 @@
                             <a href="#" style="text-decoration: none;"><span>질문작성하기</span></a>
                             </div>
                             <div class="viewpage_qnaview">
-                                <p>등록된 질문이 없습니다.</p>
+                                <div>
+                                    <ul class="review_list" id="qna_list">
+                                        <li class="rlist ">  
+                                            <div class="rbox_mine">  
+                                                 <span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
+                                         
+                                                <strong class="guest_name" style="font-size:22px;">예지</strong>
+                                                <p class="p_review">디제이 기기도 같이 올나잇에 사용가능한가요??</p>
+                                                <div class="rbox_info_base">  
+                                                    <span class="time_info">2019.04.19. 18:45:35</span> 
+                                                </div>
+                                            </div>
+                                            <div class="rbox_reply" style="margin-top:30px;">
+                                                <p class="p_tit_reply">
+                                                    <em>옥탑방라운지</em>님의 댓글
+                                                </p>
+                                                <p class="p_review">
+                                                    안녕하세요 현재 내부 사정으로 디제잉 장비 대여가 잠시 중단되었습니다.
+                                                </p>
+                                                <div class="rbox_info_base">
+                                                    <p class="time_info">2019.04.19. 18:49:25</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                          <div class="viewpage_hostpage">
@@ -189,48 +229,27 @@
 						</div>
                         </div>
                         <div class="viewpage_review_header">
-						<h4 class="h_intro">
+						<h4 class="h_intro"><!--?s_no=${s.s_no }  -->
 							이용 후기 <strong class="txt_primary">0개</strong>
 							<span class="dot"></span>
 							평균 평점 <strong class="txt_primary">0.0</strong>
 						</h4>
+                <a class="btn btn-outline-primary btn-sm" href="/reviewWrite?S_no=${s.s_no }" style="color:#f69b02; border-color:#f69b02; float:right;">리뷰등록</a>
 					</div>
                     <div class="viewpage_review">
                         <ul>
-                            <li class="rlist ">   
+                            <li class="rlist">   
                                 <div class="rbox_mine"> 
-                                    <span class="pf_img">프로필</span> 
+                                    <span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
                                     <strong class="guest_name">아이디</strong> 
                                     <p class="p_review">공간도 엄청 넓고, 포토존이 많아서 예쁜사진 많이남겼어요 ㅠㅠ 브라이덜샤워로 이용하기 정말 좋은 곳이었습니다~!! 그리고 오픈한지 얼마 안되서 그런지 장소도 소품도 아주 깨끗해요!!ㅎㅎ 삼각대, 충전기, 블루투스 스피커까지 없는게 없었습니다!! 그리고 호스트님이 정말 친절하셔용  번창하세요!!~!</p>
                                     <div class="space_list swiper_list photo_review"> 
                                         <div class="flex_wrap column3 fluid">      
                                             <article class="box_space">    
                                                 <div class="inner">     
-                                                    <a href="#" class="_review_img_link" target="_blank">
+                                                    <a href="#" class="_review_img_link">
                                                         <div class="img_box">
-                                                            <span><img src="../img/ex1.jpg" width="210px" height="210px"></span>
-                                                           
-                                                            </span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </article>
-                                            <article class="box_space">
-                                                <div class="inner">
-                                                    <a href="#" class="_review_img_link" target="_blank" >
-                                                        <div class="img_box">
-                                                            <span><img src="../img/ex2.jpg" width="210px" height="210px"></span>
-                                                            
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </article>
-                                            <article class="box_space">
-                                                <div class="inner">
-                                                    <a href="#">
-                                                        <div class="img_box">
-                                                            <span><img src="../img/ex3.jpg" width="210px" height="210px"></span>
-                                                          
+                                                            <span><img src="../img/ex1.jpg" width="100%" height="100%"></span>
                                                         </div>
                                                     </a>
                                                 </div>
@@ -292,7 +311,15 @@
                                             <img src="../img/ex1.jpg" width="110px" height="110px" id="viewpage_right_img">
                                             <p style="float:right;">${s.s_placeIntroduce1}</p>
                                         </li>
-                                        <li style="clear: both;" class="viewpage_right_c"><span style="color:#656565; float:left;">· 공간유형</span> <p>회의실 세미나실 파티룸</p></li>
+                                        <li style="clear: both;" class="viewpage_right_c"><span style="color:#656565; float:left;">· 공간유형</span>
+                                                                               
+                                         <%for(int i = 0; i<place1.length; i++) {%>
+                                    	<%if(place1[i].equals("1")){ %>                                    
+                                    				<p><%=kg1[i] %></p>
+                                    			
+	                                    	<%} %>
+	                                    <%} %>
+                                 		 </li>
                                         <li class="viewpage_right_c"><span style="color:#656565; float:left;">· 예약시간</span><p>${s.s_start } ~ ${s.s_end }</p></li>
                                         <li class="viewpage_right_c"><span style="color:#656565; float:left;" >· 예약인원</span> <p>${s.s_people}</p></li>
                                     </ul>
@@ -307,7 +334,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button><a href="/selectOneReservation?S_no=2">결제하기</a></button>			
+                             <button><a href="/selectOneReservation?S_no=2">결제하기</a></button>
                         </div>
                 </div>
                 </div>
@@ -316,34 +343,41 @@
     </section>
         <%-- 메뉴바 스크롤 따라오기 스크립트 --%>
         <script>
+        var $ = jQuery.noConflict();
        $(document).ready(function() {
-            var floatPosition = parseInt($(".viewpage_right").css('top'));
-            $(window).scroll(function() {
-                var scrollTop = $(window).scrollTop();
-                console.log(scrollTop);
-                if(scrollTop>300){
-                	$(".viewpage_right").css("display","block");
-                }else{
-                	$(".viewpage_right").css("display","none");
-                }
-                if(scrollTop>300){
-                	 var newPosition = scrollTop + floatPosition + "px";
-                     $(".viewpage_right").stop().animate({
-                         "top" : newPosition
-                     }, 1000);
-                }
-            }).scroll();
+    	   var floatPosition = parseInt($(".viewpage_right").css('top'));
+           $(window).scroll(function() {
+               var scrollTop = $(window).scrollTop();
+               console.log(scrollTop);
+               console.log($(document).height());
+               if(scrollTop<800){
+                   var newPosition = 0 + "px";
+                    $(".viewpage_right").stop().animate({
+                        "top" : newPosition
+                    }, 1000);
+               }else if($(document).height() > scrollTop+$(window).height()){
+                  var newPosition = (scrollTop-700) + "px";
+                   $(".viewpage_right").stop().animate({
+                       "top" : newPosition
+                   }, 1000);
+               }else{
+                  var newPosition = (scrollTop - (parseInt($(".viewpage_right").css("height"))+150)) + "px";
+                   $(".viewpage_right").stop().animate({
+                       "top" : newPosition
+                   }, 1000);
+               }
+           }).scroll();
            
             $("#like").click(function(){   
-                    $("#viewpage_alert").slideDown(700);
-                    $("#viewpage_alert").delay(1300);
-                    $("#viewpage_alert").css("display","inline");
-                    $("#viewpage_alert").delay(1300);
-                    $("#viewpage_alert").slideUp(700); 
-                    $("#like_full").css("display","inline");
-                    $("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");
+            	$("#viewpage_alert").slideDown(700);
+            	$("#viewpage_alert").delay(1300);
+            	$("#viewpage_alert").css("display","inline");
+            	$("#viewpage_alert").delay(1300);
+            	$("#viewpage_alert").slideUp(700); 
+            	$("#like_full").css("display","inline");
+            	$("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");
             });
-           $("#like_full").click(function(){
+            $("#like_full").click(function(){
                     $("#viewpage_alert").slideDown(700);
                     $("#viewpage_alert").delay(1300);
                     $("#viewpage_alert").css("display","inline");
@@ -355,12 +389,110 @@
             });
            $(".viewpage_content").css("background","url(/upload/space/${s.s_img1})no-repeat center center");
            $(".viewpage_content").css("background-size","cover");
-           
+          
+         //current position
+           var pos = 0;
+           //number of slides
+           var totalSlides = $('#slider-wrap ul li').length;
+           //get the slide width
+           var sliderWidth = $('#slider-wrap').width();
+               
+               /*****************
+                BUILD THE SLIDER
+               *****************/
+               //set width to be 'x' times the number of slides
+               $('#slider-wrap ul#slider').width(sliderWidth*totalSlides);
+               
+               //next slide    
+               $('#next').click(function(){
+                   slideRight();
+               });
+               
+               //previous slide
+               $('#previous').click(function(){
+                   slideLeft();
+               });
+               
+               
+               
+               /*************************
+                //*> OPTIONAL SETTINGS
+               ************************/
+               //automatic slider
+               var autoSlider = setInterval(slideRight, 3000);
+               
+               //for each slide 
+               $.each($('#slider-wrap ul li'), function() { 
+
+                  //create a pagination
+                  var li = document.createElement('li');
+                  $('#pagination-wrap ul').append(li);    
+               });
+               
+               //counter
+               countSlides();
+               
+               //pagination
+               pagination();
+               
+               //hide/show controls/btns when hover
+               //pause automatic slide when hover
+               $('#slider-wrap').hover(
+                 function(){ $(this).addClass('active'); clearInterval(autoSlider); }, 
+                 function(){ $(this).removeClass('active'); autoSlider = setInterval(slideRight, 3000); }
+               );
+               
+               
+
+  
+               
+
+
+           /***********
+            SLIDE LEFT
+           ************/
+           function slideLeft(){
+               pos--;
+               if(pos==-1){ pos = totalSlides-1; }
+               $('#slider-wrap ul#slider').css('left', -(sliderWidth*pos));    
+               
+               //*> optional
+               countSlides();
+               pagination();
+           }
+
+
+           /************
+            SLIDE RIGHT
+           *************/
+           function slideRight(){
+               pos++;
+               if(pos==totalSlides){ pos = 0; }
+               $('#slider-wrap ul#slider').css('left', -(sliderWidth*pos)); 
+               
+               //*> optional 
+               countSlides();
+               pagination();
+           }
+
+
+
+               
+           /************************
+            //*> OPTIONAL SETTINGS
+           ************************/
+           function countSlides(){
+               $('#counter').html(pos+1 + ' / ' + totalSlides);
+           }
+
+           function pagination(){
+               $('#pagination-wrap ul li').removeClass('active');
+               $('#pagination-wrap ul li:eq('+pos+')').addClass('active');
+           }
+                    	
         });   
 
-       $('.single-item-rtl').slick({
-         rtl: true
-       });
+       
 
         </script>
         <script>
@@ -399,8 +531,7 @@
 			});     
 	    });		
 		};
-</script>	
-	
+</script>		
     <jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
 </html>
