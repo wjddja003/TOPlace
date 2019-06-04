@@ -842,11 +842,7 @@
                 <th colspan="7">
                 <button id="btn">다시 선택하기</button>
                 <span></span><br>
-                <button id="strCheck">확인하기</button>
-                <div></div>
-                <input type="radio" value="1" name="testradio" checked>날짜별
-            	<input type="radio" value="2" name="testradio">시간별
-            	<input type="radio" value="3" name="testradio">불규칙선택
+                <button id="testbtn11">다시 선택하기</button>
                 </th>
             </tr>
             
@@ -1128,7 +1124,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         $('td').not('td.inhibitDay').click(function(){
-        	if($('input[name="testradio"]:checked').val()==1 && $(this).find('p').text() != ""){ //기간별 선택 됐을때
+        	if(btnVal==1 && $(this).find('p').text() != ""){ //기간별 선택 됐을때
         		//위의 인풋타입으로 들어온조건 수정해야함 수정용 마커
                 if($(this).hasClass("inhibitDay") === false && count==0){ //예약 불가 날짜는 제외
                     $('td').not('td.inhibitDay').css("background-color","white");
@@ -1143,6 +1139,10 @@
                     startYear = year;
                     //선택된 날짜 스트링 변수로 바꿔서 배열에 넣기 위한 조건변수들
                     count=1;
+                    //예약 시작 날짜 출력
+                    $('.endDay').text("");
+                    $('.hapDay').text("");
+                    $('.startDay').text(year+"."+month+"."+$(this).text()+"일");
                 } else if($(this).hasClass("inhibitDay") === false && count==1){
                     endDay = $('td').index(this);
                     $(this).css("background-color","red");
@@ -1151,6 +1151,18 @@
                     endYear = year;
                     clickEndDay = $(this).find('p').text();
                     count = 0;
+                    //예약 종료 날짜 출력
+                    $('.endDay').text("");
+                    if(startDay<endDay){
+                    	$('.endDay').text("~ "+year+"."+month+"."+$(this).text()+"일");	
+                    }else{
+                    	var changeStr = $('.startDay').eq(0).text();
+                    	$('.startDay').text("");
+                    	$('.endDay').text("~ "+changeStr);
+                    	$('.startDay').text(year+"."+month+"."+$(this).text()+"일");
+                    	
+                    }
+   
                 }
                 
                 if($("td").eq(endDay).hasClass("selectDay") === true && count==0){//마지막날이 클릭 됐을때 
@@ -1180,8 +1192,10 @@
                     createSelectDay();
                     $('#duringSpan').text(during);
                     endDay=null;
+                    //예약 날짜 합계 출력
+                    $('.hapDay').text("총"+during+"일");
                 }              
-        	} else if($('input[name="testradio"]:checked').val()==2 && $(this).find('p').text() != ""){
+        	} else if(btnVal==2 && $(this).find('p').text() != ""){
                 if($(this).hasClass("inhibitDay") === false && count==0){
                     $('td').not('td.inhibitDay').css("background-color","white");
                     $('td').removeClass("selectDay");
@@ -1220,9 +1234,10 @@
 					count=0;
                 }
                 console.log(strOneDay);
-        	} else if($('input[name="testradio"]:checked').val()==3 && $(this).find('p').text() != ""){
+        	} else if(btnVal==3 && $(this).find('p').text() != ""){
         		
         		if($(this).hasClass("inhibitDay") === false && $(this).attr("class") != "selectDay"){
+                    //선택된 날짜 초기화 
                     startDay = $('td').index(this);
                    	$(this).css("background-color","green");
                     $(this).addClass("selectDay");
@@ -1254,7 +1269,25 @@
                     const idx = array.indexOf(strOneDay); 
                     if (idx > -1) array.splice(idx, 1)
                 }
-                 console.log(array);            
+                 console.log(array);
+                 if($("td").eq(startDay).hasClass("selectDay") === true){
+ 					//마커 
+ 					//여기 윤호랑 맞춰서 아이디 클래스 변수명 변경 해야함
+ 					$('#reservation_time').slideDown(500);
+ 					var test12 = "000001111100000111111111";
+ 					var dbDay='20190531';
+ 					
+ 					if(dbDay==strOneDay){
+ 						for(var i=0;i<$('.swiper-slide').length;i++){
+ 							if(test12.charAt(i)==1){
+ 							$('.swiper-slide').eq(i).children().css('background','#183058');
+ 							$('.swiper-slide').eq(i).children().css('color','white');//css변경구문으로 교체하면 됨.
+ 							}
+ 						}
+ 					}
+ 					$('.selDay').text(strOneDay);
+
+                 }
         	}
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1263,6 +1296,9 @@
         resetfn = sample;	
         function sample(){
             alert("예약일은 30일을 초과할수 없습니다.")
+            $('.endDay').text("");
+            $('.hapDay').text("");
+            $('.startDay').text("");
             $('td').not('td.inhibitDay').css("background-color","white");
             for(var i = 0; i<$('td').not('td.inhibitDay').length;i++){
             	if($('td').not('td.inhibitDay').eq(i).attr("class")=="selectDay"){
@@ -1285,6 +1321,9 @@
 //선택된 날짜 길이 확인용 메소드
 		createSelectDay = function(){
 	            if(startMonth>endMonth){
+	            	$('.endDay').text("");
+	                $('.hapDay').text("");
+	                $('.startDay').text("");
 	                alert("이전 날짜부터 선택해주십시오.")
 	                $('td').not('td.inhibitDay').css("background-color","white");
 	                return;
@@ -1356,9 +1395,6 @@
 	            }
 	            console.log(array);
 		}
-        $("#strCheck").click(function(){
-        	createSelectDay
-        });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //선택된 예약 날짜 배열에 저장하는 로직 종료
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1379,9 +1415,20 @@
                   prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
                   },
           });
-        $('input[name="testradio"]').click(function(){
-        	array = new Array();
-        });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//기간선택하는 버튼 밸류값 지정메소드
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		$('.daySelBtn').click(function(){
+			btnVal = $(this).val();
+			$('td').not('td.inhibitDay').css("background-color","white");
+            $('td').removeClass("selectDay");
+            array = new Array();
+		});
+		$('#testbtn11').click(function(){
+			$('td.selectDay').addClass('testclass');
+			console.log($('.testclass').length);
+		}); //예약테이블 완성되면 예약된 날짜에다가 클래스 하나 새로 준다음 그 클래스 인애들은 
     });
     </script>
 </body>

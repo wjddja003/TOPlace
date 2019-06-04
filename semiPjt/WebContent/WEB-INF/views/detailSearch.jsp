@@ -119,6 +119,9 @@
     		border: 0px;
     		float:right;
 		}
+		.selectFilter{
+			background-color: blue;
+		}
 	</style>
 </head>
 <body>
@@ -193,9 +196,9 @@
 			</div>
 			
 			<div class="detailSearchList">이용일
-				<div class="selectBox" style="width:800px")>모든날짜<span>▽</span></div>
+				<div class="selectBox" >모든날짜<span>▽</span></div>
 				<div class="selectBoxInner">
-					<jsp:include page="/WEB-INF/views/calendar.jsp"/>
+					<jsp:include page="/WEB-INF/views/calendar2.jsp"/>
 				</div>
 			</div>
 			<div class="detailSearchList">
@@ -205,7 +208,7 @@
 			</div>
 			<div class="filterOutLine">
 				<div class="filterOutBox">
-					<span>편의시설을 선택하세요.</span>
+					<span>편의시설</span><span style="font-weight:100;">을 선택하세요.</span>&nbsp;&nbsp;&nbsp;전체선택&nbsp;<input type="checkbox" id="filterCheck" style="width:20px;height:20px;" checked="checked">
 					<button id="filterBack")>X</button>
 				</div>
 				<div class="filterOutBox">
@@ -297,16 +300,30 @@
 	     	filterCount = 0;
 	});
 	$("input:radio[name='testradio']:radio[value='2']").prop('checked', true);
-	var filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var filterArray = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 	var filterCount = 0;
 	$('.filterBox').click(function(){
-		if(filterCount>5){
-			alert("")
+		if($('#filterCheck').is(':checked')==true){
+			$('#filterCheck').prop("checked", false);
+			filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 		}
 		var filterIndex = $('.filterBox').index(this);
-		filterArray[filterIndex] = 1;
-		filtercount++
+		$(this).toggleClass("selectFilter");
+		if($(this).hasClass("selectFilter")){
+			filterArray[filterIndex] = 1;
+		}else{
+			filterArray[filterIndex] = 0;
+		}
+		console.log(filterArray);
 	});
+	$('#filterCheck').click(function(){
+		if($('#filterCheck').is(':checked')==true){
+			filterArray = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+		} else{
+			filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+		}
+	});
+	
 	</script>
 </body>
 </html>
