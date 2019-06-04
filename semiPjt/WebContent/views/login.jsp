@@ -23,9 +23,15 @@
 		}
 		.insert{
 			line-height: 50px;
-			width:100%;
+			width:500px;
 			margin: 0 0 10px;
 			height: 50px;
+		}
+		.btnlogin{
+			height: 50px;
+		}
+		.loginlink{
+			text-align: right;
 		}
 	</style>
 </head>
@@ -42,20 +48,28 @@
 						</tr>
 						<tr>
 							<td colspan="3">
-								<input class="insert" type="text" name="userId" id="userId" placeholder="아이디" ><span id="idMsg"></span>
+								<input class="insert" type="text" name="userId" id="userId" placeholder="아이디" >
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3">
-								<input class="insert" type="password" name="userPw" id="userPw" placeholder="비밀번호"><span id="pwMsg"></span>
+								<span id="idMsg"></span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<input class="insert" type="password" name="userPw" id="userPw" placeholder="비밀번호">
 								<p class="errorMsg" style="display:none">아이디 또는 비밀번호를 다시 확인하세요.<br>등록되지 않은 아이디이거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.</p>
 							</td>
+						</tr>
+						<tr>
+							<td><span id="pwMsg"></span></td>
 						</tr>
 						<tr>
 							<td colspan="3"><button type="button" style="width:100%;" class="btnlogin">로그인</button></td>
 						</tr>
 						<tr>
-							<td><a href="/views/userTerms.jsp"><span class="loginTxt">회원가입</span></a></td><td><a href="/views/idSearch.jsp"><span class="loginTxt" style="padding:0;">아이디</span></a><span>·</span><a href="/views/pwSearch.jsp"><span class="loginTxt">비밀번호찾기</span></a></td><td><span>로그인 상태 유지</span></td>
+							<td><a href="/views/userTerms.jsp"><span class="loginTxt">회원가입</span></a></td><td colspan="2" class="loginlink"><a href="/views/idSearch.jsp"><span class="loginTxt" style="padding:0;">아이디</span></a><span>·</span><a href="/views/pwSearch.jsp"><span class="loginTxt">비밀번호찾기</span></a><span>로그인 상태 유지</span></td>
 						</tr>
 					
 					</table>
@@ -87,12 +101,17 @@
 </body>
 <script type="text/javascript">
 	$(".btnlogin").click(function(){
+		$(".errorMsg").hide();
+		$("#pwMsg").text("");
+		$("#idMsg").text("");
 		if($("#userId").val() == ""){
 			$("#idMsg").text("아이디를 입력해주세요.");
+			$("#userId").focus();
 		}else{
 			$("#idMsg").text("");
 			if($("#userPw").val() == ""){
 				$("#pwMsg").text("비밀번호를 입력해주세요");
+				$("#userPw").focus();
 			}else{
 				$("#pwMsg").text("");
 				var id = $("#userId").val();

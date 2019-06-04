@@ -1,7 +1,7 @@
 <%@page import="user.model.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -160,7 +160,14 @@
                 			<a href="/views/login.jsp">로그인이 필요합니다.</a>		
                 		</c:when>
                 		<c:otherwise>
-                			<a href="#">${sessionScope.User.userName}</a>
+                			<c:choose>
+                				<c:when test="${empty sessionScope.host}">
+                					<a href="/views/hostprofile.jsp">${sessionScope.User.userName}</a>
+                				</c:when>
+                				<c:otherwise>
+                					<a href="/views/hostprofileUpdate.jsp">${sessionScope.User.userName}</a>
+                				</c:otherwise>
+                			</c:choose>
                 		</c:otherwise>
                 	</c:choose>	
                 </li>
@@ -217,7 +224,16 @@
         </div>
         </div>
         <div id="aside-host">
-            <div id="aside-host1"><a href="#">호스트등록으로 이동</a></div>
+            <div id="aside-host1">
+            	<c:choose>
+       				<c:when test="${empty sessionScope.host}">
+       					<a href="/views/hostprofile.jsp">호스트 등록으로 이동</a>
+       				</c:when>
+       				<c:otherwise>
+       					<a href="/views/hostprofileUpdate.jsp">호스트 정보 수정으로 이동</a>
+       				</c:otherwise>
+       			</c:choose>
+            </div>
         </div>
     </div>
 <script>

@@ -1,5 +1,6 @@
 package host.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -7,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -39,15 +41,20 @@ public class HostProfileServlet extends HttpServlet {
 		System.out.println(saveDirectory);
 		int maxSize = 110*1024*1024; //(10MB)x11
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory,maxSize,"UTF-8",new DefaultFileRenamePolicy());
+		System.out.println(Integer.parseInt(mRequest.getParameter("userNo")));
 		int userNo = Integer.parseInt(mRequest.getParameter("userNo"));
 		Host h = new Host();
 		h.setUserNo(userNo);
 		h.setHostFile(mRequest.getFilesystemName("hostFile"));
 		h.setHostName(mRequest.getParameter("hostName"));
-		h.setHostContent(mRequest.getParameter("hostComtent"));
+		h.setHostContent(mRequest.getParameter("hostContent"));
+		System.out.println(mRequest.getParameter("hostContent"));
 		int result = new HostService().hostJoin(h);
+		String filename = mRequest.getParameter("hostFile");
 		if(result > 0) {
 			System.out.println("등록 성공");
+			HttpSession session = request.getSession();
+			session.setAttribute("host", h);
 			int updateResult = new UserService().gradeUpdate(userNo); 
 			if(updateResult > 0) {
 				System.out.println("등급 업데이트 성공");
@@ -56,6 +63,9 @@ public class HostProfileServlet extends HttpServlet {
 			}
 		}else {
 			System.out.println("등록 실패");
+			File deleteFile = new File(saveDirectory+"/"+filename);
+			boolean bool = deleteFile.delete();
+			System.out.println(bool?"삭제완료":"삭제실패");
 		}
 		
 	}
