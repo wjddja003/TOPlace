@@ -7,6 +7,8 @@
     	String[] img2 = s.getS_img2().split(",");
     	String[] kg = (s.getS_kategorie2()).split(",");
     	String[] kg2 = {"TV/프로젝터","인터넷/WIFI","복사/인쇄기","화이트보드","음향/마이크","취사시설","음식물반입가능","주류반입가능","샤워시설","주차","금연","반려동물 동반 가능","PC/노트북","의자/테이블","내부화장실","탈의실","테라스/루프탑","공용라운지","전신거울","바베큐시설","도어락"};
+    	String[] place1 = (s.getS_kategorie1()).split(",");
+    	String[] kg1 = {"회의실","세미나실","다목적홀","작업실","레저시설","파티룸","공연장","연습실","카페","스터디룸","엠티장소","루프탑"};
     %>
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=33qm1u5uje&submodules=geocoder"> //네이버 지도 스크립트
 	</script>
@@ -14,21 +16,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script
-      src="https://code.jquery.com/jquery-3.4.0.js"
-      integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
-      crossorigin="anonymous">
-</script>
-<script type="text/javascript" src="/css/slick.min.js"></script>
+<!--  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
+<!--   <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+<!--   <script type="text/javascript" src="/js/slick.min.js"></script>  -->
 <link rel="stylesheet" type="text/css" href="/css/viewpage.css">
 <link rel="stylesheet" type="text/css" href="/css/slick.css"/>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <title>뷰페이지</title>
 
 </head>
 <body>
-    <jsp:include page="/WEB-INF/common/header.jsp"/>  
+      <jsp:include page="/WEB-INF/common/header.jsp"/>
     <section>
         <div id="viewpage_alert"><p></p></div>
         <div class="viewpage_content">
@@ -136,11 +135,27 @@
 <!--                          <div class="viewpage_photo"> -->
 <!--                             <a href="#"><img src="../img/viewpage_eximg4.jpg" width="773px;"></a> -->
 <!--                         </div> -->
-                        <div class=".single-item-rtl" width="773px;">
-						  <div><img src="../img/viewpage_eximg4.jpg"></div>
-						  <div><img src="../img/viewpage_eximg3.jpg"></div>
-						  <div><img src="../img/viewpage_eximg2.jpg"></div>
-						</div>
+                          <div id="slider-wrap">
+				          <ul id="slider">
+				          <c:forTokens items="${s.s_img2 }" delims="," var="sliderimg"> 
+				             <li data-color="#1abc9c">				                          
+									<img src="/upload/space/${sliderimg }">
+				             </li>	   
+				           </c:forTokens>          		             
+				          </ul>
+				          
+           <!--controls-->
+          <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
+          <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
+          <div id="counter"></div>
+          
+          <div id="pagination-wrap">
+            <ul>
+            </ul>
+          </div>
+          <!--controls-->  
+                 
+      </div>
                         <div class="viewpage_host_info">
                             <div class="viewpage_host_addr">
                                 <div class="viewpage_host_first">
@@ -292,7 +307,15 @@
                                             <img src="../img/ex1.jpg" width="110px" height="110px" id="viewpage_right_img">
                                             <p style="float:right;">${s.s_placeIntroduce1}</p>
                                         </li>
-                                        <li style="clear: both;" class="viewpage_right_c"><span style="color:#656565; float:left;">· 공간유형</span> <p>회의실 세미나실 파티룸</p></li>
+                                        <li style="clear: both;" class="viewpage_right_c"><span style="color:#656565; float:left;">· 공간유형</span>
+                                                                               
+                                         <%for(int i = 0; i<place1.length; i++) {%>
+                                    	<%if(place1[i].equals("1")){ %>                                    
+                                    				<p><%=kg1[i] %></p>
+                                    			
+	                                    	<%} %>
+	                                    <%} %>
+                                 		 </li>
                                         <li class="viewpage_right_c"><span style="color:#656565; float:left;">· 예약시간</span><p>${s.s_start } ~ ${s.s_end }</p></li>
                                         <li class="viewpage_right_c"><span style="color:#656565; float:left;" >· 예약인원</span> <p>${s.s_people}</p></li>
                                     </ul>
@@ -307,7 +330,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button><a href="/selectOneReservation?S_no=2">결제하기</a></button>			
+<!--                             <button><a href="/selectOneReservation?S_no=2">결제하기</a></button>			 -->
                         </div>
                 </div>
                 </div>
@@ -316,34 +339,35 @@
     </section>
         <%-- 메뉴바 스크롤 따라오기 스크립트 --%>
         <script>
+        var $ = jQuery.noConflict();
        $(document).ready(function() {
             var floatPosition = parseInt($(".viewpage_right").css('top'));
             $(window).scroll(function() {
                 var scrollTop = $(window).scrollTop();
                 console.log(scrollTop);
-                if(scrollTop>300){
+                if(scrollTop>150){
                 	$(".viewpage_right").css("display","block");
                 }else{
                 	$(".viewpage_right").css("display","none");
                 }
-                if(scrollTop>300){
+                if(scrollTop>150){
                 	 var newPosition = scrollTop + floatPosition + "px";
-                     $(".viewpage_right").stop().animate({
+                	 $(".viewpage_right").stop().animate({
                          "top" : newPosition
                      }, 1000);
                 }
             }).scroll();
            
             $("#like").click(function(){   
-                    $("#viewpage_alert").slideDown(700);
-                    $("#viewpage_alert").delay(1300);
-                    $("#viewpage_alert").css("display","inline");
-                    $("#viewpage_alert").delay(1300);
-                    $("#viewpage_alert").slideUp(700); 
-                    $("#like_full").css("display","inline");
-                    $("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");
+            	$("#viewpage_alert").slideDown(700);
+            	$("#viewpage_alert").delay(1300);
+            	$("#viewpage_alert").css("display","inline");
+            	$("#viewpage_alert").delay(1300);
+            	$("#viewpage_alert").slideUp(700); 
+            	$("#like_full").css("display","inline");
+            	$("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");
             });
-           $("#like_full").click(function(){
+            $("#like_full").click(function(){
                     $("#viewpage_alert").slideDown(700);
                     $("#viewpage_alert").delay(1300);
                     $("#viewpage_alert").css("display","inline");
@@ -355,12 +379,110 @@
             });
            $(".viewpage_content").css("background","url(/upload/space/${s.s_img1})no-repeat center center");
            $(".viewpage_content").css("background-size","cover");
-           
+          
+         //current position
+           var pos = 0;
+           //number of slides
+           var totalSlides = $('#slider-wrap ul li').length;
+           //get the slide width
+           var sliderWidth = $('#slider-wrap').width();
+               
+               /*****************
+                BUILD THE SLIDER
+               *****************/
+               //set width to be 'x' times the number of slides
+               $('#slider-wrap ul#slider').width(sliderWidth*totalSlides);
+               
+               //next slide    
+               $('#next').click(function(){
+                   slideRight();
+               });
+               
+               //previous slide
+               $('#previous').click(function(){
+                   slideLeft();
+               });
+               
+               
+               
+               /*************************
+                //*> OPTIONAL SETTINGS
+               ************************/
+               //automatic slider
+               var autoSlider = setInterval(slideRight, 3000);
+               
+               //for each slide 
+               $.each($('#slider-wrap ul li'), function() { 
+
+                  //create a pagination
+                  var li = document.createElement('li');
+                  $('#pagination-wrap ul').append(li);    
+               });
+               
+               //counter
+               countSlides();
+               
+               //pagination
+               pagination();
+               
+               //hide/show controls/btns when hover
+               //pause automatic slide when hover
+               $('#slider-wrap').hover(
+                 function(){ $(this).addClass('active'); clearInterval(autoSlider); }, 
+                 function(){ $(this).removeClass('active'); autoSlider = setInterval(slideRight, 3000); }
+               );
+               
+               
+
+  
+               
+
+
+           /***********
+            SLIDE LEFT
+           ************/
+           function slideLeft(){
+               pos--;
+               if(pos==-1){ pos = totalSlides-1; }
+               $('#slider-wrap ul#slider').css('left', -(sliderWidth*pos));    
+               
+               //*> optional
+               countSlides();
+               pagination();
+           }
+
+
+           /************
+            SLIDE RIGHT
+           *************/
+           function slideRight(){
+               pos++;
+               if(pos==totalSlides){ pos = 0; }
+               $('#slider-wrap ul#slider').css('left', -(sliderWidth*pos)); 
+               
+               //*> optional 
+               countSlides();
+               pagination();
+           }
+
+
+
+               
+           /************************
+            //*> OPTIONAL SETTINGS
+           ************************/
+           function countSlides(){
+               $('#counter').html(pos+1 + ' / ' + totalSlides);
+           }
+
+           function pagination(){
+               $('#pagination-wrap ul li').removeClass('active');
+               $('#pagination-wrap ul li:eq('+pos+')').addClass('active');
+           }
+                    	
         });   
 
-       $('.single-item-rtl').slick({
-         rtl: true
-       });
+       
 
         </script>
         <script>
@@ -399,8 +521,7 @@
 			});     
 	    });		
 		};
-</script>	
-	
+</script>		
     <jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
 </html>
