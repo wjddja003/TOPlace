@@ -5,12 +5,9 @@
     	String[] kg1 = s.getS_kategorie1().split(",");
     	String[] pt = s.getS_placeTag().split("#");
     	String[] kg2 = s.getS_kategorie2().split(",");
-    	String[] img2img = s.getS_img2().split(",");
-    	String[] img2 = new String[img2img.length];
-    	for(int i = 0 ; i<img2.length;i++){
-    		img2[i] = "/upload/space/"+img2img[i];
-    		System.out.println(img2[i]);
-    	}
+    	
+    	String[] img2 = s.getS_img2().split(",");
+    	
     	String email = s.getS_email().split("@")[0];
     	String com = s.getS_email().split("@")[1];
     	String[] comlist = {"naver.com","chol.com","dreamwiz.com","empal.com","gmail.com","hanafos.com","hanmail.net","hanmir.com","hitel.net","hotmail.com","korea.com","lycos.co.kr","nate.com","직접입력"};
@@ -91,7 +88,19 @@
 		clip:rect(0,0,0,0); 
 		border: 0; 
 		}
-	
+	.delbt{
+		border:1px solid #605f5d;
+		color : #605f5d;
+		width:100px;
+		background:white;
+		display:none;
+		height: 37px;
+		border-radius : 5px;
+	}
+	.delbt:hover{
+		color : white;
+		background:#605f5d;
+	}
 	</style>
 </head>
 
@@ -215,13 +224,19 @@
 				<img id="S_img2img<%=i %>" width="100px" height="100px" >
 				<img id="S_img2x<%=i %>" width="100px" height="100px" style="display:none;">
 				<br>
-				<div class="S_filebox" style="display:inline; border:0;"> 
+				<div class="S_filebox" style="display:inline; border:0;" id="S_upload<%=i %>"> 
 				<label for="S_img2<%=i %>" class="btn btn-outline-warning" style="width:100px;"><%=i %>.업로드</label> 
 				<input type="file" id="S_img2<%=i %>" name="S_img2<%=i %>" onchange="loadImg2(this,<%=i %>)" accept="image/*">
 				</div>
+				<button type="button" id="S_imgdelbt<%=i %>" class="delbt" onclick="deleteimg(<%=i%>)"><%=i %>.수정</button>
 				</div>
 			<%} %>
-			
+			<input type="hidden" id="S_img" name="S_img">
+			<input type="hidden" id="S_imgupdate" name="S_imgupdate">
+			<input type="hidden" id="S_imgdelete" name="S_imgdelete">
+			<%-- 
+			<input type="hidden" id="updateIndex" name="updateIndex">
+			--%>
 			<br><br>
 			<br><br>
 			<br><br>
@@ -515,6 +530,10 @@
 						$("#S_img1img").css("display","inline");
 						$("#S_img1text").css("display","none");
 						check1[5] = true;
+						if(imgupdate[0]==false){
+							imgupdate[0] = true;
+							imgdelete[0] = img[0];
+						}
 					}
 				} else{ //파일을 뺄 경우
 					$("#S_img1img").attr("src","");
@@ -525,16 +544,18 @@
 			}
 			//S_img2
 			var imgcheck = 0;
+			//var updatestr = "0";
 			function loadImg2(f,i){
 				if(f.files.length!=0 && f.files[0]!=0){ //f.file -> 선택한 파일을 가져옴 (배열형태로) , f.files[0] -> 0번재 파일의 크기
 					$("#S_img2x"+i).css("display","none");
 					$("#S_img2img"+i).css("display","inline");
 					var reader = new FileReader();	//JS의 FileReader 객체 -> 객체 내부의 result 속성에 파일 컨텐츠가 있음
 					reader.readAsDataURL(f.files[0]);	//선택한 파일의 경로를 읽어옴
-					console.log(f.files[0]);
 					reader.onload = function(e){
 						$("#S_img2img"+i).attr("src",e.target.result);
 						imgcheck +=1;
+						<%--updatestr += ","+i;
+						$('#updateIndex').val(updatestr);--%>
 					}
 				} else{ //파일을 뺄 경우
 					$("#S_img2img"+i).attr("src","");
@@ -542,6 +563,16 @@
 					$("#S_img2img"+i).css("display","none");
 					imgcheck -=1;
 				}
+			}
+			function deleteimg(i){
+				$("#S_imgdelbt"+i).css("display","none");
+				$("#S_upload"+i).css("display","inline");
+				$("#S_img2img"+i).attr("src","");
+				$("#S_img2img"+i).css("display","none");
+				$("#S_img2x"+i).css("display","inline");
+				imgcheck -=1;
+				imgupdate[i] = true;
+				imgdelete[i] = img[i];
 			}
 			//addrNum, address
 			$(".addressinsert").click(function(){
@@ -578,13 +609,13 @@
 			$("#btphone1").click(function(){
 				$("#beforephone1").css("display","inline");
 				$("#S_phone1").attr("type","hidden");
-				$(this).css("display","none");
+				$(this).css("visibility","hidden");
 				pcheck1 = true;
 			});
 			$("#btphone2").click(function(){
 				$("#beforephone2").css("display","inline");
 				$("#S_phone2").attr("type","hidden");
-				$(this).css("display","none");
+				$(this).css("visibility","hidden");
 				pcheck2 = true;
 			});
 			//S_type
@@ -712,22 +743,33 @@
 					$("#S_ul2 li").eq(<%=i%>).css("background","#f69b02"); //그런 위치의 박스에 색칠
 				<% }%>
 			<% }%>
-			
+
+	    	
+	    	var imglength = <%=img2.length%>+1;
+	    	img = new Array(imglength);
+	    	imgupdate = new Array(imglength);
+	    	imgdelete = new Array(imglength);
+	    	<% for(int i =0; i<img2.length+1; i++){%>
+	    		<% if(i==0){ %>
+	    				img[0] = "<%=s.getS_img1()%>";
+	    				imgupdate[<%=i%>] = false;
+	    				imgdelete[<%=i%>] = "0";
+	    		<%continue;} %>
+	    		img[<%=i%>] = "<%=img2[i-1]%>";
+    			imgupdate[<%=i%>] = false;
+    			imgdelete[<%=i%>] = "0";
+    		<% }%>
 			$("#S_img1img").css("display","inline");
 			$("#S_img1text").css("display","none");
 			$("#S_img1img").attr("src","/upload/space/"+"<%=s.getS_img1()%>");
-			
 			check1[5] = true;
 			<%for (int i = 0 ; i<img2.length;i++){ %>
 				<%--alert("<%=img2[i]%>");--%>
-				$("#S_img2img"+<%=i+1%>).attr("src","<%=img2[i]%>");
+				$("#S_img2img"+<%=i+1%>).attr("src","/upload/space/"+"<%=img2[i]%>");
+				$("#S_upload"+<%=i+1%>).css("display","none");
+				$("#S_imgdelbt"+<%=i+1%>).css("display","inline");
 			<%}%>
 			imgcheck = <%=img2.length%>;
-			//사진은 우선 img태그에 src를 통해 집어 넣고 타입이 file인 input들에는 파일 명을 value값으로 지정해 놓는다.
-			// 혹시 로드된 것이 있으면 true 없으면 false img2도 마찬가지로!!
-			//멀티플 객체로 만들어야 하긴 함 왜냐하면 form이 enctype 이므로!!
-			//true 라면 서블릿에서는 filename을 getfilesystem으로 false라면 겟파라미터로 받아옴.(수정이안된것이므로)
-			//만약 업데이트 완료하면 모든 파일네임을 검사하고 실제파일과 비교하여 삭제!
 			
 			$("#addrNum").val(<%=s.getAddrNum()%>);
 			$("#address").val("<%=s.getAddress()%>");
@@ -800,6 +842,9 @@
 					$("#S_kategorie1").val(S_kategorie1.join(','));
 					$("#S_kategorie2").val(S_kategorie2.join(','));
 					$("#S_hiddentag").val($("#S_opspan4").text());
+					$("#S_img").val(img.join(','));
+					$("#S_imgupdate").val(imgupdate.join(','));
+					$("#S_imgdelete").val(imgdelete.join(','));
 					for(var i = 0 ; i<check1.length;i++){ 
 						switch(i){
 						case 0: 

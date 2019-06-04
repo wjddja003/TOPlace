@@ -1,9 +1,11 @@
 package space.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,6 +62,13 @@ public class UpdateSpaceServlet extends HttpServlet {
 		String S_placeWeb = mRequest.getParameter("S_placeWeb"); //웹사이트
 		System.out.println("웹사이트 : " + S_placeWeb);
 		
+		String[] img = mRequest.getParameter("S_img").split(",");
+		String[] imgupdate = mRequest.getParameter("S_imgupdate").split(",");
+		String[] imgdelete = mRequest.getParameter("S_imgdelete").split(",");
+		System.out.println(img.length);
+		System.out.println(imgupdate.length);
+		System.out.println(imgdelete.length);
+		
 		String formname="";
 		ArrayList<String> S_img = new ArrayList<String>();
 		Enumeration forms = mRequest.getFileNames();
@@ -67,18 +76,65 @@ public class UpdateSpaceServlet extends HttpServlet {
 			formname=(String)forms.nextElement();
 			S_img.add(mRequest.getFilesystemName(formname));
 		}
-		String S_img1 = S_img.get(10); //대표이미지(이미지1)
+		 //대표이미지(이미지1)
+		String S_img1;
+		if(imgupdate[0].equals("true")) {
+			S_img1 = S_img.get(10);
+		}else {
+			S_img1 = img[0];
+		}
 		System.out.println("대표이미지 : " + S_img1);
 		
 		String S_img2 = "";
-		for(int i = 9; i>= 0;i--) {
-			if(S_img.get(i)!=null) {
-				S_img2 += S_img.get(i)+",";
+		boolean img2check = false;
+		for(int i=1;i<imgupdate.length;i++) {
+			if(imgupdate[i].equals("true")) {
+				img2check=true;
+				break;
+			}
+		}
+		if(img2check) {
+			for(int i = 1; i<img.length;i++) {
+				if(img[i].equals(imgdelete[i])) {
+					continue;
+				}
+				S_img2 += img[i]+",";
+			}
+			for(int i = 9; i>= 0;i--) {
+				if(S_img.get(i)!=null) {
+					S_img2 += S_img.get(i)+",";
+				}
+			}
+		}else {
+			for(int i = 1; i<img.length;i++) {
+				S_img2 += img[i]+",";
+			}
+			for(int i = 9; i>= 0;i--) {
+				if(S_img.get(i)!=null) {
+					S_img2 += S_img.get(i)+",";
+				}
 			}
 		}
 		if(!S_img2.equals("")) {
 			S_img2 = S_img2.substring(0, S_img2.length()-1); //이미지(이미지2)
 		}
+		for(int i =0; i<imgdelete.length;i++) {
+			if(imgdelete[i].equals("0")) {
+				continue;
+			}
+			File file = new File(saveDirectory+"\\"+imgdelete[i]);
+	         
+	        if( file.exists() ){
+	            if(file.delete()){
+	                System.out.println("파일삭제 성공");
+	            }else{
+	                System.out.println("파일삭제 실패");
+	            }
+	        }else{
+	            System.out.println("파일이 존재하지 않습니다.");
+	        }
+	             
+		}  
 		System.out.println("이미지 : " + S_img2);
 		
 		int addrNum = Integer.parseInt(mRequest.getParameter("addrNum")); //지번
@@ -111,13 +167,14 @@ public class UpdateSpaceServlet extends HttpServlet {
 		int S_price2 = Integer.parseInt(mRequest.getParameter("S_price2")); //1인당 추가 가격
 		System.out.println("1인당 추가 가격 : " + S_price2);
 		
-		//Space s = new Space(0, S_hostNum, S_placeName, S_kategorie1, S_placeIntroduce1, S_placeIntroduce2, S_placeTag, S_kategorie2, S_placeWeb, S_img1, S_img2, addrNum, address, S_email, S_phone1, S_phone2, S_type, S_start, S_end, S_holiday, S_people, S_warning, S_price1, S_price2, 0, 0);
-		//int result = new SpaceService().insertSpace(s);
-		//if(result>0) {
-		//	System.out.println("성공");
-		//}else {
-		//	System.out.println("실패");
-		//}
+		Space s = new Space(S_no, S_hostNum, S_placeName, S_kategorie1, S_placeIntroduce1, S_placeIntroduce2, S_placeTag, S_kategorie2, S_placeWeb, S_img1, S_img2, addrNum, address, S_email, S_phone1, S_phone2, S_type, S_start, S_end, S_holiday, S_people, S_warning, S_price1, S_price2, 0, 0);
+		int result = new SpaceService().updateSpace(s);
+		if(result>0) {
+			System.out.println("업데이트 성공");
+		}else {
+			System.out.println("업데이트 실패");
+		}
+		response.sendRedirect("/");
 	}
 
 	/**
