@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script
-      src="https://code.jquery.com/jquery-3.4.0.js"
-      integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
-      crossorigin="anonymous">
-</script>
-<title>TOPlace</title>
+<title>Insert title here</title>
 </head>
 <style>
 	.hostprofile_tit{
@@ -98,80 +94,22 @@
 		outline: none;
 		background:#f69b02;
 		border-radius: 10px;
-		width : 150px;
+		width : 300px;
 		height: 50px;
 		border: 0px;
 		color : white;
-	}
-	#cencelBtn{
-		outline : none;
-		background:#183058;
-		width : 150px;
-		height: 50px;
-		border: 0px;
-		color : white;
-		border-radius: 10px;
-	}
-	.layer_popup {
-		border-radius:10px;
-		text-align: center;
-		background:#f7f7f7;
-	    position: absolute;
-	    top: 30%;
-	    left: 45%;
-	    display: block;
-	    width: 500px;
-	    z-index: 150;
-	    padding : 40px 0 0 0;
-	    margin-left: -145px;
-	    
-	}
-	.pop_guide_txt{
-		font-size: 18px;
-	}
-	.accent{
-		color:#f69b02;
-	}
-	.btns{
-		margin : 30px 0 30px 0;
-	}
-	.btns a:hover{
-		text-decoration: none;
-		color: #f7f7f7;
-	}
-	.popcencle{
-		background: #605f5d;
-    	font-size: 20px;
-    	padding : 10px 40px 10px;
-    	color : #f7f7f7;
-	}
-	.poprollback{
-		background:#183058;
-		font-size: 20px;
-		padding : 10px 20px 10px 20px;
-		color : #f7f7f7;
-	}
-	.hostpopupMask{
-		top:0;
-		left:0;
-		z-index:99;
-		position: fixed;
-		width: 100%;
-		height: 1000px;
-		background-color: black;
-		opacity: 0.6;
-		display:none;
 	}
 </style>
 <body>
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
 	<section>	
-		<form class="profileForm" action="/hostProfile" method="post" enctype="multipart/form-data">
+		<form class="profileForm" action="/hostProfileUpdate" method="post" enctype="multipart/form-data">
 			<div class="section_content">
 				<div class="hostprofile_tit">
 					<div class="tit_content">
 						<span class="hostprofile_option">*필수입력</span>	
 						<h3>호스트 정보를 입력해 주세요</h3>
+						<input type="hidden" id="hostNo" name="hostNo" value="${sessionScope.host.hostNo}">
 						<input type="hidden" id="userNo" name="userNo" value="${sessionScope.User.userNo}">
 					</div>
 				</div>
@@ -180,7 +118,14 @@
 						<h5>프로필 이미지</h5>
 					</div>
 					<div class="content_text" id="profileImg">
-						<div class="file_img"></div>
+						<c:choose>
+							<c:when test="${empty sessionScope.host.hostFile}">
+								<div class="file_img"></div>
+							</c:when>
+							<c:otherwise>
+								<div class="file_img" style="background: url(/upload/hostProfile/${sessionScope.host.hostFile}); background-size:cover;" ></div>
+							</c:otherwise>
+						</c:choose>
 						<div class="placeholder">
 							<span style="color:black">파일유형 jpg, jpeg, png, gif<br>
 									최대파일크기 10MB</span>
@@ -188,12 +133,10 @@
 						<div class="file_box">
 							<label for="hostFile" style="width: 100%; background: #183058; text-align: center;">
 							<span style="color:white;">파일첨부</span>
-							<input type="hidden" name="oldFilename" value="">  <!--예전파일명 -->
-	                    	<input type="hidden" name="oldFilename" value="">  <!--예전파일경로 -->
-							<input type="file" name="hostFile" id="hostFile" style="display: none;" accept="image/*" onchange="loadImg(this)">
+							<input type="hidden" name="oldFilename" value="${sessionScope.host.hostFile}">  <!--예전파일명 -->
+							<input type="file" name="hostFile" id="hostFile" style="display: none;" accept="image/*" onchange="loadImg(this)" value="${sessionScope.host.hostFile}">
 							</label>
 						</div>
-						
 					</div>
 				</div>
 				<div class="hstprofile_content_name">
@@ -202,7 +145,7 @@
 						<h5>프로필 명<span>*</span></h5>
 					</div>
 					<div class="content_text">
-						<input type="text" name="hostName" id="hostName" maxlength="10" placeholder="프로필명을 입력해주세요" style="width: 300px; height: 50px; font-size: 18px;">
+						<input type="text" name="hostName" id="hostName" maxlength="10" placeholder="프로필명을 입력해주세요" style="width: 300px; height: 50px; font-size: 18px;" value="${sessionScope.host.hostName}">
 						<p style="display: none;" id="nameErrorMsg">프로필명은 필수 입력입니다.</p>
 					</div>
 				</div>
@@ -212,43 +155,27 @@
 						<h5>소개말<span>*</span></h5>
 					</div>
 					<div class="content_text">
-						<textarea id="hostContent" name="hostContent" maxlength="30" placeholder="프로필에 노출될 소개말을 입력해주세요." style="height:108px; resize: none;" required ></textarea>
+						<textarea id="hostContent" name="hostContent" maxlength="30" placeholder="프로필에 노출될 소개말을 입력해주세요." " style="height:108px; resize: none;" required>${sessionScope.host.hostContent}</textarea>
 						<p style="display: none;" id="contentErrorMsg">소개말(0~30자)은 필수 입력입니다.</p>
 					</div>
 				</div>
 				<center>
 					<div class="hstprofile_footer">
-						<div class="footerContent">
-							<button type="button" id="cencelBtn">돌아가기</button>
-						</div>
 						<div class="footerContent"> 
-							<button type="button" id="successBtn">등록</button>
+							<button type="button" id="successBtn">완료</button>
 						</div>
 					</div>
 				</center>
 			</div>
 		</form>
-		<div class="layer_popup" id="_noProfileCheckLayout" style="display:none;position:fixed;">
-			<div class="popup_wrap alert">
-				<div class="pop_container">
-					<p class="pop_guide_txt">
-						프로필 등록 후 공간을 등록할 수 있습니다.<br>
-						<span class="accent">등록을 취소하시겠습니까?</span>
-					</p>
-					<div class="btns">
-						<a href="javascript:void(0);" class="popcencle" _popcls="_noProfileCheckLayout">닫기</a>
-						<a href="javascript:history.back();" class="poprollback">등록 취소</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="hostpopupMask">
-		
-		</div>
 	</section>
 	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
 <script type="text/javascript">
+	$(document).ready(function(){
+		$("#nameLength").text($("#hostContent").val().length);
+		$("#contentLength").text($("#hostContent").val().length);
+	});
 	var hostNameFlag = false;
 	var hostContentFlag = false;
 	$("#successBtn").click(function(){
@@ -272,7 +199,6 @@
 	$("#hostName").keyup(function(){
 		console.log($('#userNo').val());
 		var count = $("#hostName").val().length;
-		console.log(count);
 		$("#nameLength").text(count);
 		if(count > 10){
 			$("#nameLength").text(10);
@@ -280,7 +206,6 @@
 	});
 	$("#hostContent").keyup(function(){
 		var count = $("#hostContent").val().length;
-		console.log(count);
 		$("#contentLength").text(count);
 		if(count > 30){
 			$("#contentLength").text(30);
