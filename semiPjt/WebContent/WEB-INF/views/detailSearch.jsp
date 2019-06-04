@@ -46,8 +46,8 @@
 			padding:20px;
 			display:none;
 			width: 500px;
-			height : 100%;
 			border: 1px solid black;
+			overflow: hidden;
 		}
 		.selectBox:hover{
 			cursor: pointer;
@@ -76,10 +76,11 @@
 		    right: 300px;
 		}
 		.filterOutLine{
-			padding-top:20px;
+			padding:20px;
 			display: none;
 			clear: both;
 			border: 1px solid black;
+			
 		}
 		.detailSearchBtn{
 			background-color: white;
@@ -88,6 +89,7 @@
 		}
 		.detailBox{
 			margin-top:30px;
+			
 		}
 
 		.filterBox{
@@ -97,7 +99,8 @@
 			border: 1px solid gainsboro;
 			color: darkgrey;
 			text-align: center;
-			width:13.5%;
+			width:13.7%;
+			height:90px;
 			cursor: pointer;
 		}
 		.filterBox:hover{
@@ -106,7 +109,7 @@
 		}
 		.filterOutBox{
 			clear:left;
-			margin-left:20%;
+			overflow: hidden;
 		}
 		#filterBack{
 			font-size: 20px;
@@ -206,31 +209,31 @@
 					<button id="filterBack")>X</button>
 				</div>
 				<div class="filterOutBox">
-					<div class="filterBox">TV/프로젝터</div>
-					<div class="filterBox">인터넷/Wifi</div>
-					<div class="filterBox">복사/인쇄기</div>
-					<div class="filterBox">화이트보드</div>
-					<div class="filterBox">음향/마이크</div>
-					<div class="filterBox">취사시설</div>
-					<div class="filterBox">음식물반입가능</div>
+					<div class="filterBox">TV/프로젝터<br><img src="/upload/space/kategorie2/1.png" ></div>
+					<div class="filterBox">인터넷/Wifi<br><img src="/upload/space/kategorie2/2.png" ></div>
+					<div class="filterBox">복사/인쇄기<br><img src="/upload/space/kategorie2/3.png" ></div>
+					<div class="filterBox">화이트보드<br><img src="/upload/space/kategorie2/4.png" ></div>
+					<div class="filterBox">음향/마이크<br><img src="/upload/space/kategorie2/5.png" ></div>
+					<div class="filterBox">취사시설<br><img src="/upload/space/kategorie2/6.png" ></div>
+					<div class="filterBox">음식물반입가능<br><img src="/upload/space/kategorie2/7.png" ></div>
 				</div>
 				<div class="filterOutBox">
-					<div class="filterBox">주류반입가능</div>
-					<div class="filterBox">샤워시설</div>
-					<div class="filterBox">주차</div>
-					<div class="filterBox">금연</div>
-					<div class="filterBox">반려동물 동반가능</div>
-					<div class="filterBox">PC/노트북</div>
-					<div class="filterBox">의자/테이블</div>
+					<div class="filterBox">주류반입가능<br><img src="/upload/space/kategorie2/8.png" ></div>
+					<div class="filterBox">샤워시설<br><img src="/upload/space/kategorie2/9.png" ></div>
+					<div class="filterBox">주차<br><img src="/upload/space/kategorie2/10.png" ></div>
+					<div class="filterBox">금연<br><img src="/upload/space/kategorie2/11.png" ></div>
+					<div class="filterBox">반려동물 동반가능<br><img src="/upload/space/kategorie2/12.png" ></div>
+					<div class="filterBox">PC/노트북<br><img src="/upload/space/kategorie2/13.png" ></div>
+					<div class="filterBox">의자/테이블<br><img src="/upload/space/kategorie2/14.png" ></div>
 				</div>
 				<div class="filterOutBox">
-					<div class="filterBox">내부화장실</div>
-					<div class="filterBox">탈의실</div>
-					<div class="filterBox">테라스/루프탑</div>
-					<div class="filterBox">공용라운지</div>
-					<div class="filterBox">전신거울</div>
-					<div class="filterBox">바베큐시설</div>
-					<div class="filterBox">도어락</div>
+					<div class="filterBox">내부화장실<br><img src="/upload/space/kategorie2/15.png" ></div>
+					<div class="filterBox">탈의실<br><img src="/upload/space/kategorie2/16.png" ></div>
+					<div class="filterBox">테라스/루프탑<br><img src="/upload/space/kategorie2/17.png" ></div>
+					<div class="filterBox">공용라운지<br><img src="/upload/space/kategorie2/18.png" ></div>
+					<div class="filterBox">전신거울<br><img src="/upload/space/kategorie2/19.png" ></div>
+					<div class="filterBox">바베큐시설<br><img src="/upload/space/kategorie2/20.png" ></div>
+					<div class="filterBox">도어락<br><img src="/upload/space/kategorie2/21.png" ></div>
 				</div>
 			</div>
 		</div>
