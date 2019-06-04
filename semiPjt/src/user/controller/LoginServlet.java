@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import host.model.service.HostService;
+import host.model.vo.Host;
 import user.model.service.UserService;
 import user.model.vo.User;
 
@@ -37,9 +39,14 @@ public class LoginServlet extends HttpServlet {
 		String pw = request.getParameter("pw");
 		User u = new UserService().login(id,pw);
 		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
 		if(u!=null) {
-			HttpSession session = request.getSession();
+			int userNo = u.getUserNo();
 			session.setAttribute("User", u);
+			Host h = new HostService().selectOne(userNo);
+			if(h!=null) {
+				session.setAttribute("host", h);
+			}
 			out.print(1);
 		}else {
 			out.print(0);
