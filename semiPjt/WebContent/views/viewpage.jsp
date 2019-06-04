@@ -186,7 +186,32 @@
                             <a href="#" style="text-decoration: none;"><span>질문작성하기</span></a>
                             </div>
                             <div class="viewpage_qnaview">
-                                <p>등록된 질문이 없습니다.</p>
+                                <div>
+                                    <ul class="review_list" id="qna_list">
+                                        <li class="rlist ">  
+                                            <div class="rbox_mine">  
+                                                 <span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
+                                         
+                                                <strong class="guest_name" style="font-size:22px;">예지</strong>
+                                                <p class="p_review">디제이 기기도 같이 올나잇에 사용가능한가요??</p>
+                                                <div class="rbox_info_base">  
+                                                    <span class="time_info">2019.04.19. 18:45:35</span> 
+                                                </div>
+                                            </div>
+                                            <div class="rbox_reply" style="margin-top:30px;">
+                                                <p class="p_tit_reply">
+                                                    <em>옥탑방라운지</em>님의 댓글
+                                                </p>
+                                                <p class="p_review">
+                                                    안녕하세요 현재 내부 사정으로 디제잉 장비 대여가 잠시 중단되었습니다.
+                                                </p>
+                                                <div class="rbox_info_base">
+                                                    <p class="time_info">2019.04.19. 18:49:25</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                          <div class="viewpage_hostpage">
@@ -204,48 +229,27 @@
 						</div>
                         </div>
                         <div class="viewpage_review_header">
-						<h4 class="h_intro">
+						<h4 class="h_intro"><!--?s_no=${s.s_no }  -->
 							이용 후기 <strong class="txt_primary">0개</strong>
 							<span class="dot"></span>
 							평균 평점 <strong class="txt_primary">0.0</strong>
 						</h4>
+                <a class="btn btn-outline-primary btn-sm" href="/reviewWrite?S_no=${s.s_no }" style="color:#f69b02; border-color:#f69b02; float:right;">리뷰등록</a>
 					</div>
                     <div class="viewpage_review">
                         <ul>
-                            <li class="rlist ">   
+                            <li class="rlist">   
                                 <div class="rbox_mine"> 
-                                    <span class="pf_img">프로필</span> 
+                                    <span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
                                     <strong class="guest_name">아이디</strong> 
                                     <p class="p_review">공간도 엄청 넓고, 포토존이 많아서 예쁜사진 많이남겼어요 ㅠㅠ 브라이덜샤워로 이용하기 정말 좋은 곳이었습니다~!! 그리고 오픈한지 얼마 안되서 그런지 장소도 소품도 아주 깨끗해요!!ㅎㅎ 삼각대, 충전기, 블루투스 스피커까지 없는게 없었습니다!! 그리고 호스트님이 정말 친절하셔용  번창하세요!!~!</p>
                                     <div class="space_list swiper_list photo_review"> 
                                         <div class="flex_wrap column3 fluid">      
                                             <article class="box_space">    
                                                 <div class="inner">     
-                                                    <a href="#" class="_review_img_link" target="_blank">
+                                                    <a href="#" class="_review_img_link">
                                                         <div class="img_box">
-                                                            <span><img src="../img/ex1.jpg" width="210px" height="210px"></span>
-                                                           
-                                                            </span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </article>
-                                            <article class="box_space">
-                                                <div class="inner">
-                                                    <a href="#" class="_review_img_link" target="_blank" >
-                                                        <div class="img_box">
-                                                            <span><img src="../img/ex2.jpg" width="210px" height="210px"></span>
-                                                            
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </article>
-                                            <article class="box_space">
-                                                <div class="inner">
-                                                    <a href="#">
-                                                        <div class="img_box">
-                                                            <span><img src="../img/ex3.jpg" width="210px" height="210px"></span>
-                                                          
+                                                            <span><img src="../img/ex1.jpg" width="100%" height="100%"></span>
                                                         </div>
                                                     </a>
                                                 </div>
@@ -330,7 +334,7 @@
                                     </div>
                                 </div>
                             </div>
-<!--                             <button><a href="/selectOneReservation?S_no=2">결제하기</a></button>			 -->
+                             <button><a href="/selectOneReservation?S_no=2">결제하기</a></button>
                         </div>
                 </div>
                 </div>
@@ -341,22 +345,28 @@
         <script>
         var $ = jQuery.noConflict();
        $(document).ready(function() {
-            var floatPosition = parseInt($(".viewpage_right").css('top'));
-            $(window).scroll(function() {
-                var scrollTop = $(window).scrollTop();
-                console.log(scrollTop);
-                if(scrollTop>150){
-                	$(".viewpage_right").css("display","block");
-                }else{
-                	$(".viewpage_right").css("display","none");
-                }
-                if(scrollTop>150){
-                	 var newPosition = scrollTop + floatPosition + "px";
-                	 $(".viewpage_right").stop().animate({
-                         "top" : newPosition
-                     }, 1000);
-                }
-            }).scroll();
+    	   var floatPosition = parseInt($(".viewpage_right").css('top'));
+           $(window).scroll(function() {
+               var scrollTop = $(window).scrollTop();
+               console.log(scrollTop);
+               console.log($(document).height());
+               if(scrollTop<800){
+                   var newPosition = 0 + "px";
+                    $(".viewpage_right").stop().animate({
+                        "top" : newPosition
+                    }, 1000);
+               }else if($(document).height() > scrollTop+$(window).height()){
+                  var newPosition = (scrollTop-700) + "px";
+                   $(".viewpage_right").stop().animate({
+                       "top" : newPosition
+                   }, 1000);
+               }else{
+                  var newPosition = (scrollTop - (parseInt($(".viewpage_right").css("height"))+150)) + "px";
+                   $(".viewpage_right").stop().animate({
+                       "top" : newPosition
+                   }, 1000);
+               }
+           }).scroll();
            
             $("#like").click(function(){   
             	$("#viewpage_alert").slideDown(700);
