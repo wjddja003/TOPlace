@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="qaSy.model.vo.QaComment" %>
-    <%@ page import="java.util.ArrayList" %>
-    <%@ page import="qaSy.model.vo.QaPageData" %>
-    <%@ page import="user.model.vo.User" %>
+   <%@ page import="review.model.vo.ReviewPageData" %>
+   <%@ page import="review.model.vo.Review" %>
+   
     <%
-    	QaPageData pd = (QaPageData)request.getAttribute("pd");
-    	ArrayList<QaComment> list = pd.getList();
+    	ReviewPageData pd = (ReviewPageData)request.getAttribute("pd");
+    
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,8 +14,8 @@
 <title>Insert title here</title>
 </head>
 <style>
-     #rq{
-         font-size: 18px;
+    #rq{
+        font-size: 18px;
         border-top:1px solid #183058;
     	text-align: center;
         margin: 30px 0 0 0;
@@ -26,15 +25,15 @@
     }
     
     .review{
-      
-        color: #183058;
+         background-color: #f69b02;
+        color: #f7f7f7;
+        
         float: left;
         width: 50%;
         height: 70px;
     }
     .qa{
-        background-color: #f69b02;
-        color: #f7f7f7;
+        color: #183058;
         float: left;
         width: 50%;
          height: 70px;
@@ -43,6 +42,14 @@
         
         margin: 0 auto;
         width: 1000px;
+    }
+    .qa_header{
+        color: #f7f7f7;
+        background-color: #183058;
+        border: 1px solid black;
+        width: 100%;
+        height: 50px;
+        text-align: center;
     }
     .qa_v{
         text-align: center;
@@ -68,7 +75,7 @@
         position: absolute;
         bottom: 0;
     }
-    .qa_navi{
+    .re_navi{
     	clear: both;
     	text-align: center;
     }
@@ -93,26 +100,24 @@
                         <div class="qa"><p style="line-height:70px">Q＆A</p></div>
                     </a>
                 </div>
-                <c:forEach items="${pd.list }" var="q">
+                <c:forEach items="${pd.list }" var="r">
                 	 
-                	<c:if test="${sessionScope.User.userId == q.qaCommentWriter}">
+                	<c:if test="${sessionScope.User.userId == r.reviewWriter}">
                 <div class="qa_v">
               
                     <div class="qa_no">
-                        <div class="comment">
-                            공간명 :${q.qaCommentNo }<br>
-                            ${q.qaCommentContent }<br>
-                    	</div>
+                    	공간명 :${r.reviewNo }<br>
+                    	${r.reviewTitle }<br>
+                    	
                         <div class="Q_btn">
-                        ${q.qaCommentDate }<br>
-                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02" href="/qaCommentDelete?qaCommentNo=${q.qaCommentNo }">삭제</button>
-                           	<button class="reviewBtn"style="color:#f69b02; border-color:#f69b02" href="/qaCommentUpdate?qaCommentNo=${q.qaCommentNo }">수정</button>
+                        ${r.reviewDate }<br>
+                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02">리뷰보러가기</button>
                         </div>
                     </div>
                 </div>
                 	</c:if>
                 </c:forEach>
-               <div class="qa_navi"><%=pd.getPageNavi() %></div>
+               <div class="re_navi"><%=pd.getPageNavi() %></div>
             </div>
         </div>
     </section>
