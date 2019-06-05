@@ -8,17 +8,25 @@ public class QaComment {
 	private String qaCommentContent;
 	private int qaRef;
 	private Date qaCommentDate;
+	private int qaCommentRef;
 	public QaComment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public QaComment(int qaCommentNo, String qaCommentWriter, String qaCommentContent, int qaRef, Date qaCommentDate) {
+	public QaComment(int qaCommentNo, String qaCommentWriter, String qaCommentContent, int qaRef, Date qaCommentDate,int qaCommentRef) {
 		super();
 		this.qaCommentNo = qaCommentNo;
 		this.qaCommentWriter = qaCommentWriter;
 		this.qaCommentContent = qaCommentContent;
 		this.qaRef = qaRef;
 		this.qaCommentDate = qaCommentDate;
+		this.qaCommentRef = qaCommentRef;
+	}
+	public int getQaCommentRef() {
+		return qaCommentRef;
+	}
+	public void setQaCommentRef(int qaCommentRef) {
+		this.qaCommentRef = qaCommentRef;
 	}
 	public int getQaCommentNo() {
 		return qaCommentNo;
