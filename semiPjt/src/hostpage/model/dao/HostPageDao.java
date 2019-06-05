@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import common.JDBCTemplate;
 import hostpage.model.vo.Hostpage;
 import space.model.vo.Space;
+import user.model.vo.User;
 
 public class HostPageDao {
 
@@ -185,6 +186,77 @@ public class HostPageDao {
 		finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return list;
+	}
+
+	public int totalCount(Connection conn) {
+		
+		Statement stmt= null;
+		ResultSet rest = null;
+		
+		String query =  "select count(*) cnt from user_db";
+		int result = 0;
+		
+		try {
+			stmt= conn.createStatement();
+			rest= stmt.executeQuery(query);
+			
+			if(rest.next()) {
+				result = rest.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			JDBCTemplate.close(rest);
+			JDBCTemplate.close(stmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<User> selectList(Connection conn, int start, int end) {
+		
+		ArrayList<User> list = null; 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from (select ROWNUM as rnum, m.* from (select * from user_db order by user_no)m) where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset= pstmt.executeQuery();
+			list = new ArrayList<User>();
+			
+			while(rset.next()){
+				User u = new User();
+				u.setUserNo(rset.getInt("user_no"));
+				u.setUserId(rset.getString("user_id"));
+				u.setUserPw(rset.getString("user_pw"));
+				u.setUserName(rset.getString("user_name"));
+				u.setUserPhone(rset.getString("phone"));
+				u.setUserBirthday(rset.getString("birthday"));
+				u.setUserEmail(rset.getString("email"));
+				u.setUserGender(rset.getString("gender"));
+				u.setUserAddressNumber(rset.getInt("addressNumber"));
+				u.setUserAddress(rset.getString("address"));
+				u.setUserGrade(rset.getString("grade"));
+				u.setUserTOS(rset.getString("tos"));
+				u.setUserprivacy(rset.getString("privacy"));
+				u.setUserSMS(rset.getString("sms"));
+				u.setEnrollDate(rset.getDate("enroll_date"));
+				list.add(u);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
 		}
 		
 		

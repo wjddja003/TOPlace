@@ -88,7 +88,6 @@
 <section>
 <!-- section content -->
 <div class="section_content">
-	<button type="button" onclick="location.href='/selectOneSpace2?S_no=23'">공간수정</button><button type="button" >공간삭제</button>
 	<!-- 프로세스바 -->
 	<div id="S_processBar" style="text-align:center;">
 		<div id="S_processBar-1">1. 공간 정보<br>공간 정보를 입력해주세요.</div>

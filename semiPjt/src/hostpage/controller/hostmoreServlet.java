@@ -40,6 +40,7 @@ public class hostmoreServlet extends HttpServlet {
 		ArrayList<Space> list = new HostpageService().hostmore(start);
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(list,response.getWriter());
+		
 	}
 
 	/**

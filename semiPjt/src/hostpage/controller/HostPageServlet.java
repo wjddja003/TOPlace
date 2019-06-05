@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import host.model.service.HostService;
 import hostpage.model.service.HostpageService;
 import hostpage.model.vo.HostDataPage;
+import hostpage.model.vo.HostPaging;
 import space.model.vo.Space;
 
 
@@ -36,20 +38,16 @@ public class HostPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1
 		request.setCharacterEncoding("UTF-8");
-		
-	
-		//2
-		
+		//2	
 		int ShostNum = Integer.parseInt(request.getParameter("ShostNum"));
 		int totalCount = new HostpageService().more();
 		HostDataPage hd  = new HostpageService().host(ShostNum);
+		HostPaging hp = new HostpageService().userPaging(ShostNum);
 		request.setAttribute("hd", hd);
 		request.setAttribute("totalCount", totalCount);
+		request.setAttribute("hp", hp);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/hostpage.jsp");
-		rd.forward(request, response);
-		
-	
-		
+		rd.forward(request, response);	
 	}
 
 	/**
