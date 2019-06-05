@@ -9,24 +9,27 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import hostpage.model.vo.Hostpage;
+import qaSy.model.vo.QaComment;
+import review.model.vo.Review;
 import space.model.vo.Space;
 import user.model.vo.User;
 
 public class HostPageDao {
 
-	public ArrayList<Space> host(Connection conn) {
+	public ArrayList<Space> host(int shostNum, Connection conn) {
 		
 		ArrayList<Space> list = null;
 		ResultSet rset = null;
-		Statement stmt = null;
+		PreparedStatement pstmt= null;
 		
-		String query = "select * from place";
+		String query = "select * from place where s_hostNum=?";
+		
 		
 		try {
-			stmt =conn.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, shostNum);
+			rset = pstmt.executeQuery();
 			list = new ArrayList<Space>();
-			
 			while(rset.next()) {
 				Space s = new Space();
 				s.setS_no(rset.getInt("S_no"));
@@ -63,7 +66,7 @@ public class HostPageDao {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(rset);
-			JDBCTemplate.close(stmt);
+			JDBCTemplate.close(pstmt);
 		}
 
 		return list;
@@ -192,18 +195,17 @@ public class HostPageDao {
 		return list;
 	}
 
-	public int totalCount(Connection conn) {
+	public int totalCount(Connection conn, int shostNum) {
 		
-		Statement stmt= null;
+		PreparedStatement pstmt = null;
 		ResultSet rest = null;
-		
-		String query =  "select count(*) cnt from user_db";
+		String query =  "select count(*) cnt from review where review_sno in (select s_no from place where s_hostNum=?)";
 		int result = 0;
 		
 		try {
-			stmt= conn.createStatement();
-			rest= stmt.executeQuery(query);
-			
+		  pstmt = conn.prepareStatement(query);
+		  pstmt.setInt(1, shostNum);
+		  rest = pstmt.executeQuery();
 			if(rest.next()) {
 				result = rest.getInt("cnt");
 			}
@@ -213,43 +215,34 @@ public class HostPageDao {
 		}
 		finally {
 			JDBCTemplate.close(rest);
-			JDBCTemplate.close(stmt);
+			JDBCTemplate.close(pstmt);
 		}
 		
 		return result;
 	}
 
-	public ArrayList<User> selectList(Connection conn, int start, int end) {
+	public ArrayList<Review> selectList(Connection conn, int start, int end, int shostNum) {
 		
-		ArrayList<User> list = null; 
+		ArrayList<Review> list = null; 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select ROWNUM as rnum, m.* from (select * from user_db order by user_no)m) where rnum between ? and ?";
+		String query = "select * from (select ROWNUM as rnum, m.* from (select * from review where review_sno in (select s_no from place where s_hostNum=0))m) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			rset= pstmt.executeQuery();
-			list = new ArrayList<User>();
-			
+			list = new ArrayList<Review>();			
 			while(rset.next()){
-				User u = new User();
-				u.setUserNo(rset.getInt("user_no"));
-				u.setUserId(rset.getString("user_id"));
-				u.setUserPw(rset.getString("user_pw"));
-				u.setUserName(rset.getString("user_name"));
-				u.setUserPhone(rset.getString("phone"));
-				u.setUserBirthday(rset.getString("birthday"));
-				u.setUserEmail(rset.getString("email"));
-				u.setUserGender(rset.getString("gender"));
-				u.setUserAddressNumber(rset.getInt("addressNumber"));
-				u.setUserAddress(rset.getString("address"));
-				u.setUserGrade(rset.getString("grade"));
-				u.setUserTOS(rset.getString("tos"));
-				u.setUserprivacy(rset.getString("privacy"));
-				u.setUserSMS(rset.getString("sms"));
-				u.setEnrollDate(rset.getDate("enroll_date"));
-				list.add(u);
+				Review r = new Review();
+				r.setReviewNo(rset.getInt("review_no"));
+				r.setReviewSno(rset.getInt("review_sno"));
+				r.setReviewTitle(rset.getString("review_title"));
+				r.setReviewWriter(rset.getString("review_writer"));
+				r.setReviewContent(rset.getString("review_content"));
+				r.setFilename(rset.getString("filename"));
+				r.setReviewDate(rset.getDate("review_date"));
+				list.add(r);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -259,6 +252,38 @@ public class HostPageDao {
 			JDBCTemplate.close(rset);
 		}
 		
+		
+		return list;
+	}
+
+	public ArrayList<QaComment> Qalist(Connection conn, int shostNum ) {
+		ArrayList<QaComment> list = null;
+		ResultSet rset = null;
+		PreparedStatement pstmt= null;
+		String query = "select * from  qa_COMMENT where qa_Ref in (select s_no from place where s_hostNum=?)";
+		
+		try {
+			pstmt =conn.prepareStatement(query);
+			pstmt.setInt(1, shostNum);
+			rset  = pstmt.executeQuery();
+			list= new ArrayList<QaComment>();
+			while(rset.next()) {
+				QaComment q = new QaComment();
+				q.setQaCommentNo(rset.getInt("qa_COMMENT_NO"));
+				q.setQaCommentWriter(rset.getString("qa_COMMENT_WRITER"));
+				q.setQaCommentContent(rset.getString("qa_COMMENT_CONTENT"));
+				q.setQaRef(rset.getInt("qa_REF"));
+				q.setQaCommentDate(rset.getDate("qa_COMMENT_DATE"));
+				list.add(q);
+				System.out.println(list.get(0).getQaCommentNo());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		
 		return list;
 	}

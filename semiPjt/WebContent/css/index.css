@@ -87,7 +87,8 @@ header {
 	display: block;
 	list-style: none;
 	text-align: center;
-	width: 33%;
+	width: 25%;
+	/*width:33%;*/
 }
 
 #header-search {

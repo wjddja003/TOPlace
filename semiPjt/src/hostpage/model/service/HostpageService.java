@@ -8,6 +8,8 @@ import host.model.dao.HostDao;
 import hostpage.model.dao.HostPageDao;
 import hostpage.model.vo.HostDataPage;
 import hostpage.model.vo.HostPaging;
+import qaSy.model.vo.QaComment;
+import review.model.vo.Review;
 import space.model.vo.Space;
 import user.model.vo.User;
 
@@ -15,8 +17,7 @@ public class HostpageService {
 
 	public HostDataPage host(int shostNum) {
 		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Space> list = new HostPageDao().host(conn);
-		
+		ArrayList<Space> list = new HostPageDao().host(shostNum,conn);
 		int count = new HostPageDao().count(shostNum,conn);
 		HostDataPage hd = new HostDataPage(list, count);
 		JDBCTemplate.close(conn);
@@ -70,11 +71,12 @@ public class HostpageService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+	
 
-	public HostPaging userPaging(int reqPage) {
+	public HostPaging userPaging(int reqPage, int shostNum) {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 3;   //게시물의 숫자
-		int totalCount = new HostPageDao().totalCount(conn);  //총개시물을 나ㅏ타낸다
+		int totalCount = new HostPageDao().totalCount(conn,shostNum);  //총개시물을 나ㅏ타낸다
 		
 		int totalpge = 0;
 		
@@ -85,31 +87,42 @@ public class HostpageService {
 		}
 		int start = (reqPage-1)*numPerPage+1;   
 		int end = reqPage*numPerPage; 
-		ArrayList<User> list = new HostPageDao().selectList(conn,start,end);
+		ArrayList<Review> list = new HostPageDao().selectList(conn,start,end,shostNum);
 		String pageNavi ="";
 		int pageNaviSize = 5;    // <1 2 3 4 5 ?> 
 		int pageNo =((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(pageNo !=1) {											
-			pageNavi += "<a class='btn' href='/hostPage?ShostNum="+(pageNo-1)+"'>이전</a>";
+			pageNavi += "<a class='btn' href='/hostPage?reqPage="+(pageNo-1)+"&ShostNum="+shostNum+"'>이전</a>";
 		}
 		int i = 1; 
 		while( !(i++>pageNaviSize || pageNo>totalpge)) {  
 			if(reqPage == pageNo) { 
 				 pageNavi += "<span class='selectPage'>"+pageNo+"</span>";
 			}else {
-				pageNavi += "<a class='btn' href='/hostPage?ShostNum="+pageNo+"'>"+pageNo+"</a>"; 
+				pageNavi += "<a class='btn' href='/hostPage?reqPage="+pageNo+"&ShostNum="+shostNum+"'>"+pageNo+"</a>"; 
 						//pageno 2개 = 하나는 볼것 하나는 값 전달할것
 			}
 			pageNo++;
 		}
 		if(pageNo <= totalpge) {
-			pageNavi +="<a class='btn' href='/hostPage?ShostNum="+(pageNo)+"'>다음</a>";
+			pageNavi +="<a class='btn' href='/hostPage?reqPage="+(pageNo)+"&ShostNum=+"+shostNum+"+'>다음</a>";
 		}
 		
 		HostPaging hp = new HostPaging(list,pageNavi);
 		
 		JDBCTemplate.close(conn);
 		return hp;
+	}
+
+	public ArrayList<QaComment> Qalist(int shostNum) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<QaComment> list = new HostPageDao().Qalist(conn,shostNum);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	
 	}
 
 	

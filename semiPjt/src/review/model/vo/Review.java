@@ -3,13 +3,13 @@ package review.model.vo;
 import java.sql.Date;
 
 public class Review {
-	private int reviewNo;
-	private int reviewSno;
-	private String reviewTitle;
-	private String reviewWriter;
-	private String reviewContent;
-	private String filename;
-	private Date reviewDate;
+	private int reviewNo; //리뷰번호
+	private int reviewSno; //공간번호
+	private String reviewTitle; //제목
+	private String reviewWriter; //작성자
+	private String reviewContent; //글
+	private String filename; 
+	private Date reviewDate; //작성일
 	public Review() {
 		super();
 		// TODO Auto-generated constructor stub

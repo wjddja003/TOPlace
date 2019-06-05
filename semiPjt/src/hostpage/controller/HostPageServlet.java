@@ -1,6 +1,7 @@
 package hostpage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import host.model.service.HostService;
 import hostpage.model.service.HostpageService;
 import hostpage.model.vo.HostDataPage;
 import hostpage.model.vo.HostPaging;
+import qaSy.model.vo.QaComment;
 import space.model.vo.Space;
 
 
@@ -39,13 +41,24 @@ public class HostPageServlet extends HttpServlet {
 		//1
 		request.setCharacterEncoding("UTF-8");
 		//2	
+		
+		int reqPage;
+		try {	//강제로 만듬
+			reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		}catch(NumberFormatException e) {
+			reqPage = 1;
+		}
 		int ShostNum = Integer.parseInt(request.getParameter("ShostNum"));
 		int totalCount = new HostpageService().more();
-		HostDataPage hd  = new HostpageService().host(ShostNum);
-		HostPaging hp = new HostpageService().userPaging(ShostNum);
+		HostDataPage hd  = new HostpageService().host(ShostNum); //공간
+		HostPaging hp = new HostpageService().userPaging(reqPage,ShostNum); //리뷰		
+		ArrayList<QaComment> Qalist = new  HostpageService().Qalist(ShostNum); //Q&A
+
+		
 		request.setAttribute("hd", hd);
 		request.setAttribute("totalCount", totalCount);
 		request.setAttribute("hp", hp);
+		request.setAttribute("Qalist", Qalist);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/hostpage.jsp");
 		rd.forward(request, response);	
 	}

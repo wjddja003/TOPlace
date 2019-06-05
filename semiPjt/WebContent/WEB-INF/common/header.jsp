@@ -30,7 +30,7 @@
 
 	                <li class="navi-li"><a href="/views/insertSpace.jsp">공간등록</a></li>
 	                
-	                <li class="navi-li"><a href="/hostPage?ShostNum=1">(동천)</a>
+	                <li class="navi-li"><a href="/hostPage?ShostNum=0">(동천)</a>
 	                
 	            </ul>
 	        </div>
