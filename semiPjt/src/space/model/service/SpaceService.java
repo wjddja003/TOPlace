@@ -74,7 +74,5 @@ public class SpaceService {
 		return s;
 	}
 	*/
-=======
 
->>>>>>> 3f03f4b04c647ffbf9f519ed1c3eb995b9aede87
 }

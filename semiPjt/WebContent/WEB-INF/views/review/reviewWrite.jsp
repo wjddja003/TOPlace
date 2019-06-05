@@ -16,19 +16,18 @@
 					<tr>
 						<th colspan="2" style="font-size:20px; font-weight:bold;">리뷰게시판 작성</th>
 					</tr>
-					
-					<tr>
-						<th>작성자</th>
-						<td>
-							
-							<input type="text" name="reviewWriter" value="user" readonly>
-						</td>
-					</tr>
 					<tr>
 						<th>제목</th>
 						<td>
 						
 							<input type="text" name="reviewTitle">
+						</td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td>
+							
+							<input type="text" name="reviewWriter" value="user" readonly>
 						</td>
 					</tr>
 					<tr>
