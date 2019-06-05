@@ -100,7 +100,7 @@ public class QaDao {
 	public int totalQCount(Connection conn,String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("totalQCount");
+		String query = "select count(*) cnt from qa_Comment where qa_comment_writer = ?";
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -109,6 +109,7 @@ public class QaDao {
 			if(rset.next()) {
 				result = rset.getInt("cnt");
 			}
+			System.out.println(result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -196,6 +197,49 @@ public class QaDao {
 		return result;
 		
 	}
-	
-	
+	public QaComment selectOne(Connection conn, int qaCommentNo) {
+		QaComment q = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from qa_comment where qa_comment_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, qaCommentNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				q = new QaComment();
+				q.setQaCommentNo(rset.getInt("qa_comment_no"));
+				q.setQaCommentWriter(rset.getString("qa_comment_writer"));
+				q.setQaCommentContent(rset.getString("qa_comment_content"));
+				q.setQaCommentDate(rset.getDate("qa_comment_date"));
+				q.setQaCommentRef(rset.getInt("qa_comment_ref"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return q;
+	}
+	public int updateQaComment(Connection conn, QaComment q) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update qa_comment set qa_comment_content=? where qa_comment_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, q.getQaCommentContent());
+			pstmt.setInt(2, q.getQaCommentNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			JDBCTemplate.close(pstmt);
+	}
+	return result;
+}
 }
