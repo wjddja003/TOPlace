@@ -5,6 +5,7 @@ import java.sql.Connection;
 import common.JDBCTemplate;
 import space.model.dao.SpaceDao;
 import space.model.vo.Space;
+import view.model.vo.Like;
 
 public class SpaceService {
 	public int insertSpace(Space s) {
@@ -21,6 +22,12 @@ public class SpaceService {
 	public Space selectOneSpace(int S_no) {
 		Connection conn = JDBCTemplate.getConnection();
 		Space s = new SpaceDao().selectOneSpace(conn,S_no);
+		int result = new SpaceDao().hitUpdate(conn,S_no);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
 		s.setS_kategorieList(s.getS_kategorie2());
 		JDBCTemplate.close(conn);
 		return s;
@@ -35,6 +42,28 @@ public class SpaceService {
 		}
 		JDBCTemplate.close(conn);
 		return result;
+	}
+	public int likeUpdate(Like l) {
+		Connection conn = JDBCTemplate.getConnection();
+		int likeUpdate = new SpaceDao().likeUpdate(l,conn);
+		if(likeUpdate > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return likeUpdate;
+	}
+	public int likeDelete(Like l) {
+		Connection conn = JDBCTemplate.getConnection();
+		int likeDelete = new SpaceDao().likeDelete(l,conn);
+		if(likeDelete > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return likeDelete;
 	}
 	/*
 	public Space selectImg(int S_no) {
