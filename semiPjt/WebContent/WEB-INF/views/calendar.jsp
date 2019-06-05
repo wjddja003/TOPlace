@@ -909,6 +909,7 @@
         var whileIndex = 0;
         var strOneDay="";
         var appendCount = 0;
+        var arrayStr = "";
         var timetestArray=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         
         var holiday = [sysday.getFullYear()+"0101",sysday.getFullYear()+"0301",sysday.getFullYear()+"0505",sysday.getFullYear()+"0512",sysday.getFullYear()+"0606",sysday.getFullYear()+"0815",sysday.getFullYear()+"1003",sysday.getFullYear()+"1009",sysday.getFullYear()+"1225"];
@@ -1447,6 +1448,15 @@
 	                }
 	            }
 	            console.log(array);
+	            arrayStr="";
+	            for(var arrI=0;arrI<array.length;arrI++){
+	            	arrayStr += array[arrI];
+	            	if(arrI<array.length-1){
+	            		arrayStr += ",";
+	            	}
+	            }
+	            console.log(arrayStr);
+	            $('input[name=reservationDay]').val(arrayStr);
 		}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //선택된 예약 날짜 배열에 저장하는 로직 종료
