@@ -1,6 +1,7 @@
 package review.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,10 +54,11 @@ public class InsertReviewServlet extends HttpServlet {
 		String reviewContent = mRequest.getParameter("reviewContent");
 		String reviewWriter = mRequest.getParameter("reviewWriter");
 		String filename = mRequest.getFilesystemName("filename");
-		Review r = new Review(0,reviewSno,reviewTitle,reviewContent,reviewWriter,filename,null);
+		Review r = new Review(0,reviewSno,reviewTitle,reviewWriter,reviewContent,filename,null);
 		int result = new ReviewService().insertReview(r);
 		if(result>0) {
 			request.setAttribute("msg", "리뷰등록 성공");
+			System.out.println("insert into review values(seq_review_no.nexval,"+reviewSno+",'"+reviewTitle+"','"+reviewWriter+"','"+reviewContent+"','"+filename+"',sysdate);");
 		}else {
 			request.setAttribute("msg","리뷰등록실패");
 		}
