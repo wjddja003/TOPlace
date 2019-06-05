@@ -37,5 +37,4 @@ public class SpaceService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-
 }

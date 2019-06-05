@@ -8,7 +8,8 @@
    href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
 <script
    src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script
       src="https://code.jquery.com/jquery-3.4.0.js"
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
@@ -848,6 +849,8 @@
         </tfooter>
     </table>    
     <script>
+    var timeInhibitArray=new Array();
+    var preday = new Array();
     $(document).ready(function(){
          
         var sysday = new Date();         
@@ -910,17 +913,45 @@
         var strOneDay="";
         var appendCount = 0;
         var arrayStr = "";
-        var timetestArray=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        
         
         var holiday = [sysday.getFullYear()+"0101",sysday.getFullYear()+"0301",sysday.getFullYear()+"0505",sysday.getFullYear()+"0512",sysday.getFullYear()+"0606",sysday.getFullYear()+"0815",sysday.getFullYear()+"1003",sysday.getFullYear()+"1009",sysday.getFullYear()+"1225"];
         var selectInhibitDay = new Array();
         var array = new Array(); 
-        var inhibitType = new Array(${s.s_holiday}); 
-        
+        var inhibitType = new Array('${s.s_holiday}'); 
+        var inhibitrList = new Array();
         var inhibitDay = new Array();
+        var exList = new Array();
+        var snum = '${s.s_no}';
+        var substrarr = new Array();
+        $.ajax({
+            url: "/searchDay?S_no="+snum, // 클라이언트가 요청을 보낼 서버의 URL 주소
+            type: "GET",                             // HTTP 요청 방식(GET, POST)
+            dataType: "json",                         // 서버에서 보내줄 데이터의 타입
+            async: false,
+           success : function(data) {
+              for(var i =0;i<data.length;i++){
+            	  if(data[i].reservationTime==null){
+            		inhibitrList.push(data[i].reservationDay);
+            		inhibitDay = inhibitDay.concat(inhibitrList[i].split(','));
+            	  }else{
+            		  inhibitrList.push(data[i].reservationDay);
+            		  preday = preday.concat(inhibitrList[i].split(','));
+            		  substrarr = data[i].reservationTime.split('/');
+            		  timeInhibitArray.push(data[i].reservationTime.split(','));
+            	  }
+              }
+             
+           },error : function(xhr, status, error) {
+              console.log("에러!: " + error);
+           }
+        });
+        console.log(preday);
+        
         var inhibitDOW = [-1,-1,-1,-1,-1,-1,-1]
+        console.log(inhibitDOW[0]);
         if(inhibitType[0]==1){
-        	inhibitDay = holiday;
+        	inhibitDay = inhibitDay.concat(holiday);
         }else if(inhibitType[0]==2){
         	for(var hIndex=1;hIndex<8;hIndex++){
         		if(inhibitType[0]==1){
@@ -939,7 +970,7 @@
         		prepareDay =inhibitType[2]
         	}
         	selectInhibitDay.push("2019"+prepareMonth+prepareDay);
-        	inhibitDay = selectInhibitDay;
+        	inhibitDay = inhibitDay.concat(selectInhibitDay);
         }
         console.log(inhibitDay);
         //윤호 예약테이블완료되면 예약된날선택 불가 =>기간별만 inhibitDay에 들어감
@@ -1187,6 +1218,8 @@
                     $('.endDay').text("");
                     $('.hapDay').text("");
                     $('.startDay').text(year+"."+month+"."+$(this).find('p').text()+"일");
+                    //추가
+                    $('.price').text($(this).find('pre').text());
                 } else if($(this).hasClass("inhibitDay") === false && count==1){
                     endDay = $('td').index(this);
                     $(this).css("background-color","red");
@@ -1231,6 +1264,9 @@
                         if($("td").eq(i).hasClass("inhibitDay") === false && $('td').eq(i).find('p').text()!=""){
                             $('td').eq(i).css("background-color","green");
                             $('td').eq(i).addClass("selectDay");
+                            //추가
+                            $('.price').text($('.price').text()+$('td').eq(i).find('pre').text());
+                            
                         }
                     }//for가 두개인 이유는 날짜 거꾸로 선택 가능 하게 하기위해서
                     createSelectDay();
@@ -1257,6 +1293,8 @@
                     }
                     strOneDay = year+strMonth1+strDay;
                     count=1;
+                    //예약 시작 날짜 출력, 추가
+                    $('.startDay').text(year+"."+month+"."+$(this).find('p').text()+"일");
                 }
         		
                 if($("td").eq(startDay).hasClass("selectDay") === true && count==1){
@@ -1281,6 +1319,9 @@
         	} else if(btnVal==3 && $(this).find('p').text() != ""){
         		if(array.length==7){
         			alert("원하는 날짜는 7일까지 선택가능합니다.");
+        			//추가
+        			$('.startDay').text("");
+        			$('#choiceDay').html("");
         			return;
         		}
         		if($(this).hasClass("inhibitDay") === false && $(this).attr("class") != "selectDay"){
@@ -1299,6 +1340,8 @@
                     }
                     strOneDay = year+strMonth1+strDay;
                     array.push(strOneDay);
+                   //추가
+                    $('.startDay').text($('.startDay').text()+year+"."+month+"."+$(this).find('p').text()+"일");
                 } else if($(this).hasClass("inhibitDay") === false && $(this).attr("class") == "selectDay"){
                 	$(this).css("background-color","white");
                     $(this).removeClass("selectDay");
@@ -1319,7 +1362,7 @@
         		array.sort();
         		$('#choiceDay').html("");
         		for(appendCount = 0; appendCount<array.length;appendCount++){
-        			$('#choiceDay').append("<button onclick='selectTimeBtnfn();' class='selectTimeBtn'>"+array[appendCount]+"</button>");
+        			$('#choiceDay').append("<button onclick='selectTimeBtnfn(this);' class='selectTimeBtn'>"+array[appendCount]+"</button>");
         		}
         		
         		
