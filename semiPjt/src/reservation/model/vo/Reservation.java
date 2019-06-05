@@ -7,9 +7,11 @@ public class Reservation {
 	private int S_no;
 	private int userNo;
 	private String reservationName;
-	private Date reservationDay;
+	private String reservationDay;
+	private String reservationBooker;
 	private String reservationTime;
-	private String reservationPerson;
+	private int reservationPerson;
+	private String reservationOption;
 	private String paymentId;
 	private int paymentPrice;
 	private String paymentCard;
@@ -17,16 +19,19 @@ public class Reservation {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Reservation(int reservationNo, int s_no, int userNo, String reservationName, Date reservationDay,
-			String reservationTime, String reservationPerson, String paymentId, int paymentPrice, String paymentCard) {
+	public Reservation(int reservationNo, int s_no, int userNo, String reservationName, String reservationDay,
+			String reservationBooker, String reservationTime, int reservationPerson, String reservationOption,
+			String paymentId, int paymentPrice, String paymentCard) {
 		super();
 		this.reservationNo = reservationNo;
 		S_no = s_no;
 		this.userNo = userNo;
 		this.reservationName = reservationName;
 		this.reservationDay = reservationDay;
+		this.reservationBooker = reservationBooker;
 		this.reservationTime = reservationTime;
 		this.reservationPerson = reservationPerson;
+		this.reservationOption = reservationOption;
 		this.paymentId = paymentId;
 		this.paymentPrice = paymentPrice;
 		this.paymentCard = paymentCard;
@@ -55,11 +60,17 @@ public class Reservation {
 	public void setReservationName(String reservationName) {
 		this.reservationName = reservationName;
 	}
-	public Date getReservationDay() {
+	public String getReservationDay() {
 		return reservationDay;
 	}
-	public void setReservationDay(Date reservationDay) {
+	public void setReservationDay(String reservationDay) {
 		this.reservationDay = reservationDay;
+	}
+	public String getReservationBooker() {
+		return reservationBooker;
+	}
+	public void setReservationBooker(String reservationBooker) {
+		this.reservationBooker = reservationBooker;
 	}
 	public String getReservationTime() {
 		return reservationTime;
@@ -67,11 +78,17 @@ public class Reservation {
 	public void setReservationTime(String reservationTime) {
 		this.reservationTime = reservationTime;
 	}
-	public String getReservationPerson() {
+	public int getReservationPerson() {
 		return reservationPerson;
 	}
-	public void setReservationPerson(String reservationPerson) {
+	public void setReservationPerson(int reservationPerson) {
 		this.reservationPerson = reservationPerson;
+	}
+	public String getReservationOption() {
+		return reservationOption;
+	}
+	public void setReservationOption(String reservationOption) {
+		this.reservationOption = reservationOption;
 	}
 	public String getPaymentId() {
 		return paymentId;

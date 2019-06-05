@@ -32,6 +32,7 @@ public class Space {
 	private int S_hit;
 	private int S_like;
 	private String[] S_kategorieList;
+	private String[] S_kategorieList1;
 	public Space() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -226,8 +227,6 @@ public class Space {
 		S_like = s_like;
 	}
 	public String[] getS_kategorieList(){
-		
-		
 		return S_kategorieList;
 	}
 	public void setS_kategorieList(String str) {
@@ -244,6 +243,25 @@ public class Space {
 		String[] list = {"TV/프로젝터","인터넷/WIFI","복사/인쇄기","화이트보드","음향/마이크","취사시설","음식물반입가능","주류반입가능","샤워시설","주차","금연","반려동물 동반 가능","PC/노트북","의자/테이블","내부화장실","탈의실","테라스/루프탑","공용라운지","전신거울","바베큐시설","도어락"};
 		return list;
 	}
+	
+	public String[] getS_kategorieList1() {
+		return S_kategorieList1;
+	}
+	public void setS_kategorieList1(String str) {
+		StringTokenizer st = new StringTokenizer(str,","); 
+		String[] list = new String[12];
+		int i = 0;
+		while(st.hasMoreTokens()) { 
+			list[i] = st.nextToken();
+			i++;
+		}
+		S_kategorieList1 =list; 
+	}
+	public String[] getS_kategorieName1() {
+		String[] list = {"회의실","세미나실","다목적홀","작업실","레저시설","파티룸","공연장","연습실","카페","공연장","연습실","카페","스터디룸","엠티장소","루프탑"};
+		return list;
+	}
+	
 	
 	public ArrayList<String> getDelImg() {
 	      StringTokenizer st = new StringTokenizer(S_img2, ",");
