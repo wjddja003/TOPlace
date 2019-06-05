@@ -246,7 +246,7 @@
                                                 <div class="inner">     
                                                     <a href="#" class="_review_img_link">
                                                         <div class="img_box">
-                                                            <span><img src="../img/${rc.filename }" width="100%" height="100%"></span>
+                                                            <span><img src="../upload/review/${rc.filename }" width="100%" height="100%"></span>
                                                         </div>
                                                     </a>
                                                 </div>
@@ -275,7 +275,7 @@
                                         </span>
                                     </span>
                                    </c:forEach>
-                                   <div id="pageNavi">${pd.PageNavi }</div>
+                                   <div id="pageNavi">${pd.pageNavi }</div>
                                 </div>
                             </li>
                         </ul>
