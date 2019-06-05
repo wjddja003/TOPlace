@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
 <script
    src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
-<title>Insert title here</title>
+
 <script
       src="https://code.jquery.com/jquery-3.4.0.js"
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
@@ -49,8 +49,7 @@
         	width:50px;
         }
     </style>
-</head>
-<body>
+
 	<table border="1">
         <thead>
             <th><button class="movebtn" id="prevbtn"><</button></th>
@@ -847,7 +846,7 @@
             </tr>
             
         </tfooter>
-    </table>
+    </table>    
     <script>
     $(document).ready(function(){
          
@@ -903,37 +902,69 @@
         //선택된 마지막날 비교용
         var multiSelectCount = 0;
         //불규칙 다중 선택 날짜용 인덱스 변수
+        var prepareMonth = "";
+        var prepareDay = "";
         var MultiSelectArray = new Array();
         var booktypeValue = 0;
         var whileIndex = 0;
         var strOneDay="";
+        var appendCount = 0;
         var timetestArray=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        
         var holiday = [sysday.getFullYear()+"0101",sysday.getFullYear()+"0301",sysday.getFullYear()+"0505",sysday.getFullYear()+"0512",sysday.getFullYear()+"0606",sysday.getFullYear()+"0815",sysday.getFullYear()+"1003",sysday.getFullYear()+"1009",sysday.getFullYear()+"1225"];
         var selectInhibitDay = new Array();
-        var array = new Array();
-        selectInhibitDay.push("20191002");
+        var array = new Array(); 
+        var inhibitType = new Array(${s.s_holiday}); 
         
-        //나중에 조건나오면 if 걸어서 제외할 날들 배열 합치기 inhibitDay가 최종 배열
-        //조건 나오면 정렬 돌려서 넣기
-        var inhibitDay = selectInhibitDay; //예약 불가날자용 배열
-        
+        var inhibitDay = new Array();
+        var inhibitDOW = [-1,-1,-1,-1,-1,-1,-1]
+        if(inhibitType[0]==1){
+        	inhibitDay = holiday;
+        }else if(inhibitType[0]==2){
+        	for(var hIndex=1;hIndex<8;hIndex++){
+        		if(inhibitType[0]==1){
+        			inhibitDOW[hIndex-1] = hIndex-1;
+        		}
+        	}
+        }else if(inhibitType[0]==3){
+        	if(inhibitType[1]<10){
+        		prepareMonth = "0"+inhibitType[1];
+        	}else{
+        		prepareMonth =inhibitType[1]
+        	}
+        	if(inhibitType[2]<10){
+        		prepareDay = "0"+inhibitType[2];
+        	} else{
+        		prepareDay =inhibitType[2]
+        	}
+        	selectInhibitDay.push("2019"+prepareMonth+prepareDay);
+        	inhibitDay = selectInhibitDay;
+        }
         console.log(inhibitDay);
+        //윤호 예약테이블완료되면 예약된날선택 불가 =>기간별만 inhibitDay에 들어감
+        //시간별일때는 따로 로직 태워야함 => 마커 부분에서
         $(".calendar").eq(visibleMonth).css("visibility","visible"); // 온로드시 보여줘야 될 캘린더 인덱스
        
         $('th').eq(1).text(year+"년 "+month+"월"); //지금 띄워진 달력이 몇년도 몇월인지
         var weeknum = 1;
         for(var i=1;i<monthEndDay[month-1]+1;i++){
-            $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>'${s.s_price}'"); //해당 달의 끝날자만큼 for문이 돌아서 날짜를 td에 입력
+        	var price = '${s.s_price1}';
+        	if(DOW==0 || DOW==5 || DOW==6){
+        		price = price*2;
+        	}
+            $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price); //해당 달의 끝날자만큼 for문이 돌아서 날짜를 td에 입력
             if(month==parseInt(sysday.getMonth()+1) && i<day){  //지금 이번달이 맞는지 또 입력되고 있는 날짜가 현재 날자보다 작은지 에따른 조건으로
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
             } //오늘 이전의 날들은 예약불가 처리 하는 로직
             for(var k = 0; k<inhibitDay.length; k++){
                 if(year == parseInt(inhibitDay[k].substring(0,4)) && month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
                 }
             } //예약불가 처리해야할 날짜들이 담긴 배열을 체크하여 예약불가 처리하는 로직
             if(i==monthEndDay[month-1]){//날짜를 입력하다가 마지막 이되면 다음달 첫날의 요일을 알려주는 변수에 현재 요일을 넣어줌
@@ -988,7 +1019,11 @@
             $('th').eq(1).text(year+"년 "+month+"월");
 
             for(var i=1;i<monthEndDay[month-1]+1;i++){
-                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>'${s.s_price}'");
+            	var price = '${s.s_price1}';
+            	if(DOW==0 || DOW==5 || DOW==6){
+            		price = price*2;
+            	}
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
                 //기본 날짜 넣는 로직
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","white");
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","pointer");
@@ -998,6 +1033,7 @@
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
                 }
                 //저번달 달력에 담아있을 예약불가 처리 날짜 리셋
                 for(var i2 = 0; i2<$(".calendar").eq(visibleMonth).find('td').length; i2++) {
@@ -1013,6 +1049,7 @@
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                        $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
                     }
                 }//예약불가 날짜 처리 로직
                 if(array.length>0){
@@ -1072,7 +1109,11 @@
            
             $('th').eq(1).text(year+"년 "+month+"월");
             for(var i=1;i<monthEndDay[month-1]+1;i++){
-                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>'${s.s_price}'");
+            	var price = '${s.s_price1}';
+            	if(DOW==0 || DOW==5 || DOW==6){
+            		price = price*2;
+            	}
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
                 
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","white");
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","pointer");
@@ -1082,6 +1123,7 @@
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
                 }    
                 
                 for(var i2 = 0; i2<$(".calendar").eq(visibleMonth).find('td').length; i2++) {
@@ -1097,6 +1139,7 @@
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                        $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
                     }
                 }
                 if(array.length>0){
@@ -1142,7 +1185,7 @@
                     //예약 시작 날짜 출력
                     $('.endDay').text("");
                     $('.hapDay').text("");
-                    $('.startDay').text(year+"."+month+"."+$(this).text()+"일");
+                    $('.startDay').text(year+"."+month+"."+$(this).find('p').text()+"일");
                 } else if($(this).hasClass("inhibitDay") === false && count==1){
                     endDay = $('td').index(this);
                     $(this).css("background-color","red");
@@ -1154,12 +1197,12 @@
                     //예약 종료 날짜 출력
                     $('.endDay').text("");
                     if(startDay<endDay){
-                    	$('.endDay').text("~ "+year+"."+month+"."+$(this).text()+"일");	
+                    	$('.endDay').text("~ "+year+"."+month+"."+$(this).find('p').text()+"일");	
                     }else{
                     	var changeStr = $('.startDay').eq(0).text();
                     	$('.startDay').text("");
                     	$('.endDay').text("~ "+changeStr);
-                    	$('.startDay').text(year+"."+month+"."+$(this).text()+"일");
+                    	$('.startDay').text(year+"."+month+"."+$(this).find('p').text()+"일");
                     	
                     }
    
@@ -1235,7 +1278,10 @@
                 }
                 console.log(strOneDay);
         	} else if(btnVal==3 && $(this).find('p').text() != ""){
-        		
+        		if(array.length==7){
+        			alert("원하는 날짜는 7일까지 선택가능합니다.");
+        			return;
+        		}
         		if($(this).hasClass("inhibitDay") === false && $(this).attr("class") != "selectDay"){
                     //선택된 날짜 초기화 
                     startDay = $('td').index(this);
@@ -1269,10 +1315,17 @@
                     const idx = array.indexOf(strOneDay); 
                     if (idx > -1) array.splice(idx, 1)
                 }
+        		array.sort();
+        		$('#choiceDay').html("");
+        		for(appendCount = 0; appendCount<array.length;appendCount++){
+        			$('#choiceDay').append("<button onclick='selectTimeBtnfn();' class='selectTimeBtn'>"+array[appendCount]+"</button>");
+        		}
+        		
+        		
                  console.log(array);
                  if($("td").eq(startDay).hasClass("selectDay") === true){
  					//마커 
- 					//여기 윤호랑 맞춰서 아이디 클래스 변수명 변경 해야함
+ 					//여기 윤호랑 맞춰서 아이디 클래스 변수명 변경 해야함 이거아직 해야함!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  					$('#reservation_time').slideDown(500);
  					var test12 = "000001111100000111111111";
  					var dbDay='20190531';
@@ -1431,4 +1484,3 @@
 		}); //예약테이블 완성되면 예약된 날짜에다가 클래스 하나 새로 준다음 그 클래스 인애들은 
     });
     </script>
-</body>
