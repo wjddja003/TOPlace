@@ -235,14 +235,21 @@
         </div>
         <div id="aside-host">
             <div id="aside-host1">
-            	<c:choose>
-       				<c:when test="${empty sessionScope.host}">
-       					<a href="/views/hostprofile.jsp">호스트 등록으로 이동</a>
-       				</c:when>
-       				<c:otherwise>
-       					<a href="/views/hostprofileUpdate.jsp">호스트 정보 수정으로 이동</a>
-       				</c:otherwise>
-       			</c:choose>
+	            <c:choose>
+	            	<c:when test="${empty sessionScope.User}">
+	            		<a href="#" class="hostJoin">호스트 등록으로 이동</a>
+	            	</c:when>
+	            	<c:otherwise>
+		            	<c:choose>
+		       				<c:when test="${empty sessionScope.host}">
+		       					<a href="/views/hostprofile.jsp" class="hostJoin">호스트 등록으로 이동</a>
+		       				</c:when>
+		       				<c:otherwise>
+		       					<a href="/views/hostprofileUpdate.jsp">호스트 정보 수정으로 이동</a>
+		       				</c:otherwise>
+		       			</c:choose>
+	       			</c:otherwise>
+	       		</c:choose>
             </div>
         </div>
     </div>
@@ -264,5 +271,12 @@
        
 //        $("#sv_list").css("display","block");
 //        $("#sv_list > ul").css("background","lightgrey");
-    })
+    });
+    $('.hostJoin').click(function(){
+    	var check = '${sessionScope.User}';
+    	if(check == ""){
+    		alert("로그인이 필요합니다!");
+    		location.href="/views/login.jsp";
+    	}
+    });
 </script>

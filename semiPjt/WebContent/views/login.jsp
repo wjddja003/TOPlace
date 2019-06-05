@@ -11,10 +11,11 @@
 			padding: 70px 0 0;
 		}
 		.loginLogo{
+			width:250px;
 			margin: 0 0 50px 0;
 		}
 		.loginTxt{
-			padding: 0 10px 0 0;
+			
 			color:black;
 		}
 		input{
@@ -28,10 +29,25 @@
 			height: 50px;
 		}
 		.btnlogin{
+			background:#f69b02;
+			border:none;
+			color:#f7f7f7;
 			height: 50px;
 		}
 		.loginlink{
 			text-align: right;
+		}
+		#idMsg{
+			color:red;
+			font-size: 14px;
+		}
+		#pwMsg{
+			color:red;
+			font-size: 14px;
+		}
+		.errorMsg{
+			color:red;
+			font-size: 14px;
 		}
 	</style>
 </head>
@@ -69,7 +85,7 @@
 							<td colspan="3"><button type="button" style="width:100%;" class="btnlogin">로그인</button></td>
 						</tr>
 						<tr>
-							<td><a href="/views/userTerms.jsp"><span class="loginTxt">회원가입</span></a></td><td colspan="2" class="loginlink"><a href="/views/idSearch.jsp"><span class="loginTxt" style="padding:0;">아이디</span></a><span>·</span><a href="/views/pwSearch.jsp"><span class="loginTxt">비밀번호찾기</span></a><span>로그인 상태 유지</span></td>
+							<td><a href="/views/userTerms.jsp"><span class="loginTxt">회원가입</span></a></td><td colspan="2" class="loginlink"><a href="/views/findInformation.jsp"><span class="loginTxt" style="padding:0;">아이디</span></a><span>·</span><a href="/views/findInformation.jsp"><span class="loginTxt">비밀번호찾기</span></a></td>
 						</tr>
 					
 					</table>
@@ -98,6 +114,7 @@
 			</center>
 		</div>	
 	</section>
+	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
 <script type="text/javascript">
 	$(".btnlogin").click(function(){
