@@ -1,10 +1,18 @@
 $(document).ready(function(){
+	var inputType = 0;
 	$('.placeType').click(function() {
 		var index = $('.placeType').index(this);
 		var type = $('.placeType').eq(index).text();
-		location.href = "/headerSearchPlace?type=" + type + "&index=" + index;
+		if(index<12){
+			inputType = 1;			
+		}else{
+			inputType = 2;
+		}
+		
+		location.href = "/headerSearchPlace?type=" + type + "&index=" + index + "&inputType=" + inputType;
 	});
 	$('.searchInput').keydown(function(key) {
+		inputType = 3;
 				if (key.keyCode == 13) {
 					if ($(this).val() == "") {
 						$('#detach_div').slideUp(700);
@@ -23,11 +31,12 @@ $(document).ready(function(){
 							}
 						}
 						location.href = "/headerSearchPlace?type=" + type
-								+ "&index=" + index;
+								+ "&index=" + index + "&inputType=" + inputType;
 					}
 				}
 			});
 	$('.searchIcon').click(function() {
+		inputType = 3;
 		if ($(".searchInput").val() == "") {
 			$('#detach_div').slideUp(700);
 			$("#searchAlert").slideDown(700);
@@ -37,13 +46,13 @@ $(document).ready(function(){
 			$("#searchAlert").slideUp(700);
 		} else {
 			var type = $(".searchInput").val();
-			var index = 0;
+			var index = -1;
 			for (var i = 0; i < $('.placeType').length; i++) {
 				if ($('.placeType').eq(i).text() == type) {
 					index = i;
 				}
 			}
-			location.href = "/headerSearchPlace?type=" + type + "&index=" + index;
+			location.href = "/headerSearchPlace?type=" + type + "&index=" + index + "&inputType=" + inputType;
 		}
 	});
 });

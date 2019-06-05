@@ -808,8 +808,45 @@
       </div>
    </section>
    <script>	
-		function selectTimeBtnfn(){
-	   		alert("좀되라");
+   var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+   var count = 1;
+   var sendTimeArray = new Array(10);
+   var btnIndex;
+		function selectTimeBtnfn(a){
+			count = 1;
+            $('.disabled').css('background','#f69b02');
+            $('.disabled').css('color','black');
+            selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+            btnIndex= $(a).index();
+            sendTimeArray.slice(btnIndex);
+			for(var i12=0;i12<preday.length;i12++){
+			
+				console.log($(a).text());
+				if($(a).text()==preday[i12]){
+					for(var i11=0;i11<timeInhibitArray[i12].length;i11++){
+						console.log(i11);		
+						if(timeInhibitArray[i12][i11]==1){
+							$('.swiper-slide button').eq(i11).removeClass('disabled');
+							$('.swiper-slide button').eq(i11).attr("disabled","true");
+						      $('.swiper-slide button').eq(i11).text("");
+						      $('.swiper-slide button').eq(i11).css("background","url('../img/icon_close.png') no-repeat");
+						      $('.swiper-slide button').eq(i11).css("background-size","100%");
+						}
+						console.log(timeInhibitArray.length);		
+					}
+				}else {
+					for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
+						if($('.swiper-slide button').eq(i).hasClass('disabled')){
+							$('.swiper-slide button').eq(i).html(i+"<br>￦"+'${s.s_price1}');
+					    	  $('.swiper-slide button').eq(i).css("background","#f69b02");
+					    	  $('.swiper-slide button').eq(i11).attr("disabled","false");
+						}
+				      }
+				}
+				
+			}
+			
+			
 	   	}
       $(document).ready(function() {
    <%-- 예약정보 정규식 --%>
@@ -817,13 +854,14 @@
       var bookerCheck = /[가-힣]{2,13}$/;
    <%-- 날짜 선택 스크립트 --%> 
    <%-- 시간 선택 스크립트 --%>
-      var count = 0; // 시간 버튼 클릭
+       // 시간 버튼 클릭
       var start = -1; // 시간 시작 버튼 인덱스
       var end = -1; // 시간 끝 버튼 인덱스
       var startTime; // 시간 시작 값
       var endTime; // 시간 끝 값
       var hapTime; // 총 시간 값(실제 금액 계산)
-      var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // 시간 값 배열로 전달하여 디비 저장 할 값
+       // 시간 값 배열로 전달하여 디비 저장 할 값
+     
       for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
     	  $('.swiper-slide button').eq(i).addClass("disabled");
     	  $('.swiper-slide button').eq(i).css("background","#f69b02");
@@ -832,8 +870,8 @@
       $('.swiper-slide button').not('.disabled').text("");
       $('.swiper-slide button').not('.disabled').css("background","url('../img/icon_close.png') no-repeat");
       $('.swiper-slide button').not('.disabled').css("background-size","100%");
+      //클릭 이벤트
       $('.swiper-slide button').click(function() {
-         count++;
          if (count == 1) {
             start = $('.swiper-slide button').index(this);
             $(this).css('background','#183058');
@@ -841,32 +879,44 @@
             startTime = parseInt($(this).text());
             hapTime = 1;
             $(".selTime").text(startTime+"시~"+(startTime+1)+"시,  "+hapTime+"시간");
+            count = 2;
             } else if (count == 2) {
                endTime = parseInt($(this).text());
-               if(startTime<endTime){
-                  hapTime = (endTime-startTime)+1;
-                  $(".selTime").text(startTime+"시~"+(endTime+1)+"시,  "+hapTime+"시간");
-               }else{
-                  hapTime = (startTime-endTime)+1;
-                  $(".selTime").text(endTime+"시~"+(startTime+1)+"시,  "+hapTime+"시간");
-               }
+               
                end = $('.swiper-slide button').index(this);
                   for (var i = start; i < end + 1; i++) {
-                     $('.swiper-slide button').eq(i).css('background-color','#183058');
-                     $('.swiper-slide button').eq(i).css('color','white');
-                     selTimeArray[i]=1;
+                	  if($('.swiper-slide button').eq(i).hasClass('disabled')){
+	                     $('.swiper-slide button').eq(i).css('background-color','#183058');
+	                     $('.swiper-slide button').eq(i).css('color','white');
+	                     selTimeArray[i]=1;
+	                     hapTime++;
+                	  }
                      }
                   for (var i = start; i > end - 1; i--) {
-                     $('.swiper-slide button').eq(i).css('background-color','#183058');
-                     $('.swiper-slide button').eq(i).css('color','white');
-                     selTimeArray[i]=1;
-                     }
+                	  if($('.swiper-slide button').eq(i).hasClass('disabled')){
+ 	                     $('.swiper-slide button').eq(i).css('background-color','#183058');
+ 	                     $('.swiper-slide button').eq(i).css('color','white');
+ 	                     selTimeArray[i]=1;
+ 	                    hapTime++
+                 	  }
+                  }
+                  var s = selTimeArray.join('');
+                  sendTimeArray[btnIndex] = s; //얘가 최종적으로 보내야할 예약된 시간임 데이는 원래 저장되던 array?로 보내면됨 둘다 스트링으로 만드는데 sendTime은 /로 항목 구분 해줘야함
+                  console.log(selTimeArray);
+                  console.log(sendTimeArray);
+                  count = 3;
+                  if(startTime<endTime){
+                      $(".selTime").text(startTime+"시~"+(endTime+1)+"시,  "+(hapTime-1)+"시간");
+                   }else{
+                      $(".selTime").text(endTime+"시~"+(startTime+1)+"시,  "+(hapTime-1)+"시간");
+                   }
                }else if (count > 2) {
-                  count = 0;
+                  count = 1;
                   $('.disabled').css('background','#f69b02');
                   $('.disabled').css('color','black');
+                  selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+                  sendTimeArray.pop();
                }
-         console.log(selTimeArray);
          });
    <%-- 인원 선택 스크립트 --%>
       var person = parseInt($('.people').text());

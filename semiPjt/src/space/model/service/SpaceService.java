@@ -44,6 +44,7 @@ public class SpaceService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
 	public int likeUpdate(Like l) {
 		Connection conn = JDBCTemplate.getConnection();
 		int likeUpdate = new SpaceDao().likeUpdate(l,conn);
@@ -74,5 +75,4 @@ public class SpaceService {
 		return s;
 	}
 	*/
-
 }

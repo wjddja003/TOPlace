@@ -1,6 +1,7 @@
 package space.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import reservation.model.service.ReservationService;
+import reservation.model.vo.Reservation;
 import space.model.service.SpaceService;
 import space.model.vo.Space;
 
@@ -35,6 +40,7 @@ public class SelectOneReservationServlet extends HttpServlet {
 		int S_no = Integer.parseInt(request.getParameter("S_no"));
 		System.out.println(S_no);
 		Space s = new SpaceService().selectOneSpace(S_no);
+		
 		if(s!=null) {
 			System.out.println("가져오기 성공");
 			request.setAttribute("s",s);

@@ -34,17 +34,9 @@ public class HeaderSearchPlaceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		int index = Integer.parseInt(request.getParameter("index"));
+		int inputType = Integer.parseInt(request.getParameter("inputType"));
 		String type = request.getParameter("type");
-		String typeArr = "";
-		for(int i =0;i<23;i++) {
-			if(i==index*2) {
-				typeArr += "1";
-			}else {
-				typeArr += "_";
-			}
-		}
-		System.out.println(typeArr);
-		ArrayList<Space> list = new DetailSearchService().detailSearch(typeArr,index);
+		ArrayList<Space> list = new DetailSearchService().detailSearch(inputType,index);
 		request.setAttribute("type", type);
 		request.setAttribute("index", index);
 		request.setAttribute("list", list);
