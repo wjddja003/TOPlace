@@ -109,7 +109,6 @@ public class InsertSpaceServlet extends HttpServlet {
 		System.out.println("시간당/종일 대여 가격 : " + S_price1);
 		int S_price2 = Integer.parseInt(mRequest.getParameter("S_price2")); //1인당 추가 가격
 		System.out.println("1인당 추가 가격 : " + S_price2);
-		
 		Space s = new Space(0, S_hostNum, S_placeName, S_kategorie1, S_placeIntroduce1, S_placeIntroduce2, S_placeTag, S_kategorie2, S_placeWeb, S_img1, S_img2, addrNum, address, S_email, S_phone1, S_phone2, S_type, S_start, S_end, S_holiday, S_people, S_warning, S_price1, S_price2, 0, 0);
 		int result = new SpaceService().insertSpace(s);
 		if(result>0) {
@@ -117,6 +116,8 @@ public class InsertSpaceServlet extends HttpServlet {
 		}else {
 			System.out.println("실패");
 		}
+		System.out.println("insert into place values(S_no_sequence.nextval,"+S_hostNum+",'"+S_placeName+"','"+S_kategorie1+"','"+S_placeIntroduce1+"','"+S_placeIntroduce2+"','"+S_placeTag+"','"+S_kategorie2+"','"+S_placeWeb+"','"+S_img1+"','"+S_img2+"',"+addrNum+",'"+address+"','"+S_email+"','"+S_phone1+"','"+S_phone2+"','"+S_type+"',"+S_start+","+S_end+",'"+S_holiday+"',"+S_people+",'"+S_warning+"',"+S_price1+","+S_price2+",default,default);");
+		response.sendRedirect("/");
 	}
 
 	/**
