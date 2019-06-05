@@ -1,4 +1,4 @@
-package noticeSy.controller;
+package qaSy.controller;
 
 import java.io.IOException;
 
@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import qaSy.model.service.QaService;
-import qaSy.model.vo.QaPageData;
+import qaSy.model.vo.QaComment;
 
 /**
- * Servlet implementation class QaMngmentServlet
+ * Servlet implementation class QaCommentUpdateServlet
  */
-@WebServlet(name = "QaMngment", urlPatterns = { "/qaMngment" })
-public class QaMngmentServlet extends HttpServlet {
+@WebServlet(name = "QaCommentUpdate", urlPatterns = { "/qaCommentUpdate" })
+public class QaCommentUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QaMngmentServlet() {
+    public QaCommentUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,16 +34,12 @@ public class QaMngmentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		int reqPage;
-		try {
-			reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		}catch (NumberFormatException e) {
-			reqPage = 1;
-		}
-		QaPageData pd = new QaService().selectList(reqPage);
-//		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qaList.jsp");
-//		request.setAttribute("pd", pd);
-//		rd.forward(request, response);
+		int qaCommentNo = Integer.parseInt(request.getParameter("qaCommentNo"));
+		
+		QaComment q = new QaService().selectOne(qaCommentNo);
+		request.setAttribute("qaComment", q);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qaCommentUpdate.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
