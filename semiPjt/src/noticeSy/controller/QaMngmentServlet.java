@@ -41,9 +41,9 @@ public class QaMngmentServlet extends HttpServlet {
 			reqPage = 1;
 		}
 		QaPageData pd = new QaService().selectList(reqPage);
-//		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qaList.jsp");
-//		request.setAttribute("pd", pd);
-//		rd.forward(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qaList.jsp");
+		request.setAttribute("pd", pd);
+		rd.forward(request, response);
 	}
 
 	/**

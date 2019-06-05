@@ -13,13 +13,15 @@
 		margin: 0 auto;
 	}
 	.joinheader{
-		padding: 40px 0 0 0;
+		margin: 40px 0;
 		text-align: left;
 		font-size: 30px;
 		font-weight: 900;
 	}
-	span{
+	.joinErrorMsg{
 		color : red;
+		font-size: 12px;
+		margin: 0 0 0 5px;
 	}
 	.joinpopup{
 		top:0;
@@ -33,6 +35,20 @@
 		opacity: 0.6;
 		display:none;
 	}
+	.inputBox{
+		width: 300px;
+	}
+	.table{
+		line-height: 40px;
+		
+	}
+	.btn1{
+		background: #183058;
+		color:white;
+		width: 50px;
+		border: none;
+	}
+	
 </style>
 
 </head>
@@ -45,34 +61,34 @@
 					<input type="hidden" name="termsEmail" value='${param.termsEmail}'>
 					<div class="joincontainer join">
 					<div class="joinheader">
-						<p>회원가입</p>
+						<img class="loginLogo" src="../img/logo.png" alt="이용약관" align="middle"><span style="font-size: 20px">회원가입</span>
 					</div>
-					<table class="table" style="width:100%">
+					<table class="table">
 						<tr>
-							<td><label>아이디</label></td>
-		                    <td><input type="text" id="userId" name="userId" style="width:200px; height:30px" maxlength="16"><span id="idMsg"></span>
+							<td><label for="userId">아이디</label></td>
+		                    <td><input class="inputBox" type="text" id="userId" name="userId"  maxlength="16"><span class="joinErrorMsg" id="idMsg"></span>
 		                   
 		                    </td>
 						</tr>
 						<tr>
-							 <td><label>비밀번호</label></td>
-		                     <td><input type="password" id="userPw" name="userPw" style="width:200px; height:30px"><span id="pwMsg">  </span>
-		                     <p style="font-size: 12px">※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-</p>
+							 <td><label for="userPw">비밀번호</label></td>
+		                     <td><input class="inputBox" type="password" id="userPw" name="userPw"><span class="joinErrorMsg" id="pwMsg">  </span>
+		                     <p style="font-size: 12px; height: 20px;">※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-</p>
 		                    
 						</tr>
 						<tr>
-							 <td><label>비밀번호 확인</label></td>
-		                     <td><input type="password" id="userPwre" style="width:200px; height:30px"><span id="pwreMsg">  </span></td>
+							 <td><label for="userPwre">비밀번호 확인</label></td>
+		                     <td><input class="inputBox" type="password" id="userPwre"><span class="joinErrorMsg" id="pwreMsg">  </span></td>
 						</tr>
 						<tr>
-							<td>이름</td>
-							<td><input type="text" name="userName" id="userName" maxlength="4"><span id="nameMsg"></span></td>
+							<td><label for="userName">이름</label></td>
+							<td><input class="inputBox" type="text" name="userName" id="userName" maxlength="4"><span class="joinErrorMsg" id="nameMsg"></span></td>
 						</tr>
 						<tr>
-							<td>생년월일</td>
+							<td><label for="year">생년월일</label></td>
 							<td>
-								<input type="text" name="year" id="year" style="width:70px;" maxlength="4">
-								<select name=month id="month" style="width:70px;height:20px;">
+								<input type="text" name="year" id="year"  maxlength="4" style="width:70px; height:40px">
+								<select name="month" id="month" style="width:70px; height:40px">
 									<option>월</option>
 									<option value="01">1</option>
 									<option value="02">2</option>
@@ -87,52 +103,55 @@
 									<option value="11">11</option>
 									<option value="12">12</option>	
 								</select>
-								<input type="text" name="day" id="day" style="width:70px;" maxlength="2"><br><span id="birthdayMsg"></span>
+								<input type="text" name="day" id="day" maxlength="2" style="width:70px; height:40px"><br><span class="joinErrorMsg" id="birthdayMsg"></span>
 							</td>
 						</tr>
 						<tr>
-							<td>성별</td>
-							<td><select id="gender" name="gender" style="width:70px; height:30px;">
+							<td><label for="gender">성별</label></td>
+							<td>
+								<select id="gender" name="gender" style="width:70px; height:40px">
 		                            <option>성별</option>
 		                        	<option value="M">남자</option>
 		                            <option value="F">여자</option>
 		                        </select>
-		                        <br>
-		                        <span id="genderMsg"></span>
-		                        </td>
+		                        <span class="joinErrorMsg" id="genderMsg"></span>
+		                    </td>
 						</tr>
 						<tr>
-							<td>이메일</td>
+							<td><label for="email">이메일</label></td>
 							<td>
 								<input type="text" name="email" id="email"> <button type="button" class="btn1" disabled="disabled">인증</button><br>
-								<span id="emailMsg"></span>
+								<span class="joinErrorMsg" id="emailMsg"></span>
 								<span id="eTxt" style="color:blue"></span>
 							</td>
 						</tr>
 						<tr>
-							<td>휴대폰</td>
+							<td><label for="phone">휴대폰</label></td>
 							<td>
-								<select style="width:70px; height:30px;" name="phone">
+								<select name="phone" id="phone" style="width:70px; height:40px">
 		                            <option>선택</option>
 		                        	<option>010</option>
 		                            <option>011</option>
+		                            <option>016</option>
+		                            <option>017</option>
+		                            <option>019</option>
 		                        </select>
-		                        <span style="margin:0 5px 0 5px; color:black;" > - </span><input type="text" id="phone1" name="phone1" style="width:70px; height:30px" maxlength="4">
-		                        <span style="margin:0 5px 0 5px; color:black;"> - </span><input type="text" id="phone2" name="phone2" style="width:70px; height:30px" maxlength="4"> 
-		                        <br><span id="phoneMsg"></span>
+		                        <span style="margin:0 5px 0 5px; color:black;" > - </span><input type="text" id="phone1" name="phone1" style="width:70px; height:40px" maxlength="4">
+		                        <span style="margin:0 5px 0 5px; color:black;"> - </span><input type="text" id="phone2" name="phone2" style="width:70px; height:40px" maxlength="4"> 
+		                        <br><span class="joinErrorMsg" id="phoneMsg"></span>
 		                    </td>
 						</tr>
 						<tr>
-							<td>주소</td>
+							<td><label for="btnAddr">주소</label></td>
 							<td>
-								<input type="text" id="addrNum" name="addrNum" style="width:100px; height:20px;" readonly="readonly"><button type="button" class="addressinsert" >우편주소</button>
+								<input type="text" id="addrNum" name="addrNum"  readonly="readonly"><button type="button" class="addressinsert" id="btnAddr">우편주소</button>
 								<br>
-								<input type="text" id="address" name="address" style="width:350px; height:20px; font-size:10px;" readonly="readonly"><br>
-								<span id="addrMsg"></span>
+								<input type="text" id="address" name="address"  readonly="readonly"><br>
+								<span class="joinErrorMsg" id="addrMsg"></span>
 							</td>				
 						</tr>
 						<tr>
-							<td colspan="3"><button type="button" class="btnjoin">가입하기</button></td>
+							<td colspan="3" style="text-align: center;" ><button type="button" class="btnjoin">가입하기</button></td>
 						</tr>
 					</table>
 					</div>
@@ -276,7 +295,7 @@
          var index = 0;
          $('#month').focusout(function(){
         	 index = $("#month option").index($("#month option:selected"));
-			 if(index == 0){
+			 if(index == 0 || $("#month option:selected").val() == null){
 				 $('#birthdayMsg').text("생년월일을 다시 확인해주세요.");
 				 $(this).val("");
 				 birthFlag = false;
@@ -287,7 +306,7 @@
 			 }
          });
          $('#day').focusout(function(){
-        	 if($(this).val() > month_day[index-1]){
+        	 if($(this).val() > month_day[index-1] || $(this).val() == ""){
         		 $('#birthdayMsg').text("생년월일을 다시 확인해주세요.");
 				 $(this).val("");
 				 birthFlag = false;
@@ -375,11 +394,12 @@
      			if(result == 'Y'){
      				console.log(result);
      				if(event == "first"){
-     					 $("#idMsg").text("사용 가능한 아이디 입니다.!");
+     					$("#idMsg").text("사용 가능한 아이디 입니다.!");
+     					idFlag =true;
      				}else{
      					$("#idMsg").hide();
+     					idFlag =true;
      				}
-     				idFlag =true;
      			} else{
      				 $("#idMsg").text("이미 사용중이거나 탈퇴한 아이디입니다.");
      			}
