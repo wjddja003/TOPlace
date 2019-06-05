@@ -143,7 +143,7 @@
 		
 		</div>
 	</section>
-	
+	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
 <script type="text/javascript">
 	$(".btn1").click(function(){

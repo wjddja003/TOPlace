@@ -85,8 +85,8 @@
 	<section>
 		<div class="section_content" style="margin: 0 auto;">
 			<center>
-			<form action="/insertQa" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="qaCommentWriter" value="${sessionScope.user.userId }">
+			<form action="/insertQa" method="post">
+				<input type="hidden" name="qaCommentWriter" value="${sessionScope.User.userId }">
 				<%-- <input type="hidden" name="qaRef" value="1"> --%>
 	            <div id="reservation_popup_mask"></div>
 	            <div id="reservation_popupDiv">

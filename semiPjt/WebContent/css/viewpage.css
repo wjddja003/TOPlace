@@ -168,12 +168,12 @@
         border-bottom: 3px solid #f69b02;
     }
     .viewpage_textbox p{
-        font-weight: 100;
+        
         color: #656565;
     }
     .viewpage_textbox ul li{
         list-style: none;
-        font-weight:100;
+        
         
     }
     .viewpage_photo2{
@@ -258,10 +258,9 @@
 }
 .viewpage_qnaview{
     width: 773px;
-    text-align: center;
 }
 .h_intro{
-    border-bottom: 3px solid #f69b02;
+    float: left;
     font-size: 18px;
 }
 .viewpage_qna_header h4{
@@ -281,12 +280,10 @@
     float:right;
 }
 .viewpage_qnaview{
-    height: 300px;
-    line-height: 270px;
-    text-align: center;
+    clear: both;
 }
 .viewpage_qnaview p{
-    font-size: 22px;
+    font-size: 16px;
 }
 .viewpage_hostpage{
     width: 773px;
@@ -318,10 +315,20 @@
     color: #f69b02;
 }
 .viewpage_review_header{
+    border-bottom: 3px solid #f69b02;
+    font-size: 18px;
+    width: 100%;
+    height: 40px;
     margin-top: 50px;
+}
+.p_review{
+    margin-top: 11px;
+    line-height: 28px;
 }
 .img_box{
     display: inline-block;
+    width: 400px;
+    height: 300px;
 }
 .box_space{
     float: left;
@@ -330,7 +337,9 @@
 .rbox_info_base{
     clear: both;
 }
-
+#viewpage_review_btn{
+    float: right;
+}
 
 
 

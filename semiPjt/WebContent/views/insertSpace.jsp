@@ -107,7 +107,7 @@
 		<!-- 프로세스1 -->
 		<div id="S_process-1">
 			<!-- 세션에서 호스트(멤버)정보 하나를 가져옴 -->
-			<input type="hidden" name="S_hostNum" value="1">
+			<input type="hidden" name="S_hostNum" value="0">
 			
 			<br>
 			공간명 <span class="S_red">*</span><span class="S_condition" id="S_lengthspan1">0자/18자</span> <br>
@@ -351,12 +351,12 @@
 			
 			<span id="S_whattype"></span>
 			<span class="S_red"> *</span><br> 
-			<input type="text" id="S_price1" name="S_price1" class="form-control" required placeholder="가격을 입력해 주세요." style="display:inline;width:98%;">원
+			<input type="text" id="S_price1" name="S_price1" class="form-control" required numberOnly placeholder="가격을 입력해 주세요." style="display:inline;width:98%;">원
 
 			<br><br>
 			
 			1인당 추가 가격 <span class="S_red"> *</span><br>
-			<input type="text" id="S_price2" name="S_price2" class="form-control" required placeholder="1인당 추가 가격을 입력해 주세요." style="display:inline;width:98%;">원
+			<input type="text" id="S_price2" name="S_price2" class="form-control" required numberOnly placeholder="1인당 추가 가격을 입력해 주세요." style="display:inline;width:98%;">원
 			
 		</div><!-- 프로세스4 -->
 		

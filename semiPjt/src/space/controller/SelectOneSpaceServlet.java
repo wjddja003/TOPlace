@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import review.model.service.ReviewService;
+import review.model.vo.ReviewPageData;
 import space.model.service.SpaceService;
 import space.model.vo.Space;
 
@@ -35,10 +37,18 @@ public class SelectOneSpaceServlet extends HttpServlet {
 		int S_no = Integer.parseInt(request.getParameter("S_no"));
 		System.out.println(S_no);
 		Space s = new SpaceService().selectOneSpace(S_no);
+		int reqPage;
+		try {
+			reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		}catch(NumberFormatException e) {
+			reqPage = 1;
+		}
+		ReviewPageData pd = new ReviewService().selectList(reqPage);
 		if(s!=null) {
 			System.out.println("가져오기 성공");
 			request.setAttribute("s",s);
-			RequestDispatcher rd = request.getRequestDispatcher("/views/viewpage.jsp");
+			request.setAttribute("pd",pd);
+			RequestDispatcher rd = request.getRequestDispatcher("views/viewpage.jsp");
 			rd.forward(request, response);
 		}else {
 			System.out.println("가져오기 실패");
