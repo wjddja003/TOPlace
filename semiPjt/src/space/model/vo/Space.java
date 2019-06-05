@@ -1,5 +1,6 @@
 package space.model.vo;
 
+import java.text.DecimalFormat;
 import java.util.StringTokenizer;
 
 public class Space {
@@ -254,4 +255,5 @@ public class Space {
 	      }
 	      return list;
 	   }
+	
 }

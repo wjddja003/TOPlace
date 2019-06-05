@@ -206,6 +206,7 @@
    height: 50px;
    line-height: 50px;
    font-size: 16px;
+   clear:both;
 }
 .pop_list_left {
    text-align: left;
@@ -229,6 +230,12 @@
 }
 #reservation_popup_footer {
    margin-bottom:30px;
+}
+#pop_option{
+	display:none;
+}
+#rMenu_option{
+	display:none;
 }
 .reservation_popCloseBtn{
    width: 120px;
@@ -292,7 +299,7 @@
    width: 100px;
    height: 80px;
    max-width: 100%;
-   background: #f69b02;
+   background-color: #000000;
    border: 1px solid #ccc;
 }
 
@@ -330,8 +337,8 @@
                </div>
                <div class="reservation_content">
                		<div class="reservation_space_info">
-	               		<div class="reservation_space_img" style="width:20%; float:left">
-	               			<img src="/upload/space/${s.s_img1 }" width='100%;'>
+	               		<div class="reservation_space_img" style="width:20%; height:300px; float:left">
+	               			<img src="/upload/space/${s.s_img1 }" width='100%;' height="100%;">
 	               		</div>
 	               		<div class="reservation_space_tit" style="width:80%; float:left; border-bottom:1px solid #183058;">
 	               			<h3>${s.s_placeName} </h3>
@@ -384,8 +391,10 @@
                      <jsp:include page="/WEB-INF/views/calendar.jsp" />
                   </div>
                </div>
-      <%-- 나중에 if문으로 시간용 공간 설정해주어야함 --%>
      		<c:if test="${s.s_type eq 'time'}">
+     			<div id="choiceDay" style="display:block;">
+     				
+     			</div>
                <%-- 예약페이지 시간선택 --%>
                <div id="reservation_time">
 	               <div class="reservation_head">
@@ -397,78 +406,78 @@
 	               <div class="reservation_content">
 	                  <div class="swiper-container">
 	                     <div class="swiper-wrapper">
-	                        <div class="swiper-slide">
-	                           <button>0</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>1</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>2</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>3</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>4</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>5</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>6</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>7</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>8</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>9</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>10</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>11</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>12</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>13</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>14</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>15</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>16</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>17</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>18</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>19</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>20</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>21</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>22</button>
-	                        </div>
-	                        <div class="swiper-slide">
-	                           <button>23</button>
-	                        </div>
+		                     <div class="swiper-slide">
+		                           <button>0<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>1<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>2<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>3<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>4<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>5<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>6<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>7<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>8<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>9<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>10<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>11<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>12<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>13<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>14<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>15<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>16<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>17<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>18<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>19<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>20<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>21<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>22<br>￦${s.s_price1}</button>
+		                     </div>
+		                     <div class="swiper-slide">
+		                           <button>23<br>￦${s.s_price1}</button>
+		                     </div>
                      	</div>
                   	</div>
                	</div>
@@ -634,6 +643,10 @@
                		<div class="pop_list_left">예약인원</div>
                		<div class="pop_list_right"><span class="reservation_people2"></span></div>
                </div>
+               <div class="rMenu_list" id="rMenu_option">
+               		<div class="pop_list_left">추가옵션</div>
+               		<div class="pop_list_right"><span class="option1"></span></div>
+               </div>
                <div class="rMenu_price">
                		<div class="pop_list_left" style="color:red;font-size:16px;" id="reservation_price"></div>
                   	<div class="pop_list_left" style="color:#183058">￦</div>
@@ -645,48 +658,63 @@
             <%-- 팝업 배경 DIV--%>
             <div id="reservation_popup_mask"></div>
             <%-- 팝업 DIV--%>
-            <div id="reservation_popupDiv">
-               <div id="reservation_popupDiv_title">
-                  예약 신청
-                  <button class="reservation_popCloseBtn_1"></button>
-               </div>
-               <div id="reservation_popupDiv_content">예약 내용을 확인해주세요.</div>
-               <div class="reservation_popupDiv_list">
-                  <div class="pop_list_left">예약공간</div>
-                  <div class="pop_list_right">${s.s_placeName}</div>
-               </div>
-               <div class="reservation_popupDiv_list">
-                  <div class="pop_list_left">예약날짜</div>
-                  <div class="pop_list_right"><span class="selDay"></span></div>
-               </div>
-               <div class="reservation_popupDiv_list">
-                  <div class="pop_list_left">예약시간</div>
-                  <div class="pop_list_right"><span class="selTime"></span></div>
-               </div>
-               <div class="reservation_popupDiv_list">
-                  <div class="pop_list_left">예약인원</div>
-                  <div class="pop_list_right"><span class="reservation_people2"></span></div>
-               </div>
-
-               <div class="reservation_popupDiv_list">
-                  <div class="pop_list_left">추가인원</div>
-                  <div class="pop_list_right"><span class="option1"></span></div>
-               </div>
-
-               <div class="reservation_popupDiv_list">
-                  <div class="pop_list_left">결제예정금액</div>
-                  <div class="pop_list_right"><span class="price"></span></div>
-               </div>
-               <br>
-               <div class="reservation_popupDiv_info">
-                  <div class="pop_list_info"><img src="../img/icon_warning.png" width="13px" height="13px">&nbsp;결제 전에, 환불기준과 예약내용을 반드시 확인해주세요!</div>
-               </div>
-               <br>
-               <div id="reservation_popup_footer">
-                  <button class="reservation_popCloseBtn">예약 수정</button>
-                  <button id="pop_payment">예약 하기</button>
-               </div>
-            </div>
+            <form action="/reservation" method="post">
+	            <div id="reservation_popupDiv">
+	               <div id="reservation_popupDiv_title">
+	                  예약 신청
+	                  <button class="reservation_popCloseBtn_1"></button>
+	               </div>
+	               <div id="reservation_popupDiv_content">예약 내용을 확인해주세요.</div>
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약공간</div>
+	                  <div class="pop_list_right">${s.s_placeName}</div>
+	                  <input type="hidden" name="space_no" value="${s.s_no}">
+	                  <input type="hidden" name="user_no" value="${sessionScope.User.userNo}">
+	               </div>
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약날짜</div>
+	                  <div class="pop_list_right">
+	                  	<span class="startDay"></span>
+               			<span class="endDay"></span>
+               			<span class="hapDay"></span>
+               		  </div>
+	               </div>
+	               <c:if test="${s.s_type eq 'day'}">
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">이용시간</div>
+	                  <div class="pop_list_right"><span class="selTime">${s.s_start}시~${s.s_end}시</span></div>
+	               </div>
+	               </c:if>
+	               <c:if test="${s.s_type eq 'time'}">
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약시간</div>
+	                  <div class="pop_list_right"><span class="selTime"></span></div>
+	               </div>
+	               </c:if>
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약인원</div>
+	                  <div class="pop_list_right"><span class="reservation_people2"></span></div>
+	               </div>
+	               <div class="reservation_popupDiv_list" id="pop_option">
+	                  <div class="pop_list_left">추가옵션</div>
+	                  <div class="pop_list_right"><span class="option1"></span></div>
+	               </div>
+	
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">결제예정금액</div>
+	                  <div class="pop_list_right"><span class="price"></span></div>
+	               </div>
+	               <br>
+	               <div class="reservation_popupDiv_info">
+	                  <div class="pop_list_info"><img src="../img/icon_warning.png" width="13px" height="13px">&nbsp;결제 전에, 환불기준과 예약내용을 반드시 확인해주세요!</div>
+	               </div>
+	               <br>
+	               <div id="reservation_popup_footer">
+	                  <button class="reservation_popCloseBtn">예약 수정</button>
+	                  <button id="pop_payment">예약 하기</button>
+	               </div>
+	            </div>
+            </form>
             <%-- div 기준 초기화--%>
             <div style="clear: both;"></div>
          </div>
@@ -694,10 +722,18 @@
    </section>
 
    <script>
+   		   			
+		function selectTimeBtnfn(){
+	   		alert("좀되라");
+	   	}
+   		
       $(document).ready(function() {
    <%-- 예약정보 정규식 --%>
       var phoneCheck = /[0-9]{4}$/;
       var bookerCheck = /[가-힣]{2,13}$/;
+   <%-- 날짜 선택 스크립트 --%>
+	   	
+    
    <%-- 시간 선택 스크립트 --%>
       var count = 0; // 시간 버튼 클릭
       var start = -1; // 시간 시작 버튼 인덱스
@@ -706,6 +742,14 @@
       var endTime; // 시간 끝 값
       var hapTime; // 총 시간 값(실제 금액 계산)
       var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // 시간 값 배열로 전달하여 디비 저장 할 값
+      for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
+    	  $('.swiper-slide button').eq(i).addClass("disabled");
+    	  $('.swiper-slide button').eq(i).css("background","#f69b02");
+      }
+      $('.swiper-slide button').not('.disabled').attr("disabled","true");
+      $('.swiper-slide button').not('.disabled').text("");
+      $('.swiper-slide button').not('.disabled').css("background","url('../img/icon_close.png') no-repeat");
+      $('.swiper-slide button').not('.disabled').css("background-size","100%");
       $('.swiper-slide button').click(function() {
          count++;
          if (count == 1) {
@@ -714,34 +758,31 @@
             $(this).css('color','white');
             startTime = parseInt($(this).text());
             hapTime = 1;
-            $(".selTime").text(startTime+"~"+(startTime+1)+",  "+hapTime+"시간");
+            $(".selTime").text(startTime+"시~"+(startTime+1)+"시,  "+hapTime+"시간");
             } else if (count == 2) {
                endTime = parseInt($(this).text());
                if(startTime<endTime){
                   hapTime = (endTime-startTime)+1;
-                  $(".selTime").text(startTime+"~"+(endTime+1)+",  "+hapTime+"시간");
+                  $(".selTime").text(startTime+"시~"+(endTime+1)+"시,  "+hapTime+"시간");
                }else{
                   hapTime = (startTime-endTime)+1;
-                  $(".selTime").text(endTime+"~"+(startTime+1)+",  "+hapTime+"시간");
+                  $(".selTime").text(endTime+"시~"+(startTime+1)+"시,  "+hapTime+"시간");
                }
                end = $('.swiper-slide button').index(this);
                   for (var i = start; i < end + 1; i++) {
                      $('.swiper-slide button').eq(i).css('background-color','#183058');
                      $('.swiper-slide button').eq(i).css('color','white');
-                     $('.swiper-slide button').eq(i).addClass('tSel');
                      selTimeArray[i]=1;
                      }
                   for (var i = start; i > end - 1; i--) {
                      $('.swiper-slide button').eq(i).css('background-color','#183058');
                      $('.swiper-slide button').eq(i).css('color','white');
-                     $('.swiper-slide button').eq(i).addClass('tSel');
                      selTimeArray[i]=1;
                      }
                }else if (count > 2) {
                   count = 0;
-                  $('.swiper-slide button').css('background','#f69b02');
-                  $('.swiper-slide button').css('color','black');
-                  $('.swiper-slide button').eq(i).removeClass('tSel');
+                  $('.disabled').css('background','#f69b02');
+                  $('.disabled').css('color','black');
                }
          console.log(selTimeArray);
          });
@@ -773,14 +814,17 @@
       <%-- 추가옵션 선택 스크립트 --%>
       var option = 0;
       $('#option_minus').click(function(){
-         if(option<=0){
-            $('#option_minus').attr("button",false);
-            $('#option_plus').attr("button",true);
-         }else{
+        
         	 option = option-1;
             $('#option2').text(option);
             $('.option1').text(option+"명");
-         }
+            if(option==0){
+                $('#option_minus').attr("button",false);
+                $('#option_plus').attr("button",true);
+                $('#pop_option').css("display","none");
+                $('#rMenu_option').css("display","none");
+             }
+         
       });
       $('#option_plus').click(function(){
          if(option>=100){
@@ -791,6 +835,8 @@
         	 option = option+1;
             $('#option2').text(option);
             $('.option1').text(option+"명");
+            $('#pop_option').css("display","block");
+            $('#rMenu_option').css("display","block");
          }
       });
    <%-- 전체 체크박스 선택 스크립트 --%>
@@ -818,7 +864,7 @@
          }else {
    <%-- 시간 체크 확인 --%>
    <%-- 넘어온 타입이 시간일때 --%>
-   if("${s.s_type == 'time'}"){
+   if("${s.s_type}"=='time'){
 	   if (count == 1) {
 	      alert("최소 두시간 이상 예약이 가능합니다.");
 	      } else if (count != 2) {
@@ -860,11 +906,13 @@
                      $("#reservation_popup_mask").css("display","none");
                      $("#reservation_popupDiv").css("display","none");
                      $("body").css("overflow","auto");
+                     return false;
                      });
                   $(".reservation_popCloseBtn_1").click(function(event) {
                      $("#reservation_popup_mask").css("display","none");
                      $("#reservation_popupDiv").css("display","none");
                      $("body").css("overflow","auto");
+                     return false;
                      });
                   }
                <%-- 동의 체크 완료 --%>
