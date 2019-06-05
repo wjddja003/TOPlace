@@ -16,7 +16,6 @@ public class SpaceDao {
 	private Properties prop = new Properties();
 	public SpaceDao() {
 		String fileName = Space.class.getResource("/sql/space/spaceQuery2.properties").getPath();
-		System.out.println(fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
