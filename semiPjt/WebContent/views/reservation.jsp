@@ -48,7 +48,7 @@
 	font-size:20px;
 }
 .rMenu_list:first-of-type {
-   border-top: 3px solid #183058;
+   border-top: 3px solid #f69b02;
 }
 .rMenu_list {
 	border-bottom: 1px solid #ccc;
@@ -81,7 +81,7 @@
 .reservation_content {
    background: #f7f7f7;
    margin: 0px 0px 20px 0px;
-   border-top: 2px solid #183058;
+   border-top: 2px solid #f69b02;
    padding: 20px;
    clear: both;
    position: relative;
@@ -125,7 +125,7 @@
    width:50px;
    height:50px;
    border: 1px; solid #ccc;
-   background : #f69b02;
+   background : #183058;
    color: white;
    outline:none;
 }
@@ -133,7 +133,7 @@
    width:50px;
    height:50px;
    border: 1px; solid #ccc;
-   background : #f69b02;
+   background : #183058;
    color: white;
    outline:none;
 }
@@ -151,7 +151,7 @@
 	width:50px;
    	height:50px;
    	border: 1px; solid #ccc;
-   	background : #f69b02;
+   	background : #183058;
    	color: white;
    	outline:none;
 }
@@ -159,7 +159,7 @@
 	width:50px;
    	height:50px;
    	border: 1px; solid #ccc;
-   	background : #f69b02;
+   	background : #183058;
    	color: white;
    	outline:none;
 }
@@ -241,14 +241,14 @@
    width: 120px;
    height: 50px;
    color:white;
-   background: #183058;
+   background: #f69b02;
    outline:none;
    border:none;
    border-radius: 10px;
 }
 #pop_payment{
    color:white;
-   background: #f69b02;
+   background: #183058;
    width: 120px;
    height: 50px;
    outline:none;
@@ -337,18 +337,48 @@
                </div>
                <div class="reservation_content">
                		<div class="reservation_space_info">
-	               		<div class="reservation_space_img" style="width:20%; height:300px; float:left">
-	               			<img src="/upload/space/${s.s_img1 }" width='100%;' height="100%;">
-	               		</div>
-	               		<div class="reservation_space_tit" style="width:80%; float:left; border-bottom:1px solid #183058;">
-	               			<h3>${s.s_placeName} </h3>
-	               		</div>
-	               		<div class="reservation_space_tit" style="width:80%; float:left">
-	               			<span>${s.s_placeIntroduce1}</span>
-	               			<span>${s.s_placeIntroduce2}</span>
+               			<div style="border-bottom:1px solid #ccc; width:100%; float:left; margin-bottom:20px">
+		               		<div class="reservation_space_img" style="width:30%; height:300px; float:left">
+		               			<img src="/upload/space/${s.s_img1 }" width='100%;' height="100%;">
+		               		</div>
+		               		<div class="reservation_space_tit" style="width:68%; float:left; border-bottom:1px solid #ccc; margin-left:10px;" >
+		               			<h3>${s.s_placeName} </h3>
+		               		</div>
+		               		<div class="reservation_space_tit" style="width:68%; float:left; margin: 10px 0px 0px 10px;">
+		               			<span style="color:black;">${s.s_placeIntroduce1}</span>
+		               			<span style="color:black;">${s.s_placeIntroduce2}</span>
+		               		</div>
 	               		</div>
 	               		<div class="viewpage_textbox">
-                            <div style="border-bottom:1px solid #183058"></div>
+                            <div>
+                            	<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+	               					<span style="font-size:18px; line-height: 100%;"> 공간유형</span><span style="color:black; margin-left:20px;">
+	               					<c:forEach items="${s.s_kategorieList1}" var="list1" varStatus="i">
+                                    	<c:if test="${list1 == '1'}"><span style="color:black;">${s.s_kategorieName1[i.index]}</span>
+                                    	</c:if>
+                                    </c:forEach>
+	               					</span>
+	               				</div>
+			               		<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+			               			<span style="font-size:18px; line-height: 100%;" > 이용시간</span><span style="color:black; margin-left:20px;"> ${s.s_start}시 ~ ${s.s_end}시</span>
+			               		</div>
+			               		<c:if test="${s.s_type eq 'time'}">
+			               		<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+			               			<span style="font-size:18px; line-height: 100%;"> 예약시간</span><span style="color:black; margin-left:20px;">최소 2시간 부터</span>
+			               		</div>
+			               		</c:if>
+			               		<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+			               			<span style="font-size:18px; line-height: 100%;"> 예약인원</span><span style="color:black; margin-left:20px;">${s.s_people}명</span>
+			               		</div>
+			               		<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+	               					<span style="font-size:18px; line-height: 100%;"> 연락처&nbsp;&nbsp;&nbsp;</span><span style="color:black; margin-left:20px;">${s.s_phone2}&nbsp;&nbsp;${s.s_email}</span>
+	               				</div>
+	               				<c:if test="${not empty s.s_placeWeb} ">
+	               				<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+	               					<span style="font-size:18px; line-height: 100%;"> 사이트&nbsp;&nbsp;&nbsp;</span><span style="color:black; margin-left:20px;">${s.s_placeWeb}</span>
+	               				</div>
+	               				</c:if>
+                            </div>
                             <ul>
                                 <li style="padding:30px 0px 20px 0px; text-align:center; overflow:hidden;">                               
                                     <c:forEach items="${s.s_kategorieList}" var="list" varStatus="i">
@@ -499,12 +529,12 @@
                </div>
                <%-- 예약페이지 추가옵션 --%>
                <div class="reservation_head">
-                  <span class="reservation_title">추가 옵션 선택</span> 
+                  <span class="reservation_title">추가 인원 선택</span> 
                   <span class="reservation_sub"><span class="option1"></span></span>
                </div>
                <div class="reservation_content">
                   <div class="reservation_person">
-                     <div id="reservation_people" style="clear:both; width:50%">
+                     <div id="reservation_people" style="clear:both; width:80%">
                         <div style="float:left"><button id="option_minus">-</button></div>
                         	<span id="option2" style="color:black; line-height:50px; font-size:18px;">0</span>
                         <div style="float:right"><button id="option_plus">+</button></div>
@@ -517,29 +547,67 @@
                      class="reservation_sub" style="color: red;">*필수 입력</span>
                </div>
                <div class="reservation_content">
-                  <label>예약자 <span>*</span><input type="text" name="booker"
-                     value="${sessionScope.User.userName}" required="required"></label><br> <label>연락처
-                     <span>*</span> <select name="phone" required="required">
-                        <option>010</option>
-                        <option>011</option>
-                        <option>016</option>
-                        <option>017</option>
-                        <option>018</option>
-                        <option>019</option>
-                  </select>- <input type="text" name="phone1" value=" ${sessionScope.User.userPhone.substring(3,7)}" required="required"
-                     maxlength="4">- <input type="text" name="phone2" value="${sessionScope.User.userPhone.substring(7,11)}"
-                     required="required" maxlength="4">
-                  </label><br> <label>이메일 <span></span><input type="text"
-                     name="email" placeholder="이메일 주소를 남겨주세요."></label><br> <label>요청사항
-                     <span></span><input type="text" placeholder="남기고 싶은 말을 적어주세요.">
-                  </label><br>
+               		<div>
+               			<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+	                        <label>
+	                        	<span style="font-size:18px; line-height: 100%; color:black;">예약자<span>&nbsp;*</span></span>
+	                        	<span style="color:black;"><input type="text" name="booker"  value="${sessionScope.User.userName}" required="required"></span>
+	                     	</label>
+             			</div>
+	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+	               			<label>
+	                        	<span style="font-size:18px; line-height: 100%; color:black;">연락처<span>&nbsp;*</span></span>
+	                        	<select name="phone" required="required">
+			                        <option>010</option>
+			                        <option>011</option>
+			                        <option>016</option>
+			                        <option>017</option>
+			                        <option>018</option>
+			                        <option>019</option>
+			                     </select>
+			                     - <input type="text" name="phone1" value=" ${sessionScope.User.userPhone.substring(3,7)}" required="required" maxlength="4">- <input type="text" name="phone2" value="${sessionScope.User.userPhone.substring(7,11)}" required="required" maxlength="4">
+	                        </label>
+	               		</div>
+	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+	               			<label>
+		               			<span style="font-size:18px; line-height: 100%; color:black;">이메일 <span>&nbsp;</span></span>
+		               			<input type="text" name="email" placeholder="이메일 주소를 남겨주세요.">
+	               			</label>
+	               		</div>
+	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+	               			<label>
+	               				<span style="font-size:18px; line-height: 100%; color:black;">요청사항<span></span></span>
+	               				<input type="text" placeholder="남기고 싶은 말을 적어주세요.">
+	               			</label>
+	               		</div>
+	               	</div>
                </div>
-               <%-- 예약페이지 호스트정보 --%>
+               <%-- 
+               <%-- 예약페이지 호스트정보 
                <div class="reservation_head">
-                  <span class="reservation_title">호스트 정보</span> <span
-                     class="reservation_sub">&nbsp;</span>
+                  <span class="reservation_title">호스트 정보</span> 
+                  <span class="reservation_sub">&nbsp; 
+                  </span>
                </div>
-               <div class="reservation_content"></div>
+               <div class="reservation_content">
+               		<div>
+               			<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+                        <span style="font-size:18px; line-height: 100%"> 대표자</span><span style="color:black; margin-left:20px;">${s.s_hostNum}</span>
+             				</div>
+	               		<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+	               			<span style="font-size:18px; line-height: 100%"> 소재지</span><span style="color:black; margin-left:20px;">${s.address}</span>
+	               		</div>
+	               		<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+	               			<span style="font-size:18px; line-height: 100%"> 연락처</span><span style="color:black; margin-left:20px;">${s.s_phone2}&nbsp;&nbsp;${s.s_email}</span>
+	               		</div>
+	               		<c:if test="${not empty s.s_placeWeb} ">
+	               		<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
+	               			<span style="font-size:18px; line-height: 100%"> 사이트</span><span style="color:black; margin-left:20px;">${s.s_placeWeb}</span>
+	               		</div>
+	               		</c:if>
+	               	</div>
+               </div>
+               --%>
                <%-- 예약페이지 예약주의사항 --%>
                <div class="reservation_head">
                   <span class="reservation_title">예약시 주의사항</span> <span
@@ -548,9 +616,11 @@
                <div class="reservation_content">
                		<ol style="margin-left:15px;">
                			<c:forTokens items="${s.s_warning }" delims="," var="warning" varStatus="i" >
-                          <li style="margin: 10px 0px 10px 0px; font-size: 16px;">
-                          	${warning}
-                          </li>
+               			<div style="border-bottom: 1px solid #ccc;">
+	                          <li style="margin: 10px; padding-left:10px; font-size: 18px;">
+	                          	${warning}
+	                          </li>
+                         </div>
                       	</c:forTokens>
                     </ol>
                </div>
@@ -558,7 +628,7 @@
                <div class="reservation_head">
                   <span class="reservation_title">서비스 동의</span> <label
                      class="reservation_sub"><span><input
-                        type="checkbox" id="allCheck">전체 동의</span></label>
+                        type="checkbox" id="allCheck"> 전체 동의</span></label>
                </div>
                <div class="reservation_content">
                   <div class="reservaion_list">
@@ -652,13 +722,12 @@
                   	<div class="pop_list_left" style="color:#183058">￦</div>
                   	<div class="pop_list_right" style="color:#183058"><span class="price">0</span></div>
                </div>
-               <button id="payment">결제하기</button>
+               <button id="payment">예약하기</button>
             </div>
             <%-- 예약 정보 창 --%>
             <%-- 팝업 배경 DIV--%>
             <div id="reservation_popup_mask"></div>
             <%-- 팝업 DIV--%>
-            <form action="/reservation" method="post">
 	            <div id="reservation_popupDiv">
 	               <div id="reservation_popupDiv_title">
 	                  예약 신청
@@ -668,8 +737,6 @@
 	               <div class="reservation_popupDiv_list">
 	                  <div class="pop_list_left">예약공간</div>
 	                  <div class="pop_list_right">${s.s_placeName}</div>
-	                  <input type="hidden" name="space_no" value="${s.s_no}">
-	                  <input type="hidden" name="user_no" value="${sessionScope.User.userNo}">
 	               </div>
 	               <div class="reservation_popupDiv_list">
 	                  <div class="pop_list_left">예약날짜</div>
@@ -677,6 +744,12 @@
 	                  	<span class="startDay"></span>
                			<span class="endDay"></span>
                			<span class="hapDay"></span>
+               		  </div>
+	               </div>
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약자명</div>
+	                  <div class="pop_list_right">
+	                  	<span class="booker"></span>
                		  </div>
 	               </div>
 	               <c:if test="${s.s_type eq 'day'}">
@@ -711,29 +784,38 @@
 	               <br>
 	               <div id="reservation_popup_footer">
 	                  <button class="reservation_popCloseBtn">예약 수정</button>
-	                  <button id="pop_payment">예약 하기</button>
+	                  <button id="pop_payment">결제 하기</button>
 	               </div>
 	            </div>
-            </form>
+	            <div style="display:none">
+	            	<form action="/insertReservation" method="post" id="payfrm">
+	            		<input type="hidden" name="S_no" value="${s.s_no}">
+	            		<input type="hidden" name="userNo" value="${sessionScope.User.userNo}">
+	            		<input type="hidden" name="reservationName" value="${s.s_placeName}">
+	            		<input type="hidden" name="reservationDay" value=""><%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationBooker" value=""><%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationTime" value=""><%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationPerson" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationOption" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="paymentId" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="paymentPrice" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="paymentCard" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            	</form>
+	            </div>
             <%-- div 기준 초기화--%>
             <div style="clear: both;"></div>
          </div>
       </div>
    </section>
-
-   <script>
-   		   			
+   <script>	
 		function selectTimeBtnfn(){
 	   		alert("좀되라");
 	   	}
-   		
       $(document).ready(function() {
    <%-- 예약정보 정규식 --%>
       var phoneCheck = /[0-9]{4}$/;
       var bookerCheck = /[가-힣]{2,13}$/;
-   <%-- 날짜 선택 스크립트 --%>
-	   	
-    
+   <%-- 날짜 선택 스크립트 --%> 
    <%-- 시간 선택 스크립트 --%>
       var count = 0; // 시간 버튼 클릭
       var start = -1; // 시간 시작 버튼 인덱스
@@ -789,6 +871,7 @@
    <%-- 인원 선택 스크립트 --%>
       var person = parseInt($('.people').text());
       $('.reservation_people2').text(person+"명");
+      $('input[name=reservationPerson]').val(person);
       $('#person_minus').click(function(){
          if(person<=1){
             $('#person_minus').attr("button",false);
@@ -798,6 +881,7 @@
             person = person-1;
             $('.people').text(person);
             $('.reservation_people2').text(person+"명");
+            $('input[name=reservationPerson]').val(person);
          }
       });
       $('#person_plus').click(function(){
@@ -809,32 +893,37 @@
             person = person+1;
             $('.people').text(person);
             $('.reservation_people2').text(person+"명");
+            $('input[name=reservationPerson]').val(person);
          }
       });
       <%-- 추가옵션 선택 스크립트 --%>
       var option = 0;
       $('#option_minus').click(function(){
-        
-        	 option = option-1;
-            $('#option2').text(option);
-            $('.option1').text(option+"명");
-            if(option==0){
-                $('#option_minus').attr("button",false);
-                $('#option_plus').attr("button",true);
-                $('#pop_option').css("display","none");
-                $('#rMenu_option').css("display","none");
-             }
-         
+    	  option = option-1;
+    	  if(option<1){
+    		  option = 0;
+              $('#option_plus').attr("button",true);
+              $('#option_minus').attr("button",false);
+    		  $('.option1').text("");
+    		  $('#option2').text(option); 
+    		  $('#pop_option').css("display","none");
+              $('#rMenu_option').css("display","none");
+    	  }else{
+        	  $('#option2').text(option);  
+              $('.option1').text(option+"명");
+              $('input[name=reservationOption]').val(option+"명");
+    	  }
       });
       $('#option_plus').click(function(){
-         if(option>=100){
+         if(option>=10){
             $('#option_minus').attr("button",true);
             $('#option_plus').attr("button",false);
-            alert("최대 추가 옵션 인원은"+"100"+ "명입니다.");
+            alert("최대 추가 옵션 인원은"+"10"+ "명입니다.");
          }else{
-        	 option = option+1;
+        	option = option+1;
             $('#option2').text(option);
             $('.option1').text(option+"명");
+            $('input[name=reservationOption]').val(option+"명");
             $('#pop_option').css("display","block");
             $('#rMenu_option').css("display","block");
          }
@@ -858,8 +947,10 @@
          });
    <%-- 결제버튼 클릭 스크립트--%>
       $('#payment').click(function() {
+    	  $('.booker').text($('input[name=booker]').val());
+    	  $('input[name=reservationBooker]').val($('.booker').text());
    <%-- 날짜 체크 확인--%>
-      if ($('#hapDay').val() == "") {
+      if ($('#hapDay').text() == "") {
          alert("예약 날짜를 선택해주세요.");
          }else {
    <%-- 시간 체크 확인 --%>
@@ -943,22 +1034,27 @@
          var payDate = d.getFullYear()+''+ (d.getMonth() + 1)+ '' + d.getDate() + ''+ d.getHours() + ''+ d.getMinutes() + ''+ d.getSeconds();
          IMP.init('imp07297817'); //복사해온 개인 키
          IMP.request_pay({ //결제정보작성
-            merchant_uid : "상품명_"+ payDate, //거래아이디
+            merchant_uid : "${s.s_placeName}"+ payDate, //거래아이디
             name : "결제테스트", //결제명
             amount : price, // 결제금액
-            buyer_email : 'next007@nate.com', // 구매자 email
-            buyer_name : '이윤수',
-            buyer_tel : '010-2636-9873',
-            buyer_addr : '서울',
-            buyer_postcode : '123-456' //우편번호
+            buyer_email : '${sessionScope.User.userEmail}', // 구매자 email
+            buyer_name : '${sessionScope.User.userName}',
+            buyer_tel : '${sessionScope.User.userPhone}',
+            buyer_addr : '${sessionScope.User.userAddress}',
+            buyer_postcode : '${sessionScope.User.userAddressNumber}' //우편번호
             },
             function(rsp) {
                if (rsp.success) {
                   var msg = '결제가완료되었습니다';
-                  var info1 = '고유 ID : ' + rsp.imp_uid;
-                  var info2 = '결제금액 :  ' + rsp.paid_amount;
-                  var info3 = '카드승인번호 : ' + rsp.apply_num;
-                  alert(msg+ info1+ info2+ info3);
+                  var info1 = rsp.imp_uid; //결제 아이디
+                  var info2 = rsp.paid_amount; //결제 금액
+                  var info3 =  rsp.apply_num; //결제 카드번호
+                  $('input[name=paymentId]').val(info1);
+                  $('input[name=paymentPrice]').val(price);
+                  $('input[name=paymentCard]').val(info3);
+                  alert(msg);
+                  var frm =  $("#payfrm");
+            	  frm.submit();
                   } else {
                      alert('에러내용 : ' + rsp.error_msg);
                   }

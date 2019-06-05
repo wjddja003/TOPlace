@@ -28,6 +28,7 @@ public class SpaceService {
 		}else {
 			JDBCTemplate.rollback(conn);
 		}
+		s.setS_kategorieList1(s.getS_kategorie1());
 		s.setS_kategorieList(s.getS_kategorie2());
 		JDBCTemplate.close(conn);
 		return s;
@@ -73,4 +74,7 @@ public class SpaceService {
 		return s;
 	}
 	*/
+=======
+
+>>>>>>> 3f03f4b04c647ffbf9f519ed1c3eb995b9aede87
 }

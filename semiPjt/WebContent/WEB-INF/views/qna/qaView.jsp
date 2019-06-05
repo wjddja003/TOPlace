@@ -63,28 +63,51 @@
         <div class="section_content">
             <div id="qa_view">
                 <div class="qa_header">
-                    <h3>Q＆A</h3>
-                    ${sessionScope.User.userId}
+                	<h3>Q＆A</h3>
                 </div>
                 <c:forEach items="${pd.list }" var="q">
                 	 
                 	<c:if test="${sessionScope.User.userId == q.qaCommentWriter}">
                 <div class="qa_v">
+              
                     <div class="qa_no">
-                    	아이디 : ${q.qaCommentWriter}
                     	공간명 :${q.qaCommentNo }<br>
                     	${q.qaCommentContent }<br>
                     	
                         <div class="Q_btn">
                         ${q.qaCommentDate }<br>
-                            <a class="btn btn-outline-primary btn-sm btn1"style="color:#f69b02; border-color:#f69b02" href="/qaDelete?qaCommentNo=${q.qaCommentNo }">삭제</a>
-                            <a class="btn btn-outline-primary btn-sm btn1"style="color:#f69b02; border-color:#f69b02" href="/qaDelete?qaCommentNo=${q.qaCommentNo }">수정</a>
+                            <a class="btn btn-outline-primary btn-sm btn1"style="color:#f69b02; border-color:#f69b02" href="/qaCommentDelete?qaCommentNo=${q.qaCommentNo }">삭제</a>
+                           	<a class="btn btn-outline-primary btn-sm btn1"style="color:#f69b02; border-color:#f69b02" href="/qaCommentUpdate?qaCommentNo=${q.qaCommentNo }">수정</a>
                         </div>
                     </div>
                 </div>
                 	</c:if>
                 </c:forEach>
                <div class="qa_navi"><%=pd.getPageNavi() %></div>
+            </div>
+                       <div id="qa_view">
+                <div class="qa_header">
+                	<h3>Review</h3>
+                </div>
+                <c:forEach items="${pd.list }" var="q">
+                	 
+                	<c:if test="${sessionScope.User.userId == q.qaCommentWriter}">
+                <div class="qa_v">
+              
+                    <div class="qa_no">
+                    	공간명 :${q.qaCommentNo }<br>
+                    	${q.qaCommentContent }<br>
+                    	
+                        <div class="Q_btn">
+                        ${q.qaCommentDate }<br>
+                            <a class="btn btn-outline-primary btn-sm btn1"style="color:#f69b02; border-color:#f69b02" href="/qaCommentDelete?qaCommentNo=${q.qaCommentNo }">삭제</a>
+                           	<a class="btn btn-outline-primary btn-sm btn1"style="color:#f69b02; border-color:#f69b02" href="/qaCommentUpdate?qaCommentNo=${q.qaCommentNo }">수정</a>
+                        </div>
+                    </div>
+                </div>
+                	</c:if>
+                </c:forEach>
+               <div class="qa_navi"></div>
             </div>
         </div>
     </section>

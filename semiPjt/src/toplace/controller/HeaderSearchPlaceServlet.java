@@ -1,6 +1,7 @@
 package toplace.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import space.model.vo.Space;
+import toplace.model.service.DetailSearchService;
 
 /**
  * Servlet implementation class HeaderSearchPlaceServlet
@@ -31,9 +35,19 @@ public class HeaderSearchPlaceServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		int index = Integer.parseInt(request.getParameter("index"));
 		String type = request.getParameter("type");
-		System.out.println(type+","+index);
+		String typeArr = "";
+		for(int i =0;i<23;i++) {
+			if(i==index*2) {
+				typeArr += "1";
+			}else {
+				typeArr += "_";
+			}
+		}
+		System.out.println(typeArr);
+		ArrayList<Space> list = new DetailSearchService().detailSearch(typeArr,index);
 		request.setAttribute("type", type);
 		request.setAttribute("index", index);
+		request.setAttribute("list", list);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/detailSearch.jsp");
 		rd.forward(request, response);
 	}
