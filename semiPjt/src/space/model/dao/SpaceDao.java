@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import common.JDBCTemplate;
 import space.model.vo.Space;
+import view.model.vo.Like;
 
 public class SpaceDao {
 	private Properties prop = new Properties();
@@ -25,6 +26,54 @@ public class SpaceDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public int hitUpdate(Connection conn,int S_no) {
+		int result = 0;
+		PreparedStatement pstmt =null;
+		String query = "update place set s_hit = s_hit+1 where s_no =?";
+		try {
+			pstmt= conn.prepareStatement(query);
+			pstmt.setInt(1, S_no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	public int likeDelete(Like l,Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "update place set s_like = s_like-1 where s_no = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, l.getsNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	public int likeUpdate(Like l,Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "update place set s_like = s_like+1 where s_no = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, l.getsNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 	public int insertSpace(Connection conn,Space s) {
 		int result = 0;

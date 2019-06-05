@@ -69,6 +69,8 @@ public class QaService {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 3;
 		int totalCount = new QaDao().totalQCount(conn,userId);
+		System.out.println(totalCount);
+		System.out.println(userId);
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
@@ -95,5 +97,22 @@ public class QaService {
 	QaPageData pd = new QaPageData(list,pageNavi);
 	JDBCTemplate.close(conn);
 	return pd;
+	}
+	public QaComment selectOne(int qaCommentNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		QaComment q = new QaDao().selectOne(conn,qaCommentNo);
+		JDBCTemplate.close(conn);
+		return q;
+	}
+	public int updateQaComment(QaComment q) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new QaDao().updateQaComment(conn,q);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 }

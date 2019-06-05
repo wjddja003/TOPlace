@@ -3,9 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <link rel="stylesheet" type="text/css" href="/css/index.css">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -108,7 +108,7 @@
 		<div id="S_process-1">
 			<!-- 세션에서 호스트(멤버)정보 하나를 가져옴 -->
 			<input type="hidden" name="S_hostNum" value="0">
-			
+			<button type="button" onclick="location.href='/selectOneSpace2?S_no=1'">수정하기</button>
 			<br>
 			공간명 <span class="S_red">*</span><span class="S_condition" id="S_lengthspan1">0자/18자</span> <br>
 			<input type="text" id="S_placeName" name="S_placeName" class="form-control" placeholder="공간명을 입력해주세요.">

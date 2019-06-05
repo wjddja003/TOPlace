@@ -234,11 +234,12 @@
 					</div>
                     <div class="viewpage_review">
                         <ul>
+                         <c:forEach items="${pd.list}" var="rc">
                             <li class="rlist">   
                                 <div class="rbox_mine"> 
-                                	<c:forEach items="${pd.list}" var="rc">
                                     <span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
-                                    <strong class="guest_name">아이디</strong> 
+                                    <strong class="guest_name">${rc.reviewWriter}</strong> 
+<%--                                     <p class="p_review"><span>제목 : </span>${rc.reviewTitle }</p> --%>
                                     <p class="p_review">${rc.reviewContent }</p>
                                     <div class="space_list swiper_list photo_review"> 
                                         <div class="flex_wrap column3 fluid">      
@@ -246,7 +247,7 @@
                                                 <div class="inner">     
                                                     <a href="#" class="_review_img_link">
                                                         <div class="img_box">
-                                                            <span><img src="../img/${rc.filename }" width="100%" height="100%"></span>
+                                                            <span><img src="../upload/review/${rc.filename }" width="100%" height="100%"></span>
                                                         </div>
                                                     </a>
                                                 </div>
@@ -274,10 +275,14 @@
                                             <em class="sp_icon ico_star_off">★</em>
                                         </span>
                                     </span>
-                                   </c:forEach>
-                                   <div id="pageNavi">${pd.PageNavi }</div>
+                                    <div style="text-align: right;">
+                                    	<button class="btn btn-outline-primary btn-sm"><a href="/reviewUpdateEnd?reviewNo=${rc.reviewNo }">수정</a></button>
+                                    	<button class="btn btn-outline-primary btn-sm">삭제</button>
+                                    </div>
                                 </div>
                             </li>
+                            </c:forEach>
+                            <div id="pageNavi">${pd.pageNavi}</div>
                         </ul>
                         <div class="viewpage_qna">
                             <div class="viewpage_qna_header">
@@ -304,7 +309,7 @@
                                 <div class="viewpage_right_list2">
                                     <ul>
                                         <li class="viewpage_list_none" style="padding:22px 0px 21px;">
-                                            <input type="radio" checked> 한남동 <span>￦20,000<small style="color:#949494;">/시간</small></span>
+                                            <input type="radio" checked> ${s.s_placeName } <span>￦${s.s_price1}<small style="color:#949494;">/시간</small></span>
                                         </li>
                                         <li class="viewpage_list_none" style="padding:15px 0px 15px; height:140px;">
                                             <img src="../img/ex1.jpg" width="110px" height="110px" id="viewpage_right_img">
@@ -323,13 +328,21 @@
                                         <li class="viewpage_right_c"><span style="color:#656565; float:left;" >· 예약인원</span> <p>${s.s_people}</p></li>
                                     </ul>
                                     <div class="viewpage_right_icon">
-                                         <%for(int i = 0; i<kg.length; i++) {%>
-                                    	<%if(kg[i].equals("1")){ %>
-                                    			<div class="viewpage_right_kategorie"><img src="/upload/space/kategorie2/<%=i+1 %>.png" width="30px;">
-                                    				<p style="font-size:14px;"><%=kg2[i] %></p>
-                                    			</div>
-                                    	<%} %>
-                                    <%} %>
+                                        <%  int count = 0;
+                                        	for(int i = 0; i<kg.length; i++) {
+	                                    		if(kg[i].equals("1")){ 
+	                                    			count++;
+	                                    			if(count<=3){
+	                                    		%>
+	                                    			<div class="viewpage_right_kategorie"><img src="/upload/space/kategorie2/<%=i+1 %>.png" width="30px;">
+	                                    				<p style="font-size:14px;"><%=kg2[i] %></p>
+	                                    			</div>
+	                                    		  <%}
+	                                    		} 
+                                    		}%>
+                                    	<div class="viewpage_right_kategorie">
+                                    		<p style="font-size:14px;">+ <%=count-3%> </p>
+                                    	</div>
                                     </div>
                                 </div>
                             </div>
@@ -344,7 +357,10 @@
         <script>
         var $ = jQuery.noConflict();
        $(document).ready(function() {
-    	   var floatPosition = parseInt($(".viewpage_right").css('top'));
+    	   if('${l}' != ""){
+    		   $("#like_full").css("display","inline");
+			}
+    	   var floatPosition = parseInt($(".viewpage_right").css('top'));    	   
            $(window).scroll(function() {
                var scrollTop = $(window).scrollTop();
                console.log(scrollTop);
@@ -367,25 +383,48 @@
                }
            }).scroll();
            
-            $("#like").click(function(){   
-            	$("#viewpage_alert").slideDown(700);
-            	$("#viewpage_alert").delay(1300);
-            	$("#viewpage_alert").css("display","inline");
-            	$("#viewpage_alert").delay(1300);
-            	$("#viewpage_alert").slideUp(700); 
-            	$("#like_full").css("display","inline");
-            	$("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");
-            });
-            $("#like_full").click(function(){
-                    $("#viewpage_alert").slideDown(700);
-                    $("#viewpage_alert").delay(1300);
-                    $("#viewpage_alert").css("display","inline");
-                    $("#viewpage_alert").delay(1300);
-                    $("#viewpage_alert").slideUp(700); 
-                    $("#like_full").css("display","none"); 
-                    $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
+           $("#like").click(function(){
+           	var s_no = ${s.s_no};
+           	var userNo = ${sessionScope.User.userNo};
+           	$.ajax({
+           		type:"GET",
+           		url: "/likeInsertAjax?S_no="+s_no+"&userNo="+userNo,
+           		success : function(data){
+           			var result = data;
+           			if(result==1){
+           				$("#viewpage_alert").slideDown(700);
+                       	$("#viewpage_alert").delay(1300);
+                       	$("#viewpage_alert").css("display","inline");
+                       	$("#viewpage_alert").delay(1300);
+                       	$("#viewpage_alert").slideUp(700); 
+                       	$("#like_full").css("display","inline");
+                       	$("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");	
+           			}
+           		}
+           	});
+           });
+           $("#like_full").click(function(){
+           	var s_no = ${s.s_no};
+           	var userNo = ${sessionScope.User.userNo};
+               $.ajax({
+           		type:"GET",
+           		url: "/likeDeleteAjax?S_no="+s_no+"&userNo="+userNo,
+           		success : function(data){
+           			var result = data;
+           			if(result==1){
+          					$("#viewpage_alert").slideDown(700);
+          	                $("#viewpage_alert").delay(1300);
+          	                $("#viewpage_alert").css("display","inline");
+          	                $("#viewpage_alert").delay(1300);
+          	                $("#viewpage_alert").slideUp(700); 
+          	                $("#like_full").css("display","none"); 
+          	                $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
+           				
+           			}	
+           		}
+           	});
 
-            });
+           });
            $(".viewpage_content").css("background","url(/upload/space/${s.s_img1})no-repeat center center");
            $(".viewpage_content").css("background-size","cover");
           

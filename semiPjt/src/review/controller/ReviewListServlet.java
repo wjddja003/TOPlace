@@ -39,7 +39,7 @@ public class ReviewListServlet extends HttpServlet {
 			reqPage = 1;
 		}
 		ReviewPageData pd = new ReviewService().selectList(reqPage);
-		RequestDispatcher rd = request.getRequestDispatcher("views/viewpage.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/views/viewpage.jsp");
 		request.setAttribute("pd", pd);
 		rd.forward(request, response);
 	}
