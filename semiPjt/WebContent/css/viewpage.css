@@ -88,12 +88,15 @@
     font-size: 18px;
     font-weight: bold;
     float: left;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 .viewpage_right_header span{
     color: red;
     float: right;
     font-size: 16px;
     font-weight: normal;
+    
 }
 .viewpage_list_none span{
     float: right;
@@ -165,12 +168,12 @@
         border-bottom: 3px solid #f69b02;
     }
     .viewpage_textbox p{
-        font-weight: 100;
+        
         color: #656565;
     }
     .viewpage_textbox ul li{
         list-style: none;
-        font-weight:100;
+        
         
     }
     .viewpage_photo2{
@@ -255,10 +258,9 @@
 }
 .viewpage_qnaview{
     width: 773px;
-    text-align: center;
 }
 .h_intro{
-    border-bottom: 3px solid #f69b02;
+    float: left;
     font-size: 18px;
 }
 .viewpage_qna_header h4{
@@ -278,12 +280,10 @@
     float:right;
 }
 .viewpage_qnaview{
-    height: 300px;
-    line-height: 270px;
-    text-align: center;
+    clear: both;
 }
 .viewpage_qnaview p{
-    font-size: 22px;
+    font-size: 16px;
 }
 .viewpage_hostpage{
     width: 773px;
@@ -315,10 +315,20 @@
     color: #f69b02;
 }
 .viewpage_review_header{
+    border-bottom: 3px solid #f69b02;
+    font-size: 18px;
+    width: 100%;
+    height: 40px;
     margin-top: 50px;
+}
+.p_review{
+    margin-top: 11px;
+    line-height: 28px;
 }
 .img_box{
     display: inline-block;
+    width: 400px;
+    height: 300px;
 }
 .box_space{
     float: left;
@@ -326,4 +336,138 @@
 }
 .rbox_info_base{
     clear: both;
+}
+#viewpage_review_btn{
+    float: right;
+}
+
+
+
+
+
+#slider-wrap{
+    width:773px;
+    height:600px;
+    position:relative;
+    overflow:hidden;
+}
+
+#slider-wrap ul#slider{
+    width:100%;
+    height:100%;
+    
+    position:absolute;
+    top:0;
+    left:0;     
+}
+
+#slider-wrap ul#slider li{
+    float:left;
+    position:relative;
+    width:773px;
+    height:600px;   
+    list-style: none;
+}
+
+#slider-wrap ul#slider li > div{
+    position:absolute;
+    top:20px;
+    left:35px;  
+}
+
+#slider-wrap ul#slider li > div h3{
+    font-size:36px;
+    text-transform:uppercase;   
+}
+
+#slider-wrap ul#slider li > div span{
+    font-family: Neucha, Arial, sans serif;
+    font-size:21px;
+}
+
+#slider-wrap ul#slider li img{
+    display:block;
+    width:100%;
+    height: 100%;
+}
+
+
+/*btns*/
+.btns{
+    position:absolute;
+    width:50px;
+    height:60px;
+    top:50%;
+    margin-top:-25px;
+    line-height:57px;
+    text-align:center;
+    cursor:pointer; 
+    background:rgba(0,0,0,0.1);
+    z-index:100;
+    
+    
+    -webkit-user-select: none;  
+    -moz-user-select: none; 
+    -khtml-user-select: none; 
+    -ms-user-select: none;
+    
+    -webkit-transition: all 0.1s ease;
+    -moz-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+    -ms-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+
+.btns:hover{
+    background:rgba(0,0,0,0.3); 
+}
+
+#next{right:-50px; border-radius:7px 0px 0px 7px;}
+#previous{left:-50px; border-radius:0px 7px 7px 7px;}
+#counter{
+    top: 30px; 
+    right:35px; 
+    width:auto;
+    position:absolute;
+}
+
+#slider-wrap.active #next{right:0px;}
+#slider-wrap.active #previous{left:0px;}
+
+
+/*bar*/
+#pagination-wrap{
+    min-width:20px;
+    margin-top:580px;
+    margin-left: auto; 
+    margin-right: auto;
+    height:15px;
+    position:relative;
+    text-align:center;
+}
+
+#pagination-wrap ul {
+    width:100%;
+}
+
+#pagination-wrap ul li{
+    margin: 0 4px;
+    display: inline-block;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#fff;
+    opacity:0.5;
+    position:relative;
+  top:0;
+  
+  
+}
+
+#pagination-wrap ul li.active{
+  width:12px;
+  height:12px;
+  top:3px;
+    opacity:1;
+    box-shadow:rgba(0,0,0,0.5) 1px 1px 0px; 
 }

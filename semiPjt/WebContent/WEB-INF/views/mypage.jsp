@@ -196,7 +196,7 @@
            			<p style="font-weight: normal; font-size:16px;">예약리스트</p>
             	</div>
             </a>
-            <a href="/qaMngment">
+            <a href="/qaView?userId='${sessionScope.User.userId}'">
             	<div class="aside-mng_1">
             		<div>
                         <img src="../../img/mypage_qna_icon.png">

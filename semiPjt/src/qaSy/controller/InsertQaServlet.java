@@ -33,7 +33,9 @@ public class InsertQaServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String qaCommentWriter = request.getParameter("qaCommentWriter");
 		String qaCommentContent = request.getParameter("qaCommentContent");
-		QaComment qc = new QaComment(0, qaCommentWriter, qaCommentContent, 0, null);
+		System.out.println(qaCommentWriter);
+		System.out.println(qaCommentContent);
+		QaComment qc = new QaComment(0, qaCommentWriter, qaCommentContent, 0, null,0);
 		int result = new QaService().insertQa(qc);
 		if(result>0) {
 			request.setAttribute("msg","등록 성공");
@@ -41,7 +43,7 @@ public class InsertQaServlet extends HttpServlet {
 			request.setAttribute("msg","등록 실패");
 		}
 		
-		request.setAttribute("loc", "/qaList");
+		request.setAttribute("loc", "/qaMngment");
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 	}
 
