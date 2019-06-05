@@ -390,12 +390,12 @@
 			
 			<span id="S_whattype"></span>
 			<span class="S_red"> *</span><br> 
-			<input type="text" id="S_price1" name="S_price1" class="form-control" required placeholder="가격을 입력해 주세요." style="display:inline;width:98%;" value="${s.s_price1 }">원
+			<input type="text" id="S_price1" name="S_price1" class="form-control" required numberOnly placeholder="가격을 입력해 주세요." style="display:inline;width:98%;" value="${s.s_price1 }">원
 
 			<br><br>
 			
 			1인당 추가 가격(수정) <span class="S_red"> *</span><br>
-			<input type="text" id="S_price2" name="S_price2" class="form-control" required placeholder="1인당 추가 가격을 입력해 주세요." style="display:inline;width:98%;" value="${s.s_price2 }">원
+			<input type="text" id="S_price2" name="S_price2" class="form-control" required numberOnly placeholder="1인당 추가 가격을 입력해 주세요." style="display:inline;width:98%;" value="${s.s_price2 }">원
 			
 		</div><!-- 프로세스4 -->
 		

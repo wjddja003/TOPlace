@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Insert title here</title>
 	<style>
 		.searchInfo{
@@ -111,7 +113,7 @@
 			clear:left;
 			overflow: hidden;
 		}
-		#filterBack{
+		.filterBack{
 			font-size: 20px;
     		background-color: black;
     		color: white;
@@ -121,6 +123,24 @@
 		}
 		.selectFilter{
 			background-color: blue;
+		}
+		.totalOutLine{
+			width:100%;
+			margin-top:10px;
+			margin-bottom:10px;
+			clear:left;
+		}
+		.totalInnerBox{
+			width:33.3%;
+			padding:10px;
+			border:1px solid black;
+			float:left;
+			display:none;
+		}
+		#viewMore{
+			width:200px;
+			height:50px;
+			margin-top:30px;
 		}
 	</style>
 </head>
@@ -141,7 +161,7 @@
 				<div class="selectBox">모든공간&nbsp;&nbsp;&nbsp;&nbsp;<span>▽</span></div>
 				<div class="selectBoxInner">
 					<div class="typeOutlineDetail">
-						<button id="filterBack")>X</button>
+						<button class="filterBack">X</button>
 					</div>
 					<div class="typeOutlineDetail">
 						<div class="placeTypeDetail">회의실</div>
@@ -174,7 +194,7 @@
 				<div class="selectBox">모든지역<span>▽</span></div>
 				<div class="selectBoxInner">
 					<div class="typeOutlineDetail">
-						<button id="filterBack")>X</button>
+						<button class="filterBack">X</button>
 					</div>
 					<div class="typeOutlineDetail">
 						<div class="placeTypeDetail">이태원</div>
@@ -208,8 +228,9 @@
 			</div>
 			<div class="filterOutLine">
 				<div class="filterOutBox">
-					<span>편의시설</span><span style="font-weight:100;">을 선택하세요.</span>&nbsp;&nbsp;&nbsp;전체선택&nbsp;<input type="checkbox" id="filterCheck" style="width:20px;height:20px;" checked="checked">
-					<button id="filterBack")>X</button>
+					<span>편의시설</span><span style="font-weight:100;">을 선택하세요.</span>&nbsp;&nbsp;&nbsp;전체선택&nbsp;
+					<input type="checkbox" id="filterCheck" style="width:20px;height:20px;" checked="checked">&nbsp;
+					<button class="filterBack">X</button>
 				</div>
 				<div class="filterOutBox">
 					<div class="filterBox">TV/프로젝터<br><img src="/upload/space/kategorie2/1.png" ></div>
@@ -240,10 +261,28 @@
 				</div>
 			</div>
 		</div>
+		<div class="totalOutLine">
+			<c:forEach items='${list }' var='s'>
+				<div class='totalInnerBox'>
+					<div style='height:200px;'>
+						<img src='/upload/space/${s.s_img1}'>
+					</div>
+					<div style='height:120px;'>
+						<h2>'${s.s_placeName}'</h2>
+						<img src='/img/map_marker.png'>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+		<div style="clear:left; text-align:center;">
+			<button id="viewMore">더보기</button>
+		</div>
 	</div>
 	</section>
 	<script type="text/javascript">
 	$(document).ready(function() {
+		var filterCount = 0;
+		var prepareNum=-1;
 		var index = '${index }';
 		if (index >= 0 && index < 12) {
 			if($('.placeTypeDetail').eq(index).text()=='${type}'){
@@ -261,7 +300,7 @@
 				$('.selectBox').eq(2).html('${type }<span>▽</span>');
 			}
 		}
-		var prepareNum=-1;
+		
 		$('.selectBox').click(function() {
 			var selectNum = $('.selectBox').index(this);
 			
@@ -277,13 +316,17 @@
 			}
 			filterCount = 0;
 		});
+		for(var i = 0; i<6; i++){
+			$('.totalInnerBox').eq(i).css("display","block");
+		}
 	});
+	
 	$('.placeTypeDetail').click(function() {
 		var index = $('.placeTypeDetail').index(this);
 		var type = $('.placeTypeDetail').eq(index).text();
 		location.href = "/headerSearchPlace?type=" + type + "&index=" + index;
 	});
-	var filterCount = 0;
+	
 	$('#detailSearchFilter').click(function(){
 		if(filterCount==0){
 			$('.selectBox').find('span').html('▽');
@@ -295,9 +338,10 @@
 			filterCount = 0;
 		}
 	});
-	$('#filterBack').click(function() {
-	     	$(this).parent().parent().css("display","none");
-	     	filterCount = 0;
+	$('.filterBack').click(function() {
+		$('.selectBoxInner').css("display", "none");
+		$('.filterOutLine').css("display", "none");
+	    filterCount = 0;
 	});
 	$("input:radio[name='testradio']:radio[value='2']").prop('checked', true);
 	var filterArray = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
@@ -322,8 +366,15 @@
 		} else{
 			filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 		}
+		$(".selectFilter").removeClass("selectFilter");
 	});
-	
+	var viewIndex = 6;//공간 리스트 인덱스
+	$('#viewMore').click(function(){
+		for(var i = viewIndex; i<viewIndex+6; i++){
+			$('.totalInnerBox').eq(i).css("display","block");
+		}
+		viewIndex = viewIndex+6;
+	});
 	</script>
 </body>
 </html>

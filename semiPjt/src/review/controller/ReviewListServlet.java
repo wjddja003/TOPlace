@@ -31,17 +31,17 @@ public class ReviewListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		request.setCharacterEncoding("utf-8");
-//		int reqPage;
-//		try {
-//			reqPage = Integer.parseInt(request.getParameter("reqPage"));
-//		}catch(NumberFormatException e) {
-//			reqPage = 1;
-//		}
-//		ReviewPageData pd = new ReviewService().selectList(reqPage);
-//		RequestDispatcher rd = request.getRequestDispatcher("/views/viewpage.jsp");
-//		request.setAttribute("pd", pd);
-//		rd.forward(request, response);
+		request.setCharacterEncoding("utf-8");
+		int reqPage;
+		try {
+			reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		}catch(NumberFormatException e) {
+			reqPage = 1;
+		}
+		ReviewPageData pd = new ReviewService().selectList(reqPage);
+		RequestDispatcher rd = request.getRequestDispatcher("/views/viewpage.jsp");
+		request.setAttribute("pd", pd);
+		rd.forward(request, response);
 	}
 
 	/**

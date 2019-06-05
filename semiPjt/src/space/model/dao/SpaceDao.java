@@ -16,7 +16,6 @@ public class SpaceDao {
 	private Properties prop = new Properties();
 	public SpaceDao() {
 		String fileName = Space.class.getResource("/sql/space/spaceQuery2.properties").getPath();
-		System.out.println(fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -150,29 +149,4 @@ public class SpaceDao {
 		}
 		return result;
 	}
-	/*
-	public Space selectImg(Connection conn,int S_no) {
-		Space s = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String query = "select s_img1,s_img2 from place where s_no=?";
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, S_no);
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				s = new Space();
-				s.setS_img1(rset.getString("S_img1"));
-				s.setS_img2(rset.getString("S_img2"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-		return s;
-	}
-	*/
 }
