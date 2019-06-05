@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/common/header.jsp"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <section>
 		<div class="table-wrapper" style="text-align: center;width:80%;margin:0 auto;">
 		<form action="/reviewUpdate" method="post" enctype="multipart/form-data">
@@ -33,9 +35,12 @@
 						<div class="file_box">
 							<label for="hostFile" style="width: 100%; background: #183058; text-align: center;">
 							<span style="color:white;">파일첨부</span>
-							<img src="/upload/review/${review.filename}" style="width:300px; height:300px;" >
+							<c:if test="${not empty review.filename}">
+								<img src="/upload/review/${review.filename}" style="width:300px; height:300px;" class="file_img" >
+							</c:if>
 							<input type="hidden" name="oldFilename" value="${review.filename}">  <!--예전파일명 -->
 							<input type="file" name="filename" id="reviewFile" accept="image/*" onchange="loadImg(this)" value="${review.filename}">
+							<button type="button" class="btn btn-outline-primary" id="imgdelete">삭제하기</button>
 							</label>
 						</div>
 						</td>
@@ -50,6 +55,7 @@
 							<button type="submit" class="btn btn-outline-primary">수정하기</button>
 						</th>
 					</tr>
+					
 				</table>
 		</form>
 		</div>
@@ -60,17 +66,19 @@
 				var reader = new FileReader();
 				reader.readAsDataURL(event.files[0]);
 				reader.onload = function(e){
-					console.log($("#hostFile").val());
 					$(".file_img").attr("src",e.target.result);
-					$(".file_img").css("background-size","cover");
-					
+					$(".file_img").show();
 				}
 			}else{
 				$(".file_img").attr("style","background-image:url(/img/logo.png)");
 				$(".file_img").css("background-size","contain");
 			}
-			
 		}
+		 $("#imgdelete").click(function(){
+			 $("#reviewFile").val("");
+			 console.log( $("#reviewFile").val());
+			 $(".file_img").hide();
+		 });
 		</script>
 </body>
 </html>

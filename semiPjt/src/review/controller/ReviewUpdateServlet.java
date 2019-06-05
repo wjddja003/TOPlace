@@ -53,10 +53,8 @@ public class ReviewUpdateServlet extends HttpServlet {
 		
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 		Review r = new Review();
-		r.setReviewNo(Integer.parseInt(mRequest.getParameter("review_no")));
-		r.setReviewTitle(mRequest.getParameter("review_title"));
-		r.setReviewWriter(mRequest.getParameter("review_writer"));
-		r.setReviewContent(mRequest.getParameter("review_content"));
+		r.setReviewNo(Integer.parseInt(mRequest.getParameter("reviewNo")));
+		r.setReviewContent(mRequest.getParameter("reviewContent"));
 		r.setFilename(mRequest.getFilesystemName("filename"));
 		
 		String oldFilename = mRequest.getParameter("oldFilename");

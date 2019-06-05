@@ -241,19 +241,21 @@
                                     <strong class="guest_name">${rc.reviewWriter}</strong> 
 <%--                                     <p class="p_review"><span>제목 : </span>${rc.reviewTitle }</p> --%>
                                     <p class="p_review">${rc.reviewContent }</p>
+                                    <c:if test="${not empty rc.filename }">
                                     <div class="space_list swiper_list photo_review"> 
                                         <div class="flex_wrap column3 fluid">      
                                             <article class="box_space">    
                                                 <div class="inner">     
                                                     <a href="#" class="_review_img_link">
                                                         <div class="img_box">
-                                                            <span><img src="../upload/review/${rc.filename }" width="100%" height="100%"></span>
+                                                            <span><img src="/upload/review/${rc.filename }" width="100%" height="100%"></span>
                                                         </div>
                                                     </a>
                                                 </div>
                                             </article>
                                         </div>
                                     </div>
+                                    </c:if> 
                                     <div class="rbox_info_base">
                                         <span class="time_info">${rc.reviewDate }</span>
                                     </div>
