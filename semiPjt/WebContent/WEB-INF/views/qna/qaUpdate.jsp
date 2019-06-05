@@ -85,7 +85,7 @@
 	<section>
 		<div class="section_content" style="margin: 0 auto;">
 			<center>
-			<form action="/insertQa" method="post">
+			<form action="/qaUpdateEnd" method="post">
 				<input type="hidden" name="qaCommentWriter" value="${sessionScope.User.userId }">
 				<%-- <input type="hidden" name="qaRef" value="1"> --%>
 	            <div id="reservation_popup_mask"></div>

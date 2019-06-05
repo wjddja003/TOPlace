@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import qaSy.model.service.QaService;
-import qaSy.model.vo.QaComment;
 
 /**
- * Servlet implementation class InsertQaServlet
+ * Servlet implementation class QaDeleteServlet
  */
-@WebServlet(name = "InsertQa", urlPatterns = { "/insertQa" })
-public class InsertQaServlet extends HttpServlet {
+@WebServlet(name = "QaDelete", urlPatterns = { "/qaDelete" })
+public class QaDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertQaServlet() {
+    public QaDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +30,9 @@ public class InsertQaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String qaCommentWriter = request.getParameter("qaCommentWriter");
-		String qaCommentContent = request.getParameter("qaCommentContent");
-		System.out.println(qaCommentWriter);
-		System.out.println(qaCommentContent);
-		QaComment qc = new QaComment(0, qaCommentWriter, qaCommentContent, 0, null,0);
-		int result = new QaService().insertQa(qc);
-		if(result>0) {
-			request.setAttribute("msg","등록 성공");
-		}else {
-			request.setAttribute("msg","등록 실패");
-		}
-		
-		request.setAttribute("loc", "/qaMngment");
-		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		int qaCommentNo = Integer.parseInt(request.getParameter("qaCommentNo"));
+		int result = new QaService().deleteQa(qaCommentNo);
+		response.sendRedirect("/qaMngment");
 	}
 
 	/**

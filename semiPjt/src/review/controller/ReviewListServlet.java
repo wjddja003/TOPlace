@@ -1,27 +1,28 @@
-package qaSy.controller;
+package review.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import qaSy.model.service.QaService;
-import qaSy.model.vo.QaComment;
+import review.model.service.ReviewService;
+import review.model.vo.ReviewPageData;
 
 /**
- * Servlet implementation class InsertQaServlet
+ * Servlet implementation class ReviewListServlet
  */
-@WebServlet(name = "InsertQa", urlPatterns = { "/insertQa" })
-public class InsertQaServlet extends HttpServlet {
+@WebServlet(name = "ReviewList", urlPatterns = { "/reviewList" })
+public class ReviewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertQaServlet() {
+    public ReviewListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,21 +31,17 @@ public class InsertQaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String qaCommentWriter = request.getParameter("qaCommentWriter");
-		String qaCommentContent = request.getParameter("qaCommentContent");
-		System.out.println(qaCommentWriter);
-		System.out.println(qaCommentContent);
-		QaComment qc = new QaComment(0, qaCommentWriter, qaCommentContent, 0, null,0);
-		int result = new QaService().insertQa(qc);
-		if(result>0) {
-			request.setAttribute("msg","등록 성공");
-		}else {
-			request.setAttribute("msg","등록 실패");
-		}
-		
-		request.setAttribute("loc", "/qaMngment");
-		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+//		request.setCharacterEncoding("utf-8");
+//		int reqPage;
+//		try {
+//			reqPage = Integer.parseInt(request.getParameter("reqPage"));
+//		}catch(NumberFormatException e) {
+//			reqPage = 1;
+//		}
+//		ReviewPageData pd = new ReviewService().selectList(reqPage);
+//		RequestDispatcher rd = request.getRequestDispatcher("/views/viewpage.jsp");
+//		request.setAttribute("pd", pd);
+//		rd.forward(request, response);
 	}
 
 	/**

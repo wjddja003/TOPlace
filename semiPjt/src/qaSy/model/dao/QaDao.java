@@ -5,7 +5,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import common.JDBCTemplate;
@@ -14,7 +17,7 @@ import qaSy.model.vo.QaComment;
 public class QaDao {
 	private Properties prop = new Properties();
 	public QaDao() {
-		String fileName = QaComment.class.getResource("/sql/qa/qaQuery3.properties").getPath();
+		String fileName = QaComment.class.getResource("/sql/qa/qaQuery9.properties").getPath();
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -25,6 +28,35 @@ public class QaDao {
 			e.printStackTrace();
 		}
 	}
+	public ArrayList<QaComment> selectAll(Connection conn){
+		ArrayList<QaComment> list = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		String query = "select * from qa_comment";
+		try {
+			stmt= conn.createStatement();
+			rset= stmt.executeQuery(query);
+			list = new ArrayList<QaComment>();
+			while(rset.next()) {
+				QaComment q = new QaComment();
+				q.setQaCommentNo(rset.getInt("qa_comment_no"));
+				q.setQaCommentWriter(rset.getString("qa_Comment_writer"));
+				q.setQaCommentContent(rset.getString("qa_Comment_content"));
+				q.setQaRef(rset.getInt("qa_ref"));
+				q.setQaCommentDate(rset.getDate("qa_Comment_date"));
+				q.setQaCommentRef(rset.getInt("qa_comment_ref"));
+				list.add(q);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(stmt);
+		}
+		return list;
+	}
+	
 	public int insertQa(Connection conn, QaComment qc) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -44,6 +76,126 @@ public class QaDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+	public int totalCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("totalCount");
+		int result = 0;
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(stmt);
+		}
+		return result;
+	}
+	public int totalQCount(Connection conn,String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("totalQCount");
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	public ArrayList<QaComment> selectList(Connection conn, int start,int end){
+		ArrayList<QaComment> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from (select rownum as rnum, q.* from (select * from qa_comment where qa_comment_ref is null order by qa_comment_date desc) q) where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<QaComment>();
+			while(rset.next()) {
+				QaComment q = new QaComment();
+				q.setQaCommentNo(rset.getInt("qa_comment_no"));
+				q.setQaCommentWriter(rset.getString("qa_Comment_writer"));
+				q.setQaCommentContent(rset.getString("qa_Comment_content"));
+				q.setQaRef(rset.getInt("qa_ref"));
+				q.setQaCommentDate(rset.getDate("qa_Comment_date"));
+				q.setQaCommentRef(rset.getInt("qa_comment_ref"));
+				list.add(q);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	
+	}
+	public ArrayList<QaComment> selectQList(Connection conn, int start,int end){
+		ArrayList<QaComment> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from (select rownum as rnum, q.* from (select * from qa_comment where qa_comment_ref is null order by qa_comment_date desc) q) where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<QaComment>();
+			while(rset.next()) {
+				QaComment q = new QaComment();
+				q.setQaCommentNo(rset.getInt("qa_comment_no"));
+				q.setQaCommentWriter(rset.getString("qa_Comment_writer"));
+				q.setQaCommentContent(rset.getString("qa_Comment_content"));
+				q.setQaCommentDate(rset.getDate("qa_Comment_date"));
+				list.add(q);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	
+	}
+	public int deleteQa(Connection conn, int qaCommentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("deleteQa");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, qaCommentNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 		
 	}
+	
+	
 }

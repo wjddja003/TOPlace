@@ -2,26 +2,28 @@ package qaSy.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import qaSy.model.service.QaService;
-import qaSy.model.vo.QaComment;
+import qaSy.model.vo.QaPageData;
 
 /**
- * Servlet implementation class InsertQaServlet
+ * Servlet implementation class QaViewServlet
  */
-@WebServlet(name = "InsertQa", urlPatterns = { "/insertQa" })
-public class InsertQaServlet extends HttpServlet {
+@WebServlet(name = "QaView", urlPatterns = { "/qaView" })
+public class QaViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertQaServlet() {
+    public QaViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +33,20 @@ public class InsertQaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String qaCommentWriter = request.getParameter("qaCommentWriter");
-		String qaCommentContent = request.getParameter("qaCommentContent");
-		System.out.println(qaCommentWriter);
-		System.out.println(qaCommentContent);
-		QaComment qc = new QaComment(0, qaCommentWriter, qaCommentContent, 0, null,0);
-		int result = new QaService().insertQa(qc);
-		if(result>0) {
-			request.setAttribute("msg","등록 성공");
-		}else {
-			request.setAttribute("msg","등록 실패");
+		HttpSession session = request.getSession();
+		String userId = request.getParameter("userId");
+		
+		int reqPage;
+		try {
+			reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		}catch (NumberFormatException e) {
+			reqPage = 1;
 		}
 		
-		request.setAttribute("loc", "/qaMngment");
-		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		QaPageData pd = new QaService().selectQList(reqPage,userId);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qaView.jsp");
+		request.setAttribute("pd", pd);
+		rd.forward(request, response);
 	}
 
 	/**
