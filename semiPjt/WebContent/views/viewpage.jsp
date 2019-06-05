@@ -16,11 +16,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<!--  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
-<!--   <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
-<!--   <script type="text/javascript" src="/js/slick.min.js"></script>  -->
 <link rel="stylesheet" type="text/css" href="/css/viewpage.css">
-<link rel="stylesheet" type="text/css" href="/css/slick.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <title>뷰페이지</title>
@@ -240,16 +236,17 @@
                         <ul>
                             <li class="rlist">   
                                 <div class="rbox_mine"> 
+                                	<c:forEach items="${pd.list}" var="rc">
                                     <span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
                                     <strong class="guest_name">아이디</strong> 
-                                    <p class="p_review">공간도 엄청 넓고, 포토존이 많아서 예쁜사진 많이남겼어요 ㅠㅠ 브라이덜샤워로 이용하기 정말 좋은 곳이었습니다~!! 그리고 오픈한지 얼마 안되서 그런지 장소도 소품도 아주 깨끗해요!!ㅎㅎ 삼각대, 충전기, 블루투스 스피커까지 없는게 없었습니다!! 그리고 호스트님이 정말 친절하셔용  번창하세요!!~!</p>
+                                    <p class="p_review">${rc.reviewContent }</p>
                                     <div class="space_list swiper_list photo_review"> 
                                         <div class="flex_wrap column3 fluid">      
                                             <article class="box_space">    
                                                 <div class="inner">     
                                                     <a href="#" class="_review_img_link">
                                                         <div class="img_box">
-                                                            <span><img src="../img/ex1.jpg" width="100%" height="100%"></span>
+                                                            <span><img src="../img/${rc.filename }" width="100%" height="100%"></span>
                                                         </div>
                                                     </a>
                                                 </div>
@@ -257,7 +254,7 @@
                                         </div>
                                     </div>
                                     <div class="rbox_info_base">
-                                        <span class="time_info">2019.06.13. 09:39:06</span>
+                                        <span class="time_info">${rc.reviewDate }</span>
                                     </div>
                                     <span class="rate_area">
                                         <span class="blind">평점</span>
@@ -277,6 +274,8 @@
                                             <em class="sp_icon ico_star_off">★</em>
                                         </span>
                                     </span>
+                                   </c:forEach>
+                                   <div id="pageNavi">${pd.PageNavi }</div>
                                 </div>
                             </li>
                         </ul>

@@ -36,12 +36,5 @@ public class SpaceService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-	/*
-	public Space selectImg(int S_no) {
-		Connection conn = JDBCTemplate.getConnection();
-		Space s = new SpaceDao().selectImg(conn,S_no);
-		JDBCTemplate.close(conn);
-		return s;
-	}
-	*/
+
 }
