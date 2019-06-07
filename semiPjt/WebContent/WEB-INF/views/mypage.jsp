@@ -251,7 +251,7 @@
                 </c:if>
                 <li><a href="/noticeList">공지사항<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li><a href="/helpList">도움말<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <li><a href="https://talk.naver.com/ct/wc89we">1:1문의<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="https://talk.naver.com/ct/wc89we" target="_blank">1:1문의<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li class="service"><a href="#">서비스정보<span><img src="/img/chevrondown.png" class="d_img"></span></a></li>
                 <div style="display:none" id="sv_list">
                         <ul>
