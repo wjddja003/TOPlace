@@ -1074,7 +1074,7 @@
          var price = 1000;
          var d = new Date();
          var payDate = d.getFullYear()+''+ (d.getMonth() + 1)+ '' + d.getDate() + ''+ d.getHours() + ''+ d.getMinutes() + ''+ d.getSeconds();
-         IMP.init('imp07297817'); //복사해온 개인 키
+         IMP.init('imp59515101'); //복사해온 개인 키
          IMP.request_pay({ //결제정보작성
             merchant_uid : "${s.s_placeName}"+ payDate, //거래아이디
             name : "결제테스트", //결제명
