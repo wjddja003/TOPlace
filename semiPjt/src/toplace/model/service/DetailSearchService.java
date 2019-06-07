@@ -8,7 +8,7 @@ import space.model.vo.Space;
 import toplace.model.dao.DetailSearchDao;
 
 public class DetailSearchService {
-	public ArrayList<Space> detailSearch(int inputType,int index){
+	public ArrayList<Space> detailSearch(int inputType,int index,String type){
 		Connection conn=JDBCTemplate.getConnection();
 		String typeArr = "";
 		
@@ -21,15 +21,13 @@ public class DetailSearchService {
 					typeArr += "_";
 				}
 			}
-			list = new DetailSearchDao().placeTypeSearch(conn,typeArr,index);
+			System.out.println(typeArr);
+			list = new DetailSearchDao().placeTypeSearch(conn,typeArr);
 		} else if(inputType==2) {
-			for(int i =0;i<23;i++) {
-				if(i==index*2) {
-					typeArr += "1";
-				}else {
-					typeArr += "_";
-				}
-			}
+				
+		} else if(inputType==3) {
+			System.out.println(type);
+			list = new DetailSearchDao().unknownTypeSearch(conn,type);
 		}
 		
 		
