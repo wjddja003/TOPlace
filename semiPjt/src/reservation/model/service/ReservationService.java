@@ -34,7 +34,7 @@ public class ReservationService {
 	}
 	public ReservationPageData selectList(int reqPage,int userNo) {
 		Connection conn = JDBCTemplate.getConnection();
-		int numPerPage = 3;
+		int numPerPage = 4;
 		int totalCount = new ReservationDao().totalCount(conn,userNo);
 		System.out.println(totalCount);
 		System.out.println(userNo);
@@ -46,19 +46,19 @@ public class ReservationService {
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(pageNo != 1) {
-			pageNavi += "<a class='btn' href='/reservationView?reqPage="+(pageNo-1)+"'>이전</a>";
+			pageNavi += "<a class='btn' href='/reservationList?reqPage="+(pageNo-1)+"'>이전</a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
 			if(reqPage == pageNo) {
 				pageNavi += "<span class='selectPage'>"+pageNo+"</span>";
 			}else {
-				pageNavi += "<a class='btn' href='/reservationView?reqPage="+pageNo+"'>"+pageNo+"</a>";
+				pageNavi += "<a class='btn' href='/reservationList?reqPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 	if(pageNo <= totalPage) {
-		pageNavi +="<a class='btn' href='/reservationView?reqPage="+pageNo+"'>다음</a>";
+		pageNavi +="<a class='btn' href='/reservationList?reqPage="+pageNo+"'>다음</a>";
 	}
 	
 	ReservationPageData pd = new ReservationPageData(list,pageNavi);

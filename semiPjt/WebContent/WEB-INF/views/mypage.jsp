@@ -241,7 +241,7 @@
         </div>
         <div class="aside-list">
             <ul class="aside-navi">
-                <li><a href="/bookmark">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="/likeList">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <c:if test="${not empty sessionScope.host }">
                 <li class="spaceMng">
                 	
