@@ -47,6 +47,7 @@ public class HostPageServlet extends HttpServlet {
 			reqPage = 1;
 		}
 		int ShostNum = Integer.parseInt(request.getParameter("ShostNum"));
+		System.out.println(ShostNum);
 		int totalCount = new HostpageService().more();
 		HostDataPage hd  = new HostpageService().host(ShostNum); //공간
 		HostPaging hp = new HostpageService().userPaging(reqPage,ShostNum); //리뷰		
