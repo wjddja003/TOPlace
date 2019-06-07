@@ -14,16 +14,16 @@ import space.model.vo.Space;
 import toplace.model.service.DetailSearchService;
 
 /**
- * Servlet implementation class HeaderSearchPlaceServlet
+ * Servlet implementation class FilterSearchServlet
  */
-@WebServlet(name = "HeaderSearchPlace", urlPatterns = { "/headerSearchPlace" })
-public class HeaderSearchPlaceServlet extends HttpServlet {
+@WebServlet(name = "FilterSearch", urlPatterns = { "/filterSearch" })
+public class FilterSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HeaderSearchPlaceServlet() {
+    public FilterSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,8 +36,12 @@ public class HeaderSearchPlaceServlet extends HttpServlet {
 		int index = Integer.parseInt(request.getParameter("index"));
 		int inputType = Integer.parseInt(request.getParameter("inputType"));
 		String type = request.getParameter("type");
+		String filter =""; 
+		if(request.getParameter("filter")!=null) {
+			filter = request.getParameter("filter");
+		}
 		
-		ArrayList<Space> list = new DetailSearchService().detailSearch(inputType,index,type);
+		ArrayList<Space> list = new DetailSearchService().filterSearch(inputType,index,type,filter);
 		
 		request.setAttribute("type", type);
 		request.setAttribute("index", index);
@@ -45,6 +49,7 @@ public class HeaderSearchPlaceServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/detailSearch.jsp");
 		rd.forward(request, response);
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
