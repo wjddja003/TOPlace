@@ -849,6 +849,7 @@
     <script>
     var timeInhibitArray=new Array();
     var preday = new Array();
+    var array = new Array(); 
     $(document).ready(function(){
          
         var sysday = new Date();         
@@ -915,7 +916,7 @@
         
         var holiday = [sysday.getFullYear()+"0101",sysday.getFullYear()+"0301",sysday.getFullYear()+"0505",sysday.getFullYear()+"0512",sysday.getFullYear()+"0606",sysday.getFullYear()+"0815",sysday.getFullYear()+"1003",sysday.getFullYear()+"1009",sysday.getFullYear()+"1225"];
         var selectInhibitDay = new Array();
-        var array = new Array(); 
+        
         var inhibitType = new Array(${s.s_holiday}); 
         var inhibitrList = new Array();
         var inhibitDay = new Array();
@@ -982,10 +983,7 @@
         var weeknum = 1;
         for(var i=1;i<monthEndDay[month-1]+1;i++){
         	var price = '${s.s_price1}';
-        	if(DOW==0 || DOW==5 || DOW==6){
-        		price = price*2;
-        		$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("priceDouble");
-        	}
+        	
             $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price); //해당 달의 끝날자만큼 for문이 돌아서 날짜를 td에 입력
             if(month==parseInt(sysday.getMonth()+1) && i<day){  //지금 이번달이 맞는지 또 입력되고 있는 날짜가 현재 날자보다 작은지 에따른 조건으로
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","grey");
@@ -1063,10 +1061,7 @@
 
             for(var i=1;i<monthEndDay[month-1]+1;i++){
             	var price = '${s.s_price1}';
-            	if(DOW==0 || DOW==5 || DOW==6){
-            		price = price*2;
-            		$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("priceDouble");
-            	}
+            	
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
                 //기본 날짜 넣는 로직
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","white");
@@ -1162,10 +1157,7 @@
             $('th').eq(1).text(year+"년 "+month+"월");
             for(var i=1;i<monthEndDay[month-1]+1;i++){
             	var price = '${s.s_price1}';
-            	if(DOW==0 || DOW==5 || DOW==6){
-            		price = price*2;
-            		$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("priceDouble");
-            	}
+            	
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
                 
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","white");
@@ -1390,6 +1382,7 @@
                     if (idx > -1) array.splice(idx, 1)
                 }
         		array.sort();
+        		
         		$('#choiceDay').html("");
         		$('#showDay').html("날짜선택");
         		for(appendCount = 0; appendCount<array.length;appendCount++){
@@ -1516,7 +1509,7 @@
 	                    array[i] = year+strMonth+strDay;
 	                }
 	            }
-	            console.log(array);
+	            
 	            arrayStr="";
 	            for(var arrI=0;arrI<array.length;arrI++){
 	            	arrayStr += array[arrI];

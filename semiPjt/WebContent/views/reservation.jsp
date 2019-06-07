@@ -859,8 +859,18 @@
  	                    hapTime++
                  	  }
                   }
+                  arrayStr="";
+	  	            for(var arrI=0;arrI<array.length;arrI++){
+	  	            	arrayStr += array[arrI];
+	  	            	if(arrI<array.length-1){
+	  	            		arrayStr += ",";
+	  	            	}
+	  	            }
+	  	            console.log("날짜스트링"+arrayStr);
+	  	            $('input[name=reservationDay]').val(arrayStr);
                   var s = selTimeArray.join('')+'/';
                   sendTimeArray[btnIndex] = s; //얘가 최종적으로 보내야할 예약된 시간임 데이는 원래 저장되던 array?로 보내면됨 둘다 스트링으로 만드는데 sendTime은 /로 항목 구분 해줘야함
+                  console.log(array);
                   arrayTime="";
                   for(var Itime=0;Itime<sendTimeArray.length;Itime++){
                 	  arrayTime += sendTimeArray[Itime];
@@ -1064,7 +1074,7 @@
          var price = 1000;
          var d = new Date();
          var payDate = d.getFullYear()+''+ (d.getMonth() + 1)+ '' + d.getDate() + ''+ d.getHours() + ''+ d.getMinutes() + ''+ d.getSeconds();
-         IMP.init('imp07297817'); //복사해온 개인 키
+         IMP.init('imp59515101'); //복사해온 개인 키
          IMP.request_pay({ //결제정보작성
             merchant_uid : "${s.s_placeName}"+ payDate, //거래아이디
             name : "결제테스트", //결제명
@@ -1121,30 +1131,15 @@
             }
          });
       });
-      
     	  function priceCAL(){
     	  var onePrice = ${s.s_price1};
     	  for (var spd=0; spd<$('.selectDay').length;spd++){
     		  if(btnVal==1){
-    			  if($('.selectDay').eq(spd).hasClass("priceDouble") === true){
-        			  totalPrice += onePrice+onePrice+0;
-        			  
-        		  }else if($('.selectDay').eq(spd).hasClass("priceDouble") === false){
-        			  totalPrice += onePrice+onePrice+0;
-        			  
-        		  }
+        			  totalPrice += onePrice+0;
     		  }else{
-    			  if($('.selectDay').eq(spd).hasClass("priceDouble") === true){
-        			  totalPrice += onePrice*2* priceTimeArr[spd]+0;
-        			  
-        		  }else if($('.selectDay').eq(spd).hasClass("priceDouble") === false){
         			  totalPrice += onePrice* priceTimeArr[spd]+0;
-        			  
-        		  }
     		  }
-    		  
     	  }
-    	  
       }
    </script>
    <jsp:include page="/WEB-INF/common/footer.jsp" />
