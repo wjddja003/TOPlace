@@ -73,6 +73,7 @@ public class HostProfileUpdateServlet extends HttpServlet {
 		}else {//첨부파일이 없는 경우
 			File deleteFile = new File(saveDirectory+"/"+oldFilename);
 			boolean bool = deleteFile.delete();
+			h.setHostFile(oldFilename);
 			System.out.println(bool?"삭제완료":"삭제실패");
 		}
 		int result = new HostService().hostUpdate(h);
