@@ -101,5 +101,11 @@
             </div>
         </div>
     </section>
+    <script>
+    	$(document).ready(function(){
+    		console.log(${sessionScope.User.userNo});
+    		console.log(${pd.list[1].userNo});
+    	});
+    </script>
 </body>
 </html>

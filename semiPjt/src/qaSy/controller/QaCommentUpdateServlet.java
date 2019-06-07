@@ -35,7 +35,6 @@ public class QaCommentUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		int qaCommentNo = Integer.parseInt(request.getParameter("qaCommentNo"));
-		
 		QaComment q = new QaService().selectOne(qaCommentNo);
 		request.setAttribute("qaComment", q);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qaCommentUpdate.jsp");

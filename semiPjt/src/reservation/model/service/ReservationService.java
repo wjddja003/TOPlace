@@ -43,6 +43,9 @@ public class ReservationService {
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
 		ArrayList<ReservationImg> list = new ReservationDao().selectList(conn, start, end,userNo);
+		if(list == null) {
+			System.out.println("문제가 아니길 빌자");
+		}
 		String pageNavi = "";
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
@@ -65,7 +68,7 @@ public class ReservationService {
 	ReservationPageData pd = new ReservationPageData(list,pageNavi);
 	JDBCTemplate.close(conn);
 	return pd;
-
+	}
 	public ArrayList<Reservation> reservationSelect(int S_no, int userNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Reservation> resList = new ReservationDao().reservationSelect(conn,S_no,userNo);

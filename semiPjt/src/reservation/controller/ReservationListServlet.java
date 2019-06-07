@@ -47,7 +47,7 @@ public class ReservationListServlet extends HttpServlet {
 			}catch (NumberFormatException e) {
 				reqPage = 1;
 			}
-			
+			System.out.println("확인");
 			ReservationPageData pd = new ReservationService().selectList(reqPage,userNo);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reservation/reservationView.jsp");
 			request.setAttribute("pd", pd);
