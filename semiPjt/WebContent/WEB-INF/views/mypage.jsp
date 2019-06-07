@@ -220,7 +220,7 @@
         
         <div id="mypage1">    
         <div class="aside-mng">
-            <a href="/reservationView">
+            <a href="/reservationList">
             	<div class="aside-mng_1">
             		<div>
                         <img src="../../img/mypage_reservation_icon.png">
@@ -234,7 +234,7 @@
             		<div>
                         <img src="../../img/mypage_qna_icon.png">
                     </div>
-            		<p style="font-weight: normal; font-size:16px;">Q＆A관리</p>
+            		<p style="font-weight: normal; font-size:16px;">이용후기/Q＆A관리</p>
             	</div>
             </a>
            

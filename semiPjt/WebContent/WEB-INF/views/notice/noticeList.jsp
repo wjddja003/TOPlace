@@ -79,6 +79,16 @@ prefix="c" %>
         background-color: #183058;
         color: #f7f7f7;
     }
+    .reviewBtn{
+        background: #fff;
+        border: 1px solid #f69b02;
+        font-size: 12px;
+        margin: 0 0 5px 0;
+        float: right;
+        width: 50px;
+        height: 30px;
+    }
+    
 </style>
 </head>
 <body>
@@ -122,8 +132,8 @@ prefix="c" %>
 							
 							${n.noticeContent }
 							<c:if test="${sessionScope.User.userId == n.noticeWriter}">
-							<a class="btn btn-outline-primary btn-sm btn1" href="/noticeDelete?noticeNo=${n.noticeNo }">삭제</a>
-								<a class="btn btn-outline-primary btn-sm btn1" href="/noticeUpdate?noticeNo=${n.noticeNo }">수정</a>
+                                <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/noticeDelete?noticeNo=${n.noticeNo }"style="color:#f69b02">삭제</a></button>
+                                <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/noticeUpdate?noticeNo=${n.noticeNo }"style="color:#f69b02">수정</a></button>
 							</c:if>
 							
 								
@@ -138,7 +148,7 @@ prefix="c" %>
             </table>
             <div><%= pd.getPageNavi() %></div>
             <div>
-                <a class="btn btn-outline-primary btn-sm" href="/noticeWrite"style="color:#f69b02; border-color:#f69b02">글쓰기</a>
+                <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/noticeWrite" style="color:#f69b02">글쓰기</a></button>
             </div>
         </div>
     </div>

@@ -17,7 +17,6 @@
 <style>
      #rq{
          font-size: 18px;
-        border-top:1px solid #183058;
     	text-align: center;
         margin: 30px 0 0 0;
         width: 1000px;
@@ -105,8 +104,8 @@
                     	</div>
                         <div class="Q_btn">
                         ${q.qaCommentDate }<br>
-                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02" href="/qaCommentDelete?qaCommentNo=${q.qaCommentNo }">삭제</button>
-                           	<button class="reviewBtn"style="color:#f69b02; border-color:#f69b02" href="/qaCommentUpdate?qaCommentNo=${q.qaCommentNo }">수정</button>
+                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/qaCommentDelete?qaCommentNo=${q.qaCommentNo }"style="color:#f69b02">삭제</a></button>
+                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/qaCommentUpdate?qaCommentNo=${q.qaCommentNo }"style="color:#f69b02">수정</a></button>
                         </div>
                     </div>
                 </div>

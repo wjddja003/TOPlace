@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ page import="review.model.vo.ReviewPageData" %>
-   <%@ page import="review.model.vo.Review" %>
-   
+    <%@ page import="reservation.model.vo.ReservationImg" %>
+    <%@ page import="reservation.model.vo.ReservationPageData" %>
     <%
-    	ReviewPageData pd = (ReviewPageData)request.getAttribute("pd");
-    
+    	ReservationPageData pd = (ReservationPageData)request.getAttribute("pd");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,30 +13,16 @@
 </head>
 <style>
     #rq{
+        padding-top: 20px;
         font-size: 18px;
     	text-align: center;
         margin: 30px 0 0 0;
         width: 1000px;
         height: 70px;
-        background: #e2e2e2;
+        background: #f69b02;
     }
-    
-    .review{
-         background-color: #f69b02;
-        color: #f7f7f7;
-        
-        float: left;
-        width: 50%;
-        height: 70px;
-    }
-    .qa{
-        color: #183058;
-        float: left;
-        width: 50%;
-         height: 70px;
-    }
+  
     #qa_view{
-        
         margin: 0 auto;
         width: 1000px;
     }
@@ -92,25 +76,21 @@
         <div class="section_content">
             <div id="qa_view">
                 <div id="rq">
-                    <a href="/reviewList2">
-                        <div class="review"><p style="line-height:70px">REVIEW</p></div>
-                    </a>
-                    <a href="/qaView">
-                        <div class="qa"><p style="line-height:70px">Q＆A</p></div>
-                    </a>
+                    예약 내역 리스트
                 </div>
                 <c:forEach items="${pd.list }" var="r">
                 	 
-                	<c:if test="${sessionScope.User.userId == r.reviewWriter}">
+                	<c:if test="${sessionScope.User.userNo == r.userNo}">
                 <div class="qa_v">
               
                     <div class="qa_no">
-                    	공간명 :${r.reviewNo }<br>
-                    	${r.reviewTitle }<br>
-                    	
+                    	사진: ${r.img}<br>
+                    	공간명 :${r.reservationName }<br>
+                    	예약날짜 :${r.reservationDay }<br>
+                    	가격 :${r.paymentPrice }
                         <div class="Q_btn">
-                        ${r.reviewDate }<br>
-                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02">리뷰보러가기</button>
+                       <br>
+                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02">예약공간가기</button>
                         </div>
                     </div>
                 </div>

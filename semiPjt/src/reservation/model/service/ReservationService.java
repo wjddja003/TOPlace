@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import common.JDBCTemplate;
 import reservation.model.dao.ReservationDao;
 import reservation.model.vo.Reservation;
+import reservation.model.vo.ReservationImg;
+import reservation.model.vo.ReservationPageData;
 
 public class ReservationService {
 	public int insertReservation(Reservation r) {
@@ -29,5 +31,38 @@ public class ReservationService {
 		}
 		JDBCTemplate.close(conn);
 		return rList;
+	}
+	public ReservationPageData selectList(int reqPage,int userNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int numPerPage = 3;
+		int totalCount = new ReservationDao().totalCount(conn,userNo);
+		System.out.println(totalCount);
+		System.out.println(userNo);
+		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
+		int start = (reqPage-1)*numPerPage+1;
+		int end = reqPage*numPerPage;
+		ArrayList<ReservationImg> list = new ReservationDao().selectList(conn, start, end,userNo);
+		String pageNavi = "";
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		if(pageNo != 1) {
+			pageNavi += "<a class='btn' href='/reservationView?reqPage="+(pageNo-1)+"'>이전</a>";
+		}
+		int i = 1;
+		while(!(i++>pageNaviSize || pageNo>totalPage)) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='selectPage'>"+pageNo+"</span>";
+			}else {
+				pageNavi += "<a class='btn' href='/reservationView?reqPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+	if(pageNo <= totalPage) {
+		pageNavi +="<a class='btn' href='/reservationView?reqPage="+pageNo+"'>다음</a>";
+	}
+	
+	ReservationPageData pd = new ReservationPageData(list,pageNavi);
+	JDBCTemplate.close(conn);
+	return pd;
 	}
 }
