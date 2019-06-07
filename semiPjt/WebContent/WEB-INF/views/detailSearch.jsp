@@ -14,7 +14,7 @@
 			margin-top: 30px;
 		}
 		.detailSearchList{
-			width:25%;
+			position:relative;
 			float:left;
 			padding-left:5%;
 			padding-right:5%;
@@ -45,11 +45,14 @@
 			text-align: right;
 		}
 		.selectBoxInner{
+			position:absolute;
+			top:55px;
 			padding:20px;
 			display:none;
 			width: 500px;
 			border: 1px solid black;
 			overflow: hidden;
+			background-color: white;
 		}
 		.selectBox:hover{
 			cursor: pointer;
@@ -78,6 +81,7 @@
 		    right: 300px;
 		}
 		.filterOutLine{
+		
 			padding:20px;
 			display: none;
 			clear: both;
@@ -133,7 +137,7 @@
 		.totalInnerBox{
 			width:33.3%;
 			padding:10px;
-			border:1px solid black;
+			
 			float:left;
 			display:none;
 		}
@@ -157,7 +161,7 @@
             <input class="searchIcon" type="submit" value="">
         </div>
 		<div class="detailBox">
-			<div class="detailSearchList">공간유형
+			<div class="detailSearchList" style="width:37.5%;">공간유형
 				<div class="selectBox">모든공간&nbsp;&nbsp;&nbsp;&nbsp;<span>▽</span></div>
 				<div class="selectBoxInner">
 					<div class="typeOutlineDetail">
@@ -190,8 +194,8 @@
 				</div>
 			</div>
 				
-			<div class="detailSearchList">지역
-				<div class="selectBox">모든지역<span>▽</span></div>
+			<div class="detailSearchList" style="width:37.5%;">지역
+				<div class="selectBox">모든지역&nbsp;&nbsp;&nbsp;&nbsp;<span>▽</span></div>
 				<div class="selectBoxInner">
 					<div class="typeOutlineDetail">
 						<button class="filterBack">X</button>
@@ -214,15 +218,14 @@
 					</div>
 				</div>
 			</div>
-			
 			<div class="detailSearchList">이용일
 				<div class="selectBox" >모든날짜<span>▽</span></div>
 				<div class="selectBoxInner">
 					<jsp:include page="/WEB-INF/views/calendar2.jsp"/>
 				</div>
 			</div>
-			<div class="detailSearchList">
-				<button id="detailSearchMap" class="detailSearchBtn">지도</button>
+			<div class="detailSearchList" style="width:25%;">
+				<button id="detailSearchMap" class="detailSearchBtn" onclick="maps('${inputType}','${index}','${type}')">지도</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button id="detailSearchFilter" class="detailSearchBtn">필터</button>
 			</div>
@@ -262,6 +265,11 @@
 					<div class="filterBox">바베큐시설<br><img src="/upload/space/kategorie2/20.png" ></div>
 					<div class="filterBox">도어락<br><img src="/upload/space/kategorie2/21.png" ></div>
 				</div>
+				<div class="filterOutBox" style="margin-top:20px; text-align:center">
+					<button id="filterReset" style="width:35%; height:60px;">초기화 하기</button>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<button id="filterSubmit" style="width:35%; height:60px;">필터 적용하기</button>
+				</div>
 			</div>
 		</div>
 		<div class="totalOutLine">
@@ -294,24 +302,34 @@
 	$(document).ready(function() {
 		var filterCount = 0;
 		var prepareNum=-1;
+		$('.searchInput').val('${type}');
+		var type = '${type}';
 		var index = '${index }';
 		if (index >= 0 && index < 12) {
 			if($('.placeTypeDetail').eq(index).text()=='${type}'){
 				$('.selectBox').eq(0).html('${type }<span>▽</span>');
 				$('.placeTypeDetail').eq(index).css("background-color", "blue");
 			}
-			
+			inputType=1;
 		} else if (index >= 12 && index < 18) {
 			if($('.placeTypeDetail').eq(index).text()=='${type}'){
 				$('.selectBox').eq(1).html('${type }<span>▽</span>');
 				$('.placeTypeDetail').eq(index).css("background-color", "blue");
 			}
+			inputType=2;
 		} else {
 			if($('.placeTypeDetail').eq(index).text()=='${type}'){
 				$('.selectBox').eq(2).html('${type }<span>▽</span>');
 			}
+			inputType=3;
 		}
 		
+		
+		for(var i = 0; i<6; i++){
+			$('.totalInnerBox').eq(i).css("display","block");
+		}
+	
+	
 		$('.selectBox').click(function() {
 			var selectNum = $('.selectBox').index(this);
 			
@@ -327,80 +345,108 @@
 			}
 			filterCount = 0;
 		});
-		for(var i = 0; i<6; i++){
-			$('.totalInnerBox').eq(i).css("display","block");
-		}
-	});
-	
-	$('.placeTypeDetail').click(function() {
 		
-		var index = $('.placeTypeDetail').index(this);
-		var type = $('.placeTypeDetail').eq(index).text();
-		if(index<12){
-			inputType = 1;			
-		}else if(index>=12 && index<20){
-			inputType = 2;
-		}
-		location.href = "/headerSearchPlace?type=" + type + "&index=" + index + "&inputType=" + inputType;
-	});
-	
-	$('.totalInnerBox').click(function(){
-		var sNumber = $(this).find('input').val();
-		location.href = "/selectOneSpace?S_no="+sNumber;
-	});
-	
-	$('#detailSearchFilter').click(function(){
-		if(filterCount==0){
-			$('.selectBox').find('span').html('▽');
-			$('.selectBox').next().css("display", "none");
-			$('.filterOutLine').css("display", "block");	
-			filterCount = 1;
-		} else if(filterCount==1){
-			$('.filterOutLine').css("display", "none");	
-			filterCount = 0;
-		}
-	});
-	$('.filterBack').click(function() {
-		$('.selectBoxInner').css("display", "none");
-		$('.filterOutLine').css("display", "none");
-	    filterCount = 0;
-	});
-	$("input:radio[name='testradio']:radio[value='2']").prop('checked', true);
-	var filterArray = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-	var filterCount = 0;
-	$('.filterBox').click(function(){
-		if($('#filterCheck').is(':checked')==true){
+		$('.placeTypeDetail').click(function() {
+			
+			var index = $('.placeTypeDetail').index(this);
+			var type = $('.placeTypeDetail').eq(index).text();
+			if(index<12){
+				inputType = 1;			
+			}else if(index>=12 && index<20){
+				inputType = 2;
+			}
+			location.href = "/headerSearchPlace?type=" + type + "&index=" + index + "&inputType=" + inputType;
+		});
+		
+		$('.totalInnerBox').click(function(){
+			var sNumber = $(this).find('input').val();
+			location.href = "/selectOneSpace?S_no="+sNumber;
+		});
+		
+		$('#detailSearchFilter').click(function(){
+			if(filterCount==0){
+				$('.selectBox').find('span').html('▽');
+				$('.selectBox').next().css("display", "none");
+				$('.filterOutLine').css("display", "block");	
+				filterCount = 1;
+			} else if(filterCount==1){
+				$('.filterOutLine').css("display", "none");	
+				filterCount = 0;
+			}
+		});
+		$('.filterBack').click(function() {
+			$('.selectBoxInner').css("display", "none");
+			$('.filterOutLine').css("display", "none");
+		    filterCount = 0;
+		});
+		
+		var filterArray = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+		var filterCount = 0;
+		$('.filterBox').click(function(){
+			if($('#filterCheck').is(':checked')==true){
+				$('#filterCheck').prop("checked", false);
+				filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+			}
+			var filterIndex = $('.filterBox').index(this);
+			$(this).toggleClass("selectFilter");
+			if($(this).hasClass("selectFilter")){
+				filterArray[filterIndex] = 1;
+			}else{
+				filterArray[filterIndex] = 0;
+			}
+			console.log(filterArray);
+		});
+		$('#filterCheck').click(function(){
+			if($('#filterCheck').is(':checked')==true){
+				filterArray = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+			} else{
+				filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+			}
+			$(".selectFilter").removeClass("selectFilter");
+		});
+		var viewIndex = 6;//공간 리스트 인덱스
+		$('#viewMore').click(function(){
+			for(var i = viewIndex; i<viewIndex+6; i++){
+				$('.totalInnerBox').eq(i).css("display","block");
+			}
+			viewIndex = viewIndex+6;
+		});
+		$('#detailSearchMap').click(function(){
+			
+			$('.mapInner').toggle();
+		});
+		$('#filterReset').click(function(){
 			$('#filterCheck').prop("checked", false);
 			filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-		}
-		var filterIndex = $('.filterBox').index(this);
-		$(this).toggleClass("selectFilter");
-		if($(this).hasClass("selectFilter")){
-			filterArray[filterIndex] = 1;
-		}else{
-			filterArray[filterIndex] = 0;
-		}
-		console.log(filterArray);
+			$(".selectFilter").removeClass("selectFilter");
+		});
+		$('#filterSubmit').click(function(){
+			var filter = filterArray.join("");
+			console.log(filter);
+			location.href = "/filterSearch?type=" + type + "&index=" + index + "&inputType=" + inputType +"&filter="+filter;
+		});
 	});
-	$('#filterCheck').click(function(){
-		if($('#filterCheck').is(':checked')==true){
-			filterArray = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-		} else{
-			filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-		}
-		$(".selectFilter").removeClass("selectFilter");
-	});
-	var viewIndex = 6;//공간 리스트 인덱스
-	$('#viewMore').click(function(){
-		for(var i = viewIndex; i<viewIndex+6; i++){
-			$('.totalInnerBox').eq(i).css("display","block");
-		}
-		viewIndex = viewIndex+6;
-	});
-	$('#detailSearchMap').click(function(){
+
+	
+	
+	
+	
+	function maps(inputType,index,type) {
 		
-		$('.mapInner').toggle();
-	})
+		var inputType = inputType;
+		var index = index;
+		var type = type;
+		console.log(inputType);
+		console.log(index);
+		console.log(type);
+		location.href="/headerSearchplace2?inputType="+inputType+"&index="+index+"&type="+type;
+	
+	}
+	
+	
+
 	</script>
+	
+	
 </body>
 </html>

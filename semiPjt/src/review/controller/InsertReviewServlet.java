@@ -42,7 +42,6 @@ public class InsertReviewServlet extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/views/common/msg.jsp").forward(request, response);
 			return;
 		}
-		
 		String root = getServletContext().getRealPath("/");
 		String saveDirectory = root + "upload/review";
 		
@@ -63,7 +62,7 @@ public class InsertReviewServlet extends HttpServlet {
 		}else {
 			request.setAttribute("msg","리뷰등록실패");
 		}
-		request.setAttribute("loc", "/");
+		request.setAttribute("loc", "/selectOneSpace?S_no="+reviewSno);
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 	}
 

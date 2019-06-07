@@ -27,6 +27,7 @@
 		<div class="table-wrapper" style="text-align: center;width:80%;margin:0 auto;">
 		<form action="/reviewUpdate" method="post" enctype="multipart/form-data">
 				<table class="table table-bordered">
+					<input type="hidden" name="reviewSno" value="${review.reviewSno }">
 					<input type="hidden" name="reviewNo" value="${review.reviewNo }">
 					<tr>
 						<th colspan="2" style="font-size:20px;font-weight:bold">공지사항</th>				

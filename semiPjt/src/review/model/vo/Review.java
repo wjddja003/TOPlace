@@ -3,6 +3,7 @@ package review.model.vo;
 import java.sql.Date;
 
 public class Review {
+
 	private int reviewNo;
 	private int reviewSno;
 	private String reviewTitle;
@@ -11,6 +12,7 @@ public class Review {
 	private String filename;
 	private int reviewStar;
 	private Date reviewDate;
+
 	public Review() {
 		super();
 		// TODO Auto-generated constructor stub

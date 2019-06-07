@@ -31,8 +31,9 @@ public class ReviewDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		int S_no = Integer.parseInt(request.getParameter("S_no"));
 		int result = new ReviewService().deleteReview(reviewNo);
-		response.sendRedirect("/selectOneSpace");
+		response.sendRedirect("/selectOneSpace?S_no="+S_no);
 	}
 
 	/**

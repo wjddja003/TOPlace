@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Space {
-	private int S_no;
+	private int S_no;//공간번호
 	private int S_hostNum;
 	private String S_placeName;
 	private String S_kategorie1;

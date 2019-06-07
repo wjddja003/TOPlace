@@ -42,7 +42,7 @@
 						<th>작성자</th>
 						<td>
 				
-							<input type="text" name="reviewWriter" value="${reviewWriter}" readonly>
+							<input type="text" name="reviewWriter" value="${sessionScope.User.userId}" readonly>
 						</td>
 					</tr>
 					<tr>
