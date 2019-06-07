@@ -137,7 +137,7 @@
 		.totalInnerBox{
 			width:33.3%;
 			padding:10px;
-			
+			cursor: pointer;
 			float:left;
 			display:none;
 		}
@@ -154,7 +154,7 @@
 	<section>
 	<div class="section_content">
 		<div class="searchInfo">
-			<span style="color:blue;font-weight:bold;font-size:30px; border-bottom:4px solid blue">${type }</span><span style="font-weight:100;font-size:20px;"> (으)로 검색한 결과입니다.</sapn>
+			<span style="color:blue;font-weight:bold;font-size:30px; border-bottom:4px solid blue">${type }</span><span style="font-weight:100;font-size:20px;"> (으)로 검색한 결과입니다.</span>
 		</div>
 		<div class="detailSearch">
             <input class="searchInput" type="text" placeholder="검색어를 입력해주세요">
@@ -319,7 +319,9 @@
 			inputType=3;
 		}
 		
-		
+		console.log(index);
+		console.log(type);
+		console.log(inputType);
 		for(var i = 0; i<6; i++){
 			$('.totalInnerBox').eq(i).css("display","block");
 		}
@@ -354,6 +356,7 @@
 		});
 		
 		$('.totalInnerBox').click(function(){
+			
 			var sNumber = $(this).find('input').val();
 			location.href = "/selectOneSpace?S_no="+sNumber;
 		});

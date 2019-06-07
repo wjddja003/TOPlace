@@ -30,6 +30,14 @@ $(document).ready(function(){
 								index = i;
 							}
 						}
+						if(index<12){
+							inputType = 1;			
+						}else if(index>=12 && index<20){
+							inputType = 2;
+						}
+						console.log(index);
+						console.log(type);
+						console.log(inputType);
 						location.href = "/headerSearchPlace?type=" + type
 								+ "&index=" + index + "&inputType=" + inputType;
 					}
@@ -51,6 +59,11 @@ $(document).ready(function(){
 				if ($('.placeType').eq(i).text() == type) {
 					index = i;
 				}
+			}
+			if(index<12){
+				inputType = 1;			
+			}else if(index>=12 && index<20){
+				inputType = 2;
 			}
 			location.href = "/headerSearchPlace?type=" + type + "&index=" + index + "&inputType=" + inputType;
 		}
