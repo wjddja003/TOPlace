@@ -218,9 +218,14 @@
 					</div>
 				</div>
 			</div>
-			
+			<div class="detailSearchList">이용일
+				<div class="selectBox" >모든날짜<span>▽</span></div>
+				<div class="selectBoxInner">
+					<jsp:include page="/WEB-INF/views/calendar2.jsp"/>
+				</div>
+			</div>
 			<div class="detailSearchList" style="width:25%;">
-				<button id="detailSearchMap" class="detailSearchBtn">지도</button>
+				<button id="detailSearchMap" class="detailSearchBtn" onclick="maps('${inputType}','${index}','${type}')">지도</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button id="detailSearchFilter" class="detailSearchBtn">필터</button>
 			</div>
@@ -424,6 +429,27 @@
 			location.href = "/filterSearch?type=" + type + "&index=" + index + "&inputType=" + inputType +"&filter="+filter;
 		});
 	});
+
+	
+	
+	
+	
+	function maps(inputType,index,type) {
+		
+		var inputType = inputType;
+		var index = index;
+		var type = type;
+		console.log(inputType);
+		console.log(index);
+		console.log(type);
+		location.href="/headerSearchplace2?inputType="+inputType+"&index="+index+"&type="+type;
+	
+	}
+	
+	
+
 	</script>
+	
+	
 </body>
 </html>

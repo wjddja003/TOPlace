@@ -1,9 +1,8 @@
 package reservation.model.vo;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
-public class Reservation {
+public class ReservationImg {
 	private int reservationNo;
 	private int S_no;
 	private int userNo;
@@ -17,14 +16,14 @@ public class Reservation {
 	private int paymentPrice;
 	private String paymentCard;
 	private ArrayList<String> rDay;
-
-	public Reservation() {
+	private String img;
+	public ReservationImg() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Reservation(int reservationNo, int s_no, int userNo, String reservationName, String reservationDay,
+	public ReservationImg(int reservationNo, int s_no, int userNo, String reservationName, String reservationDay,
 			String reservationBooker, String reservationTime, int reservationPerson, String reservationOption,
-			String paymentId, int paymentPrice, String paymentCard) {
+			String paymentId, int paymentPrice, String paymentCard, ArrayList<String> rDay, String img) {
 		super();
 		this.reservationNo = reservationNo;
 		S_no = s_no;
@@ -38,6 +37,8 @@ public class Reservation {
 		this.paymentId = paymentId;
 		this.paymentPrice = paymentPrice;
 		this.paymentCard = paymentCard;
+		this.rDay = rDay;
+		this.img = img;
 	}
 	public int getReservationNo() {
 		return reservationNo;
@@ -111,17 +112,16 @@ public class Reservation {
 	public void setPaymentCard(String paymentCard) {
 		this.paymentCard = paymentCard;
 	}
-	public ArrayList<String> getRDay() {
-		StringTokenizer st = new StringTokenizer(reservationDay, ",");
-	      
-	      rDay = new ArrayList<String>();
-	      while(st.hasMoreTokens()) {
-	         rDay.add(st.nextToken());
-	      }
-	     System.out.println(reservationDay);
+	public ArrayList<String> getrDay() {
 		return rDay;
 	}
-	public void setRDay(ArrayList<String> rDay) {
+	public void setrDay(ArrayList<String> rDay) {
 		this.rDay = rDay;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 }

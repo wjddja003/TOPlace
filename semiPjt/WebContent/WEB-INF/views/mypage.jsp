@@ -220,7 +220,7 @@
         
         <div id="mypage1">    
         <div class="aside-mng">
-            <a href="/reservationView">
+            <a href="/reservationList">
             	<div class="aside-mng_1">
             		<div>
                         <img src="../../img/mypage_reservation_icon.png">
@@ -234,19 +234,18 @@
             		<div>
                         <img src="../../img/mypage_qna_icon.png">
                     </div>
-            		<p style="font-weight: normal; font-size:16px;">Q＆A관리</p>
+            		<p style="font-weight: normal; font-size:16px;">이용후기/Q＆A관리</p>
             	</div>
             </a>
            
         </div>
         <div class="aside-list">
             <ul class="aside-navi">
-                <li><a href="/bookmark">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="/likeList">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <c:if test="${not empty sessionScope.host }">
                 <li class="spaceMng">
+                	<a href="/hostPage?ShostNum=${sessionScope.host.hostNo}" >내 공간정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a>
                 	
-                	<a href="/bookmark" >내 공간정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a>
-                
                 </li>
                 </c:if>
                 <li><a href="/noticeList">공지사항<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
@@ -295,6 +294,7 @@
         </div>
     </div>
 <script>
+	
     var count =0;
     $(".service").click(function(){
         if(count==0){

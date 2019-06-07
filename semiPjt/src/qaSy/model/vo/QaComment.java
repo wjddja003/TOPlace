@@ -6,7 +6,7 @@ public class QaComment {
 	private int qaCommentNo;
 	private String qaCommentWriter;
 	private String qaCommentContent;
-	private int qaRef;
+	private int qaRef; //참조할 공간번호
 	private Date qaCommentDate;
 	private int qaCommentRef;
 	public QaComment() {
