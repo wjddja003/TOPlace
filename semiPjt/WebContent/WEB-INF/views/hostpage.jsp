@@ -16,7 +16,7 @@
 	
     .hosh_mid{
         box-sizing:border-box;
-     
+         margin-left: 250px;
             
     }
     .profile ul{
@@ -33,7 +33,7 @@
     
         width: 70%;
         float: left;
-        margin-top: 100px;
+       
     }
     .more{
     height: 3%;
@@ -88,10 +88,10 @@
     	box-sizing:border-box;
     	position: fixed;
      	top : 200px; 
- 		left : 100;
+ 		
   		width: 18.3%;
         height: 25%;
-        
+        left: 300px;
         text-align: center;
     }
     .img1{
@@ -107,7 +107,7 @@
     	margin-left: 9px;
     }
     #more-btn{
-    	width: 96%;
+    	width: 100%;
     	background-color: #f69b02;
         border-style: none;
         color: #f7f7f7;
@@ -133,8 +133,9 @@
     float: right;
     }
     .list{
-   		float: left;
+   	
    		color: blue;
+   		font-size: 50px;
       }
       .list2{
         color: blue;   
@@ -167,7 +168,7 @@
 		margin-top: 50px;
 	}
 	.hostpage_DATE{
-		width:120px;
+	
 	}
     .QRA_DATE{
     
@@ -197,8 +198,10 @@
                     <div class="sp"><h1> ${sessionScope.host.hostName}의공간 ${hd.count}개 <h1></h1></div>
                     <div class="space"></div>
                     <div class="more"><button type="button" currentCount="0" totalCount='${totalCount}' id="more-btn" value="1">더보기</button></div> 
-                    <div class="list">리뷰창<br></div>                
+                 <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+        <br> <br><br> <br> <br>	
                     <div class="review">
+                    <div class="list">리뷰창<br></div>                
                     <c:forEach items="${hp.list}" var="hp" varStatus="i">
 	                    	<div class=" reviewlist">
 	                    		<div><span>${hp.reviewWriter} </span><img src="../../img/icon_search.png" class="reviewimg"></div>
@@ -231,6 +234,7 @@
             </div>
 		</div>
 	</section> 
+	<br><br><br><br><br><br><br><br>
 	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 	</body>
 		<script type="text/javascript">
