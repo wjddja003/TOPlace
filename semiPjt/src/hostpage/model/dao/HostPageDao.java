@@ -220,17 +220,41 @@ public class HostPageDao {
 		
 		return result;
 	}
+	public int totalCount2(Connection conn, int shostNum) {
+		PreparedStatement pstmt = null;
+		ResultSet rest = null;
+		String query =  "select count(*) cnt from qa_COMMENT where qa_COMMENT_NO in (select s_no from place where s_hostNum=?)";
+		int result = 0;
+		try {
+			  pstmt = conn.prepareStatement(query);
+			  pstmt.setInt(1, shostNum);
+			  rest = pstmt.executeQuery();
+				if(rest.next()) {
+					result = rest.getInt("cnt");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally {
+				JDBCTemplate.close(rest);
+				JDBCTemplate.close(pstmt);
+			}
+			
+			return result;
+	}
 
 	public ArrayList<Review> selectList(Connection conn, int start, int end, int shostNum) {
 		
 		ArrayList<Review> list = null; 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select ROWNUM as rnum, m.* from (select * from review where review_sno in (select s_no from place where s_hostNum=0))m) where rnum between ? and ?";
+		String query = "select * from (select ROWNUM as rnum, m.* from (select * from review where review_sno in (select s_no from place where s_hostNum=?))m) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			pstmt.setInt(1, shostNum);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rset= pstmt.executeQuery();
 			list = new ArrayList<Review>();			
 			while(rset.next()){
@@ -287,6 +311,43 @@ public class HostPageDao {
 		
 		return list;
 	}
+
+	public ArrayList<QaComment> qalistPaging(Connection conn, int start, int end, int shostNum) {
+	
+		ArrayList<QaComment> list = null; 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from (select ROWNUM as rnum, m.* from (select * from review where review_sno in (select s_no from place where s_hostNum=?))m) where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, shostNum);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset= pstmt.executeQuery();
+			list = new ArrayList<QaComment>();			
+			while(rset.next()){
+				QaComment q = new QaComment();
+				q.setQaCommentNo(rset.getInt("qa_COMMENT_NO"));
+				q.setQaCommentWriter(rset.getString("qa_COMMENT_WRITER"));
+				q.setQaCommentContent(rset.getString("qa_COMMENT_CONTENT"));
+				q.setQaRef(rset.getInt("qa_REF"));
+				q.setQaCommentDate(rset.getDate("qa_COMMENT_DATE"));
+				
+				list.add(q);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		
+		return list;
+	}
+
+	
 
 	
 

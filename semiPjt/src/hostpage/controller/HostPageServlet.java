@@ -9,14 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import host.model.service.HostService;
 import hostpage.model.service.HostpageService;
 import hostpage.model.vo.HostDataPage;
 import hostpage.model.vo.HostPaging;
+import hostpage.model.vo.HostPagiongQA;
 import qaSy.model.vo.QaComment;
-import space.model.vo.Space;
 
 
 /**
@@ -53,12 +51,12 @@ public class HostPageServlet extends HttpServlet {
 		HostDataPage hd  = new HostpageService().host(ShostNum); //공간
 		HostPaging hp = new HostpageService().userPaging(reqPage,ShostNum); //리뷰		
 		ArrayList<QaComment> Qalist = new  HostpageService().Qalist(ShostNum); //Q&A
-
-		
+		HostPagiongQA hqa = new HostpageService().qalistPaging(reqPage,ShostNum); //QA <1 2 3 4  5>	
 		request.setAttribute("hd", hd);
 		request.setAttribute("totalCount", totalCount);
 		request.setAttribute("hp", hp);
 		request.setAttribute("Qalist", Qalist);
+		request.setAttribute("hqa", hqa);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/hostpage.jsp");
 		rd.forward(request, response);	
 	}

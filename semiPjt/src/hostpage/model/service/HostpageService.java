@@ -8,6 +8,7 @@ import host.model.dao.HostDao;
 import hostpage.model.dao.HostPageDao;
 import hostpage.model.vo.HostDataPage;
 import hostpage.model.vo.HostPaging;
+import hostpage.model.vo.HostPagiongQA;
 import qaSy.model.vo.QaComment;
 import review.model.vo.Review;
 import space.model.vo.Space;
@@ -123,6 +124,48 @@ public class HostpageService {
 		
 		return list;
 	
+	}
+
+	public HostPagiongQA qalistPaging(int reqPage, int shostNum) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int numPerPage = 3;   //게시물의 숫자
+		int totalCount = new HostPageDao().totalCount2(conn,shostNum);  //총개시물을 나ㅏ타낸다
+		
+		int totalpge = 0;
+		
+		if(totalCount%numPerPage==0){ //게시물 5개 나누고 밑에 하나씩 추가하는것들
+			totalpge = (totalCount)/(numPerPage);
+		}else {
+			totalpge = (totalCount)/(numPerPage)+1;
+		}
+		int start = (reqPage-1)*numPerPage+1;   
+		int end = reqPage*numPerPage; 
+		ArrayList<QaComment> list = new HostPageDao().qalistPaging(conn,start,end,shostNum);
+		String pageNavi ="";
+		int pageNaviSize = 5;    // <1 2 3 4 5 ?> 
+		int pageNo =((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		if(pageNo !=1) {											
+			pageNavi += "<a class='btn' href='/hostPage?reqPage="+(pageNo-1)+"&ShostNum="+shostNum+"'>이전</a>";
+		}
+		int i = 1; 
+		while( !(i++>pageNaviSize || pageNo>totalpge)) {  
+			if(reqPage == pageNo) { 
+				 pageNavi += "<span class='selectPage'>"+pageNo+"</span>";
+			}else {
+				pageNavi += "<a class='btn' href='/hostPage?reqPage="+pageNo+"&ShostNum="+shostNum+"'>"+pageNo+"</a>"; 
+						//pageno 2개 = 하나는 볼것 하나는 값 전달할것
+			}
+			pageNo++;
+		}
+		if(pageNo <= totalpge) {
+			pageNavi +="<a class='btn' href='/hostPage?reqPage="+(pageNo)+"&ShostNum=+"+shostNum+"+'>다음</a>";
+		}
+		
+		HostPagiongQA hqa = new HostPagiongQA(list,pageNavi);
+		
+		JDBCTemplate.close(conn);
+		return hqa;
 	}
 
 	
