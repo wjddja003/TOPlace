@@ -267,6 +267,7 @@
 		<div class="totalOutLine">
 			<c:forEach items='${list }' var='s'>
 				<div class='totalInnerBox'>
+					<input type="hidden" value='${s.s_no }'>
 					<div style='height:200px;'>
 						<img src='/upload/space/${s.s_img1}' width="100%" height="200px">
 					</div>
@@ -341,6 +342,11 @@
 			inputType = 2;
 		}
 		location.href = "/headerSearchPlace?type=" + type + "&index=" + index + "&inputType=" + inputType;
+	});
+	
+	$('.totalInnerBox').click(function(){
+		var sNumber = $(this).find('input').val();
+		location.href = "/selectOneSpace?S_no="+sNumber;
 	});
 	
 	$('#detailSearchFilter').click(function(){

@@ -9,13 +9,14 @@ public class Review {
 	private String reviewWriter;
 	private String reviewContent;
 	private String filename;
+	private int reviewStar;
 	private Date reviewDate;
 	public Review() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Review(int reviewNo, int reviewSno, String reviewTitle, String reviewWriter, String reviewContent,
-			String filename, Date reviewDate) {
+			String filename, int reviewStar, Date reviewDate) {
 		super();
 		this.reviewNo = reviewNo;
 		this.reviewSno = reviewSno;
@@ -23,6 +24,7 @@ public class Review {
 		this.reviewWriter = reviewWriter;
 		this.reviewContent = reviewContent;
 		this.filename = filename;
+		this.reviewStar = reviewStar;
 		this.reviewDate = reviewDate;
 	}
 	public int getReviewNo() {
@@ -60,6 +62,12 @@ public class Review {
 	}
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+	public int getReviewStar() {
+		return reviewStar;
+	}
+	public void setReviewStar(int reviewStar) {
+		this.reviewStar = reviewStar;
 	}
 	public Date getReviewDate() {
 		return reviewDate;

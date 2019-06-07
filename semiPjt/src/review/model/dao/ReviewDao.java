@@ -19,7 +19,7 @@ import review.model.vo.ReviewComment;
 public class ReviewDao {
 	private Properties prop = new Properties();
 	public ReviewDao() {
-		String fileName = Review.class.getResource("/sql/review/reviewQuery4.properties").getPath();
+		String fileName = Review.class.getResource("/sql/review/reviewQuery5.properties").getPath();
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -41,6 +41,7 @@ public class ReviewDao {
 			pstmt.setString(3, r.getReviewWriter());
 			pstmt.setString(4, r.getReviewContent());
 			pstmt.setString(5, r.getFilename());
+			pstmt.setInt(6, r.getReviewStar());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -69,6 +70,7 @@ public class ReviewDao {
 				r.setReviewWriter(rset.getString("review_writer"));
 				r.setReviewContent(rset.getString("review_content"));
 				r.setFilename(rset.getString("filename"));
+				r.setReviewStar(rset.getInt("review_star"));
 				r.setReviewDate(rset.getDate("review_date"));
 				list.add(r);
 			}
@@ -140,6 +142,7 @@ public class ReviewDao {
 				r.setReviewWriter(rset.getString("review_writer"));
 				r.setReviewContent(rset.getString("review_content"));
 				r.setFilename(rset.getString("filename"));
+				r.setReviewStar(rset.getInt("review_star"));
 				r.setReviewDate(rset.getDate("review_Date"));
 			}
 		} catch (SQLException e) {
@@ -189,9 +192,26 @@ public class ReviewDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, r.getReviewContent());
 			pstmt.setString(2, r.getFilename());
-			pstmt.setInt(3, r.getReviewNo());
+			pstmt.setInt(3, r.getReviewStar());
+			pstmt.setInt(4, r.getReviewNo());
 			result = pstmt.executeUpdate();
 			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	public int deleteReview(Connection conn, int reviewNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("deleteReview");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reviewNo);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
