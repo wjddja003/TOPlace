@@ -51,13 +51,15 @@ public class HostProfileServlet extends HttpServlet {
 		System.out.println(mRequest.getParameter("hostContent"));
 		int result = new HostService().hostJoin(h);
 		String filename = mRequest.getParameter("hostFile");
+		Host newH = new HostService().selectOne(userNo);
 		if(result > 0) {
 			System.out.println("등록 성공");
 			HttpSession session = request.getSession();
-			session.setAttribute("host", h);
 			int updateResult = new UserService().gradeUpdate(userNo); 
 			if(updateResult > 0) {
 				System.out.println("등급 업데이트 성공");
+				session.setAttribute("host", newH);
+				response.sendRedirect("/");
 			}else {
 				System.out.println("등급 업데이트 실패");
 			}
