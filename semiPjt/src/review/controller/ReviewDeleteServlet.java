@@ -1,29 +1,26 @@
-package toplace.controller;
+package review.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import space.model.vo.Space;
-import toplace.model.service.DetailSearchService;
+import review.model.service.ReviewService;
 
 /**
- * Servlet implementation class HeaderSearchPlaceServlet
+ * Servlet implementation class ReviewDeleteServlet
  */
-@WebServlet(name = "HeaderSearchPlace", urlPatterns = { "/headerSearchPlace" })
-public class HeaderSearchPlaceServlet extends HttpServlet {
+@WebServlet(name = "ReviewDelete", urlPatterns = { "/reviewDelete" })
+public class ReviewDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HeaderSearchPlaceServlet() {
+    public ReviewDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,15 +30,9 @@ public class HeaderSearchPlaceServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int index = Integer.parseInt(request.getParameter("index"));
-		int inputType = Integer.parseInt(request.getParameter("inputType"));
-		String type = request.getParameter("type");
-		ArrayList<Space> list = new DetailSearchService().detailSearch(inputType,index,type);
-		request.setAttribute("type", type);
-		request.setAttribute("index", index);
-		request.setAttribute("list", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/detailSearch.jsp");
-		rd.forward(request, response);
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		int result = new ReviewService().deleteReview(reviewNo);
+		response.sendRedirect("/selectOneSpace");
 	}
 
 	/**

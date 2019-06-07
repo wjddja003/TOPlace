@@ -39,8 +39,7 @@ public class SelectOneSpaceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		User u = (User)session.getAttribute("User");  // 세션 값 받아오기
-		int userNo = u.getUserNo();		
+		User u = (User)session.getAttribute("User");  // 세션 값 받아오기			
 		int S_no = Integer.parseInt(request.getParameter("S_no"));
 		System.out.println(S_no);
 		Space s = new SpaceService().selectOneSpace(S_no);
@@ -51,11 +50,15 @@ public class SelectOneSpaceServlet extends HttpServlet {
 			reqPage = 1;
 		}
 		ReviewPageData pd = new ReviewService().selectList(reqPage);
-		Like l = new LikeService().selectLike(S_no,userNo); // 좋아요 체크 확인
+		
 		if(s!=null) {
+			if( u!= null) {
+				int userNo = u.getUserNo();
+				Like l = new LikeService().selectLike(S_no,userNo); // 좋아요 체크 확인
+				request.setAttribute("l",l);
+			}
 			System.out.println("가져오기 성공");
 			request.setAttribute("s",s);
-			request.setAttribute("l",l);
 			request.setAttribute("pd",pd);
 			RequestDispatcher rd = request.getRequestDispatcher("/views/viewpage.jsp");
 			rd.forward(request, response);
