@@ -19,7 +19,7 @@ import review.model.vo.ReviewComment;
 public class ReviewDao {
 	private Properties prop = new Properties();
 	public ReviewDao() {
-		String fileName = Review.class.getResource("/sql/review/reviewQuery2.properties").getPath();
+		String fileName = Review.class.getResource("/sql/review/reviewQuery4.properties").getPath();
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -187,11 +187,9 @@ public class ReviewDao {
 		String query = prop.getProperty("reviewUpdate");
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, r.getReviewTitle());
-			pstmt.setString(2, r.getReviewWriter());
-			pstmt.setString(3, r.getReviewContent());
-			pstmt.setString(4, r.getFilename());
-			pstmt.setInt(5, r.getReviewNo());
+			pstmt.setString(1, r.getReviewContent());
+			pstmt.setString(2, r.getFilename());
+			pstmt.setInt(3, r.getReviewNo());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
