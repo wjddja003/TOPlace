@@ -1,10 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+	.star_rating {font-size:0; letter-spacing:0px;}
+        .star_rating a {
+            font-size:22px;
+            letter-spacing:0;
+            display:inline-block;
+            margin-left:5px;
+            color:#ccc;
+            text-decoration:none;
+        }
+        .star_rating a:first-child {margin-left:0;}
+        .star_rating a.on {color:#f69b02;}
+	
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/common/header.jsp"/>
@@ -26,8 +41,8 @@
 					<tr>
 						<th>작성자</th>
 						<td>
-							
-							<input type="text" name="reviewWriter" value="user" readonly>
+				
+							<input type="text" name="reviewWriter" value="${sessionScope.User.userId}" readonly>
 						</td>
 					</tr>
 					<tr>
@@ -48,6 +63,20 @@
 						<th>내용</th>
 						<td>
 							<textarea rows="3" class="form-control" name="reviewContent"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<th>별점</th>
+						<td>
+							 <p class="star_rating">
+						        <a href="#">★</a>
+						        <a href="#">★</a>
+						        <a href="#">★</a>
+						        <a href="#">★</a>
+						        <a href="#">★</a>
+						        <input type="hidden" class="star" name="reviewStar">
+						    </p>
+
 						</td>
 					</tr>
 					<tr>
@@ -72,6 +101,13 @@
 				$("#img-view").attr('src','');
 			}
 		}
+	    $( ".star_rating a" ).click(function() {
+	         $(this).parent().children("a").removeClass("on");
+	         $(this).addClass("on").prevAll("a").addClass("on");
+	         $(".star").val($('.on').length);
+	         console.log($(".star").val());
+	         return false;
+	    });
 	</script>
 </body>
 </html>

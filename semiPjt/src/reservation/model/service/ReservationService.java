@@ -30,4 +30,10 @@ public class ReservationService {
 		JDBCTemplate.close(conn);
 		return rList;
 	}
+	public ArrayList<Reservation> reservationSelect(int S_no, int userNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Reservation> resList = new ReservationDao().reservationSelect(conn,S_no,userNo);
+		JDBCTemplate.close(conn);
+		return resList;
+	}
 }

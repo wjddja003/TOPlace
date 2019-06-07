@@ -5,6 +5,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+	.star_rating {font-size:0; letter-spacing:0px;}
+        .star_rating a {
+            font-size:22px;
+            letter-spacing:0;
+            display:inline-block;
+            margin-left:5px;
+            color:#ccc;
+            text-decoration:none;
+        }
+        .star_rating a:first-child {margin-left:0;}
+        .star_rating a.on {color:#f69b02;}
+	
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/common/header.jsp"/>
@@ -13,6 +27,7 @@
 		<div class="table-wrapper" style="text-align: center;width:80%;margin:0 auto;">
 		<form action="/reviewUpdate" method="post" enctype="multipart/form-data">
 				<table class="table table-bordered">
+					<input type="hidden" name="reviewSno" value="${review.reviewSno }">
 					<input type="hidden" name="reviewNo" value="${review.reviewNo }">
 					<tr>
 						<th colspan="2" style="font-size:20px;font-weight:bold">공지사항</th>				
@@ -51,6 +66,22 @@
 						
 					</tr>
 					<tr>
+						<th>별점</th>
+						<td> 
+							
+							<p class="star_rating">
+								<c:forEach  begin="1" end='${review.reviewStar}'>
+									<a href="#" class="on">★</a>
+								</c:forEach>
+								<c:forEach  begin="${review.reviewStar}" end='4'>
+									<a href="#">★</a>
+								</c:forEach>
+							        <input type="hidden" class="star" name="reviewStar" value="${review.reviewStar}">
+						    </p>
+						 </td>
+						
+					</tr>
+					<tr>
 						<th colspan="2">
 							<button type="submit" class="btn btn-outline-primary">수정하기</button>
 						</th>
@@ -71,7 +102,7 @@
 				}
 			}else{
 				$(".file_img").attr("style","background-image:url(/img/logo.png)");
-				$(".file_img").css("background-size","contain");
+				
 			}
 		}
 		 $("#imgdelete").click(function(){
@@ -79,6 +110,13 @@
 			 console.log( $("#reviewFile").val());
 			 $(".file_img").hide();
 		 });
+		 $( ".star_rating a" ).click(function() {
+	         $(this).parent().children("a").removeClass("on");
+	         $(this).addClass("on").prevAll("a").addClass("on");
+	         $(".star").val($('.on').length);
+	         console.log($(".star").val());
+	         return false;
+	    });
 		</script>
 </body>
 </html>

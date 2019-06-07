@@ -28,10 +28,14 @@
 
 	                <li class="navi-li"><a href="/selectOneSpace?S_no=2">핫딜/이벤트(윤주)</a></li>
 
+<<<<<<< HEAD
 	                <li class="navi-li"><a href="/views/insertSpace.jsp">공간등록</a></li>
 	                
 	                <li class="navi-li"><a href="/hostPage?ShostNum=0">(동천)</a>
 	                
+=======
+	                <li class="navi-li"><a href="/insertSpaceCheck">공간등록</a></li>
+>>>>>>> 9da2c56fc8f01408077846743470b40fc14b22a6
 	            </ul>
 	        </div>
 	        <div class="header realtime" style="width:9.6%;">실시간</div>

@@ -3,19 +3,22 @@ package review.model.vo;
 import java.sql.Date;
 
 public class Review {
-	private int reviewNo; //리뷰번호
-	private int reviewSno; //공간번호
-	private String reviewTitle; //제목
-	private String reviewWriter; //작성자
-	private String reviewContent; //글
-	private String filename; 
-	private Date reviewDate; //작성일
+
+	private int reviewNo;
+	private int reviewSno;
+	private String reviewTitle;
+	private String reviewWriter;
+	private String reviewContent;
+	private String filename;
+	private int reviewStar;
+	private Date reviewDate;
+
 	public Review() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Review(int reviewNo, int reviewSno, String reviewTitle, String reviewWriter, String reviewContent,
-			String filename, Date reviewDate) {
+			String filename, int reviewStar, Date reviewDate) {
 		super();
 		this.reviewNo = reviewNo;
 		this.reviewSno = reviewSno;
@@ -23,6 +26,7 @@ public class Review {
 		this.reviewWriter = reviewWriter;
 		this.reviewContent = reviewContent;
 		this.filename = filename;
+		this.reviewStar = reviewStar;
 		this.reviewDate = reviewDate;
 	}
 	public int getReviewNo() {
@@ -60,6 +64,12 @@ public class Review {
 	}
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+	public int getReviewStar() {
+		return reviewStar;
+	}
+	public void setReviewStar(int reviewStar) {
+		this.reviewStar = reviewStar;
 	}
 	public Date getReviewDate() {
 		return reviewDate;
