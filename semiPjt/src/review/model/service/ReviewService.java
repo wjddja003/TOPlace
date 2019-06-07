@@ -106,5 +106,16 @@ public class ReviewService {
 		}
 		return result;
 	}
+	public int deleteReview(int reviewNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ReviewDao().deleteReview(conn,reviewNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
 }

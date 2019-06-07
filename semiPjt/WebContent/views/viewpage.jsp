@@ -20,7 +20,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <title>뷰페이지</title>
-
+<style type="text/css">
+.star_rating {font-size:0; letter-spacing:0px;}
+.star_rating span{
+    font-size:22px;
+    letter-spacing:0;
+    display:inline-block;
+    margin-left:5px;
+    color:#ccc;
+    text-decoration:none;
+}
+.star_rating span:first-child {margin-left:0;}
+.star_rating span.on{
+	color:#f69b02;
+}
+</style>
 </head>
 <body>
       <jsp:include page="/WEB-INF/common/header.jsp"/>
@@ -261,25 +275,20 @@
                                     </div>
                                     <span class="rate_area">
                                         <span class="blind">평점</span>
-                                        <span class="rate active">
-                                            <em class="sp_icon ico_star_off">★</em>
-                                        </span>
-                                        <span class="rate active">
-                                            <em class="sp_icon ico_star_off">★</em>
-                                        </span>
-                                        <span class="rate active">
-                                            <em class="sp_icon ico_star_off">★</em>
-                                        </span>
-                                        <span class="rate active">
-                                            <em class="sp_icon ico_star_off">★</em>
-                                        </span>
-                                        <span class="rate active">
-                                            <em class="sp_icon ico_star_off">★</em>
-                                        </span>
+	                                       <p class="star_rating">
+												<c:forEach  begin="1" end='${rc.reviewStar}'>
+													<span class="on">★</span>
+												</c:forEach>
+												<c:forEach  begin="${rc.reviewStar}" end='4'>
+													<span>★</span>
+												</c:forEach>
+						    			   </p>
                                     </span>
                                     <div style="text-align: right;">
+                                    	<c:if test="${sessionScope.User.userId == rc.reviewWriter}">
                                     	<button class="btn btn-outline-primary btn-sm"><a href="/reviewUpdateEnd?reviewNo=${rc.reviewNo }">수정</a></button>
-                                    	<button class="btn btn-outline-primary btn-sm">삭제</button>
+                                    	<button class="btn btn-outline-primary btn-sm"><a href="/reviewDelete?reviewNo=${rc.reviewNo }">삭제</a></button>
+                                    	</c:if>
                                     </div>
                                 </div>
                             </li>
@@ -385,48 +394,65 @@
                }
            }).scroll();
            
-           $("#like").click(function(){
-           	var s_no = ${s.s_no};
-           	var userNo = ${sessionScope.User.userNo};
-           	$.ajax({
-           		type:"GET",
-           		url: "/likeInsertAjax?S_no="+s_no+"&userNo="+userNo,
-           		success : function(data){
-           			var result = data;
-           			if(result==1){
-           				$("#viewpage_alert").slideDown(700);
-                       	$("#viewpage_alert").delay(1300);
-                       	$("#viewpage_alert").css("display","inline");
-                       	$("#viewpage_alert").delay(1300);
-                       	$("#viewpage_alert").slideUp(700); 
-                       	$("#like_full").css("display","inline");
-                       	$("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");	
-           			}
-           		}
-           	});
-           });
-           $("#like_full").click(function(){
-           	var s_no = ${s.s_no};
-           	var userNo = ${sessionScope.User.userNo};
-               $.ajax({
-           		type:"GET",
-           		url: "/likeDeleteAjax?S_no="+s_no+"&userNo="+userNo,
-           		success : function(data){
-           			var result = data;
-           			if(result==1){
-          					$("#viewpage_alert").slideDown(700);
-          	                $("#viewpage_alert").delay(1300);
-          	                $("#viewpage_alert").css("display","inline");
-          	                $("#viewpage_alert").delay(1300);
-          	                $("#viewpage_alert").slideUp(700); 
-          	                $("#like_full").css("display","none"); 
-          	                $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
-           				
-           			}	
-           		}
-           	});
-
-           });
+          if('${sessionScope.User}' != ""){
+        	  $("#like").click(function(){
+                 	var s_no = ${s.s_no};
+                 
+                 	var userNo = '${sessionScope.User.userNo}';
+                 	
+                 	
+                 	$.ajax({
+                 		type:"GET",
+                 		url: "/likeInsertAjax?S_no="+s_no+"&userNo="+userNo,
+                 		success : function(data){
+                 			var result = data;
+                 			if(result==1){
+                 				$("#viewpage_alert").slideDown(700);
+                             	$("#viewpage_alert").delay(1300);
+                             	$("#viewpage_alert").css("display","inline");
+                             	$("#viewpage_alert").delay(1300);
+                             	$("#viewpage_alert").slideUp(700); 
+                             	$("#like_full").css("display","inline");
+                             	$("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");	
+                 			}
+                 		}
+                 	});
+                 });
+                 $("#like_full").click(function(){
+                 	var s_no = ${s.s_no};
+                 	
+                 	var userNo = '${sessionScope.User.userNo}';
+                 	
+                     $.ajax({
+                 		type:"GET",
+                 		url: "/likeDeleteAjax?S_no="+s_no+"&userNo="+userNo,
+                 		success : function(data){
+                 			var result = data;
+                 			if(result==1){
+                					$("#viewpage_alert").slideDown(700);
+                	                $("#viewpage_alert").delay(1300);
+                	                $("#viewpage_alert").css("display","inline");
+                	                $("#viewpage_alert").delay(1300);
+                	                $("#viewpage_alert").slideUp(700); 
+                	                $("#like_full").css("display","none"); 
+                	                $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
+                 				
+                 			}	
+                 		}
+                 	});
+           		});
+          }else{
+        	  $("#like").click(function(){
+        		  $("#viewpage_alert").slideDown(700);
+	                $("#viewpage_alert").delay(1300);
+	                $("#viewpage_alert").css("display","inline");
+	                $("#viewpage_alert").delay(1300);
+	                $("#viewpage_alert").slideUp(700); 
+	                $("#like_full").css("display","none"); 
+	                $("#viewpage_alert p").html("로그인 후 이용가능 합니다.");
+        	  });
+        	  
+          }
            $(".viewpage_content").css("background","url(/upload/space/${s.s_img1})no-repeat center center");
            $(".viewpage_content").css("background-size","cover");
           

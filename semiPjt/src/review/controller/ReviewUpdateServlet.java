@@ -55,6 +55,7 @@ public class ReviewUpdateServlet extends HttpServlet {
 		Review r = new Review();
 		r.setReviewNo(Integer.parseInt(mRequest.getParameter("reviewNo")));
 		r.setReviewContent(mRequest.getParameter("reviewContent"));
+		r.setReviewStar(Integer.parseInt(mRequest.getParameter("reviewStar")));
 		r.setFilename(mRequest.getFilesystemName("filename"));
 		
 		String oldFilename = mRequest.getParameter("oldFilename");
