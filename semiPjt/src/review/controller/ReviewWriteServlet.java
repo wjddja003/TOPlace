@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import space.model.vo.Space;
+import user.model.vo.User;
 
 /**
  * Servlet implementation class ReviewWriteServlet
@@ -32,9 +33,13 @@ public class ReviewWriteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		int S_no = Integer.parseInt(request.getParameter("S_no"));
+		String userId = request.getParameter("userId");
 		Space s = new Space();
+		User u = new User();
+		u.setUserId(userId);
 		s.setS_no(S_no);
 		request.setAttribute("s", s);
+		request.setAttribute("u",u);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/review/reviewWrite.jsp");
 		rd.forward(request, response);
 	}

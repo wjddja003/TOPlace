@@ -53,6 +53,7 @@ public class ReviewUpdateServlet extends HttpServlet {
 		
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 		Review r = new Review();
+		int reviewSno = Integer.parseInt(mRequest.getParameter("reviewSno"));
 		r.setReviewNo(Integer.parseInt(mRequest.getParameter("reviewNo")));
 		r.setReviewContent(mRequest.getParameter("reviewContent"));
 		r.setReviewStar(Integer.parseInt(mRequest.getParameter("reviewStar")));
@@ -80,7 +81,7 @@ public class ReviewUpdateServlet extends HttpServlet {
 		}else {
 			request.setAttribute("msg", "수정실패");
 		}
-		request.setAttribute("loc","/");
+		request.setAttribute("loc","/selectOneSpace?S_no="+reviewSno);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		rd.forward(request, response);
 	}
