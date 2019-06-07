@@ -101,6 +101,20 @@
 		color : white;
 		background:#605f5d;
 	}
+	#emptyValue{
+		width:100%;
+		height: 100px;
+		text-align: center;
+		letter-spacing: 8px;
+		word-spacing:15px;
+		background-color: black;
+		color:white;
+		font-size: 30px;
+		line-height: 100px;
+		display:none;
+		top:0px;
+		position:fixed;
+	}
 	</style>
 </head>
 
@@ -108,7 +122,8 @@
 <body>
 <!-- 헤더파일포함 -->
 <jsp:include page="/WEB-INF/common/header.jsp"/>
-		
+<div id="emptyValue">
+</div>		
 		<br>
 		
 <section>
@@ -130,10 +145,9 @@
 		<br>
 	<!-- 프로세스를 담는 Div -->	
 	<div id="S_process"">
-	<form action="/updateSpace" method="post" enctype="multipart/form-data">
+	<form action="/updateSpace" method="post" enctype="multipart/form-data" onsubmit="return check()">
 		<!-- 프로세스1 -->
 		<div id="S_process-1">
-			<!-- 세션에서 호스트(멤버)정보 하나를 가져옴 -->
 			<input type="hidden" name="S_no" value="${s.s_no }">
 			<input type="hidden" name="S_hostNum" value="${s.s_hostNum }">
 			
@@ -390,12 +404,12 @@
 			
 			<span id="S_whattype"></span>
 			<span class="S_red"> *</span><br> 
-			<input type="text" id="S_price1" name="S_price1" class="form-control" required numberOnly placeholder="가격을 입력해 주세요." style="display:inline;width:98%;" value="${s.s_price1 }">원
+			<input type="text" id="S_price1" name="S_price1" class="form-control" numberOnly placeholder="가격을 입력해 주세요." style="display:inline;width:98%;" value="${s.s_price1 }">원
 
 			<br><br>
 			
 			1인당 추가 가격(수정) <span class="S_red"> *</span><br>
-			<input type="text" id="S_price2" name="S_price2" class="form-control" required numberOnly placeholder="1인당 추가 가격을 입력해 주세요." style="display:inline;width:98%;" value="${s.s_price2 }">원
+			<input type="text" id="S_price2" name="S_price2" class="form-control" numberOnly placeholder="1인당 추가 가격을 입력해 주세요." style="display:inline;width:98%;" value="${s.s_price2 }">원
 			
 		</div><!-- 프로세스4 -->
 		
@@ -710,6 +724,26 @@
 				$("#S_warning").val("");
 			});
 			
+			//alert(emptyValue)
+			function emptyValue(msg){
+				$("#emptyValue").text(msg);
+				$("#emptyValue").slideDown(700);
+				$("#emptyValue").delay(1300);
+				$("#emptyValue").slideUp(700);
+			}
+			function check(){
+				if($("#S_price1").val()==""){
+					emptyValue("대여가격을 입력해주세요.");
+					$("#S_price1").focus();
+					return false;
+				}else if($("#S_price2").val()==""){
+					emptyValue("1인당 추가 가격을 입력해주세요.");
+					$("#S_price2").focus();
+					return false;
+				}else{
+					return true;
+				}
+			}
 			
 		//프로세스 이전,다음 로직
 			var state = 0;
@@ -848,34 +882,48 @@
 					for(var i = 0 ; i<check1.length;i++){ 
 						switch(i){
 						case 0: 
+							if(check1[i]==false){
+								$(check11[i]).focus();
+								emptyValue("공간명을 입력해주세요.");
+								return;}
+							break;
 						case 2:
+							if(check1[i]==false){
+								$(check11[i]).focus();
+								emptyValue("공간 한줄 소개를 입력해주세요.");
+								return;}
+							break;
 						case 3:
 							if(check1[i]==false){
-								$(check11[i]).focus(); return;}
+								$(check11[i]).focus();
+								emptyValue("공간 소개를 입력해주세요.");
+								return;}
 							break;
 						case 1:
 							if($("#S_kategorie1").val()=="0,0,0,0,0,0,0,0,0,0,0,0"){
-								alert("공간유형은 최소한 한 개 이상 선택하여야 합니다.");
+								emptyValue("공간유형은 최소한 한개 이상 선택하여야 합니다.");
 								$(check11[i]).focus(); return;}
 							break;
 						case 4:
 							if($("#S_opspan4").text()==""){
+								emptyValue("공간 태그는 최소 1개 이상 등록하여야 합니다.");
 								$(check11[i]).focus(); return;}
 							break;
 						case 5:
 							if(check1[i]==false){
-								alert("대표사진은 최소한 한 장 이상 등록하여야 합니다.");
+								emptyValue("대표사진은 최소한 1장 이상 등록하여야 합니다.");
 								$("#S_img1text").focus(); return;}
 							break;
 						case 6:
 						case 7:
 							if($(check11[i]).val()==""){
+								emptyValue("주소 및 상세주소를 등록해 주세요.");
 								$(check11[i]).focus(); return;}
 							break;
 						}
 					}
 					if(imgcheck<3){
-						alert("공간의 이미지는 최소 3장 이상 등록하여야 합니다.");
+						emptyValue("공간의 이미지는 최소 3장 이상 등록하여야 합니다.");
 						return;
 					}
 					$('#S_processBar-1').css("background-color","white");
@@ -886,9 +934,11 @@
 					state=2;
 				}else if(state==2){ //프로세스 2일 때, 다음 버튼 클릭 시
 					if($("#S_idemail").val()==""){
+						emptyValue("이메일을 입력해주세요.");
 						$("#S_idemail").focus();
 						return;
 					}else if($("#S_inputemail").val()==""){
+						emptyValue("이메일을 입력해주세요.");
 						$("#S_inputemail").focus();
 						return;
 					}
@@ -896,9 +946,11 @@
 					$("#S_email").val(S_email);
 					if(pcheck1 == true){
 						if($("#S_phone1_2").val()==""){
+							emptyValue("휴대폰번호를 입력해주세요.");
 							$("#S_phone1_2").focus();
 							return;
 						}else if($("#S_phone1_3").val()==""){
+							emptyValue("휴대폰번호를 입력해주세요.");
 							$("#S_phone1_3").focus();
 							return;
 						}
@@ -907,12 +959,15 @@
 					}
 					if(pcheck2 == true){
 						if($("#S_phone2_1").val()==""){
+							emptyValue("대표전화를 입력해주세요.");
 							$("#S_phone2_1").focus();
 							return;
 						}else if($("#S_phone2_2").val()==""){
+							emptyValue("대표전화를 입력해주세요.");
 							$("#S_phone2_2").focus();
 							return;
 						}else if($("#S_phone2_3").val()==""){
+							emptyValue("대표전화를 입력해주세요.");
 							$("#S_phone2_3").focus();
 							return;
 						}
@@ -929,14 +984,14 @@
 					$("#S_holiday1").val(S_holiday.join(","));
 					$("#S_warninghidden").val(warning.join(","));
 					if($("#S_type").val()==""){
-						alert("예약 유형을 선택하여 주십시오.");
+						emptyValue("예약 유형을 선택하여 주십시오.");
 						return;
 					}else if($("#S_people").val()==""){
-						alert("최대 수용 인원을 입력해주십시오.");
+						emptyValue("최대 수용 인원을 입력해주십시오.");
 						$("#S_people").focus();
 						return;
 					}else if(warning.join(",")==",,,,,,,,,"){
-						alert("주의사항을 적어도 한 개 이상 입력해 주세요.");
+						emptyValue("주의사항을 적어도 1개 이상 입력해 주세요.");
 						$("#S_warning").focus();
 						return;
 					}
