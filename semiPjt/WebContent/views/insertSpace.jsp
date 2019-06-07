@@ -121,7 +121,8 @@
 		<!-- 프로세스1 -->
 		<div id="S_process-1">
 			<!-- 세션에서 호스트(멤버)정보 하나를 가져옴 -->
-			<input type="hidden" name="S_hostNum" value="${sessionScope.host.hostNo }">
+			<input type="hidden" name="S_hostNum" id="S_hostNum" value="${sessionScope.host.hostNo }">
+			
 			<button type="button" onclick="location.href='/selectOneSpace2?S_no=1'">수정하기</button>
 			<br>
 			공간명 <span class="S_red">*</span><span class="S_condition" id="S_lengthspan1">0자/18자</span> <br>
