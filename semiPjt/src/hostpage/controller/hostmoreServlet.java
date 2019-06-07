@@ -1,29 +1,31 @@
-package toplace.controller;
+package hostpage.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import host.model.service.HostService;
+import hostpage.model.service.HostpageService;
 import space.model.vo.Space;
-import toplace.model.service.DetailSearchService;
 
 /**
- * Servlet implementation class HeaderSearchPlaceServlet
+ * Servlet implementation class hostmoreServlet
  */
-@WebServlet(name = "HeaderSearchPlace", urlPatterns = { "/headerSearchPlace" })
-public class HeaderSearchPlaceServlet extends HttpServlet {
+@WebServlet(name = "Hostmore", urlPatterns = { "/hostmore" })
+public class hostmoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HeaderSearchPlaceServlet() {
+    public hostmoreServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +34,13 @@ public class HeaderSearchPlaceServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int index = Integer.parseInt(request.getParameter("index"));
-		int inputType = Integer.parseInt(request.getParameter("inputType"));
-		String type = request.getParameter("type");
-
-		ArrayList<Space> list = new DetailSearchService().detailSearch(inputType,index,type);	
-
-		request.setAttribute("type", type);
-		request.setAttribute("index", index);
-		request.setAttribute("inputType", inputType);
-		request.setAttribute("list", list);		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/detailSearch.jsp");
-		rd.forward(request, response);
+		
+		
+		int start = Integer.parseInt(request.getParameter("start"));
+		ArrayList<Space> list = new HostpageService().hostmore(start);
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(list,response.getWriter());
+		
 	}
 
 	/**

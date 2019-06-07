@@ -1,6 +1,7 @@
 package space.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import qaSy.model.service.QaService;
+import qaSy.model.vo.QaPageData;
+import reservation.model.service.ReservationService;
+import reservation.model.vo.Reservation;
 import review.model.service.ReviewService;
 import review.model.vo.ReviewPageData;
 import space.model.service.SpaceService;
@@ -39,10 +44,12 @@ public class SelectOneSpaceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		User u = (User)session.getAttribute("User");  // 세션 값 받아오기			
+		User u = (User)session.getAttribute("User");  // 세션 값 받아오기	
+		
 		int S_no = Integer.parseInt(request.getParameter("S_no"));
 		System.out.println(S_no);
 		Space s = new SpaceService().selectOneSpace(S_no);
+		
 		int reqPage;
 		try {
 			reqPage = Integer.parseInt(request.getParameter("reqPage"));
@@ -54,9 +61,19 @@ public class SelectOneSpaceServlet extends HttpServlet {
 		if(s!=null) {
 			if( u!= null) {
 				int userNo = u.getUserNo();
+				ArrayList<Reservation> res = new ReservationService().reservationSelect(S_no,userNo);
 				Like l = new LikeService().selectLike(S_no,userNo); // 좋아요 체크 확인
 				request.setAttribute("l",l);
+				request.setAttribute("res", res);
 			}
+			int reqPageQna;
+			try {
+				reqPageQna = Integer.parseInt(request.getParameter("reqPage"));
+			}catch (NumberFormatException e) {
+				reqPageQna = 1;
+			}					
+			QaPageData qpd = new QaService().qaSelectList(reqPageQna,S_no);
+			request.setAttribute("qna",qpd);
 			System.out.println("가져오기 성공");
 			request.setAttribute("s",s);
 			request.setAttribute("pd",pd);

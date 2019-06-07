@@ -115,4 +115,35 @@ public class QaService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	public QaPageData qaSelectList(int reqPageQna, int S_no) {
+		Connection conn = JDBCTemplate.getConnection();
+		int numPerPage = 5;
+		int totalCountQna = new QaDao().totalCountQna(conn,S_no );
+		int totalPage = (totalCountQna%numPerPage==0)?(totalCountQna/numPerPage):(totalCountQna/numPerPage)+1;
+		int start = (reqPageQna-1)*numPerPage+1;
+		int end = reqPageQna*numPerPage;
+		ArrayList<QaComment> list = new QaDao().selectList(conn, start, end);
+		String pageNavi = "";
+		int pageNaviSize = 5;
+		int pageNo = ((reqPageQna-1)/pageNaviSize)*pageNaviSize+1;
+		if(pageNo != 1) {
+			pageNavi += "<a class='btn' href='/qaView?reqPage="+(pageNo-1)+"'>이전</a>";
+		}
+		int i = 1;
+		while(!(i++>pageNaviSize || pageNo>totalPage)) {
+			if(reqPageQna == pageNo) {
+				pageNavi += "<span class='selectPage'>"+pageNo+"</span>";
+			}else {
+				pageNavi += "<a class='btn' href='/qaView?reqPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+	if(pageNo <= totalPage) {
+		pageNavi +="<a class='btn' href='/qaView?reqPage="+pageNo+"'>다음</a>";
+	}
+	ArrayList<QaComment> listAll = new QaDao().selectAll(conn);
+	QaPageData pd = new QaPageData(list,pageNavi,listAll);
+	JDBCTemplate.close(conn);
+	return pd;
+	}
 }

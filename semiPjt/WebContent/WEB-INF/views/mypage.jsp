@@ -244,9 +244,8 @@
                 <li><a href="/likeList">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <c:if test="${not empty sessionScope.host }">
                 <li class="spaceMng">
+                	<a href="/hostPage?ShostNum=${sessionScope.host.hostNo}" >내 공간정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a>
                 	
-                	<a href="/bookmark" >내 공간정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a>
-                
                 </li>
                 </c:if>
                 <li><a href="/noticeList">공지사항<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
@@ -295,6 +294,7 @@
         </div>
     </div>
 <script>
+	
     var count =0;
     $(".service").click(function(){
         if(count==0){

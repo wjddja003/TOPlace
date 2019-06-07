@@ -13,7 +13,6 @@ import reservation.model.vo.Reservation;
 import reservation.model.vo.ReservationImg;
 
 public class ReservationDao {
-	private Properties prop = new Properties();
 	public int insertReservation(Connection conn,Reservation r) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -75,6 +74,7 @@ public class ReservationDao {
 		}
 		return rList;
 	}
+<<<<<<< HEAD
 	public int totalCount(Connection conn,int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -114,6 +114,22 @@ public class ReservationDao {
 			
 				r.setReservationNo(rset.getInt("reservation_no"));
 				r.setS_no(rset.getInt("s_no"));
+=======
+	public ArrayList<Reservation> reservationSelect(Connection conn, int S_no, int userNo){
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Reservation> resList = null;
+		String query = "select * from reservation where S_no=? and user_No=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, S_no);
+			pstmt.setInt(2, userNo);
+			rset = pstmt.executeQuery();
+			resList = new ArrayList<Reservation>();
+			while(rset.next()) {
+				Reservation r = new Reservation();
+				r.setS_no(rset.getInt("S_no"));
+>>>>>>> b624e24ede072d7c62e6b33b875f656c3c393941
 				r.setUserNo(rset.getInt("user_no"));
 				r.setReservationName(rset.getString("reservation_name"));
 				r.setReservationDay(rset.getString("reservation_day"));
@@ -124,18 +140,29 @@ public class ReservationDao {
 				r.setPaymentId(rset.getString("payment_id"));
 				r.setPaymentPrice(rset.getInt("payment_price"));
 				r.setPaymentCard(rset.getString("payment_card"));
+<<<<<<< HEAD
 				r.setImg(rset.getString("s_img1"));
 				list.add(r);
+=======
+				resList.add(r);
+>>>>>>> b624e24ede072d7c62e6b33b875f656c3c393941
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
+<<<<<<< HEAD
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
 		return list;
 		
 		
+=======
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return resList;		
+>>>>>>> b624e24ede072d7c62e6b33b875f656c3c393941
 	}
 }

@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 import common.JDBCTemplate;
@@ -93,6 +94,39 @@ public class HostDao {
 		} finally {
 			JDBCTemplate.close(pstmt);
 		}
+		return result;
+	}
+	public int more(Connection conn) {
+		
+
+		Statement stmt = null;
+		ResultSet rest = null;
+		
+		int result = 0;
+		
+		String query = "select count(*) cnt from place";
+		
+			try {
+				stmt = conn.createStatement();
+				rest = stmt.executeQuery(query);
+				
+				
+				if(rest.next()){
+					result = rest.getInt("cnt");
+				}
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(stmt);
+				JDBCTemplate.close(rest);
+			}
+			
+		
+		
+		
 		return result;
 	}
 }

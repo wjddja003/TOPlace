@@ -117,6 +117,28 @@ public class QaDao {
 		}
 		return result;
 	}
+	public int totalCountQna(Connection conn, int S_no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select count(*) cnt from qa_comment where qa_ref=?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, S_no);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
 	public ArrayList<QaComment> selectList(Connection conn, int start,int end){
 		ArrayList<QaComment> list = null;
 		PreparedStatement pstmt = null;
@@ -147,6 +169,35 @@ public class QaDao {
 		}
 		return list;
 	
+	}
+	public ArrayList<QaComment> qaSelectList(Connection conn, int start, int end){
+		ArrayList<QaComment> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from (select rownum as rnum, q.* from (select * from qa_comment where qa_comment_ref is null order by qa_comment_date desc) q) where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<QaComment>();
+			while(rset.next()) {
+				QaComment q = new QaComment();
+				q.setQaCommentNo(rset.getInt("qa_comment_no"));
+				q.setQaCommentWriter(rset.getString("qa_Comment_writer"));
+				q.setQaCommentContent(rset.getString("qa_Comment_content"));
+				q.setQaCommentDate(rset.getDate("qa_Comment_date"));
+				list.add(q);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+		
 	}
 	public ArrayList<QaComment> selectQList(Connection conn, int start,int end){
 		ArrayList<QaComment> list = null;
@@ -240,4 +291,5 @@ public class QaDao {
 	}
 	return result;
 }
+	
 }

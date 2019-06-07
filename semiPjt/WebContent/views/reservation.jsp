@@ -64,6 +64,13 @@
    border-top: 3px solid #183058;
    font-size: 28px;
 }
+.rMenu_price_list{
+   height: 20px;
+      line-height: 20px;
+      font-size: 14px;
+      clear:both;
+      text-align: right;
+}
 #payment {
    height: 56px;
    width: 100%;
@@ -174,7 +181,7 @@
 }
 /* reservation페이지 reservation_content span태그 css fin */
 #reservation_popupDiv {
-   z-index: 99;
+   z-index: 999;
    top: 0px;
    position: absolute;
    background: white;
@@ -254,6 +261,16 @@
    outline:none;
    border:none;
    border-radius: 10px;
+}
+#choiceDay button{
+	font-size: 14px;
+	color:white;
+   	background: #f69b02;
+	width: 80px;
+   	height: 30px;
+   	outline:none;
+	border:none;
+	border-radius: 5px;
 }
 .reservation_popCloseBtn_1 {
    line-height: 50px;
@@ -362,11 +379,6 @@
 			               		<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
 			               			<span style="font-size:18px; line-height: 100%;" > 이용시간</span><span style="color:black; margin-left:20px;"> ${s.s_start}시 ~ ${s.s_end}시</span>
 			               		</div>
-			               		<c:if test="${s.s_type eq 'time'}">
-			               		<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
-			               			<span style="font-size:18px; line-height: 100%;"> 예약시간</span><span style="color:black; margin-left:20px;">최소 2시간 부터</span>
-			               		</div>
-			               		</c:if>
 			               		<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
 			               			<span style="font-size:18px; line-height: 100%;"> 예약인원</span><span style="color:black; margin-left:20px;">${s.s_people}명</span>
 			               		</div>
@@ -422,18 +434,20 @@
                   </div>
                </div>
      		<c:if test="${s.s_type eq 'time'}">
-     			<div id="choiceDay" style="display:block;">
-     				
-     			</div>
                <%-- 예약페이지 시간선택 --%>
                <div id="reservation_time">
 	               <div class="reservation_head">
 	                  <span class="reservation_title">시간 선택</span> 
 	                  <span class="reservation_sub">
-	                     <span class="selTime"></span>
+	                     <span class="endDay"></span>
 	                  </span>
 	               </div>
 	               <div class="reservation_content">
+	               		<div id="showDay" style="display:block;"></div>
+	               		<div id="choiceDay" style="display:block;">
+	               		</div>
+	               <div style="height: 20px;">
+	               </div>
 	                  <div class="swiper-container">
 	                     <div class="swiper-wrapper">
 		                     <div class="swiper-slide">
@@ -693,7 +707,7 @@
                <div class="rMenu_list">
                		<div class="pop_list_left">예약날짜</div>
                		<div class="pop_list_right">
-               			<span class="startDay">-</span>
+               			<span class="endDay">-</span>
                		</div>
                </div>
                </c:if>
@@ -706,7 +720,9 @@
                <c:if test="${s.s_type eq 'time'}">
                <div class="rMenu_list">
                		<div class="pop_list_left">예약시간</div>
-               		<div class="pop_list_right"><span class="selTime">-</span></div>
+               		<div class="pop_list_right">
+               			<span class="selTime1">-</span>
+               		</div>
                </div>
                </c:if>
                <div class="rMenu_list">
@@ -717,6 +733,15 @@
                		<div class="pop_list_left">추가옵션</div>
                		<div class="pop_list_right"><span class="option1"></span></div>
                </div>
+               <div class="rMenu_list">
+               		<div class="rMenu_price_list">
+               			<div class="price_day"></div>
+               			<c:if test="${s.s_type eq 'time'}">
+               				<div class="price_time"></div>
+               			</c:if>
+               			<div class="price_option"></div>
+               		</div>
+               </div>
                <div class="rMenu_price">
                		<div class="pop_list_left" style="color:red;font-size:16px;" id="reservation_price"></div>
                   	<div class="pop_list_left" style="color:#183058">￦</div>
@@ -725,106 +750,47 @@
                <button id="payment">예약하기</button>
             </div>
             <%-- 예약 정보 창 --%>
-            <%-- 팝업 배경 DIV--%>
-            <div id="reservation_popup_mask"></div>
-            <%-- 팝업 DIV--%>
-	            <div id="reservation_popupDiv">
-	               <div id="reservation_popupDiv_title">
-	                  예약 신청
-	                  <button class="reservation_popCloseBtn_1"></button>
-	               </div>
-	               <div id="reservation_popupDiv_content">예약 내용을 확인해주세요.</div>
-	               <div class="reservation_popupDiv_list">
-	                  <div class="pop_list_left">예약공간</div>
-	                  <div class="pop_list_right">${s.s_placeName}</div>
-	               </div>
-	               <div class="reservation_popupDiv_list">
-	                  <div class="pop_list_left">예약날짜</div>
-	                  <div class="pop_list_right">
-	                  	<span class="startDay"></span>
-               			<span class="endDay"></span>
-               			<span class="hapDay"></span>
-               		  </div>
-	               </div>
-	               <div class="reservation_popupDiv_list">
-	                  <div class="pop_list_left">예약자명</div>
-	                  <div class="pop_list_right">
-	                  	<span class="booker"></span>
-               		  </div>
-	               </div>
-	               <c:if test="${s.s_type eq 'day'}">
-	               <div class="reservation_popupDiv_list">
-	                  <div class="pop_list_left">이용시간</div>
-	                  <div class="pop_list_right"><span class="selTime">${s.s_start}시~${s.s_end}시</span></div>
-	               </div>
-	               </c:if>
-	               <c:if test="${s.s_type eq 'time'}">
-	               <div class="reservation_popupDiv_list">
-	                  <div class="pop_list_left">예약시간</div>
-	                  <div class="pop_list_right"><span class="selTime"></span></div>
-	               </div>
-	               </c:if>
-	               <div class="reservation_popupDiv_list">
-	                  <div class="pop_list_left">예약인원</div>
-	                  <div class="pop_list_right"><span class="reservation_people2"></span></div>
-	               </div>
-	               <div class="reservation_popupDiv_list" id="pop_option">
-	                  <div class="pop_list_left">추가옵션</div>
-	                  <div class="pop_list_right"><span class="option1"></span></div>
-	               </div>
-	
-	               <div class="reservation_popupDiv_list">
-	                  <div class="pop_list_left">결제예정금액</div>
-	                  <div class="pop_list_right"><span class="price"></span></div>
-	               </div>
-	               <br>
-	               <div class="reservation_popupDiv_info">
-	                  <div class="pop_list_info"><img src="../img/icon_warning.png" width="13px" height="13px">&nbsp;결제 전에, 환불기준과 예약내용을 반드시 확인해주세요!</div>
-	               </div>
-	               <br>
-	               <div id="reservation_popup_footer">
-	                  <button class="reservation_popCloseBtn">예약 수정</button>
-	                  <button id="pop_payment">결제 하기</button>
-	               </div>
-	            </div>
-	            <div style="display:none">
-	            	<form action="/insertReservation" method="post" id="payfrm">
-	            		<input type="hidden" name="S_no" value="${s.s_no}">
-	            		<input type="hidden" name="userNo" value="${sessionScope.User.userNo}">
-	            		<input type="hidden" name="reservationName" value="${s.s_placeName}">
-	            		<input type="hidden" name="reservationDay" value=""><%-- 스크립트에서 밸류 보냄 --%>
-	            		<input type="hidden" name="reservationBooker" value=""><%-- 스크립트에서 밸류 보냄 --%>
-	            		<input type="hidden" name="reservationTime" value=""><%-- 스크립트에서 밸류 보냄 --%>
-	            		<input type="hidden" name="reservationPerson" value=""> <%-- 스크립트에서 밸류 보냄 --%>
-	            		<input type="hidden" name="reservationOption" value=""> <%-- 스크립트에서 밸류 보냄 --%>
-	            		<input type="hidden" name="paymentId" value=""> <%-- 스크립트에서 밸류 보냄 --%>
-	            		<input type="hidden" name="paymentPrice" value=""> <%-- 스크립트에서 밸류 보냄 --%>
-	            		<input type="hidden" name="paymentCard" value=""> <%-- 스크립트에서 밸류 보냄 --%>
-	            	</form>
-	            </div>
+            
+            
             <%-- div 기준 초기화--%>
             <div style="clear: both;"></div>
          </div>
       </div>
    </section>
    <script>	
+   priceCalfn = priceCAL; 
+   var totalPrice = 0;
    var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
    var count = 1;
    var sendTimeArray = new Array(10);
+   var selTimeArr = new Array();
+   var priceTimeArr = new Array();
    var btnIndex;
 		function selectTimeBtnfn(a){
 			count = 1;
+			$('.selectTimeBtn').css('background','#f69b02');
+			$(a).css('background','#183058');
+			$(a).css('color','white');
             $('.disabled').css('background','#f69b02');
             $('.disabled').css('color','black');
             selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
             btnIndex= $(a).index();
             sendTimeArray.slice(btnIndex);
+            selTimeArr.slice(btnIndex);
+            for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
+          	  	$('.swiper-slide button').eq(i).addClass("disabled");
+          		$('.swiper-slide button').eq(i).html(i+"<br>￦"+'${s.s_price1}');
+          	  	$('.swiper-slide button').eq(i).css("background","#f69b02");
+          		$('.swiper-slide button').eq(i).removeAttr("disabled");
+            }
+            $('.swiper-slide button').not('.disabled').attr("disabled","true");
+            $('.swiper-slide button').not('.disabled').text("");
+            $('.swiper-slide button').not('.disabled').css("background","url('../img/icon_close.png') no-repeat");
+            $('.swiper-slide button').not('.disabled').css("background-size","100%");
 			for(var i12=0;i12<preday.length;i12++){
-			
-				console.log($(a).text());
 				if($(a).text()==preday[i12]){
 					for(var i11=0;i11<timeInhibitArray[i12].length;i11++){
-						console.log(i11);		
+						
 						if(timeInhibitArray[i12][i11]==1){
 							$('.swiper-slide button').eq(i11).removeClass('disabled');
 							$('.swiper-slide button').eq(i11).attr("disabled","true");
@@ -832,26 +798,19 @@
 						      $('.swiper-slide button').eq(i11).css("background","url('../img/icon_close.png') no-repeat");
 						      $('.swiper-slide button').eq(i11).css("background-size","100%");
 						}
-						console.log(timeInhibitArray.length);		
+							
 					}
-				}else {
-					for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
-						if($('.swiper-slide button').eq(i).hasClass('disabled')){
-							$('.swiper-slide button').eq(i).html(i+"<br>￦"+'${s.s_price1}');
-					    	  $('.swiper-slide button').eq(i).css("background","#f69b02");
-					    	  $('.swiper-slide button').eq(i11).attr("disabled","false");
-						}
-				      }
 				}
-				
 			}
 			
-			
 	   	}
+		
       $(document).ready(function() {
    <%-- 예약정보 정규식 --%>
       var phoneCheck = /[0-9]{4}$/;
       var bookerCheck = /[가-힣]{2,13}$/;
+      var timeCheck = "${s.s_type}";
+      console.log(timeCheck);
    <%-- 날짜 선택 스크립트 --%> 
    <%-- 시간 선택 스크립트 --%>
        // 시간 버튼 클릭
@@ -870,19 +829,19 @@
       $('.swiper-slide button').not('.disabled').text("");
       $('.swiper-slide button').not('.disabled').css("background","url('../img/icon_close.png') no-repeat");
       $('.swiper-slide button').not('.disabled').css("background-size","100%");
+      
       //클릭 이벤트
       $('.swiper-slide button').click(function() {
+    	  console.log(count);
          if (count == 1) {
             start = $('.swiper-slide button').index(this);
             $(this).css('background','#183058');
             $(this).css('color','white');
             startTime = parseInt($(this).text());
             hapTime = 1;
-            $(".selTime").text(startTime+"시~"+(startTime+1)+"시,  "+hapTime+"시간");
             count = 2;
             } else if (count == 2) {
                endTime = parseInt($(this).text());
-               
                end = $('.swiper-slide button').index(this);
                   for (var i = start; i < end + 1; i++) {
                 	  if($('.swiper-slide button').eq(i).hasClass('disabled')){
@@ -900,23 +859,38 @@
  	                    hapTime++
                  	  }
                   }
-                  var s = selTimeArray.join('');
+                  var s = selTimeArray.join('')+'/';
                   sendTimeArray[btnIndex] = s; //얘가 최종적으로 보내야할 예약된 시간임 데이는 원래 저장되던 array?로 보내면됨 둘다 스트링으로 만드는데 sendTime은 /로 항목 구분 해줘야함
-                  console.log(selTimeArray);
-                  console.log(sendTimeArray);
-                  count = 3;
+                  arrayTime="";
+                  for(var Itime=0;Itime<sendTimeArray.length;Itime++){
+                	  arrayTime += sendTimeArray[Itime];
+                  }
+                  $('input[name=reservationTime]').val(arrayTime);
                   if(startTime<endTime){
-                      $(".selTime").text(startTime+"시~"+(endTime+1)+"시,  "+(hapTime-1)+"시간");
+                	  selTimeArr[btnIndex]=startTime+"~"+(endTime+1)+"시,  "+(hapTime-1)+"시간 ";
+                	  priceTimeArr[btnIndex]=hapTime-1;
+                      count = 3;
                    }else{
-                      $(".selTime").text(endTime+"시~"+(startTime+1)+"시,  "+(hapTime-1)+"시간");
+                	  selTimeArr[btnIndex]=endTime+"~"+(startTime+1)+"시,  "+(hapTime-1)+"시간 ";
+                	  priceTimeArr[btnIndex]=hapTime-1;
+                      count = 3;
                    }
+                  $('.selTime1').html("");
+                  for(var IItime=0; IItime<selTimeArr.length; IItime++){
+           				$('.selTime1').html($('.selTime1').html()+String(selTimeArr[IItime]).replace("undefined",""));
+           			}
+                  
+                  console.log(selTimeArr);
                }else if (count > 2) {
                   count = 1;
                   $('.disabled').css('background','#f69b02');
                   $('.disabled').css('color','black');
                   selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-                  sendTimeArray.pop();
+                  selTimeArray.pop();
+                  selTimeArr.pop();
                }
+         	
+         		
          });
    <%-- 인원 선택 스크립트 --%>
       var person = parseInt($('.people').text());
@@ -958,10 +932,13 @@
     		  $('#option2').text(option); 
     		  $('#pop_option').css("display","none");
               $('#rMenu_option').css("display","none");
+              $('.price_option').text("");
     	  }else{
         	  $('#option2').text(option);  
               $('.option1').text(option+"명");
               $('input[name=reservationOption]').val(option+"명");
+              $('.rMenu_price_list').css("display","block");
+              $('.price_option').text("추가인원 "+option+"명"+' x '+'${s.s_price2}'+' ￦'+option*'${s.s_price2}');
     	  }
       });
       $('#option_plus').click(function(){
@@ -970,12 +947,14 @@
             $('#option_plus').attr("button",false);
             alert("최대 추가 옵션 인원은"+"10"+ "명입니다.");
          }else{
-        	option = option+1;
+        	 option = option+1;
             $('#option2').text(option);
             $('.option1').text(option+"명");
             $('input[name=reservationOption]').val(option+"명");
             $('#pop_option').css("display","block");
             $('#rMenu_option').css("display","block");
+            $('.rMenu_price_list').css("display","block");
+            $('.price_option').text("추가인원 "+option+"명"+' x '+'${s.s_price2}'+' ￦'+option*'${s.s_price2}');
          }
       });
    <%-- 전체 체크박스 선택 스크립트 --%>
@@ -997,19 +976,21 @@
          });
    <%-- 결제버튼 클릭 스크립트--%>
       $('#payment').click(function() {
+    	  priceCalfn();
+    	  console.log(totalPrice);
+    	  $('.price').text(totalPrice);
     	  $('.booker').text($('input[name=booker]').val());
     	  $('input[name=reservationBooker]').val($('.booker').text());
    <%-- 날짜 체크 확인--%>
-      if ($('#hapDay').text() == "") {
+      if ($('.endDay').html().length < 2) {
          alert("예약 날짜를 선택해주세요.");
          }else {
    <%-- 시간 체크 확인 --%>
    <%-- 넘어온 타입이 시간일때 --%>
-   if("${s.s_type}"=='time'){
-	   if (count == 1) {
-	      alert("최소 두시간 이상 예약이 가능합니다.");
-	      } else if (count != 2) {
-	         alert("시간을 선택해주세요.");
+   console.log(count);
+   if($('.selTime1').text().length < 2){
+	   if (count != 3) {
+		   alert("시간을 선택해주세요.");
 	      }
 	   } else {
    <%-- 예약정보 체크 --%>
@@ -1036,8 +1017,8 @@
                      } else {
                <%-- 예약 정보 확인 창 열기 --%>
                   $("#reservation_popupDiv").css({
-                     "top" : (($(window).height() - $(   "#reservation_popupDiv").outerHeight()) / 4 + $(window).scrollTop())+ "px",
-                     "left" : (($(window).width() - $("#reservation_popupDiv").outerWidth()) / 4 + $(window).scrollLeft())+ "px"
+                     "top" : (($(window).height() - $(   "#reservation_popupDiv").outerHeight()) / 2 + $(window).scrollTop())+ "px",
+                     "left" : (($(window).width() - $("#reservation_popupDiv").outerWidth()) / 2 + $(window).scrollLeft())+ "px"
                      });
                   $("#reservation_popup_mask").css("display","block");
                   $("#reservation_popupDiv").css("display","block");
@@ -1079,6 +1060,7 @@
          $("#reservation_popup_mask").css("display", "none");
          $("#reservation_popupDiv").css("display", "none");
          $("body").css("overflow","auto");
+         
          var price = 1000;
          var d = new Date();
          var payDate = d.getFullYear()+''+ (d.getMonth() + 1)+ '' + d.getDate() + ''+ d.getHours() + ''+ d.getMinutes() + ''+ d.getSeconds();
@@ -1129,7 +1111,7 @@
                },
             });
    <%-- 이용약관 스크립트--%>
-      $('.agree_img')   .click(function() {
+      $('.agree_img').click(function() {
          if ($(this).next().css("display") == "none") {
             $(this).next().css("display", "block");
             $(this).attr("src",   "/img/chevronup.png");
@@ -1139,7 +1121,111 @@
             }
          });
       });
+      
+    	  function priceCAL(){
+    	  var onePrice = ${s.s_price1};
+    	  for (var spd=0; spd<$('.selectDay').length;spd++){
+    		  if(btnVal==1){
+    			  if($('.selectDay').eq(spd).hasClass("priceDouble") === true){
+        			  totalPrice += onePrice+onePrice+0;
+        			  
+        		  }else if($('.selectDay').eq(spd).hasClass("priceDouble") === false){
+        			  totalPrice += onePrice+onePrice+0;
+        			  
+        		  }
+    		  }else{
+    			  if($('.selectDay').eq(spd).hasClass("priceDouble") === true){
+        			  totalPrice += onePrice*2* priceTimeArr[spd]+0;
+        			  
+        		  }else if($('.selectDay').eq(spd).hasClass("priceDouble") === false){
+        			  totalPrice += onePrice* priceTimeArr[spd]+0;
+        			  
+        		  }
+    		  }
+    		  
+    	  }
+    	  
+      }
    </script>
    <jsp:include page="/WEB-INF/common/footer.jsp" />
+   <%-- 팝업 배경 DIV--%>
+            <div id="reservation_popup_mask"></div>
+            <%-- 팝업 DIV--%>
+	            <div id="reservation_popupDiv">
+	               <div id="reservation_popupDiv_title">
+	                  예약 신청
+	                  <button class="reservation_popCloseBtn_1"></button>
+	               </div>
+	               <div id="reservation_popupDiv_content">예약 내용을 확인해주세요.</div>
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약공간</div>
+	                  <div class="pop_list_right">${s.s_placeName}</div>
+	               </div>
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약날짜</div>
+	                  <div class="pop_list_right">
+	                  	<span class="startDay"></span>
+               			<span class="endDay"></span>
+               			<span class="hapDay"></span>
+               		  </div>
+	               </div>
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약자명</div>
+	                  <div class="pop_list_right">
+	                  	<span class="booker"></span>
+               		  </div>
+	               </div>
+	               <c:if test="${s.s_type eq 'day'}">
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">이용시간</div>
+	                  <div class="pop_list_right"><span class="selTime">${s.s_start}시~${s.s_end}시</span></div>
+	               </div>
+	               </c:if>
+	               <c:if test="${s.s_type eq 'time'}">
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약시간</div>
+	                  <div class="pop_list_right">
+	                  	<span class="selTime1"></span>
+	                  </div>
+	               </div>
+	               </c:if>
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약인원</div>
+	                  <div class="pop_list_right"><span class="reservation_people2"></span></div>
+	               </div>
+	               <div class="reservation_popupDiv_list" id="pop_option">
+	                  <div class="pop_list_left">추가옵션</div>
+	                  <div class="pop_list_right"><span class="option1"></span></div>
+	               </div>
+	
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">결제예정금액</div>
+	                  <div class="pop_list_right"><span class="price"></span></div>
+	               </div>
+	               <br>
+	               <div class="reservation_popupDiv_info">
+	                  <div class="pop_list_info"><img src="../img/icon_warning.png" width="13px" height="13px">&nbsp;결제 전에, 환불기준과 예약내용을 반드시 확인해주세요!</div>
+	               </div>
+	               <br>
+	               <div id="reservation_popup_footer">
+	                  <button class="reservation_popCloseBtn">예약 수정</button>
+	                  <button id="pop_payment">결제 하기</button>
+	               </div>
+	            </div>
+	            <div style="display:none">
+	            	<form action="/insertReservation" method="post" id="payfrm">
+	            		<input type="hidden" name="S_no" value="${s.s_no}">
+	            		<input type="hidden" name="userNo" value="${sessionScope.User.userNo}">
+	            		<input type="hidden" name="reservationName" value="${s.s_placeName}">
+	            		<input type="hidden" name="reservationDay" value=""><%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationBooker" value=""><%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationTime" value=""><%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationPerson" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationOption" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="paymentId" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="paymentPrice" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="paymentCard" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            	</form>
+	            </div>
 </body>
 </html>

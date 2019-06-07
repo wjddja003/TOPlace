@@ -14,16 +14,16 @@ import space.model.vo.Space;
 import toplace.model.service.DetailSearchService;
 
 /**
- * Servlet implementation class HeaderSearchPlaceServlet
+ * Servlet implementation class HeaderSearchplaceServlet2
  */
-@WebServlet(name = "HeaderSearchPlace", urlPatterns = { "/headerSearchPlace" })
-public class HeaderSearchPlaceServlet extends HttpServlet {
+@WebServlet(name = "HeaderSearchplace2", urlPatterns = { "/headerSearchplace2" })
+public class HeaderSearchplaceServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HeaderSearchPlaceServlet() {
+    public HeaderSearchplaceServlet2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +32,15 @@ public class HeaderSearchPlaceServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
 		int index = Integer.parseInt(request.getParameter("index"));
 		int inputType = Integer.parseInt(request.getParameter("inputType"));
 		String type = request.getParameter("type");
-
 		ArrayList<Space> list = new DetailSearchService().detailSearch(inputType,index,type);	
-
 		request.setAttribute("type", type);
 		request.setAttribute("index", index);
 		request.setAttribute("inputType", inputType);
-		request.setAttribute("list", list);		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/detailSearch.jsp");
+		request.setAttribute("list", list);
+		RequestDispatcher rd = request.getRequestDispatcher("/views/apiTest4.jsp");
 		rd.forward(request, response);
 	}
 
