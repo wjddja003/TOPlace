@@ -1,6 +1,7 @@
 package reservation.model.vo;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class Reservation {
 	private int reservationNo;
@@ -15,6 +16,7 @@ public class Reservation {
 	private String paymentId;
 	private int paymentPrice;
 	private String paymentCard;
+	private ArrayList<String> rDay;
 	public Reservation() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -107,5 +109,18 @@ public class Reservation {
 	}
 	public void setPaymentCard(String paymentCard) {
 		this.paymentCard = paymentCard;
+	}
+	public ArrayList<String> getRDay() {
+		StringTokenizer st = new StringTokenizer(reservationDay, ",");
+	      
+	      rDay = new ArrayList<String>();
+	      while(st.hasMoreTokens()) {
+	         rDay.add(st.nextToken());
+	      }
+	     System.out.println(reservationDay);
+		return rDay;
+	}
+	public void setRDay(ArrayList<String> rDay) {
+		this.rDay = rDay;
 	}
 }

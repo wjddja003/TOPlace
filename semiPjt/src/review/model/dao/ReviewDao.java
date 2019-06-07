@@ -19,7 +19,7 @@ import review.model.vo.ReviewComment;
 public class ReviewDao {
 	private Properties prop = new Properties();
 	public ReviewDao() {
-		String fileName = Review.class.getResource("/sql/review/reviewQuery.properties").getPath();
+		String fileName = Review.class.getResource("/sql/review/reviewQuery4.properties").getPath();
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -80,6 +80,28 @@ public class ReviewDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return list;
+	}
+	public int totalRCount(Connection conn,String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select count(*) cnt from review where review_writer = ?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+			System.out.println(result);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 	public int totalCount(Connection conn) {
 		Statement stmt = null;
@@ -159,26 +181,23 @@ public class ReviewDao {
 		}
 		return list;		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public int reviewUpdate(Connection conn, Review r) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("reviewUpdate");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, r.getReviewContent());
+			pstmt.setString(2, r.getFilename());
+			pstmt.setInt(3, r.getReviewNo());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 }

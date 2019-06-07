@@ -226,6 +226,9 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button id="detailSearchFilter" class="detailSearchBtn">필터</button>
 			</div>
+			<div class="mapInner" style="display:none; width:100%;">
+					<jsp:include page="/WEB-INF/views/common/maptest.jsp"/>
+			</div>
 			<div class="filterOutLine">
 				<div class="filterOutBox">
 					<span>편의시설</span><span style="font-weight:100;">을 선택하세요.</span>&nbsp;&nbsp;&nbsp;전체선택&nbsp;
@@ -265,7 +268,7 @@
 			<c:forEach items='${list }' var='s'>
 				<div class='totalInnerBox'>
 					<div style='height:200px;'>
-						<img src='/upload/space/${s.s_img1}'>
+						<img src='/upload/space/${s.s_img1}' width="100%" height="200px">
 					</div>
 					<div style='height:120px;'>
 						<h2>'${s.s_placeName}'</h2>
@@ -322,9 +325,15 @@
 	});
 	
 	$('.placeTypeDetail').click(function() {
+		
 		var index = $('.placeTypeDetail').index(this);
 		var type = $('.placeTypeDetail').eq(index).text();
-		location.href = "/headerSearchPlace?type=" + type + "&index=" + index;
+		if(index<12){
+			inputType =1;			
+		}else{
+			inputType=2;
+		}
+		location.href = "/headerSearchPlace?type=" + type + "&index=" + index + "&inputType=" + inputType;
 	});
 	
 	$('#detailSearchFilter').click(function(){
@@ -375,6 +384,10 @@
 		}
 		viewIndex = viewIndex+6;
 	});
+	$('#detailSearchMap').click(function(){
+		
+		$('.mapInner').toggle();
+	})
 	</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package reservation.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import reservation.model.dao.ReservationDao;
@@ -17,5 +18,16 @@ public class ReservationService {
 		}
 		JDBCTemplate.close(conn);
 		return result;
+	}
+	public ArrayList<Reservation> selectOneReservation(int S_no){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Reservation> rList = new ReservationDao().selectOneReservation(conn,S_no);
+		if(rList!=null) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return rList;
 	}
 }
