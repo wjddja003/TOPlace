@@ -53,8 +53,9 @@ public class InsertReviewServlet extends HttpServlet {
 		String reviewTitle = mRequest.getParameter("reviewTitle");
 		String reviewContent = mRequest.getParameter("reviewContent");
 		String reviewWriter = mRequest.getParameter("reviewWriter");
+		int reviewStar = Integer.parseInt(mRequest.getParameter("reviewStar"));
 		String filename = mRequest.getFilesystemName("filename");
-		Review r = new Review(0,reviewSno,reviewTitle,reviewWriter,reviewContent,filename,null);
+		Review r = new Review(0,reviewSno,reviewTitle,reviewWriter,reviewContent,filename,reviewStar,null);
 		int result = new ReviewService().insertReview(r);
 		if(result>0) {
 			request.setAttribute("msg", "리뷰등록 성공");
