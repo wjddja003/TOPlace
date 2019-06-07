@@ -36,7 +36,7 @@ public class HeaderSearchPlaceServlet extends HttpServlet {
 		int index = Integer.parseInt(request.getParameter("index"));
 		int inputType = Integer.parseInt(request.getParameter("inputType"));
 		String type = request.getParameter("type");
-		ArrayList<Space> list = new DetailSearchService().detailSearch(inputType,index);
+		ArrayList<Space> list = new DetailSearchService().detailSearch(inputType,index,type);
 		request.setAttribute("type", type);
 		request.setAttribute("index", index);
 		request.setAttribute("list", list);

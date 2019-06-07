@@ -5,7 +5,7 @@ $(document).ready(function(){
 		var type = $('.placeType').eq(index).text();
 		if(index<12){
 			inputType = 1;			
-		}else{
+		}else if(index>=12 && index<20){
 			inputType = 2;
 		}
 		
@@ -24,7 +24,7 @@ $(document).ready(function(){
 						
 					} else {
 						var type = $(this).val();
-						var index = 0;
+						var index = -1;
 						for (var i = 0; i < $('.placeType').length; i++) {
 							if ($('.placeType').eq(i).text() == type) {
 								index = i;

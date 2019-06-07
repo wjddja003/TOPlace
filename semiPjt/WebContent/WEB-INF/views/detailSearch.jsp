@@ -227,7 +227,7 @@
 				<button id="detailSearchFilter" class="detailSearchBtn">필터</button>
 			</div>
 			<div class="mapInner" style="display:none; width:100%;">
-					<jsp:include page="/WEB-INF/views/common/maptest.jsp"/>
+					
 			</div>
 			<div class="filterOutLine">
 				<div class="filterOutBox">
@@ -271,8 +271,15 @@
 						<img src='/upload/space/${s.s_img1}' width="100%" height="200px">
 					</div>
 					<div style='height:120px;'>
-						<h2>'${s.s_placeName}'</h2>
-						<img src='/img/map_marker.png'>
+						<h4>${s.s_placeName}</h4>
+						<img src='/img/map-marker.png'><span>${s.addressCut}</span>
+						<div style="width:100%; height:22px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">${s.s_placeTag}</div>
+						<c:if test="${s.s_type eq 'time' }">
+							<span style="font-size:22px;">${s.s_price1}</span><span>원/시간</span>
+						</c:if>
+						<c:if test="${s.s_type eq 'day' }">
+							<span style="font-size:22px;">${s.s_price1}</span><span>원/일</span>
+						</c:if>
 					</div>
 				</div>
 			</c:forEach>
@@ -329,9 +336,9 @@
 		var index = $('.placeTypeDetail').index(this);
 		var type = $('.placeTypeDetail').eq(index).text();
 		if(index<12){
-			inputType =1;			
-		}else{
-			inputType=2;
+			inputType = 1;			
+		}else if(index>=12 && index<20){
+			inputType = 2;
 		}
 		location.href = "/headerSearchPlace?type=" + type + "&index=" + index + "&inputType=" + inputType;
 	});

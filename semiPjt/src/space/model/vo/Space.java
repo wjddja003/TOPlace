@@ -272,5 +272,13 @@ public class Space {
 	      }
 	      return list;
 	   }
-	
+	public String getAddressCut() {
+		StringTokenizer st = new StringTokenizer(address, " ");
+		String addrCut = "";
+		for(int i=0;i<2;i++) {
+			addrCut += st.nextToken()+" ";
+		}
+		
+		return addrCut;
+	}
 }
