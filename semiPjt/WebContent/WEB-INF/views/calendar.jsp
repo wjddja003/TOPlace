@@ -1297,7 +1297,7 @@
                     endDay=null;
                     //예약 날짜 합계 출력
                     $('.hapDay').text("총"+during+"일");
-                    $('.price_day').text($('.startDay').html()+$('.endDay').html()+" 총"+during+"일"+" x "+"${s.s_price1}"+" ￦"+during*${s.s_price1});
+                    $('.price_day').text($('.startDay').html()+" "+$('.endDay').html()+" 총"+during+"일"+" x "+"${s.s_price1}");
                     totalPrice += ((during*'${s.s_price1}')*1);
                     $('.price').html(totalPrice);
                 }              

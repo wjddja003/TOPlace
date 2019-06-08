@@ -346,10 +346,10 @@
                <div class="reservation_head">
                   <span class="reservation_title">예약 공간</span> 
                   <c:if test="${s.s_type eq 'day'}">
-                  	<span class="reservation_sub"  style="color:red;">￦ ${s.s_price1}<span style="font-size:14px">/일</span></span>
+                  	<span class="reservation_sub"  style="color:red;">￦ ${s.s_price1}<span style="font-size:16px">/일</span></span>
                   </c:if>
                   <c:if test="${s.s_type eq 'time'}">
-                  	<span class="reservation_sub"  style="color:red;">￦ ${s.s_price1}<span style="font-size:14px">/시간</span></span>
+                  	<span class="reservation_sub"  style="color:red;">￦ ${s.s_price1}<span style="font-size:16px">/시간</span></span>
                   </c:if>
                </div>
                <div class="reservation_content">
@@ -405,7 +405,7 @@
                         </div>
                		</div>
                </div>
-               <%-- 예약 단위 선택  --%>
+               <%-- 예약 단위 선택  
                <div class="reservation_head">
                   <span class="reservation_title">예약 단위 선택</span> 
                   <span class="reservation_sub" style="color:red;">*VAT 가격 포함</span>
@@ -419,14 +419,16 @@
                   	</c:if>
                   </div>
                </div>
+               --%>
                <%-- 예약페이지 날짜선택 --%>
                <div class="reservation_head">
                   <span class="reservation_title">날짜 선택</span>
-                  <span class="reservation_sub">
-                     <span class="startDay"></span>
-                     <span class="endDay"></span>
-                     <span class="hapDay"></span>
-                  </span>
+                  <c:if test="${s.s_type eq 'day'}">
+                  <span class="reservation_sub" style="color: red;">* 최소 1일 ~ 최대 30일</span>
+                  </c:if>
+                  <c:if test="${s.s_type eq 'time'}">
+                  <span class="reservation_sub" style="color: red;">* 최소 1일 ~ 최대 7일</span>
+                  </c:if>
                </div>
                <div class="reservation_content">
                   <div class="demo">
@@ -734,7 +736,9 @@
                		<div class="pop_list_left">추가옵션</div>
                		<div class="pop_list_right"><span class="option1"></span></div>
                </div>
-               <div class="rMenu_list">
+               
+               <div class="rMenu_price">
+               <div class="rMenu_list" style="border:none; margin-top: 10px; height: 30px;">
                		<div class="rMenu_price_list">
                			<div class="price_day"></div>
                			<c:if test="${s.s_type eq 'time'}">
@@ -743,28 +747,24 @@
                			<div class="price_option"></div>
                		</div>
                </div>
-               <div class="rMenu_price">
-               		<div class="pop_list_left" style="color:red;font-size:16px;" id="reservation_price"></div>
                   	<div class="pop_list_left" style="color:#183058">￦</div>
                   	<div class="pop_list_right" style="color:#183058"><span class="price">0</span></div>
                </div>
                <button id="payment">예약하기</button>
             </div>
             <%-- 예약 정보 창 --%>
-            
-            
             <%-- div 기준 초기화--%>
             <div style="clear: both;"></div>
          </div>
       </div>
    </section>
    <script>	
-   var totalPrice = 0;
-   var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-   var count = 1;
-   var sendTimeArray = new Array(10);
-   var selTimeArr = new Array();
-   var priceTimeArr = new Array();
+   var totalPrice = 0; //총 계산금액
+   var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //선택 한 시간 값
+   var count = 1; //버튼클릭 카운트
+   var sendTimeArray = new Array(10); //보낼 시간 값
+   var selTimeArr = new Array(); //출력 할 시간 값
+   var priceTimeArr = new Array(); //돈 계산 할 시간 값
    var btnIndex;
 		function selectTimeBtnfn(a){
 			count = 1;
@@ -806,21 +806,20 @@
 	   	}
 		
       $(document).ready(function() {
+    	  if('${s.s_type}'=='day'){
+    		  btnVal=1;
+    	  }else{
+    		  btnVal=3;
+    	  }
    <%-- 예약정보 정규식 --%>
       var phoneCheck = /[0-9]{4}$/;
       var bookerCheck = /[가-힣]{2,13}$/;
-      var timeCheck = "${s.s_type}";
-      console.log(timeCheck);
-   <%-- 날짜 선택 스크립트 --%> 
    <%-- 시간 선택 스크립트 --%>
-       // 시간 버튼 클릭
       var start = -1; // 시간 시작 버튼 인덱스
       var end = -1; // 시간 끝 버튼 인덱스
       var startTime; // 시간 시작 값
       var endTime; // 시간 끝 값
-      var hapTime; // 총 시간 값(실제 금액 계산)
-       // 시간 값 배열로 전달하여 디비 저장 할 값
-     
+      var hapTime; // 총 시간 값
       for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
     	  $('.swiper-slide button').eq(i).addClass("disabled");
     	  $('.swiper-slide button').eq(i).css("background","#f69b02");
@@ -832,7 +831,6 @@
       
       //클릭 이벤트
       $('.swiper-slide button').click(function() {
-    	  console.log(count);
          if (count == 1) {
             start = $('.swiper-slide button').index(this);
             $(this).css('background','#183058');
@@ -866,11 +864,9 @@
 	  	            		arrayStr += ",";
 	  	            	}
 	  	            }
-	  	            console.log("날짜스트링"+arrayStr);
-	  	            $('input[name=reservationDay]').val(arrayStr);
+	  	          $('input[name=reservationDay]').val(arrayStr);
                   var s = selTimeArray.join('')+'/';
                   sendTimeArray[btnIndex] = s; //얘가 최종적으로 보내야할 예약된 시간임 데이는 원래 저장되던 array?로 보내면됨 둘다 스트링으로 만드는데 sendTime은 /로 항목 구분 해줘야함
-                  console.log(array);
                   arrayTime="";
                   for(var Itime=0;Itime<sendTimeArray.length;Itime++){
                 	  arrayTime += sendTimeArray[Itime];
@@ -886,12 +882,10 @@
                 	  priceTimeArr[btnIndex]=hapTime-1;
                       count = 3;
                    }
-                  $('.selTime1').html("");
+                  $('.selTime2').html("");
                   for(var IItime=0; IItime<selTimeArr.length; IItime++){
-           				$('.selTime1').html($('.selTime1').html()+String(selTimeArr[IItime]).replace("undefined",""));
+           				$('.selTime2').html($('.selTime2').html()+String(selTimeArr[IItime]).replace("undefined",""));
            			}
-                  
-                  console.log(selTimeArr);
                }else if (count > 2) {
                   count = 1;
                   $('.disabled').css('background','#f69b02');
@@ -899,9 +893,7 @@
                   selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                   selTimeArray.pop();
                   selTimeArr.pop();
-               }
-         	
-         		
+               }	
          });
    <%-- 인원 선택 스크립트 --%>
       var person = parseInt($('.people').text());
@@ -944,7 +936,8 @@
     		  $('#pop_option').css("display","none");
               $('#rMenu_option').css("display","none");
               $('.price_option').text("");
-              $('.price').html($('.price').html()*1-('${s.s_price2}')*1);
+              totalPrice -= ('${s.s_price2}')*1;
+              $('.price').html(totalPrice);
     	  }else{
         	  $('#option2').text(option);  
               $('.option1').text(option+"명");
@@ -952,7 +945,7 @@
               $('.rMenu_price_list').css("display","block");
               totalPrice -= ('${s.s_price2}')*1;
               $('.price').html(totalPrice);
-              $('.price_option').text("추가인원 "+option+"명"+' x '+'${s.s_price2}'+' ￦'+option*'${s.s_price2}');
+              $('.price_option').text("추가인원 "+option+"명"+' x '+'${s.s_price2}');
     	  }
       });
       $('#option_plus').click(function(){
@@ -971,7 +964,7 @@
             $('.rMenu_price_list').css("display","block");
             totalPrice += ('${s.s_price2}')*1;
             $('.price').html(totalPrice);
-            $('.price_option').text("추가인원 "+option+"명"+' x '+'${s.s_price2}'+' ￦'+option*'${s.s_price2}');
+            $('.price_option').text("추가인원 "+option+"명"+' x '+'${s.s_price2}');
          }
       });
    <%-- 전체 체크박스 선택 스크립트 --%>
@@ -1002,7 +995,6 @@
          }else {
    <%-- 시간 체크 확인 --%>
    <%-- 넘어온 타입이 시간일때 --%>
-   console.log(count);
    if($('.selTime1').text().length < 2 && $('.selTime2').text().length < 2){
 	   if (count != 3) {
 		   alert("시간을 선택해주세요.");
@@ -1152,6 +1144,12 @@
 	                  <div class="pop_list_right">${s.s_placeName}</div>
 	               </div>
 	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약자명</div>
+	                  <div class="pop_list_right">
+	                  	<span class="booker"></span>
+               		  </div>
+	               </div>
+	               <div class="reservation_popupDiv_list">
 	                  <div class="pop_list_left">예약날짜</div>
 	                  <div class="pop_list_right">
 	                  	<span class="startDay"></span>
@@ -1159,23 +1157,17 @@
                			<span class="hapDay"></span>
                		  </div>
 	               </div>
-	               <div class="reservation_popupDiv_list">
-	                  <div class="pop_list_left">예약자명</div>
-	                  <div class="pop_list_right">
-	                  	<span class="booker"></span>
-               		  </div>
-	               </div>
 	               <c:if test="${s.s_type eq 'day'}">
 	               <div class="reservation_popupDiv_list">
 	                  <div class="pop_list_left">이용시간</div>
-	                  <div class="pop_list_right"><span class="selTime">${s.s_start}시~${s.s_end}시</span></div>
+	                  <div class="pop_list_right"><span class="selTime1">${s.s_start}시~${s.s_end}시</span></div>
 	               </div>
 	               </c:if>
 	               <c:if test="${s.s_type eq 'time'}">
 	               <div class="reservation_popupDiv_list">
 	                  <div class="pop_list_left">예약시간</div>
 	                  <div class="pop_list_right">
-	                  	<span class="selTime1"></span>
+	                  	<span class="selTime2"></span>
 	                  </div>
 	               </div>
 	               </c:if>
