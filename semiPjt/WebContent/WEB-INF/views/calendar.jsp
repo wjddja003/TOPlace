@@ -1346,9 +1346,32 @@
         		if(array.length==7){
         			alert("원하는 날짜는 7일까지 선택가능합니다.");
         			//추가
-        			$('.endDay').text("");
-        			$('#choiceDay').html("");
-        			$('#showDay').html("");
+        			$('.price').text(totalPrice);
+                    $('.endDay').text("");
+                    $('.hapDay').text("");
+                    $('.startDay').text("");
+                    $('.price_time').text("");
+                    selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+                    sendTimeArray = new Array(10);
+                    selTimeArr = new Array(); 
+                    priceTimeArr = new Array(); 
+                    $('#choiceDay').html("");
+                    $('#showDay').html("");
+                    $('.price_day').text("");
+                    $('.selTime2').text("");
+        			$('td').not('td.inhibitDay').css("background-color","white");
+       	            during = 0;
+       	            $('#duringSpan').text(during);
+       	            multiSelectCount = 0;
+       	            array=new Array();
+       	            for(var i = 0; i<$('td').not('td.inhibitDay').length;i++){
+       	            	if($('td').not('td.inhibitDay').eq(i).attr("class")=="selectDay"){
+       	            		$('td').not('td.inhibitDay').eq(i).removeClass("selectDay")
+       	            	}
+       	            }
+       	         $('#rMenu_time').css('display','block');
+                 $('.rM_time').css('display','none');
+                 $('.swiper-slide button').attr('disabled','false');
         			return;
         		}
         		if($(this).hasClass("inhibitDay") === false && $(this).attr("class") != "selectDay"){
@@ -1368,7 +1391,7 @@
                     strOneDay = year+strMonth1+strDay;
                     array.push(strOneDay);
                    //추가
-                    $('.endDay').html($('.endDay').html()+year+"."+month+"."+$(this).find('p').text()+"일 ");
+                    $('.endDay').html("총 "+array.length+"일");
                 } else if($(this).hasClass("inhibitDay") === false && $(this).attr("class") == "selectDay"){
                 	$(this).css("background-color","white");
                     $(this).removeClass("selectDay");
@@ -1414,6 +1437,7 @@
             }
             during = 0;
             $('#duringSpan').text(during);
+            $('.swiper-slide button').attr('disabled','false');
         }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //30일 이상 선태 불가 메소드 종료
@@ -1436,10 +1460,16 @@
             $('.startDay').text("");
             selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
             sendTimeArray = new Array(10);
+            selTimeArr = new Array(); 
+            priceTimeArr = new Array(); 
             $('#choiceDay').html("");
             $('#showDay').html("");
             $('.price_day').text("");
             $('.selTime2').text("");
+            $('.price_time').text("");
+            $('#rMenu_time').css('display','block');
+            $('.rM_time').css('display','none');
+            $('.swiper-slide button').attr('disabled','false');
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //선택된 날짜 길이 확인용 메소드

@@ -362,8 +362,8 @@
 		               			<h3>${s.s_placeName} </h3>
 		               		</div>
 		               		<div class="reservation_space_tit" style="width:68%; float:left; margin: 10px 0px 0px 10px;">
-		               			<span style="color:black;">${s.s_placeIntroduce1}</span>
-		               			<span style="color:black;">${s.s_placeIntroduce2}</span>
+		               			<h5><span style="color:black;">${s.s_placeIntroduce1}</span></h5>
+		               			<span style="color:black; word-break:break-all">${s.s_placeIntroduce2}</span>
 		               		</div>
 	               		</div>
 	               		<div class="viewpage_textbox">
@@ -453,76 +453,76 @@
 	                  <div class="swiper-container">
 	                     <div class="swiper-wrapper">
 		                     <div class="swiper-slide">
-		                           <button>0<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">0<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>1<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">1<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>2<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">2<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>3<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">3<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>4<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">4<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>5<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">5<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>6<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">6<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>7<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">7<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>8<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">8<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>9<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">9<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>10<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">10<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>11<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">11<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>12<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">12<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>13<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">13<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>14<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">14<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>15<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">15<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>16<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">16<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>17<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">17<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>18<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">18<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>19<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">19<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>20<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">20<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>21<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">21<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>22<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">22<br>￦${s.s_price1}</button>
 		                     </div>
 		                     <div class="swiper-slide">
-		                           <button>23<br>￦${s.s_price1}</button>
+		                           <button disabled="disabled">23<br>￦${s.s_price1}</button>
 		                     </div>
                      	</div>
                   	</div>
@@ -709,7 +709,7 @@
                <div class="rMenu_list">
                		<div class="pop_list_left">예약날짜</div>
                		<div class="pop_list_right">
-               			<span class="endDay">-</span>
+               			<span class="endDay" style="color:red''">-</span>
                		</div>
                </div>
                </c:if>
@@ -721,11 +721,15 @@
                </div>
                </c:if>
                <c:if test="${s.s_type eq 'time'}">
-               <div class="rMenu_list">
+               <div class="rMenu_list" id="rMenu_time">
                		<div class="pop_list_left">예약시간</div>
                		<div class="pop_list_right">
-               			<span class="selTime2">-</span>
+               			<span>-</span>
                		</div>
+               </div>
+               <div class="rM_time" style="border-bottom: 1px solid #ccc; clear: both; display:none;">
+               		<span style="text-align: left;">예약시간</span>
+               		<div style="text-align:right;"><span class="selTime2"></span></div>
                </div>
                </c:if>
                <div class="rMenu_list">
@@ -767,6 +771,7 @@
    var priceTimeArr = new Array(); //돈 계산 할 시간 값
    var btnIndex;
 		function selectTimeBtnfn(a){
+			$('.swiper-slide button').attr('disabled','true');
 			count = 1;
 			$('.selectTimeBtn').css('background','#f69b02');
 			$(a).css('background','#183058');
@@ -820,6 +825,7 @@
       var startTime; // 시간 시작 값
       var endTime; // 시간 끝 값
       var hapTime; // 총 시간 값
+      var totalTime = 0; //계산할 시간
       for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
     	  $('.swiper-slide button').eq(i).addClass("disabled");
     	  $('.swiper-slide button').eq(i).css("background","#f69b02");
@@ -836,7 +842,7 @@
             $(this).css('background','#183058');
             $(this).css('color','white');
             startTime = parseInt($(this).text());
-            hapTime = 1;
+            hapTime = 0;
             count = 2;
             } else if (count == 2) {
                endTime = parseInt($(this).text());
@@ -846,7 +852,7 @@
 	                     $('.swiper-slide button').eq(i).css('background-color','#183058');
 	                     $('.swiper-slide button').eq(i).css('color','white');
 	                     selTimeArray[i]=1;
-	                     hapTime++;
+	                     hapTime = end-start+1;
                 	  }
                      }
                   for (var i = start; i > end - 1; i--) {
@@ -854,7 +860,7 @@
  	                     $('.swiper-slide button').eq(i).css('background-color','#183058');
  	                     $('.swiper-slide button').eq(i).css('color','white');
  	                     selTimeArray[i]=1;
- 	                    hapTime++
+ 	                     hapTime = start-end+1;
                  	  }
                   }
                   arrayStr="";
@@ -874,18 +880,26 @@
             	  $('.price').text(totalPrice);
                   $('input[name=reservationTime]').val(arrayTime);
                   if(startTime<endTime){
-                	  selTimeArr[btnIndex]=startTime+"~"+(endTime+1)+"시,  "+(hapTime-1)+"시간 ";
-                	  priceTimeArr[btnIndex]=hapTime-1;
+                	  selTimeArr[btnIndex]=startTime+"~"+(endTime+1)+"시,  "+(hapTime)+"시간 ";
+                	  priceTimeArr[btnIndex]=hapTime;
                       count = 3;
                    }else{
-                	  selTimeArr[btnIndex]=endTime+"~"+(startTime+1)+"시,  "+(hapTime-1)+"시간 ";
-                	  priceTimeArr[btnIndex]=hapTime-1;
+                	  selTimeArr[btnIndex]=endTime+"~"+(startTime+1)+"시,  "+(hapTime)+"시간 ";
+                	  priceTimeArr[btnIndex]=hapTime;
                       count = 3;
                    }
                   $('.selTime2').html("");
                   for(var IItime=0; IItime<selTimeArr.length; IItime++){
-           				$('.selTime2').html($('.selTime2').html()+String(selTimeArr[IItime]).replace("undefined",""));
+           				$('.selTime2').html($('.selTime2').html()+String(array[IItime]).substring(0,4)+"년 "+String(array[IItime]).substring(4,6)+"월 "+String(array[IItime]).substring(6,8)+"일, "+String(selTimeArr[IItime]).replace("undefined","")+"<br>");
            			}
+                  for(var IIII=0; IIII<priceTimeArr.length; IIII++){
+         				totalTime += priceTimeArr[IIII];
+         			}
+                   $('#rMenu_time').css('display','none');
+                   $('.rM_time').css('display','block');
+                  	$('.price_time').html("총 "+totalTime+'시간 x '+'${s.s_price1}');
+                  	totalPrice = totalTime*'${s.s_price1}';
+                  	$('.price').html(totalPrice);
                }else if (count > 2) {
                   count = 1;
                   $('.disabled').css('background','#f69b02');
@@ -893,7 +907,8 @@
                   selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                   selTimeArray.pop();
                   selTimeArr.pop();
-               }	
+                  priceTimeArr.pop();
+               }
          });
    <%-- 인원 선택 스크립트 --%>
       var person = parseInt($('.people').text());
