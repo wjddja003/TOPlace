@@ -1225,6 +1225,8 @@
                 if($(this).hasClass("inhibitDay") === false && count==0){ //예약 불가 날짜는 제외
                     $('td').not('td.inhibitDay').css("background-color","white");
                     $('td').removeClass("selectDay");
+                    totalPrice -= ((during*'${s.s_price1}')*1);
+                    $('.price').html(totalPrice);
                     //선택된 날짜 초기화 
                     startDay = $('td').index(this);
                     //선택된 날짜의 td index 가져오기
@@ -1240,7 +1242,7 @@
                     $('.hapDay').text("");
                     $('.startDay').text(year+"."+month+"."+$(this).find('p').text()+"일");
                     //추가
-                    $('.price').text($(this).find('pre').text());
+                    $('.price_day').text("");
                 } else if($(this).hasClass("inhibitDay") === false && count==1){
                     endDay = $('td').index(this);
                     $(this).css("background-color","red");
@@ -1295,6 +1297,9 @@
                     endDay=null;
                     //예약 날짜 합계 출력
                     $('.hapDay').text("총"+during+"일");
+                    $('.price_day').text($('.startDay').html()+$('.endDay').html()+" 총"+during+"일"+" x "+"${s.s_price1}"+" ￦"+during*${s.s_price1});
+                    totalPrice += ((during*'${s.s_price1}')*1);
+                    $('.price').html(totalPrice);
                 }              
         	} else if(btnVal==2 && $(this).find('p').text() != ""){
                 if($(this).hasClass("inhibitDay") === false && count==0){
@@ -1414,6 +1419,7 @@
 //30일 이상 선태 불가 메소드 종료
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////  
         $('#btn').click(function(){
+        	totalPrice -= ((during*'${s.s_price1}')*1);
             $('td').not('td.inhibitDay').css("background-color","white");
             during = 0;
             $('#duringSpan').text(during);
@@ -1424,6 +1430,7 @@
             		$('td').not('td.inhibitDay').eq(i).removeClass("selectDay")
             	}
             }
+            $('.price').text(totalPrice);
             $('.endDay').text("");
             $('.hapDay').text("");
             $('.startDay').text("");
@@ -1431,7 +1438,8 @@
             sendTimeArray = new Array(10);
             $('#choiceDay').html("");
             $('#showDay').html("");
-            $('.selTime1').text("");
+            $('.price_day').text("");
+            $('.selTime2').text("");
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //선택된 날짜 길이 확인용 메소드

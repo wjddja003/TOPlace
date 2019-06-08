@@ -715,13 +715,14 @@
                <div class="rMenu_list">
                		<div class="pop_list_left">이용시간</div>
                		<div class="pop_list_right"><span>${s.s_start}시~${s.s_end}시</span></div>
+               		<span class="selTime1" style="display:none">----</span>
                </div>
                </c:if>
                <c:if test="${s.s_type eq 'time'}">
                <div class="rMenu_list">
                		<div class="pop_list_left">예약시간</div>
                		<div class="pop_list_right">
-               			<span class="selTime1">-</span>
+               			<span class="selTime2">-</span>
                		</div>
                </div>
                </c:if>
@@ -758,7 +759,6 @@
       </div>
    </section>
    <script>	
-   priceCalfn = priceCAL; 
    var totalPrice = 0;
    var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
    var count = 1;
@@ -875,6 +875,7 @@
                   for(var Itime=0;Itime<sendTimeArray.length;Itime++){
                 	  arrayTime += sendTimeArray[Itime];
                   }
+            	  $('.price').text(totalPrice);
                   $('input[name=reservationTime]').val(arrayTime);
                   if(startTime<endTime){
                 	  selTimeArr[btnIndex]=startTime+"~"+(endTime+1)+"시,  "+(hapTime-1)+"시간 ";
@@ -936,18 +937,21 @@
     	  option = option-1;
     	  if(option<1){
     		  option = 0;
-              $('#option_plus').attr("button",true);
-              $('#option_minus').attr("button",false);
+              $('#option_plus').attr("disabled",false);
+              $('#option_minus').attr("disabled",true);
     		  $('.option1').text("");
     		  $('#option2').text(option); 
     		  $('#pop_option').css("display","none");
               $('#rMenu_option').css("display","none");
               $('.price_option').text("");
+              $('.price').html($('.price').html()*1-('${s.s_price2}')*1);
     	  }else{
         	  $('#option2').text(option);  
               $('.option1').text(option+"명");
               $('input[name=reservationOption]').val(option+"명");
               $('.rMenu_price_list').css("display","block");
+              totalPrice -= ('${s.s_price2}')*1;
+              $('.price').html(totalPrice);
               $('.price_option').text("추가인원 "+option+"명"+' x '+'${s.s_price2}'+' ￦'+option*'${s.s_price2}');
     	  }
       });
@@ -957,13 +961,16 @@
             $('#option_plus').attr("button",false);
             alert("최대 추가 옵션 인원은"+"10"+ "명입니다.");
          }else{
-        	 option = option+1;
+        	$('#option_minus').attr("disabled",false);
+        	option = option+1;
             $('#option2').text(option);
             $('.option1').text(option+"명");
             $('input[name=reservationOption]').val(option+"명");
             $('#pop_option').css("display","block");
             $('#rMenu_option').css("display","block");
             $('.rMenu_price_list').css("display","block");
+            totalPrice += ('${s.s_price2}')*1;
+            $('.price').html(totalPrice);
             $('.price_option').text("추가인원 "+option+"명"+' x '+'${s.s_price2}'+' ￦'+option*'${s.s_price2}');
          }
       });
@@ -986,8 +993,6 @@
          });
    <%-- 결제버튼 클릭 스크립트--%>
       $('#payment').click(function() {
-    	  priceCalfn();
-    	  console.log(totalPrice);
     	  $('.price').text(totalPrice);
     	  $('.booker').text($('input[name=booker]').val());
     	  $('input[name=reservationBooker]').val($('.booker').text());
@@ -998,7 +1003,7 @@
    <%-- 시간 체크 확인 --%>
    <%-- 넘어온 타입이 시간일때 --%>
    console.log(count);
-   if($('.selTime1').text().length < 2){
+   if($('.selTime1').text().length < 2 && $('.selTime2').text().length < 2){
 	   if (count != 3) {
 		   alert("시간을 선택해주세요.");
 	      }
@@ -1131,16 +1136,6 @@
             }
          });
       });
-    	  function priceCAL(){
-    	  var onePrice = ${s.s_price1};
-    	  for (var spd=0; spd<$('.selectDay').length;spd++){
-    		  if(btnVal==1){
-        			  totalPrice += onePrice+0;
-    		  }else{
-        			  totalPrice += onePrice* priceTimeArr[spd]+0;
-    		  }
-    	  }
-      }
    </script>
    <jsp:include page="/WEB-INF/common/footer.jsp" />
    <%-- 팝업 배경 DIV--%>
