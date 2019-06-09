@@ -1252,7 +1252,7 @@
                     clickEndDay = $(this).find('p').text();
                     count = 0;
                     //예약 종료 날짜 출력
-                    $('.endDay').text("");
+                    $('.endDay').text("-");
                     if(startDay<endDay){
                     	$('.endDay').text("~ "+year+"."+month+"."+$(this).find('p').text()+"일");	
                     }else{
@@ -1347,7 +1347,7 @@
         			alert("원하는 날짜는 7일까지 선택가능합니다.");
         			//추가
         			$('.price').text(totalPrice);
-                    $('.endDay').text("");
+                    $('.endDay').text("-");
                     $('.hapDay').text("");
                     $('.startDay').text("");
                     $('.price_time').text("");
@@ -1426,7 +1426,7 @@
         resetfn = sample;	
         function sample(){
             alert("예약일은 30일을 초과할수 없습니다.")
-            $('.endDay').text("");
+            $('.endDay').text("-");
             $('.hapDay').text("");
             $('.startDay').text("");
             $('td').not('td.inhibitDay').css("background-color","white");
@@ -1455,7 +1455,7 @@
             	}
             }
             $('.price').text(totalPrice);
-            $('.endDay').text("");
+            $('.endDay').text("-");
             $('.hapDay').text("");
             $('.startDay').text("");
             selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -1475,7 +1475,7 @@
 //선택된 날짜 길이 확인용 메소드
 		createSelectDay = function(){
 	            if(startMonth>endMonth){
-	            	$('.endDay').text("");
+	            	$('.endDay').text("-");
 	                $('.hapDay').text("");
 	                $('.startDay').text("");
 	                alert("이전 날짜부터 선택해주십시오.")
