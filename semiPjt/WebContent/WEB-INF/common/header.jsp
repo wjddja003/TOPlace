@@ -4,6 +4,7 @@
     
 
 <link rel="stylesheet" type="text/css" href="/css/index.css">
+<link rel="stylesheet" type="text/css" href="/css/headerSearch.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script
       src="https://code.jquery.com/jquery-3.4.0.js"

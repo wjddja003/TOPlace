@@ -20,9 +20,9 @@
 			cursor: pointer;
 			float:left;
 			display:none;
-			border: 2px solid #f5ca6b;
+			border: 2px solid #183058;
 			border-radius:3%;
-			
+			height:360px;
 		}
 		#viewpage_alert{
         width: 100%;
@@ -41,16 +41,16 @@
 			height:100%;
 			border:none;
 			background:white;
-			color:#f5ca6b;
+			color:#f69b02;
 			border-radius:8px;
 			font-size:20px;
 		}
 		#viewMore:hover{
-			background:#f5ca6b;
+			background:#f69b02;
 			color:white;
 		}
 		#viewMore:focus{
-    outline: none;
+    		outline: none;
 		}
 		.searchInfo{
 			width:100%;
@@ -65,7 +65,7 @@
 	    .like{
 	    	width:40px;
 	    	height: 40px;
-	        background: #f5ca6b ;
+	        background: #f69b02 ;
 	        border-radius:20%; 
 	    }
 	    
@@ -78,7 +78,7 @@
 	<div class="section_content">
 	<div class="totalOutLine">
 		<div class="searchInfo">
-			<span id="selectVal" style="color:#f5ca6b;font-weight:bold;font-size:30px; border-bottom:4px solid #f5ca6b">모든 공간보기</span><span style="font-weight:100;font-size:20px;">  검색 결과</span>
+			<span id="selectVal" style="color:#f69b02;font-weight:bold;font-size:30px; border-bottom:4px solid #f69b02">모든 공간보기</span><span style="font-weight:100;font-size:20px;">  검색 결과</span>
 		</div>
 			<c:forEach items='${list }' var='s'>
 				<div class='totalInnerBox'>
@@ -94,21 +94,21 @@
                     	</a>
                     	</div>
                     	
-						<p style="font-size:20px; color:#f5ca6b; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${s.s_placeName}</p>
+						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${s.s_placeName}</p>
 						
 						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span>${s.addressCut}</span>
 						<div style="width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${s.s_placeTag}</div>
 						<c:if test="${s.s_type eq 'time' }">
-							&nbsp;<span style="font-size:22px; color:#f5ca6b;">￦ ${s.s_price1}</span><span style=""> 원/시간</span>
+							&nbsp;<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${s.s_type eq 'day' }">
-							<span style="font-size:22px; color:#f5ca6b;">￦ ${s.s_price1}</span><span> 원/일</span>
+							<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-		<div style="margin-bottom:50px;margin-left:20%;width:60%; height:50px; clear:left; text-align:center; border: 1px solid #f5ca6b; border-radius:8px;">
+		<div style="margin-bottom:50px;margin-left:20%;width:60%; height:50px; clear:left; text-align:center; border: 1px solid #f69b02; border-radius:8px;">
 			<button id="viewMore">더보기</button>
 		</div>
 	

@@ -21,22 +21,27 @@
 			font-size:18px;
 			padding-left: 10px;
 		}
-		.detailSearchBtn{
-			width:5%;
+		
+		.detailSearchBtn:focus{
+			outline:none;
 		}
 		.placeTypeDetail{
 			margin:0 auto;
 			float:left;
 			box-sizing: border-box;
-			border: 1px solid gainsboro;
-			color: darkgrey;
+			background-color:#f69b02;
+			border:1px solid white;	
+			color: white;
 			text-align: center;
 			width:45%;
+			height:30px;
 			cursor: pointer;
 		}
 		.placeTypeDetail:hover{
-			background-color:purple;
-			color:black;
+			border:1px solid white;	
+			background-color: #183058;
+			color:white;
+			font-size:20px;
 		}
 		.typeOutlineDetail{
 			clear:left;
@@ -50,12 +55,14 @@
 			padding:20px;
 			display:none;
 			width: 500px;
-			border: 1px solid black;
+			border:2px solid #183058;
 			overflow: hidden;
 			background-color: white;
+			border-radius: 8px;
 		}
 		.selectBox:hover{
 			cursor: pointer;
+			
 		}
 		.detailSearch {
 			width: 1160px;
@@ -80,38 +87,60 @@
 		    padding: 0;
 		    right: 300px;
 		}
-		.filterOutLine{
 		
+		.filterOutLine{
+			border-radius:8px;
 			padding:20px;
 			display: none;
 			clear: both;
-			border: 1px solid black;
+			border: 2px solid #183058;
 			
 		}
 		.detailSearchBtn{
 			background-color: white;
-			width: 80px;
+			width: 100%;
 			height: 40px;
+			color:#f69b02;
+			border:1px solid #f69b02;
+			border-radius:8px;
+			font-size:20px;
+		}
+		.detailSearchBtn:hover{
+			background-color: #f69b02;
+			color:white;
 		}
 		.detailBox{
 			margin-top:30px;
 			
 		}
-
+		.filterBtn{
+			background-color: white;
+			width: 35%;
+			height: 60px;
+			color:#f69b02;
+			border:1px solid #f69b02;
+			border-radius:8px;
+			font-size:20px;
+		}
+		.filterBtn:hover{
+			background-color: #f69b02;
+			color:white;
+		}
 		.filterBox{
 			margin:0 auto;
 			float:left;
 			box-sizing: border-box;
-			border: 1px solid gainsboro;
-			color: darkgrey;
+			border: 1px solid #183058;
+			color: #f69b02;
 			text-align: center;
 			width:13.7%;
 			height:90px;
 			cursor: pointer;
+			background-color: white;
 		}
-		.filterBox:hover{
-			background-color:purple;
-			color:black;
+		.selectFilter{
+			background-color: #f69b02;
+			color: white;
 		}
 		.filterOutBox{
 			clear:left;
@@ -119,14 +148,15 @@
 		}
 		.filterBack{
 			font-size: 20px;
-    		background-color: black;
+    		background-color:#f69b02;
     		color: white;
     		width: 30px;
-    		border: 0px;
+    		border: 1px solid white;
     		float:right;
 		}
-		.selectFilter{
-			background-color: blue;
+		.filterBack:hover{
+			background-color:#183058;
+			color: white;
 		}
 		
 		.totalOutLine{
@@ -142,9 +172,9 @@
 			cursor: pointer;
 			float:left;
 			display:none;
-			border: 2px solid #f5ca6b;
+			border: 2px solid #183058;
 			border-radius:3%;
-			
+			height:360px;
 		}
 		#viewpage_alert{
         width: 100%;
@@ -163,16 +193,16 @@
 			height:100%;
 			border:none;
 			background:white;
-			color:#f5ca6b;
+			color:#f69b02;
 			border-radius:8px;
 			font-size:20px;
 		}
 		#viewMore:hover{
-			background:#f5ca6b;
+			background:#f69b02;
 			color:white;
 		}
 		#viewMore:focus{
-    outline: none;
+    		outline: none;
 		}
 		
 		.like_full{
@@ -183,10 +213,15 @@
 	    .like{
 	    	width:40px;
 	    	height: 40px;
-	        background: #f5ca6b ;
+	        background: #f69b02 ;
 	        border-radius:20%; 
 	    }
-	    
+	    .searchInput:focus{
+	    	outline: none;
+	    }
+	    .searchInput{
+	    	border:1px solid #183058;
+	    }
 	</style>
 </head>
 <body>
@@ -196,11 +231,11 @@
 	<div id="viewpage_alert"><p></p></div>
 	<div class="section_content">
 		<div class="searchInfo">
-			<span style="color:#f5ca6b;font-weight:bold;font-size:30px; border-bottom:4px solid #f5ca6b">${type }</span><span style="font-weight:100;font-size:20px;"> (으)로 검색한 결과입니다.</span>
+			<span style="color:#f69b02;font-weight:bold;font-size:30px; border-bottom:4px solid #f69b02">${type }</span><span style="font-weight:100;font-size:20px;"> (으)로 검색한 결과입니다.</span>
 		</div>
 		<div class="detailSearch">
-            <input class="searchInput" type="text" placeholder="검색어를 입력해주세요">
-            <input class="searchIcon" type="submit" value="">
+            <input class="searchInput" type="text" placeholder="검색어를 입력해주세요" size="81" style="font-size:30px;">
+            <input class="searchIcon" type="submit" value="" style="color:#183058;">
         </div>
 		<div class="detailBox">
 			<div class="detailSearchList" style="width:37.5%;">공간유형
@@ -301,9 +336,9 @@
 					<div class="filterBox">도어락<br><img src="/upload/space/kategorie2/21.png" ></div>
 				</div>
 				<div class="filterOutBox" style="margin-top:20px; text-align:center">
-					<button id="filterReset" style="width:35%; height:60px;">초기화 하기</button>
+					<button class="filterBtn" id="filterReset">초기화 하기</button>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<button id="filterSubmit" style="width:35%; height:60px;">필터 적용하기</button>
+					<button class="filterBtn" id="filterSubmit">필터 적용하기</button>
 				</div>
 			</div>
 		</div>
@@ -323,21 +358,21 @@
                     	</a>
                     	</div>
                     	
-						<p style="font-size:20px; color:#f5ca6b; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${s.s_placeName}</p>
+						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${s.s_placeName}</p>
 						
 						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span>${s.addressCut}</span>
 						<div style="width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${s.s_placeTag}</div>
 						<c:if test="${s.s_type eq 'time' }">
-							&nbsp;<span style="font-size:22px; color:#f5ca6b;">￦ ${s.s_price1}</span><span style=""> 원/시간</span>
+							&nbsp;<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${s.s_type eq 'day' }">
-							<span style="font-size:22px; color:#f5ca6b;">￦ ${s.s_price1}</span><span> 원/일</span>
+							<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-		<div style="margin-bottom:50px;margin-left:20%;width:60%; height:50px; clear:left; text-align:center; border: 1px solid #f5ca6b; border-radius:8px;">
+		<div style="margin-bottom:50px;margin-left:20%;width:60%; height:50px; clear:left; text-align:center; border: 1px solid #f69b02; border-radius:8px;">
 			<button id="viewMore">더보기</button>
 		</div>
 	</div>
@@ -442,13 +477,17 @@
 		if (index >= 0 && index < 12) {
 			if($('.placeTypeDetail').eq(index).text()=='${type}'){
 				$('.selectBox').eq(0).html('${type }<span>&nbsp;&nbsp;&nbsp;▽</span>');
-				$('.placeTypeDetail').eq(index).css("background-color", "blue");
+				$('.selectBox').eq(0).css("color", "#f69b02")
+				$('.placeTypeDetail').eq(index).css("background-color", "#183058");
+				$('.placeTypeDetail').eq(index).css("color", "white");
 			}
 			inputType=1;
 		} else if (index >= 12 && index < 20) {
 			if($('.placeTypeDetail').eq(index).text()=='${type}'){
 				$('.selectBox').eq(1).html('${type }<span>&nbsp;&nbsp;&nbsp;▽</span>');
-				$('.placeTypeDetail').eq(index).css("background-color", "blue");
+				$('.selectBox').eq(1).css("color", "#f69b02")
+				$('.placeTypeDetail').eq(index).css("background-color", "#183058");
+				$('.placeTypeDetail').eq(index).css("color", "white");
 			}
 			inputType=2;
 		} else {
