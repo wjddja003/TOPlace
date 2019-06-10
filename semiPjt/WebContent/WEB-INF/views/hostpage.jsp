@@ -128,6 +128,7 @@
     }
     .day{  
    		font-size: 11px;
+   		    text-align: -webkit-right;
     }
     .reviewComment{
     float: right;
