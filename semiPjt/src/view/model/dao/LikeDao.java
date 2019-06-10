@@ -96,7 +96,7 @@ public class LikeDao {
 		ArrayList<LikeImg> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum as rnum, m.* from (select l.*,S_img1,s_placeName,s_Price1,s_placeTag,address,s_type from like_db l join place p on (l.s_no = p.S_no) where user_no = ? order by like_no desc) m) where rnum between ? and ?";
+		String query = "select * from (select rownum as rnum, m.* from (select l.*,S_img1,s_placeName,s_Price1,s_placeTag,address,s_type,S_kategorie2 from like_db l join place p on (l.s_no = p.S_no) where user_no = ? order by like_no desc) m) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, userNo);
@@ -115,6 +115,7 @@ public class LikeDao {
 				l.setPlaceTag(rset.getString("s_placetag"));
 				l.setAddress(rset.getString("address"));
 				l.setType(rset.getString("s_type"));
+				l.setS_kategorie2(rset.getString("s_kategorie2"));
 				list.add(l);
 			}
 		} catch (SQLException e) {

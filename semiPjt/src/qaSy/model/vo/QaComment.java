@@ -9,11 +9,13 @@ public class QaComment {
 	private int qaRef; //참조할 공간번호
 	private Date qaCommentDate;
 	private int qaCommentRef;
+	private String placeName;
 	public QaComment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public QaComment(int qaCommentNo, String qaCommentWriter, String qaCommentContent, int qaRef, Date qaCommentDate,int qaCommentRef) {
+	public QaComment(int qaCommentNo, String qaCommentWriter, String qaCommentContent, int qaRef, Date qaCommentDate,
+			int qaCommentRef, String placeName) {
 		super();
 		this.qaCommentNo = qaCommentNo;
 		this.qaCommentWriter = qaCommentWriter;
@@ -21,12 +23,7 @@ public class QaComment {
 		this.qaRef = qaRef;
 		this.qaCommentDate = qaCommentDate;
 		this.qaCommentRef = qaCommentRef;
-	}
-	public int getQaCommentRef() {
-		return qaCommentRef;
-	}
-	public void setQaCommentRef(int qaCommentRef) {
-		this.qaCommentRef = qaCommentRef;
+		this.placeName = placeName;
 	}
 	public int getQaCommentNo() {
 		return qaCommentNo;
@@ -58,4 +55,17 @@ public class QaComment {
 	public void setQaCommentDate(Date qaCommentDate) {
 		this.qaCommentDate = qaCommentDate;
 	}
+	public int getQaCommentRef() {
+		return qaCommentRef;
+	}
+	public void setQaCommentRef(int qaCommentRef) {
+		this.qaCommentRef = qaCommentRef;
+	}
+	public String getPlaceName() {
+		return placeName;
+	}
+	public void setPlaceName(String placeName) {
+		this.placeName = placeName;
+	}
+	
 }

@@ -173,7 +173,7 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#nameLength").text($("#hostContent").val().length);
+		$("#nameLength").text($("#hostName").val().length);
 		$("#contentLength").text($("#hostContent").val().length);
 	});
 	var hostNameFlag = false;
@@ -197,7 +197,6 @@
 		}
 	});
 	$("#hostName").keyup(function(){
-		console.log($('#userNo').val());
 		var count = $("#hostName").val().length;
 		$("#nameLength").text(count);
 		if(count > 10){

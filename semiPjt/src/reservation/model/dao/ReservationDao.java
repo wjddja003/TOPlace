@@ -1,17 +1,14 @@
 package reservation.model.dao;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Properties;
 
 import common.JDBCTemplate;
 import reservation.model.vo.Reservation;
+import reservation.model.vo.ReservationImg;
 
 public class ReservationDao {
 
@@ -103,7 +100,7 @@ public class ReservationDao {
 		ArrayList<ReservationImg> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum as rnum, m.* from (select r.*,S_img1 from reservation r join place p on (r.s_no = p.S_no) where user_no = ? order by reservation_no desc) m) where rnum between ? and ?";
+		String query = "select * from (select rownum as rnum, m.* from (select r.*,S_img1,s_placename from reservation r join place p on (r.s_no = p.S_no) where user_no = ? order by reservation_no desc) m) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, userNo);
@@ -121,6 +118,7 @@ public class ReservationDao {
 				r.setReservationDay(rset.getString("reservation_day"));
 				r.setImg(rset.getString("s_img1"));
 				r.setPaymentPrice(rset.getInt("payment_price"));
+				r.setPlaceName(rset.getString("s_placename"));
 				list.add(r);
 			}
 		} catch (SQLException e) {
@@ -173,4 +171,4 @@ public class ReservationDao {
 	
 
 	}
-}
+

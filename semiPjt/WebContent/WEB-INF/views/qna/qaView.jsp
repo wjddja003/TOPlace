@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="qaSy.model.vo.QaComment" %>
-    <%@ page import="java.util.ArrayList" %>
-    <%@ page import="qaSy.model.vo.QaPageData" %>
-    <%@ page import="user.model.vo.User" %>
-    <%
-    	QaPageData pd = (QaPageData)request.getAttribute("pd");
-    	ArrayList<QaComment> list = pd.getList();
-    %>
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -46,7 +39,7 @@
     .qa_v{
         text-align: center;
         width: 300px;
-        margin: 0 20px 0 0;
+        margin: 50px 20px 0 0;
         padding: 10px;
         height: 100%;
         float: left;
@@ -99,7 +92,7 @@
               
                     <div class="qa_no">
                         <div class="comment">
-                            공간명 :${q.qaCommentNo }<br>
+                           	 <a href="/spaceOneSpace?S_no=${q.qaRef }">공간명 :${q.placeName }</a><br>
                             ${q.qaCommentContent }<br>
                     	</div>
                         <div class="Q_btn">
@@ -111,7 +104,7 @@
                 </div>
                 	</c:if>
                 </c:forEach>
-               <div class="qa_navi"><%=pd.getPageNavi() %></div>
+               <div class="qa_navi">${pd.pageNavi }</div>
             </div>
         </div>
     </section>
