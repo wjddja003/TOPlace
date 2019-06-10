@@ -1,4 +1,4 @@
-package review.controller;
+package qaSy.controller;
 
 import java.io.IOException;
 
@@ -12,21 +12,19 @@ import javax.servlet.http.HttpSession;
 
 import qaSy.model.service.QaService;
 import qaSy.model.vo.QaPageData;
-import review.model.service.ReviewService;
-import review.model.vo.ReviewPageData;
 import user.model.vo.User;
 
 /**
- * Servlet implementation class ReviewListServlet
+ * Servlet implementation class QaviewpageViewServlet
  */
-@WebServlet(name = "ReviewList2", urlPatterns = { "/reviewList2" })
-public class ReviewListServlet2 extends HttpServlet {
+@WebServlet(name = "QaviewpageView", urlPatterns = { "/qaviewpageView" })
+public class QaviewpageViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewListServlet2() {
+    public QaviewpageViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,6 +41,7 @@ public class ReviewListServlet2 extends HttpServlet {
 			rd.forward(request, response);
 		}else {
 			
+			System.out.println(u.getUserId());
 			String userId = u.getUserId();
 			int reqPage;
 			try {
@@ -51,11 +50,11 @@ public class ReviewListServlet2 extends HttpServlet {
 				reqPage = 1;
 			}
 			
-			ReviewPageData pd = new ReviewService().selectRList(reqPage,userId);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/review/reviewList.jsp");
+			QaPageData pd = new QaService().selectQList(reqPage,userId);
+			RequestDispatcher rd = request.getRequestDispatcher("views/viewpage.jsp");
 			request.setAttribute("pd", pd);
 			rd.forward(request, response);
-		}
+		}		
 	}
 
 	/**

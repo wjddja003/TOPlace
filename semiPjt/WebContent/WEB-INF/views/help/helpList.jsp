@@ -89,6 +89,15 @@
         .table_toggle>tbody>tr:first-child>td{
             border-top: 2px solid #656565;
         }
+          .reviewBtn{
+        background: #fff;
+        border: 1px solid #f69b02;
+        font-size: 12px;
+        margin: 0 0 5px 0;
+        float: right;
+        width: 50px;
+        height: 30px;
+    }
     
 </style>
 </head>
@@ -139,8 +148,8 @@ prefix="c" %>
                             <td colspan="5">
                                 ${h.helpContent }
                                 <c:if test="${sessionScope.User.userId == h.helpWriter}">
-                                <a class="btn btn-outline-primary btn-sm btn1" href="/helpDelete?helpNo=${h.helpNo }">삭제</a>
-                                    <a class="btn btn-outline-primary btn-sm btn1" href="/helpUpdate?helpNo=${h.helpNo }">수정</a>
+                                <button class="reviewBtn" style="color:#f69b02; border-color:#f69b02"href="/helpDelete?helpNo=${h.helpNo }">삭제</button>
+                                    <button class="reviewBtn" style="color:#f69b02; border-color:#f69b02"href="/helpUpdate?helpNo=${h.helpNo }">수정</button>
                                 </c:if>
                                 <br>
                                 <c:if test="${h.filename != null }">
@@ -151,7 +160,7 @@ prefix="c" %>
                 </table>
             <div><%= pd.getPageNavi() %></div>
             <div>
-                <a class="btn btn-outline-primary btn-sm" href="/helpWrite" style="color:#f69b02; border-color:#f69b02">글쓰기</a>
+                <button class="reviewBtn" href="/helpWrite" style="color:#f69b02; border-color:#f69b02">글쓰기</button>
             </div>
         </div>
         </div>

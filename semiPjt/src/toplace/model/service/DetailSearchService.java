@@ -101,4 +101,15 @@ public class DetailSearchService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+	public ArrayList<Space> allSearch(){
+		Connection conn=JDBCTemplate.getConnection();
+		ArrayList<Space> list =new DetailSearchDao().allSearch(conn);
+		if(list != null) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return list;
+	}
 }

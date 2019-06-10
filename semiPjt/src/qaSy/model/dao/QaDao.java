@@ -60,12 +60,13 @@ public class QaDao {
 	public int insertQa(Connection conn, QaComment qc) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into qa_comment values(seq_qa_comment_no.nextval,?,?,1,default,null)";
+		String query = "insert into qa_comment values(seq_qa_comment_no.nextval,?,?,?,default,null)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, qc.getQaCommentWriter());
 			pstmt.setString(2, qc.getQaCommentContent());
+			pstmt.setInt(3, qc.getQaRef());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

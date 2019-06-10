@@ -1,4 +1,4 @@
-package review.controller;
+package view.controller;
 
 import java.io.IOException;
 
@@ -10,23 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import qaSy.model.service.QaService;
-import qaSy.model.vo.QaPageData;
-import review.model.service.ReviewService;
-import review.model.vo.ReviewPageData;
 import user.model.vo.User;
+import view.model.service.LikeService;
+import view.model.vo.LikePageData;
 
 /**
- * Servlet implementation class ReviewListServlet
+ * Servlet implementation class LikeListServlet
  */
-@WebServlet(name = "ReviewList2", urlPatterns = { "/reviewList2" })
-public class ReviewListServlet2 extends HttpServlet {
+@WebServlet(name = "LikeList", urlPatterns = { "/likeList" })
+public class LikeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewListServlet2() {
+    public LikeListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,19 +40,17 @@ public class ReviewListServlet2 extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
 			rd.forward(request, response);
 		}else {
-			
-			String userId = u.getUserId();
+			int userNo = u.getUserNo();
 			int reqPage;
 			try {
 				reqPage = Integer.parseInt(request.getParameter("reqPage"));
 			}catch (NumberFormatException e) {
 				reqPage = 1;
 			}
-			
-			ReviewPageData pd = new ReviewService().selectRList(reqPage,userId);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/review/reviewList.jsp");
+			LikePageData pd = new LikeService().selectList(reqPage,userNo);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/like/likeList.jsp");
 			request.setAttribute("pd", pd);
-			rd.forward(request, response);
+			rd.forward(request,response);
 		}
 	}
 
