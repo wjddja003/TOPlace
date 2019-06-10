@@ -49,7 +49,7 @@ public class SelectOneSpaceServlet extends HttpServlet {
 		int S_no = Integer.parseInt(request.getParameter("S_no"));
 		System.out.println(S_no);
 		Space s = new SpaceService().selectOneSpace(S_no);
-		
+		int result = new SpaceService().searchCount(S_no);
 		int reqPage;
 		try {
 			reqPage = Integer.parseInt(request.getParameter("reqPage"));

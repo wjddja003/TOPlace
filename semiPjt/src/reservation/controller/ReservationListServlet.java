@@ -1,4 +1,4 @@
-package review.controller;
+package reservation.controller;
 
 import java.io.IOException;
 
@@ -10,23 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import qaSy.model.service.QaService;
-import qaSy.model.vo.QaPageData;
-import review.model.service.ReviewService;
-import review.model.vo.ReviewPageData;
+import reservation.model.service.ReservationService;
+import reservation.model.vo.ReservationPageData;
 import user.model.vo.User;
 
 /**
- * Servlet implementation class ReviewListServlet
+ * Servlet implementation class ReservationViewServlet
  */
-@WebServlet(name = "ReviewList2", urlPatterns = { "/reviewList2" })
-public class ReviewListServlet2 extends HttpServlet {
+@WebServlet(name = "ReservationList", urlPatterns = { "/reservationList" })
+public class ReservationListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewListServlet2() {
+    public ReservationListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,17 +40,16 @@ public class ReviewListServlet2 extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
 			rd.forward(request, response);
 		}else {
-			
-			String userId = u.getUserId();
+			int userNo = u.getUserNo();
 			int reqPage;
 			try {
 				reqPage = Integer.parseInt(request.getParameter("reqPage"));
 			}catch (NumberFormatException e) {
 				reqPage = 1;
 			}
-			
-			ReviewPageData pd = new ReviewService().selectRList(reqPage,userId);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/review/reviewList.jsp");
+			System.out.println("확인");
+			ReservationPageData pd = new ReservationService().selectList(reqPage,userNo);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reservation/reservationView.jsp");
 			request.setAttribute("pd", pd);
 			rd.forward(request, response);
 		}
