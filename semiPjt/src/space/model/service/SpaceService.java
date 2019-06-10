@@ -1,6 +1,7 @@
 package space.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import space.model.dao.SpaceDao;
@@ -71,5 +72,24 @@ public class SpaceService {
 		}
 		JDBCTemplate.close(conn);
 		return likeDelete;
+	}
+	/*
+	public Space selectImg(int S_no) {
+		Connection conn = JDBCTemplate.getConnection();
+		Space s = new SpaceDao().selectImg(conn,S_no);
+		JDBCTemplate.close(conn);
+		return s;
+	}
+	*/
+	public ArrayList<Space> ranking(){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Space> sList = new SpaceDao().ranking(conn);
+		if(sList!=null) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return sList;
 	}
 }
