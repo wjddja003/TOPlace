@@ -1005,7 +1005,7 @@
 	   } else {
    <%-- 예약정보 체크 --%>
       if (!bookerCheck.test($('input[name=booker]').val())) {
-         alert("예약자 정보를 확인해주세요(예약자명 두글자 이상)");
+         alert("예약자 정보를 확인해주세요(예약자명(한글) 두글자 이상)");
          $('input[name=booker]').focus();
          $('input[name=booker]').css('border','1px solid red');
          } else if (!phoneCheck.test($('input[name=phone1]').val())){
@@ -1136,8 +1136,10 @@
     	  for (var spd=0; spd<$('.selectDay').length;spd++){
     		  if(btnVal==1){
         			  totalPrice += onePrice+0;
+        			  totalPrice = totalPrice+(option*'${s.s_price2}');
     		  }else{
         			  totalPrice += onePrice* priceTimeArr[spd]+0;
+        			  totalPrice = totalPrice+(option*'${s.s_price2}');
     		  }
     	  }
       }
