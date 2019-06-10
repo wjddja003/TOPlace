@@ -25,7 +25,26 @@
 	                <li class="navi-li"><a href="/insertSpaceCheck">공간등록</a></li>
 	            </ul>
 	        </div>
-	        <div class="header realtime" style="width:9.6%;"><span id="ranking" style="color:#605f5d; height: 20px;">실시간</span></div>
+	        <div class="header realtime" style="width:9.6%;">
+                <span id="ranking" style="color:#605f5d; height: 20px;">실시간</span>
+                <div class="header_ranking">
+                    <div class="header_ranking_h">
+                        <p>실시간 급상승 검색어</p>
+                    </div>
+                    <ul>
+                        <li><a href="#"><span>1.</span> 윤주공간</a></li>
+                        <li><a href="#"><span>2.</span> 정엄공간</a></li>
+                        <li><a href="#"><span>3.</span> 수용공간</a></li>
+                        <li><a href="#"><span>4.</span> 윤호공간</a></li>
+                        <li><a href="#"><span>5.</span> 창직공간</a></li>
+                        <li><a href="#"><span>6.</span> 영훈공간</a></li>
+                        <li><a href="#"><span>7.</span> 동천공간</a></li>
+                        <li><a href="#"><span>8.</span> 투플레이스</a></li>
+                        <li><a href="#"><span>9.</span> 이클립스</a></li>
+                        <li><a href="#"><span>10.</span> 프로젝트</a></li>
+                    </ul>
+                </div>
+            </div>
 	        <div class="header search" style="width:7.7%;"><span>검색</span></div>
 	        <div class="header mypage" style="width:7.7%;"><span>마이페이지</span></div>
         </div>
@@ -75,6 +94,7 @@
      	    });
      	  	i++;	  
      	  }, 2000);			//2초마다 갱신
+
     </script>
     
 
