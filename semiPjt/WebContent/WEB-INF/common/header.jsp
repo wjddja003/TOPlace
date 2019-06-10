@@ -32,8 +32,8 @@
 	            </ul>
 	        </div>
 	        <div class="header realtime" style="width:9.6%;"><span id="ranking" style="color:#605f5d; height: 20px;">실시간</span></div>
-	        <div class="header search" style="width:7.7%;">검색</div>
-	        <div class="header mypage" style="width:7.7%;">마이페이지</div>
+	        <div class="header search" style="width:7.7%;"><span>검색</span></div>
+	        <div class="header mypage" style="width:7.7%;"><span>마이페이지</span></div>
         </div>
         <div id="header-search">
             

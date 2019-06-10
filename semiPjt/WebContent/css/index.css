@@ -125,17 +125,17 @@ header {
 	width:50px;
 	border: 0px;
 }
-.realtime:hover {
+.realtime span:hover {
 	font-size: 20px;
 	cursor: pointer;
     color: #f69b02;
 }
-.search:hover {
+.search span:hover {
 	font-size: 20px;
 	cursor: pointer;
     color: #f69b02;
 }
-.mypage:hover {
+.mypage span:hover {
 	font-size: 20px;
 	cursor: pointer;
     color: #f69b02;
