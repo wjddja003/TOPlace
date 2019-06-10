@@ -29,6 +29,6 @@ public class HostPaging {
 		super();
 		this.list = list;
 		this.pageNavi = pageNavi;
-	}sadsadsafsafsaf
+	}
 }
   
