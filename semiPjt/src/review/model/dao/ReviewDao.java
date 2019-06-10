@@ -19,7 +19,7 @@ import review.model.vo.ReviewComment;
 public class ReviewDao {
 	private Properties prop = new Properties();
 	public ReviewDao() {
-		String fileName = Review.class.getResource("/sql/review/reviewQuery5.properties").getPath();
+		String fileName = Review.class.getResource("/sql/review/reviewQuery9.properties").getPath();
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -29,6 +29,28 @@ public class ReviewDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public int totalStar(Connection conn, int S_no) {
+		PreparedStatement pstmt = null;
+		int totalStar = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("totalStar");
+		try {
+			pstmt= conn.prepareStatement(query);
+			pstmt.setInt(1, S_no);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalStar = rset.getInt("scnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return totalStar;
+		
 	}
 	public int insertReview(Connection conn, Review r) {
 		PreparedStatement pstmt = null;
@@ -51,11 +73,44 @@ public class ReviewDao {
 		}
 		return result;
 	}
-	public ArrayList<Review> selectList(Connection conn, int start, int end){
+	public ArrayList<Review> selectList(Connection conn, int start, int end,int S_no){
 		ArrayList<Review> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = prop.getProperty("selectList");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, S_no);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Review>();
+			while(rset.next()) {
+				Review r = new Review();
+				r.setReviewNo(rset.getInt("review_no"));
+				r.setReviewSno(rset.getInt("review_sno"));
+				r.setReviewTitle(rset.getString("review_title"));
+				r.setReviewWriter(rset.getString("review_writer"));
+				r.setReviewContent(rset.getString("review_content"));
+				r.setFilename(rset.getString("filename"));
+				r.setReviewStar(rset.getInt("review_star"));
+				r.setReviewDate(rset.getDate("review_date"));
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	public ArrayList<Review> selectRList(Connection conn, int start, int end){
+		ArrayList<Review> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectRList");
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
@@ -105,14 +160,15 @@ public class ReviewDao {
 		}
 		return result;
 	}
-	public int totalCount(Connection conn) {
-		Statement stmt = null;
+	public int totalCount(Connection conn ,int S_no) {
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = prop.getProperty("totalCount");
 		int result = 0;
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, S_no);
+			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				result = rset.getInt("cnt");
 			}
@@ -121,7 +177,7 @@ public class ReviewDao {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(rset);
-			JDBCTemplate.close(stmt);
+			JDBCTemplate.close(pstmt);
 		}
 		return result;		
 	}

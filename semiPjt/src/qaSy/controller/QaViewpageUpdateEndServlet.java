@@ -33,7 +33,7 @@ public class QaViewpageUpdateEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		QaComment q = new QaComment();
-//		int s_no = Integer.parseInt(request.getParameter("S_no"));
+		int s_no = Integer.parseInt(request.getParameter("S_no"));
 		q.setQaCommentNo(Integer.parseInt(request.getParameter("qaCommentNo")));
 		q.setQaCommentContent(request.getParameter("qaCommentContent"));
 		int result = new QaService().updateQaComment(q);
@@ -42,7 +42,7 @@ public class QaViewpageUpdateEndServlet extends HttpServlet {
 		}else {
 			request.setAttribute("msg", "공지사항 수정 실패");
 		}
-		request.setAttribute("loc", "/");
+		request.setAttribute("loc", "/selectOneSpace?S_no="+s_no);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		rd.forward(request, response);
 	}

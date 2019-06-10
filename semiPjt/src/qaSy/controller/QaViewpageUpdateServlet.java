@@ -37,7 +37,7 @@ public class QaViewpageUpdateServlet extends HttpServlet {
 		int s_no = Integer.parseInt(request.getParameter("S_no"));		
 		int qaCommentNo = Integer.parseInt(request.getParameter("qaCommentNo"));		
 		QaComment q = new QaService().selectOne(qaCommentNo);
-		request.setAttribute("qaComment", q);
+		request.setAttribute("q", q);
 		RequestDispatcher rd = request.getRequestDispatcher("views/viewpage.jsp");
 		rd.forward(request, response);
 	}
