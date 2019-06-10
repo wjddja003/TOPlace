@@ -10,6 +10,7 @@ import reservation.model.vo.ReservationImg;
 import reservation.model.vo.ReservationPageData;
 
 public class ReservationService {
+
 	public int insertReservation(Reservation r) {
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new ReservationDao().insertReservation(conn,r);
@@ -37,12 +38,12 @@ public class ReservationService {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 4;
 		int totalCount = new ReservationDao().totalCount(conn,userNo);
-		System.out.println(totalCount);
-		System.out.println(userNo);
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
 		ArrayList<ReservationImg> list = new ReservationDao().selectList(conn, start, end,userNo);
+		if(list == null) {
+		}
 		String pageNavi = "";
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;

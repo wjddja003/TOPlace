@@ -1,4 +1,4 @@
-package reservation.controller;
+package qaSy.controller;
 
 import java.io.IOException;
 
@@ -10,21 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import reservation.model.service.ReservationService;
-import reservation.model.vo.ReservationPageData;
-import user.model.vo.User;
+import qaSy.model.service.QaService;
+import qaSy.model.vo.QaComment;
 
 /**
- * Servlet implementation class ReservationViewServlet
+ * Servlet implementation class QaViewpageUpdateServlet
  */
-@WebServlet(name = "ReservationList", urlPatterns = { "/reservationList" })
-public class ReservationListServlet extends HttpServlet {
+@WebServlet(name = "QaViewpageUpdate", urlPatterns = { "/qaViewpageUpdate" })
+public class QaViewpageUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationListServlet() {
+    public QaViewpageUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,24 +34,12 @@ public class ReservationListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		User u = (User)session.getAttribute("User");
-		if(u == null) {
-			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
-			rd.forward(request, response);
-		}else {
-			int userNo = u.getUserNo();
-			int reqPage;
-			try {
-				reqPage = Integer.parseInt(request.getParameter("reqPage"));
-			}catch (NumberFormatException e) {
-				reqPage = 1;
-			}
-			System.out.println("확인");
-			ReservationPageData pd = new ReservationService().selectList(reqPage,userNo);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reservation/reservationView.jsp");
-			request.setAttribute("pd", pd);
-			rd.forward(request, response);
-		}
+		int s_no = Integer.parseInt(request.getParameter("S_no"));		
+		int qaCommentNo = Integer.parseInt(request.getParameter("qaCommentNo"));		
+		QaComment q = new QaService().selectOne(qaCommentNo);
+		request.setAttribute("qaComment", q);
+		RequestDispatcher rd = request.getRequestDispatcher("views/viewpage.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

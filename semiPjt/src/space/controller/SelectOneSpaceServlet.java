@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import host.model.vo.Host;
 import qaSy.model.service.QaService;
 import qaSy.model.vo.QaPageData;
 import reservation.model.service.ReservationService;
@@ -49,6 +50,10 @@ public class SelectOneSpaceServlet extends HttpServlet {
 		int S_no = Integer.parseInt(request.getParameter("S_no"));
 		System.out.println(S_no);
 		Space s = new SpaceService().selectOneSpace(S_no);
+		Host h = (Host)session.getAttribute("host");
+		if(s.getS_hostNum()!=h.getHostNo()) {
+			int answer = new SpaceService().hitUpSpace(S_no);
+		}
 		int result = new SpaceService().searchCount(S_no);
 		int reqPage;
 		try {

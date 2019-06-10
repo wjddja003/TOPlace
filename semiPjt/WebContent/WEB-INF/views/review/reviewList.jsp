@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ page import="review.model.vo.ReviewPageData" %>
-   <%@ page import="review.model.vo.Review" %>
-   
-    <%
-    	ReviewPageData pd = (ReviewPageData)request.getAttribute("pd");
-    
-    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -53,7 +46,7 @@
     .qa_v{
         text-align: center;
         width: 300px;
-        margin: 0 20px 0 0;
+        margin: 50px 20px 0 0;
         padding: 10px;
         height: 100%;
         float: left;
@@ -105,7 +98,7 @@
                 <div class="qa_v">
               
                     <div class="qa_no">
-                    	공간명 :${r.reviewNo }<br>
+                    	 공간명 :${r.reviewNo }<br>
                     	${r.reviewTitle }<br>
                     	
                         <div class="Q_btn">
@@ -116,7 +109,7 @@
                 </div>
                 	</c:if>
                 </c:forEach>
-               <div class="re_navi"><%=pd.getPageNavi() %></div>
+               <div class="re_navi">${pd.pageNavi }</div>
             </div>
         </div>
     </section>

@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	input[type="checkbox"] {
+input[type="checkbox"] {
     display:none;
 }
 
@@ -16,17 +16,20 @@ input[type="checkbox"] + label {
 }
 
 input[type="checkbox"] + label span {
+	line-height: 50px;
     display:inline-block;
     width:19px;
     height:19px;
-    margin:-2px 10px 0 0;
+    margin:0 10px 0 10px;
     vertical-align:middle;
-    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) left top no-repeat;
+    background: url('../img/icon_check.png') no-repeat;
     cursor:pointer;
+    border-radius: 3px;
 }
 
 input[type="checkbox"]:checked + label span {
-    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -19px top no-repeat;
+    background: url('../img/icon_checked.png') no-repeat;
+    background-size: 19px;
 }
 	.termsContent{
 		width: 800px;
@@ -112,7 +115,7 @@ input[type="checkbox"]:checked + label span {
 		<div class=section_content>
 			<div class="termsContent">	
 			<div class="termsContentheader">
-				<img class="loginLogo" src="../img/logo.png" alt="이용약관" align="middle"><span style="font-size: 20px">이용약관</span>
+				<a href="/"><img class="loginLogo" src="../img/logo.png" alt="이용약관" align="middle"></a><span style="font-size: 20px">이용약관</span>
 			</div>
 			<form action="/views/join.jsp" method="get" onsubmit="return check()">
 			<input type="checkbox" name="chk_all" id="chk_all"><label for="chk_all"><span></span>이용약관, 개인정보 수집 및 이용, 프로모션 안내 메일 수신에 모두 동의합니다.</label> <br><br>

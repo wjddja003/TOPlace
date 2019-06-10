@@ -1,29 +1,25 @@
 package qaSy.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import qaSy.model.service.QaService;
-import qaSy.model.vo.QaComment;
 
 /**
- * Servlet implementation class QaCommentUpdateServlet
+ * Servlet implementation class QaViewpageDeleteServlet
  */
-@WebServlet(name = "QaCommentUpdate", urlPatterns = { "/qaCommentUpdate" })
-public class QaCommentUpdateServlet extends HttpServlet {
+@WebServlet(name = "QaViewpageDelete", urlPatterns = { "/qaViewpageDelete" })
+public class QaViewpageDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QaCommentUpdateServlet() {
+    public QaViewpageDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,12 +29,10 @@ public class QaCommentUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession();
+		int s_no = Integer.parseInt(request.getParameter("S_no"));
 		int qaCommentNo = Integer.parseInt(request.getParameter("qaCommentNo"));
-		QaComment q = new QaService().selectOne(qaCommentNo);
-		request.setAttribute("qaComment", q);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qaCommentUpdate.jsp");
-		rd.forward(request, response);
+		int result = new QaService().deleteQa(qaCommentNo);
+		response.sendRedirect("/selectOneSpace?S_no="+s_no);
 	}
 
 	/**

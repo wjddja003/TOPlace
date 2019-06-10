@@ -1,4 +1,4 @@
-package reservation.controller;
+package qaSy.controller;
 
 import java.io.IOException;
 
@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import reservation.model.service.ReservationService;
-import reservation.model.vo.ReservationPageData;
+import qaSy.model.service.QaService;
+import qaSy.model.vo.QaPageData;
 import user.model.vo.User;
 
 /**
- * Servlet implementation class ReservationViewServlet
+ * Servlet implementation class QaviewpageViewServlet
  */
-@WebServlet(name = "ReservationList", urlPatterns = { "/reservationList" })
-public class ReservationListServlet extends HttpServlet {
+@WebServlet(name = "QaviewpageView", urlPatterns = { "/qaviewpageView" })
+public class QaviewpageViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationListServlet() {
+    public QaviewpageViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,19 +40,21 @@ public class ReservationListServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
 			rd.forward(request, response);
 		}else {
-			int userNo = u.getUserNo();
+			
+			System.out.println(u.getUserId());
+			String userId = u.getUserId();
 			int reqPage;
 			try {
 				reqPage = Integer.parseInt(request.getParameter("reqPage"));
 			}catch (NumberFormatException e) {
 				reqPage = 1;
 			}
-			System.out.println("확인");
-			ReservationPageData pd = new ReservationService().selectList(reqPage,userNo);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reservation/reservationView.jsp");
+			
+			QaPageData pd = new QaService().selectQList(reqPage,userId);
+			RequestDispatcher rd = request.getRequestDispatcher("views/viewpage.jsp");
 			request.setAttribute("pd", pd);
 			rd.forward(request, response);
-		}
+		}		
 	}
 
 	/**

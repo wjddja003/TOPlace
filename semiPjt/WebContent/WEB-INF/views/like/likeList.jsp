@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ page import="view.model.vo.LikePageData" %>
+    pageEncoding="UTF-8" import="space.model.vo.Space"%>
     <%
-    	LikePageData pd = (LikePageData)request.getAttribute("pd");
+    	Space s = (Space)request.getAttribute("s");
+    	String[] kg = (s.getS_kategorie2()).split(",");
+    	String[] kg2 = {"TV/프로젝터","인터넷/WIFI","복사/인쇄기","화이트보드","음향/마이크","취사시설","음식물반입가능","주류반입가능","샤워시설","주차","금연","반려동물 동반 가능","PC/노트북","의자/테이블","내부화장실","탈의실","테라스/루프탑","공용라운지","전신거울","바베큐시설","도어락"};
     %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -66,7 +68,7 @@
         font-size: 12px;
         margin: 0 0 5px 0;
     }
-    #spaceImg{
+    .spaceImg{
     	width: 400px;
     	height: 220px;
     }
@@ -76,7 +78,34 @@
     }
     .placeName{
         font-weight: bold;
+        position: absolute;
+        bottom: 130px;
+        
     }
+    .spaceImg {
+		  transform: scale(1);
+		  -webkit-transform: scale(1);
+		  -moz-transform: scale(1);
+		  -ms-transform: scale(1);
+		  -o-transform: scale(1);
+		  transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+	}
+	.spaceImg:hover {
+	  transform: scale(1.2);
+	  -webkit-transform: scale(1.2);
+	  -moz-transform: scale(1.2);
+	  -ms-transform: scale(1.2);
+	  -o-transform: scale(1.2);
+	}
+	.img {width:408px; height:280px; overflow:hidden 
+	}
+	.tag{
+		font-size: 10px;
+		color: #605f5d;
+	}
+	.price{
+		color: #f69b02;
+	}
 </style>
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -93,18 +122,34 @@
                 <div class="qa_v">
               
                     <div class="qa_no">
-                    	<img id="spaceImg"src="/upload/space/${l.img}"><br>
+                    	<div class="img">
+                    	<a href="/selectOneSpace?S_no=${l.sNo}"><img class="spaceImg"src="/upload/space/${l.img}"></a><br>
+                    	</div>
                     	<h4 class="placeName">${l.placeName }</h4><br>
                     	<div class="likeContent">
-                    	${l.address }<br>
-                    	${l.placeTag }<br>
-                    	￦ ${l.price }/${l.type }
+                    	<img src="../../img/map-marker.png"> ${l.address }<br>
+                    	<div class="tag">${l.placeTag }</div><br>
+                    	￦<a style="color: #f69b02">${l.price }</a>/${l.type }<br>
+                    	 <div class="viewpage_right_icon">
+                                        <%  int count = 0;
+                                        	for(int i = 0; i<kg.length; i++) {
+	                                    		if(kg[i].equals("1")){ 
+	                                    			count++;
+	                                    			if(count<=3){
+	                                    		%>
+	                                    			<div class="viewpage_right_kategorie"><img src="/upload/space/kategorie2/<%=i+1 %>.png" width="30px;">
+	                                    				<p style="font-size:14px;"><%=kg2[i] %></p>
+	                                    			</div>
+	                                    		  <%}
+	                                    		} 
+                                    		}%>
+                                    </div>
                     	</div>
                     </div>
                 </div>
                 	</c:if>
                 </c:forEach>
-               <div class="re_navi"><%=pd.getPageNavi() %></div>
+               <div class="re_navi">${pd.pageNavi }</div>
             </div>
         </div>
     </section>	
