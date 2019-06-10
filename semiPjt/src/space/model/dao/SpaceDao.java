@@ -198,22 +198,4 @@ public class SpaceDao {
 		}
 		return result;
 	}
-	
-	public int searchCount(Connection conn,int S_no) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String query = "update place set s_hit = s_hit+1 where S_no=?";
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, S_no);
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(pstmt);
-		}
-		return result;
-	}
 }
