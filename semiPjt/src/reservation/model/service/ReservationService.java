@@ -65,7 +65,7 @@ public class ReservationService {
 	ReservationPageData pd = new ReservationPageData(list,pageNavi);
 	JDBCTemplate.close(conn);
 	return pd;
-
+	}
 	public ArrayList<Reservation> reservationSelect(int S_no, int userNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Reservation> resList = new ReservationDao().reservationSelect(conn,S_no,userNo);

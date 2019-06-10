@@ -36,6 +36,32 @@ public class LikeDao {
 		}
 		return l;
 	}
+	public ArrayList<Like> likeSearch(int userNo, Connection conn) {
+		PreparedStatement pstmt =null;
+		ArrayList<Like> list = null;
+		ResultSet rset = null;
+		String query = "select * from like_db where user_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Like>();
+			while(rset.next()) {
+				Like l = new Like();
+				l.setLikeNo(rset.getInt("like_no"));
+				l.setsNo(rset.getInt("s_no"));
+				l.setUserNo(rset.getInt("user_no"));
+				list.add(l);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
 	public int likeInsert(Like l,Connection conn) {
 		PreparedStatement pstmt = null;
 		int result = 0;

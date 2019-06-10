@@ -14,72 +14,206 @@
 			clear:left;
 		}
 		.totalInnerBox{
-			width:33.3%;
-			padding:10px;
+			margin: 10px 5px;
+			width:32%;
+			padding:5px;
 			cursor: pointer;
 			float:left;
 			display:none;
+			border: 2px solid #f5ca6b;
+			border-radius:3%;
+			
 		}
+		#viewpage_alert{
+        width: 100%;
+        height: 100px;
+        background-color: #f69b02;
+        position: absolute;
+        top: 0px;
+        display: none;
+        text-align: center;
+        font-size: 22px;
+        padding: 30px 0px 30px 0px;
+        color: #fff;
+    }
 		#viewMore{
-			width:200px;
-			height:50px;
-			margin-top:30px;
+			width:100%;
+			height:100%;
+			border:none;
+			background:white;
+			color:#f5ca6b;
+			border-radius:8px;
+			font-size:20px;
+		}
+		#viewMore:hover{
+			background:#f5ca6b;
+			color:white;
+		}
+		#viewMore:focus{
+    outline: none;
 		}
 		.searchInfo{
 			width:100%;
 			height:70px;
 			margin-top: 30px;
 		}
+		.like_full{
+	        display: none;
+	        width:40px;
+	    	height: 40px;
+	    }
+	    .like{
+	    	width:40px;
+	    	height: 40px;
+	        background: #f5ca6b ;
+	        border-radius:20%; 
+	    }
+	    
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
 <section>
+	<div id="viewpage_alert"><p></p></div>
 	<div class="section_content">
 	<div class="totalOutLine">
 		<div class="searchInfo">
-			<span id="selectVal" style="color:blue;font-weight:bold;font-size:30px; border-bottom:4px solid blue">모든 공간보기</span><span style="font-weight:100;font-size:20px;">  검색 결과</span>
-			<span style="float:right;">
-				<select id="selectType" name="selectType" style="height:50px;">
-				  <option value="S_hit">조회수 순으로</option>
-				  <option value="S_like">좋아요 순으로</option>
-				</select>
-			</span>
+			<span id="selectVal" style="color:#f5ca6b;font-weight:bold;font-size:30px; border-bottom:4px solid #f5ca6b">모든 공간보기</span><span style="font-weight:100;font-size:20px;">  검색 결과</span>
 		</div>
 			<c:forEach items='${list }' var='s'>
 				<div class='totalInnerBox'>
-					<input type="hidden" value='${s.s_no }'>
-					<div style='height:200px;'>
-						<img src='/upload/space/${s.s_img1}' width="100%" height="200px">
+					<input class="inputNo" type="hidden" value='${s.s_no }'>
+					<div style='height:200px; '>
+						<img src='/upload/space/${s.s_img1}' class="bossImg" width="100%" height="200px" style="border-radius:8px;">
 					</div>
 					<div style='height:120px;'>
-						<h4>${s.s_placeName}</h4>
-						<img src='/img/map-marker.png'><span>${s.addressCut}</span>
-						<div style="width:100%; height:22px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">${s.s_placeTag}</div>
+						<div style="float:left;">
+						<a class="likeClick" href="#">
+							<img src="../img/like_icon.png" class="like">
+                    		<img src="../img/like_full_icon.png" class="like_full">
+                    	</a>
+                    	</div>
+                    	
+						<p style="font-size:20px; color:#f5ca6b; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${s.s_placeName}</p>
+						
+						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span>${s.addressCut}</span>
+						<div style="width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${s.s_placeTag}</div>
 						<c:if test="${s.s_type eq 'time' }">
-							<span style="font-size:22px;">${s.s_price1}</span><span>원/시간</span>
+							&nbsp;<span style="font-size:22px; color:#f5ca6b;">￦ ${s.s_price1}</span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${s.s_type eq 'day' }">
-							<span style="font-size:22px;">${s.s_price1}</span><span>원/일</span>
+							<span style="font-size:22px; color:#f5ca6b;">￦ ${s.s_price1}</span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-		<div style="clear:left; text-align:center;">
+		<div style="margin-bottom:50px;margin-left:20%;width:60%; height:50px; clear:left; text-align:center; border: 1px solid #f5ca6b; border-radius:8px;">
 			<button id="viewMore">더보기</button>
 		</div>
+	
 	</div>
 </section>
-		
+		<jsp:include page="/WEB-INF/common/footer.jsp"/>
 		<script type="text/javascript">
 		var viewIndex = 6;
 		$(document).ready(function() {
 			for(var i = 0; i<6; i++){
 				$('.totalInnerBox').eq(i).css("display","block");
 			}
+			var userNo = '${sessionScope.User.userNo}';
+			$.ajax({
+         		type:"GET",
+         		url: "/likeSearchAjax?userNo="+userNo,
+         		dataType: "json",                         // 서버에서 보내줄 데이터의 타입
+                
+         		success : function(data){
+         			console.log(data);
+         			for(var k=0; k<$('.inputNo').length; k++){
+         				for(var i=0; i<data.length; i++){
+         					
+             				if($('.inputNo').eq(k).val()==data[i].sNo){
+             					
+             					$(".like").eq(k).css("display","none");
+             					$(".like_full").eq(k).css("display","inline");
+             				}
+             			}
+         			}
+         			}
+         		
+         	});
 			
+			
+			if('${sessionScope.User}' != ""){
+	        	  $(".like").click(function(){
+	        		  event.stopPropagation();
+	        		  	var imgIndex = $(".like").index(this);
+	                 	var s_no = $(this).parent().parent().parent().prev().prev().val();
+	                 	
+	                 	
+	                 	
+	                 	$.ajax({
+	                 		type:"GET",
+	                 		url: "/likeInsertAjax?S_no="+s_no+"&userNo="+userNo,
+	                 		success : function(data){
+	                 			var result = data;
+	                 			if(result==1){
+	                 				$("#viewpage_alert").slideDown(700);
+	                             	$("#viewpage_alert").delay(400);
+	                             	$("#viewpage_alert").css("display","inline");
+	                             	$("#viewpage_alert").delay(400);
+	                             	$("#viewpage_alert").slideUp(700); 
+	                             	$(".like").eq(imgIndex).css("display","none");
+	                             	$(".like_full").eq(imgIndex).css("display","inline");
+	                             	$("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");	
+	                 			}
+	                 		}
+	                 	});
+	                 });
+	                 $(".like_full").click(function(){
+	                	 event.stopPropagation();
+	                	 var imgIndex = $(".like_full").index(this);
+	                 	var s_no = $(this).parent().parent().parent().prev().prev().val();
+	                 	
+	                 	var userNo = '${sessionScope.User.userNo}';
+	                 	console.log($(this).parent().html());
+	                 	console.log(s_no);
+	                 	console.log(userNo);
+	                     $.ajax({
+	                 		type:"GET",
+	                 		url: "/likeDeleteAjax?S_no="+s_no+"&userNo="+userNo,
+	                 		success : function(data){
+	                 			var result = data;
+	                 			if(result==1){
+	                					$("#viewpage_alert").slideDown(700);
+	                	                $("#viewpage_alert").delay(400);
+	                	                $("#viewpage_alert").css("display","inline");
+	                	                $("#viewpage_alert").delay(400);
+	                	                $("#viewpage_alert").slideUp(700); 
+	                	                $(".like").eq(imgIndex).css("display","inline");
+		                             	$(".like_full").eq(imgIndex).css("display","none");
+	                	                $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
+	                 				
+	                 			}	
+	                 		}
+	                 	});
+	           		});
+	          }else{
+	        	  $(".like").click(function(){
+	        		  event.stopPropagation();
+	        		  $("#viewpage_alert").slideDown(700);
+		                $("#viewpage_alert").delay(400);
+		                $("#viewpage_alert").css("display","inline");
+		                $("#viewpage_alert").delay(400);
+		                $("#viewpage_alert").slideUp(700); 
+		                
+		                $("#viewpage_alert p").html("로그인 후 이용가능 합니다.");
+	        	  });
+	        	  
+	          }
 		});
+		
+		
 		$('.totalInnerBox').click(function(){
 			
 			var sNumber = $(this).find('input').val();
@@ -92,12 +226,6 @@
 			viewIndex = viewIndex+6;
 		});
 		
-		$('#selectVal').text($('#selectType').val('${type}'));
-		$('#selectType').change(function(){
-			$('#selectVal').text($('#selectType option:selected').text());
-			var typeSel = $(this).val(); 
-			location.href = "/viewsAll?type=" + typeSel;
-		});
 		</script>
 </body>
 </html>
