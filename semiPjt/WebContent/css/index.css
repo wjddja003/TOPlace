@@ -154,6 +154,39 @@ header {
 }
 /*header fin*/
 
+.header_ranking{
+    width: 250px;
+    background: #eee;
+    display: none;
+    position: absolute;
+    left: 0;
+    height: 445px;
+}
+.header.realtime:hover .header_ranking{
+    display: inline-block;
+}
+.realtime{
+    position: relative;
+}
+.header_ranking ul li{
+    list-style: none;
+    text-align: left;
+    height: 35px;
+    margin-left: 30px;
+    font-size: 16px;
+}
+.header_ranking_h{
+    height: 60px;
+    background: #183058;
+}
+.header_ranking_h p{
+    margin: 0px;
+    line-height: 70px;
+    color: #f69b02;
+    
+}
+/*header_ranking Fin*/
+
 section {
 	width: 100%;
 	min-height: 100%;
@@ -164,6 +197,7 @@ section {
 	min-height: 100vh;
 	margin: 0 auto;
 }
+
 /*section 전체 틀 fin*/
 .wrap {
 	background: url(/img/viewpage_background.jpg) no-repeat center center;
@@ -209,7 +243,6 @@ section {
     right: 280px;
     top: 300px;
 }
-
 /*main section fin*/
 footer {
 	 height: 200px;
