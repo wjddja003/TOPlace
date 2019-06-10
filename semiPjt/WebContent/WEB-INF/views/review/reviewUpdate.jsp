@@ -1,36 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style>
-	.star_rating {font-size:0; letter-spacing:0px;}
-        .star_rating a {
-            font-size:22px;
-            letter-spacing:0;
-            display:inline-block;
-            margin-left:5px;
-            color:#ccc;
-            text-decoration:none;
-        }
-        .star_rating a:first-child {margin-left:0;}
-        .star_rating a.on {color:#f69b02;}
-	
-</style>
-</head>
-<body>
+<link rel="stylesheet" type="text/css" href="/css/reviewUpdate.css">
 <jsp:include page="/WEB-INF/common/header.jsp"/>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <section>
-		<div class="table-wrapper" style="text-align: center;width:80%;margin:0 auto;">
+		<div class="table-wrapper" style="text-align: center;width:80%;margin:0 auto; margin-top: 100px;">
 		<form action="/reviewUpdate" method="post" enctype="multipart/form-data">
-				<table class="table table-bordered">
+				<table class="table">
 					<input type="hidden" name="reviewSno" value="${review.reviewSno }">
 					<input type="hidden" name="reviewNo" value="${review.reviewNo }">
-					<tr>
-						<th colspan="2" style="font-size:20px;font-weight:bold">공지사항</th>				
+					<tr class="reviewupdate_tr">
+						<th colspan="2" style="font-size:20px;font-weight:bold">공지사항수정</th>				
 					</tr>
 <!-- 					<tr> -->
 <!-- 						<th>제목</th> -->
@@ -38,17 +20,17 @@
 <!-- 					</tr> -->
 					<tr>					
 						<th>작성자</th>
-						<td>${review.reviewWriter }</td>					
+						<td>${review.reviewWriter}</td>					
 					</tr>
 					<tr>
 						<th>첨부파일</th>
 						<td>
 						<div class="placeholder">
-							<span style="color:black">파일유형 jpg, jpeg, png, gif<br>
+							<span style="color:black; font-size:14px;">*파일유형 jpg, jpeg, png, gif
 									최대파일크기 10MB</span>
 						</div>
 						<div class="file_box">
-							<label for="hostFile" style="width: 100%; background: #183058; text-align: center;">
+							<label for="hostFile" style="width: 100%; text-align: center;">
 							<span style="color:white;">파일첨부</span>
 							<c:if test="${not empty review.filename}">
 								<img src="/upload/review/${review.filename}" style="width:300px; height:300px;" class="file_img" >
@@ -71,10 +53,10 @@
 							
 							<p class="star_rating">
 								<c:forEach  begin="1" end='${review.reviewStar}'>
-									<a href="#" class="on">★</a>
+									<a href="#" class="on" style="text-decoration:none;">★</a>
 								</c:forEach>
 								<c:forEach  begin="${review.reviewStar}" end='4'>
-									<a href="#">★</a>
+									<a href="#" style="text-decoration:none;">★</a>
 								</c:forEach>
 							        <input type="hidden" class="star" name="reviewStar" value="${review.reviewStar}">
 						    </p>
@@ -82,7 +64,7 @@
 						
 					</tr>
 					<tr>
-						<th colspan="2">
+						<th colspan="2" style="text-align:center;">
 							<button type="submit" class="btn btn-outline-primary">수정하기</button>
 						</th>
 					</tr>
@@ -91,6 +73,7 @@
 		</form>
 		</div>
 		</section>
+		 <jsp:include page="/WEB-INF/common/footer.jsp"/>
 		<script>
 		function loadImg(event){
 			if(event.files.length!=0 && event.files[0] != 0){
@@ -118,5 +101,3 @@
 	         return false;
 	    });
 		</script>
-</body>
-</html>

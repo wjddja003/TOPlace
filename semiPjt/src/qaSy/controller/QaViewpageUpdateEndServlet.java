@@ -1,6 +1,5 @@
 package qaSy.controller;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,25 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
-import noticeSy.model.service.NoticeService;
-import noticeSy.model.vo.Notice;
+import qaSy.model.service.QaService;
+import qaSy.model.vo.QaComment;
 
 /**
- * Servlet implementation class QaUpdateServlet
+ * Servlet implementation class QaViewpageUpdateEndServlet
  */
-@WebServlet(name = "QaUpdate", urlPatterns = { "/qaUpdate" })
-public class QaUpdateServlet extends HttpServlet {
+@WebServlet(name = "QaViewpageUpdateEnd", urlPatterns = { "/qaViewpageUpdateEnd" })
+public class QaViewpageUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QaUpdateServlet() {
+    public QaViewpageUpdateEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,16 +32,17 @@ public class QaUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
-		
-		Notice n = new Notice(noticeNo, noticeTitle, null, noticeContent, null, filename, filepath);
-		int result = new NoticeService().updateNotice(n);
+		QaComment q = new QaComment();
+//		int s_no = Integer.parseInt(request.getParameter("S_no"));
+		q.setQaCommentNo(Integer.parseInt(request.getParameter("qaCommentNo")));
+		q.setQaCommentContent(request.getParameter("qaCommentContent"));
+		int result = new QaService().updateQaComment(q);
 		if(result>0) {
 			request.setAttribute("msg", "공지사항 수정 완료");
 		}else {
 			request.setAttribute("msg", "공지사항 수정 실패");
 		}
-		request.setAttribute("loc", "/noticeList?noticeNo="+noticeNo);
+		request.setAttribute("loc", "/");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		rd.forward(request, response);
 	}

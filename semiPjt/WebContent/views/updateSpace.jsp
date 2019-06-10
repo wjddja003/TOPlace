@@ -26,10 +26,10 @@
 <title>공간 등록</title>
 
 	<style>
-	#S_processBar div{ float:left; width:25%;}  
+	#S_processBar div{ float:left; width:25%; height:100px; line-height: 50px;   border-bottom:2px solid #f69b02; border-top:2px solid #f69b02;}  
 	#S_process div:not(#S_process-bt){display:none;} 
 	
-	.S_red{color:red;} 
+	.S_red{color:#f69b02;} 
 	.S_condition{float:right;} 
 	
 	#S_process li:hover{
@@ -129,7 +129,7 @@
 <section>
 <!-- section content -->
 <div class="section_content">
-
+	<h1>공간등록</h1><br>
 	<!-- 프로세스바 -->
 	<div id="S_processBar" style="text-align:center;">
 		<div id="S_processBar-1">1. 공간 정보 수정<br>수정할 공간 정보를 입력해주세요.</div>
@@ -137,6 +137,7 @@
 		<div id="S_processBar-3">3. 이용 안내 수정<br>수정할 이용 정보를 입력해주세요.</div>
 		<div id="S_processBar-4">4. 결제 사항 수정<br>수정할 결제 사항을 입력해주세요.</div>
 	</div><!-- 프로세스바 -->
+		<br>
 		<br>
 		<br>
 		<br>
@@ -158,7 +159,7 @@
 			<br><br><br>
 			
 			<input type="hidden" name="S_kategorie1" id="S_kategorie1" value="${s.s_kategorie1 }">
-			공간유형(수정) <span class="S_red">*</span><br><span class="S_condition" style="color:blue;">&nbsp;최대5개선택</span><span class="S_condition S_red">최소1개선택</span>
+			공간유형(수정) <span class="S_red">*</span><br><span class="S_condition S_red">최소1개선택 &nbsp;최대5개선택</span>
 			<br>
 			<ul id="S_ul1">
 				<li>회의실</li>
@@ -231,7 +232,7 @@
 			</div>
 			<br><br><br>
 			
-			이미지(수정) <span class="S_red"> *</span><span class="S_condition">한 장당 최대 10MB <span class="S_red">(최소 3장)</span><span style="color:blue;"> (최대 10장)</span></span><br>
+			이미지(수정) <span class="S_red"> *</span><span class="S_condition">한 장당 최대 10MB <span class="S_red">(최소 3장)  (최대 10장)</span></span><br>
 			<%for(int i=1; i<11; i++){ %>	
 				
 				<div style="display:inline;float:left;height:140px;margin-top:10px;margin-right:10px;">
@@ -461,7 +462,7 @@
 						S_kategorie1[index] = 1;
 						stack1 +=1;
 					}else{
-						alert('최대 5개까지 선택할 수 있습니다.');
+						emptyValue("최대 5개까지 선택할 수 있습니다.");
 					}
 				}else{
 					S_kategorie1[index] = 0;
@@ -505,7 +506,7 @@
 			$("#S_tagbt").click(function(){
 				if($("#S_placeTag").val()!=""){
 					if(tagnum==5){
-						alert("태그는 최대 5개까지 가능합니다.");
+						emptyValue("태그는 최대 5개까지 가능합니다.");
 					}else{
 						tagnum +=1;
 						tagmsg += "#"+$("#S_placeTag").val();
