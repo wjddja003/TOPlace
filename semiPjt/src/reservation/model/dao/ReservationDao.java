@@ -100,7 +100,7 @@ public class ReservationDao {
 		ArrayList<ReservationImg> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum as rnum, m.* from (select r.*,S_img1 from reservation r join place p on (r.s_no = p.S_no) where user_no = ? order by reservation_no desc) m) where rnum between ? and ?";
+		String query = "select * from (select rownum as rnum, m.* from (select r.*,S_img1,s_placename from reservation r join place p on (r.s_no = p.S_no) where user_no = ? order by reservation_no desc) m) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, userNo);
@@ -118,6 +118,7 @@ public class ReservationDao {
 				r.setReservationDay(rset.getString("reservation_day"));
 				r.setImg(rset.getString("s_img1"));
 				r.setPaymentPrice(rset.getInt("payment_price"));
+				r.setPlaceName(rset.getString("s_placename"));
 				list.add(r);
 			}
 		} catch (SQLException e) {

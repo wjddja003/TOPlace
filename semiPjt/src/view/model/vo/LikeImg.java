@@ -10,12 +10,13 @@ public class LikeImg {
 	private String placeTag;
 	private String address;
 	private String type;
+	private String S_kategorie2;
 	public LikeImg() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public LikeImg(int likeNo, int sNo, int userNo, String img, String placeName, int price, String placeTag,
-			String address, String type) {
+			String address, String type, String s_kategorie2) {
 		super();
 		this.likeNo = likeNo;
 		this.sNo = sNo;
@@ -26,6 +27,7 @@ public class LikeImg {
 		this.placeTag = placeTag;
 		this.address = address;
 		this.type = type;
+		S_kategorie2 = s_kategorie2;
 	}
 	public int getLikeNo() {
 		return likeNo;
@@ -80,6 +82,12 @@ public class LikeImg {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getS_kategorie2() {
+		return S_kategorie2;
+	}
+	public void setS_kategorie2(String s_kategorie2) {
+		S_kategorie2 = s_kategorie2;
 	}
 	
 

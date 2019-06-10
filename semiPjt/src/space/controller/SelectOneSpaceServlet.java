@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import host.model.vo.Host;
 import qaSy.model.service.QaService;
 import qaSy.model.vo.QaPageData;
 import reservation.model.service.ReservationService;
@@ -47,9 +48,15 @@ public class SelectOneSpaceServlet extends HttpServlet {
 		User u = (User)session.getAttribute("User");  // 세션 값 받아오기	
 		
 		int S_no = Integer.parseInt(request.getParameter("S_no"));
-		System.out.println(S_no);
 		Space s = new SpaceService().selectOneSpace(S_no);
-		int result = new SpaceService().searchCount(S_no);
+		Host h = (Host)session.getAttribute("host");
+		
+		if(h!=null && s.getS_hostNum()==h.getHostNo()) {
+			System.out.println("호스트계급이면서 호스트 본인의 공간을 조회할 시 아무일도 일어나지 않음.");
+		}else {
+			System.out.println("호스트가 자신의 게시물을 누르는 경우를 제외하고는 조회수를 올린다.");
+			new SpaceService().hitUpSpace(S_no);
+		}
 		int reqPage;
 		try {
 			reqPage = Integer.parseInt(request.getParameter("reqPage"));

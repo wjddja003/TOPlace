@@ -24,6 +24,31 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <style>
+input[type="checkbox"] {
+    display:none;
+}
+
+input[type="checkbox"] + label {
+    color:black;
+}
+
+input[type="checkbox"] + label span {
+	line-height: 50px;
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:0 10px 0 10px;
+    vertical-align:middle;
+    background: url('../img/icon_check.png') no-repeat;
+    cursor:pointer;
+    border-radius: 3px;
+}
+
+input[type="checkbox"]:checked + label span {
+    background: url('../img/icon_checked.png') no-repeat;
+    background-size: 19px;
+}
+
 /*reservation css start*/
 .reservation {
    overflow: hidden;
@@ -61,7 +86,7 @@
 .rMenu_price {
    background: white;
    line-height: 80px;
-   border-top: 3px solid #183058;
+   border-top: 3px solid #f69b02;
    font-size: 28px;
 }
 .rMenu_price_list{
@@ -76,8 +101,11 @@
    width: 100%;
    border: none;
    outline: none;
-   background: #183058;
+   background: #f69b02;
    color: white;
+}
+#payment:hover{
+			background: #183058;
 }
 /* reservation_rMenu  css fin */
 .reservation_head {
@@ -132,17 +160,23 @@
    width:50px;
    height:50px;
    border: 1px; solid #ccc;
-   background : #183058;
+   background : #f69b02;
    color: white;
    outline:none;
+}
+#person_minus:hover{
+   background : #183058 ;
 }
 #person_plus{
    width:50px;
    height:50px;
    border: 1px; solid #ccc;
-   background : #183058;
+   background : #f69b02;
    color: white;
    outline:none;
+}
+#person_plus:hover{
+   background : #183058 ;
 }
 .startDay{
 	font-size:16px;
@@ -158,17 +192,23 @@
 	width:50px;
    	height:50px;
    	border: 1px; solid #ccc;
-   	background : #183058;
+   	background : #f69b02;
    	color: white;
    	outline:none;
+}
+#option_minus:hover{
+   background : #183058 ;
 }
 #option_plus{
 	width:50px;
    	height:50px;
    	border: 1px; solid #ccc;
-   	background : #183058;
+   	background : #f69b02;
    	color: white;
    	outline:none;
+}
+#option_plus:hover{
+   background : #183058 ;
 }
 /* reservation페이지 label태그 css fin */
 .reservation_content label span {
@@ -316,7 +356,6 @@
    width: 100px;
    height: 80px;
    max-width: 100%;
-   background-color: #000000;
    border: 1px solid #ccc;
 }
 
@@ -431,9 +470,11 @@
                   </c:if>
                </div>
                <div class="reservation_content">
+                <center>
                   <div class="demo">
                      <jsp:include page="/WEB-INF/views/calendar.jsp" />
                   </div>
+                   </center>
                </div>
      		<c:if test="${s.s_type eq 'time'}">
                <%-- 예약페이지 시간선택 --%>
@@ -441,7 +482,7 @@
 	               <div class="reservation_head">
 	                  <span class="reservation_title">시간 선택</span> 
 	                  <span class="reservation_sub">
-	                     <span class="endDay"></span>
+	                     <span class="hapDay"></span>
 	                  </span>
 	               </div>
 	               <div class="reservation_content">
@@ -575,27 +616,27 @@
                </div>
                <%-- 서비스 동의--%>
                <div class="reservation_head">
-                  <span class="reservation_title">서비스 동의</span> <label
-                     class="reservation_sub"><span><input
-                        type="checkbox" id="allCheck"> 전체 동의</span></label>
+                  <span class="reservation_title">서비스 동의</span> 
+                  <span class="reservation_sub">
+                  	<input type="checkbox" id="allCheck">
+                  		<label for ="allCheck"><span></span>전체 동의</label>
+                  </span>
                </div>
                <div class="reservation_content">
                   <div class="reservaion_list">
-                     <label> <input type="checkbox" name="agree" value="1">
-                        위 공간의 예약조건 확인 및 결제진행 동의 <span>(필수)</span>
-                     </label>
+                      <input type="checkbox" name="agree" value="1" id="check1">
+                        <label for="check1"><span></span>위 공간의 예약조건 확인 및 결제진행 동의 (필수)</label>
                   </div>
                   <br>
                   <div class="reservaion_list">
-                     <label> <input type="checkbox" name="agree" value="1">
-                        환불규정 안내에 대한 동의 <span>(필수)</span>
-                     </label>
+                      <input type="checkbox" name="agree" value="1" id="check2">
+                       <label for="check2"><span></span>환불규정 안내에 대한 동의 (필수)</label>
                   </div>
                   <br>
                   <div class="reservaion_list">
-                     <label> <input type="checkbox" name="agree" value="1">
-                        개인정보 제3자 제공 동의 <span>(필수)</span>
-                     </label> <img src="/img/chevrondown.png" width="15px" height="15px"
+                     <input type="checkbox" name="agree" value="1" id="check3">
+                       <label for="check3"><span></span>개인정보 제3자 제공 동의 (필수)</label>
+                      <img src="/img/chevrondown.png" width="15px" height="15px"
                         class="agree_img" style="cursor: pointer">
                      <div style="display: none; overflow: auto; height: 150px;">
                         1. 개인정보를 제공받는 자: 해당 공간의 호스트<br> 2. 제공하는 개인정보 항목<br> -
@@ -609,9 +650,9 @@
                   </div>
                   <br>
                   <div class="reservaion_list">
-                     <label> <input type="checkbox" name="agree" value="1">
-                        개인정보 수집 및 이용 동의 <span>(필수)</span>
-                     </label> <img src="/img/chevrondown.png" width="15px" height="15px"
+                      <input type="checkbox" name="agree" value="1" id="check4">
+                       <label for="check4"><span></span>개인정보 수집 및 이용 동의 (필수)</label> 
+                       <img src="/img/chevrondown.png" width="15px" height="15px"
                         class="agree_img" style="cursor: pointer">
                      <div style="display: none; overflow: auto; height: 150px;">
                         1. 수집하는 개인정보의 항목<br> - 예약정보(성명, 이메일주소, 휴대전화번호), 결제정보(신용카드
@@ -642,7 +683,7 @@
                <div class="rMenu_list">
                		<div class="pop_list_left">예약날짜</div>
                		<div class="pop_list_right">
-               			<span class="endDay" style="color:red''">-</span>
+               			<span class="hapDay" style="color:red''">-</span>
                		</div>
                </div>
                </c:if>
@@ -705,14 +746,16 @@
    var btnIndex;
 		function selectTimeBtnfn(a){
 			$('.swiper-slide button').attr('disabled','true');
+			$('.swiper-slide button').css('color','white');
 			count = 1;
 			$('.selectTimeBtn').css('background','#f69b02');
 			$(a).css('background','#183058');
 			$(a).css('color','white');
             $('.disabled').css('background','#f69b02');
-            $('.disabled').css('color','black');
+            $('.disabled').css('color','white');
             selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-            btnIndex= $(a).index();
+            btnIndex = $(a).index();
+            priceTimeArr[btnIndex] = 0;
             sendTimeArray.slice(btnIndex);
             selTimeArr.slice(btnIndex);
             for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
@@ -825,26 +868,31 @@
                   for(var IItime=0; IItime<selTimeArr.length; IItime++){
            				$('.selTime2').html($('.selTime2').html()+String(array[IItime]).substring(0,4)+"년 "+String(array[IItime]).substring(4,6)+"월 "+String(array[IItime]).substring(6,8)+"일, "+String(selTimeArr[IItime]).replace("undefined","")+"<br>");
            			}
+                  totalTime = 0;
+                  totalPrice = 0;
                   for(var IIII=0; IIII<priceTimeArr.length; IIII++){
-         				totalTime += priceTimeArr[IIII];
-         			}
-                   $('#rMenu_time').css('display','none');
-                   $('.rM_time').css('display','block');
+                	  totalTime += priceTimeArr[IIII];
+                	  totalPrice += priceTimeArr[IIII]*'${s.s_price1}';
+                  }
+         			
+                    $('#rMenu_time').css('display','none');
+                    $('.rM_time').css('display','block');
                   	$('.price_time').html("총 "+totalTime+'시간 x '+'${s.s_price1}');
                   	$('.totalTime').html("총 "+totalTime+'시간');
-                  	totalPrice += hapTime*'${s.s_price1}';
                   	$('.price').html(totalPrice);
+                  	console.log("두번째클릭시"+priceTimeArr);
                }else if (count > 2) {
                   count = 1;
                   $('.disabled').css('background','#f69b02');
-                  $('.disabled').css('color','black');
+                  $('.disabled').css('color','white');
                   selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                   selTimeArray.pop();
                   selTimeArr.pop();
-                  priceTimeArr.pop();
-                  totalPrice -= hapTime*'${s.s_price1}';
+                  totalPrice -= priceTimeArr[btnIndex]*'${s.s_price1}';
                   $('.price').html(totalPrice);
+                  console.log("제외"+priceTimeArr);
                }
+         
          });
    <%-- 인원 선택 스크립트 --%>
       var person = parseInt($('.people').text());
@@ -941,7 +989,7 @@
     	  $('.booker').text($('input[name=booker]').val());
     	  $('input[name=reservationBooker]').val($('.booker').text());
    <%-- 날짜 체크 확인--%>
-      if ($('.endDay').html().length < 2) {
+      if ($('.hapDay').html().length < 2) {
          alert("예약 날짜를 선택해주세요.");
          }else {
    <%-- 시간 체크 확인 --%>
@@ -953,7 +1001,7 @@
 	   } else {
    <%-- 예약정보 체크 --%>
       if (!bookerCheck.test($('input[name=booker]').val())) {
-         alert("예약자 정보를 확인해주세요(예약자명 두글자 이상)");
+         alert("예약자 정보를 확인해주세요(예약자명(한글) 두글자 이상)");
          $('input[name=booker]').focus();
          $('input[name=booker]').css('border','1px solid red');
          } else if (!phoneCheck.test($('input[name=phone1]').val())){

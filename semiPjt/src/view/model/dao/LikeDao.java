@@ -36,6 +36,32 @@ public class LikeDao {
 		}
 		return l;
 	}
+	public ArrayList<Like> likeSearch(int userNo, Connection conn) {
+		PreparedStatement pstmt =null;
+		ArrayList<Like> list = null;
+		ResultSet rset = null;
+		String query = "select * from like_db where user_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Like>();
+			while(rset.next()) {
+				Like l = new Like();
+				l.setLikeNo(rset.getInt("like_no"));
+				l.setsNo(rset.getInt("s_no"));
+				l.setUserNo(rset.getInt("user_no"));
+				list.add(l);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
 	public int likeInsert(Like l,Connection conn) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -96,7 +122,7 @@ public class LikeDao {
 		ArrayList<LikeImg> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum as rnum, m.* from (select l.*,S_img1,s_placeName,s_Price1,s_placeTag,address,s_type from like_db l join place p on (l.s_no = p.S_no) where user_no = ? order by like_no desc) m) where rnum between ? and ?";
+		String query = "select * from (select rownum as rnum, m.* from (select l.*,S_img1,s_placeName,s_Price1,s_placeTag,address,s_type,S_kategorie2 from like_db l join place p on (l.s_no = p.S_no) where user_no = ? order by like_no desc) m) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, userNo);
@@ -115,6 +141,7 @@ public class LikeDao {
 				l.setPlaceTag(rset.getString("s_placetag"));
 				l.setAddress(rset.getString("address"));
 				l.setType(rset.getString("s_type"));
+				l.setS_kategorie2(rset.getString("s_kategorie2"));
 				list.add(l);
 			}
 		} catch (SQLException e) {

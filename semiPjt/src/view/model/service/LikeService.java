@@ -40,6 +40,12 @@ public class LikeService {
 		JDBCTemplate.close(conn);
 		return l;
 	}
+	public ArrayList<Like> likeSearch(int userNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Like> list = new LikeDao().likeSearch(userNo,conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
 	public LikePageData selectList(int reqPage,int userNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 4;

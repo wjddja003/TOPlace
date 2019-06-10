@@ -226,7 +226,7 @@ public class QaDao {
 		ArrayList<QaComment> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum as rnum, q.* from (select * from qa_comment where qa_comment_ref is null order by qa_comment_date desc) q) where rnum between ? and ?";
+		String query = "select * from (select rownum as rnum, q.* from (select q.*,s_placename from qa_comment q join place p on (q.qa_ref = p.S_no) where s_no = 1 and qa_comment_ref is null order by qa_comment_date desc) q) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
@@ -239,6 +239,7 @@ public class QaDao {
 				q.setQaCommentWriter(rset.getString("qa_Comment_writer"));
 				q.setQaCommentContent(rset.getString("qa_Comment_content"));
 				q.setQaCommentDate(rset.getDate("qa_Comment_date"));
+				q.setPlaceName(rset.getString("s_placename"));
 				list.add(q);
 			}
 		} catch (SQLException e) {

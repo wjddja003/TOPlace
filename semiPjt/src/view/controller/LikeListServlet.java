@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import space.model.service.SpaceService;
+import space.model.vo.Space;
 import user.model.vo.User;
 import view.model.service.LikeService;
+import view.model.vo.LikeImg;
 import view.model.vo.LikePageData;
 
 /**
@@ -36,6 +39,9 @@ public class LikeListServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		User u = (User)session.getAttribute("User");
+		
+		int S_no = Integer.parseInt(request.getParameter("S_no"));
+		Space s = new SpaceService().selectOneSpace(S_no);
 		if(u == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
 			rd.forward(request, response);
@@ -49,6 +55,7 @@ public class LikeListServlet extends HttpServlet {
 			}
 			LikePageData pd = new LikeService().selectList(reqPage,userNo);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/like/likeList.jsp");
+			request.setAttribute("s",s);
 			request.setAttribute("pd", pd);
 			rd.forward(request,response);
 		}
