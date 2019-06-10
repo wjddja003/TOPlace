@@ -16,7 +16,6 @@
 <style>
     #rq{
         font-size: 18px;
-        border-top:1px solid #183058;
     	text-align: center;
         margin: 30px 0 0 0;
         width: 1000px;

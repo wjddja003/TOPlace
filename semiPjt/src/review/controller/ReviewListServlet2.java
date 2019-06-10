@@ -43,7 +43,6 @@ public class ReviewListServlet2 extends HttpServlet {
 			rd.forward(request, response);
 		}else {
 			
-			System.out.println(u.getUserId());
 			String userId = u.getUserId();
 			int reqPage;
 			try {

@@ -17,6 +17,7 @@ public class Reservation {
 	private int paymentPrice;
 	private String paymentCard;
 	private ArrayList<String> rDay;
+
 	public Reservation() {
 		super();
 		// TODO Auto-generated constructor stub

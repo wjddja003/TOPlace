@@ -36,12 +36,13 @@ public class HeaderSearchPlaceServlet extends HttpServlet {
 		int index = Integer.parseInt(request.getParameter("index"));
 		int inputType = Integer.parseInt(request.getParameter("inputType"));
 		String type = request.getParameter("type");
-		
-		ArrayList<Space> list = new DetailSearchService().detailSearch(inputType,index,type);
-		
+
+		ArrayList<Space> list = new DetailSearchService().detailSearch(inputType,index,type);	
+
 		request.setAttribute("type", type);
 		request.setAttribute("index", index);
-		request.setAttribute("list", list);
+		request.setAttribute("inputType", inputType);
+		request.setAttribute("list", list);		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/detailSearch.jsp");
 		rd.forward(request, response);
 	}

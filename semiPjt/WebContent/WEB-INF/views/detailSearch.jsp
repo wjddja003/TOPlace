@@ -137,7 +137,7 @@
 		.totalInnerBox{
 			width:33.3%;
 			padding:10px;
-			
+			cursor: pointer;
 			float:left;
 			display:none;
 		}
@@ -154,7 +154,7 @@
 	<section>
 	<div class="section_content">
 		<div class="searchInfo">
-			<span style="color:blue;font-weight:bold;font-size:30px; border-bottom:4px solid blue">${type }</span><span style="font-weight:100;font-size:20px;"> (으)로 검색한 결과입니다.</sapn>
+			<span style="color:blue;font-weight:bold;font-size:30px; border-bottom:4px solid blue">${type }</span><span style="font-weight:100;font-size:20px;"> (으)로 검색한 결과입니다.</span>
 		</div>
 		<div class="detailSearch">
             <input class="searchInput" type="text" placeholder="검색어를 입력해주세요">
@@ -218,9 +218,14 @@
 					</div>
 				</div>
 			</div>
-			
+			<div class="detailSearchList">이용일
+				<div class="selectBox" >모든날짜<span>▽</span></div>
+				<div class="selectBoxInner">
+					<jsp:include page="/WEB-INF/views/calendar2.jsp"/>
+				</div>
+			</div>
 			<div class="detailSearchList" style="width:25%;">
-				<button id="detailSearchMap" class="detailSearchBtn">지도</button>
+				<button id="detailSearchMap" class="detailSearchBtn" onclick="maps('${inputType}','${index}','${type}')">지도</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button id="detailSearchFilter" class="detailSearchBtn">필터</button>
 			</div>
@@ -319,7 +324,9 @@
 			inputType=3;
 		}
 		
-		
+		console.log(index);
+		console.log(type);
+		console.log(inputType);
 		for(var i = 0; i<6; i++){
 			$('.totalInnerBox').eq(i).css("display","block");
 		}
@@ -354,6 +361,7 @@
 		});
 		
 		$('.totalInnerBox').click(function(){
+			
 			var sNumber = $(this).find('input').val();
 			location.href = "/selectOneSpace?S_no="+sNumber;
 		});
@@ -421,6 +429,27 @@
 			location.href = "/filterSearch?type=" + type + "&index=" + index + "&inputType=" + inputType +"&filter="+filter;
 		});
 	});
+
+	
+	
+	
+	
+	function maps(inputType,index,type) {
+		
+		var inputType = inputType;
+		var index = index;
+		var type = type;
+		console.log(inputType);
+		console.log(index);
+		console.log(type);
+		location.href="/headerSearchplace2?inputType="+inputType+"&index="+index+"&type="+type;
+	
+	}
+	
+	
+
 	</script>
+	
+	
 </body>
 </html>

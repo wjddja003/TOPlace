@@ -37,9 +37,9 @@ public class QaCommentUpdateEndServlet extends HttpServlet {
 		q.setQaCommentContent(request.getParameter("qaCommentContent"));
 		int result = new QaService().updateQaComment(q);
 		if(result>0) {
-			request.setAttribute("msg", "공지사항 수정 완료");
+			request.setAttribute("msg", "수정 완료");
 		}else {
-			request.setAttribute("msg", "공지사항 수정 실패");
+			request.setAttribute("msg", "수정 실패");
 		}
 		request.setAttribute("loc", "/qaView");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
