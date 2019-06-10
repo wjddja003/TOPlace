@@ -65,9 +65,6 @@ public class UpdateSpaceServlet extends HttpServlet {
 		String[] img = mRequest.getParameter("S_img").split(",");
 		String[] imgupdate = mRequest.getParameter("S_imgupdate").split(",");
 		String[] imgdelete = mRequest.getParameter("S_imgdelete").split(",");
-		System.out.println(img.length);
-		System.out.println(imgupdate.length);
-		System.out.println(imgdelete.length);
 		
 		String formname="";
 		ArrayList<String> S_img = new ArrayList<String>();
