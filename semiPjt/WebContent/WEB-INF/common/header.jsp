@@ -25,11 +25,12 @@
 	        <div class="header navi" style="width:60%;">
 	            <ul id="navi-bar">
 
-	               <li class="navi-li"> <a href="/viewsAll?type='조회수 순으로'">모든 공간보기</a></li>
+	               <li class="navi-li"> <a href="/viewsAll">모든 공간보기</a></li>
 
 	                <li class="navi-li"><a href="/viewsBest">베스트 공간보기</a></li>
 
 	                <li class="navi-li"><a href="/insertSpaceCheck">공간등록</a></li>
+	                
 	            </ul>
 	        </div>
 	        <div class="header realtime" style="width:9.6%;">실시간</div>
