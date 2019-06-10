@@ -92,13 +92,13 @@
               
                     <div class="qa_no">
                         <div class="comment">
-                           	 <a href="/spaceOneSpace?S_no=${q.qaRef }">공간명 :${q.placeName }</a><br>
+                           	 <a href="/selectOneSpace?S_no=${q.qaRef}">공간명 :${q.placeName }</a><br>
                             ${q.qaCommentContent }<br>
                     	</div>
                         <div class="Q_btn">
                         ${q.qaCommentDate }<br>
-                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/qaCommentDelete?qaCommentNo=${q.qaCommentNo }"style="color:#f69b02">삭제</a></button>
-                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/qaCommentUpdate?qaCommentNo=${q.qaCommentNo }"style="color:#f69b02">수정</a></button>
+                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02" ><a href="/qaCommentDelete?qaCommentNo=${q.qaCommentNo }"style="color:#f69b02">삭제</a></button>
+                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02" ><a id="qaupdate" href="/qaCommentUpdate?qaCommentNo=${q.qaCommentNo }"style="color:#f69b02">수정</a></button>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,51 @@
                 </c:forEach>
                <div class="qa_navi">${pd.pageNavi }</div>
             </div>
+            		<form action="/qaCommentUpdateEnd" method="post">
+    <div class="layer_popup_up" class="_noProfileCheckLayout" style="display:none;position:fixed;">
+			<div class="popup_wrap">
+                <div class="pop_header">                    
+					<p>질문 작성하기</p>
+                    <button><a href="javascript:void(0);" class="popcencleUP" style="color:#fff; text-decoration: none;">X</a></button>
+                </div>
+				<div class="pop_container">
+                    <div class="box_l">
+                        <label for="input_update">질문수정</label>
+                    </div>
+                    <div class="box_r"><p id="textarea_update">0 /</p><p id="textarea_uplength">200자</p></div>
+                    <div class="qna_input">
+						<textarea name="qaCommentContent" id="input_update" maxlength="200" data-ui-sync-length="._question_length">
+						${q.qaCommentContent }
+						</textarea>
+					</div>
+				</div>
+                <div class="qna_p">
+				    <p>
+				    질문은 공개 상태로만 등록하실 수 있습니다.
+                    </p>
+			     </div>
+                <div class="qnaBtns">
+<!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
+                    <div id="qna_updateBtn">
+						<button class="poprollback">등록</button>
+                    </div>
+					</div>
+			</div>
+		</div>
+		</form>
+		<div class="hostpopupMaskUp">
+		</div>
         </div>
     </section>
+    <script>
+	$("#qaupdate").click(function(){
+		$('.layer_popup_up').show();
+		$('.hostpopupMaskUp').show();
+	});
+	$(".popcencleUp").click(function(){
+		$('.layer_popup_up').hide();
+		$('.hostpopupMaskUp').hide();
+	});
+    </script>
 </body>
 </html>
