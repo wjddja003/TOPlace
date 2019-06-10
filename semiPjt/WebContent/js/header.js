@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	 $(".search").click(function(){
      	$("#header-mypage").css("display","none");
          $("#header-search").css("display","block");
@@ -12,3 +13,4 @@ $(document).ready(function(){
      	$("#header-mypage").css("display","none");
      });
 });
+

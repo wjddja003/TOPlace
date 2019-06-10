@@ -149,5 +149,40 @@
 			}
 		}
 	});
+	$('#userPw').keydown(function(key) {
+		
+		if (key.keyCode == 13) {
+			$(".errorMsg").hide();
+			$("#pwMsg").text("");
+			$("#idMsg").text("");
+			if($("#userId").val() == ""){
+				$("#idMsg").text("아이디를 입력해주세요.");
+				$("#userId").focus();
+			}else{
+				$("#idMsg").text("");
+				if($("#userPw").val() == ""){
+					$("#pwMsg").text("비밀번호를 입력해주세요");
+					$("#userPw").focus();
+				}else{
+					$("#pwMsg").text("");
+					var id = $("#userId").val();
+					var pw = $("#userPw").val();
+					$.ajax({
+						type:"POST",
+						url: "/login",
+						data:{ id:id, pw:pw},
+						success : function(data){
+							var result = data;
+							if(result > 0){
+								location.href="../index.jsp";
+							}else{
+								$(".errorMsg").show();
+							}
+						}
+					});
+				}
+			}
+		}
+	});
 </script>
 </html>

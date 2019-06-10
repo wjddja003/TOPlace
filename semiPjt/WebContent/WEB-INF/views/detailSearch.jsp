@@ -21,22 +21,27 @@
 			font-size:18px;
 			padding-left: 10px;
 		}
-		.detailSearchBtn{
-			width:5%;
+		
+		.detailSearchBtn:focus{
+			outline:none;
 		}
 		.placeTypeDetail{
 			margin:0 auto;
 			float:left;
 			box-sizing: border-box;
-			border: 1px solid gainsboro;
-			color: darkgrey;
+			background-color:#f69b02;
+			border:1px solid white;	
+			color: white;
 			text-align: center;
 			width:45%;
+			height:30px;
 			cursor: pointer;
 		}
 		.placeTypeDetail:hover{
-			background-color:purple;
-			color:black;
+			border:1px solid white;	
+			background-color: #183058;
+			color:white;
+			font-size:20px;
 		}
 		.typeOutlineDetail{
 			clear:left;
@@ -50,12 +55,14 @@
 			padding:20px;
 			display:none;
 			width: 500px;
-			border: 1px solid black;
+			border:2px solid #183058;
 			overflow: hidden;
 			background-color: white;
+			border-radius: 8px;
 		}
 		.selectBox:hover{
 			cursor: pointer;
+			
 		}
 		.detailSearch {
 			width: 1160px;
@@ -80,38 +87,60 @@
 		    padding: 0;
 		    right: 300px;
 		}
-		.filterOutLine{
 		
+		.filterOutLine{
+			border-radius:8px;
 			padding:20px;
 			display: none;
 			clear: both;
-			border: 1px solid black;
+			border: 2px solid #183058;
 			
 		}
 		.detailSearchBtn{
 			background-color: white;
-			width: 80px;
+			width: 100%;
 			height: 40px;
+			color:#f69b02;
+			border:1px solid #f69b02;
+			border-radius:8px;
+			font-size:20px;
+		}
+		.detailSearchBtn:hover{
+			background-color: #f69b02;
+			color:white;
 		}
 		.detailBox{
 			margin-top:30px;
 			
 		}
-
+		.filterBtn{
+			background-color: white;
+			width: 35%;
+			height: 60px;
+			color:#f69b02;
+			border:1px solid #f69b02;
+			border-radius:8px;
+			font-size:20px;
+		}
+		.filterBtn:hover{
+			background-color: #f69b02;
+			color:white;
+		}
 		.filterBox{
 			margin:0 auto;
 			float:left;
 			box-sizing: border-box;
-			border: 1px solid gainsboro;
-			color: darkgrey;
+			border: 1px solid #183058;
+			color: #f69b02;
 			text-align: center;
 			width:13.7%;
 			height:90px;
 			cursor: pointer;
+			background-color: white;
 		}
-		.filterBox:hover{
-			background-color:purple;
-			color:black;
+		.selectFilter{
+			background-color: #f69b02;
+			color: white;
 		}
 		.filterOutBox{
 			clear:left;
@@ -119,15 +148,17 @@
 		}
 		.filterBack{
 			font-size: 20px;
-    		background-color: black;
+    		background-color:#f69b02;
     		color: white;
     		width: 30px;
-    		border: 0px;
+    		border: 1px solid white;
     		float:right;
 		}
-		.selectFilter{
-			background-color: blue;
+		.filterBack:hover{
+			background-color:#183058;
+			color: white;
 		}
+		
 		.totalOutLine{
 			width:100%;
 			margin-top:10px;
@@ -135,34 +166,80 @@
 			clear:left;
 		}
 		.totalInnerBox{
-			width:33.3%;
-			padding:10px;
+			margin: 10px 5px;
+			width:32%;
+			padding:5px;
 			cursor: pointer;
 			float:left;
 			display:none;
+			border: 2px solid #183058;
+			border-radius:3%;
+			height:360px;
 		}
+		#viewpage_alert{
+        width: 100%;
+        height: 100px;
+        background-color: #f69b02;
+        position: absolute;
+        top: 0px;
+        display: none;
+        text-align: center;
+        font-size: 22px;
+        padding: 30px 0px 30px 0px;
+        color: #fff;
+    	}
 		#viewMore{
-			width:200px;
-			height:50px;
-			margin-top:30px;
+			width:100%;
+			height:100%;
+			border:none;
+			background:white;
+			color:#f69b02;
+			border-radius:8px;
+			font-size:20px;
 		}
+		#viewMore:hover{
+			background:#f69b02;
+			color:white;
+		}
+		#viewMore:focus{
+    		outline: none;
+		}
+		
+		.like_full{
+	        display: none;
+	        width:40px;
+	    	height: 40px;
+	    }
+	    .like{
+	    	width:40px;
+	    	height: 40px;
+	        background: #f69b02 ;
+	        border-radius:20%; 
+	    }
+	    .searchInput:focus{
+	    	outline: none;
+	    }
+	    .searchInput{
+	    	border:1px solid #183058;
+	    }
 	</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
 	
 	<section>
+	<div id="viewpage_alert"><p></p></div>
 	<div class="section_content">
 		<div class="searchInfo">
-			<span style="color:blue;font-weight:bold;font-size:30px; border-bottom:4px solid blue">${type }</span><span style="font-weight:100;font-size:20px;"> (으)로 검색한 결과입니다.</span>
+			<span style="color:#f69b02;font-weight:bold;font-size:30px; border-bottom:4px solid #f69b02">${type }</span><span style="font-weight:100;font-size:20px;"> (으)로 검색한 결과입니다.</span>
 		</div>
 		<div class="detailSearch">
-            <input class="searchInput" type="text" placeholder="검색어를 입력해주세요">
-            <input class="searchIcon" type="submit" value="">
+            <input class="searchInput" type="text" placeholder="검색어를 입력해주세요" size="81" style="font-size:30px;">
+            <input class="searchIcon" type="submit" value="" style="color:#183058;">
         </div>
 		<div class="detailBox">
 			<div class="detailSearchList" style="width:37.5%;">공간유형
-				<div class="selectBox">모든공간&nbsp;&nbsp;&nbsp;&nbsp;<span>▽</span></div>
+				<div class="selectBox">모든공간<span>&nbsp;&nbsp;&nbsp;▽</span></div>
 				<div class="selectBoxInner">
 					<div class="typeOutlineDetail">
 						<button class="filterBack">X</button>
@@ -195,7 +272,7 @@
 			</div>
 				
 			<div class="detailSearchList" style="width:37.5%;">지역
-				<div class="selectBox">모든지역&nbsp;&nbsp;&nbsp;&nbsp;<span>▽</span></div>
+				<div class="selectBox">모든지역<span>&nbsp;&nbsp;&nbsp;▽</span></div>
 				<div class="selectBoxInner">
 					<div class="typeOutlineDetail">
 						<button class="filterBack">X</button>
@@ -218,15 +295,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="detailSearchList">이용일
-				<div class="selectBox" >모든날짜<span>▽</span></div>
-				<div class="selectBoxInner">
-					<jsp:include page="/WEB-INF/views/calendar2.jsp"/>
-				</div>
-			</div>
 			<div class="detailSearchList" style="width:25%;">
-				<button id="detailSearchMap" class="detailSearchBtn" onclick="maps('${inputType}','${index}','${type}')">지도</button>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
 				<button id="detailSearchFilter" class="detailSearchBtn">필터</button>
 			</div>
 			<div class="mapInner" style="display:none; width:100%;">
@@ -266,40 +336,139 @@
 					<div class="filterBox">도어락<br><img src="/upload/space/kategorie2/21.png" ></div>
 				</div>
 				<div class="filterOutBox" style="margin-top:20px; text-align:center">
-					<button id="filterReset" style="width:35%; height:60px;">초기화 하기</button>
+					<button class="filterBtn" id="filterReset">초기화 하기</button>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<button id="filterSubmit" style="width:35%; height:60px;">필터 적용하기</button>
+					<button class="filterBtn" id="filterSubmit">필터 적용하기</button>
 				</div>
 			</div>
 		</div>
 		<div class="totalOutLine">
+		
 			<c:forEach items='${list }' var='s'>
 				<div class='totalInnerBox'>
-					<input type="hidden" value='${s.s_no }'>
-					<div style='height:200px;'>
-						<img src='/upload/space/${s.s_img1}' width="100%" height="200px">
+					<input class="inputNo" type="hidden" value='${s.s_no }'>
+					<div style='height:200px; '>
+						<img src='/upload/space/${s.s_img1}' class="bossImg" width="100%" height="200px" style="border-radius:8px;">
 					</div>
 					<div style='height:120px;'>
-						<h4>${s.s_placeName}</h4>
-						<img src='/img/map-marker.png'><span>${s.addressCut}</span>
-						<div style="width:100%; height:22px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">${s.s_placeTag}</div>
+						<div style="float:left;">
+						<a class="likeClick" href="#">
+							<img src="../img/like_icon.png" class="like">
+                    		<img src="../img/like_full_icon.png" class="like_full">
+                    	</a>
+                    	</div>
+                    	
+						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${s.s_placeName}</p>
+						
+						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span>${s.addressCut}</span>
+						<div style="width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${s.s_placeTag}</div>
 						<c:if test="${s.s_type eq 'time' }">
-							<span style="font-size:22px;">${s.s_price1}</span><span>원/시간</span>
+							&nbsp;<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${s.s_type eq 'day' }">
-							<span style="font-size:22px;">${s.s_price1}</span><span>원/일</span>
+							<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-		<div style="clear:left; text-align:center;">
+		<div style="margin-bottom:50px;margin-left:20%;width:60%; height:50px; clear:left; text-align:center; border: 1px solid #f69b02; border-radius:8px;">
 			<button id="viewMore">더보기</button>
 		</div>
 	</div>
 	</section>
 	<script type="text/javascript">
 	$(document).ready(function() {
+		var userNo = '${sessionScope.User.userNo}';
+		$.ajax({
+     		type:"GET",
+     		url: "/likeSearchAjax?userNo="+userNo,
+     		dataType: "json",                         // 서버에서 보내줄 데이터의 타입
+            
+     		success : function(data){
+     			console.log(data);
+     			for(var k=0; k<$('.inputNo').length; k++){
+     				for(var i=0; i<data.length; i++){
+     					
+         				if($('.inputNo').eq(k).val()==data[i].sNo){
+         					
+         					$(".like").eq(k).css("display","none");
+         					$(".like_full").eq(k).css("display","inline");
+         				}
+         			}
+     			}
+     			}
+     		
+     	});
+		
+		
+		if('${sessionScope.User}' != ""){
+        	  $(".like").click(function(){
+        		  event.stopPropagation();
+        		  	var imgIndex = $(".like").index(this);
+                 	var s_no = $(this).parent().parent().parent().prev().prev().val();
+                 	
+                 	
+                 	
+                 	$.ajax({
+                 		type:"GET",
+                 		url: "/likeInsertAjax?S_no="+s_no+"&userNo="+userNo,
+                 		success : function(data){
+                 			var result = data;
+                 			if(result==1){
+                 				$("#viewpage_alert").slideDown(700);
+                             	$("#viewpage_alert").delay(400);
+                             	$("#viewpage_alert").css("display","inline");
+                             	$("#viewpage_alert").delay(400);
+                             	$("#viewpage_alert").slideUp(700); 
+                             	$(".like").eq(imgIndex).css("display","none");
+                             	$(".like_full").eq(imgIndex).css("display","inline");
+                             	$("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");	
+                 			}
+                 		}
+                 	});
+                 });
+                 $(".like_full").click(function(){
+                	 event.stopPropagation();
+                	 var imgIndex = $(".like_full").index(this);
+                 	var s_no = $(this).parent().parent().parent().prev().prev().val();
+                 	
+                 	var userNo = '${sessionScope.User.userNo}';
+                 	console.log($(this).parent().html());
+                 	console.log(s_no);
+                 	console.log(userNo);
+                     $.ajax({
+                 		type:"GET",
+                 		url: "/likeDeleteAjax?S_no="+s_no+"&userNo="+userNo,
+                 		success : function(data){
+                 			var result = data;
+                 			if(result==1){
+                					$("#viewpage_alert").slideDown(700);
+                	                $("#viewpage_alert").delay(400);
+                	                $("#viewpage_alert").css("display","inline");
+                	                $("#viewpage_alert").delay(400);
+                	                $("#viewpage_alert").slideUp(700); 
+                	                $(".like").eq(imgIndex).css("display","inline");
+	                             	$(".like_full").eq(imgIndex).css("display","none");
+                	                $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
+                 				
+                 			}	
+                 		}
+                 	});
+           		});
+          }else{
+        	  $(".like").click(function(){
+        		  event.stopPropagation();
+        		  $("#viewpage_alert").slideDown(700);
+	                $("#viewpage_alert").delay(400);
+	                $("#viewpage_alert").css("display","inline");
+	                $("#viewpage_alert").delay(400);
+	                $("#viewpage_alert").slideUp(700); 
+	                
+	                $("#viewpage_alert p").html("로그인 후 이용가능 합니다.");
+        	  });
+        	  
+          }
 		var filterCount = 0;
 		var prepareNum=-1;
 		$('.searchInput').val('${type}');
@@ -307,14 +476,18 @@
 		var index = '${index }';
 		if (index >= 0 && index < 12) {
 			if($('.placeTypeDetail').eq(index).text()=='${type}'){
-				$('.selectBox').eq(0).html('${type }<span>▽</span>');
-				$('.placeTypeDetail').eq(index).css("background-color", "blue");
+				$('.selectBox').eq(0).html('${type }<span>&nbsp;&nbsp;&nbsp;▽</span>');
+				$('.selectBox').eq(0).css("color", "#f69b02")
+				$('.placeTypeDetail').eq(index).css("background-color", "#183058");
+				$('.placeTypeDetail').eq(index).css("color", "white");
 			}
 			inputType=1;
-		} else if (index >= 12 && index < 18) {
+		} else if (index >= 12 && index < 20) {
 			if($('.placeTypeDetail').eq(index).text()=='${type}'){
-				$('.selectBox').eq(1).html('${type }<span>▽</span>');
-				$('.placeTypeDetail').eq(index).css("background-color", "blue");
+				$('.selectBox').eq(1).html('${type }<span>&nbsp;&nbsp;&nbsp;▽</span>');
+				$('.selectBox').eq(1).css("color", "#f69b02")
+				$('.placeTypeDetail').eq(index).css("background-color", "#183058");
+				$('.placeTypeDetail').eq(index).css("color", "white");
 			}
 			inputType=2;
 		} else {
@@ -335,11 +508,11 @@
 		$('.selectBox').click(function() {
 			var selectNum = $('.selectBox').index(this);
 			
-				$('.selectBox').find('span').html('▽');
+				$('.selectBox').find('span').html('&nbsp;&nbsp;&nbsp;▽');
 				$('.selectBox').next().css("display", "none");
 				$('.filterOutLine').css("display","none");
 			if(prepareNum!=selectNum){
-				$('.selectBox').eq(selectNum).find('span').html('▲');
+				$('.selectBox').eq(selectNum).find('span').html('&nbsp;&nbsp;&nbsp;▲');
 				$('.selectBox').eq(selectNum).next().css("display", "block");
 				prepareNum = selectNum;
 			}else{
@@ -368,7 +541,7 @@
 		
 		$('#detailSearchFilter').click(function(){
 			if(filterCount==0){
-				$('.selectBox').find('span').html('▽');
+				$('.selectBox').find('span').html('&nbsp;&nbsp;&nbsp;▽');
 				$('.selectBox').next().css("display", "none");
 				$('.filterOutLine').css("display", "block");	
 				filterCount = 1;
