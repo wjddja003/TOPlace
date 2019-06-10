@@ -34,7 +34,7 @@ public class ReviewService {
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
-		ArrayList<Review> list = new ReviewDao().selectList(conn, start, end);
+		ArrayList<Review> list = new ReviewDao().selectRList(conn, start, end);
 		String pageNavi = "";
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
@@ -54,18 +54,21 @@ public class ReviewService {
 		pageNavi +="<a class='btn' href='/qaView?reqPage="+pageNo+"'>다음</a>";
 	}
 	
-	ReviewPageData pd = new ReviewPageData(list,pageNavi);
+	ReviewPageData pd = new ReviewPageData(list,pageNavi,totalCount);
 	JDBCTemplate.close(conn);
 	return pd;
 	}
-	public ReviewPageData selectList(int reqPage) {
+	public ReviewPageData selectList(int reqPage, int S_no) {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 5;
-		int totalCount  = new ReviewDao().totalCount(conn);
+		int totalCount  = new ReviewDao().totalCount(conn,S_no);
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
-		ArrayList<Review> list = new ReviewDao().selectList(conn,start,end);
+		ArrayList<Review> list = new ReviewDao().selectList(conn,start,end,S_no);
+		int totalStar = new ReviewDao().totalStar(conn, S_no);
+		double starAVG = totalStar/(totalCount*1.0);
+		starAVG = Math.round(starAVG*10)/10.0;
 		String pageNavi = "";
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
@@ -84,7 +87,7 @@ public class ReviewService {
 		if(pageNo <= totalPage) {
 			pageNavi +="<a class='btn' href='/selectOneSpace?S_no=2&reqPage="+pageNo+"'>다음</a>";
 		}
-		ReviewPageData pd = new ReviewPageData(list,pageNavi);
+		ReviewPageData pd = new ReviewPageData(list,pageNavi,totalCount,starAVG);
 		JDBCTemplate.close(conn);
 		return pd;
 	}

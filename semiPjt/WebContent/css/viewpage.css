@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+a{
+    color: #f69b02;  
+    text-decoration: none;
+}
     #viewpage_alert{
         width: 100%;
         height: 100px;
@@ -176,6 +179,11 @@
         
         
     }
+.viewpage_reservationbtn{
+    width: 370px;
+    height: 100%;
+    text-align: center;
+}
     .viewpage_photo2{
         width: 773px;
     }
@@ -290,6 +298,7 @@
     padding: 33px 30px 38px;
     border: 1px solid #e2e2e2;
     background: #eee;
+    margin-top: 50px;
 }
 .hostbtn{
     width: 255px;
@@ -310,6 +319,9 @@
 }
 .pf_txt{
     margin-top: 15px;
+}
+.pf_img{
+    float: left;
 }
 .txt_primary{
     color: #f69b02;
@@ -340,7 +352,10 @@
 #viewpage_review_btn{
     float: right;
 }
-
+.rbox_name{
+    width: 650px;    
+    float: left;
+}
 
 
 
@@ -500,6 +515,19 @@
 	    margin-left: -145px;
 	    
 	}
+.layer_popup_up {
+		border-radius:10px;
+		text-align: center;
+		background:#fff;
+	    position: absolute;
+	    top: 30%;
+	    left: 45%;
+	    display: block;
+	    width: 500px;
+	    z-index: 150;
+	    margin-left: -145px;
+	    
+	}
 	.pop_guide_txt{
 		font-size: 18px;
 	}
@@ -563,15 +591,37 @@
     height: 200px;
     
 }
+#input_update{
+    width: 460px;
+    height: 200px;
+    
+}
 #textarea_input{
     float: left;
 }
-#qna_p p{
+#textarea_update{
+    float: left;
+}
+.qna_p p{
     color: red;
     font-size: 14px;
 }
 #qna_abtn{
     width: 100px;
+    background: #f69b02;
+    margin: 0 auto;
+    height: 45px;
+    border-radius: 15px;
+}
+#qna_updateBtn{
+     width: 100px;
+    background: #f69b02;
+    margin: 0 auto;
+    height: 45px;
+    border-radius: 15px;
+}
+.qnaBtns{
+     width: 100px;
     background: #f69b02;
     margin: 0 auto;
     height: 45px;

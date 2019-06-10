@@ -56,7 +56,7 @@ public class SelectOneSpaceServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			reqPage = 1;
 		}
-		ReviewPageData pd = new ReviewService().selectList(reqPage);
+		ReviewPageData pd = new ReviewService().selectList(reqPage,S_no);
 		
 		if(s!=null) {
 			if( u!= null) {

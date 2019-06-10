@@ -6,10 +6,20 @@ public class QaPageData {
 	private ArrayList<QaComment> list;
 	private String pageNavi;
 	private ArrayList<QaComment> listAll;
+	private int totalCount;
 	public QaPageData() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public QaPageData(ArrayList<QaComment> list, String pageNavi, ArrayList<QaComment> listAll, int totalCount) {
+		super();
+		this.list = list;
+		this.pageNavi = pageNavi;
+		this.listAll = listAll;
+		this.totalCount = totalCount;
+	}
+
 	public QaPageData(ArrayList<QaComment> list, String pageNavi, ArrayList<QaComment> listAll) {
 		super();
 		this.list = list;
@@ -39,6 +49,12 @@ public class QaPageData {
 	}
 	public void setListAll(ArrayList<QaComment> listAll) {
 		this.listAll = listAll;
+	}
+	public int getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
 	}
 	
 }
