@@ -896,7 +896,6 @@ input[type="checkbox"]:checked + label span {
                   	$('.price_time').html("총 "+totalTime+'시간 x '+'${s.s_price1}');
                   	$('.totalTime').html("총 "+totalTime+'시간');
                   	$('.price').html(totalPrice);
-                  	console.log("두번째클릭시"+priceTimeArr);
                }else if (count > 2) {
                   count = 1;
                   $('.disabled').css('background','#f69b02');
@@ -906,7 +905,6 @@ input[type="checkbox"]:checked + label span {
                   selTimeArr.pop();
                   totalPrice -= priceTimeArr[btnIndex]*'${s.s_price1}';
                   $('.price').html(totalPrice);
-                  console.log("제외"+priceTimeArr);
                }
          
          });
