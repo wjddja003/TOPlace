@@ -2,6 +2,7 @@ package qaSy.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,19 +12,18 @@ import javax.servlet.http.HttpSession;
 
 import qaSy.model.service.QaService;
 import qaSy.model.vo.QaComment;
-import user.model.vo.User;
 
 /**
- * Servlet implementation class InsertQaServlet
+ * Servlet implementation class QaViewpageUpdateServlet
  */
-@WebServlet(name = "InsertQa", urlPatterns = { "/insertQa" })
-public class InsertQaServlet extends HttpServlet {
+@WebServlet(name = "QaViewpageUpdate", urlPatterns = { "/qaViewpageUpdate" })
+public class QaViewpageUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertQaServlet() {
+    public QaViewpageUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,26 +33,13 @@ public class InsertQaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-
-	    HttpSession session = request.getSession();
-	    User u = (User)session.getAttribute("User");
-	    String qaCommentWriter = u.getUserId();
-		String qaCommentContent = request.getParameter("qaCommentContent");
-		System.out.println(qaCommentWriter);
-		System.out.println(qaCommentContent);
-		
-		int ref = Integer.parseInt(request.getParameter("S_no"));
-		System.out.println(ref);
-		QaComment qc = new QaComment(0, qaCommentWriter, qaCommentContent, ref, null, 0);
-		int result = new QaService().insertQa(qc);
-		if(result>0) {
-			request.setAttribute("msg","등록 성공");
-		}else {
-			request.setAttribute("msg","등록 실패");
-		}
-		
-		request.setAttribute("loc", "/selectOneSpace?S_no="+ref);
-		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		int s_no = Integer.parseInt(request.getParameter("S_no"));		
+		int qaCommentNo = Integer.parseInt(request.getParameter("qaCommentNo"));		
+		QaComment q = new QaService().selectOne(qaCommentNo);
+		request.setAttribute("qaComment", q);
+		RequestDispatcher rd = request.getRequestDispatcher("views/viewpage.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

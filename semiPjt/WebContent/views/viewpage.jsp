@@ -193,7 +193,7 @@
                         <div class="viewpage_qna">
                             <div class="viewpage_qna_header">
                             <h4>Q&amp;A 0개</h4>
-                            <a href="" style="text-decoration: none;" id="viewQna"><span>질문작성하기</span></a>
+                            <a style="text-decoration: none;" id="viewQna"><span>질문작성하기</span></a>
                             </div>
                             <div class="viewpage_qnaview">
                                 <div>
@@ -202,29 +202,37 @@
                                         <li class="rlist ">  
                                             <div class="rbox_mine">  
                                                  <span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
-                                         
+                                                <div class="rbox_name">
                                                 <strong class="guest_name" style="font-size:22px;">${q.qaCommentWriter}</strong>
                                                 <p class="p_review">${q.qaCommentContent}</p>
+                                                </div>
                                                 <div class="rbox_info_base">  
                                                     <span class="time_info">${q.qaCommentDate}</span> 
                                                 </div>
                                             </div>
-                                            <div class="rbox_reply" style="margin-top:30px;">
-                                                <p class="p_tit_reply">
-                                                    <em>옥탑방라운지</em>님의 댓글
-                                                </p>
-                                                <p class="p_review">
-                                                    안녕하세요 현재 내부 사정으로 디제잉 장비 대여가 잠시 중단되었습니다.
-                                                </p>
-                                                <div class="rbox_info_base">
-                                                    <p class="time_info">2019.04.19. 18:49:25</p>
-                                                </div>
-                                            </div>
+<!--                                             <div class="rbox_reply" style="margin-top:30px;"> -->
+<!--                                                 <p class="p_tit_reply"> -->
+<!--                                                     <em>옥탑방라운지</em>님의 댓글 -->
+<!--                                                 </p> -->
+<!--                                                 <p class="p_review"> -->
+<!--                                                     안녕하세요 현재 내부 사정으로 디제잉 장비 대여가 잠시 중단되었습니다. -->
+<!--                                                 </p> -->
+<!--                                                 <div class="rbox_info_base"> -->
+<!--                                                     <p class="time_info">2019.04.19. 18:49:25</p> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+										<div style="text-align: right;">
+                                    	<c:if test="${sessionScope.User.userId == q.qaCommentWriter}">
+                                    	<a style="text-decoration: none;" id="qaupdate"><span>질문작성하기</span></a>
+                                    	<button class="btn btn-outline-primary btn-sm"><a href="/qaViewpageDelete?S_no=${s.s_no }&qaCommentNo=${q.qaCommentNo }">삭제</a></button>
+                                    	</c:if>
+                                    </div>
                                         </li>
                                         </c:forEach>
                                     </ul>
                                 </div>
                             </div>
+            
                         </div>
                          <div class="viewpage_hostpage">
                             <div class="host_area">
@@ -293,7 +301,7 @@
                                     	<button class="btn btn-outline-primary btn-sm"><a href="/reviewUpdateEnd?reviewNo=${rc.reviewNo }">수정</a></button>
                                     	<button class="btn btn-outline-primary btn-sm"><a href="/reviewDelete?S_no=${s.s_no }&reviewNo=${rc.reviewNo}">삭제</a></button>
                                     	</c:if>
-                                    </div>
+                                    </div>                                                                              
                                 </div>
                             </li>
                             </c:forEach>
@@ -328,7 +336,7 @@
                                         </li>
                                         <li class="viewpage_list_none" style="padding:15px 0px 15px; height:140px;">
                                             <img src="../img/ex1.jpg" width="110px" height="110px" id="viewpage_right_img">
-                                            <p style="float:right;">${s.s_placeIntroduce1}</p>
+                                            <p>${s.s_placeIntroduce1}</p>
                                         </li>
                                         <li style="clear: both;" class="viewpage_right_c"><span style="color:#656565; float:left;">· 공간유형</span>
                                                                                
@@ -364,10 +372,81 @@
                              <button><a href="/selectOneReservation?S_no=2">결제하기</a></button>
                         </div>
                 </div>
+                                              
                 </div>
             </div>
         </div>
     </section>
+
+	<form action="/insertQa?S_no=${s.s_no }" method="post">
+    <div class="layer_popup" class="_noProfileCheckLayout" style="display:none;position:fixed;">
+			<div class="popup_wrap">
+                <div class="pop_header">                    
+					<p>질문 작성하기</p>
+                    <button><a href="javascript:void(0);" class="popcencle" style="color:#fff; text-decoration: none;">X</a></button>
+                </div>
+				<div class="pop_container">
+                    <div class="box_l">
+                        <label for="input_question">질문</label>
+                    </div>
+                    <div class="box_r"><p id="textarea_input">0 /</p><p id="textarea_length">200자</p></div>
+                    <div class="qna_input">
+						<textarea name="qaCommentContent" id="input_question" placeholder="질문을 남겨 주세요." maxlength="200" data-ui-sync-length="._question_length" required></textarea>
+					</div>
+				</div>
+                <div class="qna_p">
+				    <p>
+				    질문은 공개 상태로만 등록하실 수 있습니다.
+                    </p>
+			     </div>
+                <div class="qnaBtns">
+<!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
+                    <div id="qna_abtn">
+						<button class="poprollback">등록</button>
+                    </div>
+					</div>
+			</div>
+		</div>
+		</form>
+		<div class="hostpopupMask">
+		</div>
+		
+		<form action="/qaViewpageUpdateEnd?S_no=${s.s_no }" method="post">
+    <div class="layer_popup_up" class="_noProfileCheckLayout" style="display:none;position:fixed;">
+			<div class="popup_wrap">
+                <div class="pop_header">                    
+					<p>질문 작성하기</p>
+                    <button><a href="javascript:void(0);" class="popcencleUP" style="color:#fff; text-decoration: none;">X</a></button>
+                </div>
+				<div class="pop_container">
+                    <div class="box_l">
+                        <label for="input_update">질문수정</label>
+                    </div>
+                    <div class="box_r"><p id="textarea_update">0 /</p><p id="textarea_uplength">200자</p></div>
+                    <div class="qna_input">
+						<textarea name="qaCommentContent" id="input_update" maxlength="200" data-ui-sync-length="._question_length">
+						${q.qaCommentContent }
+						</textarea>
+					</div>
+				</div>
+                <div class="qna_p">
+				    <p>
+				    질문은 공개 상태로만 등록하실 수 있습니다.
+                    </p>
+			     </div>
+                <div class="qnaBtns">
+<!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
+                    <div id="qna_updateBtn">
+						<button class="poprollback">등록</button>
+                    </div>
+					</div>
+			</div>
+		</div>
+		</form>
+		<div class="hostpopupMaskUp">
+		</div>
+               
+                                                    
         <%-- 메뉴바 스크롤 따라오기 스크립트 --%>
         <script>
         var $ = jQuery.noConflict();
@@ -422,6 +501,19 @@
                  		}
                  	});
                  });
+                
+               $('#input_question').keyup(function(){
+                  var inputLength = $(this).val().length;
+                   var remain = 200 - inputLength;
+                   $("#textarea_length").html(remain+"자");
+                   $("#textarea_input").html(inputLength+" /");
+               }); 
+               $('#input_update').keyup(function(){
+                   var upLength = $(this).val().length;
+                    var remain = ${q.qaCommentContent} - upLength;
+                    $("#textarea_uplength").html(remain+"자");
+                    $("#textarea_update").html(upLength+" /");
+                }); 
                  $("#like_full").click(function(){
                  	var s_no = ${s.s_no};
                  	
@@ -605,6 +697,23 @@
 			});     
 	    });		
 		};
+		$("#viewQna").click(function(){
+			$('.layer_popup').show();
+			$('.hostpopupMask').show();
+		});
+		$(".popcencle").click(function(){
+			$('.layer_popup').hide();
+			$('.hostpopupMask').hide();
+		});
+		$("#qaupdate").click(function(){
+			$('.layer_popup_up').show();
+			$('.hostpopupMaskUp').show();
+		});
+		$(".popcencleUp").click(function(){
+			$('.layer_popup_up').hide();
+			$('.hostpopupMaskUp').hide();
+		});
+		
 </script>		
     <jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
