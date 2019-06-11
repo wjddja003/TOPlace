@@ -356,7 +356,7 @@
                     	</a>
                     	</div>
                     	
-						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${s.s_placeName}</p>
+						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;&nbsp;${s.s_placeName}</p>
 						
 						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span style="font-weight:100;">${s.addressCut}</span>
 						<div style="font-weight:100;width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${s.s_placeTag}</div>
