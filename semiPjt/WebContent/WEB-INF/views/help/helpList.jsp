@@ -160,9 +160,10 @@ prefix="c" %>
                 </table>
             <div><%= pd.getPageNavi() %></div>
             <div>
-            	<c:if test="${sessionScope.User.userGrade == '관리자'}">
-                	<button class="reviewBtn" href="/helpWrite" style="color:#f69b02; border-color:#f69b02">글쓰기</button>
-                </c:if>
+
+
+                <button class="reviewBtn"  style="color:#f69b02; border-color:#f69b02"><a href="/helpWrite"style="color:#f69b02"> 글쓰기</a></button>
+
             </div>
         </div>
         </div>
