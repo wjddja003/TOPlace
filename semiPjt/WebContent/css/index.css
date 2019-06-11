@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 /*@font-face {
  font-family: 'NanumSquareRoundR';
  src: url(images/NanumSquareRoundR.eot);
@@ -168,6 +168,8 @@ header {
     position: absolute;
     left: 0;
     height: 445px;
+    top: 0;
+    z-index: 9;
 }
 .header.realtime:hover .header_ranking{
     display: inline-block;
