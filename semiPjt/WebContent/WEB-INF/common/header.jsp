@@ -28,7 +28,7 @@
 	        </div>
 	        <div class="header realtime" style="width:9.6%; height:100px; text-align: left; position: relative;">
 	        	<div class="realtimeDiv">
-                	<span id="ranking" style="color:#605f5d; height: 20px; line-height: 35px;">실시간</span>
+                	<span id="ranking" style="height: 20px; line-height: 35px;">실시간</span>
           		</div>
                 <div class="header_ranking">
                     <div class="header_ranking_h" style="text-align: center;">

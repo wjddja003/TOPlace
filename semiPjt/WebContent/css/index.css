@@ -13,12 +13,12 @@ ol,ul{
     margin: 0;
 }
 a{
-	text-decoration: none;
 	color:#605f5d;
 }
 a:hover{
-	text-decoration:none;
+	
 	color:#f69b02;
+	text-decoration:none;
 }
 #navi-bar li a {
 	color: #605f5d;
@@ -30,6 +30,9 @@ a:hover{
 	font-size: 20px;
 	cursor: pointer;
     color: #f69b02;
+}
+#navi-bar li{
+	margin: 0 20px 0 20px;
 }
 header {
 	width: 100%;
@@ -103,11 +106,6 @@ header {
 	
 }
 
-.realtime span:hover {
-	font-size: 18px;
-	cursor: pointer;
-    color: #f69b02;
-}
 .search span:hover {
 	font-size: 20px;
 	cursor: pointer;
@@ -145,7 +143,6 @@ header {
     height: 300px;
     z-index: 9;
 }
-
 .realtimeDiv{
 	width:100%; 
 	height:40px; 
@@ -154,13 +151,27 @@ header {
 	top:30px;
 	margin-top: 30px;
 	padding-left: 10px;
-	
 }
-#ranking a{
+#rank{
+	color: #605f5d;
+	font-size:16px;
+	text-decoration: none;
+}
+.ranking{
+	color: #605f5d;
 	font-size:16px;
 }
 .realtime{
     position: relative;
+}
+.realtime span:hover {
+	font-size: 18px;
+	cursor: pointer;
+    color: #f69b02;
+    text-decoration: none;
+}
+.realtime a:hover {
+    text-decoration: none;
 }
 .header_ranking ul li{
     list-style: none;
