@@ -64,8 +64,26 @@
                             	<a href="#">#${t}</a>
                             </li>
                          </c:forTokens>
-              
+              			
                         </ul>
+                        <!-- 마커 -->
+                        <div style="position:relative;">
+                        <div id="declare">신고하기</div>
+                        <div id="declare_content">
+                        	<div id="declare_header">신고하기</div>
+                        	<form method="post" action="/insertDeclare">
+                        		<button type="button" class="declare_type">공간 정보 허위 신고</button>
+                        		<button type="button" class="declare_type">불친절한 호스트</button>
+                        		<button type="button" class="declare_type">환불규정 미준수</button>
+                        		<br><br>
+                        		<input type="hidden" name="sNo" value="${s.s_no }">
+                        		<input id="declareType" type="hidden" name="declareType">
+                        		신고자 : <input class="declare_name" type="text" name="userName" value="${sessionScope.User.userName }" readonly="readonly"><br><br>
+                        		신고내용 : <input class="declare_name" type="text" name="declareContent" size="40" placeholder="신고내용을 간단히 작성해주세요."><br><br>
+                        		<button type="submit" id="declareBtn">신고하기</button>
+                        	</form>
+                        </div>
+                        </div>
                      </div>
                      <!--viewpage_section Fin-->
                     <div class="viewpage_cover">
@@ -715,6 +733,15 @@
     	   console.log($('.CommentNo').val());
     	   $('#layer_popup_Comment').show();
     	   $('.hostpopupMask').show();
+       });
+       $('#declare').click(function(){
+    	   //마커
+    	   $('#declare_content').toggle();
+       });
+       $('.declare_type').click(function(){
+    	   $('.declare_type').removeClass("change_btn");
+    	   $(this).toggleClass("change_btn");
+    	   $('#declareType').val($(this).text());
        });
         </script>
         <script>
