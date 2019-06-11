@@ -10,20 +10,11 @@ public class QaComment {
 	private Date qaCommentDate;
 	private int qaCommentRef;
 	private String placeName;
-	public QaComment(int qaCommentNo, String qaCommentWriter, String qaCommentContent, int qaRef, Date qaCommentDate,
-			int qaCommentRef) {
-		super();
-		this.qaCommentNo = qaCommentNo;
-		this.qaCommentWriter = qaCommentWriter;
-		this.qaCommentContent = qaCommentContent;
-		this.qaRef = qaRef;
-		this.qaCommentDate = qaCommentDate;
-		this.qaCommentRef = qaCommentRef;
-	}
 	public QaComment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public QaComment(int qaCommentNo, String qaCommentWriter, String qaCommentContent, int qaRef, Date qaCommentDate,
 			int qaCommentRef, String placeName) {
 		super();
