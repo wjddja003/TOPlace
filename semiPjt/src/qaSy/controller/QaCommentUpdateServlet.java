@@ -37,7 +37,7 @@ public class QaCommentUpdateServlet extends HttpServlet {
 		int qaCommentNo = Integer.parseInt(request.getParameter("qaCommentNo"));
 		QaComment q = new QaService().selectOne(qaCommentNo);
 		request.setAttribute("qaComment", q);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qaCommentUpdate.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qaView.jsp");
 		rd.forward(request, response);
 	}
 
