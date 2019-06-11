@@ -1,6 +1,7 @@
 package qaSy.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,8 +38,9 @@ public class QaCommentUpdateServlet extends HttpServlet {
 		int qaCommentNo = Integer.parseInt(request.getParameter("qaCommentNo"));
 		QaComment q = new QaService().selectOne(qaCommentNo);
 		request.setAttribute("qaComment", q);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qaView.jsp");
-		rd.forward(request, response);
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(q);
 	}
 
 	/**

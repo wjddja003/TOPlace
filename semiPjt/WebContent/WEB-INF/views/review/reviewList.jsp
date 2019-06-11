@@ -113,5 +113,6 @@
             </div>
         </div>
     </section>
+    <jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
 </html>
