@@ -106,15 +106,16 @@ public class ReviewDao {
 		}
 		return list;
 	}
-	public ArrayList<Review> selectRList(Connection conn, int start, int end){
+	public ArrayList<Review> selectRList(Connection conn, int start, int end,int userNo){
 		ArrayList<Review> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectRList");
+		String query = "select * from (select rownum as rnum, m.* from (select r.*,s_placename from review r join place p on (r.review_sno = p.S_no) where s_no = ? order by review_date desc) m) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Review>();
 			while(rset.next()) {
@@ -127,6 +128,7 @@ public class ReviewDao {
 				r.setFilename(rset.getString("filename"));
 				r.setReviewStar(rset.getInt("review_star"));
 				r.setReviewDate(rset.getDate("review_date"));
+				r.setPlaceName(rset.getString("s_placename"));
 				list.add(r);
 			}
 		} catch (SQLException e) {
