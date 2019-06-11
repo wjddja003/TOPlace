@@ -26,10 +26,10 @@
 	                <li class="navi-li"><a href="/insertSpaceCheck">공간등록</a></li>
 	            </ul>
 	        </div>
-	        <div class="header realtime" style="width:9.6%;">
+	        <div class="header realtime" style="width:9.6%; text-align: left">
                 <span id="ranking" style="color:#605f5d; height: 20px;">실시간</span>
                 <div class="header_ranking">
-                    <div class="header_ranking_h">
+                    <div class="header_ranking_h" style="text-align: center;">
                         <p>실시간 급상승 검색어</p>
                     </div>
                     <ul>
@@ -94,7 +94,7 @@
      		}
      	 	$('#ranking').html("<a href='/selectOneSpace?S_no="+rankingArr2[i]+"' id='rank'>"+rankingArr1[i]+"</a>");
      	 	 $('#rank').each(function(){
-     	    	var length = 10;
+     	    	var length = 13;
      	    	$(this).each(function(){
      	    		if($(this).text().length >= length){
      	    			$(this).text($(this).text().substr(0,length)+'...');
