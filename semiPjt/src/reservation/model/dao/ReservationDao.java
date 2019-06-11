@@ -15,7 +15,7 @@ public class ReservationDao {
 	public int insertReservation(Connection conn,Reservation r) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "insert into reservation values(r_no_SEQ.nextval,?,?,?,?,?,?,?,?,?,?,?)";
+		String query = "insert into reservation values(r_no_SEQ.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, r.getS_no());
@@ -23,12 +23,16 @@ public class ReservationDao {
 			pstmt.setString(3, r.getReservationName());
 			pstmt.setString(4, r.getReservationDay());
 			pstmt.setString(5, r.getReservationBooker());
-			pstmt.setString(6, r.getReservationTime());
-			pstmt.setInt(7, r.getReservationPerson());
-			pstmt.setString(8, r.getReservationOption());
-			pstmt.setString(9, r.getPaymentId());
-			pstmt.setInt(10, r.getPaymentPrice());
-			pstmt.setString(11, r.getPaymentCard());
+			pstmt.setString(6, r.getReservationPhone());
+			pstmt.setString(7, r.getReservationPhone1());
+			pstmt.setString(8, r.getReservationPhone2());
+			pstmt.setString(9, r.getReservationTime());
+			pstmt.setInt(10, r.getReservationPerson());
+			pstmt.setString(11, r.getReservationOption());
+			pstmt.setString(12, r.getReservationRequest());
+			pstmt.setString(13, r.getPaymentId());
+			pstmt.setInt(14, r.getPaymentPrice());
+			pstmt.setString(15, r.getPaymentCard());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

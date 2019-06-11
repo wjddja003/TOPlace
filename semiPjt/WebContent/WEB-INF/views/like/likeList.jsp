@@ -126,7 +126,7 @@
                     	<a href="/selectOneSpace?S_no=${l.sNo}"><img class="spaceImg"src="/upload/space/${l.img}"></a><br>
                     	</div>
                         <div>
-                    	   <h4 class="placeName">${l.placeName }</h4>
+                    	   <h4 class="placeName" style="color:#f69b02 ">${l.placeName }</h4>
                         </div><br>
                     	<div class="likeContent">
                             <div>
@@ -155,6 +155,6 @@
             </div>
         </div>
     </section>
-    
+    <jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
 </html>

@@ -33,16 +33,6 @@
                         <p>실시간 급상승 검색어</p>
                     </div>
                     <ul>
-                        <li><a href="#"><span>1.</span> 윤주공간</a></li>
-                        <li><a href="#"><span>2.</span> 정엄공간</a></li>
-                        <li><a href="#"><span>3.</span> 수용공간</a></li>
-                        <li><a href="#"><span>4.</span> 윤호공간</a></li>
-                        <li><a href="#"><span>5.</span> 창직공간</a></li>
-                        <li><a href="#"><span>6.</span> 영훈공간</a></li>
-                        <li><a href="#"><span>7.</span> 동천공간</a></li>
-                        <li><a href="#"><span>8.</span> 투플레이스</a></li>
-                        <li><a href="#"><span>9.</span> 이클립스</a></li>
-                        <li><a href="#"><span>10.</span> 프로젝트</a></li>
                     </ul>
                 </div>
             </div>
@@ -80,11 +70,12 @@
   	    for(var i=0; i<data.length; i++){
   	    	var spaceName = decodeURIComponent(data[i].S_placeName);
   	    	var spaceNo = decodeURIComponent(data[i].S_no);
-  	    	ranking1 =(i+1)+"위 "+spaceName;
+  	    	ranking1 =(i+1)+". "+spaceName;
   	    	ranking2 = spaceNo;
   	    	rankingArr1[i] = ranking1;
   	    	rankingArr2[i] = ranking2;
-  	    }
+  	    	$('.header_ranking ul').html($('.header_ranking ul').html()+"<li><a href='/selectOneSpace?S_no="+rankingArr2[i]+"' >"+rankingArr1[i]+"</a></li>");
+  	    	}
   	   },error : function(xhr, status, error) {
   	   }
   	});
@@ -104,7 +95,6 @@
      	    });
      	  	i++;	  
      	  }, 2000);			//2초마다 갱신
-
     </script>
     
 

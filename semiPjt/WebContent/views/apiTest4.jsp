@@ -6,6 +6,9 @@
     pageEncoding="UTF-8"%>   
     <%
     ArrayList<Space> list = (ArrayList<Space>)request.getAttribute("list");
+    	
+    	list = new ArrayList<Space>();
+    			
     
     %>
     
@@ -23,13 +26,13 @@
 	<script type="text/javascript" src="MarkerClustering.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
-	<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+	<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%> 	
 </head>
 <body>
 	<section>
 		<div class="container" style="color: black;">
 			<h1> 네이버 지도 API 클래스화 및  이미지 스와이프  </h1>
-			<div id="map" style="width: 100%; height: 500px;"></div>	
+			<div id="map" style="width: 100%; height: 800px;"></div>	
 	
 		</div>
 	</section>
@@ -50,15 +53,7 @@
      </style>
 	 <script> //네이버지도 script		
 	 	
-	 ///////////////////////////////////////이미지  여기다 이미지 DB 
-		var img = {
-			
-		
-		
-			 }
-			 
-			 
-	 ///////////////////////////////////////
+	
 		window.onload = function () { 
 			
 			 var htmlMarker1 = {
@@ -107,8 +102,9 @@
 	    		
 				
 /////좌표변환값 넣기 po
+
 			 po = {
-					"이ㅏㄴ우힌우린ㅇㄴ이ㅏ룬이라ㅜㄴㅇ" : [x,y], 
+					"흠" : [x,y], 
 				
 					
 					

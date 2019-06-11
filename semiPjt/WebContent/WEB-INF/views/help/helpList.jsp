@@ -167,6 +167,7 @@ prefix="c" %>
         </div>
         </div>
 	</section>
+	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 		<script>
         var count = 0;
 		$(".c_tr").click(function(){

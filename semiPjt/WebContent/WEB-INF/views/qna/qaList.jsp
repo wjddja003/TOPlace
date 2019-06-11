@@ -130,5 +130,6 @@
                 <a class="btn btn-outline-primary btn-sm" href="/qaCommentInsert"style="color:#f69b02; border-color:#f69b02">글쓰기</a>
         </div>
 	</section>
+	
 </body>
 </html>
