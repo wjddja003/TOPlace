@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$('.placeType').click(function() {
 		var index = $('.placeType').index(this);
 		var type = $('.placeType').eq(index).text();
-		if(index<12){
+		if(index>-1 && index<12){
 			inputType = 1;			
 		}else if(index>=12 && index<20){
 			inputType = 2;
@@ -30,7 +30,7 @@ $(document).ready(function(){
 								index = i;
 							}
 						}
-						if(index<12){
+						if(index>-1 && index<12){
 							inputType = 1;			
 						}else if(index>=12 && index<20){
 							inputType = 2;
@@ -60,7 +60,7 @@ $(document).ready(function(){
 					index = i;
 				}
 			}
-			if(index<12){
+			if(index>-1 && index<12){
 				inputType = 1;			
 			}else if(index>=12 && index<20){
 				inputType = 2;
@@ -69,3 +69,4 @@ $(document).ready(function(){
 		}
 	});
 });
+

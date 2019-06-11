@@ -69,9 +69,13 @@
               			
                         </ul>
                         <!-- 마커 -->
-                        <div style="position:relative;">
+                        <div id="declare_outline" style="position:relative;">
                         <c:if test="${sessionScope.User != null}">
-                        	<div id="declare">신고하기</div>
+                        	<div id="declare">
+                        		<img src="../img/icon_declare.png" height="23px" width="23px;" style="margin-bottom: 5px;">
+                        	 	<img src="../img/icon_declare2.png" height="23px" width="23px;" style="margin-bottom: 5px;">
+                        	 	신고
+                        	</div>
                         </c:if>
                         <div id="declare_content">
                         	<div id="declare_header">신고하기</div>
@@ -85,7 +89,8 @@
                         		<input id="declareType" type="hidden" name="declareType">
                         		신고자 : <input class="declare_name" type="text" name="userName" value="${sessionScope.User.userName }" readonly="readonly"><br><br>
                         		신고내용 : <input class="declare_name" type="text" name="declareContent" size="40" placeholder="신고내용을 간단히 작성해주세요."><br><br>
-                        		<button type="button" id="declareBtn">신고하기</button>
+                        		<button type="button" class="declareBtn" id="declareBtn">신고하기</button>
+                        		<button type="button" class="declareBtn" id="noneBtn">취소</button>
                         	</form>
                         </div>
                         </div>
@@ -134,10 +139,10 @@
                         </div>
                         <div class="viewpage_photo2">
                         	<div id="viewpage_photo2_l">
-                                <img src="/upload/space/<%=img2[1] %>" width="384px;">
+                                <img src="/upload/space/<%=img2[1] %>" width="384px;" height="255px;">
                         	</div>
                         	<div id="viewpage_photo2_r">
-                                <img src="/upload/space/<%=img2[2] %>" width="383px;">
+                                <img src="/upload/space/<%=img2[2] %>" width="383px;" height="255px;">
                         	</div>
                         </div>
                         <div class="viewpage_textbox">
@@ -246,8 +251,8 @@
                                     	<a style="text-decoration:none; color:#f69b02; border-color:#f69b02;" class="qaupdate btn btn-outline-primary btn-sm"><span>수정</span></a>
                                     	<button class="btn btn-outline-primary btn-sm" style="color:#f69b02; border-color:#f69b02;"><a href="/qaViewpageDelete?S_no=${s.s_no }&qaCommentNo=${q.qaCommentNo }" style="color:#f69b02;">삭제</a></button>
                                     	</c:if>
+                                    	<input type="hidden" class="qaNo" value="${q.qaCommentNo}">
                                     	<c:if test="${s.s_hostNum == host.hostNo}">
-                                    		<input type="hidden" class="qaNo" value="${q.qaCommentNo}">
                                     		<button type="button" class="viewQnaComment btn btn-outline-primary btn-sm" style="color:#f69b02; border-color:#f69b02;">답글달기</button>
                                     	</c:if>
                                     	</div>
@@ -263,7 +268,7 @@
                                             	<span class="pf_img"><img src="/upload/hostProfile/${host.hostFile}"></span>
                                             	</c:if> 
                                                 <p class="p_tit_reply">
-                                                    <em>${q.qaCommentWriter}</em>님의 댓글
+                                                    <em>${qq.qaCommentWriter}</em>님의 댓글
                                                 </p>
                                                 <p class="p_review" style=" word-break:break-all">
                                                 	   ${qq.qaCommentContent}
@@ -272,6 +277,13 @@
                                                     <p class="time_info">${qq.qaCommentDate}</p>
                                                 </div>
                                             </div>
+                                            <div style="text-align: right;">
+                                    	<c:if test="${sessionScope.User.userId == qq.qaCommentWriter}">
+                                    	<a style="text-decoration:none; color:#f69b02; border-color:#f69b02;" class="qaupdate btn btn-outline-primary btn-sm"><span>수정</span></a>
+                                    	<button class="btn btn-outline-primary btn-sm" style="color:#f69b02; border-color:#f69b02;"><a href="/qaViewpageDelete?S_no=${s.s_no }&qaCommentNo=${qq.qaCommentNo }" style="color:#f69b02;">삭제</a></button>
+                                    	</c:if>
+                                    	<input type="hidden" class="qaNo" value="${qq.qaCommentNo}">      
+                                    	</div>
                                            </c:if>
                                         </c:forEach> 
                                         </c:forEach>
@@ -447,9 +459,11 @@
 					</div>
 				</div>
                 <div class="qna_p">
-				    <p>
-				    답글은 공개 상태로만 등록하실 수 있습니다.
+				   <div class="view_warning_img">
+				   <img src="../img/icon_warning.png"> <p>
+				    질문은 공개 상태로만 등록하실 수 있습니다.
                     </p>
+                    </div>
 			     </div>
                 <div class="qnaBtns">
 <!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
@@ -463,7 +477,7 @@
 	<form action="/insertQa?S_no=${s.s_no }" method="post">
     <div class="layer_popup" class="_noProfileCheckLayout" style="display:none;position:fixed;">
 			<div class="popup_wrap">
-                <div class="pop_header">                    
+                <div class="pop_header">                     
 					<p>질문 작성하기</p>
                     <button type="button"><a href="javascript:void(0);" class="popcencle" style="color:#fff; text-decoration: none;">X</a></button>
                 </div>
@@ -477,9 +491,11 @@
 					</div>
 				</div>
                 <div class="qna_p">
-				    <p>
+				   <div class="view_warning_img">
+				   <img src="../img/icon_warning.png"> <p>
 				    질문은 공개 상태로만 등록하실 수 있습니다.
                     </p>
+                    </div>
 			     </div>
                 <div class="qnaBtns">
 <!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
@@ -497,6 +513,7 @@
     <div class="layer_popup_up" class="_noProfileCheckLayout" style="display:none;position:fixed;">
 			<div class="popup_wrap">
                 <div class="pop_header">
+                	<input type="hidden" name="qaCommentNo" class="cNo" value="">  
                 	<input type="hidden" name="S_no" value="${s.s_no}">                    
 					<p>질문 작성하기</p>
                     <button type="button" class="popcencleUP">X</button>
@@ -511,9 +528,11 @@
 					</div>
 				</div>
                 <div class="qna_p">
+                    <div class="view_warning_img">
 				   <img src="../img/icon_warning.png"> <p>
 				    질문은 공개 상태로만 등록하실 수 있습니다.
                     </p>
+                    </div>
 			     </div>
                 <div class="qnaBtns">
 <!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
@@ -749,7 +768,6 @@
     	   $('.hostpopupMask').show();
        });
        $('#declare').click(function(){
-    	   //마커
     	   $('#declare_content').toggle();
        });
        $('.declare_type').click(function(){
@@ -757,8 +775,11 @@
     	   $(this).toggleClass("change_btn");
     	   $('#declareType').val($(this).text());
        });
+       $('#noneBtn').click(function(){
+    	   $('#declare_content').css("display","none");
+       });
        $('#declareBtn').click(function(){
-    	   console
+    	   
     	   var params = $('#declare_form').serialize();
            $.ajax({
                url:"/insertDeclare",
@@ -771,6 +792,7 @@
                success:function(data){
             	   var result = data;
         			if(result==1){
+        				$('#declare_content').css("display","none");
         				$("#viewpage_alert").slideDown(700);
         				var offset = $("#viewpage_alert").offset();
         		        $('html, body').animate({scrollTop : offset.top}, 400);
@@ -779,8 +801,8 @@
                     	$("#viewpage_alert").delay(1300);
                     	$("#viewpage_alert").slideUp(700); 
                     	$("#viewpage_alert p").html("신고접수가 완료되었습니다.");//마커
-                    	$('#declare_content').css("display","none");
         			}else{
+        				$('#declare_content').css("display","none");
         				$("#viewpage_alert").slideDown(700);
         				var offset = $("#viewpage_alert").offset();
         		        $('html, body').animate({scrollTop : offset.top}, 400);
@@ -789,11 +811,12 @@
                     	$("#viewpage_alert").delay(1300);
                     	$("#viewpage_alert").slideUp(700);
                     	$("#viewpage_alert p").html("신고접수 실패");
-                    	$('#declare_content').css("display","none");
+                    	
         			}
                }
            });
        });
+       
         </script>
         <script>
 	window.onload = function () { 
@@ -855,8 +878,9 @@
 			$('.hostpopupMask').hide();
 		});
 		$(".qaupdate").click(function(){
+			$('.cNo').val($(this).next().next().val());
 			$('.layer_popup_up').show();
-			$('#qaUpdateForm').attr('action',"/qaViewpageUpdateEnd?qaCommentNo="+$('.qaNo').val());
+			$('#qaUpdateForm').attr('action',"/qaViewpageUpdateEnd");
 			$('#input_update').html($(this).parents('.rlist').find(".p_review").html());
 			$('.hostpopupMaskUp').show();
 		});

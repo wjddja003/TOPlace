@@ -14,6 +14,7 @@ public class QaComment {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public QaComment(int qaCommentNo, String qaCommentWriter, String qaCommentContent, int qaRef, Date qaCommentDate,
 			int qaCommentRef, String placeName) {
 		super();

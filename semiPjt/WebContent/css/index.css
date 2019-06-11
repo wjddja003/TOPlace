@@ -1,32 +1,5 @@
 ﻿@charset "UTF-8";
-/*@font-face {
- font-family: 'NanumSquareRoundR';
- src: url(images/NanumSquareRoundR.eot);
- src: url(images/NanumSquareRoundR?#iefix) format('embedded-opentype'),
-      url(images/NanumSquareRoundR.woff2) format('woff2'),
-      url(images/NanumSquareRoundR.woff) format('woff'),
-      url(images/NanumSquareRoundR.ttf) format('truetype');
-}
-@font-face {
- font-family: 'NanumSquareRoundL';
- src: url(images/NanumSquareRoundL.eot);
- src: url(images/NanumSquareRoundL.eot?#iefix) format('embedded-opentype'),
-      url(images/NanumSquareRoundL.woff2) format('woff2'),
-      url(images/NanumSquareRoundL.woff) format('woff'),
-      url(images/NanumSquareRoundL.ttf) format('truetype');
-}
-*/
-/*@font-face { font-family: 'HangeulNuri-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/HangeulNuri-Bold.woff') format('woff'); font-weight: normal; font-style: normal; }
-@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
-*/
 
-/*
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-
-* {
-	font-family: 'Noto Sans KR', sans-serif;
-}
-*/
 @font-face { font-family: 'Arita-dotum-Medium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff') format('woff'); font-weight: normal; font-style: normal; }
 *{
 	font-family: 'Arita-dotum-Medium';
@@ -95,10 +68,11 @@ header {
 }
 
 #header-search {
+	border: 2px solid #f69b02;
 	background-color: white;
 	display: none;
 	width: 100%;
-	height: 700px;
+	height: 600px;
 	position: absolute;
 	top: 100px;
 	z-index: 10;
@@ -171,15 +145,7 @@ header {
     height: 300px;
     z-index: 9;
 }
-/*
-.header.realtime:hover .header_ranking{
-    display: block;
-    position: absolute;
-    left: -30;
-    height: 300px;
-    top: 100;
-    z-index: 9;
-}*/
+
 .realtimeDiv{
 	width:100%; 
 	height:40px; 
