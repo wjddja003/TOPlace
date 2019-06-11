@@ -252,7 +252,46 @@ section {
 }
 /*main section fin*/
 footer {
-	 height: 200px;
+	 height: 340px;
 	 margin-top: 0px;
 	 background: #3e3e3e;  
+	 
+	 
+}
+.footer_content{
+	width: 1160px;
+	height:100%;
+	margin: 0 auto;
+}
+.footer_head{
+	width:100%; 
+	height:40%; 
+	border-bottom:1px solid #ccc;
+	clear:left;
+}
+.service_info{
+	width:12%;
+	height:70%;
+	margin-top:20px;
+	color:#ccc;
+	text-align: center;
+	line-height: 80px;
+	cursor:pointer;
+}
+.footer_float{
+	float:left;
+}
+.footer_main{
+	width:100%; 
+	height:60%; 
+	margin-top:20px;
+}
+.footer_main_content{
+	color:#ccc;
+	line-height: 25px;
+}
+.footer_bottom{
+	color:#ccc;
+	text-align: right;
+	opacity: 0.7;
 }

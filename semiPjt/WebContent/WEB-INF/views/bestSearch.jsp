@@ -18,14 +18,10 @@
 		.totalInnerBox{
 			margin: 10px 5px;
 			width:32%;
-			height:360px;
+			height:410px;
 			padding:5px;
 			cursor: pointer;
 			float:left;
-			
-			border: 2px solid #183058;
-			border-radius:3%;
-			
 		}
 		.searchInfo{
 			width:100%;
@@ -45,10 +41,10 @@
 			<c:forEach items='${hitList }' var='hits'>
 				<div class='totalInnerBox'>
 					<input type="hidden" value='${hits.s_no }'>
-					<div style='height:200px;'>
-						<img src='/upload/space/${hits.s_img1}' width="100%" height="200px">
+					<div style='height:250px;'>
+						<img src='/upload/space/${hits.s_img1}' width="100%" height="250px">
 					</div>
-					<div style='height:120px;'>
+					<div style='height:140px; padding-left:5px;border:1px solid #f69b02;'>
 						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${hits.s_placeName}</p>
 						
 						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span>${hits.addressCut}</span>
@@ -57,7 +53,7 @@
 							&nbsp;<span style="font-size:22px; color:#f69b02;">￦ ${hits.s_price1}</span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${hits.s_type eq 'day' }">
-							<span style="font-size:22px; color:#f69b02;">￦ ${hits.s_price1}</span><span> 원/일</span>
+							&nbsp;<span style="font-size:22px; color:#f69b02;">￦ ${hits.s_price1}</span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>
