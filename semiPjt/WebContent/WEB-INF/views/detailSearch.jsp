@@ -376,6 +376,7 @@
 		</div>
 	</div>
 	</section>
+	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		var userNo = '${sessionScope.User.userNo}';

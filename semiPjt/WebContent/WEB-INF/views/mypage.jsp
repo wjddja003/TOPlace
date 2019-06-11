@@ -100,10 +100,11 @@
             border-bottom: none;
             border-left: none;
             border-right: none;
+            
         }
         #aside-login_b a{
             text-decoration: none;
-            color: gray;
+            color:#f69b02;
             position: absolute;
             top: 40px;
             left: 120px;
