@@ -71,7 +71,11 @@
                         <!-- 마커 -->
                         <div style="position:relative;">
                         <c:if test="${sessionScope.User != null}">
-                        	<div id="declare">신고하기</div>
+                        	<div id="declare">
+                        		<img src="../img/icon_declare.png" height="23px" width="23px;" style="margin-bottom: 5px;">
+                        	 	<img src="../img/icon_declare2.png" height="23px" width="23px;" style="margin-bottom: 5px;">
+                        	 	신고
+                        	</div>
                         </c:if>
                         <div id="declare_content">
                         	<div id="declare_header">신고하기</div>

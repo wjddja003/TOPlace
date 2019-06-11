@@ -667,17 +667,21 @@ a{
 	border:1px solid red;
 	margin-left:670px;
 	margin-bottom:10px;
-	width:100px;
-	height:50px;
+	width:80px;
+	height:30px;
 	border-radius: 10px;
 	color:red;
 	text-align: center;
-	line-height: 50px;
-	font-size:20px;
+	line-height: 30px;
+	font-size:16px;
 	cursor:pointer;
 	position:absolute;
-	top:-55px;
+	top:-60px;
+	left:20px;
 }
+#declare img:last-child{display:none} 
+#declare:hover img:first-child{display:none} 
+#declare:hover img:last-child{display:inline-block}
 #declare:hover{
 	color:white;
 	background-color: red;
