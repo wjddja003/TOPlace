@@ -178,24 +178,24 @@ a{
         list-style: none;      
         
     }
+
 .viewpage_reservationbtn{
+    color: #fff;
+    height: 50px;
+    line-height: 45px;
+    font-size: 16px;
     width: 370px;
     height: 50px;
     text-align: center;
     background: #f69b02;
-}
-.viewpage_reservationbtn a{
-    color: #fff;
-    height: 50px;
-    width: 300px;
-    line-height: 45px;
-    font-size: 16px;
+    border:none;
 }
 .viewpage_reservationbtn:hover{
     background-color: #183058;
+     color: #fff;
 }
-.viewpage_reservationbtn a:hover{
-    color: #fff;
+.viewpage_reservationbtn:hover{
+   
 }
     .viewpage_photo2{
         width: 773px;
