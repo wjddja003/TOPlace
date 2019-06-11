@@ -99,7 +99,7 @@
                     <div class="viewpage_cover">
                     <div class="viewpage_left">
                         <div class="viewpage_photo">
-                            <img src="/upload/space/${s.s_img1 }" width="773px;" height="255px;">
+                            <a href="#"><img src="/upload/space/${s.s_img1 }" width="773px;"></a>
                         </div>
                         <div class="viewpage_textbox">
                             <h2>${s.s_placeIntroduce1 }</h2>
@@ -139,10 +139,10 @@
                         </div>
                         <div class="viewpage_photo2">
                         	<div id="viewpage_photo2_l">
-                                <img src="/upload/space/<%=img2[1] %>" width="384px;">
+                                <img src="/upload/space/<%=img2[1] %>" width="384px;" height="255px;">
                         	</div>
                         	<div id="viewpage_photo2_r">
-                                <img src="/upload/space/<%=img2[2] %>" width="383px;">
+                                <img src="/upload/space/<%=img2[2] %>" width="383px;" height="255px;">
                         	</div>
                         </div>
                         <div class="viewpage_textbox">
