@@ -251,7 +251,13 @@
 	  top:3px;
 	  opacity:1;
 	  box-shadow:rgba(0,0,0,0.5) 1px 1px 0px; 
-}
+	}
+	.comment a{
+		float: left;
+	}
+	.qdate{
+		font-size: 13px;
+	}
 </style>
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -275,11 +281,11 @@
                     <div class="qa_no">
                     	<input type="hidden" class="qNoHidden" value="${q.qaCommentNo }">
                         <div class="comment">
-                           	 <a href="/selectOneSpace?S_no=${q.qaRef}">공간명 :${q.placeName }</a><br>
-                            <span class="text">${q.qaCommentContent }</span><br>
+                           	 <a href="/selectOneSpace?S_no=${q.qaRef}"style=color:#f69b02;font-size:14px;>공간명 : ${q.placeName }</a><br>
+                            <a class="text">${q.qaCommentContent }</a><br>
                     	</div>
                         <div class="Q_btn">
-                        ${q.qaCommentDate }<br>
+                        <a class="qdate" style="color:#605f5d">${q.qaCommentDate }</a><br>
                             <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02" ><a href="/qaCommentDelete?qaCommentNo=${q.qaCommentNo }"style="color:#f69b02">삭제</a></button>
                             <button onclick="updateFn(this);" class="reviewBtn qaupdate" style="color:#f69b02; border-color:#f69b02" >수정</button>
                         </div>

@@ -439,7 +439,7 @@ input[type="checkbox"]:checked + label span {
 			               			<span style="font-size:18px; line-height: 100%;"> 예약인원</span><span style="color:black; margin-left:20px;">${s.s_people}명</span>
 			               		</div>
 			               		<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
-	               					<span style="font-size:18px; line-height: 100%;"> 연락처&nbsp;&nbsp;&nbsp;</span><span style="color:black; margin-left:20px;">${s.s_phone2}&nbsp;&nbsp;${s.s_email}</span>
+	               					<span style="font-size:18px; line-height: 100%;"> 연락처&nbsp;&nbsp;&nbsp;</span><span style="color:black; margin-left:20px;">${fn:substring(s.s_phone2, 0, 3)}-${fn:substring(s.s_phone2, 3, 7)}-${fn:substring(s.s_phone2, 7, 11)}&nbsp;&nbsp;${s.s_email}</span>
 	               				</div>
 	               				<c:if test="${not empty s.s_placeWeb} ">
 	               				<div class="reservation_space_tit" style="width:100%; margin: 10px; border-bottom:1px solid #ccc; padding:10px">
@@ -1113,7 +1113,7 @@ input[type="checkbox"]:checked + label span {
                   var frm =  $("#payfrm");
             	  frm.submit();
                   } else {
-                     alert('에러내용 : ' + rsp.error_msg);
+                     alert(rsp.error_msg);
                   }
                });
          });

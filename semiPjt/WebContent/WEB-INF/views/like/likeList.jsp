@@ -77,6 +77,24 @@
 			clear:both;
 			height:290px;
 		}
+		.scale {
+			  transform: scale(1);
+			  -webkit-transform: scale(1);
+			  -moz-transform: scale(1);
+			  -ms-transform: scale(1);
+			  -o-transform: scale(1);
+			  transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+		}
+		.scale:hover {
+			  transform: scale(1.2);
+			  -webkit-transform: scale(1.2);
+			  -moz-transform: scale(1.2);
+			  -ms-transform: scale(1.2);
+			  -o-transform: scale(1.2);
+		}
+		.scale_img{
+			width:100%; height:250px; overflow:hidden;
+		}
 </style>
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -93,8 +111,10 @@
         	<c:if test="${sessionScope.User.userNo == l.userNo}">
                 <div class='totalInnerBox'>
 					<input class="inputNo" type="hidden" value='${l.sNo }'>
-					<div style='height:250px; '>
-						<img src='/upload/space/${l.img}' class="bossImg" width="100%" height="250px">
+					<div class="scale_img">
+						<div class="scale" style='height:250px; '>
+							<img src='/upload/space/${l.img}' class="bossImg" width="100%" height="250px">
+						</div>
 					</div>
 					<div style='height:460px; padding-left:5px;border:1px solid #f69b02;'>
 						<div style="float:left;">
