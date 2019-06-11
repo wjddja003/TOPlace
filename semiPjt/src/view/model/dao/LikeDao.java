@@ -118,16 +118,15 @@ public class LikeDao {
 		}
 		return result;
 	}
-	public ArrayList<LikeImg> selectList(Connection conn,int start,int end,int userNo){
+	public ArrayList<LikeImg> selectList(Connection conn,int userNo){
 		ArrayList<LikeImg> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum as rnum, m.* from (select l.*,S_img1,s_placeName,s_Price1,s_placeTag,address,s_type,S_kategorie2 from like_db l join place p on (l.s_no = p.S_no) where user_no = ? order by like_no desc) m) where rnum between ? and ?";
+		String query = "select l.*,S_img1,s_placeName,s_Price1,s_placeTag,address,s_type,S_kategorie2 from like_db l join place p on (l.s_no = p.S_no) where user_no = ? order by like_no desc";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, userNo);
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
+			
 			rset = pstmt.executeQuery();
 			list = new ArrayList<LikeImg>();
 			while(rset.next()) {

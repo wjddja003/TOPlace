@@ -1,12 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="helpSy.model.vo.Help" %>
-    <%@ page import="helpSy.model.vo.HelpPageData" %>
-    <%
-    	HelpPageData pd = (HelpPageData)request.getAttribute("pd");
-    	ArrayList<Help> list = pd.getList();
-    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -158,7 +152,7 @@ prefix="c" %>
                             </td>
                     </c:forEach>
                 </table>
-            <div><%= pd.getPageNavi() %></div>
+            <div>${pd.pageNavi }</div>
             <div>
                 <button class="reviewBtn"  style="color:#f69b02; border-color:#f69b02"><a href="/helpWrite"style="color:#f69b02"> 글쓰기</a></button>
             </div>
