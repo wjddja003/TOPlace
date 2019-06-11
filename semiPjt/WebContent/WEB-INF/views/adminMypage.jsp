@@ -145,18 +145,9 @@
             width: 30px;
             height: 30px;
         }
-        .dimmed{
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            padding-bottom: 50px;
-            background-color: rgba(0,0,0,0.5);
-        }
+      
     </style>
-     <div class="dimmed" style="display:block;"></div>
+    
     
     <div id="mypage">
        
