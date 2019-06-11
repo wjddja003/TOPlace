@@ -18,13 +18,10 @@
 		.totalInnerBox{
 			margin: 10px 5px;
 			width:32%;
+			height:410px;
 			padding:5px;
 			cursor: pointer;
 			float:left;
-			
-			border: 2px solid #f5ca6b;
-			border-radius:3%;
-			
 		}
 		.searchInfo{
 			width:100%;
@@ -39,24 +36,24 @@
 	<div class="section_content">
 	<div class="totalOutLine">
 		<div class="searchInfo">
-			<span id="selectVal" style="color:#f5ca6b;font-weight:bold;font-size:30px; border-bottom:4px solid #f5ca6b">조회수순 공간보기</span><span style="font-weight:100;font-size:20px;">  검색 결과</span>
+			<span id="selectVal" style="color:#f69b02;font-weight:bold;font-size:30px; border-bottom:4px solid #f69b02">조회수순 공간보기</span><span style="font-weight:100;font-size:20px;">  검색 결과</span>
 		</div>
 			<c:forEach items='${hitList }' var='hits'>
 				<div class='totalInnerBox'>
 					<input type="hidden" value='${hits.s_no }'>
-					<div style='height:200px;'>
-						<img src='/upload/space/${hits.s_img1}' width="100%" height="200px">
+					<div style='height:250px;'>
+						<img src='/upload/space/${hits.s_img1}' width="100%" height="250px">
 					</div>
-					<div style='height:120px;'>
-						<p style="font-size:20px; color:#f5ca6b; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${hits.s_placeName}</p>
+					<div style='height:140px; padding-left:5px;border:1px solid #f69b02;'>
+						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${hits.s_placeName}</p>
 						
 						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span>${hits.addressCut}</span>
 						<div style="width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${hits.s_placeTag}</div>
 						<c:if test="${hits.s_type eq 'time' }">
-							&nbsp;<span style="font-size:22px; color:#f5ca6b;">￦ ${hits.s_price1}</span><span style=""> 원/시간</span>
+							&nbsp;<span style="font-size:22px; color:#f69b02;">￦ ${hits.s_price1}</span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${hits.s_type eq 'day' }">
-							<span style="font-size:22px; color:#f5ca6b;">￦ ${hits.s_price1}</span><span> 원/일</span>
+							&nbsp;<span style="font-size:22px; color:#f69b02;">￦ ${hits.s_price1}</span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>
@@ -64,7 +61,7 @@
 		</div>
 		<div class="totalOutLine">
 		<div class="searchInfo">
-			<span id="selectVal" style="color:#f5ca6b;font-weight:bold;font-size:30px; border-bottom:4px solid #f5ca6b">좋아요순 공간보기</span><span style="font-weight:100;font-size:20px;">  검색 결과</span>
+			<span id="selectVal" style="color:#f69b02;font-weight:bold;font-size:30px; border-bottom:4px solid #f69b02">좋아요순 공간보기</span><span style="font-weight:100;font-size:20px;">  검색 결과</span>
 		</div>
 			<c:forEach items='${likeList }' var='likes'>
 				<div class='totalInnerBox'>
@@ -73,15 +70,15 @@
 						<img src='/upload/space/${likes.s_img1}' width="100%" height="200px">
 					</div>
 					<div style='height:120px;'>
-						<p style="font-size:20px; color:#f5ca6b; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${likes.s_placeName}</p>
+						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${likes.s_placeName}</p>
 						
 						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span>${likes.addressCut}</span>
 						<div style="width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${likes.s_placeTag}</div>
 						<c:if test="${likes.s_type eq 'time' }">
-							&nbsp;<span style="font-size:22px; color:#f5ca6b;">￦ ${likes.s_price1}</span><span style=""> 원/시간</span>
+							&nbsp;<span style="font-size:22px; color:#183058;">￦ ${likes.s_price1}</span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${likes.s_type eq 'day' }">
-							<span style="font-size:22px; color:#f5ca6b;">￦ ${likes.s_price1}</span><span> 원/일</span>
+							<span style="font-size:22px; color:#183058;">￦ ${likes.s_price1}</span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>
@@ -89,6 +86,7 @@
 		</div>
 	</div>
 </section>
+<jsp:include page="/WEB-INF/common/footer.jsp"/>
 		
 		<script type="text/javascript">
 		$(document).ready(function() {

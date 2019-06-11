@@ -371,11 +371,27 @@ input[type="checkbox"]:checked + label span {
 .viewpage_textbox{
 	clear:both;
 }
+#emptyValue{
+      width:100%;
+      height: 100px;
+      text-align: center;
+      letter-spacing: 8px;
+      word-spacing:15px;
+      background-color: #f69b02;
+      color:white;
+      font-size: 30px;
+      line-height: 100px;
+      display:none;
+      top:0px;
+      position:fixed;
+      z-index:99;
+   }
 /*reservation css fin*/
 </style>
 </head>
 <body>
    <jsp:include page="/WEB-INF/common/header.jsp" />
+   <div id="emptyValue"></div>
    <section style="background: white">
       <div class="section_content" style="background: white; clear:both;">
          <div class="reservation">
@@ -547,7 +563,7 @@ input[type="checkbox"]:checked + label span {
 	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
 	               			<label>
 	                        	<span style="font-size:18px; line-height: 100%; color:black;">연락처<span>&nbsp;*</span></span>
-	                        	<select name="phone" required="required">
+	                        	<select name="phone" required="required" id="phone">
 			                        <option>010</option>
 			                        <option>011</option>
 			                        <option>016</option>
@@ -555,7 +571,7 @@ input[type="checkbox"]:checked + label span {
 			                        <option>018</option>
 			                        <option>019</option>
 			                     </select>
-			                     - <input type="text" name="phone1" value="${sessionScope.User.userPhone.substring(3,7)}" required="required" maxlength="4">- <input type="text" name="phone2" value="${sessionScope.User.userPhone.substring(7,11)}" required="required" maxlength="4">
+			                     - <input type="text" name="phone1" class="phone1" value="${sessionScope.User.userPhone.substring(3,7)}" required="required" maxlength="4">- <input type="text" class="phone2" name="phone2" value="${sessionScope.User.userPhone.substring(7,11)}" required="required" maxlength="4">
 	                        </label>
 	               		</div>
 	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
@@ -567,7 +583,7 @@ input[type="checkbox"]:checked + label span {
 	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
 	               			<label>
 	               				<span style="font-size:18px; line-height: 100%; color:black;">요청사항<span></span></span>
-	               				<input type="text" placeholder="남기고 싶은 말을 적어주세요.">
+	               				<input type="text" name="request" class="reservationRequest" placeholder="남기고 싶은 말을 적어주세요.">
 	               			</label>
 	               		</div>
 	               	</div>
@@ -683,7 +699,7 @@ input[type="checkbox"]:checked + label span {
                <div class="rMenu_list">
                		<div class="pop_list_left">예약날짜</div>
                		<div class="pop_list_right">
-               			<span class="hapDay" style="color:red''">-</span>
+               			<span class="hapDay" style="color:red">-</span>
                		</div>
                </div>
                </c:if>
@@ -711,7 +727,7 @@ input[type="checkbox"]:checked + label span {
                		<div class="pop_list_right"><span class="reservation_people2"></span></div>
                </div>
                <div class="rMenu_list" id="rMenu_option">
-               		<div class="pop_list_left">추가옵션</div>
+               		<div class="pop_list_left">추가인원</div>
                		<div class="pop_list_right"><span class="option1"></span></div>
                </div>
                
@@ -880,7 +896,6 @@ input[type="checkbox"]:checked + label span {
                   	$('.price_time').html("총 "+totalTime+'시간 x '+'${s.s_price1}');
                   	$('.totalTime').html("총 "+totalTime+'시간');
                   	$('.price').html(totalPrice);
-                  	console.log("두번째클릭시"+priceTimeArr);
                }else if (count > 2) {
                   count = 1;
                   $('.disabled').css('background','#f69b02');
@@ -890,7 +905,6 @@ input[type="checkbox"]:checked + label span {
                   selTimeArr.pop();
                   totalPrice -= priceTimeArr[btnIndex]*'${s.s_price1}';
                   $('.price').html(totalPrice);
-                  console.log("제외"+priceTimeArr);
                }
          
          });
@@ -902,7 +916,7 @@ input[type="checkbox"]:checked + label span {
          if(person<=1){
             $('#person_minus').attr("button",false);
             $('#person_plus').attr("button",true);
-            alert("최소인원은"+"1"+ "명입니다.");
+            emptyValue("최소인원은"+"1"+ "명입니다.");
          }else{
             person = person-1;
             $('.people').text(person);
@@ -914,7 +928,7 @@ input[type="checkbox"]:checked + label span {
          if(person>="${s.s_people}"){
             $('#person_minus').attr("button",true);
             $('#person_plus').attr("button",false);
-            alert("최대인원은"+"${s.s_people}"+ "명입니다.");
+            emptyValue("최대인원은"+"${s.s_people}"+ "명입니다.");
          }else{
             person = person+1;
             $('.people').text(person);
@@ -951,7 +965,7 @@ input[type="checkbox"]:checked + label span {
          if(option>=10){
             $('#option_minus').attr("button",true);
             $('#option_plus').attr("button",false);
-            alert("최대 추가 옵션 인원은"+"10"+ "명입니다.");
+            emptyValue("최대 추가인원은"+"10"+ "명입니다.");
          }else{
         	$('#option_minus').attr("disabled",false);
         	option = option+1;
@@ -988,29 +1002,33 @@ input[type="checkbox"]:checked + label span {
     	  $('.price').text(totalPrice);
     	  $('.booker').text($('input[name=booker]').val());
     	  $('input[name=reservationBooker]').val($('.booker').text());
+    	  $('input[name=reservationPhone]').val($('#phone option:selected').text());
+    	  $('input[name=reservationPhone1]').val($('.phone1').val());
+    	  $('input[name=reservationPhone2]').val($('.phone2').val());
+    	  $('input[name=reservationRequest]').val($('.reservationRequest').val());
    <%-- 날짜 체크 확인--%>
       if ($('.hapDay').html().length < 2) {
-         alert("예약 날짜를 선택해주세요.");
+    	  emptyValue("예약날짜를 선택해주세요.");
          }else {
    <%-- 시간 체크 확인 --%>
    <%-- 넘어온 타입이 시간일때 --%>
    if($('.selTime1').text().length < 2 && $('.selTime2').text().length < 2){
 	   if (count != 3) {
-		   alert("시간을 선택해주세요.");
+		   emptyValue("예약시간을 선택해주세요.");
 	      }
 	   } else {
    <%-- 예약정보 체크 --%>
       if (!bookerCheck.test($('input[name=booker]').val())) {
-         alert("예약자 정보를 확인해주세요(예약자명(한글) 두글자 이상)");
+    	  emptyValue("예약자정보를 확인해주세요(예약자명(한글)두 글자 이상)");
          $('input[name=booker]').focus();
          $('input[name=booker]').css('border','1px solid red');
          } else if (!phoneCheck.test($('input[name=phone1]').val())){
-            alert("연락처 정보를 확인해주세요");
+        	 emptyValue("연락처정보를 확인해주세요");
             $('input[name=booker]').css('border','');
             $('input[name=phone1]').focus();
             $('input[name=phone1]').css('border','1px solid red');
             } else if (!phoneCheck.test($('input[name=phone2]').val())) {
-               alert("연락처 정보를 확인해주세요");
+            	emptyValue("연락처정보를 확인해주세요");
                $('input[name=phone1]').css('border','');
                $('input[name=phone2]').focus();
                $('input[name=phone2]').css('border','1px solid red');
@@ -1019,7 +1037,7 @@ input[type="checkbox"]:checked + label span {
                   var aChk = $("input").filter($("input[name=agree]:checked"));
                   if (aChk.length != 4) {
                      $('#allCheck').focus();
-                     alert("필수사항을 체크해주세요.");
+                     emptyValue("필수사항을 체크해주세요.");
                      } else {
                <%-- 예약 정보 확인 창 열기 --%>
                   $("#reservation_popupDiv").css({
@@ -1127,6 +1145,13 @@ input[type="checkbox"]:checked + label span {
             }
          });
       });
+      <%-- 얼랏창 --%>
+      function emptyValue(msg){
+          $("#emptyValue").text(msg);
+          $("#emptyValue").slideDown(700);
+          $("#emptyValue").delay(1300);
+          $("#emptyValue").slideUp(700);
+       }
    </script>
    <jsp:include page="/WEB-INF/common/footer.jsp" />
    <%-- 팝업 배경 DIV--%>
@@ -1148,6 +1173,7 @@ input[type="checkbox"]:checked + label span {
 	                  	<span class="booker"></span>
                		  </div>
 	               </div>
+	                <c:if test="${s.s_type eq 'day'}">
 	               <div class="reservation_popupDiv_list">
 	                  <div class="pop_list_left">예약날짜</div>
 	                  <div class="pop_list_right">
@@ -1156,6 +1182,15 @@ input[type="checkbox"]:checked + label span {
                			<span class="hapDay"></span>
                		  </div>
 	               </div>
+	               </c:if>
+	               <c:if test="${s.s_type eq 'time'}">
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약날짜</div>
+	                  <div class="pop_list_right">
+               			<span class="hapDay"></span>
+               		  </div>
+	               </div>
+	               </c:if>
 	               <c:if test="${s.s_type eq 'day'}">
 	               <div class="reservation_popupDiv_list">
 	                  <div class="pop_list_left">이용시간</div>
@@ -1206,9 +1241,13 @@ input[type="checkbox"]:checked + label span {
 	            		<input type="hidden" name="reservationName" value="${s.s_placeName}">
 	            		<input type="hidden" name="reservationDay" value=""><%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="reservationBooker" value=""><%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationPhone" value="">
+	            		<input type="hidden" name="reservationPhone1" value="">
+	            		<input type="hidden" name="reservationPhone2" value="">
 	            		<input type="hidden" name="reservationTime" value=""><%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="reservationPerson" value=""> <%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="reservationOption" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationRequest" value=""> <%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="paymentId" value=""> <%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="paymentPrice" value=""> <%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="paymentCard" value=""> <%-- 스크립트에서 밸류 보냄 --%>

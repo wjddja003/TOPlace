@@ -1,9 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-
 <link rel="stylesheet" type="text/css" href="/css/index.css">
+<link rel="stylesheet" type="text/css" href="/css/headerSearch.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script
       src="https://code.jquery.com/jquery-3.4.0.js"
@@ -22,25 +20,28 @@
 	        <!--logo Fin-->
 	        <div class="header navi" style="width:60%;">
 	            <ul id="navi-bar">
-
 	               <li class="navi-li"> <a href="/viewsAll">모든 공간보기</a></li>
-
 	                <li class="navi-li"><a href="/viewsBest">베스트 공간보기</a></li>
-
 	                <li class="navi-li"><a href="/insertSpaceCheck">공간등록</a></li>
-	                
 	            </ul>
 	        </div>
-	        <div class="header realtime" style="width:9.6%;"><span id="ranking" style="color:#605f5d; height: 20px;">실시간</span></div>
+	        <div class="header realtime" style="width:9.6%;">
+                <span id="ranking" style="color:#605f5d; height: 20px;">실시간</span>
+                <div class="header_ranking">
+                    <div class="header_ranking_h">
+                        <p>실시간 급상승 검색어</p>
+                    </div>
+                    <ul>
+                    </ul>
+                </div>
+            </div>
 	        <div class="header search" style="width:7.7%;"><span>검색</span></div>
 	        <div class="header mypage" style="width:7.7%;"><span>마이페이지</span></div>
         </div>
         <div id="header-search">
-            
        		<jsp:include page="/views/headerSearch.jsp"/>
     	</div>
-    	<div id="header-mypage">
-        	
+    	<div id="header-mypage">	
         	<jsp:include page="/WEB-INF/views/mypage.jsp"/>
     	</div>
     </header>
@@ -55,20 +56,17 @@
   	    dataType: "json",                         // 서버에서 보내줄 데이터의 타입
   	    async: false,
   	    success : function(data) {
-  	    console.log("성공!: " + data);
   	    var ranking = "";
   	    for(var i=0; i<data.length; i++){
   	    	var spaceName = decodeURIComponent(data[i].S_placeName);
   	    	var spaceNo = decodeURIComponent(data[i].S_no);
-  	    	ranking1 =(i+1)+"위 "+spaceName;
+  	    	ranking1 =(i+1)+". "+spaceName;
   	    	ranking2 = spaceNo;
   	    	rankingArr1[i] = ranking1;
   	    	rankingArr2[i] = ranking2;
-  	    }
-  	    console.log(rankingArr1);
-  	    console.log(rankingArr2);
+  	    	$('.header_ranking ul').html($('.header_ranking ul').html()+"<li><a href='/selectOneSpace?S_no="+rankingArr2[i]+"' >"+rankingArr1[i]+"</a></li>");
+  	    	}
   	   },error : function(xhr, status, error) {
-  	      console.log("에러!: " + error);
   	   }
   	});
      	var i=0;	
@@ -83,13 +81,10 @@
      	    		if($(this).text().length >= length){
      	    			$(this).text($(this).text().substr(0,length)+'...');
      	    		}
-     	    		console.log(length);
      	    	});
      	    });
      	  	i++;	  
      	  }, 2000);			//2초마다 갱신
-   
-     
     </script>
     
 

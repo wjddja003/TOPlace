@@ -39,9 +39,6 @@ public class LikeListServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		User u = (User)session.getAttribute("User");
-		
-		int S_no = Integer.parseInt(request.getParameter("S_no"));
-		Space s = new SpaceService().selectOneSpace(S_no);
 		if(u == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
 			rd.forward(request, response);
@@ -55,7 +52,6 @@ public class LikeListServlet extends HttpServlet {
 			}
 			LikePageData pd = new LikeService().selectList(reqPage,userNo);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/like/likeList.jsp");
-			request.setAttribute("s",s);
 			request.setAttribute("pd", pd);
 			rd.forward(request,response);
 		}
