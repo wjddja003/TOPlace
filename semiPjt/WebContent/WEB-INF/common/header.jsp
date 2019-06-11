@@ -41,10 +41,10 @@
 		    <div class="header mypage" style="width:7.7%;"><span>마이페이지</span></div>
 	        
         </div>
-        <div id="header-search">
+        <div id="header-search" class="exception-header">
        		<jsp:include page="/views/headerSearch.jsp"/>
     	</div>
-    	<div id="header-mypage">
+    	<div id="header-mypage" class="exception-header">
     		<c:choose>
 	       		<c:when test="${sessionScope.User.userGrade != '관리자'}">	
         			<jsp:include page="/WEB-INF/views/mypage.jsp"/>
