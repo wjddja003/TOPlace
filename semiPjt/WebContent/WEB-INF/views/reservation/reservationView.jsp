@@ -39,10 +39,10 @@
         float: left;
     }
     .qa_no{
-        padding: 10px;
+        padding: 0px;
         float: left;
         margin: 20px 0 0 20px;
-        border: 1px solid #e2e2e2;
+       
         width: 100%;
         height: 320px;
         overflow: hidden;
@@ -66,12 +66,13 @@
     }
     #spaceImg{
      
-    	width: 400px;
+    	width: 430px;
     	height: 220px;
     }
     .reservationContent{
-    	width:408px;
-    	height:88px;
+    	border: 1px solid #f69b02;
+    	width: 100%;
+    	height:98px;
     	float: left;
     }
     .reservationContent a {
