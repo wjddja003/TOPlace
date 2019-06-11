@@ -44,11 +44,8 @@ prefix="c" %>
        width:900px;
     }
     .table-wrapper{
-        text-align: center;
-        width: 1160px;
-        margin: 0 auto;
-        position: absolute;
-        top: 40%;
+       margin-top:400px;
+       margin-bottom:100px;
     }
     .nc_tr{
         visibility: collapse;
@@ -64,6 +61,7 @@ prefix="c" %>
          margin-top: 60px;
          font-size:15px;
          width:100%;
+         text-align: center;;
     }
         .table_toggle tbody tr{
             height: 60px;
@@ -144,7 +142,7 @@ prefix="c" %>
 					</tr>
                 </c:forEach>
             </table>
-            <div><%= pd.getPageNavi() %></div>
+            <div style="text-align:center;"><%= pd.getPageNavi() %></div>
             <div>
             	<c:if test="${sessionScope.User.userGrade == '관리자'}">
                 	<button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/noticeWrite" style="color:#f69b02">글쓰기</a></button>
@@ -153,7 +151,6 @@ prefix="c" %>
         </div>
     </div>
 	</section>
-	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 	<script>
         var count = 0;
 		$(".n_tr").click(function(){
@@ -167,3 +164,4 @@ prefix="c" %>
             }
         }); 
 	</script>
+	<jsp:include page="/WEB-INF/common/footer.jsp"/>
