@@ -107,7 +107,7 @@
 		text-align: center;
 		letter-spacing: 8px;
 		word-spacing:15px;
-		background-color: black;
+		background-color: #f69b02;
 		color:white;
 		font-size: 30px;
 		line-height: 100px;
