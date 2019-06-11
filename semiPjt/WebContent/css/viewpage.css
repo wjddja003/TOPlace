@@ -156,6 +156,7 @@ a{
     }
     .viewpage_textbox{
         margin-bottom: 45px;
+        clear: both;
     }
     .viewpage_textbox h2{
         padding: 50px 100px 0 0;
@@ -634,11 +635,12 @@ a{
     border-radius: 15px;
 }
 .qnaBtns{
-     width: 100px;
+    width: 100px;
     background: #f69b02;
     margin: 0 auto;
     height: 45px;
     border-radius: 15px;
+    margin-bottom: 25px;
 }
 .poprollback{
     border: none;
@@ -697,13 +699,12 @@ a{
 	
 }
 #declare_content{
-	position:absolute;
-	
+	position:absolute;	
 	left:373px;
 	display:none;
 	border:1px solid red;
 	width:400px;
-	heigth:500px;
+	height:500px;
 	text-align: center;
 	border-radius: 15px;
 	margin-bottom:10px;
@@ -740,6 +741,11 @@ a{
 }
 .change_btn{
 	color:white;
-	background-color: red;
-	
+	background-color: red;	
+}
+
+/*earning img start*/
+.view_warning_img img{
+    width: 20px;
+    height: 20px;
 }
