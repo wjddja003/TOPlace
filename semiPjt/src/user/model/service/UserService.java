@@ -10,6 +10,17 @@ import user.model.vo.User;
 import user.model.vo.UserPage;
 
 public class UserService {
+	public int adminUserDelete(int userNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new UserDao().adminUserDelete(userNo,conn);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 	public UserPage adminSelectAll(int reqPage){
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 10;
