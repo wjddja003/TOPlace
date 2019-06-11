@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="/css/index.css">
 <link rel="stylesheet" type="text/css" href="/css/headerSearch.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script
       src="https://code.jquery.com/jquery-3.4.0.js"
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
@@ -25,10 +26,10 @@
 	                <li class="navi-li"><a href="/insertSpaceCheck">공간등록</a></li>
 	            </ul>
 	        </div>
-	        <div class="header realtime" style="width:9.6%;">
+	        <div class="header realtime" style="width:9.6%; text-align: left">
                 <span id="ranking" style="color:#605f5d; height: 20px;">실시간</span>
                 <div class="header_ranking">
-                    <div class="header_ranking_h">
+                    <div class="header_ranking_h" style="text-align: center;">
                         <p>실시간 급상승 검색어</p>
                     </div>
                     <ul>
@@ -36,13 +37,22 @@
                 </div>
             </div>
 	        <div class="header search" style="width:7.7%;"><span>검색</span></div>
-	        <div class="header mypage" style="width:7.7%;"><span>마이페이지</span></div>
+	       
+		    <div class="header mypage" style="width:7.7%;"><span>마이페이지</span></div>
+	        
         </div>
         <div id="header-search">
        		<jsp:include page="/views/headerSearch.jsp"/>
     	</div>
-    	<div id="header-mypage">	
-        	<jsp:include page="/WEB-INF/views/mypage.jsp"/>
+    	<div id="header-mypage">
+    		<c:choose>
+	       		<c:when test="${sessionScope.User.userGrade != '관리자'}">	
+        			<jsp:include page="/WEB-INF/views/mypage.jsp"/>
+        		</c:when>
+        		<c:otherwise>
+        			<jsp:include page="/WEB-INF/views/adminMypage.jsp"/>
+        		</c:otherwise>
+        	</c:choose>
     	</div>
     </header>
     
@@ -64,7 +74,15 @@
   	    	ranking2 = spaceNo;
   	    	rankingArr1[i] = ranking1;
   	    	rankingArr2[i] = ranking2;
-  	    	$('.header_ranking ul').html($('.header_ranking ul').html()+"<li><a href='/selectOneSpace?S_no="+rankingArr2[i]+"' >"+rankingArr1[i]+"</a></li>");
+  	    	$('.header_ranking ul').html($('.header_ranking ul').html()+"<li><a href='/selectOneSpace?S_no="+rankingArr2[i]+"'><span class='ranking'>"+rankingArr1[i]+"</span></a></li>");
+	  	    	$('.ranking').each(function(){
+	     	    	var length = 13;
+	     	    	$(this).each(function(){
+	     	    		if($(this).text().length >= length){
+	     	    			$(this).text($(this).text().substr(0,length)+'...');
+	     	    		}
+	     	    	});
+	     	    });
   	    	}
   	   },error : function(xhr, status, error) {
   	   }
@@ -76,7 +94,7 @@
      		}
      	 	$('#ranking').html("<a href='/selectOneSpace?S_no="+rankingArr2[i]+"' id='rank'>"+rankingArr1[i]+"</a>");
      	 	 $('#rank').each(function(){
-     	    	var length = 10;
+     	    	var length = 13;
      	    	$(this).each(function(){
      	    		if($(this).text().length >= length){
      	    			$(this).text($(this).text().substr(0,length)+'...');

@@ -202,9 +202,9 @@
                                     <ul class="review_list" id="qna_list">
                                     <c:forEach var="q" items="${qna.list}">   
                                     	<c:if test="${q.qaCommentRef == ''}">   	
-                                        <li class="rlist ">  
+                                        <li class="rlist" style="padding-top:30px;">  
                                         <div class="rbox_mine">  
-                                                 <span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
+                                                 <span class="pf_img"><img src="../img/user1.png" width="100px;" height="100px;"></span> 
                                                 <div class="rbox_name">
                                                 <strong class="guest_name" style="font-size:22px;">${q.qaCommentWriter}</strong>
                                                 <p class="p_review">${q.qaCommentContent}</p>
@@ -218,7 +218,7 @@
 										<div style="text-align: right;">
                                     	<c:if test="${sessionScope.User.userId == q.qaCommentWriter}">
                                     	<a style="text-decoration:none; color:#f69b02; border-color:#f69b02;" class="qaupdate btn btn-outline-primary btn-sm"><span>수정</span></a>
-                                    	<button class="btn btn-outline-primary btn-sm" style="color:#f69b02; border-color:#f69b02;"><a href="/qaViewpageDelete?S_no=${s.s_no }&qaCommentNo=${q.qaCommentNo }">삭제</a></button>
+                                    	<button class="btn btn-outline-primary btn-sm" style="color:#f69b02; border-color:#f69b02;"><a href="/qaViewpageDelete?S_no=${s.s_no }&qaCommentNo=${q.qaCommentNo }" style="color:#f69b02;">삭제</a></button>
                                     	</c:if>
                                     	<c:if test="${s.s_hostNum == host.hostNo}">
                                     		<input type="hidden" class="qaNo" value="${q.qaCommentNo}">
@@ -230,9 +230,14 @@
                                         <c:forEach var="qq" items="${qna.list}">
                                           <c:if test="${q.qaCommentNo == qq.qaCommentRef}">
                                             <div class="rbox_reply" style="margin-top:30px;">
-                                            	<span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
+                                            <c:if test="${empty host.hostFile}">                                            	
+                                            	<span class="pf_img"><img src="../img/logo.png" width="100px;" height="50px;"></span>
+                                            </c:if>
+                                            <c:if test="${not empty host.hostFile }">
+                                            	<span class="pf_img"><img src="/upload/hostProfile/${host.hostFile}"></span>
+                                            	</c:if> 
                                                 <p class="p_tit_reply">
-                                                    <em>${host.hostName}</em>님의 댓글
+                                                    <em>${q.qaCommentWriter}</em>님의 댓글
                                                 </p>
                                                 <p class="p_review">
                                                 	   ${qq.qaCommentContent}
@@ -254,13 +259,9 @@
                             <div class="host_area">
 							<div class="pf_left"><img src="../img/logo.png"></div>
 							<div class="pf_right">
-								<strong class="pf_host">HOST</strong><br> <span class="pf_name">(주)투플레이스</span>
-								<p class="pf_txt">서울시 서초구 방배동 815-20 B1 80평 스튜디오</p>
-							</div>
-                            <a href="#" class="hostbtn" style="text-decoration: none;">
-							<span class="btn_inner">
-								호스트 페이지로 이동 →
-							</span>
+								<strong class="pf_host">HOST</strong><br> <span class="pf_name">${s.s_placeName}</span>
+								<p class="pf_txt">${s.address}</p>
+							</div>							
 						</a>
 						</div>
                         </div>
@@ -278,8 +279,8 @@
                         <ul>
                          <c:forEach items="${pd.list}" var="rc">
                             <li class="rlist">   
-                                <div class="rbox_mine"> 
-                                    <span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
+                                <div class="rbox_mine" style="padding-top:30px;"> 
+                                    <span class="pf_img"><img src="../img/user1.png" width="100px;" height="100px;"></span> 
                                     <strong class="guest_name">${rc.reviewWriter}</strong> 
 <%--                                     <p class="p_review"><span>제목 : </span>${rc.reviewTitle }</p> --%>
                                     <p class="p_review">${rc.reviewContent }</p>
@@ -314,7 +315,7 @@
                                     </span>
                                     <div style="text-align: right;">
                                     	<c:if test="${sessionScope.User.userId == rc.reviewWriter}">
-                                    	<button class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;"><a href="/reviewUpdateEnd?reviewNo=${rc.reviewNo }">수정</a></button>
+                                    	<button class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;"><a href="/reviewUpdateEnd?reviewNo=${rc.reviewNo }" style="color:#f69b02;">수정</a></button>
                                     	<button class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;" ><a href="/reviewDelete?S_no=${s.s_no }&reviewNo=${rc.reviewNo}" style="color:#f69b02;">삭제</a></button>
                                     	</c:if>
                                     </div>                                                                              
@@ -380,12 +381,12 @@
                             <c:choose>
                             	<c:when test="${not empty sessionScope.User}">	
                                     <div class="viewpage_reservationbtn">
-                             		<button type="button" class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;"><a href="/selectOneReservation?S_no=${s.s_no}" style="color:#f69b02;">결제하기</a></button>
+                             		<a href="/selectOneReservation?S_no=${s.s_no}">결제하러 가기</a>
                                     </div>
                              	</c:when>
                              	<c:otherwise>
                                     <div class="viewpage_reservationbtn">
-                             		<button type="button" class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;"><a href="/views/login.jsp" style="color:#f69b02;">결제하기</a></button>
+                             		<a href="/views/login.jsp">결제하러 가기</a>
                                     </div>
                              	</c:otherwise>
                              </c:choose>

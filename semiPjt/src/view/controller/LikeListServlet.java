@@ -44,12 +44,8 @@ public class LikeListServlet extends HttpServlet {
 			rd.forward(request, response);
 		}else {
 			int userNo = u.getUserNo();
-			int reqPage;
-			try {
-				reqPage = Integer.parseInt(request.getParameter("reqPage"));
-			}catch (NumberFormatException e) {
-				reqPage = 1;
-			}
+			int reqPage=1;
+			
 			LikePageData pd = new LikeService().selectList(reqPage,userNo);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/like/likeList.jsp");
 			request.setAttribute("pd", pd);

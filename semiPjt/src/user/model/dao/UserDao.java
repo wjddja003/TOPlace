@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import common.JDBCTemplate;
@@ -27,6 +29,83 @@ public class UserDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public int adminUserDelete(int userNo,Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from user_db where user_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
+	public int totalCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		String query = "select count(*) cnt from user_db";
+		int result = 0;
+		try {
+			stmt=conn.createStatement();
+			rset=stmt.executeQuery(query);
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+			System.out.println(result);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(stmt);
+		}
+		return result;
+	}
+	public ArrayList<User> adminSelectAll(Connection conn,int start, int end){
+		ArrayList<User> list= null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from (select rownum as rnum, m.* from (select * from user_db order by enroll_date desc) m) where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<User>();
+			while(rset.next()) {
+				User u = new User();
+				u.setUserNo(rset.getInt("user_no"));
+				u.setUserId(rset.getString("user_id"));
+				u.setUserPw(rset.getString("user_pw"));
+				u.setUserName(rset.getString("user_name"));
+				u.setUserPhone(rset.getString("phone"));
+				u.setUserBirthday(rset.getString("birthday"));
+				u.setUserEmail(rset.getString("email"));
+				u.setUserGender(rset.getString("gender"));
+				u.setUserAddressNumber(rset.getInt("addressNumber"));
+				u.setUserAddress(rset.getString("address"));
+				u.setUserGrade(rset.getString("grade"));
+				u.setUserTOS(rset.getString("tos"));
+				u.setUserprivacy(rset.getString("privacy"));
+				u.setUserSMS(rset.getString("sms"));
+				u.setEnrollDate(rset.getDate("enroll_date"));
+				list.add(u);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
 	}
 	public int gradeUpdate(int userNo,Connection conn) {
 		PreparedStatement pstmt = null;

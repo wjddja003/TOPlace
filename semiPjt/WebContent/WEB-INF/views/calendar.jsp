@@ -10,6 +10,7 @@
    src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <script
       src="https://code.jquery.com/jquery-3.4.0.js"
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
@@ -1023,7 +1024,7 @@
         $('th').eq(1).text(year+"년 "+month+"월"); //지금 띄워진 달력이 몇년도 몇월인지
         var weeknum = 1;
         for(var i=1;i<monthEndDay[month-1]+1;i++){
-        	var price = '${s.s_price1}';
+        	var price = "<fmt:formatNumber type='number' maxFractionDigits='3' value='${s.s_price1}' />";
         	
             $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price); //해당 달의 끝날자만큼 for문이 돌아서 날짜를 td에 입력
             
@@ -1102,7 +1103,7 @@
             $('th').eq(1).text(year+"년 "+month+"월");
 
             for(var i=1;i<monthEndDay[month-1]+1;i++){
-            	var price = '${s.s_price1}';
+            	var price = "<fmt:formatNumber type='number' maxFractionDigits='3' value='${s.s_price1}' />";
             	
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
                 //기본 날짜 넣는 로직
@@ -1198,7 +1199,7 @@
            
             $('th').eq(1).text(year+"년 "+month+"월");
             for(var i=1;i<monthEndDay[month-1]+1;i++){
-            	var price = '${s.s_price1}';
+            	var price = "<fmt:formatNumber type='number' maxFractionDigits='3' value='${s.s_price1}' />";
             	
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
                 
@@ -1268,7 +1269,7 @@
                     $('td').not('td.inhibitDay').css("background-color","white");
                     $('td').removeClass("selectDay");
                     totalPrice -= ((during*'${s.s_price1}')*1);
-                    $('.price').html(totalPrice);
+                    $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     //선택된 날짜 초기화 
                     startDay = $('td').index(this);
                     //선택된 날짜의 td index 가져오기
@@ -1348,9 +1349,9 @@
                     endDay=null;
                     //예약 날짜 합계 출력
                     $('.hapDay').text("총"+during+"일");
-                    $('.price_day').text($('.startDay').html()+" "+$('.endDay').html()+" 총"+during+"일"+" x "+"${s.s_price1}");
+                    $('.price_day').text($('.startDay').html()+" "+$('.endDay').html()+" 총"+during+"일"+" x "+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" />');
                     totalPrice += ((during*'${s.s_price1}')*1);
-                    $('.price').html(totalPrice);
+                    $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }              
         	} else if(btnVal==2 && $(this).find('p').text() != ""){
                 if($(this).hasClass("inhibitDay") === false && count==0){
@@ -1397,7 +1398,7 @@
         		if(array.length==7){
         			emptyValue("원하는 날짜는 7일까지 선택가능합니다.");
         			//추가
-        			$('.price').text(totalPrice);
+        			$('.price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('.endDay').text("-");
                     $('.hapDay').text("");
                     $('.startDay').text("");
@@ -1515,7 +1516,7 @@
             		$('td').not('td.inhibitDay').eq(i).removeClass("selectDay")
             	}
             }
-            $('.price').text(totalPrice);
+            $('.price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('.endDay').text("-");
             $('.hapDay').text("");
             $('.startDay').text("");

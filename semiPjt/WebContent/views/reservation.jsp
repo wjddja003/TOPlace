@@ -2,6 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -401,10 +402,10 @@ input[type="checkbox"]:checked + label span {
                <div class="reservation_head">
                   <span class="reservation_title">예약 공간</span> 
                   <c:if test="${s.s_type eq 'day'}">
-                  	<span class="reservation_sub"  style="color:red;">￦ ${s.s_price1}<span style="font-size:16px">/일</span></span>
+                  	<span class="reservation_sub"  style="color:red;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /><span style="font-size:16px">/일</span></span>
                   </c:if>
                   <c:if test="${s.s_type eq 'time'}">
-                  	<span class="reservation_sub"  style="color:red;">￦ ${s.s_price1}<span style="font-size:16px">/시간</span></span>
+                  	<span class="reservation_sub"  style="color:red;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /><span style="font-size:16px">/시간</span></span>
                   </c:if>
                </div>
                <div class="reservation_content">
@@ -511,7 +512,7 @@ input[type="checkbox"]:checked + label span {
 	                     <div class="swiper-wrapper">
 	                     <c:forEach var="i" begin="0" end="23" step="1">
 	                     	<div class="swiper-slide">
-		                          <button disabled="disabled">${i} <br>￦${s.s_price1}</button>
+		                          <button disabled="disabled">${i} <br>￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /></button>
 		                 	</div>
 		                 </c:forEach>
                      	</div>
@@ -752,7 +753,7 @@ input[type="checkbox"]:checked + label span {
          </div>
       </div>
    </section>
-   <script>	
+   <script>
    var totalPrice = 0; //총 계산금액
    var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //선택 한 시간 값
    var count = 1; //버튼클릭 카운트
@@ -776,7 +777,7 @@ input[type="checkbox"]:checked + label span {
             selTimeArr.slice(btnIndex);
             for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
           	  	$('.swiper-slide button').eq(i).addClass("disabled");
-          		$('.swiper-slide button').eq(i).html(i+"<br>￦"+'${s.s_price1}');
+          		$('.swiper-slide button').eq(i).html(i+"<br>￦"+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" />');
           	  	$('.swiper-slide button').eq(i).css("background","#f69b02");
           		$('.swiper-slide button').eq(i).removeAttr("disabled");
             }
@@ -869,7 +870,7 @@ input[type="checkbox"]:checked + label span {
                   for(var Itime=0;Itime<sendTimeArray.length;Itime++){
                 	  arrayTime += sendTimeArray[Itime];
                   }
-            	  $('.price').text(totalPrice);
+            	  $('.price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                   $('input[name=reservationTime]').val(arrayTime);
                   if(startTime<endTime){
                 	  selTimeArr[btnIndex]=startTime+"~"+(endTime+1)+"시,  "+(hapTime)+"시간 ";
@@ -893,9 +894,9 @@ input[type="checkbox"]:checked + label span {
          			
                     $('#rMenu_time').css('display','none');
                     $('.rM_time').css('display','block');
-                  	$('.price_time').html("총 "+totalTime+'시간 x '+'${s.s_price1}');
+                  	$('.price_time').html("총 "+totalTime+'시간 x '+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" />');
                   	$('.totalTime').html("총 "+totalTime+'시간');
-                  	$('.price').html(totalPrice);
+                  	$('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                }else if (count > 2) {
                   count = 1;
                   $('.disabled').css('background','#f69b02');
@@ -904,7 +905,7 @@ input[type="checkbox"]:checked + label span {
                   selTimeArray.pop();
                   selTimeArr.pop();
                   totalPrice -= priceTimeArr[btnIndex]*'${s.s_price1}';
-                  $('.price').html(totalPrice);
+                  $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                }
          
          });
@@ -950,15 +951,15 @@ input[type="checkbox"]:checked + label span {
               $('#rMenu_option').css("display","none");
               $('.price_option').text("");
               totalPrice -= ('${s.s_price2}')*1;
-              $('.price').html(totalPrice);
+              $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     	  }else{
         	  $('#option2').text(option);  
               $('.option1').text(option+"명");
               $('input[name=reservationOption]').val(option+"명");
               $('.rMenu_price_list').css("display","block");
               totalPrice -= ('${s.s_price2}')*1;
-              $('.price').html(totalPrice);
-              $('.price_option').text("추가인원 "+option+"명"+' x '+'${s.s_price2}');
+              $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+              $('.price_option').text("추가인원 "+option+"명"+' x '+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price2}" />');
     	  }
       });
       $('#option_plus').click(function(){
@@ -976,8 +977,8 @@ input[type="checkbox"]:checked + label span {
             $('#rMenu_option').css("display","block");
             $('.rMenu_price_list').css("display","block");
             totalPrice += ('${s.s_price2}')*1;
-            $('.price').html(totalPrice);
-            $('.price_option').text("추가인원 "+option+"명"+' x '+'${s.s_price2}');
+            $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $('.price_option').text("추가인원 "+option+"명"+' x '+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price2}" />');
          }
       });
    <%-- 전체 체크박스 선택 스크립트 --%>
@@ -999,7 +1000,7 @@ input[type="checkbox"]:checked + label span {
          });
    <%-- 결제버튼 클릭 스크립트--%>
       $('#payment').click(function() {
-    	  $('.price').text(totalPrice);
+    	  $('.price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     	  $('.booker').text($('input[name=booker]').val());
     	  $('input[name=reservationBooker]').val($('.booker').text());
     	  $('input[name=reservationPhone]').val($('#phone option:selected').text());
