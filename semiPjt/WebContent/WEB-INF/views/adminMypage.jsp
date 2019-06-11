@@ -169,7 +169,7 @@
             <ul class="aside-navi">
                 <li><a href="/adminUserPage">회원 정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li class="spaceMng">
-                	<a href="#">공간정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a>
+                	<a href="/adminSpacePage">공간정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a>
                 	
                 </li>
                 <li><a href="/noticeList">공지사항 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
