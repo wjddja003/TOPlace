@@ -888,8 +888,10 @@ input[type="checkbox"]:checked + label span {
                   totalTime = 0;
                   totalPrice = 0;
                   for(var IIII=0; IIII<priceTimeArr.length; IIII++){
-                	  totalTime += priceTimeArr[IIII];
-                	  totalPrice += priceTimeArr[IIII]*'${s.s_price1}';
+                	  if(priceTimeArr[IIII]!=null){
+                  		totalTime += priceTimeArr[IIII];
+                      	  totalPrice += priceTimeArr[IIII]*'${s.s_price1}';
+                  	}
                   }
          			
                     $('#rMenu_time').css('display','none');
