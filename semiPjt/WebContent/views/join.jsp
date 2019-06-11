@@ -200,7 +200,6 @@
             }
 		  }, 500);
 	});
-	
 	$(".addressinsert").click(function(){
 		$(".joinpopup").css("display","block");
 		var windowW = 600;  // 창의 가로 길이
@@ -354,7 +353,7 @@
         	}
          });
          $('#email').focusout(function(){
-             idFlag=false;
+             emailFlag=false;
              checkEmail();
          });
          

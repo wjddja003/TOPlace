@@ -1,8 +1,9 @@
-package hostpage.controller;
+package qaSy.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,23 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-
-import host.model.vo.Host;
-import hostpage.model.service.HostpageService;
-import space.model.vo.Space;
+import qaSy.model.service.QaService;
+import qaSy.model.vo.QaComment;
 
 /**
- * Servlet implementation class hostmoreServlet
+ * Servlet implementation class QaCommentUpdateServlet
  */
-@WebServlet(name = "Hostmore", urlPatterns = { "/hostmore" })
-public class hostmoreServlet extends HttpServlet {
+@WebServlet(name = "QaCommentUpdate", urlPatterns = { "/qaCommentUpdate" })
+public class QaCommentUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public hostmoreServlet() {
+    public QaCommentUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,15 +33,14 @@ public class hostmoreServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		Host h = (Host)session.getAttribute("host");
-		int S_hostNum = h.getHostNo();
-		int start = Integer.parseInt(request.getParameter("start"));
-		ArrayList<Space> list = new HostpageService().hostmore(start,S_hostNum);
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(list,response.getWriter());
-		
+		int qaCommentNo = Integer.parseInt(request.getParameter("qaCommentNo"));
+		QaComment q = new QaService().selectOne(qaCommentNo);
+		request.setAttribute("qaComment", q);
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(q);
 	}
 
 	/**

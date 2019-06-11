@@ -69,6 +69,14 @@
     	width: 400px;
     	height: 220px;
     }
+    .reservationContent{
+    	width:408px;
+    	height:88px;
+    	float: left;
+    }
+    .reservationContent a {
+    	float: left;
+    }
 </style>
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -86,10 +94,11 @@
               
                     <div class="qa_no">
                     	<a href="/selectOneSpace?S_no=${r.s_no}"> <img id="spaceImg"src="/upload/space/${r.img}"></a><br>
-                    	
-                    	공간명 :${r.placeName }<br>
-                    	예약날짜 :${r.reservationDay }<br>
-                    	￦${r.paymentPrice }
+                    	<div class="reservationContent">
+	                    	<a style="color:#f69b02" id="r_placeName">${r.placeName }</a><br>
+	                    	<a>예약날짜 :${r.reservationDay }</a><br>
+	                    	<a>예약금액 :￦${r.paymentPrice }</a>
+                    	</div>
                     </div>
                 </div>
                 	</c:if>
@@ -98,7 +107,7 @@
             </div>
         </div>
     </section>
-    <script>
-    </script>
+    <jsp:include page="/WEB-INF/common/footer.jsp"/>
+
 </body>
 </html>

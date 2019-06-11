@@ -563,7 +563,7 @@ input[type="checkbox"]:checked + label span {
 	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
 	               			<label>
 	                        	<span style="font-size:18px; line-height: 100%; color:black;">연락처<span>&nbsp;*</span></span>
-	                        	<select name="phone" required="required">
+	                        	<select name="phone" required="required" id="phone">
 			                        <option>010</option>
 			                        <option>011</option>
 			                        <option>016</option>
@@ -571,7 +571,7 @@ input[type="checkbox"]:checked + label span {
 			                        <option>018</option>
 			                        <option>019</option>
 			                     </select>
-			                     - <input type="text" name="phone1" value="${sessionScope.User.userPhone.substring(3,7)}" required="required" maxlength="4">- <input type="text" name="phone2" value="${sessionScope.User.userPhone.substring(7,11)}" required="required" maxlength="4">
+			                     - <input type="text" name="phone1" class="phone1" value="${sessionScope.User.userPhone.substring(3,7)}" required="required" maxlength="4">- <input type="text" class="phone2" name="phone2" value="${sessionScope.User.userPhone.substring(7,11)}" required="required" maxlength="4">
 	                        </label>
 	               		</div>
 	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
@@ -583,7 +583,7 @@ input[type="checkbox"]:checked + label span {
 	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
 	               			<label>
 	               				<span style="font-size:18px; line-height: 100%; color:black;">요청사항<span></span></span>
-	               				<input type="text" placeholder="남기고 싶은 말을 적어주세요.">
+	               				<input type="text" name="request" class="reservationRequest" placeholder="남기고 싶은 말을 적어주세요.">
 	               			</label>
 	               		</div>
 	               	</div>
@@ -699,7 +699,7 @@ input[type="checkbox"]:checked + label span {
                <div class="rMenu_list">
                		<div class="pop_list_left">예약날짜</div>
                		<div class="pop_list_right">
-               			<span class="hapDay" style="color:red''">-</span>
+               			<span class="hapDay" style="color:red">-</span>
                		</div>
                </div>
                </c:if>
@@ -752,7 +752,7 @@ input[type="checkbox"]:checked + label span {
          </div>
       </div>
    </section>
-   <script>	
+   <script>
    var totalPrice = 0; //총 계산금액
    var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //선택 한 시간 값
    var count = 1; //버튼클릭 카운트
@@ -1002,6 +1002,10 @@ input[type="checkbox"]:checked + label span {
     	  $('.price').text(totalPrice);
     	  $('.booker').text($('input[name=booker]').val());
     	  $('input[name=reservationBooker]').val($('.booker').text());
+    	  $('input[name=reservationPhone]').val($('#phone option:selected').text());
+    	  $('input[name=reservationPhone1]').val($('.phone1').val());
+    	  $('input[name=reservationPhone2]').val($('.phone2').val());
+    	  $('input[name=reservationRequest]').val($('.reservationRequest').val());
    <%-- 날짜 체크 확인--%>
       if ($('.hapDay').html().length < 2) {
     	  emptyValue("예약날짜를 선택해주세요.");
@@ -1148,6 +1152,7 @@ input[type="checkbox"]:checked + label span {
           $("#emptyValue").delay(1300);
           $("#emptyValue").slideUp(700);
        }
+      <%-- 금액 표시 --%>
    </script>
    <jsp:include page="/WEB-INF/common/footer.jsp" />
    <%-- 팝업 배경 DIV--%>
@@ -1169,6 +1174,7 @@ input[type="checkbox"]:checked + label span {
 	                  	<span class="booker"></span>
                		  </div>
 	               </div>
+	                <c:if test="${s.s_type eq 'day'}">
 	               <div class="reservation_popupDiv_list">
 	                  <div class="pop_list_left">예약날짜</div>
 	                  <div class="pop_list_right">
@@ -1177,6 +1183,15 @@ input[type="checkbox"]:checked + label span {
                			<span class="hapDay"></span>
                		  </div>
 	               </div>
+	               </c:if>
+	               <c:if test="${s.s_type eq 'time'}">
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약날짜</div>
+	                  <div class="pop_list_right">
+               			<span class="hapDay"></span>
+               		  </div>
+	               </div>
+	               </c:if>
 	               <c:if test="${s.s_type eq 'day'}">
 	               <div class="reservation_popupDiv_list">
 	                  <div class="pop_list_left">이용시간</div>
@@ -1227,9 +1242,13 @@ input[type="checkbox"]:checked + label span {
 	            		<input type="hidden" name="reservationName" value="${s.s_placeName}">
 	            		<input type="hidden" name="reservationDay" value=""><%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="reservationBooker" value=""><%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationPhone" value="">
+	            		<input type="hidden" name="reservationPhone1" value="">
+	            		<input type="hidden" name="reservationPhone2" value="">
 	            		<input type="hidden" name="reservationTime" value=""><%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="reservationPerson" value=""> <%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="reservationOption" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationRequest" value=""> <%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="paymentId" value=""> <%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="paymentPrice" value=""> <%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="paymentCard" value=""> <%-- 스크립트에서 밸류 보냄 --%>

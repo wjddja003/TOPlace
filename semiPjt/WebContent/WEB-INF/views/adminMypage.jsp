@@ -100,11 +100,10 @@
             border-bottom: none;
             border-left: none;
             border-right: none;
-            
         }
         #aside-login_b a{
             text-decoration: none;
-            color:#f69b02;
+            color: gray;
             position: absolute;
             top: 40px;
             left: 120px;
@@ -120,8 +119,8 @@
         }
         #aside-host a{
             text-decoration: none;
-            color: #f69b02;
-            margin-left: 73px;
+            color: #f7f7f7;
+            margin-left: 115px;
 
         }
         .aside-navi ul{
@@ -156,11 +155,6 @@
             padding-bottom: 50px;
             background-color: rgba(0,0,0,0.5);
         }
-        #hostImage{
-        	width: 75px;
-        	height: 75px;
-        	border-radius: 36px;
-        }
     </style>
      <div class="dimmed" style="display:block;"></div>
     
@@ -169,130 +163,34 @@
    		 <button class="back">></button>
         <div id="aside-login_t">
             <ul>
-                <li>
-                <c:choose>
-                	<c:when test="${empty sessionScope.User }">
-                		<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>
-                	</c:when>
-                	<c:otherwise>
-                		<c:choose>
-                			<c:when test="${empty sessionScope.host }">
-                				<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>
-                			</c:when>
-                			<c:otherwise>
-                				<c:choose>
-	                				<c:when test="${not empty sessionScope.host }">
-	                					<c:if test="${sessionScope.host.hostFile != null }">
-	                						<img src="../../../upload/hostProfile/${sessionScope.host.hostFile }" id="hostImage">
-	                					</c:if>
-	                					<c:if test="${sessionScope.host.hostFile == null }">
-	                						<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>
-	                					</c:if>
-	                				</c:when>
-  								</c:choose>
-                			</c:otherwise>
-                		</c:choose>
-                	</c:otherwise>
-                </c:choose>
+                <li>	
+                	<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>	
                 </li>
                 <li>
-                	<c:choose>
-                		<c:when test="${empty sessionScope.User}">
-                			<a href="/views/login.jsp">로그인이 필요합니다.</a>		
-                		</c:when>
-                		<c:otherwise>
-                			<c:choose>
-                				<c:when test="${empty sessionScope.host}">
-                					<a href="/views/hostprofile.jsp">${sessionScope.User.userName}</a>
-                				</c:when>
-                				<c:otherwise>
-                					<c:if test="${not empty sessionScope.host }">
-                						<a href="/views/hostprofileUpdate.jsp">${sessionScope.host.hostName}</a>
-                					</c:if>
-                				</c:otherwise>
-                			</c:choose>
-                		</c:otherwise>
-                	</c:choose>	
+                	<a href="#">${sessionScope.User.userName}</a>
                 </li>
                 
             </ul>
         </div>
-       
-        
         <div id="mypage1">    
-        <div class="aside-mng">
-            <a href="/reservationList">
-            	<div class="aside-mng_1">
-            		<div>
-                        <img src="../../img/mypage_reservation_icon.png">
-                    </div>
-           			<p style="font-weight: normal; font-size:16px;">예약리스트</p>
-            	</div>
-            </a>
-        	
-            <a href="/qaView">
-            	<div class="aside-mng_1">
-            		<div>
-                        <img src="../../img/mypage_qna_icon.png">
-                    </div>
-            		<p style="font-weight: normal; font-size:16px;">이용후기/Q＆A관리</p>
-            	</div>
-            </a>
-           
-        </div>
-        <div class="aside-list">
+      
+        	<div class="aside-list">
             <ul class="aside-navi">
-            	
-                <li><a href="/likeList">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <c:if test="${not empty sessionScope.host }">
+                <li><a href="/adminUserPage">회원 정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li class="spaceMng">
-                	<a href="/hostPage?ShostNum=${sessionScope.host.hostNo}" >내 공간정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a>
+                	<a href="#">공간정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a>
                 	
                 </li>
-                </c:if>
-                <li><a href="/noticeList">공지사항<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <li><a href="/helpList">도움말<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <li><a href="https://talk.naver.com/ct/wc89we" target="_blank">1:1문의<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <li class="service"><a href="#">서비스정보<span><img src="/img/chevrondown.png" class="d_img"></span></a></li>
-                <div style="display:none" id="sv_list">
-                        <ul>
-                            <a href="/views/mypage/introduction.jsp"><li>서비스 소개</li></a>
-                            <a href="/views/mypage/TermsOfService.jsp"><li>이용약관</li></a>
-                            <a href="/views/mypage/policyPerson.jsp"><li>개인정보처리방침</li></a>
-                            <a href="/views/mypage/policyOperate.jsp"><li>운영정책</li></a>
-                        </ul>
-                </div>
+                <li><a href="/noticeList">공지사항 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="/helpList">도움말 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="#">QnA 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="#">리뷰 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="#">예약 내역 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
             </ul>
-        </div>
-        <div id="aside-login_b">
-        	<c:choose>
-				<c:when test="${empty sessionScope.User}">
-	       			<a href="/views/login.jsp">로그인</a>		
-	       		</c:when>
-	       		<c:otherwise>
-	       			<a href="/logout">로그아웃</a>
-	       		</c:otherwise>
-	       	</c:choose>
-        </div>
+        	</div>
         </div>
         <div id="aside-host">
-            <div id="aside-host1">
-	            <c:choose>
-	            	<c:when test="${empty sessionScope.User}">
-	            		<a href="#" class="hostJoin">호스트 등록으로 이동</a>
-	            	</c:when>
-	            	<c:otherwise>
-		            	<c:choose>
-		       				<c:when test="${empty sessionScope.host}">
-		       					<a href="/views/hostprofile.jsp" class="hostJoin">호스트 등록으로 이동</a>
-		       				</c:when>
-		       				<c:otherwise>
-		       					<a href="/views/hostprofileUpdate.jsp">호스트 정보 수정으로 이동</a>
-		       				</c:otherwise>
-		       			</c:choose>
-	       			</c:otherwise>
-	       		</c:choose>
-            </div>
+	        <a href="/logout">로그아웃 하기</a>	
         </div>
     </div>
 <script>
@@ -300,16 +198,16 @@
     var count =0;
     $(".service").click(function(){
         if(count==0){
+        	$(".service").css("border-bottom","none");
             $(".service img").attr("src","/img/chevronup.png");
             $("#sv_list").css("display","block");
             $("#sv_list > ul").css("background","lightgrey");
             count=1;
-            $('#mypage1').css("overflow-y","scroll");
         }else if(count==1){
+        	$(".service").css("border-bottom","1px solid gray");
             $(".service img").attr("src","/img/chevrondown.png");
             $("#sv_list").css("display","none")
             count=0;
-            $('#mypage1').css("overflow-y","hidden");
         }
        
 //        $("#sv_list").css("display","block");

@@ -20,9 +20,7 @@
 			cursor: pointer;
 			float:left;
 			display:none;
-			border: 2px solid #183058;
-			border-radius:3%;
-			height:360px;
+			height:410px;
 		}
 		#viewpage_alert{
         width: 100%;
@@ -42,7 +40,7 @@
 			border:none;
 			background:white;
 			color:#f69b02;
-			border-radius:8px;
+			
 			font-size:20px;
 		}
 		#viewMore:hover{
@@ -83,10 +81,10 @@
 			<c:forEach items='${list }' var='s'>
 				<div class='totalInnerBox'>
 					<input class="inputNo" type="hidden" value='${s.s_no }'>
-					<div style='height:200px; '>
-						<img src='/upload/space/${s.s_img1}' class="bossImg" width="100%" height="200px" style="border-radius:8px;">
+					<div style='height:250px; '>
+						<img src='/upload/space/${s.s_img1}' class="bossImg" width="100%" height="250px">
 					</div>
-					<div style='height:120px;'>
+					<div style='height:140px; padding-left:5px;border:1px solid #f69b02;'>
 						<div style="float:left;">
 						<a class="likeClick" href="#">
 							<img src="../img/like_icon.png" class="like">
@@ -102,13 +100,13 @@
 							&nbsp;<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${s.s_type eq 'day' }">
-							<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span> 원/일</span>
+							&nbsp;<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-		<div style="margin-bottom:50px;margin-left:20%;width:60%; height:50px; clear:left; text-align:center; border: 1px solid #f69b02; border-radius:8px;">
+		<div style="margin-bottom:50px;margin-left:20%;width:60%; height:50px; clear:left; text-align:center; border: 1px solid #f69b02;">
 			<button id="viewMore">더보기</button>
 		</div>
 	

@@ -36,15 +36,19 @@ public class InsertReservationServlet extends HttpServlet {
 		String reservationName = request.getParameter("reservationName");
 		String reservationDay = request.getParameter("reservationDay");
 		String reservationBooker = request.getParameter("reservationBooker");
+		String reservationPhone = request.getParameter("reservationPhone");
+		String reservationPhone1 = request.getParameter("reservationPhone1");
+		String reservationPhone2 = request.getParameter("reservationPhone2");
 		String reservationTime = request.getParameter("reservationTime");
 		reservationTime = reservationTime.replace("undefined","");
 		int reservationPerson = Integer.parseInt(request.getParameter("reservationPerson"));
 		String reservationOption = request.getParameter("reservationOption");
+		String reservationRequest = request.getParameter("reservationRequest");
 		String paymentId = request.getParameter("paymentId");
 		int paymentPrice = Integer.parseInt(request.getParameter("paymentPrice"));
 		String paymentCard = request.getParameter("paymentCard");
 		
-		Reservation r = new Reservation(0, S_no, userNo, reservationName, reservationDay, reservationBooker, reservationTime, reservationPerson, reservationOption, paymentId, paymentPrice, paymentCard);
+		Reservation r = new Reservation(0, S_no, userNo, reservationName, reservationDay, reservationBooker, reservationPhone, reservationPhone1, reservationPhone2, reservationTime, reservationPerson, reservationOption, reservationRequest, paymentId, paymentPrice, paymentCard);
 		int result = new ReservationService().insertReservation(r);
 		System.out.println(result);
 		if(result>0) {

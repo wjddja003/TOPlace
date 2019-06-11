@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="/css/index.css">
 <link rel="stylesheet" type="text/css" href="/css/headerSearch.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script
       src="https://code.jquery.com/jquery-3.4.0.js"
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
@@ -25,34 +26,33 @@
 	                <li class="navi-li"><a href="/insertSpaceCheck">공간등록</a></li>
 	            </ul>
 	        </div>
-	        <div class="header realtime" style="width:9.6%;">
+	        <div class="header realtime" style="width:9.6%; text-align: left">
                 <span id="ranking" style="color:#605f5d; height: 20px;">실시간</span>
                 <div class="header_ranking">
-                    <div class="header_ranking_h">
+                    <div class="header_ranking_h" style="text-align: center;">
                         <p>실시간 급상승 검색어</p>
                     </div>
                     <ul>
-                        <li><a href="#"><span>1.</span> 윤주공간</a></li>
-                        <li><a href="#"><span>2.</span> 정엄공간</a></li>
-                        <li><a href="#"><span>3.</span> 수용공간</a></li>
-                        <li><a href="#"><span>4.</span> 윤호공간</a></li>
-                        <li><a href="#"><span>5.</span> 창직공간</a></li>
-                        <li><a href="#"><span>6.</span> 영훈공간</a></li>
-                        <li><a href="#"><span>7.</span> 동천공간</a></li>
-                        <li><a href="#"><span>8.</span> 투플레이스</a></li>
-                        <li><a href="#"><span>9.</span> 이클립스</a></li>
-                        <li><a href="#"><span>10.</span> 프로젝트</a></li>
                     </ul>
                 </div>
             </div>
 	        <div class="header search" style="width:7.7%;"><span>검색</span></div>
-	        <div class="header mypage" style="width:7.7%;"><span>마이페이지</span></div>
+	       
+		    <div class="header mypage" style="width:7.7%;"><span>마이페이지</span></div>
+	        
         </div>
         <div id="header-search">
        		<jsp:include page="/views/headerSearch.jsp"/>
     	</div>
-    	<div id="header-mypage">	
-        	<jsp:include page="/WEB-INF/views/mypage.jsp"/>
+    	<div id="header-mypage">
+    		<c:choose>
+	       		<c:when test="${sessionScope.User.userGrade != '관리자'}">	
+        			<jsp:include page="/WEB-INF/views/mypage.jsp"/>
+        		</c:when>
+        		<c:otherwise>
+        			<jsp:include page="/WEB-INF/views/adminMypage.jsp"/>
+        		</c:otherwise>
+        	</c:choose>
     	</div>
     </header>
     
@@ -70,11 +70,20 @@
   	    for(var i=0; i<data.length; i++){
   	    	var spaceName = decodeURIComponent(data[i].S_placeName);
   	    	var spaceNo = decodeURIComponent(data[i].S_no);
-  	    	ranking1 =(i+1)+"위 "+spaceName;
+  	    	ranking1 =(i+1)+". "+spaceName;
   	    	ranking2 = spaceNo;
   	    	rankingArr1[i] = ranking1;
   	    	rankingArr2[i] = ranking2;
-  	    }
+  	    	$('.header_ranking ul').html($('.header_ranking ul').html()+"<li><a href='/selectOneSpace?S_no="+rankingArr2[i]+"'><span class='ranking'>"+rankingArr1[i]+"</span></a></li>");
+	  	    	$('.ranking').each(function(){
+	     	    	var length = 13;
+	     	    	$(this).each(function(){
+	     	    		if($(this).text().length >= length){
+	     	    			$(this).text($(this).text().substr(0,length)+'...');
+	     	    		}
+	     	    	});
+	     	    });
+  	    	}
   	   },error : function(xhr, status, error) {
   	   }
   	});
@@ -85,7 +94,7 @@
      		}
      	 	$('#ranking').html("<a href='/selectOneSpace?S_no="+rankingArr2[i]+"' id='rank'>"+rankingArr1[i]+"</a>");
      	 	 $('#rank').each(function(){
-     	    	var length = 10;
+     	    	var length = 13;
      	    	$(this).each(function(){
      	    		if($(this).text().length >= length){
      	    			$(this).text($(this).text().substr(0,length)+'...');
@@ -94,7 +103,6 @@
      	    });
      	  	i++;	  
      	  }, 2000);			//2초마다 갱신
-
     </script>
     
 

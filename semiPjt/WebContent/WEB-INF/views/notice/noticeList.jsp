@@ -148,11 +148,14 @@ prefix="c" %>
             </table>
             <div><%= pd.getPageNavi() %></div>
             <div>
-                <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/noticeWrite" style="color:#f69b02">글쓰기</a></button>
+            	<c:if test="${sessionScope.User.userGrade == '관리자'}">
+                	<button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/noticeWrite" style="color:#f69b02">글쓰기</a></button>
+                </c:if>
             </div>
         </div>
     </div>
 	</section>
+	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 	<script>
         var count = 0;
 		$(".n_tr").click(function(){

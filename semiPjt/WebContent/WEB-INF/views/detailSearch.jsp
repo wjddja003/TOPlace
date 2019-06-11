@@ -55,10 +55,10 @@
 			padding:20px;
 			display:none;
 			width: 500px;
-			border:2px solid #183058;
+			border:1px solid #f69b02;
 			overflow: hidden;
 			background-color: white;
-			border-radius: 8px;
+			
 		}
 		.selectBox:hover{
 			cursor: pointer;
@@ -89,11 +89,15 @@
 		}
 		
 		.filterOutLine{
-			border-radius:8px;
+			position:absolute;
+			background-color: white;
+			width:1140px;
+			
+			top:350px;
 			padding:20px;
 			display: none;
 			clear: both;
-			border: 2px solid #183058;
+			border: 1px solid #f69b02;
 			
 		}
 		.detailSearchBtn{
@@ -102,7 +106,7 @@
 			height: 40px;
 			color:#f69b02;
 			border:1px solid #f69b02;
-			border-radius:8px;
+			
 			font-size:20px;
 		}
 		.detailSearchBtn:hover{
@@ -119,7 +123,7 @@
 			height: 60px;
 			color:#f69b02;
 			border:1px solid #f69b02;
-			border-radius:8px;
+			
 			font-size:20px;
 		}
 		.filterBtn:hover{
@@ -130,8 +134,8 @@
 			margin:0 auto;
 			float:left;
 			box-sizing: border-box;
-			border: 1px solid #183058;
-			color: #f69b02;
+			border: 1px solid white;
+			color: #183058;
 			text-align: center;
 			width:13.7%;
 			height:90px;
@@ -172,9 +176,7 @@
 			cursor: pointer;
 			float:left;
 			display:none;
-			border: 2px solid #183058;
-			border-radius:3%;
-			height:360px;
+			height:410px;
 		}
 		#viewpage_alert{
         width: 100%;
@@ -194,7 +196,7 @@
 			border:none;
 			background:white;
 			color:#f69b02;
-			border-radius:8px;
+			
 			font-size:20px;
 		}
 		#viewMore:hover{
@@ -299,9 +301,6 @@
 				
 				<button id="detailSearchFilter" class="detailSearchBtn">필터</button>
 			</div>
-			<div class="mapInner" style="display:none; width:100%;">
-					
-			</div>
 			<div class="filterOutLine">
 				<div class="filterOutBox">
 					<span>편의시설</span><span style="font-weight:100;">을 선택하세요.</span>&nbsp;&nbsp;&nbsp;전체선택&nbsp;
@@ -347,10 +346,10 @@
 			<c:forEach items='${list }' var='s'>
 				<div class='totalInnerBox'>
 					<input class="inputNo" type="hidden" value='${s.s_no }'>
-					<div style='height:200px; '>
-						<img src='/upload/space/${s.s_img1}' class="bossImg" width="100%" height="200px" style="border-radius:8px;">
+					<div style='height:250px; '>
+						<img src='/upload/space/${s.s_img1}' class="bossImg" width="100%" height="250px">
 					</div>
-					<div style='height:120px;'>
+					<div style='height:140px; padding-left:5px;border:1px solid #f69b02;'>
 						<div style="float:left;">
 						<a class="likeClick" href="#">
 							<img src="../img/like_icon.png" class="like">
@@ -366,17 +365,18 @@
 							&nbsp;<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${s.s_type eq 'day' }">
-							<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span> 원/일</span>
+							&nbsp;<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-		<div style="margin-bottom:50px;margin-left:20%;width:60%; height:50px; clear:left; text-align:center; border: 1px solid #f69b02; border-radius:8px;">
+		<div style="margin-bottom:50px;margin-left:20%;width:60%; height:50px; clear:left; text-align:center; border: 1px solid #f69b02;">
 			<button id="viewMore">더보기</button>
 		</div>
 	</div>
 	</section>
+	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		var userNo = '${sessionScope.User.userNo}';
