@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="/css/index.css">
 <link rel="stylesheet" type="text/css" href="/css/headerSearch.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script
       src="https://code.jquery.com/jquery-3.4.0.js"
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
@@ -46,13 +47,22 @@
                 </div>
             </div>
 	        <div class="header search" style="width:7.7%;"><span>검색</span></div>
-	        <div class="header mypage" style="width:7.7%;"><span>마이페이지</span></div>
+	       
+		    <div class="header mypage" style="width:7.7%;"><span>마이페이지</span></div>
+	        
         </div>
         <div id="header-search">
        		<jsp:include page="/views/headerSearch.jsp"/>
     	</div>
-    	<div id="header-mypage">	
-        	<jsp:include page="/WEB-INF/views/mypage.jsp"/>
+    	<div id="header-mypage">
+    		<c:choose>
+	       		<c:when test="${sessionScope.User.userGrade != '관리자'}">	
+        			<jsp:include page="/WEB-INF/views/mypage.jsp"/>
+        		</c:when>
+        		<c:otherwise>
+        			<jsp:include page="/WEB-INF/views/adminMypage.jsp"/>
+        		</c:otherwise>
+        	</c:choose>
     	</div>
     </header>
     
