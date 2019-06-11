@@ -744,13 +744,31 @@
 					position : naver.maps.Position.TOP_RIGHT,       //줌컨트롤의 위치
 					style : naver.maps.ZoomControlStyle.SMALL  		//스타일 + - 만 나오는게 지도에대한 설정이었다 이말이야
 				}
+			 	
 			});
+			map.setOptions("mapTypeControl", true);
 			
 			var marker = new naver.maps.Marker({ 
 				position : new naver.maps.LatLng(y,x), //마커
-				map : map
+				map : map,
+				icon: {
+			        content: '<img src="/img/mark.png">',
+			        size: new naver.maps.Size(22, 35),
+			        anchor: new naver.maps.Point(11, 35)
+			    }
 				
-			});     
+			});
+			var infoWindow =new naver.maps.InfoWindow();
+			naver.maps.Event.addListener(marker,'click',function(e){	//클릭햇을떄 이벤트 줘야지
+				if(infoWindow.getMap()){ //지도에 열려있는지 아닌지 판단여부 (정보창)
+					infoWindow.close();
+				}else{
+					infoWindow.setContent('<div style="width:180px;text-align:center;padding:10px;"><img src="/upload/space/${s.s_img1}" style="width:150px;">${s.address}</div>');
+					infoWindow.open(map,marker);
+				}
+				
+			});
+			
 	    });		
 		};
 		

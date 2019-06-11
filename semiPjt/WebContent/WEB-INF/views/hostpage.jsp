@@ -126,7 +126,11 @@
     .day{  
    		font-size: 11px;
    		text-align: -webkit-right;
-   		margin-top: 25px;
+   		
+    }
+    .day2{
+     font-size: 14px;
+     text-align: right;
     }
     .reviewComment{
  	   float: right;
@@ -154,7 +158,8 @@
       
        width: 773px;
        text-align: left;    
-       margin-bottom: -33px;  
+      
+       border-bottom: 4px solid #f69b02;
     }
     .QRAcomment{
        float: left;
@@ -186,6 +191,7 @@
    .spspan{   
  	  color: #f69b02;
  	  font-size: 30px;
+ 	  border-bottom: 2px solid #f69b02;
   	 }
   	 .QRA{
   	 margin-right: 3px;
@@ -231,7 +237,8 @@
 	}
 	.qacomment{
 		
-		margin-left: 150px;
+    	width: 85.3%;
+		
    
 	}.placename{
 		float: left;
@@ -306,7 +313,7 @@
 	               	   <c:if test="${Q.qaCommentRef eq 0}">     	                         	               			               
 		                    <div class="QRAlist" id="${Q.qaCommentNo }">	                 
 			                    <div><span class="QRalspan">${Q.qaCommentWriter}</span></div>
-			                    <div class="QRAcomment">글:  ${Q.qaCommentContent}</div>
+			                    <div class="QRAcomment">${Q.qaCommentContent}</div>
 				                    <c:forEach items="${hd.list}" var="l">
 				                    	<c:if test="${l.s_no eq Q.qaRef}">
 				                    		<div class="day">${l.s_placeName }</div>
@@ -318,7 +325,8 @@
 						</c:if>
 							<c:forEach items="${Qalist}" var="Qa">
 								<c:if test="${Q.qaCommentNo == Qa.qaCommentRef}">		         	 
-									<div class="qacomment">ㄴ ${Qa.qaCommentWriter } : ${Qa.qaCommentContent }</div>
+									<div class="qacomment">▶ ${Qa.qaCommentWriter } : ${Qa.qaCommentContent } <div class="day2">${Qa.qaCommentDate }</div></div>
+				                    		
 								</c:if>
 							</c:forEach>
 		         	 	          		                        
@@ -335,10 +343,7 @@
 	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 	</body>
 		<script type="text/javascript">
-			//그 댓글의 글번호(아이디)
-			function appendDiv(ref,writer,content){
-				$("#"+ref ).append("<div> ㄴ 작성자아디 : "+writer+" 글 : "+content+"</div>");
-			}
+			
 			function del(event){
 				location.href="/deleteHostPage?s_no="+event;	
   				
