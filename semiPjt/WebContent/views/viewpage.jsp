@@ -70,19 +70,22 @@
                         </ul>
                         <!-- 마커 -->
                         <div style="position:relative;">
-                        <div id="declare">신고하기</div>
+                        <c:if test="${sessionScope.User != null}">
+                        	<div id="declare">신고하기</div>
+                        </c:if>
                         <div id="declare_content">
                         	<div id="declare_header">신고하기</div>
-                        	<form method="post" action="/insertDeclare">
+                        	<form id="declare_form">
                         		<button type="button" class="declare_type">공간 정보 허위 신고</button>
                         		<button type="button" class="declare_type">불친절한 호스트</button>
                         		<button type="button" class="declare_type">환불규정 미준수</button>
                         		<br><br>
-                        		<input type="hidden" name="sNo" value="${s.s_no }">
+                        		<input type="hidden" name="S_no" value="${s.s_no }">
+                        		<input type="hidden" name="S_placeName" value="${s.s_placeName }">
                         		<input id="declareType" type="hidden" name="declareType">
                         		신고자 : <input class="declare_name" type="text" name="userName" value="${sessionScope.User.userName }" readonly="readonly"><br><br>
                         		신고내용 : <input class="declare_name" type="text" name="declareContent" size="40" placeholder="신고내용을 간단히 작성해주세요."><br><br>
-                        		<button type="submit" id="declareBtn">신고하기</button>
+                        		<button type="button" id="declareBtn">신고하기</button>
                         	</form>
                         </div>
                         </div>
@@ -753,6 +756,43 @@
     	   $('.declare_type').removeClass("change_btn");
     	   $(this).toggleClass("change_btn");
     	   $('#declareType').val($(this).text());
+       });
+       $('#declareBtn').click(function(){
+    	   console
+    	   var params = $('#declare_form').serialize();
+           $.ajax({
+               url:"/insertDeclare",
+               type:"POST",
+               data:params, 
+               error:function(request,status,error){
+                   alert("실패");
+                   alert(request.status);
+               },
+               success:function(data){
+            	   var result = data;
+        			if(result==1){
+        				$("#viewpage_alert").slideDown(700);
+        				var offset = $("#viewpage_alert").offset();
+        		        $('html, body').animate({scrollTop : offset.top}, 400);
+                    	$("#viewpage_alert").delay(1300);
+                    	$("#viewpage_alert").css("display","inline");
+                    	$("#viewpage_alert").delay(1300);
+                    	$("#viewpage_alert").slideUp(700); 
+                    	$("#viewpage_alert p").html("신고접수가 완료되었습니다.");//마커
+                    	$('#declare_content').css("display","none");
+        			}else{
+        				$("#viewpage_alert").slideDown(700);
+        				var offset = $("#viewpage_alert").offset();
+        		        $('html, body').animate({scrollTop : offset.top}, 400);
+                    	$("#viewpage_alert").delay(1300);
+                    	$("#viewpage_alert").css("display","inline");
+                    	$("#viewpage_alert").delay(1300);
+                    	$("#viewpage_alert").slideUp(700);
+                    	$("#viewpage_alert p").html("신고접수 실패");
+                    	$('#declare_content').css("display","none");
+        			}
+               }
+           });
        });
         </script>
         <script>

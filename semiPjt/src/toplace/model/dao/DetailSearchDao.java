@@ -15,7 +15,7 @@ public class DetailSearchDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		ArrayList<Space> list = null;
-		String query = "select * from place";
+		String query = "select * from place order by s_no desc";
 		try {
 			stmt = conn.createStatement();
 			
@@ -67,7 +67,7 @@ public class DetailSearchDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Space> list = null;
-		String query = "select * from place where S_kategorie1 like ?";
+		String query = "select * from place where S_kategorie1 like ? order by s_no desc";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, typeArr);
@@ -119,7 +119,7 @@ public class DetailSearchDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		ArrayList<Space> list = null;
-		String query = "select * from place where (S_placeName || S_placeintroduce1 || S_placetag || address) like '%"+type+"%'";
+		String query = "select * from place where (S_placeName || S_placeintroduce1 || S_placetag || address) like '%"+type+"%' order by s_no desc";
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
@@ -170,7 +170,7 @@ public class DetailSearchDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Space> list = null;
-		String query = "select * from place where S_kategorie1 like ? and S_kategorie2 like ?";
+		String query = "select * from place where S_kategorie1 like ? and S_kategorie2 like ? order by s_no desc";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, typeArr);
@@ -223,7 +223,7 @@ public class DetailSearchDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		ArrayList<Space> list = null;
-		String query = "select * from place where (S_placeName || S_placeintroduce1 || S_placetag || address) like '%"+type+"%' and S_kategorie2 like '"+filterArr+"'";
+		String query = "select * from place where (S_placeName || S_placeintroduce1 || S_placetag || address) like '%"+type+"%' and S_kategorie2 like '"+filterArr+"' order by s_no desc";
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
@@ -274,7 +274,7 @@ public class DetailSearchDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		ArrayList<Space> list = null;
-		String query = "select * from place";
+		String query = "select * from place order by s_no desc";
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);

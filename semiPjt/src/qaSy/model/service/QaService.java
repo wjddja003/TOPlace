@@ -54,7 +54,7 @@ public class QaService {
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
-		ArrayList<QaComment> list = new QaDao().selectQList(conn, start, end);
+		ArrayList<QaComment> list = new QaDao().selectQList(conn, start, end,userId);
 		String pageNavi = "";
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;

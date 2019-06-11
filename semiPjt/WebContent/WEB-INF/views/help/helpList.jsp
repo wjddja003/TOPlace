@@ -56,8 +56,7 @@
         text-align: center;
         width: 1160px;
         margin: 0 auto;
-        position: absolute;
-        top: 40%;
+   		margin-top: 350px;
     }
      .hc_tr{
         visibility: collapse;
@@ -83,7 +82,7 @@
         .table_toggle>tbody>tr:first-child>td{
             border-top: 2px solid #656565;
         }
-          .reviewBtn{
+        .helpDeleteBtn{
         background: #fff;
         border: 1px solid #f69b02;
         font-size: 12px;
@@ -91,6 +90,40 @@
         float: right;
         width: 50px;
         height: 30px;
+        }
+        .helpUpdateBtn{
+        background: #fff;
+        border: 1px solid #f69b02;
+        font-size: 12px;
+        margin: 0 5px 5px 0;
+        float: right;
+        width: 50px;
+        height: 30px;
+        }
+        .helpInsertBtn{
+        background: #fff;
+        border: 1px solid #f69b02;
+        font-size: 12px;
+        margin: 0 0 5px 0;
+        float: right;
+        width: 50px;
+        height: 30px;
+        }
+        #DeleteMsg{
+	      width:100%;
+	      height: 100px;
+	      text-align: center;
+	      letter-spacing: 8px;
+	      word-spacing:15px;
+	      background-color: #f69b02;
+	      color:white;
+	      font-size: 30px;
+	      line-height: 100px;
+	      display:none;
+	      top:0px;
+	      position:fixed;
+	      z-index:99;
+	   }
     }
     
 </style>
@@ -99,8 +132,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
+	<div id="DeleteMsg"></div>
 	<section>
         <div class="section_content">
+        	
             <div class="box_search">
                 <div>
                     <label style="font-weight:bold" >카테고리 선택</label>
@@ -141,9 +176,10 @@ prefix="c" %>
                         <tr class="hc_tr">
                             <td colspan="5">
                                 ${h.helpContent }
-                                <c:if test="${sessionScope.User.userId == h.helpWriter}">
-                                <button class="reviewBtn" style="color:#f69b02; border-color:#f69b02"href="/helpDelete?helpNo=${h.helpNo }">삭제</button>
-                                    <button class="reviewBtn" style="color:#f69b02; border-color:#f69b02"href="/helpUpdate?helpNo=${h.helpNo }">수정</button>
+                                <c:if test="${sessionScope.User.userGrade == '관리자'}">
+                                <input type="hidden" value="${h.helpNo }">
+                                <button type="button" class="helpDeleteBtn" style="color:#f69b02; border-color:#f69b02">삭제</button>
+                                <button type="button" class="helpUpdateBtn" style="color:#f69b02; border-color:#f69b02"><a style="color:#f69b02;" href="/helpUpdate?helpNo=${h.helpNo }">수정</a></button>
                                 </c:if>
                                 <br>
                                 <c:if test="${h.filename != null }">
@@ -154,10 +190,9 @@ prefix="c" %>
                 </table>
             <div>${pd.pageNavi }</div>
             <div>
-
-
-                <button class="reviewBtn"  style="color:#f69b02; border-color:#f69b02"><a href="/helpWrite"style="color:#f69b02"> 글쓰기</a></button>
-
+				<c:if test="${sessionScope.User.userGrade == '관리자'}">
+                	<button class="helpInsertBtn"  style="color:#f69b02; border-color:#f69b02"><a href="/helpWrite"style="color:#f69b02"> 글쓰기</a></button>
+                </c:if>
             </div>
         </div>
         </div>
@@ -174,7 +209,27 @@ prefix="c" %>
                 $(this).next().css("visibility","collapse");
                 $(this).children().find('img').attr("src","/img/chevrondown.png");
             }
-        }); 
+        });
+		$('.helpDeleteBtn').click(function(){
+			var helpNo = $(this).prev().val();
+			console.log(helpNo);
+			$.ajax({
+				type:"GET",
+				url: "/helpDelete?helpNo="+helpNo,
+				success : function(data){
+					var result = data;
+					if(result == 1){
+						alert("도움말 삭제 완료");
+						location.reload();
+					}else{
+						$("#DeleteMsg").text("도움말 삭제 실패");
+				        $("#DeleteMsg").slideDown(700);
+				        $("#DeleteMsg").delay(1300);
+				        $("#DeleteMsg").slideUp(700);
+					}
+				}
+			});
+		});
 	</script>
 </body>
 </html>

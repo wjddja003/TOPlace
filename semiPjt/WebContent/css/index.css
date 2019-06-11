@@ -276,10 +276,8 @@ section {
 footer {
 	 height: 240px;
 	 margin-top: 0px;
-	 background: #3e3e3e;  
-	 overflow: hidden;
-	 
-	 
+	 background: #183058;  
+	 overflow: hidden;	 
 }
 .footer_content{
 	width: 1160px;

@@ -33,6 +33,7 @@ public class Space {
 	private int S_like;
 	private String[] S_kategorieList;
 	private String[] S_kategorieList1;
+	private String S_placeShow;
 	public Space() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -280,5 +281,13 @@ public class Space {
 		}
 		
 		return addrCut;
+	}
+	
+	public String getS_placeShow() {
+		return S_placeShow;
+	}
+	public void setS_placeShow(String s_placeShow) {
+		String str = s_placeShow.replaceAll("\r\n", "<br>");
+		S_placeShow =  str;
 	}
 }
