@@ -99,7 +99,7 @@
                     <div class="viewpage_cover">
                     <div class="viewpage_left">
                         <div class="viewpage_photo">
-                            <a href="#"><img src="/upload/space/${s.s_img1 }" width="773px;" height="255px;"></a>
+                            <img src="/upload/space/${s.s_img1 }" width="773px;" height="255px;">
                         </div>
                         <div class="viewpage_textbox">
                             <h2>${s.s_placeIntroduce1 }</h2>
