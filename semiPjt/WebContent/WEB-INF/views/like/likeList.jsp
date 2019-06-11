@@ -66,8 +66,6 @@
 	    .like{
 	    	width:40px;
 	    	height: 40px;
-	        background: #f69b02 ;
-	        border-radius:20%; 
 	    }
 		.kategorie1{
 			float:left;
@@ -101,7 +99,7 @@
 					<div style='height:460px; padding-left:5px;border:1px solid #f69b02;'>
 						<div style="float:left;">
 							<a class="likeClick" href="#">
-								<img src="../img/like_icon.png" class="like">
+								<img src="../img/like_border.png" class="like">
 	                    		<img src="../img/like_full_icon.png" class="like_full">
 	                    	</a>
                     	</div>
@@ -226,6 +224,7 @@
 	                 			}	
 	                 		}
 	                 	});
+	                     location.href="/likeList";
 	           		});
 	          }else{
 	        	  $(".like").click(function(){
