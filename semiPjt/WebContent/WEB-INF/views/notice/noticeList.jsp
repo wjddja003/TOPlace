@@ -44,11 +44,8 @@ prefix="c" %>
        width:900px;
     }
     .table-wrapper{
-        text-align: center;
-        width: 1160px;
-        margin: 0 auto;
-        position: absolute;
-        top: 40%;
+       margin-top:400px;
+       margin-bottom:100px;
     }
     .nc_tr{
         visibility: collapse;
@@ -64,6 +61,7 @@ prefix="c" %>
          margin-top: 60px;
          font-size:15px;
          width:100%;
+         text-align: center;;
     }
         .table_toggle tbody tr{
             height: 60px;
@@ -78,7 +76,7 @@ prefix="c" %>
         background-color: #183058;
         color: #f7f7f7;
     }
-    .reviewBtn{
+    .noticeBtn{
         background: #fff;
         border: 1px solid #f69b02;
         font-size: 12px;
@@ -86,13 +84,30 @@ prefix="c" %>
         float: right;
         width: 50px;
         height: 30px;
+        color:#f69b02; 
+        border-color:#f69b02;
     }
-    
+    #DeleteMsg{
+	      width:100%;
+	      height: 100px;
+	      text-align: center;
+	      letter-spacing: 8px;
+	      word-spacing:15px;
+	      background-color: #f69b02;
+	      color:white;
+	      font-size: 30px;
+	      line-height: 100px;
+	      display:none;
+	      top:0px;
+	      position:fixed;
+	      z-index:99;
+	   }
 </style>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
+	<div id="deleteMsg"></div>
 	<section>
     <div class="section_content">
             <div class="box_search">
@@ -129,9 +144,10 @@ prefix="c" %>
 						
 							
 							${n.noticeContent }
-							<c:if test="${sessionScope.User.userId == n.noticeWriter}">
-                                <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/noticeDelete?noticeNo=${n.noticeNo }"style="color:#f69b02">삭제</a></button>
-                                <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/noticeUpdate?noticeNo=${n.noticeNo }"style="color:#f69b02">수정</a></button>
+							<c:if test="${sessionScope.User.userGrade == '관리자'}">
+								<input type="hidden" value="${n.noticeNo }">
+                                <button type="button" id="noticeDeleteBtn" class="noticeBtn" style="margin: 0 0 5px 5px;">삭제</button>
+                                <button type="button" class="noticeBtn"><a href="/noticeUpdate?noticeNo=${n.noticeNo }"style="color:#f69b02">수정</a></button>
 							</c:if>
 							
 								
@@ -144,16 +160,15 @@ prefix="c" %>
 					</tr>
                 </c:forEach>
             </table>
-            <div><%= pd.getPageNavi() %></div>
+            <div style="text-align:center;"><%= pd.getPageNavi() %></div>
             <div>
             	<c:if test="${sessionScope.User.userGrade == '관리자'}">
-                	<button class="reviewBtn"style="color:#f69b02; border-color:#f69b02"><a href="/noticeWrite" style="color:#f69b02">글쓰기</a></button>
+                	<button class="noticeBtn"style="color:#f69b02; border-color:#f69b02"><a href="/noticeWrite" style="color:#f69b02">글쓰기</a></button>
                 </c:if>
             </div>
         </div>
     </div>
 	</section>
-	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 	<script>
         var count = 0;
 		$(".n_tr").click(function(){
@@ -165,5 +180,25 @@ prefix="c" %>
                 $(this).next().css("visibility","collapse");
                 $(this).children().find('img').attr("src","/img/chevrondown.png");
             }
-        }); 
+        });
+		$('#noticeDeleteBtn').click(function(){
+			var noticeNo = $(this).prev().val();
+			$.ajax({
+				type:"GET",
+				url: "/noticeDelete?noticeNo="+noticeNo,
+				success : function(data){
+					var result = data;
+					if(result == 1){
+						alert("공지사항 삭제 완료");
+						location.reload();
+					}else{
+						$("#DeleteMsg").text("공지사항 삭제 실패");
+				        $("#DeleteMsg").slideDown(700);
+				        $("#DeleteMsg").delay(1300);
+				        $("#DeleteMsg").slideUp(700);
+					}
+				}
+			});
+		});
 	</script>
+	<jsp:include page="/WEB-INF/common/footer.jsp"/>

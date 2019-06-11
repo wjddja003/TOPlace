@@ -1,7 +1,8 @@
-package qaSy.controller;
+package qaSy.model.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,7 +51,7 @@ public class InsertQaServlet extends HttpServlet {
 		}else {
 			request.setAttribute("msg","등록 실패");
 		}
-		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qaWrite.jsp");
 		request.setAttribute("loc", "/selectOneSpace?S_no="+ref);
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 	}

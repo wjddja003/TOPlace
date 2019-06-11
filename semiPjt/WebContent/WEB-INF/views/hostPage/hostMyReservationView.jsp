@@ -43,12 +43,12 @@
         float: left;
     }
     .qa_no{
-        padding: 10px;
+       
         float: left;
         margin: 20px 0 0 20px;
         border: 1px solid #e2e2e2;
         width: 100%;
-        height: 320px;
+       
         overflow: hidden;
         position: relative;
         text-align: center;
@@ -91,16 +91,23 @@
                     <div class="qa_no">
                     	<img id="spaceImg"src="/upload/space/${r.s_img1}"><br>
                     	예약자성명 :${r.reservationName }<br>
+                    	예약인원 : ${r.reservationPerson}<br>
+                    	추가인원 : ${r.reservationOption }     <br>              	
                     	예약날짜 :${r.reservationDay }<br>
-                    	가격 :${r.paymentPrice }
+                    	가격 :${r.paymentPrice }<br>
+                    	폰번호: ${r.reservationPhone } - ${r.reservationPhone1 } - ${r.reservationPhone2 } <br>
+                    	요청사항 : ${r.reservationRequest} 
+                    	
                     </div>
                 </div>
                 	</c:if>
                 </c:forEach>
               
             </div>
+          
         </div>
     </section>
+    <jsp:include page="/WEB-INF/common/footer.jsp"/>
     <script>
     	$(document).ready(function(){
     		console.log(${sessionScope.User.userNo});

@@ -1,6 +1,7 @@
 package helpSy.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +33,12 @@ public class HelpDeleteServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		int helpNo = Integer.parseInt(request.getParameter("helpNo"));
 		int result = new HelpService().deleteHelp(helpNo);
-		response.sendRedirect("/helpList");
+		PrintWriter out = response.getWriter();
+		if(result > 0) {
+			out.print(1);
+		}else {
+			out.print(0);
+		}
 	}
 
 	/**

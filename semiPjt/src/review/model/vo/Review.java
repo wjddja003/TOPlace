@@ -18,6 +18,19 @@ public class Review {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public Review(int reviewNo, int reviewSno, String reviewTitle, String reviewWriter, String reviewContent,
+			String filename, int reviewStar, Date reviewDate) {
+		super();
+		this.reviewNo = reviewNo;
+		this.reviewSno = reviewSno;
+		this.reviewTitle = reviewTitle;
+		this.reviewWriter = reviewWriter;
+		this.reviewContent = reviewContent;
+		this.filename = filename;
+		this.reviewStar = reviewStar;
+		this.reviewDate = reviewDate;
+	}
+
 
 	public Review(int reviewNo, int reviewSno, String reviewTitle, String reviewWriter, String reviewContent,
 			String filename, int reviewStar, Date reviewDate, String placeName) {
