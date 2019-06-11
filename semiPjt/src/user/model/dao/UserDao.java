@@ -30,6 +30,23 @@ public class UserDao {
 			e.printStackTrace();
 		}
 	}
+	public int adminUserDelete(int userNo,Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from user_db where user_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
 	public int totalCount(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;

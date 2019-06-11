@@ -23,10 +23,7 @@
 		height: 30px;
 		border: 1px solid #f69b02;
 		background: white;
-	}
-	.adminUserBtn a{
 		color: #f69b02;
-		background: white;
 	}
 </style>
 </head>
@@ -34,6 +31,7 @@
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
 	<section>
     <div class="section_content">
+    	 
     	 <div class="table-wrapper">
     	 	<div class="adminuser_header">
     	 		<h2>회원 관리</h2>
@@ -50,7 +48,7 @@
 	                    <td>${u.userName }</td>
 	                    <td>${u.enrollDate }</td>
 	                    <td>	
-                            <button type="button" class="adminUserBtn"><a href="/adminUserDelete?user_No=${u.userNo}">삭제</a></button>
+                            <button type="button" class="adminUserBtn">삭제</button>
 						</td>
                     </tr>
                 </c:forEach>
@@ -61,4 +59,29 @@
     </section>
     <jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
+<script type="text/javascript">
+	$('.adminUserBtn').click(function(){
+		var userNo = $(this).parent().prev().prev().prev().prev().html();
+		$.ajax({
+			type:"GET",
+			url:"/adminUserDelete?userNo="+userNo,
+			success : function(data){
+				var result = data;
+				if(result == 1){
+					$("#searchAlert").text("회원 탈퇴 성공");
+			        $("#searchAlert").slideDown(700);
+			        $("#searchAlert").delay(1300);
+			        $("#searchAlert").slideUp(700);
+				}else{
+					$("#searchAlert").text("회원 탈퇴 실패");
+			        $("#searchAlert").slideDown(700);
+			        $("#searchAlert").delay(1300);
+			        $("#searchAlert").slideUp(700);
+				}
+			}
+		});
+		
+
+	})
+</script>
 </html>
