@@ -204,7 +204,7 @@
                                     	<c:if test="${q.qaCommentRef == ''}">   	
                                         <li class="rlist" style="padding-top:30px;">  
                                         <div class="rbox_mine">  
-                                                 <span class="pf_img"><img src="../img/user.png" width="100px;" height="100px;"></span> 
+                                                 <span class="pf_img"><img src="../img/user1.png" width="100px;" height="100px;"></span> 
                                                 <div class="rbox_name">
                                                 <strong class="guest_name" style="font-size:22px;">${q.qaCommentWriter}</strong>
                                                 <p class="p_review">${q.qaCommentContent}</p>
@@ -230,9 +230,14 @@
                                         <c:forEach var="qq" items="${qna.list}">
                                           <c:if test="${q.qaCommentNo == qq.qaCommentRef}">
                                             <div class="rbox_reply" style="margin-top:30px;">
-                                            	<span class="pf_img"><img src="../img/${host.hostFile}"></span> 
+                                            <c:if test="${empty host.hostFile}">                                            	
+                                            	<span class="pf_img"><img src="../img/logo.png" width="100px;" height="50px;"></span>
+                                            </c:if>
+                                            <c:if test="${not empty host.hostFile }">
+                                            	<span class="pf_img"><img src="/upload/hostProfile/${host.hostFile}"></span>
+                                            	</c:if> 
                                                 <p class="p_tit_reply">
-                                                    <em>${host.hostName}</em>님의 댓글
+                                                    <em>${q.qaCommentWriter}</em>님의 댓글
                                                 </p>
                                                 <p class="p_review">
                                                 	   ${qq.qaCommentContent}
@@ -256,11 +261,7 @@
 							<div class="pf_right">
 								<strong class="pf_host">HOST</strong><br> <span class="pf_name">${s.s_placeName}</span>
 								<p class="pf_txt">${s.address}</p>
-							</div>
-                            <a href="/hostPage?hostNum=${host.hostNo}" class="hostbtn" style="text-decoration: none;">
-							<span class="btn_inner">
-								호스트 페이지로 이동 →
-							</span>
+							</div>							
 						</a>
 						</div>
                         </div>
@@ -279,7 +280,7 @@
                          <c:forEach items="${pd.list}" var="rc">
                             <li class="rlist">   
                                 <div class="rbox_mine" style="padding-top:30px;"> 
-                                    <span class="pf_img"><img src="../img/user.png" width="100px;" height="100px;"></span> 
+                                    <span class="pf_img"><img src="../img/user1.png" width="100px;" height="100px;"></span> 
                                     <strong class="guest_name">${rc.reviewWriter}</strong> 
 <%--                                     <p class="p_review"><span>제목 : </span>${rc.reviewTitle }</p> --%>
                                     <p class="p_review">${rc.reviewContent }</p>
