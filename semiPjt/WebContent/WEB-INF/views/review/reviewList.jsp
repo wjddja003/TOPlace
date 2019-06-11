@@ -51,7 +51,7 @@
         height: 100%;
         float: left;
     }
-    .qa_no{
+    .rv_no{
         padding: 10px;
         float: left;
         margin: 20px 0 0 20px;
@@ -77,6 +77,12 @@
         font-size: 12px;
         margin: 0 0 5px 0;
     }
+    .rv_no a{
+    	float: left;
+    }
+    .rdate{
+		font-size: 13px;
+	}
 </style>
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -97,13 +103,13 @@
                 	<c:if test="${sessionScope.User.userId == r.reviewWriter}">
                 <div class="qa_v">
               
-                    <div class="qa_no">
-                    	 공간명 :${r.reviewNo }<br>
-                    	${r.reviewTitle }<br>
+                    <div class="rv_no">
+                    	<a style="color:#f69b02;font-size:14px;"> 공간명 : ${r.placeName }</a><br>
+                    	<a>${r.reviewTitle }</a><br>
                     	
                         <div class="Q_btn">
-                        ${r.reviewDate }<br>
-                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02">리뷰보러가기</button>
+	                        <a class="rdate" style="color:#605f5d">${r.reviewDate }</a><br>
+	                        <a href="/selectOneSpace?S_no=${r.reviewNo}"> <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02">리뷰보러가기</button></a>
                         </div>
                     </div>
                 </div>
