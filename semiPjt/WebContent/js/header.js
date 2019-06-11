@@ -2,7 +2,7 @@ $(document).ready(function(){
 	
 	 $(".search").click(function(){
      	$("#header-mypage").css("display","none");
-         $("#header-search").css("display","block");
+         $("#header-search").toggle();
          
      });
      $(".mypage").click(function(){
