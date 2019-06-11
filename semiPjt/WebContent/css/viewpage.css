@@ -117,7 +117,7 @@ a{
     float: left;
 }
 .viewpage_right_list{
-    border: 1px solid #183058;
+    border: 2px solid #183058;
     padding: 20px;
     overflow: hidden;
 }
@@ -284,6 +284,9 @@ a{
     float: left;
     font-size: 18px;
 }
+.viewpage_qna_header{
+	cursor: pointer;
+}
 .viewpage_qna_header h4{
     float: left;
     border-bottom: 3px solid #f69b02;
@@ -302,9 +305,6 @@ a{
 }
 .viewpage_qnaview{
     clear: both;
-}
-.viewpage_qnaview p{
-    font-size: 16px;
 }
 .viewpage_hostpage{
     width: 773px;
@@ -645,4 +645,21 @@ a{
     background: none;
     color: #fff;
     
+}
+.pageNavi{
+    text-align: center;
+}
+.pageNavi span:hover{
+    border: 1px solid #f69b02;
+    background: #f69b02;
+    padding: 10px;
+    border-radius: 5px;
+    color: #183058   
+}
+.review_none{
+	width:773px;
+	height: 200px;
+	text-align: center;
+	line-height: 230px;
+	font-size: 22px;
 }

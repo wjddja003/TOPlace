@@ -43,8 +43,8 @@ public class InsertReviewServlet extends HttpServlet {
 			return;
 		}
 		String root = getServletContext().getRealPath("/");
-		String saveDirectory = root + "upload/review";
-		
+		String saveDirectory = root+"upload\\review";
+		System.out.println(saveDirectory);
 		int maxSize = 10*1024*1024;
 		
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory,maxSize,"utf-8",new DefaultFileRenamePolicy());
