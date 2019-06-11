@@ -66,8 +66,26 @@
                             	<a href="#">#${t}</a>
                             </li>
                          </c:forTokens>
-              
+              			
                         </ul>
+                        <!-- 마커 -->
+                        <div style="position:relative;">
+                        <div id="declare">신고하기</div>
+                        <div id="declare_content">
+                        	<div id="declare_header">신고하기</div>
+                        	<form method="post" action="/insertDeclare">
+                        		<button type="button" class="declare_type">공간 정보 허위 신고</button>
+                        		<button type="button" class="declare_type">불친절한 호스트</button>
+                        		<button type="button" class="declare_type">환불규정 미준수</button>
+                        		<br><br>
+                        		<input type="hidden" name="sNo" value="${s.s_no }">
+                        		<input id="declareType" type="hidden" name="declareType">
+                        		신고자 : <input class="declare_name" type="text" name="userName" value="${sessionScope.User.userName }" readonly="readonly"><br><br>
+                        		신고내용 : <input class="declare_name" type="text" name="declareContent" size="40" placeholder="신고내용을 간단히 작성해주세요."><br><br>
+                        		<button type="submit" id="declareBtn">신고하기</button>
+                        	</form>
+                        </div>
+                        </div>
                      </div>
                      <!--viewpage_section Fin-->
                     <div class="viewpage_cover">
@@ -727,6 +745,15 @@
     	   $('#layer_popup_Comment').show();
     	   $('.hostpopupMask').show();
        });
+       $('#declare').click(function(){
+    	   //마커
+    	   $('#declare_content').toggle();
+       });
+       $('.declare_type').click(function(){
+    	   $('.declare_type').removeClass("change_btn");
+    	   $(this).toggleClass("change_btn");
+    	   $('#declareType').val($(this).text());
+       });
         </script>
         <script>
 	window.onload = function () { 
@@ -755,13 +782,31 @@
 					position : naver.maps.Position.TOP_RIGHT,       //줌컨트롤의 위치
 					style : naver.maps.ZoomControlStyle.SMALL  		//스타일 + - 만 나오는게 지도에대한 설정이었다 이말이야
 				}
+			 	
 			});
+			map.setOptions("mapTypeControl", true);
 			
 			var marker = new naver.maps.Marker({ 
 				position : new naver.maps.LatLng(y,x), //마커
-				map : map
+				map : map,
+				icon: {
+			        content: '<img src="/img/mark.png">',
+			        size: new naver.maps.Size(22, 35),
+			        anchor: new naver.maps.Point(11, 35)
+			    }
 				
-			});     
+			});
+			var infoWindow =new naver.maps.InfoWindow();
+			naver.maps.Event.addListener(marker,'click',function(e){	//클릭햇을떄 이벤트 줘야지
+				if(infoWindow.getMap()){ //지도에 열려있는지 아닌지 판단여부 (정보창)
+					infoWindow.close();
+				}else{
+					infoWindow.setContent('<div style="width:180px;text-align:center;padding:10px;"><img src="/upload/space/${s.s_img1}" style="width:150px;">${s.address}</div>');
+					infoWindow.open(map,marker);
+				}
+				
+			});
+			
 	    });		
 		};
 		

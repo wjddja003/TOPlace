@@ -48,8 +48,8 @@
 					<div style='height:140px; padding-left:5px;border:1px solid #f69b02;'>
 						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${hits.s_placeName}</p>
 						
-						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span>${hits.addressCut}</span>
-						<div style="width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${hits.s_placeTag}</div>
+						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span style="font-weight:100;">${hits.addressCut}</span>
+						<div style="font-weight:100;width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${hits.s_placeTag}</div>
 						<c:if test="${hits.s_type eq 'time' }">
 							&nbsp;<span style="font-size:22px; color:#f69b02;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${hits.s_price1}" /></span><span style=""> 원/시간</span>
 						</c:if>
@@ -73,13 +73,13 @@
 					<div style='height:140px; padding-left:5px;border:1px solid #f69b02;'>
 						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${likes.s_placeName}</p>
 						
-						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span>${likes.addressCut}</span>
-						<div style="width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${likes.s_placeTag}</div>
+						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span style="font-weight:100;">${likes.addressCut}</span>
+						<div style="font-weight:100;width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${likes.s_placeTag}</div>
 						<c:if test="${likes.s_type eq 'time' }">
-							&nbsp;<span style="font-size:22px; color:#183058;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${likes.s_price1}" /></span><span style=""> 원/시간</span>
+							&nbsp;<span style="font-size:22px; color:#f69b02;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${likes.s_price1}" /></span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${likes.s_type eq 'day' }">
-							&nbsp;<span style="font-size:22px; color:#183058;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${likes.s_price1}" /></span><span> 원/일</span>
+							&nbsp;<span style="font-size:22px; color:#f69b02;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${likes.s_price1}" /></span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>

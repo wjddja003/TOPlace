@@ -1,15 +1,19 @@
 package reservation.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import helpSy.model.service.HelpService;
 import reservation.model.service.ReservationService;
 import reservation.model.vo.Reservation;
+import user.model.vo.User;
 
 /**
  * Servlet implementation class InsertReservationServlet
@@ -31,6 +35,12 @@ public class InsertReservationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		User u = (User)session.getAttribute("User");
+		if(u == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
+			rd.forward(request, response);
+		}else {
 		int S_no = Integer.parseInt(request.getParameter("S_no"));
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		String reservationName = request.getParameter("reservationName");
@@ -58,6 +68,7 @@ public class InsertReservationServlet extends HttpServlet {
 		}
 		request.setAttribute("loc", "/");
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**
