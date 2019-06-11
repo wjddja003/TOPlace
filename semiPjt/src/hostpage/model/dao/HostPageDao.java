@@ -9,7 +9,9 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import hostpage.model.vo.Hostpage;
+import hostpage.model.vo.Reservation2;
 import qaSy.model.vo.QaComment;
+import reservation.model.vo.Reservation;
 import review.model.vo.Review;
 import space.model.vo.Space;
 import user.model.vo.User;
@@ -138,17 +140,18 @@ public class HostPageDao {
 		return s;
 	}
 
-	public ArrayList<Space> hostmore(Connection conn, int start, int end) {
+	public ArrayList<Space> hostmore(Connection conn, int start, int end, int s_hostNum) {
 		PreparedStatement pstmt = null;
 		ResultSet rset= null;
-		String query = "select * from (select rownum as rnum, p.* from (select * from place order by s_no desc)p) where rnum between ? and ?";
+		String query = "select * from (select rownum as rnum, p.* from (select * from place where S_hostNum=? order by s_no desc)p) where rnum between ? and ?";
 		
 		ArrayList<Space> list = null;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			pstmt.setInt(1, s_hostNum);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Space>();
 			
@@ -298,8 +301,9 @@ public class HostPageDao {
 				q.setQaCommentContent(rset.getString("qa_COMMENT_CONTENT"));
 				q.setQaRef(rset.getInt("qa_REF"));
 				q.setQaCommentDate(rset.getDate("qa_COMMENT_DATE"));
+				q.setQaCommentRef(rset.getInt("qa_comment_ref"));
 				list.add(q);
-				System.out.println(list.get(0).getQaCommentNo());
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -317,7 +321,7 @@ public class HostPageDao {
 		ArrayList<QaComment> list = null; 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select ROWNUM as rnum, m.* from (select * from review where review_sno in (select s_no from place where s_hostNum=?))m) where rnum between ? and ?";
+		String query = "select * from (select ROWNUM as rnum, m.* from (select * from qa_COMMENT where qa_ref in (select s_no from place where s_hostNum=?))m) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, shostNum);
@@ -347,6 +351,51 @@ public class HostPageDao {
 		return list;
 	}
 
+	public ArrayList<Reservation2> hostreservationList(Connection conn, int hostNum) {
+		ArrayList<Reservation2> list = null; 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select p.s_img1,r.* from place p join (select * from reservation where s_no in (select s_no from place where s_hostNum = ?))r on (r.s_no = p.s_no)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, hostNum);
+			rset= pstmt.executeQuery();
+			list = new ArrayList<Reservation2>();	
+			while(rset.next()) {
+				Reservation2 r = new Reservation2();
+				r.setS_img1(rset.getString("s_img1"));
+				r.setReservationNo(rset.getInt("reservation_no"));
+				r.setS_no(rset.getInt("s_no"));
+				r.setUserNo(rset.getInt("user_no"));
+				r.setReservationName(rset.getString("reservation_name"));
+				r.setReservationDay(rset.getString("reservation_day"));
+				r.setReservationBooker(rset.getString("reservation_booker"));
+				r.setReservationTime(rset.getString("reservation_time"));
+				r.setReservationPerson(rset.getInt("reservation_person"));
+				r.setReservationOption(rset.getString("reservation_option"));
+				r.setPaymentId(rset.getString("payment_id"));
+				r.setPaymentPrice(rset.getInt("payment_price"));
+				r.setPaymentCard(rset.getString("payment_card"));
+				
+				list.add(r);
+				
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		
+		return list;
+	}
+
+	
 	
 
 	
