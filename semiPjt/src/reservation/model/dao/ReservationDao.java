@@ -1,17 +1,14 @@
 package reservation.model.dao;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Properties;
 
 import common.JDBCTemplate;
 import reservation.model.vo.Reservation;
+import reservation.model.vo.ReservationImg;
 
 public class ReservationDao {
 
@@ -173,4 +170,4 @@ public class ReservationDao {
 	
 
 	}
-}
+

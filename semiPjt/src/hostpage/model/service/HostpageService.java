@@ -7,12 +7,14 @@ import common.JDBCTemplate;
 import host.model.dao.HostDao;
 import hostpage.model.dao.HostPageDao;
 import hostpage.model.vo.HostDataPage;
+import hostpage.model.vo.HostPageReservation;
 import hostpage.model.vo.HostPaging;
 import hostpage.model.vo.HostPagiongQA;
+import hostpage.model.vo.Reservation2;
 import qaSy.model.vo.QaComment;
+import reservation.model.vo.Reservation;
 import review.model.vo.Review;
 import space.model.vo.Space;
-import user.model.vo.User;
 
 public class HostpageService {
 
@@ -64,11 +66,11 @@ public class HostpageService {
 		return result;
 	}
 
-	public ArrayList<Space> hostmore(int start) {
+	public ArrayList<Space> hostmore(int start, int s_hostNum) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		int length= 3;
-		ArrayList<Space> list = new HostPageDao().hostmore(conn,start,start+length-1);
+		ArrayList<Space> list = new HostPageDao().hostmore(conn,start,start+length-1,s_hostNum);
 		JDBCTemplate.close(conn);
 		return list;
 	}
@@ -93,20 +95,21 @@ public class HostpageService {
 		int pageNaviSize = 5;    // <1 2 3 4 5 ?> 
 		int pageNo =((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(pageNo !=1) {											
-			pageNavi += "<a class='btn' href='/hostPage?reqPage="+(pageNo-1)+"&ShostNum="+shostNum+"'>이전</a>";
+			pageNavi += "<a class='pageBtn' href='/hostPage?reqPage="+(pageNo-1)+"&ShostNum="+shostNum+"'>이전</a>";
 		}
+		
 		int i = 1; 
 		while( !(i++>pageNaviSize || pageNo>totalpge)) {  
 			if(reqPage == pageNo) { 
 				 pageNavi += "<span class='selectPage'>"+pageNo+"</span>";
 			}else {
-				pageNavi += "<a class='btn' href='/hostPage?reqPage="+pageNo+"&ShostNum="+shostNum+"'>"+pageNo+"</a>"; 
+				pageNavi += "<a class='pageBtn' href='/hostPage?reqPage="+pageNo+"&ShostNum="+shostNum+"'>"+pageNo+"</a>"; 
 						//pageno 2개 = 하나는 볼것 하나는 값 전달할것
 			}
 			pageNo++;
 		}
 		if(pageNo <= totalpge) {
-			pageNavi +="<a class='btn' href='/hostPage?reqPage="+(pageNo)+"&ShostNum=+"+shostNum+"+'>다음</a>";
+			pageNavi +="<a class='pageBtn' href='/hostPage?reqPage="+(pageNo)+"&ShostNum=+"+shostNum+"+'>다음</a>";
 		}
 		
 		HostPaging hp = new HostPaging(list,pageNavi);
@@ -166,6 +169,15 @@ public class HostpageService {
 		
 		JDBCTemplate.close(conn);
 		return hqa;
+	}
+
+	public ArrayList<Reservation2> hostreservationList(int hostNum) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Reservation2> list = new HostPageDao().hostreservationList(conn,hostNum);
+		
+	
+		JDBCTemplate.close(conn);
+		return list;
 	}
 
 	
