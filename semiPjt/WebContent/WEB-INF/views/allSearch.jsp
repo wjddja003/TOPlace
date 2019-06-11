@@ -94,13 +94,13 @@
                     	
 						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${s.s_placeName}</p>
 						
-						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span>${s.addressCut}</span>
-						<div style="width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${s.s_placeTag}</div>
+						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span style="font-weight:100;">${s.addressCut}</span>
+						<div style="font-weight:100;width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${s.s_placeTag}</div>
 						<c:if test="${s.s_type eq 'time' }">
-							&nbsp;<span style="font-size:22px; color:#183058;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /></span><span style=""> 원/시간</span>
+							&nbsp;<span style="font-size:22px; color:#f69b02;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /></span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${s.s_type eq 'day' }">
-							&nbsp;<span style="font-size:22px; color:#183058;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /></span><span> 원/일</span>
+							&nbsp;<span style="font-size:22px; color:#f69b02;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /></span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>

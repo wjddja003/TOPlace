@@ -34,13 +34,13 @@
                     <div class="header_ranking_h" style="text-align: center;">
                         <p>실시간 급상승 검색어</p>
                     </div>
-                    <ul>
+                    <ul style="line-height: 100px;">
                     </ul>
                 </div>
             </div>
-	        <div class="header search" style="width:7.7%;"><span>검색</span></div>
+	        <div class="header search" style="width:7.7%; line-height: 100px;"><span>검색</span></div>
 	       
-		    <div class="header mypage" style="width:7.7%;"><span>마이페이지</span></div>
+		    <div class="header mypage" style="width:7.7%; line-height: 100px;"><span>마이페이지</span></div>
 	        
         </div>
         <div id="header-search" class="exception-header">
@@ -78,7 +78,7 @@
   	    	rankingArr2[i] = ranking2;
   	    	$('.header_ranking ul').html($('.header_ranking ul').html()+"<li><a href='/selectOneSpace?S_no="+rankingArr2[i]+"'><span class='ranking'>"+rankingArr1[i]+"</span></a></li>");
 	  	    	$('.ranking').each(function(){
-	     	    	var length = 12;
+	     	    	var length = 15;
 	     	    	$(this).each(function(){
 	     	    		if($(this).text().length >= length){
 	     	    			$(this).text($(this).text().substr(0,length)+'...');

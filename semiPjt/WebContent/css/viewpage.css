@@ -117,7 +117,7 @@ a{
     float: left;
 }
 .viewpage_right_list{
-    border: 1px solid #183058;
+    border: 2px solid #183058;
     padding: 20px;
     overflow: hidden;
 }
@@ -178,24 +178,24 @@ a{
         list-style: none;      
         
     }
+
 .viewpage_reservationbtn{
+    color: #fff;
+    height: 50px;
+    line-height: 45px;
+    font-size: 16px;
     width: 370px;
     height: 50px;
     text-align: center;
     background: #f69b02;
-}
-.viewpage_reservationbtn a{
-    color: #fff;
-    height: 50px;
-    width: 300px;
-    line-height: 45px;
-    font-size: 16px;
+    border:none;
 }
 .viewpage_reservationbtn:hover{
     background-color: #183058;
+     color: #fff;
 }
-.viewpage_reservationbtn a:hover{
-    color: #fff;
+.viewpage_reservationbtn:hover{
+   
 }
     .viewpage_photo2{
         width: 773px;
@@ -284,6 +284,9 @@ a{
     float: left;
     font-size: 18px;
 }
+.viewpage_qna_header{
+	cursor: pointer;
+}
 .viewpage_qna_header h4{
     float: left;
     border-bottom: 3px solid #f69b02;
@@ -302,9 +305,6 @@ a{
 }
 .viewpage_qnaview{
     clear: both;
-}
-.viewpage_qnaview p{
-    font-size: 16px;
 }
 .viewpage_hostpage{
     width: 773px;
@@ -645,4 +645,102 @@ a{
     background: none;
     color: #fff;
     
+}
+<<<<<<< HEAD
+.pageNavi{
+    text-align: center;
+}
+.pageNavi span:hover{
+    border: 1px solid #f69b02;
+    background: #f69b02;
+    padding: 10px;
+    border-radius: 5px;
+    color: #183058   
+}
+.review_none{
+	width:773px;
+	height: 200px;
+	text-align: center;
+	line-height: 230px;
+	font-size: 22px;
+
+#declare{
+	border:1px solid red;
+	margin-left:670px;
+	margin-bottom:10px;
+	width:100px;
+	height:50px;
+	border-radius: 10px;
+	color:red;
+	text-align: center;
+	line-height: 50px;
+	font-size:20px;
+	cursor:pointer;
+	position:absolute;
+	top:-55px;
+}
+#declare:hover{
+	color:white;
+	background-color: red;
+}
+.declare_type:focus {
+    outline: none;
+}
+.declare_type{
+	
+	background-color:white;
+	border:1px solid red;
+	border-radius: 10px;
+	color:red;
+	width:90px;
+	height:50px;
+	cursor:pointer;
+	
+}
+#declare_content{
+	position:absolute;
+	
+	left:373px;
+	display:none;
+	border:1px solid red;
+	width:400px;
+	heigth:500px;
+	text-align: center;
+	border-radius: 15px;
+	margin-bottom:10px;
+	z-index:10;
+	background-color: white;
+}
+.declare_name{
+	border:none;
+	outline: none;
+	border-bottom:1px solid black;
+	text-align: center;
+}
+#declare_header{
+	width:100%;
+	height: 50px;
+	background-color: red;
+	color:white;
+	font-size: 22px;
+	margin-bottom:10px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	line-height: 50px;
+}
+#declareBtn{
+	background-color:white;
+	border:1px solid red;
+	border-radius: 10px;
+	color:red;
+	width:90px;
+	height:50px;
+	cursor:pointer;
+	
+	outline:none;
+}
+.change_btn{
+	color:white;
+	background-color: red;
+	
 }
