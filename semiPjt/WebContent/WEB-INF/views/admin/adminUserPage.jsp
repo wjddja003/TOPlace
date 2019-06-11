@@ -25,10 +25,26 @@
 		background: white;
 		color: #f69b02;
 	}
+	#DeleteMsg{
+	      width:100%;
+	      height: 100px;
+	      text-align: center;
+	      letter-spacing: 8px;
+	      word-spacing:15px;
+	      background-color: #f69b02;
+	      color:white;
+	      font-size: 30px;
+	      line-height: 100px;
+	      display:none;
+	      top:0px;
+	      position:fixed;
+	      z-index:99;
+	}
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
+	<div id="DeleteMsg"></div>
 	<section>
     <div class="section_content">
     	 
@@ -68,15 +84,13 @@
 			success : function(data){
 				var result = data;
 				if(result == 1){
-					$("#searchAlert").text("회원 탈퇴 성공");
-			        $("#searchAlert").slideDown(700);
-			        $("#searchAlert").delay(1300);
-			        $("#searchAlert").slideUp(700);
+					alert("회원 탈퇴 완료");
+					location.reload();
 				}else{
-					$("#searchAlert").text("회원 탈퇴 실패");
-			        $("#searchAlert").slideDown(700);
-			        $("#searchAlert").delay(1300);
-			        $("#searchAlert").slideUp(700);
+					$("#DeleteMsg").text("회원 탈퇴 실패");
+			        $("#DeleteMsg").slideDown(700);
+			        $("#DeleteMsg").delay(1300);
+			        $("#DeleteMsg").slideUp(700);
 				}
 			}
 		});

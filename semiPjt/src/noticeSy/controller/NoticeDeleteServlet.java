@@ -1,6 +1,7 @@
 package noticeSy.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +33,12 @@ public class NoticeDeleteServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		int result = new NoticeService().deleteNotice(noticeNo);
-		response.sendRedirect("/noticeList");
+		PrintWriter out = response.getWriter();
+		if(result > 0) {
+			out.print(1);
+		}else {
+			out.print(0);
+		}
 	}
 
 	/**
