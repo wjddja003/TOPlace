@@ -74,7 +74,15 @@
   	    	ranking2 = spaceNo;
   	    	rankingArr1[i] = ranking1;
   	    	rankingArr2[i] = ranking2;
-  	    	$('.header_ranking ul').html($('.header_ranking ul').html()+"<li><a href='/selectOneSpace?S_no="+rankingArr2[i]+"' >"+rankingArr1[i]+"</a></li>");
+  	    	$('.header_ranking ul').html($('.header_ranking ul').html()+"<li><a href='/selectOneSpace?S_no="+rankingArr2[i]+"'><span class='ranking'>"+rankingArr1[i]+"</span></a></li>");
+	  	    	$('.ranking').each(function(){
+	     	    	var length = 13;
+	     	    	$(this).each(function(){
+	     	    		if($(this).text().length >= length){
+	     	    			$(this).text($(this).text().substr(0,length)+'...');
+	     	    		}
+	     	    	});
+	     	    });
   	    	}
   	   },error : function(xhr, status, error) {
   	   }
