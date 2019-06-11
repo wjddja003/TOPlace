@@ -242,6 +242,7 @@ public class QaDao {
 				q.setQaCommentContent(rset.getString("qa_Comment_content"));
 				q.setQaCommentDate(rset.getDate("qa_Comment_date"));
 				q.setPlaceName(rset.getString("s_placename"));
+				q.setQaRef(rset.getInt("qa_ref"));
 				list.add(q);
 			}
 		} catch (SQLException e) {

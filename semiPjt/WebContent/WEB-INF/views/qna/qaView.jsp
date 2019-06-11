@@ -258,9 +258,13 @@
 	.qdate{
 		font-size: 13px;
 	}
+	.text{
+		float: left;
+	}
 </style>
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
     <section>
         <div class="section_content">
@@ -281,8 +285,8 @@
                     <div class="qa_no">
                     	<input type="hidden" class="qNoHidden" value="${q.qaCommentNo }">
                         <div class="comment">
-                           	 <a href="/selectOneSpace?S_no=${q.qaRef}"style=color:#f69b02;font-size:14px;>공간명 : ${q.placeName }</a><br>
-                            <a class="text">${q.qaCommentContent }</a><br>
+                           	 <a href="/selectOneSpace?S_no=${q.qaRef}" style=color:#f69b02;font-size:14px;>공간명 : ${q.placeName }</a><br>
+                            <span class="text">${q.qaCommentContent }</span><br>
                     	</div>
                         <div class="Q_btn">
                         <a class="qdate" style="color:#605f5d">${q.qaCommentDate }</a><br>
@@ -296,12 +300,12 @@
                <div class="qa_navi">${pd.pageNavi }</div>
             </div>
 	<form method="post" id="qaUpdateForm2" action="/qaCommentUpdateEnd">
-	    <div class="layer_popup_up" class="_noProfileCheckLayout" style="display:none;position:fixed;">
+	    <div class="layer_popup_up"  style="display:none;position:fixed;">
 	         <div class="popup_wrap">
 	                <div class="pop_header">
 	                   <input type="hidden" name="S_no" value="${s.s_no}">                    
 	               <p>질문 작성하기</p>
-	                    <button type="button" class="popcencleUP">X</button>
+	                    <button type="button" class="popcencleUP"><a href="javascript:void(0);">X</a></button>
 	                </div>
 	            <div class="pop_container">
 	                    <div class="box_l">
