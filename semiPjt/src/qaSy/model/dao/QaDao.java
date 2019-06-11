@@ -222,15 +222,17 @@ public class QaDao {
 		return list;
 		
 	}
-	public ArrayList<QaComment> selectQList(Connection conn, int start,int end){
+	public ArrayList<QaComment> selectQList(Connection conn, int start,int end,String userId){
 		ArrayList<QaComment> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum as rnum, q.* from (select q.*,s_placename from qa_comment q join place p on (q.qa_ref = p.S_no) where s_no = 1 and qa_comment_ref is null order by qa_comment_date desc) q) where rnum between ? and ?";
+		String query = "select * from (select rownum as rnum, q.* from (select q.*,s_placename from qa_comment q join place p on (q.qa_ref = p.S_no) where qa_COMMENT_WRITER = ? and qa_comment_ref is null order by qa_comment_date desc) q) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rset = pstmt.executeQuery();
 			list = new ArrayList<QaComment>();
 			while(rset.next()) {

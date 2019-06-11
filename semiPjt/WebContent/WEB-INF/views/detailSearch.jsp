@@ -223,6 +223,7 @@
 	    .searchInput{
 	    	border:1px solid #183058;
 	    }
+
 	</style>
 </head>
 <body>
@@ -302,8 +303,7 @@
 			</div>
 			<div class="filterOutLine">
 				<div class="filterOutBox">
-					<span>편의시설</span><span style="font-weight:100;">을 선택하세요.</span>&nbsp;&nbsp;&nbsp;전체선택&nbsp;
-					<input type="checkbox" id="filterCheck" style="width:20px;height:20px;" checked="checked">&nbsp;
+					<span>편의시설</span><span style="font-weight:100;">을 선택하세요.</span>
 					<button class="filterBack">X</button>
 				</div>
 				<div class="filterOutBox">
@@ -358,13 +358,13 @@
                     	
 						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${s.s_placeName}</p>
 						
-						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span>${s.addressCut}</span>
-						<div style="width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${s.s_placeTag}</div>
+						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span style="font-weight:100;">${s.addressCut}</span>
+						<div style="font-weight:100;width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${s.s_placeTag}</div>
 						<c:if test="${s.s_type eq 'time' }">
-							&nbsp;<span style="font-size:22px; color:#183058;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /></span><span style=""> 원/시간</span>
+							&nbsp;<span style="font-size:22px; color:#f69b02;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /></span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${s.s_type eq 'day' }">
-							&nbsp;<span style="font-size:22px; color:#183058;">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /></span><span> 원/일</span>
+							&nbsp;<span style="font-size:22px; color:#f69b02;">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /></span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>
@@ -555,13 +555,10 @@
 		    filterCount = 0;
 		});
 		
-		var filterArray = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+		var filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 		var filterCount = 0;
 		$('.filterBox').click(function(){
-			if($('#filterCheck').is(':checked')==true){
-				$('#filterCheck').prop("checked", false);
-				filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-			}
+			
 			var filterIndex = $('.filterBox').index(this);
 			$(this).toggleClass("selectFilter");
 			if($(this).hasClass("selectFilter")){
@@ -571,14 +568,7 @@
 			}
 			console.log(filterArray);
 		});
-		$('#filterCheck').click(function(){
-			if($('#filterCheck').is(':checked')==true){
-				filterArray = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-			} else{
-				filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-			}
-			$(".selectFilter").removeClass("selectFilter");
-		});
+		
 		var viewIndex = 6;//공간 리스트 인덱스
 		$('#viewMore').click(function(){
 			for(var i = viewIndex; i<viewIndex+6; i++){
@@ -586,10 +576,7 @@
 			}
 			viewIndex = viewIndex+6;
 		});
-		$('#detailSearchMap').click(function(){
-			
-			$('.mapInner').toggle();
-		});
+		
 		$('#filterReset').click(function(){
 			$('#filterCheck').prop("checked", false);
 			filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];

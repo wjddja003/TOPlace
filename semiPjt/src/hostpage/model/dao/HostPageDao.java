@@ -376,6 +376,11 @@ public class HostPageDao {
 				r.setPaymentId(rset.getString("payment_id"));
 				r.setPaymentPrice(rset.getInt("payment_price"));
 				r.setPaymentCard(rset.getString("payment_card"));
+			
+				r.setReservationPhone(rset.getString("reservation_phone"));
+				r.setReservationPhone1(rset.getString("reservation_phone1"));
+				r.setReservationPhone2(rset.getString("reservation_phone2"));
+				r.setReservationRequest(rset.getString("reservation_request"));
 				
 				list.add(r);
 				

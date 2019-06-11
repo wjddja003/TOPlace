@@ -1,4 +1,4 @@
-package qaSy.controller;
+package qaSy.model.controller;
 
 import java.io.IOException;
 
