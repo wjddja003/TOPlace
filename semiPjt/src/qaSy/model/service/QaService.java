@@ -49,8 +49,6 @@ public class QaService {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 3;
 		int totalCount = new QaDao().totalQCount(conn,userId);
-		System.out.println(totalCount);
-		System.out.println(userId);
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;

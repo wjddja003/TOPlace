@@ -109,7 +109,7 @@
                     	
                         <div class="Q_btn">
 	                        <a class="rdate" style="color:#605f5d">${r.reviewDate }</a><br>
-	                        <a href="/selectOneSpace?S_no=${r.reviewNo}"> <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02">리뷰보러가기</button></a>
+	                        <a href="/selectOneSpace?S_no=${r.reviewSno}"> <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02">리뷰보러가기</button></a>
                         </div>
                     </div>
                 </div>

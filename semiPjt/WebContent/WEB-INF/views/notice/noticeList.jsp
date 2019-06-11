@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="noticeSy.model.vo.Notice" %>
-    <%@ page import="java.util.ArrayList" %>
-    <%@ page import="noticeSy.model.vo.NoticePageData" %>
-    <%@ page import="user.model.vo.User" %>
-    <%
-          NoticePageData pd = (NoticePageData)request.getAttribute("pd");
-        ArrayList<Notice> list = pd.getList();
-    %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -160,7 +153,7 @@ prefix="c" %>
 					</tr>
                 </c:forEach>
             </table>
-            <div style="text-align:center;"><%= pd.getPageNavi() %></div>
+            <div style="text-align:center;">${pd.pageNavi }</div>
             <div>
             	<c:if test="${sessionScope.User.userGrade == '관리자'}">
                 	<button class="noticeBtn"style="color:#f69b02; border-color:#f69b02"><a href="/noticeWrite" style="color:#f69b02">글쓰기</a></button>
