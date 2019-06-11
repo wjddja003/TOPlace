@@ -1,6 +1,7 @@
 package space.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import space.model.dao.SpaceDao;
@@ -22,16 +23,21 @@ public class SpaceService {
 	public Space selectOneSpace(int S_no) {
 		Connection conn = JDBCTemplate.getConnection();
 		Space s = new SpaceDao().selectOneSpace(conn,S_no);
+		s.setS_kategorieList1(s.getS_kategorie1());
+		s.setS_kategorieList(s.getS_kategorie2());
+		JDBCTemplate.close(conn);
+		return s;
+	}
+	public int hitUpSpace(int S_no) {
+		Connection conn = JDBCTemplate.getConnection();
 		int result = new SpaceDao().hitUpdate(conn,S_no);
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);
 		}
-		s.setS_kategorieList1(s.getS_kategorie1());
-		s.setS_kategorieList(s.getS_kategorie2());
 		JDBCTemplate.close(conn);
-		return s;
+		return result;
 	}
 	public int updateSpace(Space s) {
 		Connection conn = JDBCTemplate.getConnection();
@@ -67,17 +73,6 @@ public class SpaceService {
 		JDBCTemplate.close(conn);
 		return likeDelete;
 	}
-	public int searchCount(int S_no) {
-		Connection conn = JDBCTemplate.getConnection();
-		int result = new SpaceDao().searchCount(conn,S_no);
-		if(result > 0) {
-			JDBCTemplate.commit(conn);
-		}else {
-			JDBCTemplate.rollback(conn);
-		}
-		JDBCTemplate.close(conn);
-		return result;
-	}
 	/*
 	public Space selectImg(int S_no) {
 		Connection conn = JDBCTemplate.getConnection();
@@ -86,4 +81,15 @@ public class SpaceService {
 		return s;
 	}
 	*/
+	public ArrayList<Space> ranking(){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Space> sList = new SpaceDao().ranking(conn);
+		if(sList!=null) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return sList;
+	}
 }

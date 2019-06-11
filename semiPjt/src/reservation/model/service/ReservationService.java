@@ -38,14 +38,11 @@ public class ReservationService {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 4;
 		int totalCount = new ReservationDao().totalCount(conn,userNo);
-		System.out.println(totalCount);
-		System.out.println(userNo);
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
 		ArrayList<ReservationImg> list = new ReservationDao().selectList(conn, start, end,userNo);
 		if(list == null) {
-			System.out.println("문제가 아니길 빌자");
 		}
 		String pageNavi = "";
 		int pageNaviSize = 5;

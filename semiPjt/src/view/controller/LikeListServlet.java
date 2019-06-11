@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import space.model.service.SpaceService;
+import space.model.vo.Space;
 import user.model.vo.User;
 import view.model.service.LikeService;
+import view.model.vo.LikeImg;
 import view.model.vo.LikePageData;
 
 /**

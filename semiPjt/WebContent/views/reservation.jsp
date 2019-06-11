@@ -24,6 +24,31 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <style>
+input[type="checkbox"] {
+    display:none;
+}
+
+input[type="checkbox"] + label {
+    color:black;
+}
+
+input[type="checkbox"] + label span {
+	line-height: 50px;
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:0 10px 0 10px;
+    vertical-align:middle;
+    background: url('../img/icon_check.png') no-repeat;
+    cursor:pointer;
+    border-radius: 3px;
+}
+
+input[type="checkbox"]:checked + label span {
+    background: url('../img/icon_checked.png') no-repeat;
+    background-size: 19px;
+}
+
 /*reservation css start*/
 .reservation {
    overflow: hidden;
@@ -61,7 +86,7 @@
 .rMenu_price {
    background: white;
    line-height: 80px;
-   border-top: 3px solid #183058;
+   border-top: 3px solid #f69b02;
    font-size: 28px;
 }
 .rMenu_price_list{
@@ -76,8 +101,11 @@
    width: 100%;
    border: none;
    outline: none;
-   background: #183058;
+   background: #f69b02;
    color: white;
+}
+#payment:hover{
+			background: #183058;
 }
 /* reservation_rMenu  css fin */
 .reservation_head {
@@ -132,17 +160,23 @@
    width:50px;
    height:50px;
    border: 1px; solid #ccc;
-   background : #183058;
+   background : #f69b02;
    color: white;
    outline:none;
+}
+#person_minus:hover{
+   background : #183058 ;
 }
 #person_plus{
    width:50px;
    height:50px;
    border: 1px; solid #ccc;
-   background : #183058;
+   background : #f69b02;
    color: white;
    outline:none;
+}
+#person_plus:hover{
+   background : #183058 ;
 }
 .startDay{
 	font-size:16px;
@@ -158,17 +192,23 @@
 	width:50px;
    	height:50px;
    	border: 1px; solid #ccc;
-   	background : #183058;
+   	background : #f69b02;
    	color: white;
    	outline:none;
+}
+#option_minus:hover{
+   background : #183058 ;
 }
 #option_plus{
 	width:50px;
    	height:50px;
    	border: 1px; solid #ccc;
-   	background : #183058;
+   	background : #f69b02;
    	color: white;
    	outline:none;
+}
+#option_plus:hover{
+   background : #183058 ;
 }
 /* reservation페이지 label태그 css fin */
 .reservation_content label span {
@@ -316,7 +356,6 @@
    width: 100px;
    height: 80px;
    max-width: 100%;
-   background-color: #000000;
    border: 1px solid #ccc;
 }
 
@@ -332,11 +371,27 @@
 .viewpage_textbox{
 	clear:both;
 }
+#emptyValue{
+      width:100%;
+      height: 100px;
+      text-align: center;
+      letter-spacing: 8px;
+      word-spacing:15px;
+      background-color: #f69b02;
+      color:white;
+      font-size: 30px;
+      line-height: 100px;
+      display:none;
+      top:0px;
+      position:fixed;
+      z-index:99;
+   }
 /*reservation css fin*/
 </style>
 </head>
 <body>
    <jsp:include page="/WEB-INF/common/header.jsp" />
+   <div id="emptyValue"></div>
    <section style="background: white">
       <div class="section_content" style="background: white; clear:both;">
          <div class="reservation">
@@ -431,9 +486,11 @@
                   </c:if>
                </div>
                <div class="reservation_content">
+                <center>
                   <div class="demo">
                      <jsp:include page="/WEB-INF/views/calendar.jsp" />
                   </div>
+                   </center>
                </div>
      		<c:if test="${s.s_type eq 'time'}">
                <%-- 예약페이지 시간선택 --%>
@@ -441,7 +498,7 @@
 	               <div class="reservation_head">
 	                  <span class="reservation_title">시간 선택</span> 
 	                  <span class="reservation_sub">
-	                     <span class="endDay"></span>
+	                     <span class="hapDay"></span>
 	                  </span>
 	               </div>
 	               <div class="reservation_content">
@@ -506,7 +563,7 @@
 	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
 	               			<label>
 	                        	<span style="font-size:18px; line-height: 100%; color:black;">연락처<span>&nbsp;*</span></span>
-	                        	<select name="phone" required="required">
+	                        	<select name="phone" required="required" id="phone">
 			                        <option>010</option>
 			                        <option>011</option>
 			                        <option>016</option>
@@ -514,7 +571,7 @@
 			                        <option>018</option>
 			                        <option>019</option>
 			                     </select>
-			                     - <input type="text" name="phone1" value="${sessionScope.User.userPhone.substring(3,7)}" required="required" maxlength="4">- <input type="text" name="phone2" value="${sessionScope.User.userPhone.substring(7,11)}" required="required" maxlength="4">
+			                     - <input type="text" name="phone1" class="phone1" value="${sessionScope.User.userPhone.substring(3,7)}" required="required" maxlength="4">- <input type="text" class="phone2" name="phone2" value="${sessionScope.User.userPhone.substring(7,11)}" required="required" maxlength="4">
 	                        </label>
 	               		</div>
 	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
@@ -526,7 +583,7 @@
 	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
 	               			<label>
 	               				<span style="font-size:18px; line-height: 100%; color:black;">요청사항<span></span></span>
-	               				<input type="text" placeholder="남기고 싶은 말을 적어주세요.">
+	               				<input type="text" name="request" class="reservationRequest" placeholder="남기고 싶은 말을 적어주세요.">
 	               			</label>
 	               		</div>
 	               	</div>
@@ -575,27 +632,27 @@
                </div>
                <%-- 서비스 동의--%>
                <div class="reservation_head">
-                  <span class="reservation_title">서비스 동의</span> <label
-                     class="reservation_sub"><span><input
-                        type="checkbox" id="allCheck"> 전체 동의</span></label>
+                  <span class="reservation_title">서비스 동의</span> 
+                  <span class="reservation_sub">
+                  	<input type="checkbox" id="allCheck">
+                  		<label for ="allCheck"><span></span>전체 동의</label>
+                  </span>
                </div>
                <div class="reservation_content">
                   <div class="reservaion_list">
-                     <label> <input type="checkbox" name="agree" value="1">
-                        위 공간의 예약조건 확인 및 결제진행 동의 <span>(필수)</span>
-                     </label>
+                      <input type="checkbox" name="agree" value="1" id="check1">
+                        <label for="check1"><span></span>위 공간의 예약조건 확인 및 결제진행 동의 (필수)</label>
                   </div>
                   <br>
                   <div class="reservaion_list">
-                     <label> <input type="checkbox" name="agree" value="1">
-                        환불규정 안내에 대한 동의 <span>(필수)</span>
-                     </label>
+                      <input type="checkbox" name="agree" value="1" id="check2">
+                       <label for="check2"><span></span>환불규정 안내에 대한 동의 (필수)</label>
                   </div>
                   <br>
                   <div class="reservaion_list">
-                     <label> <input type="checkbox" name="agree" value="1">
-                        개인정보 제3자 제공 동의 <span>(필수)</span>
-                     </label> <img src="/img/chevrondown.png" width="15px" height="15px"
+                     <input type="checkbox" name="agree" value="1" id="check3">
+                       <label for="check3"><span></span>개인정보 제3자 제공 동의 (필수)</label>
+                      <img src="/img/chevrondown.png" width="15px" height="15px"
                         class="agree_img" style="cursor: pointer">
                      <div style="display: none; overflow: auto; height: 150px;">
                         1. 개인정보를 제공받는 자: 해당 공간의 호스트<br> 2. 제공하는 개인정보 항목<br> -
@@ -609,9 +666,9 @@
                   </div>
                   <br>
                   <div class="reservaion_list">
-                     <label> <input type="checkbox" name="agree" value="1">
-                        개인정보 수집 및 이용 동의 <span>(필수)</span>
-                     </label> <img src="/img/chevrondown.png" width="15px" height="15px"
+                      <input type="checkbox" name="agree" value="1" id="check4">
+                       <label for="check4"><span></span>개인정보 수집 및 이용 동의 (필수)</label> 
+                       <img src="/img/chevrondown.png" width="15px" height="15px"
                         class="agree_img" style="cursor: pointer">
                      <div style="display: none; overflow: auto; height: 150px;">
                         1. 수집하는 개인정보의 항목<br> - 예약정보(성명, 이메일주소, 휴대전화번호), 결제정보(신용카드
@@ -642,7 +699,7 @@
                <div class="rMenu_list">
                		<div class="pop_list_left">예약날짜</div>
                		<div class="pop_list_right">
-               			<span class="endDay" style="color:red''">-</span>
+               			<span class="hapDay" style="color:red">-</span>
                		</div>
                </div>
                </c:if>
@@ -670,7 +727,7 @@
                		<div class="pop_list_right"><span class="reservation_people2"></span></div>
                </div>
                <div class="rMenu_list" id="rMenu_option">
-               		<div class="pop_list_left">추가옵션</div>
+               		<div class="pop_list_left">추가인원</div>
                		<div class="pop_list_right"><span class="option1"></span></div>
                </div>
                
@@ -705,14 +762,16 @@
    var btnIndex;
 		function selectTimeBtnfn(a){
 			$('.swiper-slide button').attr('disabled','true');
+			$('.swiper-slide button').css('color','white');
 			count = 1;
 			$('.selectTimeBtn').css('background','#f69b02');
 			$(a).css('background','#183058');
 			$(a).css('color','white');
             $('.disabled').css('background','#f69b02');
-            $('.disabled').css('color','black');
+            $('.disabled').css('color','white');
             selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-            btnIndex= $(a).index();
+            btnIndex = $(a).index();
+            priceTimeArr[btnIndex] = 0;
             sendTimeArray.slice(btnIndex);
             selTimeArr.slice(btnIndex);
             for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
@@ -825,26 +884,29 @@
                   for(var IItime=0; IItime<selTimeArr.length; IItime++){
            				$('.selTime2').html($('.selTime2').html()+String(array[IItime]).substring(0,4)+"년 "+String(array[IItime]).substring(4,6)+"월 "+String(array[IItime]).substring(6,8)+"일, "+String(selTimeArr[IItime]).replace("undefined","")+"<br>");
            			}
+                  totalTime = 0;
+                  totalPrice = 0;
                   for(var IIII=0; IIII<priceTimeArr.length; IIII++){
-         				totalTime += priceTimeArr[IIII];
-         			}
-                   $('#rMenu_time').css('display','none');
-                   $('.rM_time').css('display','block');
+                	  totalTime += priceTimeArr[IIII];
+                	  totalPrice += priceTimeArr[IIII]*'${s.s_price1}';
+                  }
+         			
+                    $('#rMenu_time').css('display','none');
+                    $('.rM_time').css('display','block');
                   	$('.price_time').html("총 "+totalTime+'시간 x '+'${s.s_price1}');
                   	$('.totalTime').html("총 "+totalTime+'시간');
-                  	totalPrice += hapTime*'${s.s_price1}';
                   	$('.price').html(totalPrice);
                }else if (count > 2) {
                   count = 1;
                   $('.disabled').css('background','#f69b02');
-                  $('.disabled').css('color','black');
+                  $('.disabled').css('color','white');
                   selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                   selTimeArray.pop();
                   selTimeArr.pop();
-                  priceTimeArr.pop();
-                  totalPrice -= hapTime*'${s.s_price1}';
+                  totalPrice -= priceTimeArr[btnIndex]*'${s.s_price1}';
                   $('.price').html(totalPrice);
                }
+         
          });
    <%-- 인원 선택 스크립트 --%>
       var person = parseInt($('.people').text());
@@ -854,7 +916,7 @@
          if(person<=1){
             $('#person_minus').attr("button",false);
             $('#person_plus').attr("button",true);
-            alert("최소인원은"+"1"+ "명입니다.");
+            emptyValue("최소인원은"+"1"+ "명입니다.");
          }else{
             person = person-1;
             $('.people').text(person);
@@ -866,7 +928,7 @@
          if(person>="${s.s_people}"){
             $('#person_minus').attr("button",true);
             $('#person_plus').attr("button",false);
-            alert("최대인원은"+"${s.s_people}"+ "명입니다.");
+            emptyValue("최대인원은"+"${s.s_people}"+ "명입니다.");
          }else{
             person = person+1;
             $('.people').text(person);
@@ -903,7 +965,7 @@
          if(option>=10){
             $('#option_minus').attr("button",true);
             $('#option_plus').attr("button",false);
-            alert("최대 추가 옵션 인원은"+"10"+ "명입니다.");
+            emptyValue("최대 추가인원은"+"10"+ "명입니다.");
          }else{
         	$('#option_minus').attr("disabled",false);
         	option = option+1;
@@ -940,29 +1002,33 @@
     	  $('.price').text(totalPrice);
     	  $('.booker').text($('input[name=booker]').val());
     	  $('input[name=reservationBooker]').val($('.booker').text());
+    	  $('input[name=reservationPhone]').val($('#phone option:selected').text());
+    	  $('input[name=reservationPhone1]').val($('.phone1').val());
+    	  $('input[name=reservationPhone2]').val($('.phone2').val());
+    	  $('input[name=reservationRequest]').val($('.reservationRequest').val());
    <%-- 날짜 체크 확인--%>
-      if ($('.endDay').html().length < 2) {
-         alert("예약 날짜를 선택해주세요.");
+      if ($('.hapDay').html().length < 2) {
+    	  emptyValue("예약날짜를 선택해주세요.");
          }else {
    <%-- 시간 체크 확인 --%>
    <%-- 넘어온 타입이 시간일때 --%>
    if($('.selTime1').text().length < 2 && $('.selTime2').text().length < 2){
 	   if (count != 3) {
-		   alert("시간을 선택해주세요.");
+		   emptyValue("예약시간을 선택해주세요.");
 	      }
 	   } else {
    <%-- 예약정보 체크 --%>
       if (!bookerCheck.test($('input[name=booker]').val())) {
-         alert("예약자 정보를 확인해주세요(예약자명 두글자 이상)");
+    	  emptyValue("예약자정보를 확인해주세요(예약자명(한글)두 글자 이상)");
          $('input[name=booker]').focus();
          $('input[name=booker]').css('border','1px solid red');
          } else if (!phoneCheck.test($('input[name=phone1]').val())){
-            alert("연락처 정보를 확인해주세요");
+        	 emptyValue("연락처정보를 확인해주세요");
             $('input[name=booker]').css('border','');
             $('input[name=phone1]').focus();
             $('input[name=phone1]').css('border','1px solid red');
             } else if (!phoneCheck.test($('input[name=phone2]').val())) {
-               alert("연락처 정보를 확인해주세요");
+            	emptyValue("연락처정보를 확인해주세요");
                $('input[name=phone1]').css('border','');
                $('input[name=phone2]').focus();
                $('input[name=phone2]').css('border','1px solid red');
@@ -971,7 +1037,7 @@
                   var aChk = $("input").filter($("input[name=agree]:checked"));
                   if (aChk.length != 4) {
                      $('#allCheck').focus();
-                     alert("필수사항을 체크해주세요.");
+                     emptyValue("필수사항을 체크해주세요.");
                      } else {
                <%-- 예약 정보 확인 창 열기 --%>
                   $("#reservation_popupDiv").css({
@@ -1079,6 +1145,13 @@
             }
          });
       });
+      <%-- 얼랏창 --%>
+      function emptyValue(msg){
+          $("#emptyValue").text(msg);
+          $("#emptyValue").slideDown(700);
+          $("#emptyValue").delay(1300);
+          $("#emptyValue").slideUp(700);
+       }
    </script>
    <jsp:include page="/WEB-INF/common/footer.jsp" />
    <%-- 팝업 배경 DIV--%>
@@ -1100,6 +1173,7 @@
 	                  	<span class="booker"></span>
                		  </div>
 	               </div>
+	                <c:if test="${s.s_type eq 'day'}">
 	               <div class="reservation_popupDiv_list">
 	                  <div class="pop_list_left">예약날짜</div>
 	                  <div class="pop_list_right">
@@ -1108,6 +1182,15 @@
                			<span class="hapDay"></span>
                		  </div>
 	               </div>
+	               </c:if>
+	               <c:if test="${s.s_type eq 'time'}">
+	               <div class="reservation_popupDiv_list">
+	                  <div class="pop_list_left">예약날짜</div>
+	                  <div class="pop_list_right">
+               			<span class="hapDay"></span>
+               		  </div>
+	               </div>
+	               </c:if>
 	               <c:if test="${s.s_type eq 'day'}">
 	               <div class="reservation_popupDiv_list">
 	                  <div class="pop_list_left">이용시간</div>
@@ -1158,9 +1241,13 @@
 	            		<input type="hidden" name="reservationName" value="${s.s_placeName}">
 	            		<input type="hidden" name="reservationDay" value=""><%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="reservationBooker" value=""><%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationPhone" value="">
+	            		<input type="hidden" name="reservationPhone1" value="">
+	            		<input type="hidden" name="reservationPhone2" value="">
 	            		<input type="hidden" name="reservationTime" value=""><%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="reservationPerson" value=""> <%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="reservationOption" value=""> <%-- 스크립트에서 밸류 보냄 --%>
+	            		<input type="hidden" name="reservationRequest" value=""> <%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="paymentId" value=""> <%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="paymentPrice" value=""> <%-- 스크립트에서 밸류 보냄 --%>
 	            		<input type="hidden" name="paymentCard" value=""> <%-- 스크립트에서 밸류 보냄 --%>

@@ -1,5 +1,7 @@
 package view.model.vo;
 
+import java.util.StringTokenizer;
+
 public class LikeImg {
 	private int likeNo;
 	private int sNo;
@@ -10,12 +12,14 @@ public class LikeImg {
 	private String placeTag;
 	private String address;
 	private String type;
+	private String S_kategorie2;
+	private String[] S_kategorieList;
 	public LikeImg() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public LikeImg(int likeNo, int sNo, int userNo, String img, String placeName, int price, String placeTag,
-			String address, String type) {
+			String address, String type, String s_kategorie2) {
 		super();
 		this.likeNo = likeNo;
 		this.sNo = sNo;
@@ -26,6 +30,7 @@ public class LikeImg {
 		this.placeTag = placeTag;
 		this.address = address;
 		this.type = type;
+		S_kategorie2 = s_kategorie2;
 	}
 	public int getLikeNo() {
 		return likeNo;
@@ -81,6 +86,28 @@ public class LikeImg {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+	public String getS_kategorie2() {
+		return S_kategorie2;
+	}
+	public void setS_kategorie2(String s_kategorie2) {
+		S_kategorie2 = s_kategorie2;
+	}
+	public String[] getS_kategorieList(){
+		return S_kategorieList;
+	}
+	public void setS_kategorieList(String str) {
+		StringTokenizer st = new StringTokenizer(str,","); 
+		String[] list = new String[21];
+		int i = 0;
+		while(st.hasMoreTokens()) { 
+			list[i] = st.nextToken();
+			i++;
+		}
+		S_kategorieList =list; 
+	}
+	public String[] getS_kategorieName() {
+		String[] list = {"TV/프로젝터","인터넷/WIFI","복사/인쇄기","화이트보드","음향/마이크","취사시설","음식물반입가능","주류반입가능","샤워시설","주차","금연","반려동물 동반 가능","PC/노트북","의자/테이블","내부화장실","탈의실","테라스/루프탑","공용라운지","전신거울","바베큐시설","도어락"};
+		return list;
+	}
 
 }

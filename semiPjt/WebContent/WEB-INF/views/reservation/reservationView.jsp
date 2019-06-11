@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="reservation.model.vo.ReservationImg" %>
-    <%@ page import="reservation.model.vo.ReservationPageData" %>
-    <%
-    	ReservationPageData pd = (ReservationPageData)request.getAttribute("pd");
-    %>
+  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -73,6 +69,14 @@
     	width: 400px;
     	height: 220px;
     }
+    .reservationContent{
+    	width:408px;
+    	height:88px;
+    	float: left;
+    }
+    .reservationContent a {
+    	float: left;
+    }
 </style>
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -89,23 +93,21 @@
                 <div class="qa_v">
               
                     <div class="qa_no">
-                    	<img id="spaceImg"src="/upload/space/${r.img}"><br>
-                    	공간명 :${r.reservationName }<br>
-                    	예약날짜 :${r.reservationDay }<br>
-                    	가격 :${r.paymentPrice }
+                    	<a href="/selectOneSpace?S_no=${r.s_no}"> <img id="spaceImg"src="/upload/space/${r.img}"></a><br>
+                    	<div class="reservationContent">
+	                    	<a style="color:#f69b02" id="r_placeName">${r.placeName }</a><br>
+	                    	<a>예약날짜 :${r.reservationDay }</a><br>
+	                    	<a>예약금액 :￦${r.paymentPrice }</a>
+                    	</div>
                     </div>
                 </div>
                 	</c:if>
                 </c:forEach>
-               <div class="re_navi"><%=pd.getPageNavi() %></div>
+               <div class="re_navi">${pd.pageNavi }</div>
             </div>
         </div>
     </section>
-    <script>
-    	$(document).ready(function(){
-    		console.log(${sessionScope.User.userNo});
-    		console.log(${pd.list[1].userNo});
-    	});
-    </script>
+    <jsp:include page="/WEB-INF/common/footer.jsp"/>
+
 </body>
 </html>

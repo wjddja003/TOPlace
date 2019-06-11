@@ -17,13 +17,15 @@ public class ReservationImg {
 	private String paymentCard;
 	private ArrayList<String> rDay;
 	private String img;
+	private String placeName;
 	public ReservationImg() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public ReservationImg(int reservationNo, int s_no, int userNo, String reservationName, String reservationDay,
 			String reservationBooker, String reservationTime, int reservationPerson, String reservationOption,
-			String paymentId, int paymentPrice, String paymentCard, ArrayList<String> rDay, String img) {
+			String paymentId, int paymentPrice, String paymentCard, ArrayList<String> rDay, String img,
+			String placeName) {
 		super();
 		this.reservationNo = reservationNo;
 		S_no = s_no;
@@ -39,6 +41,7 @@ public class ReservationImg {
 		this.paymentCard = paymentCard;
 		this.rDay = rDay;
 		this.img = img;
+		this.placeName = placeName;
 	}
 	public int getReservationNo() {
 		return reservationNo;
@@ -124,4 +127,11 @@ public class ReservationImg {
 	public void setImg(String img) {
 		this.img = img;
 	}
+	public String getPlaceName() {
+		return placeName;
+	}
+	public void setPlaceName(String placeName) {
+		this.placeName = placeName;
+	}
+	
 }

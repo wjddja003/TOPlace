@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 	.joincontainer{
-		width:80%;
+		width:90%;
 		margin: 0 auto;
 	}
 	.joinheader{
@@ -43,10 +43,28 @@
 		
 	}
 	.btn1{
-		background: #183058;
+		background: #f69b02;
 		color:white;
 		width: 50px;
 		border: none;
+		cursor:pointer;
+	}
+	.btn1:hover{
+		background: #183058;
+		color:white;
+		cursor:pointer;
+	}
+	button{
+		background: #f69b02;
+		color:white;
+		border: none;
+		cursor:pointer;
+	}
+	button:hover{
+		background: #183058;
+		color:white;
+		border: none;
+		cursor:pointer;
 	}
 	
 </style>

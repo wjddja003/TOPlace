@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ page import="view.model.vo.LikePageData" %>
-    <%
-    	LikePageData pd = (LikePageData)request.getAttribute("pd");
-    %>
+    pageEncoding="UTF-8" import="space.model.vo.Space" %>
+
+ 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -45,9 +44,9 @@
         padding: 10px;
         float: left;
         margin: 20px 0 0 20px;
-        border: 1px solid #e2e2e2;
+        border: 1px solid #f69b02;
         width: 100%;
-        height: 420px;
+        height: 730px;
         overflow: hidden;
         position: relative;
     }
@@ -60,22 +59,52 @@
     	clear: both;
     	text-align: center;
     }
-    .reviewBtn{
-        background: #fff;
-        border: 1px solid #f69b02;
-        font-size: 12px;
-        margin: 0 0 5px 0;
-    }
-    #spaceImg{
-    	width: 400px;
+    .spaceImg{
+    	width: 408px;
     	height: 220px;
     }
     .likeContent{
+    	width: 100%;
+    	height:30%;
     	position:absolute;
-    	bottom: 0;
     }
     .placeName{
         font-weight: bold;
+    }
+    .spaceImg {
+		  transform: scale(1);
+		  -webkit-transform: scale(1);
+		  -moz-transform: scale(1);
+		  -ms-transform: scale(1);
+		  -o-transform: scale(1);
+		  transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+	}
+	.spaceImg:hover {
+	  transform: scale(1.2);
+	  -webkit-transform: scale(1.2);
+	  -moz-transform: scale(1.2);
+	  -ms-transform: scale(1.2);
+	  -o-transform: scale(1.2);
+	}
+	.img {width:408px; height:220px; overflow:hidden 
+	}
+	.tag{
+		font-size: 10px;
+		color: #605f5d;
+	}
+	.price{
+		position: absolute;
+        bottom: 0;
+	}
+    .kategorie2{
+    	width: 100%;
+        float: left;
+    }
+    .kategorie1{
+    	width: 18%;
+    	height:80px;
+    	text-align:center;
+        float: left;
     }
 </style>
 <body>
@@ -93,20 +122,39 @@
                 <div class="qa_v">
               
                     <div class="qa_no">
-                    	<img id="spaceImg"src="/upload/space/${l.img}"><br>
-                    	<h4 class="placeName">${l.placeName }</h4><br>
-                    	<div class="likeContent">
-                    	${l.address }<br>
-                    	${l.placeTag }<br>
-                    	￦ ${l.price }/${l.type }
+                    	<div class="img">
+                    	<a href="/selectOneSpace?S_no=${l.sNo}"><img class="spaceImg"src="/upload/space/${l.img}"></a><br>
                     	</div>
+                        <div>
+                    	   <h4 class="placeName" style="color:#f69b02 ">${l.placeName }</h4>
+                        </div><br>
+                    	<div class="likeContent">
+                            <div>
+                    	   <img src="../../img/map-marker.png"> ${l.address }
+                            </div>
+                        <br>    
+	                    	<div class="tag">${l.placeTag }</div><br>
+	                    	<div class="kategorie2">
+		                    	<c:forEach items="${l.s_kategorie2}" var="list" varStatus="i">
+		                        	<c:if test="${list == '1'}">
+		                            	<div class="kategorie1"><img src="/upload/space/kategorie2/${i.index+1}.png" width="30px;">
+		                                	<p>${l.s_kategorieName[i.index]}</p>
+		                                </div>
+		                           	</c:if>
+		                        </c:forEach>
+                        	</div><br>    
+                    	</div>
+                        <div class="price" >
+                            <a style="color: #f69b02; font-size:20px;">${l.price }</a>원/${l.type }
+                            </div>
                     </div>
                 </div>
                 	</c:if>
                 </c:forEach>
-               <div class="re_navi"><%=pd.getPageNavi() %></div>
+               <div class="re_navi">${pd.pageNavi }</div>
             </div>
         </div>
-    </section>	
+    </section>
+    <jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
 </html>

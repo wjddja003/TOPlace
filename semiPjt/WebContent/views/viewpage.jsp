@@ -149,7 +149,7 @@
 				          <ul id="slider">
 				          <c:forTokens items="${s.s_img2 }" delims="," var="sliderimg"> 
 				             <li data-color="#1abc9c">				                          
-									<img src="/upload/space/${sliderimg }">
+									<img src="/upload/space/${sliderimg}">
 				             </li>	   
 				           </c:forTokens>          		             
 				          </ul>
@@ -192,15 +192,18 @@
                         </div>
                         <div class="viewpage_qna">
                             <div class="viewpage_qna_header">
-                            <h4>Q&amp;A 0개</h4>
+                            <h4>Q&amp;A ${qna.totalCount}개</h4>
+                            <c:if test="${s.s_hostNum != host.hostNo}">
                             <a style="text-decoration: none;" id="viewQna"><span>질문작성하기</span></a>
+                            </c:if>
                             </div>
                             <div class="viewpage_qnaview">
                                 <div>
                                     <ul class="review_list" id="qna_list">
-                                    <c:forEach items="${qna.list}" var="q">
+                                    <c:forEach var="q" items="${qna.list}">   
+                                    	<c:if test="${q.qaCommentRef == ''}">   	
                                         <li class="rlist ">  
-                                            <div class="rbox_mine">  
+                                        <div class="rbox_mine">  
                                                  <span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
                                                 <div class="rbox_name">
                                                 <strong class="guest_name" style="font-size:22px;">${q.qaCommentWriter}</strong>
@@ -209,28 +212,41 @@
                                                 <div class="rbox_info_base">  
                                                     <span class="time_info">${q.qaCommentDate}</span> 
                                                 </div>
-                                            </div>
-<!--                                             <div class="rbox_reply" style="margin-top:30px;"> -->
-<!--                                                 <p class="p_tit_reply"> -->
-<!--                                                     <em>옥탑방라운지</em>님의 댓글 -->
-<!--                                                 </p> -->
-<!--                                                 <p class="p_review"> -->
-<!--                                                     안녕하세요 현재 내부 사정으로 디제잉 장비 대여가 잠시 중단되었습니다. -->
-<!--                                                 </p> -->
-<!--                                                 <div class="rbox_info_base"> -->
-<!--                                                     <p class="time_info">2019.04.19. 18:49:25</p> -->
-<!--                                                 </div> -->
-<!--                                             </div> -->
+                                        </div>
+                                        
+                                          
 										<div style="text-align: right;">
                                     	<c:if test="${sessionScope.User.userId == q.qaCommentWriter}">
-                                    	<a style="text-decoration: none;" id="qaupdate"><span>질문작성하기</span></a>
-                                    	<button class="btn btn-outline-primary btn-sm"><a href="/qaViewpageDelete?S_no=${s.s_no }&qaCommentNo=${q.qaCommentNo }">삭제</a></button>
+                                    	<a style="text-decoration:none; color:#f69b02; border-color:#f69b02;" class="qaupdate btn btn-outline-primary btn-sm"><span>수정</span></a>
+                                    	<button class="btn btn-outline-primary btn-sm" style="color:#f69b02; border-color:#f69b02;"><a href="/qaViewpageDelete?S_no=${s.s_no }&qaCommentNo=${q.qaCommentNo }">삭제</a></button>
                                     	</c:if>
-                                    </div>
+                                    	<c:if test="${s.s_hostNum == host.hostNo}">
+                                    		<input type="hidden" class="qaNo" value="${q.qaCommentNo}">
+                                    		<button type="button" class="viewQnaComment btn btn-outline-primary btn-sm" style="color:#f69b02; border-color:#f69b02;">답글달기</button>
+                                    	</c:if>
+                                    	</div>
                                         </li>
+                                        </c:if>
+                                        <c:forEach var="qq" items="${qna.list}">
+                                          <c:if test="${q.qaCommentNo == qq.qaCommentRef}">
+                                            <div class="rbox_reply" style="margin-top:30px;">
+                                            	<span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
+                                                <p class="p_tit_reply">
+                                                    <em>${host.hostName}</em>님의 댓글
+                                                </p>
+                                                <p class="p_review">
+                                                	   ${qq.qaCommentContent}
+                                                </p>
+                                                <div class="rbox_info_base">
+                                                    <p class="time_info">${qq.qaCommentDate}</p>
+                                                </div>
+                                            </div>
+                                           </c:if>
+                                        </c:forEach> 
                                         </c:forEach>
                                     </ul>
                                 </div>
+                                 <div id="pageNavi">${qna.pageNavi}</div>
                             </div>
             
                         </div>
@@ -250,9 +266,9 @@
                         </div>
                         <div class="viewpage_review_header">
 						<h4 class="h_intro"><!--?s_no=${s.s_no }  -->
-							이용 후기 <strong class="txt_primary">0개</strong>
+							이용 후기 <strong class="txt_primary">${pd.totalCount}개</strong>
 							<span class="dot"></span>
-							평균 평점 <strong class="txt_primary">0.0</strong>
+							평균 평점 <strong class="txt_primary">${pd.totalStar}</strong>
 						</h4>
 						<c:if test="${not empty res}">
 		               		<a class="btn btn-outline-primary btn-sm" href="/reviewWrite?S_no=${s.s_no }" style="color:#f69b02; border-color:#f69b02; float:right;">리뷰등록</a>
@@ -298,8 +314,8 @@
                                     </span>
                                     <div style="text-align: right;">
                                     	<c:if test="${sessionScope.User.userId == rc.reviewWriter}">
-                                    	<button class="btn btn-outline-primary btn-sm"><a href="/reviewUpdateEnd?reviewNo=${rc.reviewNo }">수정</a></button>
-                                    	<button class="btn btn-outline-primary btn-sm"><a href="/reviewDelete?S_no=${s.s_no }&reviewNo=${rc.reviewNo}">삭제</a></button>
+                                    	<button class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;"><a href="/reviewUpdateEnd?reviewNo=${rc.reviewNo }">수정</a></button>
+                                    	<button class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;" ><a href="/reviewDelete?S_no=${s.s_no }&reviewNo=${rc.reviewNo}" style="color:#f69b02;">삭제</a></button>
                                     	</c:if>
                                     </div>                                                                              
                                 </div>
@@ -307,14 +323,6 @@
                             </c:forEach>
                             <div id="pageNavi">${pd.pageNavi}</div>
                         </ul>
-                        <div class="viewpage_qna">
-                            <div class="viewpage_qna_header">
-                            <h4>비슷한 공간</h4>
-                            </div>
-                            <div class="viewpage_qnaview">
-                                <p>비슷한 공간이 없습니다.</p>
-                            </div>
-                        </div>
                     </div> 
                      <div>
                         <div class="viewpage_right">
@@ -369,7 +377,18 @@
                                     </div>
                                 </div>
                             </div>
-                             <button><a href="/selectOneReservation?S_no=2">결제하기</a></button>
+                            <c:choose>
+                            	<c:when test="${not empty sessionScope.User}">	
+                                    <div class="viewpage_reservationbtn">
+                             		<button type="button" class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;"><a href="/selectOneReservation?S_no=${s.s_no}" style="color:#f69b02;">결제하기</a></button>
+                                    </div>
+                             	</c:when>
+                             	<c:otherwise>
+                                    <div class="viewpage_reservationbtn">
+                             		<button type="button" class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;"><a href="/views/login.jsp" style="color:#f69b02;">결제하기</a></button>
+                                    </div>
+                             	</c:otherwise>
+                             </c:choose>
                         </div>
                 </div>
                                               
@@ -377,13 +396,43 @@
             </div>
         </div>
     </section>
-
+	<form action="/commentInsertQa?S_no=${s.s_no }&" method="post">
+    <div class="layer_popup" id="layer_popup_Comment" class="_noProfileCheckLayout" style="display:none;position:fixed;">
+			<div class="popup_wrap">
+                <div class="pop_header">
+                	<input type="hidden" name="qaNo" class="CommentNo" value="">                    
+					<p>답글 작성하기</p>
+                    <button><a href="javascript:void(0);" class="popcencle" style="color:#fff; text-decoration: none;">X</a></button>
+                </div>
+				<div class="pop_container">
+                    <div class="box_l">
+                        <label for="input_question">답글</label>
+                    </div>
+                    <div class="box_r"><p id="textarea_input">0 /</p><p id="textarea_length">200자</p></div>
+                    <div class="qna_input">
+						<textarea name="qaCommentContent" id="input_question" placeholder="답글을 남겨 주세요." maxlength="200" data-ui-sync-length="._question_length" required></textarea>
+					</div>
+				</div>
+                <div class="qna_p">
+				    <p>
+				    답글은 공개 상태로만 등록하실 수 있습니다.
+                    </p>
+			     </div>
+                <div class="qnaBtns">
+<!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
+                    <div id="qna_abtn">
+						<button class="poprollback" id="commentInsertBtn">등록</button>
+                    </div>
+					</div>
+			</div>
+		</div>
+		</form>
 	<form action="/insertQa?S_no=${s.s_no }" method="post">
     <div class="layer_popup" class="_noProfileCheckLayout" style="display:none;position:fixed;">
 			<div class="popup_wrap">
                 <div class="pop_header">                    
 					<p>질문 작성하기</p>
-                    <button><a href="javascript:void(0);" class="popcencle" style="color:#fff; text-decoration: none;">X</a></button>
+                    <button type="button"><a href="javascript:void(0);" class="popcencle" style="color:#fff; text-decoration: none;">X</a></button>
                 </div>
 				<div class="pop_container">
                     <div class="box_l">
@@ -411,12 +460,13 @@
 		<div class="hostpopupMask">
 		</div>
 		
-		<form action="/qaViewpageUpdateEnd?S_no=${s.s_no }" method="post">
+		<form method="post" id="qaUpdateForm">
     <div class="layer_popup_up" class="_noProfileCheckLayout" style="display:none;position:fixed;">
 			<div class="popup_wrap">
-                <div class="pop_header">                    
+                <div class="pop_header">
+                	<input type="hidden" name="S_no" value="${s.s_no}">                    
 					<p>질문 작성하기</p>
-                    <button><a href="javascript:void(0);" class="popcencleUP" style="color:#fff; text-decoration: none;">X</a></button>
+                    <button type="button" class="popcencleUP">X</button>
                 </div>
 				<div class="pop_container">
                     <div class="box_l">
@@ -424,22 +474,20 @@
                     </div>
                     <div class="box_r"><p id="textarea_update">0 /</p><p id="textarea_uplength">200자</p></div>
                     <div class="qna_input">
-						<textarea name="qaCommentContent" id="input_update" maxlength="200" data-ui-sync-length="._question_length">
-						${q.qaCommentContent }
-						</textarea>
+						<textarea name="qaCommentContent" id="input_update" maxlength="200"></textarea>
 					</div>
 				</div>
                 <div class="qna_p">
-				    <p>
+				   <img src="../img/icon_warning.png"> <p>
 				    질문은 공개 상태로만 등록하실 수 있습니다.
                     </p>
 			     </div>
                 <div class="qnaBtns">
 <!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
                     <div id="qna_updateBtn">
-						<button class="poprollback">등록</button>
+						<button type="submit" class="poprollback">등록</button>
                     </div>
-					</div>
+				</div>
 			</div>
 		</div>
 		</form>
@@ -656,10 +704,17 @@
        $("#viewQna").click(function(){
 			if('${sessionScope.User.userId}' == ''){
 				$("#viewQna").attr("href","/views/login.jsp");
+			}else{
+				$('.layer_popup').show();
+				$('.hostpopupMask').show();
 			}
 		});
-       
-
+       $(".viewQnaComment").click(function(){
+    	   $('.CommentNo').val($(this).prev().val());
+    	   console.log($('.CommentNo').val());
+    	   $('#layer_popup_Comment').show();
+    	   $('.hostpopupMask').show();
+       });
         </script>
         <script>
 	window.onload = function () { 
@@ -697,16 +752,15 @@
 			});     
 	    });		
 		};
-		$("#viewQna").click(function(){
-			$('.layer_popup').show();
-			$('.hostpopupMask').show();
-		});
+		
 		$(".popcencle").click(function(){
 			$('.layer_popup').hide();
 			$('.hostpopupMask').hide();
 		});
-		$("#qaupdate").click(function(){
+		$(".qaupdate").click(function(){
 			$('.layer_popup_up').show();
+			$('#qaUpdateForm').attr('action',"/qaViewpageUpdateEnd?qaCommentNo="+$('.qaNo').val());
+			$('#input_update').html($(this).parents('.rlist').find(".p_review").html());
 			$('.hostpopupMaskUp').show();
 		});
 		$(".popcencleUp").click(function(){

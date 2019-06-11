@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	 $(".search").click(function(){
      	$("#header-mypage").css("display","none");
          $("#header-search").css("display","block");
@@ -11,4 +12,8 @@ $(document).ready(function(){
      	$("#header-search").css("display","none");
      	$("#header-mypage").css("display","none");
      });
+     $(".login").click(function(){
+    	location.href="/views/login.jsp"; 
+     });
 });
+
