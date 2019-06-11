@@ -419,7 +419,7 @@ input[type="checkbox"]:checked + label span {
 		               		</div>
 		               		<div class="reservation_space_tit" style="width:68%; float:left; margin: 10px 0px 0px 10px;">
 		               			<h5><span style="color:black;">${s.s_placeIntroduce1}</span></h5>
-		               			<span style="color:black; word-break:break-all">${s.s_placeIntroduce2}</span>
+		               			<span style="color:black; word-break:break-all">${s.s_placeShow}</span>
 		               		</div>
 	               		</div>
 	               		<div class="viewpage_textbox">

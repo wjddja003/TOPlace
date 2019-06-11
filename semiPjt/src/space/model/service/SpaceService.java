@@ -25,6 +25,7 @@ public class SpaceService {
 		Space s = new SpaceDao().selectOneSpace(conn,S_no);
 		s.setS_kategorieList1(s.getS_kategorie1());
 		s.setS_kategorieList(s.getS_kategorie2());
+		s.setS_placeShow(s.getS_placeIntroduce2());
 		JDBCTemplate.close(conn);
 		return s;
 	}
