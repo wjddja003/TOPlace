@@ -1113,7 +1113,7 @@ input[type="checkbox"]:checked + label span {
                   var frm =  $("#payfrm");
             	  frm.submit();
                   } else {
-                     alert('에러내용 : ' + rsp.error_msg);
+                     alert(rsp.error_msg);
                   }
                });
          });
