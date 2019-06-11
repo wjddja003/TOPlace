@@ -69,9 +69,13 @@
               			
                         </ul>
                         <!-- 마커 -->
-                        <div style="position:relative;">
+                        <div id="declare_outline" style="position:relative;">
                         <c:if test="${sessionScope.User != null}">
-                        	<div id="declare">신고하기</div>
+                        	<div id="declare">
+                        		<img src="../img/icon_declare.png" height="23px" width="23px;" style="margin-bottom: 5px;">
+                        	 	<img src="../img/icon_declare2.png" height="23px" width="23px;" style="margin-bottom: 5px;">
+                        	 	신고
+                        	</div>
                         </c:if>
                         <div id="declare_content">
                         	<div id="declare_header">신고하기</div>
@@ -85,7 +89,8 @@
                         		<input id="declareType" type="hidden" name="declareType">
                         		신고자 : <input class="declare_name" type="text" name="userName" value="${sessionScope.User.userName }" readonly="readonly"><br><br>
                         		신고내용 : <input class="declare_name" type="text" name="declareContent" size="40" placeholder="신고내용을 간단히 작성해주세요."><br><br>
-                        		<button type="button" id="declareBtn">신고하기</button>
+                        		<button type="button" class="declareBtn" id="declareBtn">신고하기</button>
+                        		<button type="button" class="declareBtn" id="noneBtn">취소</button>
                         	</form>
                         </div>
                         </div>
@@ -763,7 +768,6 @@
     	   $('.hostpopupMask').show();
        });
        $('#declare').click(function(){
-    	   //마커
     	   $('#declare_content').toggle();
        });
        $('.declare_type').click(function(){
@@ -771,8 +775,11 @@
     	   $(this).toggleClass("change_btn");
     	   $('#declareType').val($(this).text());
        });
+       $('#noneBtn').click(function(){
+    	   $('#declare_content').css("display","none");
+       });
        $('#declareBtn').click(function(){
-    	   console
+    	   
     	   var params = $('#declare_form').serialize();
            $.ajax({
                url:"/insertDeclare",
@@ -785,6 +792,7 @@
                success:function(data){
             	   var result = data;
         			if(result==1){
+        				$('#declare_content').css("display","none");
         				$("#viewpage_alert").slideDown(700);
         				var offset = $("#viewpage_alert").offset();
         		        $('html, body').animate({scrollTop : offset.top}, 400);
@@ -793,8 +801,8 @@
                     	$("#viewpage_alert").delay(1300);
                     	$("#viewpage_alert").slideUp(700); 
                     	$("#viewpage_alert p").html("신고접수가 완료되었습니다.");//마커
-                    	$('#declare_content').css("display","none");
         			}else{
+        				$('#declare_content').css("display","none");
         				$("#viewpage_alert").slideDown(700);
         				var offset = $("#viewpage_alert").offset();
         		        $('html, body').animate({scrollTop : offset.top}, 400);
@@ -803,11 +811,12 @@
                     	$("#viewpage_alert").delay(1300);
                     	$("#viewpage_alert").slideUp(700);
                     	$("#viewpage_alert p").html("신고접수 실패");
-                    	$('#declare_content').css("display","none");
+                    	
         			}
                }
            });
        });
+       
         </script>
         <script>
 	window.onload = function () { 
