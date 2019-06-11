@@ -48,32 +48,10 @@ public class LikeService {
 	}
 	public LikePageData selectList(int reqPage,int userNo) {
 		Connection conn = JDBCTemplate.getConnection();
-		int numPerPage = 4;
-		int totalCount = new LikeDao().totalCount(conn,userNo);
-		System.out.println(totalCount);
-		System.out.println(userNo);
-		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
-		int start = (reqPage-1)*numPerPage+1;
-		int end = reqPage*numPerPage;
-		ArrayList<LikeImg> list = new LikeDao().selectList(conn, start, end,userNo);
+		
+		ArrayList<LikeImg> list = new LikeDao().selectList(conn,userNo);
 		String pageNavi = "";
-		int pageNaviSize = 5;
-		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
-		if(pageNo != 1) {
-			pageNavi += "<a class='btn' href='/likeList?reqPage="+(pageNo-1)+"'>이전</a>";
-		}
-		int i = 1;
-		while(!(i++>pageNaviSize || pageNo>totalPage)) {
-			if(reqPage == pageNo) {
-				pageNavi += "<span class='selectPage'>"+pageNo+"</span>";
-			}else {
-				pageNavi += "<a class='btn' href='/likeList?reqPage="+pageNo+"'>"+pageNo+"</a>";
-			}
-			pageNo++;
-		}
-	if(pageNo <= totalPage) {
-		pageNavi +="<a class='btn' href='/likeList?reqPage="+pageNo+"'>다음</a>";
-	}
+		
 	
 	LikePageData pd = new LikePageData(list,pageNavi);
 	JDBCTemplate.close(conn);
