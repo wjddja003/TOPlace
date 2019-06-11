@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="space.model.vo.Space"%>
+    
     <%
     	Space s = (Space)request.getAttribute("s");
     	String[] holiday = (s.getS_holiday()).split(",");
@@ -13,6 +14,7 @@
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=33qm1u5uje&submodules=geocoder"> //네이버 지도 스크립트
 	</script>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -64,8 +66,26 @@
                             	<a href="#">#${t}</a>
                             </li>
                          </c:forTokens>
-              
+              			
                         </ul>
+                        <!-- 마커 -->
+                        <div style="position:relative;">
+                        <div id="declare">신고하기</div>
+                        <div id="declare_content">
+                        	<div id="declare_header">신고하기</div>
+                        	<form method="post" action="/insertDeclare">
+                        		<button type="button" class="declare_type">공간 정보 허위 신고</button>
+                        		<button type="button" class="declare_type">불친절한 호스트</button>
+                        		<button type="button" class="declare_type">환불규정 미준수</button>
+                        		<br><br>
+                        		<input type="hidden" name="sNo" value="${s.s_no }">
+                        		<input id="declareType" type="hidden" name="declareType">
+                        		신고자 : <input class="declare_name" type="text" name="userName" value="${sessionScope.User.userName }" readonly="readonly"><br><br>
+                        		신고내용 : <input class="declare_name" type="text" name="declareContent" size="40" placeholder="신고내용을 간단히 작성해주세요."><br><br>
+                        		<button type="submit" id="declareBtn">신고하기</button>
+                        	</form>
+                        </div>
+                        </div>
                      </div>
                      <!--viewpage_section Fin-->
                     <div class="viewpage_cover">
@@ -341,7 +361,7 @@
                                 <div class="viewpage_right_list2">
                                     <ul>
                                         <li class="viewpage_list_none" style="padding:22px 0px 21px;">
-                                            <input type="radio" checked> ${s.s_placeName } <span>￦${s.s_price1}<small style="color:#949494;">/시간</small></span>
+                                            <input type="radio" checked> ${s.s_placeName } <span>￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /><small style="color:#949494;">/시간</small></span>
                                         </li>
                                         <li class="viewpage_list_none" style="padding:15px 0px 15px; height:140px;">
                                             <img src="../img/ex1.jpg" width="110px" height="110px" id="viewpage_right_img">
@@ -380,14 +400,14 @@
                             </div>
                             <c:choose>
                             	<c:when test="${not empty sessionScope.User}">	
-                                    <div class="viewpage_reservationbtn">
-                             		<a href="/selectOneReservation?S_no=${s.s_no}">결제하러 가기</a>
-                                    </div>
+                                  
+                             		<button onclick="reservationBtn1()" class="viewpage_reservationbtn">결제하러 가기</button>
+                                 
                              	</c:when>
                              	<c:otherwise>
-                                    <div class="viewpage_reservationbtn">
-                             		<a href="/views/login.jsp">결제하러 가기</a>
-                                    </div>
+                   
+                             		<button onclick="reservationBtn()"  class="viewpage_reservationbtn">결제하러 가기</button>
+                                   
                              	</c:otherwise>
                              </c:choose>
                         </div>
@@ -716,6 +736,15 @@
     	   $('#layer_popup_Comment').show();
     	   $('.hostpopupMask').show();
        });
+       $('#declare').click(function(){
+    	   //마커
+    	   $('#declare_content').toggle();
+       });
+       $('.declare_type').click(function(){
+    	   $('.declare_type').removeClass("change_btn");
+    	   $(this).toggleClass("change_btn");
+    	   $('#declareType').val($(this).text());
+       });
         </script>
         <script>
 	window.onload = function () { 
@@ -786,7 +815,12 @@
 			$('.layer_popup_up').hide();
 			$('.hostpopupMaskUp').hide();
 		});
-		
+		 function reservationBtn() {
+	            window.location = "/views/login.jsp";
+	        }
+		function reservationBtn1(){
+			window.location = "/selectOneReservation?S_no=${s.s_no}";
+		}
 </script>		
     <jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
