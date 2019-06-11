@@ -28,7 +28,8 @@
     }
     .sp{         
        width: 70%;
-       float: left;      
+       float: left;  
+       font-size: 20px;    
     }
     .more{
   	  	height: 3%;
@@ -52,7 +53,7 @@
         border-radius: 10px;
         width: 100px;
         height: 40px;
-        margin-left: 16px;
+       
         padding: 5px;		
     }	
     .deleteBtn{
@@ -67,7 +68,11 @@
         padding: 5px;
     }
     .imgs{
-   		padding: 15px;    	       
+   		padding-right: 3px;   
+   		
+
+
+   			       
     }
     .fixed{
     	box-sizing:border-box;
@@ -84,11 +89,17 @@
     	height: 150px;
     			  		
     }
-    .a{
-    	float: left;
-    	width: 30%;
-    	margin-top: 53px;
-    	margin-left: 9px;
+	 .a{
+	   	float: left;
+	    width: 32%;
+	    margin-top: 53px;
+	    margin-left: 10px;
+	    text-align: -webkit-center;
+	    font-size: 16px;
+	    color: #f69b02;
+	    box-sizing: border-box;
+	
+
     }
     #more-btn{
     	width: 100%;
@@ -115,6 +126,11 @@
     .day{  
    		font-size: 11px;
    		text-align: -webkit-right;
+   		
+    }
+    .day2{
+     font-size: 14px;
+     text-align: right;
     }
     .reviewComment{
  	   float: right;
@@ -140,13 +156,16 @@
     }
     .QRAlist{  
       
-        width: 773px;
-       text-align: left;      
+       width: 773px;
+       text-align: left;    
+      
+       border-bottom: 4px solid #f69b02;
     }
     .QRAcomment{
        float: left;
         width: 70%;
         margin-left: 115px;
+        font-size: 20px;
     }
     .navi{
 		float: left;
@@ -171,6 +190,8 @@
     }
    .spspan{   
  	  color: #f69b02;
+ 	  font-size: 30px;
+ 	  border-bottom: 2px solid #f69b02;
   	 }
   	 .QRA{
   	 margin-right: 3px;
@@ -184,6 +205,7 @@
    	}
    	.reviewName{
    		font-size: 25px;
+   		margin-left: 18px;
    	}
    	.rlist{
    	 	color:#f69b02;  
@@ -213,6 +235,20 @@
 		color: #f69b02;
 		padding: 0 5px;
 	}
+	.qacomment{
+		
+    	width: 85.3%;
+		
+   
+	}.placename{
+		float: left;
+	}
+	.htmldiv{
+		border: 1px solid #f69b02;
+		color: #183058;
+	    margin-bottom: 10px;
+	}
+	
 
 
 
@@ -231,14 +267,15 @@
 			<div class="hosh_mid" id="hosh_mid">               
                     <div class="profile">
                     	<div class="fixed">
-	                        <span><img src="/upload/hostProfile/${sessionScope.host.hostFile}" class="img1"></span>
-	                        <ul><h1>${sessionScope.host.hostName}</h1>
-	                        <li>${sessionScope.host.hostContent}</li>		                         					
-       						<button type="button" class="rlistBtn"><a href="/hostreservationList?hostNum=${sessionScope.host.hostNo}" class="rlist">예약 내역 </a></button>	       									       						             
+	                        <span ><img src="/upload/hostProfile/${sessionScope.host.hostFile}" class="img1"></span>
+	                        <ul><h1 style="font-size: 18px;font-weight: bold; margin-top: 10px;">${sessionScope.host.hostName}</h1>
+	                        <li style="font-weight: normal;">${sessionScope.host.hostContent}</li>		                         					
+       						<button style="margin-top: 20px;" type="button" class="rlistBtn"><a href="/hostreservationList?hostNum=${sessionScope.host.hostNo}" class="rlist">예약 내역 </a></button>	       									       						             
 	                        </ul>
                         </div>                        
                     </div>
-                    <div class="sp"><h1> <span class="spspan">${sessionScope.host.hostName}</span>의공간 <span class="spspan">${hd.count}개 </span><h1></h1></div>
+                    <br><br><br>
+                    <div class="sp"> <span class="spspan">${sessionScope.host.hostName}</span>의공간 <span class="spspan">${hd.count}개 </span></div>
                     <div class="space"></div>
                     <div class="more"><button type="button" currentCount="0" totalCount='${totalCount}' id="more-btn" value="1">더보기</button></div> 
                  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
@@ -275,20 +312,21 @@
 	               	  
 	               	   <c:if test="${Q.qaCommentRef eq 0}">     	                         	               			               
 		                    <div class="QRAlist" id="${Q.qaCommentNo }">	                 
-			                    <div><span class="QRalspan">작성자아디 :${Q.qaCommentWriter}</span></div>
-			                    <div class="QRAcomment">글:  ${Q.qaCommentContent}</div>
+			                    <div><span class="QRalspan">${Q.qaCommentWriter}</span></div>
+			                    <div class="QRAcomment">${Q.qaCommentContent}</div>
 				                    <c:forEach items="${hd.list}" var="l">
 				                    	<c:if test="${l.s_no eq Q.qaRef}">
-				                    		<div class="day">장소 :  ${l.s_placeName }</div>
+				                    		<div class="day">${l.s_placeName }</div>
 				                    	</c:if>	                  
 				                    </c:forEach>           		               
-			                    <div class="QRA_DATE"> 날자 :${Q.qaCommentDate}</div>
+			                    <div class="QRA_DATE">${Q.qaCommentDate}</div>
 			                    <br><br>		                    	 	               	
 			               	</div>
 						</c:if>
 							<c:forEach items="${Qalist}" var="Qa">
 								<c:if test="${Q.qaCommentNo == Qa.qaCommentRef}">		         	 
-									<div>ㄴ 작성자 아이디 : ${Qa.qaCommentWriter }, 작성 내용 : ${Qa.qaCommentContent }</div>
+									<div class="qacomment">▶ ${Qa.qaCommentWriter } : ${Qa.qaCommentContent } <div class="day2">${Qa.qaCommentDate }</div></div>
+				                    		
 								</c:if>
 							</c:forEach>
 		         	 	          		                        
@@ -305,10 +343,7 @@
 	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 	</body>
 		<script type="text/javascript">
-			//그 댓글의 글번호(아이디)
-			function appendDiv(ref,writer,content){
-				$("#"+ref ).append("<div> ㄴ 작성자아디 : "+writer+" 글 : "+content+"</div>");
-			}
+			
 			function del(event){
 				location.href="/deleteHostPage?s_no="+event;	
   				
@@ -336,7 +371,9 @@
 						for (var i in data){		
 						var p = data[i];
 						//html += "<div class='a'><img src='/upload/space/"+p.S_img1+"' style='width: 250px; height: 130px;' class='imgs'>"; 
-						html += "<div class='a'><a href='/selectOneSpace?S_no="+p.S_no+"'><img src='/upload/space/"+p.S_img1+"' style='width:250px; height: 200px;' class='imgs'></a>"; 
+			
+						html += "<div class='a'><a href='/selectOneSpace?S_no="+p.S_no+"'><img src='/upload/space/"+p.S_img1+"' style='width:250px; height: 200px;' class='imgs'></a>";
+						html += "<div class='htmldiv'>"+p.S_placeName+"</div>";
 						html += "<button class='button' id='btn' value='z' onclick='selectOneSpace2("+p.S_no+")'>수정하기 </button>" ;
                   		html += "<button type='button' id='btn' class='deleteBtn' onclick='del("+p.S_no+")''> 삭제하기</button> </div>";
 						

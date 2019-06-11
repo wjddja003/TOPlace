@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -215,8 +216,6 @@
 	    .like{
 	    	width:40px;
 	    	height: 40px;
-	        background: #f69b02 ;
-	        border-radius:20%; 
 	    }
 	    .searchInput:focus{
 	    	outline: none;
@@ -224,6 +223,7 @@
 	    .searchInput{
 	    	border:1px solid #183058;
 	    }
+
 	</style>
 </head>
 <body>
@@ -303,8 +303,7 @@
 			</div>
 			<div class="filterOutLine">
 				<div class="filterOutBox">
-					<span>편의시설</span><span style="font-weight:100;">을 선택하세요.</span>&nbsp;&nbsp;&nbsp;전체선택&nbsp;
-					<input type="checkbox" id="filterCheck" style="width:20px;height:20px;" checked="checked">&nbsp;
+					<span>편의시설</span><span style="font-weight:100;">을 선택하세요.</span>
 					<button class="filterBack">X</button>
 				</div>
 				<div class="filterOutBox">
@@ -352,20 +351,20 @@
 					<div style='height:140px; padding-left:5px;border:1px solid #f69b02;'>
 						<div style="float:left;">
 						<a class="likeClick" href="#">
-							<img src="../img/like_icon.png" class="like">
+							<img src="../img/like_border.png" class="like">
                     		<img src="../img/like_full_icon.png" class="like_full">
                     	</a>
                     	</div>
                     	
-						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;">&nbsp;&nbsp;${s.s_placeName}</p>
+						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;&nbsp;${s.s_placeName}</p>
 						
-						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span>${s.addressCut}</span>
-						<div style="width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${s.s_placeTag}</div>
+						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span style="font-weight:100;">${s.addressCut}</span>
+						<div style="font-weight:100;width:100%; height:22px; margin-bottom:5px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;${s.s_placeTag}</div>
 						<c:if test="${s.s_type eq 'time' }">
-							&nbsp;<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span style=""> 원/시간</span>
+							&nbsp;<span style="font-size:22px; color:#f69b02;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /></span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${s.s_type eq 'day' }">
-							&nbsp;<span style="font-size:22px; color:#183058;">￦ ${s.s_price1}</span><span> 원/일</span>
+							&nbsp;<span style="font-size:22px; color:#f69b02;">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /></span><span> 원/일</span>
 						</c:if>
 					</div>
 				</div>
@@ -377,252 +376,218 @@
 	</div>
 	</section>
 	<jsp:include page="/WEB-INF/common/footer.jsp"/>
+	
 	<script type="text/javascript">
-	$(document).ready(function() {
-		var userNo = '${sessionScope.User.userNo}';
-		$.ajax({
-     		type:"GET",
-     		url: "/likeSearchAjax?userNo="+userNo,
-     		dataType: "json",                         // 서버에서 보내줄 데이터의 타입
-            
-     		success : function(data){
-     			console.log(data);
-     			for(var k=0; k<$('.inputNo').length; k++){
-     				for(var i=0; i<data.length; i++){
+		$(document).ready(function() {
+	var userNo = '${sessionScope.User.userNo}';
+	$.ajax({
+ 		type:"GET",
+ 		url: "/likeSearchAjax?userNo="+userNo,
+ 		dataType: "json",                         // 서버에서 보내줄 데이터의 타입
+        
+ 		success : function(data){
+ 			console.log(data);
+ 			for(var k=0; k<$('.inputNo').length; k++){
+ 				for(var i=0; i<data.length; i++){
+ 					
+     				if($('.inputNo').eq(k).val()==data[i].sNo){
      					
-         				if($('.inputNo').eq(k).val()==data[i].sNo){
-         					
-         					$(".like").eq(k).css("display","none");
-         					$(".like_full").eq(k).css("display","inline");
-         				}
-         			}
+     					$(".like").eq(k).css("display","none");
+     					$(".like_full").eq(k).css("display","inline");
+     				}
      			}
-     			}
-     		
-     	});
-		
-		
-		if('${sessionScope.User}' != ""){
-        	  $(".like").click(function(){
-        		  event.stopPropagation();
-        		  	var imgIndex = $(".like").index(this);
-                 	var s_no = $(this).parent().parent().parent().prev().prev().val();
-                 	
-                 	
-                 	
-                 	$.ajax({
-                 		type:"GET",
-                 		url: "/likeInsertAjax?S_no="+s_no+"&userNo="+userNo,
-                 		success : function(data){
-                 			var result = data;
-                 			if(result==1){
-                 				$("#viewpage_alert").slideDown(700);
-                             	$("#viewpage_alert").delay(400);
-                             	$("#viewpage_alert").css("display","inline");
-                             	$("#viewpage_alert").delay(400);
-                             	$("#viewpage_alert").slideUp(700); 
-                             	$(".like").eq(imgIndex).css("display","none");
-                             	$(".like_full").eq(imgIndex).css("display","inline");
-                             	$("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");	
-                 			}
-                 		}
-                 	});
-                 });
-                 $(".like_full").click(function(){
-                	 event.stopPropagation();
-                	 var imgIndex = $(".like_full").index(this);
-                 	var s_no = $(this).parent().parent().parent().prev().prev().val();
-                 	
-                 	var userNo = '${sessionScope.User.userNo}';
-                 	console.log($(this).parent().html());
-                 	console.log(s_no);
-                 	console.log(userNo);
-                     $.ajax({
-                 		type:"GET",
-                 		url: "/likeDeleteAjax?S_no="+s_no+"&userNo="+userNo,
-                 		success : function(data){
-                 			var result = data;
-                 			if(result==1){
-                					$("#viewpage_alert").slideDown(700);
-                	                $("#viewpage_alert").delay(400);
-                	                $("#viewpage_alert").css("display","inline");
-                	                $("#viewpage_alert").delay(400);
-                	                $("#viewpage_alert").slideUp(700); 
-                	                $(".like").eq(imgIndex).css("display","inline");
-	                             	$(".like_full").eq(imgIndex).css("display","none");
-                	                $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
-                 				
-                 			}	
-                 		}
-                 	});
-           		});
-          }else{
-        	  $(".like").click(function(){
-        		  event.stopPropagation();
-        		  $("#viewpage_alert").slideDown(700);
-	                $("#viewpage_alert").delay(400);
-	                $("#viewpage_alert").css("display","inline");
-	                $("#viewpage_alert").delay(400);
-	                $("#viewpage_alert").slideUp(700); 
-	                
-	                $("#viewpage_alert p").html("로그인 후 이용가능 합니다.");
-        	  });
-        	  
-          }
-		var filterCount = 0;
-		var prepareNum=-1;
-		$('.searchInput').val('${type}');
-		var type = '${type}';
-		var index = '${index }';
-		if (index >= 0 && index < 12) {
-			if($('.placeTypeDetail').eq(index).text()=='${type}'){
-				$('.selectBox').eq(0).html('${type }<span>&nbsp;&nbsp;&nbsp;▽</span>');
-				$('.selectBox').eq(0).css("color", "#f69b02")
-				$('.placeTypeDetail').eq(index).css("background-color", "#183058");
-				$('.placeTypeDetail').eq(index).css("color", "white");
-			}
-			inputType=1;
-		} else if (index >= 12 && index < 20) {
-			if($('.placeTypeDetail').eq(index).text()=='${type}'){
-				$('.selectBox').eq(1).html('${type }<span>&nbsp;&nbsp;&nbsp;▽</span>');
-				$('.selectBox').eq(1).css("color", "#f69b02")
-				$('.placeTypeDetail').eq(index).css("background-color", "#183058");
-				$('.placeTypeDetail').eq(index).css("color", "white");
-			}
-			inputType=2;
-		} else {
-			if($('.placeTypeDetail').eq(index).text()=='${type}'){
-				$('.selectBox').eq(2).html('${type }<span>▽</span>');
-			}
-			inputType=3;
+ 			}
+ 			}
+ 		
+ 	});
+	
+	
+	if('${sessionScope.User}' != ""){
+    	  $(".like").click(function(){
+    		  event.stopPropagation();
+    		  	var imgIndex = $(".like").index(this);
+             	var s_no = $(this).parent().parent().parent().prev().prev().val();
+             	
+             	
+             	
+             	$.ajax({
+             		type:"GET",
+             		url: "/likeInsertAjax?S_no="+s_no+"&userNo="+userNo,
+             		success : function(data){
+             			var result = data;
+             			if(result==1){
+             				$("#viewpage_alert").slideDown(700);
+                         	$("#viewpage_alert").delay(400);
+                         	$("#viewpage_alert").css("display","inline");
+                         	$("#viewpage_alert").delay(400);
+                         	$("#viewpage_alert").slideUp(700); 
+                         	$(".like").eq(imgIndex).css("display","none");
+                         	$(".like_full").eq(imgIndex).css("display","inline");
+                         	$("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");	
+             			}
+             		}
+             	});
+             });
+             $(".like_full").click(function(){
+            	 event.stopPropagation();
+            	 var imgIndex = $(".like_full").index(this);
+             	var s_no = $(this).parent().parent().parent().prev().prev().val();
+             	
+             	var userNo = '${sessionScope.User.userNo}';
+             	console.log($(this).parent().html());
+             	console.log(s_no);
+             	console.log(userNo);
+                 $.ajax({
+             		type:"GET",
+             		url: "/likeDeleteAjax?S_no="+s_no+"&userNo="+userNo,
+             		success : function(data){
+             			var result = data;
+             			if(result==1){
+            					$("#viewpage_alert").slideDown(700);
+            	                $("#viewpage_alert").delay(400);
+            	                $("#viewpage_alert").css("display","inline");
+            	                $("#viewpage_alert").delay(400);
+            	                $("#viewpage_alert").slideUp(700); 
+            	                $(".like").eq(imgIndex).css("display","inline");
+                             	$(".like_full").eq(imgIndex).css("display","none");
+            	                $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
+             				
+             			}	
+             		}
+             	});
+       		});
+      }else{
+    	  $(".like").click(function(){
+    		  event.stopPropagation();
+    		  $("#viewpage_alert").slideDown(700);
+                $("#viewpage_alert").delay(400);
+                $("#viewpage_alert").css("display","inline");
+                $("#viewpage_alert").delay(400);
+                $("#viewpage_alert").slideUp(700); 
+                
+                $("#viewpage_alert p").html("로그인 후 이용가능 합니다.");
+    	  });
+    	  
+      }
+	var filterCount = 0;
+	var prepareNum=-1;
+	$('.searchInput').val('${type}');
+	var type = '${type}';
+	var index = '${index }';
+	if (index >= 0 && index < 12) {
+		if($('.placeTypeDetail').eq(index).text()=='${type}'){
+			$('.selectBox').eq(0).html('${type }<span>&nbsp;&nbsp;&nbsp;▽</span>');
+			$('.selectBox').eq(0).css("color", "#f69b02")
+			$('.placeTypeDetail').eq(index).css("background-color", "#183058");
+			$('.placeTypeDetail').eq(index).css("color", "white");
 		}
-		
-		console.log(index);
-		console.log(type);
-		console.log(inputType);
-		for(var i = 0; i<6; i++){
-			$('.totalInnerBox').eq(i).css("display","block");
+		inputType=1;
+	} else if (index >= 12 && index < 20) {
+		if($('.placeTypeDetail').eq(index).text()=='${type}'){
+			$('.selectBox').eq(1).html('${type }<span>&nbsp;&nbsp;&nbsp;▽</span>');
+			$('.selectBox').eq(1).css("color", "#f69b02")
+			$('.placeTypeDetail').eq(index).css("background-color", "#183058");
+			$('.placeTypeDetail').eq(index).css("color", "white");
 		}
-	
-	
-		$('.selectBox').click(function() {
-			var selectNum = $('.selectBox').index(this);
-			
-				$('.selectBox').find('span').html('&nbsp;&nbsp;&nbsp;▽');
-				$('.selectBox').next().css("display", "none");
-				$('.filterOutLine').css("display","none");
-			if(prepareNum!=selectNum){
-				$('.selectBox').eq(selectNum).find('span').html('&nbsp;&nbsp;&nbsp;▲');
-				$('.selectBox').eq(selectNum).next().css("display", "block");
-				prepareNum = selectNum;
-			}else{
-				prepareNum=-1;
-			}
-			filterCount = 0;
-		});
-		
-		$('.placeTypeDetail').click(function() {
-			
-			var index = $('.placeTypeDetail').index(this);
-			var type = $('.placeTypeDetail').eq(index).text();
-			if(index<12){
-				inputType = 1;			
-			}else if(index>=12 && index<20){
-				inputType = 2;
-			}
-			location.href = "/headerSearchPlace?type=" + type + "&index=" + index + "&inputType=" + inputType;
-		});
-		
-		$('.totalInnerBox').click(function(){
-			
-			var sNumber = $(this).find('input').val();
-			location.href = "/selectOneSpace?S_no="+sNumber;
-		});
-		
-		$('#detailSearchFilter').click(function(){
-			if(filterCount==0){
-				$('.selectBox').find('span').html('&nbsp;&nbsp;&nbsp;▽');
-				$('.selectBox').next().css("display", "none");
-				$('.filterOutLine').css("display", "block");	
-				filterCount = 1;
-			} else if(filterCount==1){
-				$('.filterOutLine').css("display", "none");	
-				filterCount = 0;
-			}
-		});
-		$('.filterBack').click(function() {
-			$('.selectBoxInner').css("display", "none");
-			$('.filterOutLine').css("display", "none");
-		    filterCount = 0;
-		});
-		
-		var filterArray = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-		var filterCount = 0;
-		$('.filterBox').click(function(){
-			if($('#filterCheck').is(':checked')==true){
-				$('#filterCheck').prop("checked", false);
-				filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-			}
-			var filterIndex = $('.filterBox').index(this);
-			$(this).toggleClass("selectFilter");
-			if($(this).hasClass("selectFilter")){
-				filterArray[filterIndex] = 1;
-			}else{
-				filterArray[filterIndex] = 0;
-			}
-			console.log(filterArray);
-		});
-		$('#filterCheck').click(function(){
-			if($('#filterCheck').is(':checked')==true){
-				filterArray = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-			} else{
-				filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-			}
-			$(".selectFilter").removeClass("selectFilter");
-		});
-		var viewIndex = 6;//공간 리스트 인덱스
-		$('#viewMore').click(function(){
-			for(var i = viewIndex; i<viewIndex+6; i++){
-				$('.totalInnerBox').eq(i).css("display","block");
-			}
-			viewIndex = viewIndex+6;
-		});
-		$('#detailSearchMap').click(function(){
-			
-			$('.mapInner').toggle();
-		});
-		$('#filterReset').click(function(){
-			$('#filterCheck').prop("checked", false);
-			filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-			$(".selectFilter").removeClass("selectFilter");
-		});
-		$('#filterSubmit').click(function(){
-			var filter = filterArray.join("");
-			console.log(filter);
-			location.href = "/filterSearch?type=" + type + "&index=" + index + "&inputType=" + inputType +"&filter="+filter;
-		});
-	});
-
-	
-	
-	
-	
-	function maps(inputType,index,type) {
-		
-		var inputType = inputType;
-		var index = index;
-		var type = type;
-		console.log(inputType);
-		console.log(index);
-		console.log(type);
-		location.href="/headerSearchplace2?inputType="+inputType+"&index="+index+"&type="+type;
-	
+		inputType=2;
+	} else {
+		if($('.placeTypeDetail').eq(index).text()=='${type}'){
+			$('.selectBox').eq(2).html('${type }<span>▽</span>');
+		}
+		inputType=3;
 	}
 	
-	
+	for(var i = 0; i<6; i++){
+		$('.totalInnerBox').eq(i).css("display","block");
+	}
 
-	</script>
+
+	$('.selectBox').click(function() {
+		var selectNum = $('.selectBox').index(this);
+		
+			$('.selectBox').find('span').html('&nbsp;&nbsp;&nbsp;▽');
+			$('.selectBox').next().css("display", "none");
+			$('.filterOutLine').css("display","none");
+		if(prepareNum!=selectNum){
+			$('.selectBox').eq(selectNum).find('span').html('&nbsp;&nbsp;&nbsp;▲');
+			$('.selectBox').eq(selectNum).next().css("display", "block");
+			prepareNum = selectNum;
+		}else{
+			prepareNum=-1;
+		}
+		filterCount = 0;
+	});
 	
+	$('.placeTypeDetail').click(function() {
+		
+		var index = $('.placeTypeDetail').index(this);
+		var type = $('.placeTypeDetail').eq(index).text();
+		if(index>-1 && index<12){
+			inputType = 1;			
+		}else if(index>=12 && index<20){
+			inputType = 2;
+		}
+		location.href = "/headerSearchPlace?type=" + type + "&index=" + index + "&inputType=" + inputType;
+	});
+	
+	$('.totalInnerBox').click(function(){
+		
+		var sNumber = $(this).find('input').val();
+		location.href = "/selectOneSpace?S_no="+sNumber;
+	});
+	
+	$('#detailSearchFilter').click(function(){
+		if(filterCount==0){
+			$('.selectBox').find('span').html('&nbsp;&nbsp;&nbsp;▽');
+			$('.selectBox').next().css("display", "none");
+			$('.filterOutLine').css("display", "block");	
+			filterCount = 1;
+		} else if(filterCount==1){
+			$('.filterOutLine').css("display", "none");	
+			filterCount = 0;
+		}
+	});
+	$('.filterBack').click(function() {
+		$('.selectBoxInner').css("display", "none");
+		$('.filterOutLine').css("display", "none");
+	    filterCount = 0;
+	});
+	
+	var filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var filterCount = 0;
+	$('.filterBox').click(function(){
+		
+		var filterIndex = $('.filterBox').index(this);
+		$(this).toggleClass("selectFilter");
+		if($(this).hasClass("selectFilter")){
+			filterArray[filterIndex] = 1;
+		}else{
+			filterArray[filterIndex] = 0;
+		}
+		console.log(filterArray);
+	});
+	
+	var viewIndex = 6;//공간 리스트 인덱스
+	$('#viewMore').click(function(){
+		for(var i = viewIndex; i<viewIndex+6; i++){
+			$('.totalInnerBox').eq(i).css("display","block");
+		}
+		viewIndex = viewIndex+6;
+	});
+	
+	$('#filterReset').click(function(){
+		$('#filterCheck').prop("checked", false);
+		filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+		$(".selectFilter").removeClass("selectFilter");
+	});
+	$('#filterSubmit').click(function(){
+		var filter = filterArray.join("");
+		console.log(filter);
+		location.href = "/filterSearch?type=" + type + "&index=" + index + "&inputType=" + inputType +"&filter="+filter;
+	});
+	
+});
+	</script>
 	
 </body>
 </html>

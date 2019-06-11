@@ -1,4 +1,4 @@
-package qaSy.controller;
+package qaSy.model.controller;
 
 import java.io.IOException;
 
@@ -40,8 +40,6 @@ public class QaViewServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
 			rd.forward(request, response);
 		}else {
-			
-			System.out.println(u.getUserId());
 			String userId = u.getUserId();
 			int reqPage;
 			try {

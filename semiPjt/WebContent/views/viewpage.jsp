@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="space.model.vo.Space"%>
+    
     <%
     	Space s = (Space)request.getAttribute("s");
     	String[] holiday = (s.getS_holiday()).split(",");
@@ -13,6 +14,7 @@
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=33qm1u5uje&submodules=geocoder"> //네이버 지도 스크립트
 	</script>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -64,14 +66,40 @@
                             	<a href="#">#${t}</a>
                             </li>
                          </c:forTokens>
-              
+              			
                         </ul>
+                        <!-- 마커 -->
+                        <div id="declare_outline" style="position:relative;">
+                        <c:if test="${sessionScope.User != null}">
+                        	<div id="declare">
+                        		<img src="../img/icon_declare.png" height="23px" width="23px;" style="margin-bottom: 5px;">
+                        	 	<img src="../img/icon_declare2.png" height="23px" width="23px;" style="margin-bottom: 5px;">
+                        	 	신고
+                        	</div>
+                        </c:if>
+                        <div id="declare_content">
+                        	<div id="declare_header">신고하기</div>
+                        	<form id="declare_form">
+                        		<button type="button" class="declare_type">공간 정보 허위 신고</button>
+                        		<button type="button" class="declare_type">불친절한 호스트</button>
+                        		<button type="button" class="declare_type">환불규정 미준수</button>
+                        		<br><br>
+                        		<input type="hidden" name="S_no" value="${s.s_no }">
+                        		<input type="hidden" name="S_placeName" value="${s.s_placeName }">
+                        		<input id="declareType" type="hidden" name="declareType">
+                        		신고자 : <input class="declare_name" type="text" name="userName" value="${sessionScope.User.userName }" readonly="readonly"><br><br>
+                        		신고내용 : <input class="declare_name" type="text" name="declareContent" size="40" placeholder="신고내용을 간단히 작성해주세요."><br><br>
+                        		<button type="button" class="declareBtn" id="declareBtn">신고하기</button>
+                        		<button type="button" class="declareBtn" id="noneBtn">취소</button>
+                        	</form>
+                        </div>
+                        </div>
                      </div>
                      <!--viewpage_section Fin-->
                     <div class="viewpage_cover">
                     <div class="viewpage_left">
                         <div class="viewpage_photo">
-                            <a href="#"><img src="/upload/space/${s.s_img1 }" width="773px;"></a>
+                            <img src="/upload/space/${s.s_img1 }" width="773px;" height="255px;">
                         </div>
                         <div class="viewpage_textbox">
                             <h2>${s.s_placeIntroduce1 }</h2>
@@ -192,22 +220,25 @@
                         </div>
                         <div class="viewpage_qna">
                             <div class="viewpage_qna_header">
-                            <h4>Q&amp;A ${qna.totalCount}개</h4>
+                            <h4>Q&amp;A <strong class="txt_primary">${qna.totalCount}개</strong></h4>
                             <c:if test="${s.s_hostNum != host.hostNo}">
-                            <a style="text-decoration: none;" id="viewQna"><span>질문작성하기</span></a>
+                            <a style="text-decoration: none; color:#fff;" id="viewQna"><span>질문작성하기</span></a>
                             </c:if>
                             </div>
                             <div class="viewpage_qnaview">
                                 <div>
                                     <ul class="review_list" id="qna_list">
+                                     <c:if test="${qna.totalCount == 0}">                                                
+                                                	<p class="review_none">등록된 질문이 없습니다.</p>
+                                    </c:if>
                                     <c:forEach var="q" items="${qna.list}">   
                                     	<c:if test="${q.qaCommentRef == ''}">   	
-                                        <li class="rlist ">  
+                                        <li class="rlist" style="padding-top:30px;">  
                                         <div class="rbox_mine">  
-                                                 <span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
+                                                 <span class="pf_img"><img src="../img/user1.png" width="100px;" height="100px;"></span> 
                                                 <div class="rbox_name">
                                                 <strong class="guest_name" style="font-size:22px;">${q.qaCommentWriter}</strong>
-                                                <p class="p_review">${q.qaCommentContent}</p>
+                                                <p class="p_review" style=" word-break:break-all">${q.qaCommentContent}</p>
                                                 </div>
                                                 <div class="rbox_info_base">  
                                                     <span class="time_info">${q.qaCommentDate}</span> 
@@ -218,10 +249,10 @@
 										<div style="text-align: right;">
                                     	<c:if test="${sessionScope.User.userId == q.qaCommentWriter}">
                                     	<a style="text-decoration:none; color:#f69b02; border-color:#f69b02;" class="qaupdate btn btn-outline-primary btn-sm"><span>수정</span></a>
-                                    	<button class="btn btn-outline-primary btn-sm" style="color:#f69b02; border-color:#f69b02;"><a href="/qaViewpageDelete?S_no=${s.s_no }&qaCommentNo=${q.qaCommentNo }">삭제</a></button>
+                                    	<button class="btn btn-outline-primary btn-sm" style="color:#f69b02; border-color:#f69b02;"><a href="/qaViewpageDelete?S_no=${s.s_no }&qaCommentNo=${q.qaCommentNo }" style="color:#f69b02;">삭제</a></button>
                                     	</c:if>
+                                    	<input type="hidden" class="qaNo" value="${q.qaCommentNo}">
                                     	<c:if test="${s.s_hostNum == host.hostNo}">
-                                    		<input type="hidden" class="qaNo" value="${q.qaCommentNo}">
                                     		<button type="button" class="viewQnaComment btn btn-outline-primary btn-sm" style="color:#f69b02; border-color:#f69b02;">답글달기</button>
                                     	</c:if>
                                     	</div>
@@ -230,23 +261,35 @@
                                         <c:forEach var="qq" items="${qna.list}">
                                           <c:if test="${q.qaCommentNo == qq.qaCommentRef}">
                                             <div class="rbox_reply" style="margin-top:30px;">
-                                            	<span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
+                                            <c:if test="${empty host.hostFile}">                                            	
+                                            	<span class="pf_img"><img src="../img/logo.png" width="100px;" height="50px;"></span>
+                                            </c:if>
+                                            <c:if test="${not empty host.hostFile }">
+                                            	<span class="pf_img"><img src="/upload/hostProfile/${host.hostFile}"></span>
+                                            	</c:if> 
                                                 <p class="p_tit_reply">
-                                                    <em>${host.hostName}</em>님의 댓글
+                                                    <em>${qq.qaCommentWriter}</em>님의 댓글
                                                 </p>
-                                                <p class="p_review">
+                                                <p class="p_review" style=" word-break:break-all">
                                                 	   ${qq.qaCommentContent}
                                                 </p>
                                                 <div class="rbox_info_base">
                                                     <p class="time_info">${qq.qaCommentDate}</p>
                                                 </div>
                                             </div>
+                                            <div style="text-align: right;">
+                                    	<c:if test="${sessionScope.User.userId == qq.qaCommentWriter}">
+                                    	<a style="text-decoration:none; color:#f69b02; border-color:#f69b02;" class="qaupdate btn btn-outline-primary btn-sm"><span>수정</span></a>
+                                    	<button class="btn btn-outline-primary btn-sm" style="color:#f69b02; border-color:#f69b02;"><a href="/qaViewpageDelete?S_no=${s.s_no }&qaCommentNo=${qq.qaCommentNo }" style="color:#f69b02;">삭제</a></button>
+                                    	</c:if>
+                                    	<input type="hidden" class="qaNo" value="${qq.qaCommentNo}">      
+                                    	</div>
                                            </c:if>
                                         </c:forEach> 
                                         </c:forEach>
                                     </ul>
                                 </div>
-                                 <div id="pageNavi">${qna.pageNavi}</div>
+                                 <div class="pageNavi">${qna.pageNavi}</div>
                             </div>
             
                         </div>
@@ -254,13 +297,9 @@
                             <div class="host_area">
 							<div class="pf_left"><img src="../img/logo.png"></div>
 							<div class="pf_right">
-								<strong class="pf_host">HOST</strong><br> <span class="pf_name">(주)투플레이스</span>
-								<p class="pf_txt">서울시 서초구 방배동 815-20 B1 80평 스튜디오</p>
-							</div>
-                            <a href="#" class="hostbtn" style="text-decoration: none;">
-							<span class="btn_inner">
-								호스트 페이지로 이동 →
-							</span>
+								<strong class="pf_host">HOST</strong><br> <span class="pf_name">${s.s_placeName}</span>
+								<p class="pf_txt">${s.address}</p>
+							</div>							
 						</a>
 						</div>
                         </div>
@@ -275,14 +314,18 @@
 		                </c:if>
 					</div>
                     <div class="viewpage_review">
+                     <c:if test="${pd.totalCount == 0}">                                                
+                       	<p class="review_none">등록된 리뷰가 없습니다.</p>
+                          </c:if>
                         <ul>
                          <c:forEach items="${pd.list}" var="rc">
                             <li class="rlist">   
-                                <div class="rbox_mine"> 
-                                    <span class="pf_img"><img src="../img/img_profile_default.jpg"></span> 
+       
+                                <div class="rbox_mine" style="padding-top:30px;"> 
+                                    <span class="pf_img"><img src="../img/user1.png" width="100px;" height="100px;"></span> 
                                     <strong class="guest_name">${rc.reviewWriter}</strong> 
 <%--                                     <p class="p_review"><span>제목 : </span>${rc.reviewTitle }</p> --%>
-                                    <p class="p_review">${rc.reviewContent }</p>
+                                    <p class="p_review" style=" word-break:break-all">${rc.reviewContent }</p>
                                     <c:if test="${not empty rc.filename }">
                                     <div class="space_list swiper_list photo_review"> 
                                         <div class="flex_wrap column3 fluid">      
@@ -314,14 +357,14 @@
                                     </span>
                                     <div style="text-align: right;">
                                     	<c:if test="${sessionScope.User.userId == rc.reviewWriter}">
-                                    	<button class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;"><a href="/reviewUpdateEnd?reviewNo=${rc.reviewNo }">수정</a></button>
+                                    	<button class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;"><a href="/reviewUpdateEnd?reviewNo=${rc.reviewNo }" style="color:#f69b02;">수정</a></button>
                                     	<button class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;" ><a href="/reviewDelete?S_no=${s.s_no }&reviewNo=${rc.reviewNo}" style="color:#f69b02;">삭제</a></button>
                                     	</c:if>
                                     </div>                                                                              
                                 </div>
                             </li>
                             </c:forEach>
-                            <div id="pageNavi">${pd.pageNavi}</div>
+                            <div class="pageNavi">${pd.pageNavi}</div>
                         </ul>
                     </div> 
                      <div>
@@ -340,7 +383,7 @@
                                 <div class="viewpage_right_list2">
                                     <ul>
                                         <li class="viewpage_list_none" style="padding:22px 0px 21px;">
-                                            <input type="radio" checked> ${s.s_placeName } <span>￦${s.s_price1}<small style="color:#949494;">/시간</small></span>
+                                            <input type="radio" checked> ${s.s_placeName } <span>￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /><small style="color:#949494;">/시간</small></span>
                                         </li>
                                         <li class="viewpage_list_none" style="padding:15px 0px 15px; height:140px;">
                                             <img src="../img/ex1.jpg" width="110px" height="110px" id="viewpage_right_img">
@@ -371,22 +414,24 @@
 	                                    		  <%}
 	                                    		} 
                                     		}%>
+                                    	<%if(count > 3 ){ %>
                                     	<div class="viewpage_right_kategorie">
                                     		<p style="font-size:14px;">+ <%=count-3%> </p>
                                     	</div>
+                                    	<%} %>
                                     </div>
                                 </div>
                             </div>
                             <c:choose>
                             	<c:when test="${not empty sessionScope.User}">	
-                                    <div class="viewpage_reservationbtn">
-                             		<button type="button" class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;"><a href="/selectOneReservation?S_no=${s.s_no}" style="color:#f69b02;">결제하기</a></button>
-                                    </div>
+                                  
+                             		<button onclick="reservationBtn1()" class="viewpage_reservationbtn">결제하러 가기</button>
+                                 
                              	</c:when>
                              	<c:otherwise>
-                                    <div class="viewpage_reservationbtn">
-                             		<button type="button" class="btn btn-outline-primary btn-sm"  style="color:#f69b02; border-color:#f69b02; text-decoration: none;"><a href="/views/login.jsp" style="color:#f69b02;">결제하기</a></button>
-                                    </div>
+                   
+                             		<button onclick="reservationBtn()"  class="viewpage_reservationbtn">결제하러 가기</button>
+                                   
                              	</c:otherwise>
                              </c:choose>
                         </div>
@@ -414,9 +459,11 @@
 					</div>
 				</div>
                 <div class="qna_p">
-				    <p>
-				    답글은 공개 상태로만 등록하실 수 있습니다.
+				   <div class="view_warning_img">
+				   <img src="../img/icon_warning.png"> <p>
+				    질문은 공개 상태로만 등록하실 수 있습니다.
                     </p>
+                    </div>
 			     </div>
                 <div class="qnaBtns">
 <!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
@@ -430,7 +477,7 @@
 	<form action="/insertQa?S_no=${s.s_no }" method="post">
     <div class="layer_popup" class="_noProfileCheckLayout" style="display:none;position:fixed;">
 			<div class="popup_wrap">
-                <div class="pop_header">                    
+                <div class="pop_header">                     
 					<p>질문 작성하기</p>
                     <button type="button"><a href="javascript:void(0);" class="popcencle" style="color:#fff; text-decoration: none;">X</a></button>
                 </div>
@@ -444,9 +491,11 @@
 					</div>
 				</div>
                 <div class="qna_p">
-				    <p>
+				   <div class="view_warning_img">
+				   <img src="../img/icon_warning.png"> <p>
 				    질문은 공개 상태로만 등록하실 수 있습니다.
                     </p>
+                    </div>
 			     </div>
                 <div class="qnaBtns">
 <!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
@@ -464,6 +513,7 @@
     <div class="layer_popup_up" class="_noProfileCheckLayout" style="display:none;position:fixed;">
 			<div class="popup_wrap">
                 <div class="pop_header">
+                	<input type="hidden" name="qaCommentNo" class="cNo" value="">  
                 	<input type="hidden" name="S_no" value="${s.s_no}">                    
 					<p>질문 작성하기</p>
                     <button type="button" class="popcencleUP">X</button>
@@ -478,9 +528,11 @@
 					</div>
 				</div>
                 <div class="qna_p">
+                    <div class="view_warning_img">
 				   <img src="../img/icon_warning.png"> <p>
 				    질문은 공개 상태로만 등록하실 수 있습니다.
                     </p>
+                    </div>
 			     </div>
                 <div class="qnaBtns">
 <!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
@@ -715,6 +767,56 @@
     	   $('#layer_popup_Comment').show();
     	   $('.hostpopupMask').show();
        });
+       $('#declare').click(function(){
+    	   $('#declare_content').toggle();
+       });
+       $('.declare_type').click(function(){
+    	   $('.declare_type').removeClass("change_btn");
+    	   $(this).toggleClass("change_btn");
+    	   $('#declareType').val($(this).text());
+       });
+       $('#noneBtn').click(function(){
+    	   $('#declare_content').css("display","none");
+       });
+       $('#declareBtn').click(function(){
+    	   
+    	   var params = $('#declare_form').serialize();
+           $.ajax({
+               url:"/insertDeclare",
+               type:"POST",
+               data:params, 
+               error:function(request,status,error){
+                   alert("실패");
+                   alert(request.status);
+               },
+               success:function(data){
+            	   var result = data;
+        			if(result==1){
+        				$('#declare_content').css("display","none");
+        				$("#viewpage_alert").slideDown(700);
+        				var offset = $("#viewpage_alert").offset();
+        		        $('html, body').animate({scrollTop : offset.top}, 400);
+                    	$("#viewpage_alert").delay(1300);
+                    	$("#viewpage_alert").css("display","inline");
+                    	$("#viewpage_alert").delay(1300);
+                    	$("#viewpage_alert").slideUp(700); 
+                    	$("#viewpage_alert p").html("신고접수가 완료되었습니다.");//마커
+        			}else{
+        				$('#declare_content').css("display","none");
+        				$("#viewpage_alert").slideDown(700);
+        				var offset = $("#viewpage_alert").offset();
+        		        $('html, body').animate({scrollTop : offset.top}, 400);
+                    	$("#viewpage_alert").delay(1300);
+                    	$("#viewpage_alert").css("display","inline");
+                    	$("#viewpage_alert").delay(1300);
+                    	$("#viewpage_alert").slideUp(700);
+                    	$("#viewpage_alert p").html("신고접수 실패");
+                    	
+        			}
+               }
+           });
+       });
+       
         </script>
         <script>
 	window.onload = function () { 
@@ -743,13 +845,31 @@
 					position : naver.maps.Position.TOP_RIGHT,       //줌컨트롤의 위치
 					style : naver.maps.ZoomControlStyle.SMALL  		//스타일 + - 만 나오는게 지도에대한 설정이었다 이말이야
 				}
+			 	
 			});
+			map.setOptions("mapTypeControl", true);
 			
 			var marker = new naver.maps.Marker({ 
 				position : new naver.maps.LatLng(y,x), //마커
-				map : map
+				map : map,
+				icon: {
+			        content: '<img src="/img/mark.png">',
+			        size: new naver.maps.Size(22, 35),
+			        anchor: new naver.maps.Point(11, 35)
+			    }
 				
-			});     
+			});
+			var infoWindow =new naver.maps.InfoWindow();
+			naver.maps.Event.addListener(marker,'click',function(e){	//클릭햇을떄 이벤트 줘야지
+				if(infoWindow.getMap()){ //지도에 열려있는지 아닌지 판단여부 (정보창)
+					infoWindow.close();
+				}else{
+					infoWindow.setContent('<div style="width:180px;text-align:center;padding:10px;"><img src="/upload/space/${s.s_img1}" style="width:150px;">${s.address}</div>');
+					infoWindow.open(map,marker);
+				}
+				
+			});
+			
 	    });		
 		};
 		
@@ -758,8 +878,9 @@
 			$('.hostpopupMask').hide();
 		});
 		$(".qaupdate").click(function(){
+			$('.cNo').val($(this).next().next().val());
 			$('.layer_popup_up').show();
-			$('#qaUpdateForm').attr('action',"/qaViewpageUpdateEnd?qaCommentNo="+$('.qaNo').val());
+			$('#qaUpdateForm').attr('action',"/qaViewpageUpdateEnd");
 			$('#input_update').html($(this).parents('.rlist').find(".p_review").html());
 			$('.hostpopupMaskUp').show();
 		});
@@ -767,7 +888,12 @@
 			$('.layer_popup_up').hide();
 			$('.hostpopupMaskUp').hide();
 		});
-		
+		 function reservationBtn() {
+	            window.location = "/views/login.jsp";
+	        }
+		function reservationBtn1(){
+			window.location = "/selectOneReservation?S_no=${s.s_no}";
+		}
 </script>		
     <jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>

@@ -44,6 +44,7 @@ public class ReviewListServlet2 extends HttpServlet {
 		}else {
 			
 			String userId = u.getUserId();
+			int userNo = u.getUserNo();
 			int reqPage;
 			try {
 				reqPage = Integer.parseInt(request.getParameter("reqPage"));
@@ -51,7 +52,7 @@ public class ReviewListServlet2 extends HttpServlet {
 				reqPage = 1;
 			}
 			
-			ReviewPageData pd = new ReviewService().selectRList(reqPage,userId);
+			ReviewPageData pd = new ReviewService().selectRList(reqPage,userId,userNo);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/review/reviewList.jsp");
 			request.setAttribute("pd", pd);
 			rd.forward(request, response);

@@ -14,6 +14,7 @@ public class QaComment {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public QaComment(int qaCommentNo, String qaCommentWriter, String qaCommentContent, int qaRef, Date qaCommentDate,
 			int qaCommentRef, String placeName) {
 		super();
@@ -24,6 +25,16 @@ public class QaComment {
 		this.qaCommentDate = qaCommentDate;
 		this.qaCommentRef = qaCommentRef;
 		this.placeName = placeName;
+	}
+	public QaComment(int qaCommentNo, String qaCommentWriter, String qaCommentContent, int qaRef, Date qaCommentDate,
+			int qaCommentRef) {
+		super();
+		this.qaCommentNo = qaCommentNo;
+		this.qaCommentWriter = qaCommentWriter;
+		this.qaCommentContent = qaCommentContent;
+		this.qaRef = qaRef;
+		this.qaCommentDate = qaCommentDate;
+		this.qaCommentRef = qaCommentRef;
 	}
 	public int getQaCommentNo() {
 		return qaCommentNo;
