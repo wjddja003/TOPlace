@@ -100,11 +100,10 @@
             border-bottom: none;
             border-left: none;
             border-right: none;
-            
         }
         #aside-login_b a{
             text-decoration: none;
-            color:#f69b02;
+            color: gray;
             position: absolute;
             top: 40px;
             left: 120px;
@@ -170,89 +169,29 @@
         <div id="aside-login_t">
             <ul>
                 <li>
-                <c:choose>
-                	<c:when test="${empty sessionScope.User }">
-                		<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>
-                	</c:when>
-                	<c:otherwise>
-                		<c:choose>
-                			<c:when test="${empty sessionScope.host }">
-                				<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>
-                			</c:when>
-                			<c:otherwise>
-                				<c:choose>
-	                				<c:when test="${not empty sessionScope.host }">
-	                					<c:if test="${sessionScope.host.hostFile != null }">
-	                						<img src="../../../upload/hostProfile/${sessionScope.host.hostFile }" id="hostImage">
-	                					</c:if>
-	                					<c:if test="${sessionScope.host.hostFile == null }">
-	                						<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>
-	                					</c:if>
-	                				</c:when>
-  								</c:choose>
-                			</c:otherwise>
-                		</c:choose>
-                	</c:otherwise>
-                </c:choose>
+               		<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>           			
+               		<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>
+                	<img src="../../../upload/hostProfile/${sessionScope.host.hostFile }" id="hostImage">			
+                	<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>	
                 </li>
                 <li>
-                	<c:choose>
-                		<c:when test="${empty sessionScope.User}">
-                			<a href="/views/login.jsp">로그인이 필요합니다.</a>		
-                		</c:when>
-                		<c:otherwise>
-                			<c:choose>
-                				<c:when test="${empty sessionScope.host}">
-                					<a href="/views/hostprofile.jsp">${sessionScope.User.userName}</a>
-                				</c:when>
-                				<c:otherwise>
-                					<c:if test="${not empty sessionScope.host }">
-                						<a href="/views/hostprofileUpdate.jsp">${sessionScope.host.hostName}</a>
-                					</c:if>
-                				</c:otherwise>
-                			</c:choose>
-                		</c:otherwise>
-                	</c:choose>	
+                	<a href="/views/hostprofile.jsp">${sessionScope.User.userName}</a>
                 </li>
                 
             </ul>
         </div>
-       
-        
         <div id="mypage1">    
-        <div class="aside-mng">
-            <a href="/reservationList">
-            	<div class="aside-mng_1">
-            		<div>
-                        <img src="../../img/mypage_reservation_icon.png">
-                    </div>
-           			<p style="font-weight: normal; font-size:16px;">예약리스트</p>
-            	</div>
-            </a>
-        	
-            <a href="/qaView">
-            	<div class="aside-mng_1">
-            		<div>
-                        <img src="../../img/mypage_qna_icon.png">
-                    </div>
-            		<p style="font-weight: normal; font-size:16px;">이용후기/Q＆A관리</p>
-            	</div>
-            </a>
-           
-        </div>
-        <div class="aside-list">
+      
+        	<div class="aside-list">
             <ul class="aside-navi">
             	
-                <li><a href="/likeList">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <c:if test="${not empty sessionScope.host }">
+                <li><a href="#">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li class="spaceMng">
-                	<a href="/hostPage?ShostNum=${sessionScope.host.hostNo}" >내 공간정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a>
+                	<a href="#" >내 공간정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a>
                 	
                 </li>
-                </c:if>
                 <li><a href="/noticeList">공지사항<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li><a href="/helpList">도움말<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <li><a href="https://talk.naver.com/ct/wc89we" target="_blank">1:1문의<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li class="service"><a href="#">서비스정보<span><img src="/img/chevrondown.png" class="d_img"></span></a></li>
                 <div style="display:none" id="sv_list">
                         <ul>
@@ -263,35 +202,14 @@
                         </ul>
                 </div>
             </ul>
-        </div>
-        <div id="aside-login_b">
-        	<c:choose>
-				<c:when test="${empty sessionScope.User}">
-	       			<a href="/views/login.jsp">로그인</a>		
-	       		</c:when>
-	       		<c:otherwise>
-	       			<a href="/logout">로그아웃</a>
-	       		</c:otherwise>
-	       	</c:choose>
-        </div>
+        	</div>
+	        <div id="aside-login_b">
+		       	<a href="/logout">로그아웃</a>	
+	        </div>
         </div>
         <div id="aside-host">
             <div id="aside-host1">
-	            <c:choose>
-	            	<c:when test="${empty sessionScope.User}">
-	            		<a href="#" class="hostJoin">호스트 등록으로 이동</a>
-	            	</c:when>
-	            	<c:otherwise>
-		            	<c:choose>
-		       				<c:when test="${empty sessionScope.host}">
-		       					<a href="/views/hostprofile.jsp" class="hostJoin">호스트 등록으로 이동</a>
-		       				</c:when>
-		       				<c:otherwise>
-		       					<a href="/views/hostprofileUpdate.jsp">호스트 정보 수정으로 이동</a>
-		       				</c:otherwise>
-		       			</c:choose>
-	       			</c:otherwise>
-	       		</c:choose>
+	               	관리자 페이지
             </div>
         </div>
     </div>

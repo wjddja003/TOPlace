@@ -149,7 +149,7 @@
 				          <ul id="slider">
 				          <c:forTokens items="${s.s_img2 }" delims="," var="sliderimg"> 
 				             <li data-color="#1abc9c">				                          
-									<img src="/upload/space/${sliderimg }">
+									<img src="/upload/space/${sliderimg}">
 				             </li>	   
 				           </c:forTokens>          		             
 				          </ul>
