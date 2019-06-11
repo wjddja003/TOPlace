@@ -168,9 +168,7 @@ header {
     background: #eee;
     display: none;
     position: absolute;
-    left: -30;
     height: 300px;
-    top: 100;
     z-index: 9;
 }
 /*
