@@ -53,7 +53,7 @@
                     </tr>
                 </c:forEach>
             </table>
-            <div>${u.pageNavi}</div>
+            <div style="text-align: center;">${up.pageNavi}</div>
         </div>
     </div>
     </section>
