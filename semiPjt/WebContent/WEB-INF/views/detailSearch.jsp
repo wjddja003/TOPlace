@@ -376,239 +376,218 @@
 	</div>
 	</section>
 	<jsp:include page="/WEB-INF/common/footer.jsp"/>
+	
 	<script type="text/javascript">
-	$(document).ready(function() {
-		var userNo = '${sessionScope.User.userNo}';
-		$.ajax({
-     		type:"GET",
-     		url: "/likeSearchAjax?userNo="+userNo,
-     		dataType: "json",                         // 서버에서 보내줄 데이터의 타입
-            
-     		success : function(data){
-     			console.log(data);
-     			for(var k=0; k<$('.inputNo').length; k++){
-     				for(var i=0; i<data.length; i++){
+		$(document).ready(function() {
+	var userNo = '${sessionScope.User.userNo}';
+	$.ajax({
+ 		type:"GET",
+ 		url: "/likeSearchAjax?userNo="+userNo,
+ 		dataType: "json",                         // 서버에서 보내줄 데이터의 타입
+        
+ 		success : function(data){
+ 			console.log(data);
+ 			for(var k=0; k<$('.inputNo').length; k++){
+ 				for(var i=0; i<data.length; i++){
+ 					
+     				if($('.inputNo').eq(k).val()==data[i].sNo){
      					
-         				if($('.inputNo').eq(k).val()==data[i].sNo){
-         					
-         					$(".like").eq(k).css("display","none");
-         					$(".like_full").eq(k).css("display","inline");
-         				}
-         			}
+     					$(".like").eq(k).css("display","none");
+     					$(".like_full").eq(k).css("display","inline");
+     				}
      			}
-     			}
-     		
-     	});
-		
-		
-		if('${sessionScope.User}' != ""){
-        	  $(".like").click(function(){
-        		  event.stopPropagation();
-        		  	var imgIndex = $(".like").index(this);
-                 	var s_no = $(this).parent().parent().parent().prev().prev().val();
-                 	
-                 	
-                 	
-                 	$.ajax({
-                 		type:"GET",
-                 		url: "/likeInsertAjax?S_no="+s_no+"&userNo="+userNo,
-                 		success : function(data){
-                 			var result = data;
-                 			if(result==1){
-                 				$("#viewpage_alert").slideDown(700);
-                             	$("#viewpage_alert").delay(400);
-                             	$("#viewpage_alert").css("display","inline");
-                             	$("#viewpage_alert").delay(400);
-                             	$("#viewpage_alert").slideUp(700); 
-                             	$(".like").eq(imgIndex).css("display","none");
-                             	$(".like_full").eq(imgIndex).css("display","inline");
-                             	$("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");	
-                 			}
-                 		}
-                 	});
-                 });
-                 $(".like_full").click(function(){
-                	 event.stopPropagation();
-                	 var imgIndex = $(".like_full").index(this);
-                 	var s_no = $(this).parent().parent().parent().prev().prev().val();
-                 	
-                 	var userNo = '${sessionScope.User.userNo}';
-                 	console.log($(this).parent().html());
-                 	console.log(s_no);
-                 	console.log(userNo);
-                     $.ajax({
-                 		type:"GET",
-                 		url: "/likeDeleteAjax?S_no="+s_no+"&userNo="+userNo,
-                 		success : function(data){
-                 			var result = data;
-                 			if(result==1){
-                					$("#viewpage_alert").slideDown(700);
-                	                $("#viewpage_alert").delay(400);
-                	                $("#viewpage_alert").css("display","inline");
-                	                $("#viewpage_alert").delay(400);
-                	                $("#viewpage_alert").slideUp(700); 
-                	                $(".like").eq(imgIndex).css("display","inline");
-	                             	$(".like_full").eq(imgIndex).css("display","none");
-                	                $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
-                 				
-                 			}	
-                 		}
-                 	});
-           		});
-          }else{
-        	  $(".like").click(function(){
-        		  event.stopPropagation();
-        		  $("#viewpage_alert").slideDown(700);
-	                $("#viewpage_alert").delay(400);
-	                $("#viewpage_alert").css("display","inline");
-	                $("#viewpage_alert").delay(400);
-	                $("#viewpage_alert").slideUp(700); 
-	                
-	                $("#viewpage_alert p").html("로그인 후 이용가능 합니다.");
-        	  });
-        	  
-          }
-		var filterCount = 0;
-		var prepareNum=-1;
-		$('.searchInput').val('${type}');
-		var type = '${type}';
-		var index = '${index }';
-		if (index >= 0 && index < 12) {
-			if($('.placeTypeDetail').eq(index).text()=='${type}'){
-				$('.selectBox').eq(0).html('${type }<span>&nbsp;&nbsp;&nbsp;▽</span>');
-				$('.selectBox').eq(0).css("color", "#f69b02")
-				$('.placeTypeDetail').eq(index).css("background-color", "#183058");
-				$('.placeTypeDetail').eq(index).css("color", "white");
-			}
-			inputType=1;
-		} else if (index >= 12 && index < 20) {
-			if($('.placeTypeDetail').eq(index).text()=='${type}'){
-				$('.selectBox').eq(1).html('${type }<span>&nbsp;&nbsp;&nbsp;▽</span>');
-				$('.selectBox').eq(1).css("color", "#f69b02")
-				$('.placeTypeDetail').eq(index).css("background-color", "#183058");
-				$('.placeTypeDetail').eq(index).css("color", "white");
-			}
-			inputType=2;
-		} else {
-			if($('.placeTypeDetail').eq(index).text()=='${type}'){
-				$('.selectBox').eq(2).html('${type }<span>▽</span>');
-			}
-			inputType=3;
+ 			}
+ 			}
+ 		
+ 	});
+	
+	
+	if('${sessionScope.User}' != ""){
+    	  $(".like").click(function(){
+    		  event.stopPropagation();
+    		  	var imgIndex = $(".like").index(this);
+             	var s_no = $(this).parent().parent().parent().prev().prev().val();
+             	
+             	
+             	
+             	$.ajax({
+             		type:"GET",
+             		url: "/likeInsertAjax?S_no="+s_no+"&userNo="+userNo,
+             		success : function(data){
+             			var result = data;
+             			if(result==1){
+             				$("#viewpage_alert").slideDown(700);
+                         	$("#viewpage_alert").delay(400);
+                         	$("#viewpage_alert").css("display","inline");
+                         	$("#viewpage_alert").delay(400);
+                         	$("#viewpage_alert").slideUp(700); 
+                         	$(".like").eq(imgIndex).css("display","none");
+                         	$(".like_full").eq(imgIndex).css("display","inline");
+                         	$("#viewpage_alert p").html("내가 가고 싶은 공간에 등록되었습니다.");	
+             			}
+             		}
+             	});
+             });
+             $(".like_full").click(function(){
+            	 event.stopPropagation();
+            	 var imgIndex = $(".like_full").index(this);
+             	var s_no = $(this).parent().parent().parent().prev().prev().val();
+             	
+             	var userNo = '${sessionScope.User.userNo}';
+             	console.log($(this).parent().html());
+             	console.log(s_no);
+             	console.log(userNo);
+                 $.ajax({
+             		type:"GET",
+             		url: "/likeDeleteAjax?S_no="+s_no+"&userNo="+userNo,
+             		success : function(data){
+             			var result = data;
+             			if(result==1){
+            					$("#viewpage_alert").slideDown(700);
+            	                $("#viewpage_alert").delay(400);
+            	                $("#viewpage_alert").css("display","inline");
+            	                $("#viewpage_alert").delay(400);
+            	                $("#viewpage_alert").slideUp(700); 
+            	                $(".like").eq(imgIndex).css("display","inline");
+                             	$(".like_full").eq(imgIndex).css("display","none");
+            	                $("#viewpage_alert p").html("내가 가고 싶은 공간에서 제외되었습니다.");
+             				
+             			}	
+             		}
+             	});
+       		});
+      }else{
+    	  $(".like").click(function(){
+    		  event.stopPropagation();
+    		  $("#viewpage_alert").slideDown(700);
+                $("#viewpage_alert").delay(400);
+                $("#viewpage_alert").css("display","inline");
+                $("#viewpage_alert").delay(400);
+                $("#viewpage_alert").slideUp(700); 
+                
+                $("#viewpage_alert p").html("로그인 후 이용가능 합니다.");
+    	  });
+    	  
+      }
+	var filterCount = 0;
+	var prepareNum=-1;
+	$('.searchInput').val('${type}');
+	var type = '${type}';
+	var index = '${index }';
+	if (index >= 0 && index < 12) {
+		if($('.placeTypeDetail').eq(index).text()=='${type}'){
+			$('.selectBox').eq(0).html('${type }<span>&nbsp;&nbsp;&nbsp;▽</span>');
+			$('.selectBox').eq(0).css("color", "#f69b02")
+			$('.placeTypeDetail').eq(index).css("background-color", "#183058");
+			$('.placeTypeDetail').eq(index).css("color", "white");
 		}
-		
-		console.log(index);
-		console.log(type);
-		console.log(inputType);
-		for(var i = 0; i<6; i++){
-			$('.totalInnerBox').eq(i).css("display","block");
+		inputType=1;
+	} else if (index >= 12 && index < 20) {
+		if($('.placeTypeDetail').eq(index).text()=='${type}'){
+			$('.selectBox').eq(1).html('${type }<span>&nbsp;&nbsp;&nbsp;▽</span>');
+			$('.selectBox').eq(1).css("color", "#f69b02")
+			$('.placeTypeDetail').eq(index).css("background-color", "#183058");
+			$('.placeTypeDetail').eq(index).css("color", "white");
 		}
-	
-	
-		$('.selectBox').click(function() {
-			var selectNum = $('.selectBox').index(this);
-			
-				$('.selectBox').find('span').html('&nbsp;&nbsp;&nbsp;▽');
-				$('.selectBox').next().css("display", "none");
-				$('.filterOutLine').css("display","none");
-			if(prepareNum!=selectNum){
-				$('.selectBox').eq(selectNum).find('span').html('&nbsp;&nbsp;&nbsp;▲');
-				$('.selectBox').eq(selectNum).next().css("display", "block");
-				prepareNum = selectNum;
-			}else{
-				prepareNum=-1;
-			}
-			filterCount = 0;
-		});
-		
-		$('.placeTypeDetail').click(function() {
-			
-			var index = $('.placeTypeDetail').index(this);
-			var type = $('.placeTypeDetail').eq(index).text();
-			if(index<12){
-				inputType = 1;			
-			}else if(index>=12 && index<20){
-				inputType = 2;
-			}
-			location.href = "/headerSearchPlace?type=" + type + "&index=" + index + "&inputType=" + inputType;
-		});
-		
-		$('.totalInnerBox').click(function(){
-			
-			var sNumber = $(this).find('input').val();
-			location.href = "/selectOneSpace?S_no="+sNumber;
-		});
-		
-		$('#detailSearchFilter').click(function(){
-			if(filterCount==0){
-				$('.selectBox').find('span').html('&nbsp;&nbsp;&nbsp;▽');
-				$('.selectBox').next().css("display", "none");
-				$('.filterOutLine').css("display", "block");	
-				filterCount = 1;
-			} else if(filterCount==1){
-				$('.filterOutLine').css("display", "none");	
-				filterCount = 0;
-			}
-		});
-		$('.filterBack').click(function() {
-			$('.selectBoxInner').css("display", "none");
-			$('.filterOutLine').css("display", "none");
-		    filterCount = 0;
-		});
-		
-		var filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-		var filterCount = 0;
-		$('.filterBox').click(function(){
-			
-			var filterIndex = $('.filterBox').index(this);
-			$(this).toggleClass("selectFilter");
-			if($(this).hasClass("selectFilter")){
-				filterArray[filterIndex] = 1;
-			}else{
-				filterArray[filterIndex] = 0;
-			}
-			console.log(filterArray);
-		});
-		
-		var viewIndex = 6;//공간 리스트 인덱스
-		$('#viewMore').click(function(){
-			for(var i = viewIndex; i<viewIndex+6; i++){
-				$('.totalInnerBox').eq(i).css("display","block");
-			}
-			viewIndex = viewIndex+6;
-		});
-		
-		$('#filterReset').click(function(){
-			$('#filterCheck').prop("checked", false);
-			filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-			$(".selectFilter").removeClass("selectFilter");
-		});
-		$('#filterSubmit').click(function(){
-			var filter = filterArray.join("");
-			console.log(filter);
-			location.href = "/filterSearch?type=" + type + "&index=" + index + "&inputType=" + inputType +"&filter="+filter;
-		});
-	});
-
-	
-	
-	
-	
-	function maps(inputType,index,type) {
-		
-		var inputType = inputType;
-		var index = index;
-		var type = type;
-		console.log(inputType);
-		console.log(index);
-		console.log(type);
-		location.href="/headerSearchplace2?inputType="+inputType+"&index="+index+"&type="+type;
-	
+		inputType=2;
+	} else {
+		if($('.placeTypeDetail').eq(index).text()=='${type}'){
+			$('.selectBox').eq(2).html('${type }<span>▽</span>');
+		}
+		inputType=3;
 	}
 	
-	
+	for(var i = 0; i<6; i++){
+		$('.totalInnerBox').eq(i).css("display","block");
+	}
 
-	</script>
+
+	$('.selectBox').click(function() {
+		var selectNum = $('.selectBox').index(this);
+		
+			$('.selectBox').find('span').html('&nbsp;&nbsp;&nbsp;▽');
+			$('.selectBox').next().css("display", "none");
+			$('.filterOutLine').css("display","none");
+		if(prepareNum!=selectNum){
+			$('.selectBox').eq(selectNum).find('span').html('&nbsp;&nbsp;&nbsp;▲');
+			$('.selectBox').eq(selectNum).next().css("display", "block");
+			prepareNum = selectNum;
+		}else{
+			prepareNum=-1;
+		}
+		filterCount = 0;
+	});
 	
+	$('.placeTypeDetail').click(function() {
+		
+		var index = $('.placeTypeDetail').index(this);
+		var type = $('.placeTypeDetail').eq(index).text();
+		if(index>-1 && index<12){
+			inputType = 1;			
+		}else if(index>=12 && index<20){
+			inputType = 2;
+		}
+		location.href = "/headerSearchPlace?type=" + type + "&index=" + index + "&inputType=" + inputType;
+	});
+	
+	$('.totalInnerBox').click(function(){
+		
+		var sNumber = $(this).find('input').val();
+		location.href = "/selectOneSpace?S_no="+sNumber;
+	});
+	
+	$('#detailSearchFilter').click(function(){
+		if(filterCount==0){
+			$('.selectBox').find('span').html('&nbsp;&nbsp;&nbsp;▽');
+			$('.selectBox').next().css("display", "none");
+			$('.filterOutLine').css("display", "block");	
+			filterCount = 1;
+		} else if(filterCount==1){
+			$('.filterOutLine').css("display", "none");	
+			filterCount = 0;
+		}
+	});
+	$('.filterBack').click(function() {
+		$('.selectBoxInner').css("display", "none");
+		$('.filterOutLine').css("display", "none");
+	    filterCount = 0;
+	});
+	
+	var filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var filterCount = 0;
+	$('.filterBox').click(function(){
+		
+		var filterIndex = $('.filterBox').index(this);
+		$(this).toggleClass("selectFilter");
+		if($(this).hasClass("selectFilter")){
+			filterArray[filterIndex] = 1;
+		}else{
+			filterArray[filterIndex] = 0;
+		}
+		console.log(filterArray);
+	});
+	
+	var viewIndex = 6;//공간 리스트 인덱스
+	$('#viewMore').click(function(){
+		for(var i = viewIndex; i<viewIndex+6; i++){
+			$('.totalInnerBox').eq(i).css("display","block");
+		}
+		viewIndex = viewIndex+6;
+	});
+	
+	$('#filterReset').click(function(){
+		$('#filterCheck').prop("checked", false);
+		filterArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+		$(".selectFilter").removeClass("selectFilter");
+	});
+	$('#filterSubmit').click(function(){
+		var filter = filterArray.join("");
+		console.log(filter);
+		location.href = "/filterSearch?type=" + type + "&index=" + index + "&inputType=" + inputType +"&filter="+filter;
+	});
+	
+});
+	</script>
 	
 </body>
 </html>
