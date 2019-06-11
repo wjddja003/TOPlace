@@ -145,10 +145,10 @@
 	                        </c:forEach>
                        	</div>
                        	<c:if test="${l.type eq 'time' }">
-							&nbsp;<span style="font-size:24px; color:#183058;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${l.price}" /></span><span style=""> 원/시간</span>
+							&nbsp;<span style="font-size:24px; color:#f69b02;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${l.price}" /></span><span style=""> 원/시간</span>
 						</c:if>
 						<c:if test="${l.type eq 'day' }">
-							&nbsp;<span style="font-size:24px; color:#183058;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${l.price}" /></span><span> 원/일</span>
+							&nbsp;<span style="font-size:24px; color:#f69b02;">￦ <fmt:formatNumber type="number" maxFractionDigits="3" value="${l.price}" /></span><span> 원/일</span>
 						</c:if>   
 	                  </div>
                         

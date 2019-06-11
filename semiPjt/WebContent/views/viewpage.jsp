@@ -212,14 +212,17 @@
                         </div>
                         <div class="viewpage_qna">
                             <div class="viewpage_qna_header">
-                            <h4>Q&amp;A ${qna.totalCount}개</h4>
+                            <h4>Q&amp;A <strong class="txt_primary">${qna.totalCount}개</strong></h4>
                             <c:if test="${s.s_hostNum != host.hostNo}">
-                            <a style="text-decoration: none;" id="viewQna"><span>질문작성하기</span></a>
+                            <a style="text-decoration: none; color:#fff;" id="viewQna"><span>질문작성하기</span></a>
                             </c:if>
                             </div>
                             <div class="viewpage_qnaview">
                                 <div>
                                     <ul class="review_list" id="qna_list">
+                                     <c:if test="${qna.totalCount == 0}">                                                
+                                                	<p class="review_none">등록된 질문이 없습니다.</p>
+                                    </c:if>
                                     <c:forEach var="q" items="${qna.list}">   
                                     	<c:if test="${q.qaCommentRef == ''}">   	
                                         <li class="rlist" style="padding-top:30px;">  
@@ -271,7 +274,7 @@
                                         </c:forEach>
                                     </ul>
                                 </div>
-                                 <div id="pageNavi">${qna.pageNavi}</div>
+                                 <div class="pageNavi">${qna.pageNavi}</div>
                             </div>
             
                         </div>
@@ -296,9 +299,13 @@
 		                </c:if>
 					</div>
                     <div class="viewpage_review">
+                     <c:if test="${pd.totalCount == 0}">                                                
+                       	<p class="review_none">등록된 리뷰가 없습니다.</p>
+                          </c:if>
                         <ul>
                          <c:forEach items="${pd.list}" var="rc">
                             <li class="rlist">   
+       
                                 <div class="rbox_mine" style="padding-top:30px;"> 
                                     <span class="pf_img"><img src="../img/user1.png" width="100px;" height="100px;"></span> 
                                     <strong class="guest_name">${rc.reviewWriter}</strong> 
@@ -342,7 +349,7 @@
                                 </div>
                             </li>
                             </c:forEach>
-                            <div id="pageNavi">${pd.pageNavi}</div>
+                            <div class="pageNavi">${pd.pageNavi}</div>
                         </ul>
                     </div> 
                      <div>
@@ -392,9 +399,11 @@
 	                                    		  <%}
 	                                    		} 
                                     		}%>
+                                    	<%if(count > 3 ){ %>
                                     	<div class="viewpage_right_kategorie">
                                     		<p style="font-size:14px;">+ <%=count-3%> </p>
                                     	</div>
+                                    	<%} %>
                                     </div>
                                 </div>
                             </div>
