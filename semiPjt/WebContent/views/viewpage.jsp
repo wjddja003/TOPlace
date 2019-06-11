@@ -233,7 +233,7 @@
                                                  <span class="pf_img"><img src="../img/user1.png" width="100px;" height="100px;"></span> 
                                                 <div class="rbox_name">
                                                 <strong class="guest_name" style="font-size:22px;">${q.qaCommentWriter}</strong>
-                                                <p class="p_review">${q.qaCommentContent}</p>
+                                                <p class="p_review" style=" word-break:break-all">${q.qaCommentContent}</p>
                                                 </div>
                                                 <div class="rbox_info_base">  
                                                     <span class="time_info">${q.qaCommentDate}</span> 
@@ -265,7 +265,7 @@
                                                 <p class="p_tit_reply">
                                                     <em>${q.qaCommentWriter}</em>님의 댓글
                                                 </p>
-                                                <p class="p_review">
+                                                <p class="p_review" style=" word-break:break-all">
                                                 	   ${qq.qaCommentContent}
                                                 </p>
                                                 <div class="rbox_info_base">
@@ -313,7 +313,7 @@
                                     <span class="pf_img"><img src="../img/user1.png" width="100px;" height="100px;"></span> 
                                     <strong class="guest_name">${rc.reviewWriter}</strong> 
 <%--                                     <p class="p_review"><span>제목 : </span>${rc.reviewTitle }</p> --%>
-                                    <p class="p_review">${rc.reviewContent }</p>
+                                    <p class="p_review" style=" word-break:break-all">${rc.reviewContent }</p>
                                     <c:if test="${not empty rc.filename }">
                                     <div class="space_list swiper_list photo_review"> 
                                         <div class="flex_wrap column3 fluid">      
