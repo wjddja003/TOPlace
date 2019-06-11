@@ -154,7 +154,10 @@ prefix="c" %>
                 </table>
             <div>${pd.pageNavi }</div>
             <div>
+
+
                 <button class="reviewBtn"  style="color:#f69b02; border-color:#f69b02"><a href="/helpWrite"style="color:#f69b02"> 글쓰기</a></button>
+
             </div>
         </div>
         </div>

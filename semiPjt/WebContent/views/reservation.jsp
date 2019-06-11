@@ -752,7 +752,7 @@ input[type="checkbox"]:checked + label span {
          </div>
       </div>
    </section>
-   <script>	
+   <script>
    var totalPrice = 0; //총 계산금액
    var selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //선택 한 시간 값
    var count = 1; //버튼클릭 카운트
@@ -1152,6 +1152,7 @@ input[type="checkbox"]:checked + label span {
           $("#emptyValue").delay(1300);
           $("#emptyValue").slideUp(700);
        }
+      <%-- 금액 표시 --%>
    </script>
    <jsp:include page="/WEB-INF/common/footer.jsp" />
    <%-- 팝업 배경 DIV--%>

@@ -119,8 +119,8 @@
         }
         #aside-host a{
             text-decoration: none;
-            color: #f69b02;
-            margin-left: 73px;
+            color: #f7f7f7;
+            margin-left: 115px;
 
         }
         .aside-navi ul{
@@ -155,11 +155,6 @@
             padding-bottom: 50px;
             background-color: rgba(0,0,0,0.5);
         }
-        #hostImage{
-        	width: 75px;
-        	height: 75px;
-        	border-radius: 36px;
-        }
     </style>
      <div class="dimmed" style="display:block;"></div>
     
@@ -168,14 +163,11 @@
    		 <button class="back">></button>
         <div id="aside-login_t">
             <ul>
-                <li>
-               		<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>           			
-               		<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>
-                	<img src="../../../upload/hostProfile/${sessionScope.host.hostFile }" id="hostImage">			
+                <li>	
                 	<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>	
                 </li>
                 <li>
-                	<a href="/views/hostprofile.jsp">${sessionScope.User.userName}</a>
+                	<a href="#">${sessionScope.User.userName}</a>
                 </li>
                 
             </ul>
@@ -184,33 +176,21 @@
       
         	<div class="aside-list">
             <ul class="aside-navi">
-            	
-                <li><a href="#">내가 가고 싶은 공간<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="/adminUserPage">회원 정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li class="spaceMng">
-                	<a href="#" >내 공간정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a>
+                	<a href="#">공간정보 관리<span><img src="/img/chevronright.png" class="r_img"></span></a>
                 	
                 </li>
-                <li><a href="/noticeList">공지사항<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <li><a href="/helpList">도움말<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <li class="service"><a href="#">서비스정보<span><img src="/img/chevrondown.png" class="d_img"></span></a></li>
-                <div style="display:none" id="sv_list">
-                        <ul>
-                            <a href="/views/mypage/introduction.jsp"><li>서비스 소개</li></a>
-                            <a href="/views/mypage/TermsOfService.jsp"><li>이용약관</li></a>
-                            <a href="/views/mypage/policyPerson.jsp"><li>개인정보처리방침</li></a>
-                            <a href="/views/mypage/policyOperate.jsp"><li>운영정책</li></a>
-                        </ul>
-                </div>
+                <li><a href="/noticeList">공지사항 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="/helpList">도움말 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="#">QnA 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="#">리뷰 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li><a href="#">예약 내역 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
             </ul>
         	</div>
-	        <div id="aside-login_b">
-		       	<a href="/logout">로그아웃</a>	
-	        </div>
         </div>
         <div id="aside-host">
-            <div id="aside-host1">
-	               	관리자 페이지
-            </div>
+	        <a href="/logout">로그아웃 하기</a>	
         </div>
     </div>
 <script>
@@ -218,16 +198,16 @@
     var count =0;
     $(".service").click(function(){
         if(count==0){
+        	$(".service").css("border-bottom","none");
             $(".service img").attr("src","/img/chevronup.png");
             $("#sv_list").css("display","block");
             $("#sv_list > ul").css("background","lightgrey");
             count=1;
-            $('#mypage1').css("overflow-y","scroll");
         }else if(count==1){
+        	$(".service").css("border-bottom","1px solid gray");
             $(".service img").attr("src","/img/chevrondown.png");
             $("#sv_list").css("display","none")
             count=0;
-            $('#mypage1').css("overflow-y","hidden");
         }
        
 //        $("#sv_list").css("display","block");
