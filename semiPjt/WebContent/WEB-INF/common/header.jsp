@@ -26,8 +26,10 @@
 	                <li class="navi-li"><a href="/insertSpaceCheck">공간등록</a></li>
 	            </ul>
 	        </div>
-	        <div class="header realtime" style="width:9.6%; text-align: left">
-                <span id="ranking" style="color:#605f5d; height: 20px;">실시간</span>
+	        <div class="header realtime" style="width:9.6%; height:100px; text-align: left; position: relative;">
+	        	<div class="realtimeDiv">
+                	<span id="ranking" style="color:#605f5d; height: 20px; line-height: 35px;">실시간</span>
+          		</div>
                 <div class="header_ranking">
                     <div class="header_ranking_h" style="text-align: center;">
                         <p>실시간 급상승 검색어</p>
@@ -76,7 +78,7 @@
   	    	rankingArr2[i] = ranking2;
   	    	$('.header_ranking ul').html($('.header_ranking ul').html()+"<li><a href='/selectOneSpace?S_no="+rankingArr2[i]+"'><span class='ranking'>"+rankingArr1[i]+"</span></a></li>");
 	  	    	$('.ranking').each(function(){
-	     	    	var length = 13;
+	     	    	var length = 12;
 	     	    	$(this).each(function(){
 	     	    		if($(this).text().length >= length){
 	     	    			$(this).text($(this).text().substr(0,length)+'...');
@@ -94,7 +96,7 @@
      		}
      	 	$('#ranking').html("<a href='/selectOneSpace?S_no="+rankingArr2[i]+"' id='rank'>"+rankingArr1[i]+"</a>");
      	 	 $('#rank').each(function(){
-     	    	var length = 13;
+     	    	var length = 12;
      	    	$(this).each(function(){
      	    		if($(this).text().length >= length){
      	    			$(this).text($(this).text().substr(0,length)+'...');
@@ -103,6 +105,13 @@
      	    });
      	  	i++;	  
      	  }, 2000);			//2초마다 갱신
+     	
+     	  $('#ranking').mouseover(function(){
+     		  $('.header_ranking').css('display','block');
+     	  });
+     	 $('.header_ranking').mouseleave(function(){
+     		$('.header_ranking').css('display','none');
+    	  });
     </script>
     
 
