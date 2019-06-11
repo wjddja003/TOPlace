@@ -205,7 +205,7 @@ public class SpaceDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		ArrayList<Space> sList = null;
-		String query = "select * from (select * from Place order by S_hit desc) where rownum<=10";
+		String query = "select * from (select * from Place order by S_hit desc) where rownum<=5";
 		try {
 			stmt= conn.createStatement();
 			rset= stmt.executeQuery(query);

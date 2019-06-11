@@ -41,7 +41,7 @@
         float: left;
     }
     .qa_no{
-        padding: 10px;
+        padding: 0px;
         float: left;
         margin: 20px 0 0 20px;
         border: 1px solid #f69b02;
@@ -60,7 +60,7 @@
     	text-align: center;
     }
     .spaceImg{
-    	width: 408px;
+    	width: 428px;
     	height: 220px;
     }
     .likeContent{
@@ -86,7 +86,7 @@
 	  -ms-transform: scale(1.2);
 	  -o-transform: scale(1.2);
 	}
-	.img {width:408px; height:220px; overflow:hidden 
+	.img {width:428px; height:220px; overflow:hidden 
 	}
 	.tag{
 		font-size: 10px;
@@ -125,28 +125,30 @@
                     	<div class="img">
                     	<a href="/selectOneSpace?S_no=${l.sNo}"><img class="spaceImg"src="/upload/space/${l.img}"></a><br>
                     	</div>
-                        <div>
-                    	   <h4 class="placeName" style="color:#f69b02 ">${l.placeName }</h4>
-                        </div><br>
-                    	<div class="likeContent">
-                            <div>
-                    	   <img src="../../img/map-marker.png"> ${l.address }
-                            </div>
-                        <br>    
-	                    	<div class="tag">${l.placeTag }</div><br>
-	                    	<div class="kategorie2">
-		                    	<c:forEach items="${l.s_kategorie2}" var="list" varStatus="i">
-		                        	<c:if test="${list == '1'}">
-		                            	<div class="kategorie1"><img src="/upload/space/kategorie2/${i.index+1}.png" width="30px;">
-		                                	<p>${l.s_kategorieName[i.index]}</p>
-		                                </div>
-		                           	</c:if>
-		                        </c:forEach>
-                        	</div><br>    
-                    	</div>
-                        <div class="price" >
-                            <a style="color: #f69b02; font-size:20px;">${l.price }</a>원/${l.type }
-                            </div>
+                    	<div class="likeAll">
+	                        <div>
+	                    	   <h4 class="placeName" style="color:#f69b02 ">${l.placeName }</h4>
+	                        </div><br>
+	                    	<div class="likeContent">
+	                            <div>
+	                    	   <img src="../../img/map-marker.png"> ${l.address }
+	                            </div>
+	                        <br>    
+		                    	<div class="tag">${l.placeTag }</div><br>
+		                    	<div class="kategorie2">
+			                    	<c:forEach items="${l.s_kategorie2}" var="list" varStatus="i">
+			                        	<c:if test="${list == '1'}">
+			                            	<div class="kategorie1"><img src="/upload/space/kategorie2/${i.index+1}.png" width="30px;">
+			                                	<p>${l.s_kategorieName[i.index]}</p>
+			                                </div>
+			                           	</c:if>
+			                        </c:forEach>
+	                        	</div><br>   
+	                    	</div>
+	                        <div class="price" >
+	                            <a style="color: #f69b02; font-size:20px;">${l.price }</a>원/${l.type }
+	                            </div>
+                       </div>
                     </div>
                 </div>
                 	</c:if>
