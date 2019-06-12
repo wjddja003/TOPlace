@@ -45,7 +45,8 @@ $(document).ready(function(){
 			});
 	$('.searchIcon').click(function() {
 		inputType = 3;
-		if ($(".searchInput").val() == "") {
+		console.log($(this).prev().val());
+		if ($(this).prev().val() == "") {
 			$('#detach_div').slideUp(700);
 			$("#searchAlert").slideDown(700);
 			$("#searchAlert").delay(1300);
@@ -53,7 +54,7 @@ $(document).ready(function(){
 			$('#detach_div').slideDown(700);
 			$("#searchAlert").slideUp(700);
 		} else {
-			var type = $(".searchInput").val();
+			var type = $(this).prev().val();
 			var index = -1;
 			for (var i = 0; i < $('.placeType').length; i++) {
 				if ($('.placeType').eq(i).text() == type) {
