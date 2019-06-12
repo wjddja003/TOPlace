@@ -96,7 +96,7 @@
 			width:100%; height:250px; overflow:hidden;
 		}
 </style>
-<body>
+<body>				
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/common/header.jsp"/>
@@ -116,7 +116,7 @@
 							<img src='/upload/space/${l.img}' class="bossImg" width="100%" height="250px">
 						</div>
 					</div>
-					<div style='height:460px; padding-left:5px;border:1px solid #f69b02;'>
+					<div style='height:460px; padding-left:5px;border:1px solid #e2e2e2;'>
 						<div style="float:left;">
 							<a class="likeClick" href="#">
 								<img src="../img/like_border.png" class="like">
