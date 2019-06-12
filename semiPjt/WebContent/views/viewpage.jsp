@@ -551,6 +551,12 @@
                                                     
         <%-- 메뉴바 스크롤 따라오기 스크립트 --%>
         <script>
+        function reservationBtn() {
+            window.location = "/views/login.jsp";
+        }
+	function reservationBtn1(){
+		window.location = "/selectOneReservation?S_no=${s.s_no}";
+	}
         var $ = jQuery.noConflict();
        $(document).ready(function() {
     	   if('${l}' != ""){
@@ -896,12 +902,6 @@
 			$('.layer_popup_up').hide();
 			$('.hostpopupMaskUp').hide();
 		});
-		 function reservationBtn() {
-	            window.location = "/views/login.jsp";
-	        }
-		function reservationBtn1(){
-			window.location = "/selectOneReservation?S_no=${s.s_no}";
-		}
 </script>		
     <jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
