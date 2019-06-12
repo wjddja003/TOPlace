@@ -50,7 +50,7 @@
     	 
     	 <div class="table-wrapper">
     	 	<div class="adminuser_header">
-    	 		<h2>신고 공관 관리</h2>
+    	 		<h2>신고 공간 관리</h2>
     	 	</div>
     	 	
             <table class="table">
