@@ -1497,6 +1497,7 @@
                     	priceTimeArr.splice(idx,1);
                         sendTimeArray.splice(idx,1);
                         selTimeArr.splice(idx,1);
+                        $('#choiceDay').find('button').eq(idx).remove();
                         console.log(array);
                         console.log(priceTimeArr);
                         console.log(sendTimeArray);
