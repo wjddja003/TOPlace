@@ -4,25 +4,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Insert title here</title>
+<title>리뷰수정</title>
 <link rel="stylesheet" type="text/css" href="/css/reviewUpdate.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/common/header.jsp"/>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <section>
-		<div class="table-wrapper" style="text-align: center;width:80%;margin:0 auto; margin-top: 100px;">
+		<div class="table-wrapper" style="text-align:center;width:1160px;margin:0 auto; margin-top: 100px;">
 		<form action="/reviewUpdate" method="post" enctype="multipart/form-data">
 				<table class="table">
 					<input type="hidden" name="reviewSno" value="${review.reviewSno }">
 					<input type="hidden" name="reviewNo" value="${review.reviewNo }">
 					<tr class="reviewupdate_tr">
-						<th colspan="2" style="font-size:20px;font-weight:bold">공지사항수정</th>				
+						<th colspan="2" style="font-size:20px;font-weight:bold;background-color:#f69b02; color:#fff;">리뷰수정</th>				
 					</tr>
-<!-- 					<tr> -->
-<!-- 						<th>제목</th> -->
-<%-- 						<td><input type="text" class="form-control" name="reviewTitle" value="<%=n.getNoticeTitle() %>"></td> --%>
-<!-- 					</tr> -->
+					<tr>
+						<th>제목</th>
+						<td><input type="text" class="form-control" name="reviewTitle" value="${review.reviewTitle }"></td>
+					</tr>
 					<tr>					
 						<th>작성자</th>
 						<td>${review.reviewWriter}</td>					
@@ -42,7 +42,7 @@
 							</c:if>
 							<input type="hidden" name="oldFilename" value="${review.filename}">  <!--예전파일명 -->
 							<input type="file" name="filename" id="reviewFile" accept="image/*" onchange="loadImg(this)" value="${review.filename}">
-							<button type="button" class="btn btn-outline-primary" id="imgdelete">삭제하기</button>
+							<button type="button" class="btn btn-outline-primary" id="imgdelete" style="border-color:#f69b02; color:#f69b02;">삭제하기</button>
 							</label>
 						</div>
 						</td>
@@ -70,7 +70,7 @@
 					</tr>
 					<tr>
 						<th colspan="2" style="text-align:center;">
-							<button type="submit" class="btn btn-outline-primary">수정하기</button>
+							<button type="submit" class="btn btn-outline-primary" style="border-color:#f69b02; color:#f69b02;">수정하기</button>
 						</th>
 					</tr>
 					

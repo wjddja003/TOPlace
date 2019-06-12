@@ -268,7 +268,7 @@
                                             	<span class="pf_img"><img src="../img/logo.png" width="100px;" height="50px;"></span>
                                             </c:if>
                                             <c:if test="${not empty host.hostFile }">
-                                            	<span class="pf_img"><img src="/upload/hostProfile/${host.hostFile}"></span>
+                                            	<span class="pf_img"><img src="/upload/hostProfile/${host.hostFile}" width="100px;" height="100px;"></span>
                                             	</c:if> 
                                                 <p class="p_tit_reply">
                                                     <em>${qq.qaCommentWriter}</em>님의 댓글
