@@ -95,7 +95,7 @@ public class HostpageService {
 		int pageNaviSize = 5;    // <1 2 3 4 5 ?> 
 		int pageNo =((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(pageNo !=1) {											
-			pageNavi += "<a class='pageBtn' href='/hostPage?reqPage="+(pageNo-1)+"&ShostNum="+shostNum+"'>이전</a>";
+			
 		}
 		
 		int i = 1; 
@@ -109,7 +109,7 @@ public class HostpageService {
 			pageNo++;
 		}
 		if(pageNo <= totalpge) {
-			pageNavi +="<a class='pageBtn' href='/hostPage?reqPage="+(pageNo)+"&ShostNum=+"+shostNum+"+'>다음</a>";
+			
 		}
 		
 		HostPaging hp = new HostPaging(list,pageNavi);

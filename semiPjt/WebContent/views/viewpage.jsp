@@ -11,8 +11,9 @@
     	String[] place1 = (s.getS_kategorie1()).split(",");
     	String[] kg1 = {"회의실","세미나실","다목적홀","작업실","레저시설","파티룸","공연장","연습실","카페","스터디룸","엠티장소","루프탑"};
     %>
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=33qm1u5uje&submodules=geocoder"> //네이버 지도 스크립트
-	</script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=33qm1u5uje&submodules=panorama,geocoder"> //네이버 지도 스크립트
+    </script>
+
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -215,7 +216,8 @@
                                 </div>
                             </div>
                             <div>				
-				                <div id="map" style="width:773px;  height:640px;"></div>            
+				                <div id="map" style="width:773px;  height:640px;"></div>
+				                <div id="pano"style="width:773px; height:340px;"></div>            
                             </div>
                         </div>
                         <div class="viewpage_qna">
@@ -425,12 +427,12 @@
                             <c:choose>
                             	<c:when test="${not empty sessionScope.User}">	
                                   
-                             		<button onclick="reservationBtn1()" class="viewpage_reservationbtn">결제하러 가기</button>
+                             		<button type="button" onclick="reservationBtn1()" class="viewpage_reservationbtn">결제하러 가기</button>
                                  
                              	</c:when>
                              	<c:otherwise>
                    
-                             		<button onclick="reservationBtn()"  class="viewpage_reservationbtn">결제하러 가기</button>
+                             		<button type="button" onclick="reservationBtn()"  class="viewpage_reservationbtn">결제하러 가기</button>
                                    
                              	</c:otherwise>
                              </c:choose>
@@ -551,6 +553,12 @@
                                                     
         <%-- 메뉴바 스크롤 따라오기 스크립트 --%>
         <script>
+        function reservationBtn() {
+            window.location = "/views/login.jsp";
+        }
+	function reservationBtn1(){
+		window.location = "/selectOneReservation?S_no=${s.s_no}";
+	}
         var $ = jQuery.noConflict();
        $(document).ready(function() {
     	   if('${l}' != ""){
@@ -866,7 +874,7 @@
 			        anchor: new naver.maps.Point(11, 35)
 			    }
 				
-			});
+			});			
 			var infoWindow =new naver.maps.InfoWindow();
 			naver.maps.Event.addListener(marker,'click',function(e){	//클릭햇을떄 이벤트 줘야지
 				if(infoWindow.getMap()){ //지도에 열려있는지 아닌지 판단여부 (정보창)
@@ -874,11 +882,65 @@
 				}else{
 					infoWindow.setContent('<div style="width:180px;text-align:center;padding:10px;"><img src="/upload/space/${s.s_img1}" style="width:150px;">${s.address}</div>');
 					infoWindow.open(map,marker);
-				}
-				
+				}				
+			});			
+			var pano = new naver.maps.Panorama("pano", {
+			    position: new naver.maps.LatLng(y, x),
+			    
+			    pov: {
+			        pan: -135,
+			        tilt: 29,
+			        fov: 100
+			    },
+		        aroundControl: true,
+		        aroundControlOptions: {
+		            position: naver.maps.Position.TOP_RIGHT
+		        }
 			});
 			
-	    });		
+			
+			naver.maps.onJSContentLoaded = initPanorama;
+
+			$("#around").on("click", function(e) {
+			    e.preventDefault();
+
+			    var el = $(this),
+			        aroundControlEnabled = pano.getOptions("aroundControl");
+
+			    if (aroundControlEnabled) {
+			        pano.setOptions({
+			            aroundControl: false
+			        });
+			        el.val("AroundControl 켜기").removeClass("control-on");
+			    } else {
+			        pano.setOptions({
+			            aroundControl: true
+			        });
+			        el.val("AroundControl 끄기").addClass("control-on");
+			    }
+			});
+
+			naver.maps.Event.addListener(pano, "init", function() {
+			    
+				
+			});
+
+			naver.maps.Event.addListener(pano, "pano_status", function(status) {
+			    console.log("pano_status", status, pano.getPanoId());
+			});
+
+			naver.maps.Event.addListener(pano, "pano_changed", function() {
+			    console.log("pano_changed", pano.getLocation());
+			});
+
+			naver.maps.Event.addListener(pano, "pov_changed", function() {
+			    console.log("pov_changed", pano.getPov());
+			});
+			
+			
+			
+			
+	   	 });			
 		};
 		
 		$(".popcencle").click(function(){
@@ -896,7 +958,8 @@
 			$('.layer_popup_up').hide();
 			$('.hostpopupMaskUp').hide();
 		});
-		 function reservationBtn() {
+
+		function reservationBtn() {
 	            window.location = "/views/login.jsp";
 	        }
 		function reservationBtn1(){

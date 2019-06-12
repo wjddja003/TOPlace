@@ -37,12 +37,7 @@
         width: 1000px;
     }
     .qa_v{
-        text-align: center;
-        width: 300px;
-        margin: 50px 20px 0 0;
-        padding: 10px;
-        height: 100%;
-        float: left;
+       
     }
     .qa_no{
         padding: 10px;
@@ -301,24 +296,26 @@
                         <div class="qa"><p style="line-height:70px">Q＆A</p></div>
                     </a>
                 </div>
-                <c:forEach items="${pd.list }" var="q">
+                
                 	
                 	
                 <div class="qa_v">
+                	<c:forEach items="${pd.list }" var="q">
                     <div class="qa_no">
                     	<input type="hidden" class="qNoHidden" value="${q.qaCommentNo }">
                         <div class="comment">
                            	 <a href="/selectOneSpace?S_no=${q.qaRef}" style=color:#f69b02;font-size:14px;>공간명 : ${q.placeName }</a><br>
-                            <textarea class="text" readonly="readonly">${q.qaCommentContent}</textarea><br>
+                            <textarea class="text" readonly="readonly" style="resize: none;">${q.qaCommentContent}</textarea><br>
                     	</div>
                         <div class="Q_btn">
                         <a class="qdate" style="color:#605f5d">${q.qaCommentDate }</a><br>
                             <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02" ><a href="/qaCommentDelete?qaCommentNo=${q.qaCommentNo }"style="color:#f69b02">삭제</a></button>
                         </div>
                     </div>
+                    </c:forEach>
                 </div>
 
-                </c:forEach>
+                
                <div class="qa_navi">${pd.pageNavi }</div>
             </div>
     </section>
