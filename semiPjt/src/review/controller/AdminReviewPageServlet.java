@@ -10,23 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import qaSy.model.service.QaService;
-import qaSy.model.vo.QaPageData;
 import review.model.service.ReviewService;
 import review.model.vo.ReviewPageData;
 import user.model.vo.User;
 
 /**
- * Servlet implementation class ReviewListServlet
+ * Servlet implementation class AdminReviewPageServlet
  */
-@WebServlet(name = "ReviewList2", urlPatterns = { "/reviewList2" })
-public class ReviewListServlet2 extends HttpServlet {
+@WebServlet(name = "AdminReviewPage", urlPatterns = { "/adminReviewPage" })
+public class AdminReviewPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewListServlet2() {
+    public AdminReviewPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,29 +34,19 @@ public class ReviewListServlet2 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession();
-		User u = (User)session.getAttribute("User");
-		if(u == null) {
-			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
-			rd.forward(request, response);
-		}else {
-			
-			String userId = u.getUserId();
-			int userNo = u.getUserNo();
-			int reqPage;
-			try {
-				reqPage = Integer.parseInt(request.getParameter("reqPage"));
-			}catch (NumberFormatException e) {
-				reqPage = 1;
-			}
-			
-			ReviewPageData pd = new ReviewService().selectRList(reqPage,userId);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/review/reviewList.jsp");
-			request.setAttribute("pd", pd);
-			rd.forward(request, response);
+	
+		int reqPage;
+		try {
+			reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		}catch (NumberFormatException e) {
+			reqPage = 1;
 		}
+		ReviewPageData pd = new ReviewService().adminSelectAll(reqPage);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/admin/adminReviewPage.jsp");
+		request.setAttribute("pd", pd);
+		rd.forward(request, response);
+		
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

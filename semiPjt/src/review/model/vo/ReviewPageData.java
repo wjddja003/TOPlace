@@ -7,6 +7,12 @@ public class ReviewPageData {
 	private String pageNavi;
 	private int totalCount;
 	private double totalStar;
+	
+	public ReviewPageData(ArrayList<Review> list, String pageNavi) {
+		super();
+		this.list = list;
+		this.pageNavi = pageNavi;
+	}
 	public ReviewPageData(ArrayList<Review> list, String pageNavi, int totalCount,double totalStar) {
 		super();
 		this.list = list;
