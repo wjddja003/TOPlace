@@ -51,9 +51,7 @@
         text-align: center;
     }
     .Q_btn{
-        margin-left: 100px;
-        position: absolute;
-        bottom: 0;
+        
     }
     .re_navi{
     	clear: both;
@@ -67,6 +65,8 @@
     }
     .rdate{
 		font-size: 13px;
+		text-align: right;
+		padding: 0 0 0 300px;
 	}
 	.on{
 		color:#f69b02;
@@ -77,6 +77,8 @@
 	}
 	.reviewText{
 		margin: 5px;
+		font-size:17px;
+		text-align: left;
 	}
 </style>
 <body>
@@ -96,20 +98,32 @@
                 <div class="qa_v">
                 	<c:forEach items="${pd.list }" var="r">
                     <div class="rv_no">
-                    	<div class="imgBox">
-                			<img class="reviewImg" src="/upload/review/review1.jpeg">
-                		</div>
-                    	<p class="reviewText" style="font-size:18px; text-align: left"><span style="color:#f69b02;">공간명 : </span>${r.placeName }</p>
-                    	<p class="reviewText" style="font-size:18px; text-align: left"><span style="color:#f69b02;">별점 : </span>
+                    <c:choose>
+                    	<c:when test="${not empty r.filename}">
+	                    	<div class="imgBox">
+	                			<img class="reviewImg" src="/upload/review/${r.filename}">
+	                		</div>
+                		</c:when>
+                		<c:otherwise>
+                			<div class="imgBox">
+                				<img class="reviewImg" src="/img/logo.png">
+                			</div>
+                		</c:otherwise>
+                	</c:choose>          
+                    	<p class="reviewText" ><span style="color:#f69b02;">공간명 : </span>${r.placeName }</p>
+                    	<p class="reviewText" ><span style="color:#f69b02;">별점 : </span>
                     	<c:forEach  begin="1" end='${r.reviewStar}'>
 						<span class="on">★</span>
 						</c:forEach>
 						<c:forEach  begin="${r.reviewStar}" end='4'>
 							<span style="color:#e2e2e2;">★</span>
 						</c:forEach></p>
-                    	<p class="reviewText"><span>${r.reviewTitle }</span></p>
+                    	<p class="reviewText"><span style="color:#f69b02;">제목 : </span>${r.reviewTitle}</p>
+                    	<span class="rdate" style="color:#605f5d">${r.reviewDate }</span>                   	
                         <div class="Q_btn">
-	                        <span class="rdate" style="color:#605f5d">${r.reviewDate }</span><a href="/reviewDelete?reviewNo=${r.reviewNo}"><button type="button" class="reviewBtn"style="color:#f69b02; border-color:#f69b02">삭제</button></a>
+	                        
+	                        <a href="/reviewDelete?reviewNo=${r.reviewNo}"><button type="button" class="reviewBtn"style="color:#f69b02; border-color:#f69b02">삭제</button></a>
+	                        <a href="/selectOneSpace?S_no=${r.reviewSno}"> <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02">리뷰보러가기</button></a>
                         </div>
                     </div>
                     </c:forEach>

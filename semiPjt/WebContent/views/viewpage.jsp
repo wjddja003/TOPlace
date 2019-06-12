@@ -12,8 +12,7 @@
     	String[] kg1 = {"회의실","세미나실","다목적홀","작업실","레저시설","파티룸","공연장","연습실","카페","스터디룸","엠티장소","루프탑"};
     %>
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=33qm1u5uje&submodules=panorama,geocoder"> //네이버 지도 스크립트
-
-    		</script>
+    </script>
 
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
@@ -428,12 +427,12 @@
                             <c:choose>
                             	<c:when test="${not empty sessionScope.User}">	
                                   
-                             		<button onclick="reservationBtn1()" class="viewpage_reservationbtn">결제하러 가기</button>
+                             		<button type="button" onclick="reservationBtn1()" class="viewpage_reservationbtn">결제하러 가기</button>
                                  
                              	</c:when>
                              	<c:otherwise>
                    
-                             		<button onclick="reservationBtn()"  class="viewpage_reservationbtn">결제하러 가기</button>
+                             		<button type="button" onclick="reservationBtn()"  class="viewpage_reservationbtn">결제하러 가기</button>
                                    
                              	</c:otherwise>
                              </c:choose>
@@ -959,6 +958,13 @@
 			$('.layer_popup_up').hide();
 			$('.hostpopupMaskUp').hide();
 		});
+
+		function reservationBtn() {
+	            window.location = "/views/login.jsp";
+	        }
+		function reservationBtn1(){
+			window.location = "/selectOneReservation?S_no=${s.s_no}";
+		}
 </script>		
     <jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
