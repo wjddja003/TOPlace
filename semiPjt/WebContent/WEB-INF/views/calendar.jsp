@@ -985,12 +985,7 @@
                     substrarr.pop();
                     console.log(substrarr);
                     timeInhibitArray = timeInhibitArray.concat(substrarr);
-                    console.log(timeInhibitArray);
-                    for(var i0 = 0; i0<preday; i0++){
-                       if(timeInhibitArray[i0]=="111111111111111111111111"){
-                           inhibitDay.push(preday[i0].reservation)
-                        }
-                    }
+                    
                     
                  }
               }
@@ -1294,6 +1289,7 @@
            if(btnVal==1 && $(this).find('p').text() != ""){ //기간별 선택 됐을때
               //위의 인풋타입으로 들어온조건 수정해야함 수정용 마커
                 if($(this).hasClass("inhibitDay") === false && count==0){ //예약 불가 날짜는 제외
+                	array = new Array();
                     $('td').not('td.inhibitDay').css("background-color","white");
                     $('td').removeClass("selectDay");
                     totalPrice -= ((during*'${s.s_price1}')*1);
@@ -1358,7 +1354,7 @@
                                 console.log(during);
                             }
                         }
-                   }else{
+                   }else if(startDay>endDay){
                       for(var i =endDay; i<startDay;i++){    
                             if($("td").eq(i).hasClass("inhibitDay") === false && $('td').eq(i).find('p').text()!=""){
                                if(during==30){
@@ -1374,6 +1370,9 @@
                                 console.log(during);
                             }
                         }//for가 두개인 이유는 날짜 거꾸로 선택 가능 하게 하기위해서
+                   }else{
+                       during =$('.selectDay').length;
+                       console.log(during);
                    }
 
                     
@@ -1382,57 +1381,22 @@
                     $('#duringSpan').text(during);
                     endDay=null;
                     //예약 날짜 합계 출력
+                    option = 0;
+                    totalPrice=0;
+                    $('.price_option').text("");
+                    $('.option1').text("");
+                    $('#option2').text("0");
+                    $('.price').html("");
                     $('.hapDay').text("총"+during+"일");
                     $('.price_day').text($('.startDay').html()+" "+$('.endDay').html()+" 총"+during+"일"+" x "+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" />');
                     totalPrice += ((during*'${s.s_price1}')*1);
-                    $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('.price').html((totalPrice+('${s.s_price2}')*option).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }              
-           } else if(btnVal==2 && $(this).find('p').text() != ""){
-                if($(this).hasClass("inhibitDay") === false && count==0){
-                    $('td').not('td.inhibitDay').css("background-color","white");
-                    $('td').removeClass("selectDay");
-                    startDay = $('td').index(this);
-                      $(this).css("background-color","#f69b02");
-                    $(this).addClass("selectDay");
-                    var strMonth1 = month.toString();
-                   if(strMonth1.length<2){
-                       strMonth1="0"+strMonth1;
-                   }
-                   if($('td').eq(startDay).find('p').text().length<2){
-                        strDay = "0"+$('td').eq(startDay).find('p').text();
-                    }else { 
-                        strDay = $('td').eq(startDay).find('p').text();
-                    }
-                    strOneDay = year+strMonth1+strDay;
-                    count=1;
-                    //예약 시작 날짜 출력, 추가
-                    $('.startDay').text(year+"."+month+"."+$(this).find('p').text()+"일");
-                }
-              
-                if($("td").eq(startDay).hasClass("selectDay") === true && count==1){
-               //마커 
-               //여기 윤호랑 맞춰서 아이디 클래스 변수명 변경 해야함
-               $('#reservation_time').slideDown(500);
-               var test12 = "000001111100000111111111";
-               var dbDay='20190531';
-               
-               if(dbDay==strOneDay){
-                  for(var i=0;i<$('.swiper-slide').length;i++){
-                     if(test12.charAt(i)==1){
-                     $('.swiper-slide').eq(i).children().css('background','#f69b02');
-                     $('.swiper-slide').eq(i).children().css('color','white');//css변경구문으로 교체하면 됨.
-                     }
-                  }
-               }
-               $('.selDay').text(strOneDay);
-               count=0;
-                }
-                console.log(strOneDay);
            } else if(btnVal==3 && $(this).find('p').text() != ""){
               if(array.length==7){
                  emptyValue("원하는 날짜는 7일까지 선택가능합니다.");
                  //추가
-                 $('.price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                 $('.price').html("");
                     $('.endDay').text("-");
                     $('.hapDay').text("");
                     $('.startDay').text("");
@@ -1505,7 +1469,7 @@
                         console.log(selTimeArr);
                     }
                     $('.hapDay').html("총 "+array.length+"일");
-                    $('.price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    
                     $('input[name=reservationTime]').val(arrayTime);
                     
                     $('.selTime2').html("");
@@ -1514,6 +1478,7 @@
                       }
                     totalTime = 0;
                     totalPrice = 0;
+                    
                     for(var IIII=0; IIII<priceTimeArr.length; IIII++){
                        if(priceTimeArr[IIII]!=null){
                           totalTime += priceTimeArr[IIII];
@@ -1523,9 +1488,10 @@
                     }
                     $('#rMenu_time').css('display','none');
                     $('.rM_time').css('display','block');
+                    
                      $('.price_time').html("총 "+totalTime+'시간 x '+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" />');
                      $('.totalTime').html("총 "+totalTime+'시간');
-                     $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                     $('.price').html((totalPrice+('${s.s_price2}')*option).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                      if(array.length==0){
                        selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                         sendTimeArray = new Array(10);
@@ -1578,7 +1544,6 @@
 //30일 이상 선태 불가 메소드 종료
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////  
         $('#resetDayBtn').click(function(){
-           totalPrice -= ((during*'${s.s_price1}')*1);
             $('td').not('td.inhibitDay').css("background-color","white");
             during = 0;
             $('#duringSpan').text(during);
@@ -1589,7 +1554,13 @@
                   $('td').not('td.inhibitDay').eq(i).removeClass("selectDay")
                }
             }
-            $('.price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            option = 0;
+            console.log(option);
+            totalPrice = 0;
+            $('.price_option').text("");
+            $('.option1').text("");
+            $('#option2').text("0");
+            $('.price').html("");
             $('.endDay').text("-");
             $('.hapDay').text("");
             $('.startDay').text("");

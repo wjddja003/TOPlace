@@ -767,6 +767,7 @@ input[type="checkbox"]:checked + label span {
    var selTimeArr = new Array(); //출력 할 시간 값
    var priceTimeArr = new Array(); //돈 계산 할 시간 값
    var btnIndex;
+   var option = 0;
 		function selectTimeBtnfn(a){
 			$('.swiper-slide button').attr('disabled','true');
 			$('.swiper-slide button').css('color','white');
@@ -914,6 +915,7 @@ input[type="checkbox"]:checked + label span {
                   selTimeArr.pop();
                   totalPrice -= priceTimeArr[btnIndex]*'${s.s_price1}';
                   $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                  
                }
          
          });
@@ -946,7 +948,7 @@ input[type="checkbox"]:checked + label span {
          }
       });
       <%-- 추가옵션 선택 스크립트 --%>
-      var option = 0;
+      
       $('#option_minus').click(function(){
     	  option = option-1;
     	  if(option<1){
