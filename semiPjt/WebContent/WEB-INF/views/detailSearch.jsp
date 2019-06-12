@@ -348,7 +348,7 @@
 					<div style='height:250px; '>
 						<img src='/upload/space/${s.s_img1}' class="bossImg" width="100%" height="250px">
 					</div>
-					<div style='height:140px; padding-left:5px;border:1px solid #f69b02;'>
+					<div style='height:140px; padding-left:5px;border:1px solid #e2e2e2;'>
 						<div style="float:left;">
 						<a class="likeClick" href="#">
 							<img src="../img/like_border.png" class="like">

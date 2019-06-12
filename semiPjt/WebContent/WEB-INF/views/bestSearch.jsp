@@ -45,7 +45,7 @@
 					<div style='height:250px;'>
 						<img src='/upload/space/${hits.s_img1}' width="100%" height="250px">
 					</div>
-					<div style='height:140px; padding-left:5px;border:1px solid #f69b02;'>
+					<div style='height:140px; padding-left:5px;border:1px solid #e2e2e2;'>
 						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;&nbsp;${hits.s_placeName}</p>
 						
 						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span style="font-weight:100;">${hits.addressCut}</span>
@@ -70,7 +70,7 @@
 					<div style='height:200px;'>
 						<img src='/upload/space/${likes.s_img1}' width="100%" height="200px">
 					</div>
-					<div style='height:140px; padding-left:5px;border:1px solid #f69b02;'>
+					<div style='height:140px; padding-left:5px;border:1px solid #e2e2e2;'>
 						<p style="font-size:20px; color:#f69b02; margin:5px 5px; line-height:40px;overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">&nbsp;&nbsp;${likes.s_placeName}</p>
 						
 						&nbsp;<span style="clear:both;"><img src='/img/map-marker.png'>&nbsp;</span><span style="font-weight:100;">${likes.addressCut}</span>

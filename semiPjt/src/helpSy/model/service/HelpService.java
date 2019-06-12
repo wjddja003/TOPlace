@@ -58,7 +58,7 @@ public class HelpService {
 			totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 			start = (reqPage-1)*numPerPage + 1;
 			end = reqPage*numPerPage;
-			list = new HelpDao().selectList(conn,start,end);
+			list = new HelpDao().searchKeywordTitle(conn,keyword,start,end);
 			break;
 		case "member" :
 			totalCount = new HelpDao().tCount(conn,keyword);
