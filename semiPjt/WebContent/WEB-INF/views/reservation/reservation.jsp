@@ -778,6 +778,12 @@ input[type="checkbox"]:checked + label span {
             $('.disabled').css('background','#f69b02');
             $('.disabled').css('color','white');
             selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+            option = 0;
+            totalPrice=0;
+            $('.price_option').text("");
+            $('.option1').text("");
+            $('#option2').text("0");
+            $('.price').html("");
             btnIndex = $(a).index();
             priceTimeArr[btnIndex] = 0;
             sendTimeArray.slice(btnIndex);
