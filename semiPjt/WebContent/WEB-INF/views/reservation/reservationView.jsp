@@ -42,9 +42,8 @@
         padding: 0px;
         float: left;
         margin: 20px 0 0 20px;
-       
         width: 100%;
-        height: 320px;
+        height: 370px;
         overflow: hidden;
         position: relative;
         text-align: center;
@@ -70,14 +69,36 @@
     	height: 220px;
     }
     .reservationContent{
-    	border: 1px solid #f69b02;
+    	border: 1px solid #e2e2e2;
     	width: 100%;
-    	height:98px;
+    	height:115px;
     	float: left;
     }
-    .reservationContent a {
-    	float: left;
-    }
+   .reservationText{
+   		font-size:20px;
+   		margin: 5px;
+   		text-align: left;
+   		margin-bottom:-20px;
+   }
+   	.scale{
+			 transform: scale(1);
+			 -webkit-transform: scale(1);
+			 -moz-transform: scale(1);
+			 -ms-transform: scale(1);
+			 -o-transform: scale(1);
+			 transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+		}
+	.scale:hover{
+			  transform: scale(1.2);
+			  -webkit-transform: scale(1.2);
+			  -moz-transform: scale(1.2);
+			  -ms-transform: scale(1.2);
+			  -o-transform: scale(1.2);
+		}
+		.scale_img{
+			width:100%; height:220px; overflow:hidden;
+		}
+    
 </style>
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -95,11 +116,15 @@
                 <div class="qa_v">
               
                     <div class="qa_no">
+                    	<div class="scale_img">
+							<div class="scale" style='height:250px; '>
                     	<a href="/selectOneSpace?S_no=${r.s_no}"> <img id="spaceImg"src="/upload/space/${r.img}"></a><br>
+                    		</div>
+						</div>
                     	<div class="reservationContent">
-	                    	<a style="color:#f69b02" id="r_placeName">${r.placeName }</a><br>
-	                    	<a><span style="font-size: 13px">예약날짜</span>: ${r.reservationDay }</a><br>
-	                    	<a><span style="font-size: 13px">예약금액</span>: <span style="font-size:24px;color:#f69b02">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${r.paymentPrice }" /></span>원</a>
+	                    	<p style="color:#f69b02" class="reservationText">${r.placeName }</p><br>
+	                    	<p class="reservationText"><span style="font-size: 13px">예약날짜:</span> <span style="font-size:15px;">${r.reservationDay }</span></p><br>
+	                    	<p class="reservationText"><span style="font-size: 13px">예약금액:</span> <span style="font-size:20px;color:#f69b02">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${r.paymentPrice }" /></span>원</p>
                     	</div>
                     </div>
                 </div>
