@@ -52,7 +52,7 @@ public class ReviewListServlet2 extends HttpServlet {
 				reqPage = 1;
 			}
 			
-			ReviewPageData pd = new ReviewService().selectRList(reqPage,userId,userNo);
+			ReviewPageData pd = new ReviewService().selectRList(reqPage,userId);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/review/reviewList.jsp");
 			request.setAttribute("pd", pd);
 			rd.forward(request, response);

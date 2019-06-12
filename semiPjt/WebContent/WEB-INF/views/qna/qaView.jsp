@@ -261,6 +261,7 @@
 		font-size: 13px;
 	}
 	.text{
+		resize: none;
 		width: 100%;
 		height:120px;
 		border:none;
@@ -328,7 +329,7 @@
 	                <div class="pop_header">
 	                   <input type="hidden" name="S_no" value="${s.s_no}">                    
 	               <p>질문 작성하기</p>
-	                    <button type="button" class="popcencleUp"><a href="javascript:void(0);">X</a></button>
+	                    <button type="button" class="popcencleUp">X</a></button>
 	                </div>
 	            <div class="pop_container">
 	                    <div class="box_l">
