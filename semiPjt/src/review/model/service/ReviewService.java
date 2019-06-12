@@ -14,6 +14,38 @@ import review.model.vo.ReviewPageData;
 import review.model.vo.ReviewViewData;
 
 public class ReviewService {
+	public ReviewPageData adminSelectAll(int reqPage) {
+		Connection conn = JDBCTemplate.getConnection();
+		int numPerPage = 6;
+		int totalCount = new ReviewDao().adminTotalCount(conn);
+		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
+		int start = (reqPage-1)*numPerPage+1;
+		int end = reqPage*numPerPage;
+		ArrayList<Review> list = new ReviewDao().adminSelectAll(conn, start, end);
+		String pageNavi = "";
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		if(pageNo != 1) {
+			pageNavi += "<a class='btn' href='/adminReviewPage?reqPage="+(pageNo-1)+"'>이전</a>";
+		}
+		int i = 1;
+		while(!(i++>pageNaviSize || pageNo>totalPage)) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='selectPage'>"+pageNo+"</span>";
+			}else {
+				pageNavi += "<a class='btn' href='/adminReviewPage?reqPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		if(pageNo <= totalPage) {
+			pageNavi +="<a class='btn' href='/adminReviewPage?reqPage="+pageNo+"'>다음</a>";
+		}
+		
+		ReviewPageData pd = new ReviewPageData(list,pageNavi);
+		JDBCTemplate.close(conn);
+		return pd;
+		
+	}
 	public int insertReview(Review r) {
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new ReviewDao().insertReview(conn,r);
