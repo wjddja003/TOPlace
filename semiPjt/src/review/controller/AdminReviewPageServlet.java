@@ -1,4 +1,4 @@
-package noticeSy.controller;
+package review.controller;
 
 import java.io.IOException;
 
@@ -10,19 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import review.model.service.ReviewService;
+import review.model.vo.ReviewPageData;
 import user.model.vo.User;
 
 /**
- * Servlet implementation class NoticeWriteServlet
+ * Servlet implementation class AdminReviewPageServlet
  */
-@WebServlet(name = "NoticeWrite", urlPatterns = { "/noticeWrite" })
-public class NoticeWriteServlet extends HttpServlet {
+@WebServlet(name = "AdminReviewPage", urlPatterns = { "/adminReviewPage" })
+public class AdminReviewPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeWriteServlet() {
+    public AdminReviewPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +34,19 @@ public class NoticeWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession(false);
-		if(session != null) {
-			String userId = ((User)session.getAttribute("User")).getUserId();
-			
-			if(userId.equals("admin")) {
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeWrite.jsp");
-				rd.forward(request, response);
-			}else {
-				request.setAttribute("msg", "잘못된경로입니다");
-				request.setAttribute("loc", "/");
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-			}
-		}else {
-			response.sendRedirect("/");
+	
+		int reqPage;
+		try {
+			reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		}catch (NumberFormatException e) {
+			reqPage = 1;
 		}
+		ReviewPageData pd = new ReviewService().adminSelectAll(reqPage);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/admin/adminReviewPage.jsp");
+		request.setAttribute("pd", pd);
+		rd.forward(request, response);
 		
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

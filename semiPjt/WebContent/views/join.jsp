@@ -66,7 +66,28 @@
 		border: none;
 		cursor:pointer;
 	}
-	
+	#addrNum{
+		text-align: center;
+	}
+	#address{
+		margin-top: 5px;
+		width: 600px;
+	}
+	.btnjoin{
+		border-radius : 10px;
+		width: 200px;
+	}
+	.addressinsert{
+		margin: 0 0 0 5px;
+		border-radius : 10px;
+	}
+	.btn1{
+		border-radius : 10px;
+	}
+	.gMsg{
+		text-align: right;
+		color: red;
+	}
 </style>
 
 </head>
@@ -80,6 +101,9 @@
 					<div class="joincontainer join">
 					<div class="joinheader">
 						<img class="loginLogo" src="../img/logo.png" alt="이용약관" align="middle"><span style="font-size: 20px">회원가입</span>
+					</div>
+					<div class="gMsg">
+						<span>모든 입력사항은 필수입력입니다.</span>
 					</div>
 					<table class="table">
 						<tr>

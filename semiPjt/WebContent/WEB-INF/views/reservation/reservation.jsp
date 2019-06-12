@@ -564,13 +564,13 @@ input[type="checkbox"]:checked + label span {
                			<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
 	                        <label>
 	                        	<span style="font-size:18px; line-height: 100%; color:black;">예약자<span>&nbsp;*</span></span>
-	                        	<span style="color:black;"><input type="text" name="booker"  value="${sessionScope.User.userName}" required="required"></span>
+	                        	<span style="color:black;"><input type="text" name="booker"  value="${sessionScope.User.userName}" required="required" style="width:600px; height: 50px;"></span>
 	                     	</label>
              			</div>
 	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
 	               			<label>
 	                        	<span style="font-size:18px; line-height: 100%; color:black;">연락처<span>&nbsp;*</span></span>
-	                        	<select name="phone" required="required" id="phone">
+	                        	<select name="phone" required="required" id="phone" style="width:185px; height: 50px;">
 			                        <option>010</option>
 			                        <option>011</option>
 			                        <option>016</option>
@@ -578,19 +578,19 @@ input[type="checkbox"]:checked + label span {
 			                        <option>018</option>
 			                        <option>019</option>
 			                     </select>
-			                     - <input type="text" name="phone1" class="phone1" value="${sessionScope.User.userPhone.substring(3,7)}" required="required" maxlength="4">- <input type="text" class="phone2" name="phone2" value="${sessionScope.User.userPhone.substring(7,11)}" required="required" maxlength="4">
+			                     - <input type="text" name="phone1" class="phone1" value="${sessionScope.User.userPhone.substring(3,7)}" required="required" maxlength="4" style="width:185px; height: 50px;"> - <input type="text" class="phone2" name="phone2" value="${sessionScope.User.userPhone.substring(7,11)}" required="required" maxlength="4" style="width:185px; height: 50px;">
 	                        </label>
 	               		</div>
 	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
 	               			<label>
 		               			<span style="font-size:18px; line-height: 100%; color:black;">이메일 <span>&nbsp;</span></span>
-		               			<input type="text" name="email" placeholder="이메일 주소를 남겨주세요.">
+		               			<input type="text" name="email" placeholder="이메일 주소를 남겨주세요." style="width:600px; height: 50px;">
 	               			</label>
 	               		</div>
 	               		<div class="reservation_space_tit" style="width:100%;margin: 10px; border-bottom:1px solid #ccc; padding:10px">
 	               			<label>
 	               				<span style="font-size:18px; line-height: 100%; color:black;">요청사항<span></span></span>
-	               				<input type="text" name="request" class="reservationRequest" placeholder="남기고 싶은 말을 적어주세요.">
+	               				<input type="text" name="request" class="reservationRequest" placeholder="남기고 싶은 말을 적어주세요." style="width:600px; height: 150px;">
 	               			</label>
 	               		</div>
 	               	</div>
@@ -905,7 +905,8 @@ input[type="checkbox"]:checked + label span {
                     $('.rM_time').css('display','block');
                   	$('.price_time').html("총 "+totalTime+'시간 x '+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" />');
                   	$('.totalTime').html("총 "+totalTime+'시간');
-                  	$('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                  	$('.price').html((totalPrice+('${s.s_price2}')*option).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                  	
                }else if (count > 2) {
                   count = 1;
                   $('.disabled').css('background','#f69b02');

@@ -56,7 +56,7 @@
         text-align: center;
         width: 1160px;
         margin: 0 auto;
-   		margin-top: 350px;
+   		margin-top: 250px;
     }
      .hc_tr{
         visibility: collapse;

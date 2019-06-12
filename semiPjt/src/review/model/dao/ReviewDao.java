@@ -30,6 +30,59 @@ public class ReviewDao {
 			e.printStackTrace();
 		}
 	}
+	public ArrayList<Review> adminSelectAll(Connection conn,int start,int end){
+		ArrayList<Review> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from (select rownum as rnum, m.* from (select r.*,s_placename from review r join place p on (r.review_sno = p.S_no) order by review_date desc) m) where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Review>();
+			while(rset.next()) {
+				Review r = new Review();
+				r.setReviewNo(rset.getInt("review_no"));
+				r.setReviewSno(rset.getInt("review_sno"));
+				r.setReviewTitle(rset.getString("review_title"));
+				r.setReviewWriter(rset.getString("review_writer"));
+				r.setReviewContent(rset.getString("review_content"));
+				r.setFilename(rset.getString("filename"));
+				r.setReviewStar(rset.getInt("review_star"));
+				r.setReviewDate(rset.getDate("review_date"));
+				r.setPlaceName(rset.getString("s_placename"));
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	public int adminTotalCount(Connection conn) {
+		Statement stmt = null;
+		int adminTotalCount = 0;
+		ResultSet rset = null;
+		String query = "select count(*) cnt from review";
+		try {
+			stmt= conn.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				adminTotalCount = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(stmt);
+		}
+		return adminTotalCount;
+	}
 	public int totalStar(Connection conn, int S_no) {
 		PreparedStatement pstmt = null;
 		int totalStar = 0;

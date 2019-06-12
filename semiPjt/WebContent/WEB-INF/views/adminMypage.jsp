@@ -18,7 +18,7 @@
         
         #mypage{
             position: fixed; 
-            background-color: #e2e2e2;
+            background-color: #f7f7f7;
             width: 300px;
             position: absolute;
             right:0px;
@@ -174,9 +174,7 @@
                 </li>
                 <li><a href="/noticeList">공지사항 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
                 <li><a href="/helpList">도움말 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <li><a href="#">QnA 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <li><a href="#">리뷰 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
-                <li><a href="#">예약 내역 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
+                <li style="border-bottom: 1px solid gray;"><a href="/adminQaPage">Q&A , 리뷰 관리<span><img src="/img/chevronright.png" class="r_img"></span></a></li>
             </ul>
         	</div>
         </div>

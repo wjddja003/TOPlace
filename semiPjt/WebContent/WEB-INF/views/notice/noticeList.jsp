@@ -37,8 +37,7 @@ prefix="c" %>
        width:900px;
     }
     .table-wrapper{
-       margin-top:400px;
-       margin-bottom:100px;
+       margin-top:250px;
     }
     .nc_tr{
         visibility: collapse;
@@ -64,6 +63,9 @@ prefix="c" %>
         }
         .table_toggle>tbody>tr:first-child>td{
             border-top: 2px solid #656565;
+        }
+          .table_toggle tbody tr td{
+        	padding: 20px;
         }
     #nlist{
         background-color: #183058;

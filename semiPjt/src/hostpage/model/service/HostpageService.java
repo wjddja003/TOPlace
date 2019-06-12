@@ -95,7 +95,7 @@ public class HostpageService {
 		int pageNaviSize = 5;    // <1 2 3 4 5 ?> 
 		int pageNo =((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(pageNo !=1) {											
-			pageNavi += "<a class='pageBtn' href='/hostPage?reqPage="+(pageNo-1)+"&ShostNum="+shostNum+"'>이전</a>";
+			
 		}
 		
 		int i = 1; 
@@ -109,7 +109,7 @@ public class HostpageService {
 			pageNo++;
 		}
 		if(pageNo <= totalpge) {
-			pageNavi +="<a class='pageBtn' href='/hostPage?reqPage="+(pageNo)+"&ShostNum=+"+shostNum+"+'>다음</a>";
+			
 		}
 		
 		HostPaging hp = new HostPaging(list,pageNavi);
@@ -149,20 +149,20 @@ public class HostpageService {
 		int pageNaviSize = 5;    // <1 2 3 4 5 ?> 
 		int pageNo =((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(pageNo !=1) {											
-			pageNavi += "<a class='btn' href='/hostPage?reqPage="+(pageNo-1)+"&ShostNum="+shostNum+"'>이전</a>";
+			pageNavi += "<a class='btn' href='/hostPage?reqPage2="+(pageNo-1)+"&ShostNum="+shostNum+"'>이전</a>";
 		}
 		int i = 1; 
 		while( !(i++>pageNaviSize || pageNo>totalpge)) {  
 			if(reqPage == pageNo) { 
 				 pageNavi += "<span class='selectPage'>"+pageNo+"</span>";
 			}else {
-				pageNavi += "<a class='btn' href='/hostPage?reqPage="+pageNo+"&ShostNum="+shostNum+"'>"+pageNo+"</a>"; 
+				pageNavi += "<a class='btn' href='/hostPage?reqPage2="+pageNo+"&ShostNum="+shostNum+"'>"+pageNo+"</a>"; 
 						//pageno 2개 = 하나는 볼것 하나는 값 전달할것
 			}
 			pageNo++;
 		}
 		if(pageNo <= totalpge) {
-			pageNavi +="<a class='btn' href='/hostPage?reqPage="+(pageNo)+"&ShostNum=+"+shostNum+"+'>다음</a>";
+			pageNavi +="<a class='btn' href='/hostPage?reqPage2="+(pageNo)+"&ShostNum=+"+shostNum+"+'>다음</a>";
 		}
 		
 		HostPagiongQA hqa = new HostPagiongQA(list,pageNavi);

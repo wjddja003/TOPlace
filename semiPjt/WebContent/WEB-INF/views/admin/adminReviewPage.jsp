@@ -88,10 +88,10 @@
         <div class="section_content">
             <div id="qa_view">
                 <div id="rq">
-                    <a href="/reviewList2">
+                    <a href="/adminReviewPage">
                         <div class="review"><p style="line-height:70px">REVIEW</p></div>
                     </a>
-                    <a href="/qaView">
+                    <a href="/adminQaPage">
                         <div class="qa"><p style="line-height:70px">Q＆A</p></div>
                     </a>
                 </div>
