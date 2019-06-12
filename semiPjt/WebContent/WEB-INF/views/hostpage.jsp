@@ -159,7 +159,7 @@
        width: 773px;
        text-align: left;    
       
-       border-bottom: 4px solid #f69b02;
+    
     }
     .QRAcomment{
        float: left;
@@ -238,7 +238,7 @@
 	.qacomment{
 		
     	width: 85.3%;
-		
+		border-bottom: 4px solid #f69b02
    
 	}.placename{
 		float: left;
