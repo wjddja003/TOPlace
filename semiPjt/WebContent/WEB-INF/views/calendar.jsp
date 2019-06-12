@@ -983,11 +983,12 @@
                     preday = preday.concat(inhibitrList[i].split(','));
                     substrarr = data[i].reservationTime.split('/');
                     substrarr.pop();
-                    
+                    console.log(substrarr);
                     timeInhibitArray = timeInhibitArray.concat(substrarr);
+                    console.log(timeInhibitArray);
                     for(var i0 = 0; i0<preday; i0++){
-                    	if(timeInhibitArray[i0]=="111111111111111111111111"){
-                        	inhibitDay.push(preday[i0].reservation)
+                       if(timeInhibitArray[i0]=="111111111111111111111111"){
+                           inhibitDay.push(preday[i0].reservation)
                         }
                     }
                     
@@ -1036,16 +1037,16 @@
            
             $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price); //해당 달의 끝날자만큼 for문이 돌아서 날짜를 td에 입력
             if(i==dayToday){
-            	$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
+               $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
             }
             if(month==parseInt(sysday.getMonth()+1) && i<=day){  //지금 이번달이 맞는지 또 입력되고 있는 날짜가 현재 날자보다 작은지 에따른 조건으로
-            	if(i==dayToday){
-                	$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
-                	$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
+               if(i==dayToday){
+                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
+                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
                 }else{
-                	$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f7f7f7");
+                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f7f7f7");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
@@ -1221,20 +1222,20 @@
                
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
                 if(month==monthToday && i==dayToday){
-                	$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
+                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
                 }
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","white");
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","pointer");
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).removeClass("inhibitDay");
                 
                 if(month==parseInt(sysday.getMonth()+1) && i<=day && year==sysday.getFullYear()){
-                	if(i==dayToday){
-                    	$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
-                    	$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
+                   if(i==dayToday){
+                       $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
+                       $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
                     }else{
-                    	$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f7f7f7");
+                       $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f7f7f7");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
@@ -1305,7 +1306,7 @@
                     startDay = $('td').index(this);
                     //선택된 날짜의 td index 가져오기
                    
-                   	 $(this).css("background-color","#f69b02");
+                       $(this).css("background-color","#f69b02");
                      $(this).addClass("selectDay");
                    
                     
@@ -1493,10 +1494,11 @@
                     strOneDay = year+strMonth1+strDay;
                     const idx = array.indexOf(strOneDay); 
                     if (idx > -1) {
-                    	array.splice(idx, 1);
-                    	priceTimeArr.splice(idx,1);
+                       array.splice(idx, 1);
+                       priceTimeArr.splice(idx,1);
                         sendTimeArray.splice(idx,1);
                         selTimeArr.splice(idx,1);
+                        $('#choiceDay').find('button').eq(idx).remove();
                         console.log(array);
                         console.log(priceTimeArr);
                         console.log(sendTimeArray);
@@ -1508,24 +1510,24 @@
                     
                     $('.selTime2').html("");
                     for(var IItime=0; IItime<selTimeArr.length; IItime++){
-             				$('.selTime2').html($('.selTime2').html()+String(array[IItime]).substring(0,4)+"년 "+String(array[IItime]).substring(4,6)+"월 "+String(array[IItime]).substring(6,8)+"일, "+String(selTimeArr[IItime]).replace("undefined","")+"<br>");
-             			}
+                         $('.selTime2').html($('.selTime2').html()+String(array[IItime]).substring(0,4)+"년 "+String(array[IItime]).substring(4,6)+"월 "+String(array[IItime]).substring(6,8)+"일, "+String(selTimeArr[IItime]).replace("undefined","")+"<br>");
+                      }
                     totalTime = 0;
                     totalPrice = 0;
                     for(var IIII=0; IIII<priceTimeArr.length; IIII++){
-                    	if(priceTimeArr[IIII]!=null){
-                    		totalTime += priceTimeArr[IIII];
-                        	  totalPrice += priceTimeArr[IIII]*'${s.s_price1}';
-                    	}
-                  	  
+                       if(priceTimeArr[IIII]!=null){
+                          totalTime += priceTimeArr[IIII];
+                             totalPrice += priceTimeArr[IIII]*'${s.s_price1}';
+                       }
+                       
                     }
                     $('#rMenu_time').css('display','none');
                     $('.rM_time').css('display','block');
-                  	$('.price_time').html("총 "+totalTime+'시간 x '+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" />');
-                  	$('.totalTime').html("총 "+totalTime+'시간');
-                  	$('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                  	if(array.length==0){
-                  	  selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+                     $('.price_time').html("총 "+totalTime+'시간 x '+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" />');
+                     $('.totalTime').html("총 "+totalTime+'시간');
+                     $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                     if(array.length==0){
+                       selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                         sendTimeArray = new Array(10);
                         selTimeArr = new Array(); 
                         priceTimeArr = new Array(); 
