@@ -425,12 +425,12 @@
                             <c:choose>
                             	<c:when test="${not empty sessionScope.User}">	
                                   
-                             		<button onclick="reservationBtn1()" class="viewpage_reservationbtn">결제하러 가기</button>
+                             		<button type="button" onclick="reservationBtn1()" class="viewpage_reservationbtn">결제하러 가기</button>
                                  
                              	</c:when>
                              	<c:otherwise>
                    
-                             		<button onclick="reservationBtn()"  class="viewpage_reservationbtn">결제하러 가기</button>
+                             		<button type="button" onclick="reservationBtn()"  class="viewpage_reservationbtn">결제하러 가기</button>
                                    
                              	</c:otherwise>
                              </c:choose>
@@ -896,7 +896,7 @@
 			$('.layer_popup_up').hide();
 			$('.hostpopupMaskUp').hide();
 		});
-		 function reservationBtn() {
+		function reservationBtn() {
 	            window.location = "/views/login.jsp";
 	        }
 		function reservationBtn1(){

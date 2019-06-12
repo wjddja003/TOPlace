@@ -37,8 +37,7 @@ prefix="c" %>
        width:900px;
     }
     .table-wrapper{
-       margin-top:400px;
-       margin-bottom:100px;
+       margin-top:250px;
     }
     .nc_tr{
         visibility: collapse;

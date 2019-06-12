@@ -16,7 +16,7 @@ import review.model.vo.ReviewViewData;
 public class ReviewService {
 	public ReviewPageData adminSelectAll(int reqPage) {
 		Connection conn = JDBCTemplate.getConnection();
-		int numPerPage = 6;
+		int numPerPage = 4;
 		int totalCount = new ReviewDao().adminTotalCount(conn);
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (reqPage-1)*numPerPage+1;
