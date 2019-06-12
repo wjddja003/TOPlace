@@ -858,15 +858,15 @@ input[type="checkbox"]:checked + label span {
 	                     $('.swiper-slide button').eq(i).css('background-color','#183058');
 	                     $('.swiper-slide button').eq(i).css('color','white');
 	                     selTimeArray[i]=1;
-	                     hapTime = end-start+1;
+	                     hapTime++;
                 	  }
-                     }
+                   }
                   for (var i = start; i > end - 1; i--) {
                 	  if($('.swiper-slide button').eq(i).hasClass('disabled')){
  	                     $('.swiper-slide button').eq(i).css('background-color','#183058');
  	                     $('.swiper-slide button').eq(i).css('color','white');
  	                     selTimeArray[i]=1;
- 	                     hapTime = start-end+1;
+ 	                     hapTime++;
                  	  }
                   }
                   arrayStr="";
