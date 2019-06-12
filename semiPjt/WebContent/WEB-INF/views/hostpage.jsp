@@ -169,7 +169,8 @@
     }
     .navi{
 		float: left;
-	    width: 100%; 			  
+	    width: 100%; 		
+	    letter-spacing: 10px;	  
 	}
 	.navi2{
 		float: left;

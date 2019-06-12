@@ -218,7 +218,7 @@
                             </div>
                             <div>				
 				                <div id="map" style="width:773px;  height:640px;"></div>
-				                <div id="pano"style="width:773px; height:640px;"></div>            
+				                <div id="pano"style="width:773px; height:340px;"></div>            
                             </div>
                         </div>
                         <div class="viewpage_qna">
@@ -869,7 +869,7 @@
 			        anchor: new naver.maps.Point(11, 35)
 			    }
 				
-			});
+			});			
 			var infoWindow =new naver.maps.InfoWindow();
 			naver.maps.Event.addListener(marker,'click',function(e){	//클릭햇을떄 이벤트 줘야지
 				if(infoWindow.getMap()){ //지도에 열려있는지 아닌지 판단여부 (정보창)
@@ -878,10 +878,10 @@
 					infoWindow.setContent('<div style="width:180px;text-align:center;padding:10px;"><img src="/upload/space/${s.s_img1}" style="width:150px;">${s.address}</div>');
 					infoWindow.open(map,marker);
 				}				
-			});
+			});			
 			var pano = new naver.maps.Panorama("pano", {
 			    position: new naver.maps.LatLng(y, x),
-			    size: new naver.maps.Size(800, 600),
+			    
 			    pov: {
 			        pan: -135,
 			        tilt: 29,
@@ -892,6 +892,8 @@
 		            position: naver.maps.Position.TOP_RIGHT
 		        }
 			});
+			
+			
 			naver.maps.onJSContentLoaded = initPanorama;
 
 			$("#around").on("click", function(e) {
@@ -914,7 +916,8 @@
 			});
 
 			naver.maps.Event.addListener(pano, "init", function() {
-			    console.log("init");
+			    
+				
 			});
 
 			naver.maps.Event.addListener(pano, "pano_status", function(status) {
@@ -928,6 +931,9 @@
 			naver.maps.Event.addListener(pano, "pov_changed", function() {
 			    console.log("pov_changed", pano.getPov());
 			});
+			
+			
+			
 			
 	   	 });			
 		};
