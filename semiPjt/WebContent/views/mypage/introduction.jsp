@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="intro_info">
-                    <img src="../../img/main_background.jpg">
+                    <img src="../../img/intro_bg.jpg">
                 </div>
             <ul class="intro_list">
                     <li class="intro1">

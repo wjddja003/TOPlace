@@ -85,7 +85,7 @@
                 </div>
                 <c:forEach items="${list}" var="r">
                 	 
-                	<c:if test="${sessionScope.User.userNo == r.userNo}">
+                	
                 <div class="qa_v">
               
                     <div class="qa_no">
@@ -100,7 +100,7 @@
                     	
                     </div>
                 </div>
-                	</c:if>
+                	
                 </c:forEach>
               
             </div>

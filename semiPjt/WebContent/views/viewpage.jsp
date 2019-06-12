@@ -184,8 +184,8 @@
 				          </ul>
 				          
            <!--controls-->
-          <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
-          <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
+          <div class="btns" id="next"><img src="../img/right_arrow.png"></div>
+          <div class="btns" id="previous"><img src="../img/left_arrow.png"></div>
           <div id="counter"></div>
           
           <div id="pagination-wrap">
@@ -203,10 +203,8 @@
                                     <p>${s.s_placeWeb}</p>
                                 </div>
                                 <div class="viewpage_host_icon">
-                                    <div class="viewpage_host_icon_l">
-                                        <a href="#" tel="010-1234-5678" style="text-decoration: none;">
-                                            <span style="line-height:45px;"><img src="../img/call_icon.png">전화걸기</span>
-                                        </a>
+                                    <div class="viewpage_host_icon_l">                                       
+                                            <span style="line-height:45px;"><img src="../img/call_icon.png">전화걸기</span>                               
                                     </div>
                                     <div class="viewpage_host_icon_r">
                                         <a href="https://map.naver.com/" style="text-decoration: none;" target="_blank">
@@ -262,14 +260,9 @@
                                         </c:if>
                                         <c:forEach var="qq" items="${qna.list}">
                                           <c:if test="${q.qaCommentNo == qq.qaCommentRef}">
-                                            <div class="rbox_reply" style="margin-top:30px;">
-                                            <c:if test="${empty host.hostFile}">                                            	
-                                            	<span class="pf_img"><img src="../img/logo.png" width="100px;" height="50px;"></span>
-                                            </c:if>
-                                            <c:if test="${not empty host.hostFile }">
-                                            	<span class="pf_img"><img src="/upload/hostProfile/${host.hostFile}" width="100px;" height="100px;"></span>
-                                            	</c:if> 
-                                                <p class="p_tit_reply">
+                                            <div class="rbox_reply" style="margin-top:30px;">                                                                                  	
+                                            	<span class="pf_img"><img src="../img/logo.png" width="100px;" height="50px;"></span>                                     
+                                                  <p class="p_tit_reply">
                                                     <em>${qq.qaCommentWriter}</em>님의 댓글
                                                 </p>
                                                 <p class="p_review" style=" word-break:break-all">
@@ -388,7 +381,7 @@
                                             <input type="radio" checked> ${s.s_placeName } <span>￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" /><small style="color:#949494;">/시간</small></span>
                                         </li>
                                         <li class="viewpage_list_none" style="padding:15px 0px 15px; height:140px;">
-                                            <img src="../img/ex1.jpg" width="110px" height="110px" id="viewpage_right_img">
+                                            <img src="/upload/space/${s.s_img1 }" width="110px" height="110px" id="viewpage_right_img">
                                             <p>${s.s_placeIntroduce1}</p>
                                         </li>
                                         <li style="clear: both;" class="viewpage_right_c"><span style="color:#656565; float:left;">· 공간유형</span>
