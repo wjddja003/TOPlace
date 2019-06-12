@@ -157,21 +157,21 @@
             <ul>
                 <li>
                 <c:choose>
-                	<c:when test="${empty sessionScope.User }">
+                	<c:when test="${empty sessionScope.User}">
                 		<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>
                 	</c:when>
                 	<c:otherwise>
                 		<c:choose>
-                			<c:when test="${empty sessionScope.host }">
+                			<c:when test="${empty sessionScope.host}">
                 				<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>
                 			</c:when>
                 			<c:otherwise>
                 				<c:choose>
-	                				<c:when test="${not empty sessionScope.host }">
-	                					<c:if test="${sessionScope.host.hostFile != null }">
+	                				<c:when test="${not empty sessionScope.host}">
+	                					<c:if test="${sessionScope.host.hostFile != null}">
 	                						<img src="../../../upload/hostProfile/${sessionScope.host.hostFile }" id="hostImage">
 	                					</c:if>
-	                					<c:if test="${sessionScope.host.hostFile == null }">
+	                					<c:if test="${sessionScope.host.hostFile == null}">
 	                						<a><img src="../../../img/logo_2.png" style="width:100px; height:50px;"></a>
 	                					</c:if>
 	                				</c:when>

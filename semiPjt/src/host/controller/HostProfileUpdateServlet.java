@@ -55,9 +55,10 @@ public class HostProfileUpdateServlet extends HttpServlet {
 		// Multipartrequest로 변환
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 		Host h = new Host();
-		int userNo =Integer.parseInt(mRequest.getParameter("hostNo"));
-		h.setHostNo(userNo);
-		h.setUserNo(Integer.parseInt(mRequest.getParameter("userNo")));
+		int hostNo =Integer.parseInt(mRequest.getParameter("hostNo"));
+		h.setHostNo(hostNo);
+		int userNo = Integer.parseInt(mRequest.getParameter("userNo"));
+		h.setUserNo(userNo);
 		h.setHostName(mRequest.getParameter("hostName"));
 		h.setHostContent(mRequest.getParameter("hostContent"));
 		h.setHostFile(mRequest.getFilesystemName("hostFile"));
@@ -65,7 +66,7 @@ public class HostProfileUpdateServlet extends HttpServlet {
 		String oldFilename = mRequest.getParameter("oldFilename");
 		//삭제 로직 확인용 변수
 		File f = mRequest.getFile("hostFile");
-		Host newh = new HostService().selectOne(userNo);
+		
 		if(f!=null &&f.length() >0) { //첨부파일이 있는 경우
 			if(oldFilename != null) {
 				File deleteFile = new File(saveDirectory+"/"+oldFilename);
@@ -73,16 +74,15 @@ public class HostProfileUpdateServlet extends HttpServlet {
 				System.out.println(bool?"삭제완료":"삭제실패");
 			}
 		}else {//첨부파일이 없는 경우
-			File deleteFile = new File(saveDirectory+"/"+oldFilename);
-			boolean bool = deleteFile.delete();
 			h.setHostFile(oldFilename);
-			System.out.println(bool?"삭제완료":"삭제실패");
+			System.out.println("수정완료");
 		}
 		int result = new HostService().hostUpdate(h);
+		Host newh = new HostService().selectOne(userNo);
+		HttpSession session = request.getSession();
+		session.setAttribute("host", newh);
 		if(result>0) {
 			request.setAttribute("msg", "수정성공");
-			HttpSession session = request.getSession();
-			session.setAttribute("host", newh);
 		}else {
 			request.setAttribute("msg", "수정실패");
 		}
