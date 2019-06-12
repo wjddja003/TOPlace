@@ -36,7 +36,7 @@ public class NoticeWriteServlet extends HttpServlet {
 		if(session != null) {
 			String userId = ((User)session.getAttribute("User")).getUserId();
 			
-			if(userId.equals("tndyd2")) {
+			if(userId.equals("admin")) {
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeWrite.jsp");
 				rd.forward(request, response);
 			}else {

@@ -15,11 +15,9 @@
         height: 70px;
         background: #e2e2e2;
     }
-    
     .review{
-         background-color: #f69b02;
+        background-color: #f69b02;
         color: #f7f7f7;
-        
         float: left;
         width: 50%;
         height: 70px;
@@ -31,7 +29,6 @@
          height: 70px;
     }
     #qa_view{
-        
         margin: 0 auto;
         width: 1000px;
     }
@@ -43,29 +40,18 @@
         height: 50px;
         text-align: center;
     }
-    .qa_v{
-        text-align: center;
-        width: 300px;
-        margin: 50px 20px 0 0;
-        padding: 10px;
-        height: 100%;
-        float: left;
-    }
     .rv_no{
         padding: 10px;
         float: left;
-        margin: 20px 0 0 20px;
+        margin: 20px 50px 0 50px;
         border: 1px solid #e2e2e2;
-        width: 300px;
-        height: 200px;
+        width: 400px;
         overflow: hidden;
         position: relative;
         text-align: center;
     }
     .Q_btn{
-        margin-left: 100px;
-        position: absolute;
-        bottom: 0;
+        
     }
     .re_navi{
     	clear: both;
@@ -77,18 +63,22 @@
         font-size: 12px;
         margin: 0 0 5px 0;
     }
-    .rv_no a{
-    	float: left;
-    }
     .rdate{
 		font-size: 13px;
+		text-align: right;
+		padding: 0 0 0 300px;
 	}
-	.rv_text{
-		resize: none;
+	.on{
+		color:#f69b02;
+	}
+	.reviewImg{
 		width: 100%;
-		height:120px;
-		border:none;
-		float: left;
+		height: 200px;
+	}
+	.reviewText{
+		margin: 5px;
+		font-size:17px;
+		text-align: left;
 	}
 </style>
 <body>
@@ -105,23 +95,41 @@
                         <div class="qa"><p style="line-height:70px">Q＆A</p></div>
                     </a>
                 </div>
-                <c:forEach items="${pd.list }" var="r">
-                	 
-                	<c:if test="${sessionScope.User.userId == r.reviewWriter}">
                 <div class="qa_v">
-              
+                	<c:forEach items="${pd.list }" var="r">
                     <div class="rv_no">
-                    	<a style="color:#f69b02;font-size:14px;"> 공간명 : ${r.placeName }</a><br>
-                    	<textarea class="rv_text" readonly="readonly">${r.reviewContent }</textarea><br>
-                    	
+                    <c:choose>
+                    	<c:when test="${not empty r.filename}">
+	                    	<div class="imgBox">
+	                			<img class="reviewImg" src="/upload/review/${r.filename}">
+	                		</div>
+                		</c:when>
+                		<c:otherwise>
+                			<div class="imgBox">
+                				<img class="reviewImg" src="/img/logo.png">
+                			</div>
+                		</c:otherwise>
+                	</c:choose>          
+                    	<p class="reviewText" ><span style="color:#f69b02;">공간명 : </span>${r.placeName }</p>
+                    	<p class="reviewText" ><span style="color:#f69b02;">별점 : </span>
+                    	<c:forEach  begin="1" end='${r.reviewStar}'>
+						<span class="on">★</span>
+						</c:forEach>
+						<c:forEach  begin="${r.reviewStar}" end='4'>
+							<span style="color:#e2e2e2;">★</span>
+						</c:forEach></p>
+                    	<p class="reviewText"><span style="color:#f69b02;">제목 : </span>${r.reviewTitle}</p>
+                    	<span class="rdate" style="color:#605f5d">${r.reviewDate }</span>                   	
                         <div class="Q_btn">
-	                        <a class="rdate" style="color:#605f5d">${r.reviewDate }</a><br>
+	                        
+	                        <a href="/reviewDelete?reviewNo=${r.reviewNo}"><button type="button" class="reviewBtn"style="color:#f69b02; border-color:#f69b02">삭제</button></a>
 	                        <a href="/selectOneSpace?S_no=${r.reviewSno}"> <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02">리뷰보러가기</button></a>
                         </div>
                     </div>
+                    </c:forEach>
                 </div>
-                	</c:if>
-                </c:forEach>
+                	
+               
                <div class="re_navi">${pd.pageNavi }</div>
             </div>
         </div>

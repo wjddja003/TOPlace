@@ -18,7 +18,7 @@
         
         #mypage{
             position: fixed; 
-            background-color: #e2e2e2;
+            background-color: #f7f7f7;
             width: 300px;
             position: absolute;
             right:0px;
