@@ -853,22 +853,30 @@ input[type="checkbox"]:checked + label span {
             } else if (count == 2) {
                endTime = parseInt($(this).text());
                end = $('.swiper-slide button').index(this);
-                  for (var i = start; i < end + 1; i++) {
-                	  if($('.swiper-slide button').eq(i).hasClass('disabled')){
-	                     $('.swiper-slide button').eq(i).css('background-color','#183058');
-	                     $('.swiper-slide button').eq(i).css('color','white');
-	                     selTimeArray[i]=1;
-	                     hapTime++;
-                	  }
-                   }
-                  for (var i = start; i > end - 1; i--) {
-                	  if($('.swiper-slide button').eq(i).hasClass('disabled')){
- 	                     $('.swiper-slide button').eq(i).css('background-color','#183058');
- 	                     $('.swiper-slide button').eq(i).css('color','white');
- 	                     selTimeArray[i]=1;
- 	                     hapTime++;
-                 	  }
+                  if(end==start){
+                	  $('.swiper-slide button').eq(end).css('background-color','#183058');
+	                     $('.swiper-slide button').eq(end).css('color','white');
+	                     selTimeArray[end]=1;
+	                     hapTime = 1;
+                  }else{
+                	  for (var i = start; i < end + 1; i++) {
+                    	  if($('.swiper-slide button').eq(i).hasClass('disabled')){
+    	                     $('.swiper-slide button').eq(i).css('background-color','#183058');
+    	                     $('.swiper-slide button').eq(i).css('color','white');
+    	                     selTimeArray[i]=1;
+    	                     hapTime++;
+                    	  }
+                       }
+                      for (var i = start; i > end - 1; i--) {
+                    	  if($('.swiper-slide button').eq(i).hasClass('disabled')){
+     	                     $('.swiper-slide button').eq(i).css('background-color','#183058');
+     	                     $('.swiper-slide button').eq(i).css('color','white');
+     	                     selTimeArray[i]=1;
+     	                    hapTime++;
+                     	  }
+                      }
                   }
+                  
                   arrayStr="";
 	  	            for(var arrI=0;arrI<array.length;arrI++){
 	  	            	arrayStr += array[arrI];
