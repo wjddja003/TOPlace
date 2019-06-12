@@ -210,7 +210,7 @@
                                         </a>
                                     </div>
                                     <div class="viewpage_host_icon_r">
-                                        <a href="https://map.naver.com/" style="text-decoration: none;">
+                                        <a href="https://map.naver.com/" style="text-decoration: none;" target="_blank">
                                             <span style="line-height:45px;"><img src="../img/way_icon.png">길찾기</span>
                                         </a>
                                     </div>
@@ -292,7 +292,7 @@
                                         </c:forEach>
                                     </ul>
                                 </div>
-                                 <div class="pageNavi">${qna.pageNavi}</div>
+                                 <div class="pageNavi_qa">${qna.pageNavi}</div>
                             </div>
             
                         </div>
@@ -454,11 +454,11 @@
                 </div>
 				<div class="pop_container">
                     <div class="box_l">
-                        <label for="input_question">답글</label>
+                        <label for="input_question_an">답글</label>
                     </div>
-                    <div class="box_r"><p id="textarea_input">0 /</p><p id="textarea_length">200자</p></div>
+                    <div class="box_r"><p id="textarea_input_re">0 /</p><p id="textarea_length_an">200자</p></div>
                     <div class="qna_input">
-						<textarea name="qaCommentContent" id="input_question" placeholder="답글을 남겨 주세요." maxlength="200" data-ui-sync-length="._question_length" required></textarea>
+						<textarea name="qaCommentContent" id="input_question_an" placeholder="답글을 남겨 주세요." maxlength="200" data-ui-sync-length="._question_length" required></textarea>
 					</div>
 				</div>
                 <div class="qna_p">
@@ -468,15 +468,17 @@
                     </p>
                     </div>
 			     </div>
-                <div class="qnaBtns">
+                <div class="qnaBtns" style="clear: both;">
 <!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
-                    <div id="qna_abtn">
+                    <div id="qna_abtn" >
 						<button class="poprollback" id="commentInsertBtn">등록</button>
                     </div>
 					</div>
 			</div>
 		</div>
 		</form>
+<!-- 			<div class="hostpopupMask"> -->
+<!-- 		</div> -->
 	<form action="/insertQa?S_no=${s.s_no }" method="post">
     <div class="layer_popup" class="_noProfileCheckLayout" style="display:none;position:fixed;">
 			<div class="popup_wrap">
@@ -488,7 +490,7 @@
                     <div class="box_l">
                         <label for="input_question">질문</label>
                     </div>
-                    <div class="box_r"><p id="textarea_input">0 /</p><p id="textarea_length">200자</p></div>
+                    <div class="box_r"><p id="textarea_input">0 /</p><p id="textarea_length_qa">200자</p></div>
                     <div class="qna_input">
 						<textarea name="qaCommentContent" id="input_question" placeholder="질문을 남겨 주세요." maxlength="200" data-ui-sync-length="._question_length" required></textarea>
 					</div>
@@ -500,7 +502,7 @@
                     </p>
                     </div>
 			     </div>
-                <div class="qnaBtns">
+                <div class="qnaBtns" style="clear: both;">
 <!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
                     <div id="qna_abtn">
 						<button class="poprollback">등록</button>
@@ -509,8 +511,8 @@
 			</div>
 		</div>
 		</form>
-		<div class="hostpopupMask">
-		</div>
+ 		<div class="hostpopupMask"> 
+ 		</div> 
 		
 		<form method="post" id="qaUpdateForm">
     <div class="layer_popup_up" class="_noProfileCheckLayout" style="display:none;position:fixed;">
@@ -537,7 +539,7 @@
                     </p>
                     </div>
 			     </div>
-                <div class="qnaBtns">
+                <div class="qnaBtns" style="clear: both;">
 <!--						<a href="javascript:void(0);" class="popcencle">닫기</a>-->
                     <div id="qna_updateBtn">
 						<button type="submit" class="poprollback">등록</button>
@@ -546,8 +548,8 @@
 			</div>
 		</div>
 		</form>
-		<div class="hostpopupMaskUp">
-		</div>
+		<div class="hostpopupMaskan"> 
+ 		</div> 
                
                                                     
         <%-- 메뉴바 스크롤 따라오기 스크립트 --%>
@@ -613,9 +615,15 @@
                }); 
                $('#input_update').keyup(function(){
                    var upLength = $(this).val().length;
-                    var remain = ${q.qaCommentContent} - upLength;
+                    var remain = 200 - $('#input_update').val().length;
                     $("#textarea_uplength").html(remain+"자");
                     $("#textarea_update").html(upLength+" /");
+                }); 
+               $('#input_question_an').keyup(function(){
+                   var inputLength = $(this).val().length;
+                    var remain = 200 - inputLength;
+                    $("#textarea_length_an").html(remain+"자");
+                    $("#textarea_input_re").html(inputLength+" /");
                 }); 
                  $("#like_full").click(function(){
                  	var s_no = ${s.s_no};
@@ -768,7 +776,7 @@
     	   $('.CommentNo').val($(this).prev().val());
     	   console.log($('.CommentNo').val());
     	   $('#layer_popup_Comment').show();
-    	   $('.hostpopupMask').show();
+    	   $('.hostpopupMaskan').show();
        });
        $('#declare').click(function(){
     	   $('#declare_content').toggle();
