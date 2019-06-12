@@ -107,19 +107,19 @@ public class QaService {
 		int pageNaviSize = 5;
 		int pageNo = ((reqPageQna-1)/pageNaviSize)*pageNaviSize+1;
 		if(pageNo != 1) {
-			pageNavi += "<a class='btn' href='/qaView?reqPage="+(pageNo-1)+"'>이전</a>";
+			pageNavi += "<a class='btn' href='/selectOneSpace?S_no=2&reqPage="+(pageNo-1)+"'>이전</a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
 			if(reqPageQna == pageNo) {
 				pageNavi += "<span class='selectPage'>"+pageNo+"</span>";
 			}else {
-				pageNavi += "<a class='btn' href='/qaView?reqPage="+pageNo+"'>"+pageNo+"</a>";
+				pageNavi += "<a class='btn' href='/selectOneSpace?S_no=2&reqPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 	if(pageNo <= totalPage) {
-		pageNavi +="<a class='btn' href='/qaView?reqPage="+pageNo+"'>다음</a>";
+		pageNavi +="<a class='btn' href='/selectOneSpace?S_no=2&reqPage="+pageNo+"'>다음</a>";
 	}
 	ArrayList<QaComment> listAll = new QaDao().selectAll(conn);
 	QaPageData pd = new QaPageData(list,pageNavi,listAll,totalCountQna);
