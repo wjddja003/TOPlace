@@ -517,6 +517,12 @@ input[type="checkbox"]:checked + label span {
 		                 </c:forEach>
                      	</div>
                   	</div>
+                  	<br>
+                  	<div style="text-align: left;">
+                  		<img src="../img/icon_warning.png" width="13px" height="13px">&nbsp;<span style="font-size:12px;">날짜 선택 버튼을 클릭 후 시간을 선택하여주세요</span><br>
+	                  	<img src="../img/icon_warning.png" width="13px" height="13px">&nbsp;<span style="font-size:12px;">좌우로 드래그하여 예약 하실 시간을 찾아주세요</span><br>
+	                  	<img src="../img/icon_warning.png" width="13px" height="13px">&nbsp;<span style="font-size:12px;">1시간 선택 시 두 번 클릭하여 주세요</span>
+                  	</div>
                	</div>
               </div>
             </c:if>
@@ -888,8 +894,10 @@ input[type="checkbox"]:checked + label span {
                   totalTime = 0;
                   totalPrice = 0;
                   for(var IIII=0; IIII<priceTimeArr.length; IIII++){
-                	  totalTime += priceTimeArr[IIII];
-                	  totalPrice += priceTimeArr[IIII]*'${s.s_price1}';
+                	  if(priceTimeArr[IIII]!=null){
+                  		totalTime += priceTimeArr[IIII];
+                      	  totalPrice += priceTimeArr[IIII]*'${s.s_price1}';
+                  	}
                   }
          			
                     $('#rMenu_time').css('display','none');

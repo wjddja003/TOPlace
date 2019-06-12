@@ -50,7 +50,7 @@
         margin: 20px 0 0 20px;
         border: 1px solid #e2e2e2;
         width: 300px;
-        height: 150px;
+        height: 200px;
         overflow: hidden;
         position: relative;
         text-align: center;
@@ -140,6 +140,7 @@
       opacity: 0.6;
       display:none;
    }
+   
 .pop_header{
     padding: 10px 20px 0px 20px;
     width: 100%;
@@ -212,6 +213,7 @@
 	    margin: 0 auto;
 	    height: 45px;
 	    border-radius: 15px;
+	    clear: both;
 	}
 	.poprollback{
 	    border: none;
@@ -258,9 +260,34 @@
 	.qdate{
 		font-size: 13px;
 	}
+	.text{
+		width: 100%;
+		height:120px;
+		border:none;
+		float: left;
+	}
+	.view_warning_img{
+    width: 300px;
+    margin: 0 auto;
+	}
+	.view_warning_img img{
+	    width: 20px;
+	    height: 20px;
+	    float: left;
+	    margin-right: 10px;
+	}
+	.qna_p{
+	    width: 500px;
+	}
+	.qna_p p{
+	    color: red;
+	    float: left;
+	    font-size: 14px;
+	}
 </style>
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
     <section>
         <div class="section_content">
@@ -274,15 +301,15 @@
                     </a>
                 </div>
                 <c:forEach items="${pd.list }" var="q">
-                	 
+                	
                 	<c:if test="${sessionScope.User.userId == q.qaCommentWriter}">
                 <div class="qa_v">
               		
                     <div class="qa_no">
                     	<input type="hidden" class="qNoHidden" value="${q.qaCommentNo }">
                         <div class="comment">
-                           	 <a href="/selectOneSpace?S_no=${q.qaRef}"style=color:#f69b02;font-size:14px;>공간명 : ${q.placeName }</a><br>
-                            <a class="text">${q.qaCommentContent }</a><br>
+                           	 <a href="/selectOneSpace?S_no=${q.qaRef}" style=color:#f69b02;font-size:14px;>공간명 : ${q.placeName }</a><br>
+                            <textarea class="text" readonly="readonly">${q.qaCommentContent}</textarea><br>
                     	</div>
                         <div class="Q_btn">
                         <a class="qdate" style="color:#605f5d">${q.qaCommentDate }</a><br>
@@ -296,12 +323,12 @@
                <div class="qa_navi">${pd.pageNavi }</div>
             </div>
 	<form method="post" id="qaUpdateForm2" action="/qaCommentUpdateEnd">
-	    <div class="layer_popup_up" class="_noProfileCheckLayout" style="display:none;position:fixed;">
+	    <div class="layer_popup_up"  style="display:none;position:fixed;">
 	         <div class="popup_wrap">
 	                <div class="pop_header">
 	                   <input type="hidden" name="S_no" value="${s.s_no}">                    
 	               <p>질문 작성하기</p>
-	                    <button type="button" class="popcencleUP">X</button>
+	                    <button type="button" class="popcencleUp"><a href="javascript:void(0);">X</a></button>
 	                </div>
 	            <div class="pop_container">
 	                    <div class="box_l">
@@ -315,11 +342,13 @@
 	                  <input type="hidden" name="qaCommentNo" id="updateCommentNo">
 	               </div>
 	            </div>
-	                <div class="qna_p">
+	          <div class="qna_p">
+	          	<div class="view_warning_img">
 	               <img src="../img/icon_warning.png"> <p>
-	                질문은 공개 상태로만 등록하실 수 있습니다.
+	               		 질문은 공개 상태로만 등록하실 수 있습니다.
 	                    </p>
-	              </div>
+	         	</div>
+              </div>
 	                <div class="qnaBtns">
 	<!--                  <a href="javascript:void(0);" class="popcencle">닫기</a>-->
 	                 <div id="qna_updateBtn">
@@ -338,17 +367,23 @@
         $('.layer_popup_up').show();
         $('.hostpopupMaskUp').show();
      });
-     $(".popcencleUp").click(function(){
-        $('.layer_popup_up').hide();
-        $('.hostpopupMaskUp').hide();
-     });
+ 	$(".popcencleUp").click(function(){
+		$('.layer_popup_up').hide();
+		$('.hostpopupMaskUp').hide();
+	});
      function updateFn(content){
-    	 var commentContent = $(content).parent().prev().find('span').text();
+    	 var commentContent = $(content).parent().prev().find('textarea').text();
     	 var commentNo = $(content).parent().prev().prev().val();
     	
     	 $('#updateContent').text(commentContent);
     	 $('#updateCommentNo').val(commentNo);
      }
+     $('#updateContent').keyup(function(){
+         var upLength = $(this).val().length;
+          var remain = 200 - $('#updateContent').val().length;
+          $("#textarea_uplength").html(remain+"자");
+          $("#textarea_update").html(upLength+" /");
+      }); 
     </script>
 </body>
 </html>

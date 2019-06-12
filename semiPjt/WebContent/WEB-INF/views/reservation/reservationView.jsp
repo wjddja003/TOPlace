@@ -39,10 +39,10 @@
         float: left;
     }
     .qa_no{
-        padding: 10px;
+        padding: 0px;
         float: left;
         margin: 20px 0 0 20px;
-        border: 1px solid #e2e2e2;
+       
         width: 100%;
         height: 320px;
         overflow: hidden;
@@ -66,12 +66,13 @@
     }
     #spaceImg{
      
-    	width: 400px;
+    	width: 430px;
     	height: 220px;
     }
     .reservationContent{
-    	width:408px;
-    	height:88px;
+    	border: 1px solid #f69b02;
+    	width: 100%;
+    	height:98px;
     	float: left;
     }
     .reservationContent a {
@@ -80,6 +81,7 @@
 </style>
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
     <section>
         <div class="section_content">
@@ -96,8 +98,8 @@
                     	<a href="/selectOneSpace?S_no=${r.s_no}"> <img id="spaceImg"src="/upload/space/${r.img}"></a><br>
                     	<div class="reservationContent">
 	                    	<a style="color:#f69b02" id="r_placeName">${r.placeName }</a><br>
-	                    	<a>예약날짜 :${r.reservationDay }</a><br>
-	                    	<a>예약금액 :￦${r.paymentPrice }</a>
+	                    	<a><span style="font-size: 13px">예약날짜</span>: ${r.reservationDay }</a><br>
+	                    	<a><span style="font-size: 13px">예약금액</span>: <span style="font-size:24px;color:#f69b02">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${r.paymentPrice }" /></span>원</a>
                     	</div>
                     </div>
                 </div>

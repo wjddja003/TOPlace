@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import common.JDBCTemplate;
 import noticeSy.model.vo.Notice;
+import toplace.model.vo.Declare;
 import user.model.vo.User;
 
 public class UserDao {
@@ -47,10 +48,65 @@ public class UserDao {
 		return result;
 		
 	}
+	public int adminDeclareDelete(int sNo,Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from declare where s_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, sNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
+	public int spaceDeclareDelete(int sNo,Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from place where s_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, sNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
 	public int totalCount(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;
 		String query = "select count(*) cnt from user_db";
+		int result = 0;
+		try {
+			stmt=conn.createStatement();
+			rset=stmt.executeQuery(query);
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+			System.out.println(result);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(stmt);
+		}
+		return result;
+	}
+	public int totalDeclareCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		String query = "select count(*) cnt from declare";
 		int result = 0;
 		try {
 			stmt=conn.createStatement();
@@ -97,6 +153,36 @@ public class UserDao {
 				u.setUserSMS(rset.getString("sms"));
 				u.setEnrollDate(rset.getDate("enroll_date"));
 				list.add(u);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	public ArrayList<Declare> adminDeclareAll(Connection conn,int start, int end){
+		ArrayList<Declare> list= null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from (select rownum as rnum, m.* from (select * from declare order by declare_no desc) m) where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Declare>();
+			while(rset.next()) {
+				Declare d = new Declare();
+				d.setDeclareNo(rset.getInt("declare_no"));
+				d.setS_no(rset.getInt("s_no"));
+				d.setS_placeName(rset.getString("s_placeName"));
+				d.setDeclareType(rset.getString("declare_type"));
+				d.setUserName(rset.getString("user_name"));
+				d.setDeclareContent(rset.getString("declare_content"));
+				list.add(d);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -17,11 +17,11 @@
       crossorigin="anonymous">   
     </script>
     <style>
-    	table{
-    		border:5px solid white;
-    		border-collapse: collapse;
-    		
-    	}
+       table{
+          border:5px solid white;
+          border-collapse: collapse;
+          
+       }
         .calendar{
             visibility: collapse;
         }
@@ -32,14 +32,14 @@
             cursor: pointer;
             border:1px solid #ccc;
             background-color:white;
-    		font-size:20px;
+          font-size:20px;
         }
         td>p{
-        	margin-bottom:0px;
-        	font-size:16px;
+           margin-bottom:0px;
+           font-size:16px;
         }
         th{
-        	width: 50px;
+           width: 50px;
             height: 50px;
             background-color:white;
             font-size:20px;
@@ -57,43 +57,43 @@
             color:skyblue;
         }
         .timebar{
-        	border:1px solid black;
-        	float:left;
-        	width: 50px;
-        	height: 50px;
+           border:1px solid black;
+           float:left;
+           width: 50px;
+           height: 50px;
         }
         #timetest{
-        	display :none;
+           display :none;
         }
         .movebtn{
-        	width:50px;
+           width:50px;
         }
         #resetDayBtn {
-		   height: 56px;
-		   width: 100%;
-		   border: none;
-		   outline: none;
-		   background: #f69b02;
-		   color: white;
-		}
-		#resetDayBtn:hover{
-			background: #183058;
-		}
-		.movebtn{
-			width: 100%;
-			height: 56px;
-		   border: none;
-		   outline: none;
-		   background: #f69b02;
-		   color: white;
-		   font-size:30px;
-		}
-		.movebtn:hover{
-			background: #183058;
-		}
+         height: 56px;
+         width: 100%;
+         border: none;
+         outline: none;
+         background: #f69b02;
+         color: white;
+      }
+      #resetDayBtn:hover{
+         background: #183058;
+      }
+      .movebtn{
+         width: 100%;
+         height: 56px;
+         border: none;
+         outline: none;
+         background: #f69b02;
+         color: white;
+         font-size:30px;
+      }
+      .movebtn:hover{
+         background: #183058;
+      }
     </style>
 
-	<table>
+   <table>
         <thead>
             <th><button class="movebtn" id="prevbtn"><</button></th>
             <th colspan="5"></th>
@@ -972,18 +972,18 @@
             async: false,
            success : function(data) {
               for(var i =0;i<data.length;i++){
-            	  if(data[i].reservationTime==null){
-            		inhibitrList.push(data[i].reservationDay);
-            		inhibitDay = inhibitDay.concat(inhibitrList[i].split(','));
-            	  }else{
-            		  inhibitrList.push(data[i].reservationDay);
-            		  preday = preday.concat(inhibitrList[i].split(','));
-            		  substrarr = data[i].reservationTime.split('/');
-            		  substrarr.pop();
-            		  console.log(substrarr);
-            		  
-            		  timeInhibitArray = timeInhibitArray.concat(substrarr);
-            	  }
+                 if(data[i].reservationTime==null){
+                  inhibitrList.push(data[i].reservationDay);
+                  inhibitDay = inhibitDay.concat(inhibitrList[i].split(','));
+                 }else{
+                    inhibitrList.push(data[i].reservationDay);
+                    preday = preday.concat(inhibitrList[i].split(','));
+                    substrarr = data[i].reservationTime.split('/');
+                    substrarr.pop();
+                    console.log(substrarr);
+                    
+                    timeInhibitArray = timeInhibitArray.concat(substrarr);
+                 }
               }
              
            },error : function(xhr, status, error) {
@@ -995,26 +995,26 @@
         var inhibitDOW = [-1,-1,-1,-1,-1,-1,-1]
         
         if(inhibitType[0]==1){
-        	inhibitDay = inhibitDay.concat(holiday);
+           inhibitDay = inhibitDay.concat(holiday);
         }else if(inhibitType[0]==2){
-        	for(var hIndex=1;hIndex<8;hIndex++){
-        		if(inhibitType[hIndex]==1){
-        			inhibitDOW[hIndex-1] = inhibitType[hIndex];
-        		}
-        	}
+           for(var hIndex=1;hIndex<8;hIndex++){
+              if(inhibitType[hIndex]==1){
+                 inhibitDOW[hIndex-1] = inhibitType[hIndex];
+              }
+           }
         }else if(inhibitType[0]==3){
-        	if(inhibitType[1]<10){
-        		prepareMonth = "0"+inhibitType[1];
-        	}else{
-        		prepareMonth =inhibitType[1]
-        	}
-        	if(inhibitType[2]<10){
-        		prepareDay = "0"+inhibitType[2];
-        	} else{
-        		prepareDay =inhibitType[2]
-        	}
-        	selectInhibitDay.push("2019"+prepareMonth+prepareDay);
-        	inhibitDay = inhibitDay.concat(selectInhibitDay);
+           if(inhibitType[1]<10){
+              prepareMonth = "0"+inhibitType[1];
+           }else{
+              prepareMonth =inhibitType[1]
+           }
+           if(inhibitType[2]<10){
+              prepareDay = "0"+inhibitType[2];
+           } else{
+              prepareDay =inhibitType[2]
+           }
+           selectInhibitDay.push("2019"+prepareMonth+prepareDay);
+           inhibitDay = inhibitDay.concat(selectInhibitDay);
         }
         console.log(inhibitDOW);
         //윤호 예약테이블완료되면 예약된날선택 불가 =>기간별만 inhibitDay에 들어감
@@ -1024,8 +1024,8 @@
         $('th').eq(1).text(year+"년 "+month+"월"); //지금 띄워진 달력이 몇년도 몇월인지
         var weeknum = 1;
         for(var i=1;i<monthEndDay[month-1]+1;i++){
-        	var price = "<fmt:formatNumber type='number' maxFractionDigits='3' value='${s.s_price1}' />";
-        	
+           var price = "<fmt:formatNumber type='number' maxFractionDigits='3' value='${s.s_price1}' />";
+           
             $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price); //해당 달의 끝날자만큼 for문이 돌아서 날짜를 td에 입력
             
             if(month==parseInt(sysday.getMonth()+1) && i<day){  //지금 이번달이 맞는지 또 입력되고 있는 날짜가 현재 날자보다 작은지 에따른 조건으로
@@ -1035,13 +1035,13 @@
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
             } //오늘 이전의 날들은 예약불가 처리 하는 로직
             for(var iDOW=0;iDOW<inhibitDOW.length;iDOW++){
-            	if(inhibitDOW[iDOW]==1 && $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).find('p').text()!=""){
-            		
-            		$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).css("background-color","#f7f7f7");
+               if(inhibitDOW[iDOW]==1 && $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).find('p').text()!=""){
+                  
+                  $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).css("background-color","#f7f7f7");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).css("cursor","not-allowed");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).addClass("inhibitDay");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).html("<p>"+i+"</p>");
-            	}
+               }
             }
             for(var k = 0; k<inhibitDay.length; k++){
                 if(year == parseInt(inhibitDay[k].substring(0,4)) && month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
@@ -1077,10 +1077,10 @@
             if(month>12){//다음 년도로 넘어갔을때
                 prevDOWY.push(prevDOWM); //저번달들의 첫날이 담긴 배열을 2차원배열의 요소로 저장
                 prevDOWM = new Array(12); //저번달의 첫날을 저장할 배열을 또 새로 생성
-                month=1;	//month 1월로 초기화
-                visibleMonth=month-1;	//표시될 tbody index를 0으로 초기화
+                month=1;   //month 1월로 초기화
+                visibleMonth=month-1;   //표시될 tbody index를 0으로 초기화
                 backyear = year;
-                year++;		//year 추가
+                year++;      //year 추가
                 yearIndex++;//저번달 첫날의 데이터가 남긴 2차원 배열용 인덱스
                 if(year==leapYear){//윤달용 로직
                     monthEndDay[1]=29;
@@ -1103,8 +1103,8 @@
             $('th').eq(1).text(year+"년 "+month+"월");
 
             for(var i=1;i<monthEndDay[month-1]+1;i++){
-            	var price = "<fmt:formatNumber type='number' maxFractionDigits='3' value='${s.s_price1}' />";
-            	
+               var price = "<fmt:formatNumber type='number' maxFractionDigits='3' value='${s.s_price1}' />";
+               
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
                 //기본 날짜 넣는 로직
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","white");
@@ -1126,13 +1126,13 @@
                     }
                 }//td체크하여 날짜가 들어가있지않은 td
                 for(var iDOW=0;iDOW<inhibitDOW.length;iDOW++){
-                	if(inhibitDOW[iDOW]==1 && $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).find('p').text()!=""){
-                		
-                		$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).css("background-color","#f7f7f7");
+                   if(inhibitDOW[iDOW]==1 && $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).find('p').text()!=""){
+                      
+                      $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).css("background-color","#f7f7f7");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).css("cursor","not-allowed");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).addClass("inhibitDay");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).html("<p>"+i+"</p>");
-                	}
+                   }
                 }
                 for(var k = 0; k<inhibitDay.length; k++){
                     if(year == parseInt(inhibitDay[k].substring(0,4)) && month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
@@ -1143,10 +1143,10 @@
                     }
                 }//예약불가 날짜 처리 로직
                 if(array.length>0){
-                	for(var k2=0; k2<array.length; k2++){
-                    	if(year == parseInt(array[k2].substring(0,4)) && month==parseInt(array[k2].substring(4,6)) && i==parseInt(array[k2].substring(6,8))){
-                    		$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f69b02");
-                    	}
+                   for(var k2=0; k2<array.length; k2++){
+                       if(year == parseInt(array[k2].substring(0,4)) && month==parseInt(array[k2].substring(4,6)) && i==parseInt(array[k2].substring(6,8))){
+                          $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f69b02");
+                       }
                     }
                 }
                 
@@ -1169,7 +1169,7 @@
         $('#prevbtn').click(function(){
             
             if(sysday.getFullYear()==year && (month-1)<sysday.getMonth()+1){
-            	emptyValue("지난 예약은 불가능합니다.")
+               emptyValue("지난 예약은 불가능합니다.")
                 return;
             } //지난 날짜 예약 불가
             
@@ -1199,8 +1199,8 @@
            
             $('th').eq(1).text(year+"년 "+month+"월");
             for(var i=1;i<monthEndDay[month-1]+1;i++){
-            	var price = "<fmt:formatNumber type='number' maxFractionDigits='3' value='${s.s_price1}' />";
-            	
+               var price = "<fmt:formatNumber type='number' maxFractionDigits='3' value='${s.s_price1}' />";
+               
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
                 
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","white");
@@ -1222,13 +1222,13 @@
                     }
                 }
                 for(var iDOW=0;iDOW<inhibitDOW.length;iDOW++){
-                	if(inhibitDOW[iDOW]==1 && $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).find('p').text()!=""){
-                		
-                		$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).css("background-color","#f7f7f7");
+                   if(inhibitDOW[iDOW]==1 && $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).find('p').text()!=""){
+                      
+                      $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).css("background-color","#f7f7f7");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).css("cursor","not-allowed");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).addClass("inhibitDay");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).html("<p>"+i+"</p>");
-                	}
+                   }
                 }
                 for(var k = 0; k<inhibitDay.length; k++){
                     if(year == parseInt(inhibitDay[k].substring(0,4)) && month==parseInt(inhibitDay[k].substring(4,6)) && i==parseInt(inhibitDay[k].substring(6,8))){
@@ -1239,10 +1239,10 @@
                     }
                 }
                 if(array.length>0){
-                	for(var k2=0; k2<array.length; k2++){
-                    	if(year == parseInt(array[k2].substring(0,4)) && month==parseInt(array[k2].substring(4,6)) && i==parseInt(array[k2].substring(6,8))){
-                    		$(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f69b02");
-                    	}
+                   for(var k2=0; k2<array.length; k2++){
+                       if(year == parseInt(array[k2].substring(0,4)) && month==parseInt(array[k2].substring(4,6)) && i==parseInt(array[k2].substring(6,8))){
+                          $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f69b02");
+                       }
                     }
                 }
                 if(i==monthEndDay[month-1]){
@@ -1263,8 +1263,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         $('td').not('td.inhibitDay').click(function(){
-        	if(btnVal==1 && $(this).find('p').text() != ""){ //기간별 선택 됐을때
-        		//위의 인풋타입으로 들어온조건 수정해야함 수정용 마커
+           if(btnVal==1 && $(this).find('p').text() != ""){ //기간별 선택 됐을때
+              //위의 인풋타입으로 들어온조건 수정해야함 수정용 마커
                 if($(this).hasClass("inhibitDay") === false && count==0){ //예약 불가 날짜는 제외
                     $('td').not('td.inhibitDay').css("background-color","white");
                     $('td').removeClass("selectDay");
@@ -1297,24 +1297,24 @@
                     //예약 종료 날짜 출력
                     $('.endDay').text("-");
                     if(startDay<endDay){
-                    	$('.endDay').text("~ "+year+"."+month+"."+$(this).find('p').text()+"일");	
+                       $('.endDay').text("~ "+year+"."+month+"."+$(this).find('p').text()+"일");   
                     }else{
-                    	var changeStr = $('.startDay').eq(0).text();
-                    	$('.startDay').text("");
-                    	$('.endDay').text("~ "+changeStr);
-                    	$('.startDay').text(year+"."+month+"."+$(this).find('p').text()+"일");
-                    	
+                       var changeStr = $('.startDay').eq(0).text();
+                       $('.startDay').text("");
+                       $('.endDay').text("~ "+changeStr);
+                       $('.startDay').text(year+"."+month+"."+$(this).find('p').text()+"일");
+                       
                     }
    
                 }
                 
                 if($("td").eq(endDay).hasClass("selectDay") === true && count==0){//마지막날이 클릭 됐을때 
-                	if(startDay<endDay){
-                		for(var i =startDay; i<endDay;i++){
-                   	     
+                   if(startDay<endDay){
+                      for(var i =startDay; i<endDay;i++){
+                           
                             if($("td").eq(i).hasClass("inhibitDay") === false && $('td').eq(i).find('p').text()!=""){
-                            	if(during==30){
-                            		console.log(during);
+                               if(during==30){
+                                  console.log(during);
                                     resetfn();
                                     return;
                                 }
@@ -1324,11 +1324,11 @@
                                 console.log(during);
                             }
                         }
-                	}else{
-                		for(var i =endDay; i<startDay;i++){    
+                   }else{
+                      for(var i =endDay; i<startDay;i++){    
                             if($("td").eq(i).hasClass("inhibitDay") === false && $('td').eq(i).find('p').text()!=""){
-                            	if(during==30){
-                            		console.log(during);
+                               if(during==30){
+                                  console.log(during);
                                     resetfn();
                                     return;
                                 }
@@ -1340,7 +1340,7 @@
                                 console.log(during);
                             }
                         }//for가 두개인 이유는 날짜 거꾸로 선택 가능 하게 하기위해서
-                	}
+                   }
 
                     
                     createSelectDay();
@@ -1353,18 +1353,18 @@
                     totalPrice += ((during*'${s.s_price1}')*1);
                     $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }              
-        	} else if(btnVal==2 && $(this).find('p').text() != ""){
+           } else if(btnVal==2 && $(this).find('p').text() != ""){
                 if($(this).hasClass("inhibitDay") === false && count==0){
                     $('td').not('td.inhibitDay').css("background-color","white");
                     $('td').removeClass("selectDay");
                     startDay = $('td').index(this);
-                   	$(this).css("background-color","#f69b02");
+                      $(this).css("background-color","#f69b02");
                     $(this).addClass("selectDay");
                     var strMonth1 = month.toString();
-	                if(strMonth1.length<2){
-	                    strMonth1="0"+strMonth1;
-	                }
-	                if($('td').eq(startDay).find('p').text().length<2){
+                   if(strMonth1.length<2){
+                       strMonth1="0"+strMonth1;
+                   }
+                   if($('td').eq(startDay).find('p').text().length<2){
                         strDay = "0"+$('td').eq(startDay).find('p').text();
                     }else { 
                         strDay = $('td').eq(startDay).find('p').text();
@@ -1374,31 +1374,31 @@
                     //예약 시작 날짜 출력, 추가
                     $('.startDay').text(year+"."+month+"."+$(this).find('p').text()+"일");
                 }
-        		
+              
                 if($("td").eq(startDay).hasClass("selectDay") === true && count==1){
-					//마커 
-					//여기 윤호랑 맞춰서 아이디 클래스 변수명 변경 해야함
-					$('#reservation_time').slideDown(500);
-					var test12 = "000001111100000111111111";
-					var dbDay='20190531';
-					
-					if(dbDay==strOneDay){
-						for(var i=0;i<$('.swiper-slide').length;i++){
-							if(test12.charAt(i)==1){
-							$('.swiper-slide').eq(i).children().css('background','#f69b02');
-							$('.swiper-slide').eq(i).children().css('color','white');//css변경구문으로 교체하면 됨.
-							}
-						}
-					}
-					$('.selDay').text(strOneDay);
-					count=0;
+               //마커 
+               //여기 윤호랑 맞춰서 아이디 클래스 변수명 변경 해야함
+               $('#reservation_time').slideDown(500);
+               var test12 = "000001111100000111111111";
+               var dbDay='20190531';
+               
+               if(dbDay==strOneDay){
+                  for(var i=0;i<$('.swiper-slide').length;i++){
+                     if(test12.charAt(i)==1){
+                     $('.swiper-slide').eq(i).children().css('background','#f69b02');
+                     $('.swiper-slide').eq(i).children().css('color','white');//css변경구문으로 교체하면 됨.
+                     }
+                  }
+               }
+               $('.selDay').text(strOneDay);
+               count=0;
                 }
                 console.log(strOneDay);
-        	} else if(btnVal==3 && $(this).find('p').text() != ""){
-        		if(array.length==7){
-        			emptyValue("원하는 날짜는 7일까지 선택가능합니다.");
-        			//추가
-        			$('.price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+           } else if(btnVal==3 && $(this).find('p').text() != ""){
+              if(array.length==7){
+                 emptyValue("원하는 날짜는 7일까지 선택가능합니다.");
+                 //추가
+                 $('.price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('.endDay').text("-");
                     $('.hapDay').text("");
                     $('.startDay').text("");
@@ -1411,31 +1411,31 @@
                     $('#showDay').html("");
                     $('.price_day').text("");
                     $('.selTime2').text("");
-        			$('td').not('td.inhibitDay').css("background-color","white");
-       	            during = 0;
-       	            $('#duringSpan').text(during);
-       	            multiSelectCount = 0;
-       	            array=new Array();
-       	            for(var i = 0; i<$('td').not('td.inhibitDay').length;i++){
-       	            	if($('td').not('td.inhibitDay').eq(i).attr("class")=="selectDay"){
-       	            		$('td').not('td.inhibitDay').eq(i).removeClass("selectDay")
-       	            	}
-       	            }
-       	         $('#rMenu_time').css('display','block');
+                 $('td').not('td.inhibitDay').css("background-color","white");
+                      during = 0;
+                      $('#duringSpan').text(during);
+                      multiSelectCount = 0;
+                      array=new Array();
+                      for(var i = 0; i<$('td').not('td.inhibitDay').length;i++){
+                         if($('td').not('td.inhibitDay').eq(i).attr("class")=="selectDay"){
+                            $('td').not('td.inhibitDay').eq(i).removeClass("selectDay")
+                         }
+                      }
+                   $('#rMenu_time').css('display','block');
                  $('.rM_time').css('display','none');
                  $('.swiper-slide button').attr('disabled','false');
-        			return;
-        		}
-        		if($(this).hasClass("inhibitDay") === false && $(this).attr("class") != "selectDay"){
+                 return;
+              }
+              if($(this).hasClass("inhibitDay") === false && $(this).attr("class") != "selectDay"){
                     //선택된 날짜 초기화 
                     startDay = $('td').index(this);
-                   	$(this).css("background-color","#f69b02");
+                      $(this).css("background-color","#f69b02");
                     $(this).addClass("selectDay");
                     var strMonth1 = month.toString();
-	                if(strMonth1.length<2){
-	                    strMonth1="0"+strMonth1;
-	                }
-	                if($('td').eq(startDay).find('p').text().length<2){
+                   if(strMonth1.length<2){
+                       strMonth1="0"+strMonth1;
+                   }
+                   if($('td').eq(startDay).find('p').text().length<2){
                         strDay = "0"+$('td').eq(startDay).find('p').text();
                     }else { 
                         strDay = $('td').eq(startDay).find('p').text();
@@ -1445,41 +1445,82 @@
                    //추가
                     $('.hapDay').html("총 "+array.length+"일");
                 } else if($(this).hasClass("inhibitDay") === false && $(this).attr("class") == "selectDay"){
-                	$(this).css("background-color","white");
+                   $(this).css("background-color","white");
                     $(this).removeClass("selectDay");
                     startDay = $('td').index(this);
                     var strMonth1 = month.toString();
-	                if(strMonth1.length<2){
-	                    strMonth1="0"+strMonth1;
-	                }
-	                if($('td').eq(startDay).find('p').text().length<2){
+                   if(strMonth1.length<2){
+                       strMonth1="0"+strMonth1;
+                   }
+                   if($('td').eq(startDay).find('p').text().length<2){
                         strDay = "0"+$('td').eq(startDay).find('p').text();
                     }else { 
                         strDay = $('td').eq(startDay).find('p').text();
                     }
                     strOneDay = year+strMonth1+strDay;
                     const idx = array.indexOf(strOneDay); 
-                    if (idx > -1) array.splice(idx, 1)
+                    if (idx > -1) {
+                    	array.splice(idx, 1);
+                    	priceTimeArr.splice(idx,1);
+                        sendTimeArray.splice(idx,1);
+                        selTimeArr.splice(idx,1);
+                        console.log(array);
+                        console.log(priceTimeArr);
+                        console.log(sendTimeArray);
+                        console.log(selTimeArr);
+                    }
+                    $('.hapDay').html("총 "+array.length+"일");
+                    $('.price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('input[name=reservationTime]').val(arrayTime);
+                    
+                    $('.selTime2').html("");
+                    for(var IItime=0; IItime<selTimeArr.length; IItime++){
+             				$('.selTime2').html($('.selTime2').html()+String(array[IItime]).substring(0,4)+"년 "+String(array[IItime]).substring(4,6)+"월 "+String(array[IItime]).substring(6,8)+"일, "+String(selTimeArr[IItime]).replace("undefined","")+"<br>");
+             			}
+                    totalTime = 0;
+                    totalPrice = 0;
+                    for(var IIII=0; IIII<priceTimeArr.length; IIII++){
+                    	if(priceTimeArr[IIII]!=null){
+                    		totalTime += priceTimeArr[IIII];
+                        	  totalPrice += priceTimeArr[IIII]*'${s.s_price1}';
+                    	}
+                  	  
+                    }
+                    $('#rMenu_time').css('display','none');
+                    $('.rM_time').css('display','block');
+                  	$('.price_time').html("총 "+totalTime+'시간 x '+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" />');
+                  	$('.totalTime').html("총 "+totalTime+'시간');
+                  	$('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                  	if(array.length==0){
+                  	  selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+                        sendTimeArray = new Array(10);
+                        selTimeArr = new Array(); 
+                        priceTimeArr = new Array(); 
+                        console.log(array);
+                        console.log(priceTimeArr);
+                        console.log(sendTimeArray);
+                        console.log(selTimeArr);
+                    }
                 }
-        		array.sort();
-        		
-        		$('#choiceDay').html("");
-        		$('#showDay').html("날짜선택");
-        		for(appendCount = 0; appendCount<array.length;appendCount++){
-        			$('#choiceDay').append("<button onclick='selectTimeBtnfn(this);' class='selectTimeBtn'>"+array[appendCount]+"</button>&nbsp;&nbsp;");
-        		}
-        		
+              array.sort();
+              
+              $('#choiceDay').html("");
+              $('#showDay').html("날짜선택");
+              for(appendCount = 0; appendCount<array.length;appendCount++){
+                 $('#choiceDay').append("<button onclick='selectTimeBtnfn(this);' class='selectTimeBtn'>"+array[appendCount]+"</button>&nbsp;&nbsp;");
+              }
+              
             }
-        	
+           
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //날짜 클릭 이벤트 로직 종료
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        resetfn = sample;	
+        resetfn = sample;   
         function sample(){
-        	console.log("리셋펑션 확인용"+during);
-        	if(startMonth>endMonth){
-            	$('.endDay').text("-");
+           console.log("리셋펑션 확인용"+during);
+           if(startMonth>endMonth){
+               $('.endDay').text("-");
                 $('.hapDay').text("");
                 $('.startDay').text("");
                 emptyValue("이전 날짜부터 선택해주십시오.")
@@ -1487,15 +1528,15 @@
                 during=0;
                 return;
             }
-        	emptyValue("예약일은 30일을 초과할수 없습니다.")
+           emptyValue("예약일은 30일을 초과할수 없습니다.")
             $('.endDay').text("-");
             $('.hapDay').text("");
             $('.startDay').text("");
             $('td').not('td.inhibitDay').css("background-color","white");
             for(var i = 0; i<$('td').not('td.inhibitDay').length;i++){
-            	if($('td').not('td.inhibitDay').eq(i).attr("class")=="selectDay"){
-            		$('td').not('td.inhibitDay').eq(i).removeClass("selectDay")
-            	}
+               if($('td').not('td.inhibitDay').eq(i).attr("class")=="selectDay"){
+                  $('td').not('td.inhibitDay').eq(i).removeClass("selectDay")
+               }
             }
             during = 0;
             $('#duringSpan').text(during);
@@ -1505,16 +1546,16 @@
 //30일 이상 선태 불가 메소드 종료
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////  
         $('#resetDayBtn').click(function(){
-        	totalPrice -= ((during*'${s.s_price1}')*1);
+           totalPrice -= ((during*'${s.s_price1}')*1);
             $('td').not('td.inhibitDay').css("background-color","white");
             during = 0;
             $('#duringSpan').text(during);
             multiSelectCount = 0;
             array=new Array();
             for(var i = 0; i<$('td').not('td.inhibitDay').length;i++){
-            	if($('td').not('td.inhibitDay').eq(i).attr("class")=="selectDay"){
-            		$('td').not('td.inhibitDay').eq(i).removeClass("selectDay")
-            	}
+               if($('td').not('td.inhibitDay').eq(i).attr("class")=="selectDay"){
+                  $('td').not('td.inhibitDay').eq(i).removeClass("selectDay")
+               }
             }
             $('.price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('.endDay').text("-");
@@ -1535,94 +1576,94 @@
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //선택된 날짜 길이 확인용 메소드
-		createSelectDay = function(){
-	console.log("크리에이트 확인용"+during);
-	            if(startMonth>endMonth){
-	            	$('.endDay').text("-");
-	                $('.hapDay').text("");
-	                $('.startDay').text("");
-	                emptyValue("이전 날짜부터 선택해주십시오.")
-	                $('td').not('td.inhibitDay').css("background-color","white");
-	                during=0;
-	                return ;
-	            }
-	            if(startMonth!=endMonth || startYear!=endYear){
-	                array = new Array();
-	                var prepareEndDay = monthEndDay[startMonth-1];
-	                for(var k = inhibitDay.length-1; k>=0; k--){
-	                    if(startMonth==parseInt(inhibitDay[k].substring(4,6)) && prepareEndDay==parseInt(inhibitDay[k].substring(6,8))){
-	                        prepareEndDay--;
-	                    }
-	                }
-	                var strMonth1 = startMonth.toString();
-	                var strMonth2 = endMonth.toString();
-	                var strDay = "";
-	                if(strMonth1.length<2){
-	                    strMonth1="0"+strMonth1;
-	                }
-	                if(strMonth2.length<2){
-	                    strMonth2="0"+strMonth2;
-	                }
-	                var i = 0;
-	                
-	                while(true){
-	                    if($('.selectDay').eq(i).find('p').text().length<2){
-	                        strDay = "0"+$('.selectDay').eq(i).find('p').text();
-	                    }else { 
-	                        strDay = $('.selectDay').eq(i).find('p').text();
-	                    }
-	                    
-	                    array[i] = year+strMonth1+strDay;
-	                    if(($('.selectDay').eq(i).find('p').text())==prepareEndDay){
-	                        i++;
-	                        break;
-	                    }
-	                    i++;
-	                }
-	                while(true){
-	                    if($('.selectDay').eq(i).find('p').text().length<2){
-	                        strDay = "0"+$('.selectDay').eq(i).find('p').text();
-	                    }else { 
-	                        strDay = $('.selectDay').eq(i).find('p').text();
-	                    }
-	                    
-	                    array[i] = year+strMonth2+strDay;
-	                    if(($('.selectDay').eq(i).find('p').text())==clickEndDay){
-	                        break;
-	                    }
-	                    i++;
-	                }
-	             
-	            }else{
-	                array = new Array();
-	                var strMonth = month.toString()
-	                var strDay = "";
-	                if(strMonth.length<2){
-	                    strMonth="0"+strMonth;
-	                }
-	
-	                console.log("어레이길이:"+$('.selectDay').length);
-	                for(var i =0;i<$('.selectDay').length;i++){
-	                    if($('.selectDay').eq(i).find('p').text().length<2){
-	                        strDay = "0"+$('.selectDay').eq(i).find('p').text();
-	                    }else { 
-	                        strDay = $('.selectDay').eq(i).find('p').text();
-	                    }
-	                    array[i] = year+strMonth+strDay;
-	                }
-	            }
-	            
-	            arrayStr="";
-	            for(var arrI=0;arrI<array.length;arrI++){
-	            	arrayStr += array[arrI];
-	            	if(arrI<array.length-1){
-	            		arrayStr += ",";
-	            	}
-	            }
-	            console.log("날짜스트링"+arrayStr);
-	            $('input[name=reservationDay]').val(arrayStr);
-	            
-		}
+      createSelectDay = function(){
+   console.log("크리에이트 확인용"+during);
+               if(startMonth>endMonth){
+                  $('.endDay').text("-");
+                   $('.hapDay').text("");
+                   $('.startDay').text("");
+                   emptyValue("이전 날짜부터 선택해주십시오.")
+                   $('td').not('td.inhibitDay').css("background-color","white");
+                   during=0;
+                   return ;
+               }
+               if(startMonth!=endMonth || startYear!=endYear){
+                   array = new Array();
+                   var prepareEndDay = monthEndDay[startMonth-1];
+                   for(var k = inhibitDay.length-1; k>=0; k--){
+                       if(startMonth==parseInt(inhibitDay[k].substring(4,6)) && prepareEndDay==parseInt(inhibitDay[k].substring(6,8))){
+                           prepareEndDay--;
+                       }
+                   }
+                   var strMonth1 = startMonth.toString();
+                   var strMonth2 = endMonth.toString();
+                   var strDay = "";
+                   if(strMonth1.length<2){
+                       strMonth1="0"+strMonth1;
+                   }
+                   if(strMonth2.length<2){
+                       strMonth2="0"+strMonth2;
+                   }
+                   var i = 0;
+                   
+                   while(true){
+                       if($('.selectDay').eq(i).find('p').text().length<2){
+                           strDay = "0"+$('.selectDay').eq(i).find('p').text();
+                       }else { 
+                           strDay = $('.selectDay').eq(i).find('p').text();
+                       }
+                       
+                       array[i] = year+strMonth1+strDay;
+                       if(($('.selectDay').eq(i).find('p').text())==prepareEndDay){
+                           i++;
+                           break;
+                       }
+                       i++;
+                   }
+                   while(true){
+                       if($('.selectDay').eq(i).find('p').text().length<2){
+                           strDay = "0"+$('.selectDay').eq(i).find('p').text();
+                       }else { 
+                           strDay = $('.selectDay').eq(i).find('p').text();
+                       }
+                       
+                       array[i] = year+strMonth2+strDay;
+                       if(($('.selectDay').eq(i).find('p').text())==clickEndDay){
+                           break;
+                       }
+                       i++;
+                   }
+                
+               }else{
+                   array = new Array();
+                   var strMonth = month.toString()
+                   var strDay = "";
+                   if(strMonth.length<2){
+                       strMonth="0"+strMonth;
+                   }
+   
+                   console.log("어레이길이:"+$('.selectDay').length);
+                   for(var i =0;i<$('.selectDay').length;i++){
+                       if($('.selectDay').eq(i).find('p').text().length<2){
+                           strDay = "0"+$('.selectDay').eq(i).find('p').text();
+                       }else { 
+                           strDay = $('.selectDay').eq(i).find('p').text();
+                       }
+                       array[i] = year+strMonth+strDay;
+                   }
+               }
+               
+               arrayStr="";
+               for(var arrI=0;arrI<array.length;arrI++){
+                  arrayStr += array[arrI];
+                  if(arrI<array.length-1){
+                     arrayStr += ",";
+                  }
+               }
+               console.log("날짜스트링"+arrayStr);
+               $('input[name=reservationDay]').val(arrayStr);
+               
+      }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //선택된 예약 날짜 배열에 저장하는 로직 종료
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1647,15 +1688,16 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //기간선택하는 버튼 밸류값 지정메소드
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		$('.daySelBtn').click(function(){
-			btnVal = $(this).val();
-			$('td').not('td.inhibitDay').css("background-color","white");
+      $('.daySelBtn').click(function(){
+         btnVal = $(this).val();
+         $('td').not('td.inhibitDay').css("background-color","white");
             $('td').removeClass("selectDay");
             array = new Array();
-		});
-		$('#testbtn11').click(function(){
-			$('td.selectDay').addClass('testclass');
-			console.log($('.testclass').length);
-		}); //예약테이블 완성되면 예약된 날짜에다가 클래스 하나 새로 준다음 그 클래스 인애들은 
+      });
+      $('#testbtn11').click(function(){
+         $('td.selectDay').addClass('testclass');
+         console.log($('.testclass').length);
+      }); //예약테이블 완성되면 예약된 날짜에다가 클래스 하나 새로 준다음 그 클래스 인애들은 
     });
+    ///커밋
     </script>
