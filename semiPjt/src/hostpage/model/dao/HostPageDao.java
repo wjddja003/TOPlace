@@ -321,7 +321,7 @@ public class HostPageDao {
 		ArrayList<QaComment> list = null; 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select ROWNUM as rnum, m.* from (select * from qa_COMMENT where qa_ref in (select s_no from place where s_hostNum=?))m) where rnum between ? and ?";
+		String query = "select * from (select ROWNUM as rnum, m.* from (select * from qa_COMMENT where qa_ref in (select s_no from place where s_hostNum=?))m where qa_comment_ref is null) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, shostNum);
@@ -336,7 +336,7 @@ public class HostPageDao {
 				q.setQaCommentContent(rset.getString("qa_COMMENT_CONTENT"));
 				q.setQaRef(rset.getInt("qa_REF"));
 				q.setQaCommentDate(rset.getDate("qa_COMMENT_DATE"));
-				
+				q.setQaCommentRef(rset.getInt("qa_comment_ref"));
 				list.add(q);
 			}
 		} catch (SQLException e) {
