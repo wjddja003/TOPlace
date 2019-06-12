@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .intro_content{
-    background: url(../img/background_test.jpg) no-repeat center center;
+    background: url(../img/intro_header.jpg) no-repeat center center;
     background-size: cover;
     width: 100%;
     height: 500px;
@@ -29,6 +29,9 @@
     padding-top: 30px;
     width: 250px;
     height: 150px;
+}
+.intro_info{
+    margin-top: 40px;
 }
 .intro_info img{
     width: 1160px;
@@ -74,7 +77,6 @@
     font-size: 22px;
     line-height: 52px;
     margin-bottom: 50px;
-    color: #f69b02;
     font-weight: normal;
 }
 .intro_btns{
@@ -106,6 +108,7 @@
 .intro_list h3{
 	margin-top: 10px;
 	font-weight: bold;
+    color: #f69b02;
 }
 .desc{
 	color: #656565;
