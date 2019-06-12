@@ -897,12 +897,15 @@
         var sysday = new Date();         
         //오늘날짜 객체로 받아오기
         var year = sysday.getFullYear(); 
+        var yearToday = sysday.getFullYear(); 
         //년도 받기
         var backyear = sysday.getFullYear();
         //뒤로예약 처리용 년도 변수
         var month = sysday.getMonth()+1; 
+        var monthToday = sysday.getMonth()+1;
         //월 받기
-        var day = sysday.getDate();      
+        var day = sysday.getDate();   
+        var dayToday = sysday.getDate();  
         //날 받기
         var strOneDay = year+"-"+month+"-1"; 
         //스트링값으로 오늘이 포함된 달의 1일
@@ -981,8 +984,14 @@
                     substrarr = data[i].reservationTime.split('/');
                     substrarr.pop();
                     console.log(substrarr);
-                    
                     timeInhibitArray = timeInhibitArray.concat(substrarr);
+                    console.log(timeInhibitArray);
+                    for(var i0 = 0; i0<preday; i0++){
+                       if(timeInhibitArray[i0]=="111111111111111111111111"){
+                           inhibitDay.push(preday[i0].reservation)
+                        }
+                    }
+                    
                  }
               }
              
@@ -1027,12 +1036,22 @@
            var price = "<fmt:formatNumber type='number' maxFractionDigits='3' value='${s.s_price1}' />";
            
             $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price); //해당 달의 끝날자만큼 for문이 돌아서 날짜를 td에 입력
-            
-            if(month==parseInt(sysday.getMonth()+1) && i<day){  //지금 이번달이 맞는지 또 입력되고 있는 날짜가 현재 날자보다 작은지 에따른 조건으로
-                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f7f7f7");
-                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
-                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
-                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
+            if(i==dayToday){
+               $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
+            }
+            if(month==parseInt(sysday.getMonth()+1) && i<=day){  //지금 이번달이 맞는지 또 입력되고 있는 날짜가 현재 날자보다 작은지 에따른 조건으로
+               if(i==dayToday){
+                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
+                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
+                }else{
+                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f7f7f7");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
+                }
+                
             } //오늘 이전의 날들은 예약불가 처리 하는 로직
             for(var iDOW=0;iDOW<inhibitDOW.length;iDOW++){
                if(inhibitDOW[iDOW]==1 && $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(iDOW).find('p').text()!=""){
@@ -1202,16 +1221,25 @@
                var price = "<fmt:formatNumber type='number' maxFractionDigits='3' value='${s.s_price1}' />";
                
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
-                
+                if(month==monthToday && i==dayToday){
+                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
+                }
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","white");
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","pointer");
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).removeClass("inhibitDay");
                 
-                if(month==parseInt(sysday.getMonth()+1) && i<day && year==sysday.getFullYear()){
-                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f7f7f7");
-                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
-                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
-                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
+                if(month==parseInt(sysday.getMonth()+1) && i<=day && year==sysday.getFullYear()){
+                   if(i==dayToday){
+                       $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
+                       $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
+                        $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                        $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
+                    }else{
+                       $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f7f7f7");
+                        $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
+                        $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
+                        $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
+                    }
                 }    
                 
                 for(var i2 = 0; i2<$(".calendar").eq(visibleMonth).find('td').length; i2++) {
@@ -1271,14 +1299,19 @@
                     totalPrice -= ((during*'${s.s_price1}')*1);
                     $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     //선택된 날짜 초기화 
-                    startDay = $('td').index(this);
-                    //선택된 날짜의 td index 가져오기
-                    $(this).css("background-color","#f69b02");
-                    $(this).addClass("selectDay");
-                    //선택된 날짜 css 변경 및 클래스 생성
                     startMonth = month;
                     startYear = year;
                     //선택된 날짜 스트링 변수로 바꿔서 배열에 넣기 위한 조건변수들
+                    
+                    startDay = $('td').index(this);
+                    //선택된 날짜의 td index 가져오기
+                   
+                       $(this).css("background-color","#f69b02");
+                     $(this).addClass("selectDay");
+                   
+                    
+                    //선택된 날짜 css 변경 및 클래스 생성
+                    
                     count=1;
                     //예약 시작 날짜 출력
                     $('.endDay').text("");
@@ -1318,6 +1351,7 @@
                                     resetfn();
                                     return;
                                 }
+                               
                                 $('td').eq(i).css("background-color","#f69b02");
                                 $('td').eq(i).addClass("selectDay");
                                 during=$('.selectDay').length;
@@ -1460,10 +1494,11 @@
                     strOneDay = year+strMonth1+strDay;
                     const idx = array.indexOf(strOneDay); 
                     if (idx > -1) {
-                    	array.splice(idx, 1);
-                    	priceTimeArr.splice(idx,1);
+                       array.splice(idx, 1);
+                       priceTimeArr.splice(idx,1);
                         sendTimeArray.splice(idx,1);
                         selTimeArr.splice(idx,1);
+                        $('#choiceDay').find('button').eq(idx).remove();
                         console.log(array);
                         console.log(priceTimeArr);
                         console.log(sendTimeArray);
@@ -1475,31 +1510,28 @@
                     
                     $('.selTime2').html("");
                     for(var IItime=0; IItime<selTimeArr.length; IItime++){
-             				$('.selTime2').html($('.selTime2').html()+String(array[IItime]).substring(0,4)+"년 "+String(array[IItime]).substring(4,6)+"월 "+String(array[IItime]).substring(6,8)+"일, "+String(selTimeArr[IItime]).replace("undefined","")+"<br>");
-             			}
+                         $('.selTime2').html($('.selTime2').html()+String(array[IItime]).substring(0,4)+"년 "+String(array[IItime]).substring(4,6)+"월 "+String(array[IItime]).substring(6,8)+"일, "+String(selTimeArr[IItime]).replace("undefined","")+"<br>");
+                      }
                     totalTime = 0;
                     totalPrice = 0;
                     for(var IIII=0; IIII<priceTimeArr.length; IIII++){
-                    	if(priceTimeArr[IIII]!=null){
-                    		totalTime += priceTimeArr[IIII];
-                        	  totalPrice += priceTimeArr[IIII]*'${s.s_price1}';
-                    	}
-                  	  
+                       if(priceTimeArr[IIII]!=null){
+                          totalTime += priceTimeArr[IIII];
+                             totalPrice += priceTimeArr[IIII]*'${s.s_price1}';
+                       }
+                       
                     }
                     $('#rMenu_time').css('display','none');
                     $('.rM_time').css('display','block');
-                  	$('.price_time').html("총 "+totalTime+'시간 x '+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" />');
-                  	$('.totalTime').html("총 "+totalTime+'시간');
-                  	$('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                  	if(array.length==0){
-                  	  selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+                     $('.price_time').html("총 "+totalTime+'시간 x '+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" />');
+                     $('.totalTime').html("총 "+totalTime+'시간');
+                     $('.price').html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                     if(array.length==0){
+                       selTimeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                         sendTimeArray = new Array(10);
                         selTimeArr = new Array(); 
                         priceTimeArr = new Array(); 
-                        console.log(array);
-                        console.log(priceTimeArr);
-                        console.log(sendTimeArray);
-                        console.log(selTimeArr);
+                        
                     }
                 }
               array.sort();

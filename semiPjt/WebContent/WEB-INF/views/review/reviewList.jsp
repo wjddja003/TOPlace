@@ -57,7 +57,7 @@
         margin: 20px 0 0 20px;
         border: 1px solid #e2e2e2;
         width: 300px;
-        height: 150px;
+        height: 200px;
         overflow: hidden;
         position: relative;
         text-align: center;
@@ -83,6 +83,13 @@
     .rdate{
 		font-size: 13px;
 	}
+	.rv_text{
+		resize: none;
+		width: 100%;
+		height:120px;
+		border:none;
+		float: left;
+	}
 </style>
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -105,7 +112,7 @@
               
                     <div class="rv_no">
                     	<a style="color:#f69b02;font-size:14px;"> 공간명 : ${r.placeName }</a><br>
-                    	<a>${r.reviewTitle }</a><br>
+                    	<textarea class="rv_text" readonly="readonly">${r.reviewContent }</textarea><br>
                     	
                         <div class="Q_btn">
 	                        <a class="rdate" style="color:#605f5d">${r.reviewDate }</a><br>

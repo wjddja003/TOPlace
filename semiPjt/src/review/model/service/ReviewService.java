@@ -57,16 +57,14 @@ public class ReviewService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-	public ReviewPageData selectRList(int reqPage,String userId,int userNo) {
+	public ReviewPageData selectRList(int reqPage,String userId) {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 3;
 		int totalCount = new ReviewDao().totalRCount(conn,userId);
-		System.out.println(totalCount);
-		System.out.println(userId);
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
-		ArrayList<Review> list = new ReviewDao().selectRList(conn, start, end,userNo);
+		ArrayList<Review> list = new ReviewDao().selectRList(conn, start, end,userId);
 		String pageNavi = "";
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
