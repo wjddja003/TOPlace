@@ -82,6 +82,9 @@
         .table_toggle>tbody>tr:first-child>td{
             border-top: 2px solid #656565;
         }
+        .table_toggle tbody tr td{
+        	padding: 20px;
+        }
         .helpDeleteBtn{
         background: #fff;
         border: 1px solid #f69b02;
@@ -124,7 +127,7 @@
 	      position:fixed;
 	      z-index:99;
 	   }
-    }
+    .table
     
 </style>
 </head>

@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="user.model.vo.User" %>
-    <%@ page import="noticeSy.model.vo.Notice" %>
-    <% 
-    	 User u = (User)session.getAttribute("User");
-    %>
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>도움말 등록</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/common/header.jsp"/>
@@ -17,9 +13,9 @@
 		<div class="section_content" style="margin: 0 auto;">
 			<center>
 			<form action="/insertHelp" method="post" enctype="multipart/form-data">
-				<table class="table table-bordered" style="text-align:left;">
+				<table class="table" style="text-align:left;margin-top: 100px">
 					<tr>
-						<th colspan="2" style="font-size:20px;font-weight:bold">도움말</th>				
+						<th colspan="2" style="font-size:20px;background: #f69b02;color: white;text-align: center">도움말</th>				
 					</tr>
 					<tr>
 						<th>카테고리</th>
@@ -41,8 +37,8 @@
 					<tr>
 						<th>작성자</th>
 						<td>
-							<%=u.getUserId()%>
-							<input type="hidden" name="helpWriter" value="<%=u.getUserId()%>">
+							${sessionScope.User.userId }
+							<input type="hidden" name="helpWriter" value="${sessionScope.User.userId }">
 						</td>
 					</tr>
 					<tr>
@@ -59,7 +55,7 @@
 					</tr>
 					<tr style="text-align: center;">
 						<th colspan="2">
-							<button type="submit" class="btn btn-outline-primary">등록하기</button>
+							<button type="submit" class="btn btn-outline-primary"style="color: #f69b02;border-color: #f69b02">등록하기</button>
 						</th>
 					</tr>
 				</table>
@@ -67,6 +63,6 @@
 			</center>
 		</div>
 	</section>
-
+	<jsp:include page="/WEB-INF/common/footer.jsp"/>
 </body>
 </html>

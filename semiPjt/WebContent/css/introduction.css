@@ -1,8 +1,4 @@
 @charset "UTF-8";
-ul li{
-    list-style: none;
-    display: inline;
-}
 .intro_content{
     background: url(../img/background_test.jpg) no-repeat center center;
     background-size: cover;
@@ -78,6 +74,8 @@ ul li{
     font-size: 22px;
     line-height: 52px;
     margin-bottom: 50px;
+    color: #f69b02;
+    font-weight: normal;
 }
 .intro_btns{
     margin-top: 56px;
@@ -105,3 +103,19 @@ ul li{
     font-size: 20px;
     padding: 15px;
 }
+.intro_list h3{
+	margin-top: 10px;
+	font-weight: bold;
+}
+.desc{
+	color: #656565;
+	font-weight: normal;
+}
+.intro_list li{
+    list-style: none;
+    display: inline;
+}
+.btn_rounded_line:hover{
+	text-decoration: none;
+}
+

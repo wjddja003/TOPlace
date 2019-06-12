@@ -36,7 +36,7 @@ public class HelpWriteServlet extends HttpServlet {
 		if(session != null) {
 			String userId = ((User)session.getAttribute("User")).getUserId();
 			System.out.println(userId);
-			if(userId.equals("tndyd2")) {
+			if(userId.equals("admin")) {
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/help/helpWrite.jsp");
 				rd.forward(request, response);
 			}else {

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="/css/introduction.css">
+ <link rel="stylesheet" type="text/css" href="/css/introduction.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -32,17 +32,17 @@
                 </div>
             <ul class="intro_list">
                     <li class="intro1">
-                        <img src="../../img/444.JPG">
+                        <img src="../../img/icon3.png">
                         <h3 class="tit">간편한 공간예약</h3>
                         <p class="desc">시간, 일 단위로 공간을 예약해보세요.<br>검색부터 예약, 결제까지 한 번에 가능합니다.</p>
                     </li>
                     <li class="intro2">
-                        <img src="../../img/5555.JPG">
+                        <img src="../../img/icon1.png">
                         <h3 class="tit">맞춤형 공간추천</h3>
                         <p class="desc">시즌별로 공간을 추천해드려요.<br>매주 새로운 테마공간을 소개합니다.</p>
                     </li>
                     <li class="intro3">
-                        <img src="../../img/777.JPG">
+                        <img src="../../img/icon2.png">
                         <h3 class="tit">다양한 모임장소</h3>
                         <p class="desc">10가지 유형의 다양한 공간을 만나보세요.<br>새로운 라이프스타일을 경험할 수 있습니다.</p>
                     </li>
@@ -54,7 +54,7 @@
                     스페이스클라우드에서 공간을 예약해보세요.
                     <div class="intro_btns">
                         <span><a href="/" class="btn_rounded_line" >공간 찾아보기</a></span>
-                        <span><a href="http://partner.spacecloud.kr" class="btn_rounded_line">내 공간 등록하기</a></span>
+                        <span><a href="http://localhost/insertSpaceCheck" class="btn_rounded_line">내 공간 등록하기</a></span>
                     </div>
                 </div>
             </div>

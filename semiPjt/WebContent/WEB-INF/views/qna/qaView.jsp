@@ -102,9 +102,10 @@
        
    }
 .layer_popup_up {
+	border: 1px solid #e2e2e2;
       border-radius:10px;
       text-align: center;
-      background:#fff;
+      background:#f7f7f7;
        position: absolute;
        top: 30%;
        left: 45%;

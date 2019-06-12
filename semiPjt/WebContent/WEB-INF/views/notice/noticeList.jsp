@@ -65,6 +65,9 @@ prefix="c" %>
         .table_toggle>tbody>tr:first-child>td{
             border-top: 2px solid #656565;
         }
+          .table_toggle tbody tr td{
+        	padding: 20px;
+        }
     #nlist{
         background-color: #183058;
         color: #f7f7f7;
