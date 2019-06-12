@@ -5,282 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/css/qaview.css">
 <title>Insert title here</title>
 </head>
-<style>
-     #rq{
-         font-size: 18px;
-    	text-align: center;
-        margin: 30px 0 0 0;
-        width: 1000px;
-        height: 70px;
-        background: #e2e2e2;
-    }
-    
-    .review{
-      
-        color: #183058;
-        float: left;
-        width: 50%;
-        height: 70px;
-    }
-    .qa{
-        background-color: #f69b02;
-        color: #f7f7f7;
-        float: left;
-        width: 50%;
-         height: 70px;
-    }
-    #qa_view{
-        
-        margin: 0 auto;
-        width: 1000px;
-    }
-    .qa_v{
-       
-    }
-    .qa_no{
-        padding: 10px;
-        float: left;
-        margin: 20px 0 0 20px;
-        border: 1px solid #e2e2e2;
-        width: 300px;
-        height: 200px;
-        overflow: hidden;
-        position: relative;
-        text-align: center;
-    }
-    .Q_btn{
-        margin-left: 100px;
-        position: absolute;
-        bottom: 0;
-    }
-    .qa_navi{
-    	clear: both;
-    	text-align: center;
-    }
-    .reviewBtn{
-        background: #fff;
-        border: 1px solid #f69b02;
-        font-size: 12px;
-        margin: 0 0 5px 0;
-    }
-    #successBtn{
-      outline: none;
-      background:#f69b02;
-      border-radius: 10px;
-      width : 150px;
-      height: 50px;
-      border: 0px;
-      color : white;
-   }
-   #cencelBtn{
-      outline : none;
-      background:#183058;
-      width : 150px;
-      height: 50px;
-      border: 0px;
-      color : white;
-      border-radius: 10px;
-   }
-   .layer_popup {
-      border-radius:10px;
-      text-align: center;
-      background:#fff;
-       position: absolute;
-       top: 30%;
-       left: 45%;
-       display: block;
-       width: 500px;
-       z-index: 150;
-       margin-left: -145px;
-       
-   }
-.layer_popup_up {
-      border-radius:10px;
-      text-align: center;
-      background:#fff;
-       position: absolute;
-       top: 30%;
-       left: 45%;
-       display: block;
-       width: 500px;
-       z-index: 150;
-       margin-left: -145px;
-       
-   }
-   .pop_guide_txt{
-      font-size: 18px;
-   }
-   .accent{
-      color:#f69b02;
-   }
-   .qnaBtns{
-        width: 500px;
-        height: 50px;
-        line-height: 47px;
-   }
-   .qnaBtns a:hover{
-      text-decoration: none;
-      color: #183058;
-   }
-   .hostpopupMask{
-      top:0;
-      left:0;
-      z-index:99;
-      position: fixed;
-      width: 100%;
-      height: 1000px;
-      background-color: black;
-      opacity: 0.6;
-      display:none;
-   }
-   
-.pop_header{
-    padding: 10px 20px 0px 20px;
-    width: 100%;
-    height: 40px;
-    background-color: #183058;
-    border-radius: 10px 10px 0px 0px;
-    color: #fff;
-	}
-	.pop_header p{
-	    float: left;
-	}
-	.pop_header button{
-	    float: right;
-	    background: none;
-	    border: none;
-	    color: #fff;
-	}
-	.pop_container{
-	    clear: both;
-	    padding: 20px;
-	}
-	.box_l{
-	    float: left;
-	}
-	.box_r{
-	    float: right;
-	    width: 100px;
-	    display: inline;
-	}
-	.qna_input{
-	    clear:both;
-	}
-	#input_question{
-	    width: 460px;
-	    height: 200px;
-	    
-	}
-	#updateContent{
-	    width: 460px;
-	    height: 200px;
-	    
-	}
-	#textarea_input{
-	    float: left;
-	}
-	#textarea_update{
-	    float: left;
-	}
-	.qna_p p{
-	    color: red;
-	    font-size: 14px;
-	}
-	#qna_abtn{
-	    width: 100px;
-	    background: #f69b02;
-	    margin: 0 auto;
-	    height: 45px;
-	    border-radius: 15px;
-	}
-	#qna_updateBtn{
-	     width: 100px;
-	    background: #f69b02;
-	    margin: 0 auto;
-	    height: 45px;
-	    border-radius: 15px;
-	}
-	.qnaBtns{
-	     width: 100px;
-	    background: #f69b02;
-	    margin: 0 auto;
-	    height: 45px;
-	    border-radius: 15px;
-	    clear: both;
-	}
-	.poprollback{
-	    border: none;
-	    background: none;
-	    color: #fff;
-	    
-	}
-	#pagination-wrap{
-    min-width:20px;
-    margin-top:580px;
-    margin-left: auto; 
-    margin-right: auto;
-    height:15px;
-    position:relative;
-    text-align:center;
-}
 
-	#pagination-wrap ul {
-	    width:100%;
-	}
-	
-	#pagination-wrap ul li{
-	    margin: 0 4px;
-	    display: inline-block;
-	    width:5px;
-	    height:5px;
-	    border-radius:50%;
-	    background:#fff;
-	    opacity:0.5;
-	    position:relative;
-	    top:0;  
-	}
-	
-	#pagination-wrap ul li.active{
-	  width:12px;
-	  height:12px;
-	  top:3px;
-	  opacity:1;
-	  box-shadow:rgba(0,0,0,0.5) 1px 1px 0px; 
-	}
-	.comment a{
-		float: left;
-	}
-	.qdate{
-		font-size: 13px;
-	}
-	.text{
-		width: 100%;
-		height:120px;
-		border:none;
-		float: left;
-		outline: none;
-	}
-	.view_warning_img{
-    width: 300px;
-    margin: 0 auto;
-	}
-	.view_warning_img img{
-	    width: 20px;
-	    height: 20px;
-	    float: left;
-	    margin-right: 10px;
-	}
-	.qna_p{
-	    width: 500px;
-	}
-	.qna_p p{
-	    color: red;
-	    float: left;
-	    font-size: 14px;
-	}
-</style>
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -296,25 +24,22 @@
                         <div class="qa"><p style="line-height:70px">Q＆A</p></div>
                     </a>
                 </div>
-                
-                	
-                	
-                <div class="qa_v">
-                	<c:forEach items="${pd.list }" var="q">
+                <c:forEach items="${pd.list }" var="q">
+                	<div class="qa_v">
+              		
                     <div class="qa_no">
                     	<input type="hidden" class="qNoHidden" value="${q.qaCommentNo }">
                         <div class="comment">
                            	 <a href="/selectOneSpace?S_no=${q.qaRef}" style=color:#f69b02;font-size:14px;>공간명 : ${q.placeName }</a><br>
-                            <textarea class="text" readonly="readonly" style="resize: none;">${q.qaCommentContent}</textarea><br>
+                            <textarea class="text" readonly="readonly">${q.qaCommentContent}</textarea><br>
                     	</div>
-                        <div class="Q_btn">
+                        <div class="Q_btn" style="margin-left: 115px;">
                         <a class="qdate" style="color:#605f5d">${q.qaCommentDate }</a><br>
-                            <button class="reviewBtn"style="color:#f69b02; border-color:#f69b02" ><a href="/qaCommentDelete?qaCommentNo=${q.qaCommentNo }"style="color:#f69b02">삭제</a></button>
+                            <button class="my_reviewBtn"style="color:#f69b02; border-color:#f69b02" ><a href="/qaCommentDelete?qaCommentNo=${q.qaCommentNo }"style="color:#f69b02">삭제</a></button>
                         </div>
                     </div>
-                    </c:forEach>
                 </div>
-
+				</c:forEach>
                 
                <div class="qa_navi">${pd.pageNavi }</div>
             </div>
