@@ -155,7 +155,7 @@
 						<h5>소개말<span>*</span></h5>
 					</div>
 					<div class="content_text">
-						<textarea id="hostContent" name="hostContent" maxlength="30" placeholder="프로필에 노출될 소개말을 입력해주세요." " style="height:108px; resize: none;" required>${sessionScope.host.hostContent}</textarea>
+						<textarea id="hostContent" name="hostContent" maxlength="30" placeholder="프로필에 노출될 소개말을 입력해주세요." style="height:108px; resize: none;" required>${sessionScope.host.hostContent}</textarea>
 						<p style="display: none;" id="contentErrorMsg">소개말(0~30자)은 필수 입력입니다.</p>
 					</div>
 				</div>
