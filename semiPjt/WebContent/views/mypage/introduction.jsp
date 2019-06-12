@@ -62,5 +62,11 @@
         </div>
     </section>
 	<jsp:include page="/WEB-INF/common/footer.jsp"/>
+	<script>
+	function searchBtn() {
+        window.location = "/viewsAll";
+    }
+	</script>
 </body>
+
 </html>
