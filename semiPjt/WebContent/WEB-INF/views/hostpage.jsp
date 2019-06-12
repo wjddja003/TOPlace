@@ -126,11 +126,16 @@
     .day{  
    		font-size: 11px;
    		text-align: -webkit-right;
+   		clear: both;
    		
     }
     .day2{
      font-size: 14px;
      text-align: right;
+     margin-right: 130px;
+	
+
+     
     }
     .reviewComment{
  	   float: right;
@@ -158,19 +163,22 @@
       
        width: 773px;
        text-align: left;    
+       height: 100px;
       
     
     }
     .QRAcomment{
        float: left;
         width: 70%;
-        margin-left: 115px;
+      
         font-size: 20px;
+        margin-left: 30px;
     }
-    .navi{
+    .host_navi{
 		float: left;
 	    width: 100%; 		
-	    letter-spacing: 10px;	  
+	    letter-spacing: 10px;  	  
+	    text-align: center;
 	}
 	.navi2{
 		float: left;
@@ -185,6 +193,7 @@
 		margin-top: 50px;
 	}
 	.hostpage_DATE{	
+	text-align: -webkit-right;
 	}
     .QRA_DATE{
     float: right;
@@ -239,7 +248,11 @@
 	.qacomment{
 		
     	width: 85.3%;
-		border-bottom: 4px solid #f69b02
+		font-size: 20px;
+		margin-left: 130px;
+}
+
+		
    
 	}.placename{
 		float: left;
@@ -249,12 +262,18 @@
 		color: #183058;
 	    margin-bottom: 10px;
 	}
-	
+	.reviewimg2{
+	    border-radius: 50%;
+    width: 100px;
 
-
-
-
-   		
+    float: left;
+    margin-top: 30px;
+    background-color: ivory;
+    background-size: cover;
+	}			
+   	
+   	.QA{
+   	height: 200px;
    	}
 </style>
 
@@ -285,7 +304,7 @@
                     <div class="elist">     					
        				<div></div>      				
 					</div>	
-                    <div class="list">리뷰창<br></div>                
+                    <div class="list">리뷰<br></div>                
                     <c:forEach items="${hp.list}" var="hp" varStatus="i">
 	                    	<div class=" reviewlist">	                    		
 	                    		<div><span class="reviewName">${hp.reviewWriter}	                    		
@@ -304,14 +323,15 @@
 				                </div>   
 	                         </div>           	
                     </c:forEach>
-                    <div class="navi">${hp.pageNavi}</div>
+                    <div class="host_navi">${hp.pageNavi}</div>
                     </div>
                     
                     <div class="QRA">
 		                <div class="list2">Q&amp;A<br></div>       	        
-	               <c:forEach items="${Qalist}" var="Q">
-	               	  
-	               	   <c:if test="${Q.qaCommentRef eq 0}">     	                         	               			               
+	               <c:forEach items="${hqa.qalist}" var="Q">
+	               	  <img src="../../img/logo.png" class="reviewimg2">
+	               	   <div class="QA">     	                         	               			               
+	               	   <c:if test="${Q.qaCommentRef eq 0}">
 		                    <div class="QRAlist" id="${Q.qaCommentNo }">	                 
 			                    <div><span class="QRalspan">${Q.qaCommentWriter}</span></div>
 			                    <div class="QRAcomment">${Q.qaCommentContent}</div>
@@ -325,12 +345,15 @@
 			               	</div>
 						</c:if>
 							<c:forEach items="${Qalist}" var="Qa">
-								<c:if test="${Q.qaCommentNo == Qa.qaCommentRef}">		         	 
-									<div class="qacomment">▶ ${Qa.qaCommentWriter } : ${Qa.qaCommentContent } <div class="day2">${Qa.qaCommentDate }</div></div>
-				                    		
+								<c:if test="${Q.qaCommentNo == Qa.qaCommentRef}">
+								<br>		         	 
+									<div class="qacomment"><img src="/img/comment.png"> ${Qa.qaCommentWriter }님의댓글  : ${Qa.qaCommentContent } 
+										<div class="day2">${Qa.qaCommentDate } </div>
+										<br>
+									</div>	
 								</c:if>
 							</c:forEach>
-		         	 	          		                        
+		         	 	 </div>         		                        
                    </c:forEach>  
                    
                    	<div class="navi2">${hqa.pageNavi}</div>

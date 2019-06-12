@@ -48,7 +48,7 @@ public class HostPageServlet extends HttpServlet {
 		}
 		int reqPage2;
 		try {	//강제로 만듬
-			reqPage2 = Integer.parseInt(request.getParameter("reqPage"));
+			reqPage2 = Integer.parseInt(request.getParameter("reqPage2"));
 		}catch(NumberFormatException e) {
 			reqPage2 = 1;
 		}

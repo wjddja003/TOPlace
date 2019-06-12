@@ -278,6 +278,7 @@
 		border:none;
 		float: left;
         padding: 10px;
+        outline: none;
 	}
 	.view_warning_img{
     width: 300px;
