@@ -1473,7 +1473,7 @@
                     }
                     $('.hapDay').html("총 "+array.length+"일");
                     
-                    $('input[name=reservationTime]').val(arrayTime);
+                    
                     
                     $('.selTime2').html("");
                     for(var IItime=0; IItime<selTimeArr.length; IItime++){
