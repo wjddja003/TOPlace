@@ -90,7 +90,7 @@
               
                     <div class="qa_no">
                     	<img id="spaceImg"src="/upload/space/${r.s_img1}"><br>
-                    	예약자성명 :${r.reservationName }<br>
+                    	예약자성명 :${r.reservationBooker }<br>
                     	예약인원 : ${r.reservationPerson}<br>
                     	추가인원 : ${r.reservationOption }     <br>              	
                     	예약날짜 :${r.reservationDay }<br>

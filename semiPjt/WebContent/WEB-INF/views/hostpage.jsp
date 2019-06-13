@@ -308,7 +308,7 @@
                     <c:forEach items="${hp.list}" var="hp" varStatus="i">
 	                    	<div class=" reviewlist">	                    		
 	                    		<div><span class="reviewName">${hp.reviewWriter}	                    		
-	                    		 </span><a href="/selectOneSpace?S_no=${hp.reviewSno}"><img src="../../img/logo.png" class="reviewimg"></a>                  		 
+	                    		 </span><a href="/selectOneSpace?S_no=${hp.reviewSno}"><img src="../../img/user1.png" class="reviewimg"></a>                  		 
 	                    		 </div>
 	                    		<br><br>
 	                    		<div class="comment">${hp.reviewContent}</div>
@@ -329,7 +329,7 @@
                     <div class="QRA">
 		                <div class="list2">Q&amp;A<br></div>       	        
 	               <c:forEach items="${hqa.qalist}" var="Q">
-	               	  <img src="../../img/logo.png" class="reviewimg2">
+	               	  <img src="../../img/user1.png" class="reviewimg2">
 	               	   <div class="QA">     	                         	               			               
 	               	   <c:if test="${Q.qaCommentRef eq 0}">
 		                    <div class="QRAlist" id="${Q.qaCommentNo }">	                 

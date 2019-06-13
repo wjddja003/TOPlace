@@ -77,7 +77,7 @@
 								<input class="insert" type="text" name="userName" id="userName" placeholder="이름" >
 							</li>
 							<li>
-								<input class="insert" type="text" name="idemail" id="idemail" placeholder="이메일">		
+								<input class="insert" type="text" name="idEmail" id="idEmail" placeholder="이메일">		
 							</li>
 						</ul>
 					</div>
@@ -123,6 +123,7 @@
 			return false;
 		}else{
 			if(!userEmail.test(idEmail)){
+				console.log($('#idEmail').val());
 				$('#idEmail').focus();
 				alert("이메일 주소를 다시 확인해주세요.");
 	    		return false;

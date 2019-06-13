@@ -1032,11 +1032,13 @@
            
             $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price); //해당 달의 끝날자만큼 for문이 돌아서 날짜를 td에 입력
             if(i==dayToday){
-               $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
+               $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#183058");
+               $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("color","#fff");
             }
             if(month==parseInt(sysday.getMonth()+1) && i<=day){  //지금 이번달이 맞는지 또 입력되고 있는 날짜가 현재 날자보다 작은지 에따른 조건으로
                if(i==dayToday){
-                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
+                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#183058");
+                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("color","#fff");
                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
                     $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
@@ -1217,7 +1219,8 @@
                
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
                 if(month==monthToday && i==dayToday){
-                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
+                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#183058");
+                   $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("color","#fff");
                 }
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","white");
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","pointer");
@@ -1225,7 +1228,8 @@
                 
                 if(month==parseInt(sysday.getMonth()+1) && i<=day && year==sysday.getFullYear()){
                    if(i==dayToday){
-                       $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","red");
+                       $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#183058");
+                       $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("color","#fff");
                        $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
                         $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
@@ -1469,7 +1473,7 @@
                     }
                     $('.hapDay').html("총 "+array.length+"일");
                     
-                    $('input[name=reservationTime]').val(arrayTime);
+                    
                     
                     $('.selTime2').html("");
                     for(var IItime=0; IItime<selTimeArr.length; IItime++){

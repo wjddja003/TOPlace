@@ -233,7 +233,7 @@ public class UserDao {
 		rset= pstmt.executeQuery();
 		if(rset.next()) {
 			u = new User();
-			u.setUserId(rset.getString("user_name"));
+			u.setUserId(rset.getString("user_id"));
 			u.setEnrollDate(rset.getDate("enroll_date"));
 		}
 		JDBCTemplate.close(rset);
