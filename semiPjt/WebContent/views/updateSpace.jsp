@@ -233,25 +233,21 @@
 			<br><br><br>
 			
 			이미지(수정) <span class="S_red"> *</span><span class="S_condition">한 장당 최대 10MB <span class="S_red">(최소 3장)  (최대 10장)</span></span><br>
-			<%for(int i=1; i<11; i++){ %>	
-				
+			<c:forEach var="i" begin="1" end="10">
 				<div style="display:inline;float:left;height:140px;margin-top:10px;margin-right:10px;">
-				<img id="S_img2img<%=i %>" width="100px" height="100px" >
-				<img id="S_img2x<%=i %>" width="100px" height="100px" style="display:none;">
+				<img id="S_img2img${i }" width="100px" height="100px" >
+				<img id="S_img2x${i }" width="100px" height="100px" style="display:none;">
 				<br>
-				<div class="S_filebox" style="display:inline; border:0;" id="S_upload<%=i %>"> 
-				<label for="S_img2<%=i %>" class="btn btn-outline-warning" style="width:100px;"><%=i %>.업로드</label> 
-				<input type="file" id="S_img2<%=i %>" name="S_img2<%=i %>" onchange="loadImg2(this,<%=i %>)" accept="image/*">
+				<div class="S_filebox" style="display:inline; border:0;" id="S_upload${i }"> 
+				<label for="S_img2${i }" class="btn btn-outline-warning" style="width:100px;">${i }.업로드</label> 
+				<input type="file" id="S_img2${i }" name="S_img2${i }" onchange="loadImg2(this,${i })" accept="image/*">
 				</div>
-				<button type="button" id="S_imgdelbt<%=i %>" class="delbt" onclick="deleteimg(<%=i%>)"><%=i %>.수정</button>
+				<button type="button" id="S_imgdelbt${i }" class="delbt" onclick="deleteimg(${i })">${i }.수정</button>
 				</div>
-			<%} %>
+			</c:forEach>
 			<input type="hidden" id="S_img" name="S_img">
 			<input type="hidden" id="S_imgupdate" name="S_imgupdate">
 			<input type="hidden" id="S_imgdelete" name="S_imgdelete">
-			<%-- 
-			<input type="hidden" id="updateIndex" name="updateIndex">
-			--%>
 			<br><br>
 			<br><br>
 			<br><br>
@@ -307,7 +303,7 @@
 		 - 
 		<input id="S_phone1_3" type="text" class="form-control" style="width:30%;display:inline;" numberOnly maxlength="4">
 		</div>
-		<input type="text" id="S_phone1" name="S_phone1" class="form-control" value="<%=s.getS_phone1()%>" readonly>
+		<input type="text" id="S_phone1" name="S_phone1" class="form-control" value="${s.s_phone1 }" readonly>
 		</div>
 		
 		
@@ -321,7 +317,7 @@
 		 - 
 		<input id="S_phone2_3" type="text" class="form-control" style="width:31%;display:inline;" numberOnly maxlength="4">
 		</div>
-		<input type="text" id="S_phone2" name="S_phone2" class="form-control" value="<%=s.getS_phone1()%>" readonly>
+		<input type="text" id="S_phone2" name="S_phone2" class="form-control" value="${s.s_phone2}" readonly>
 		</div>
 		<br>
 		<br>
