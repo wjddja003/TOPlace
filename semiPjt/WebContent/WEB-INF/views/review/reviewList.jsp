@@ -79,6 +79,7 @@
 		margin: 5px;
 		font-size:17px;
 		text-align: left;
+		overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 	}
 </style>
 <body>

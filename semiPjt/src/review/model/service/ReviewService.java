@@ -59,7 +59,7 @@ public class ReviewService {
 	}
 	public ReviewPageData selectRList(int reqPage,String userId) {
 		Connection conn = JDBCTemplate.getConnection();
-		int numPerPage = 3;
+		int numPerPage = 4;
 		int totalCount = new ReviewDao().totalRCount(conn,userId);
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (reqPage-1)*numPerPage+1;
