@@ -768,6 +768,7 @@ input[type="checkbox"]:checked + label span {
    var priceTimeArr = new Array(); //돈 계산 할 시간 값
    var btnIndex;
    var option = 0;
+   
 		function selectTimeBtnfn(a){
 			$('.swiper-slide button').attr('disabled','true');
 			$('.swiper-slide button').css('color','white');
@@ -832,6 +833,8 @@ input[type="checkbox"]:checked + label span {
       var endTime; // 시간 끝 값
       var hapTime; // 총 시간 값
       var totalTime = 0; //계산할 시간
+      
+      
       for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
     	  $('.swiper-slide button').eq(i).addClass("disabled");
     	  $('.swiper-slide button').eq(i).css("background","#f69b02");
