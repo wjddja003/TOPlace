@@ -210,12 +210,12 @@
 		
 		.like_full{
 	        display: none;
-	        width:40px;
-	    	height: 40px;
+	        width:30px;
+	    	height: 30px;
 	    }
 	    .like{
-	    	width:40px;
-	    	height: 40px;
+	    	width:30px;
+	    	height: 30px;
 	    }
 	    .searchInput:focus{
 	    	outline: none;
@@ -349,7 +349,7 @@
 						<img src='/upload/space/${s.s_img1}' class="bossImg" width="100%" height="250px">
 					</div>
 					<div style='height:140px; padding-left:5px;border:1px solid #e2e2e2;'>
-						<div style="float:left;">
+						<div style="float:left; margin-top:10px;">
 						<a class="likeClick" href="#">
 							<img src="../img/like_border.png" class="like">
                     		<img src="../img/like_full_icon.png" class="like_full">

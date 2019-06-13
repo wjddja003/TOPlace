@@ -347,8 +347,7 @@
 							<c:forEach items="${Qalist}" var="Qa">
 								<c:if test="${Q.qaCommentNo == Qa.qaCommentRef}">
 								<br>		         	 
-									<div class="qacomment"><img src="/img/comment.png"> ${Qa.qaCommentWriter }님의댓글  : ${Qa.qaCommentContent } 
-										<div class="day2">${Qa.qaCommentDate } </div>
+									<div class="qacomment"><img src="/img/comment.png"> ${Qa.qaCommentWriter }님의댓글  : ${Qa.qaCommentContent }
 										<br>
 									</div>	
 								</c:if>

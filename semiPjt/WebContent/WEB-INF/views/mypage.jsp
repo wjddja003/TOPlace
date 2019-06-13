@@ -117,7 +117,7 @@
         #aside-host a{
             text-decoration: none;
             color: #f69b02;
-            margin-left: 73px;
+            
 
         }
         .aside-navi ul{

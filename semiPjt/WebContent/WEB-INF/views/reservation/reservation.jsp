@@ -768,7 +768,7 @@ input[type="checkbox"]:checked + label span {
    var priceTimeArr = new Array(); //돈 계산 할 시간 값
    var btnIndex;
    var option = 0;
-   
+   var arrayTime="";
 		function selectTimeBtnfn(a){
 			$('.swiper-slide button').attr('disabled','true');
 			$('.swiper-slide button').css('color','white');
@@ -789,7 +789,7 @@ input[type="checkbox"]:checked + label span {
             priceTimeArr[btnIndex] = 0;
             sendTimeArray.slice(btnIndex);
             selTimeArr.slice(btnIndex);
-            for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
+            for(var i=${s.s_start}; i<${s.s_end}; i++){
           	  	$('.swiper-slide button').eq(i).addClass("disabled");
           		$('.swiper-slide button').eq(i).html(i+"<br>￦"+'<fmt:formatNumber type="number" maxFractionDigits="3" value="${s.s_price1}" />');
           	  	$('.swiper-slide button').eq(i).css("background","#f69b02");
@@ -835,7 +835,7 @@ input[type="checkbox"]:checked + label span {
       var totalTime = 0; //계산할 시간
       
       
-      for(var i='${s.s_start}'; i<'${s.s_end}'; i++){
+      for(var i=${s.s_start}; i<${s.s_end}; i++){
     	  $('.swiper-slide button').eq(i).addClass("disabled");
     	  $('.swiper-slide button').eq(i).css("background","#f69b02");
       }
