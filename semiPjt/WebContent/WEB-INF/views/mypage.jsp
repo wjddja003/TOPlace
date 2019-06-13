@@ -106,12 +106,13 @@
         }
         #aside-host{
             border: 1px solid gray;
-            width: 100%;
+            width: 300px;
             height: 80px;
             line-height:80px;
             bottom : 0px;
             position: fixed;
             background-color: #183058;
+            text-align:center;
         }
         #aside-host a{
             text-decoration: none;

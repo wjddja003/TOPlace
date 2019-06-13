@@ -15,32 +15,35 @@
     <header>
         <div id="searchAlert">검색어를 입력해주세요.</div>
         <div id="detach_div">
-	        <div class="header logo" style="width:15%">
-	            <a href="/index.jsp"><img src="../../img/logo.png" width="200px" height="100px"></a>
-	        </div>
-	        <!--logo Fin-->
-	        <div class="header navi" style="width:60%;">
+	        <div class="header logo" style="width:100%">
+	            
+	            <div class="header navi" style="width:1903px;">
 	            <ul id="navi-bar">
-	               <li class="navi-li"> <a href="/viewsAll">모든 공간보기</a></li>
+	            	<li class="navi-li"><a href="/index.jsp" style="float:left;"><img src="../../img/logo.png" width="200px" height="100px"></a></li>
+	               <li class="navi-li" style="margin-left:65px;"> <a href="/viewsAll">모든 공간보기</a></li>
 	                <li class="navi-li"><a href="/viewsBest">베스트 공간보기</a></li>
 	                <li class="navi-li"><a href="/insertSpaceCheck">공간등록</a></li>
+	                </ul>
+	                <ul style="float:right; width:690px;">
+	                <li class="navi-li"><div class="header realtime" style="width:200px; height:100px; text-align: left; position: relative;">
+				        	<div class="realtimeDiv">
+			                	<span id="ranking" style="height: 20px; line-height: 35px;">실시간</span>
+			          		</div>
+			                <div class="header_ranking">
+			                    <div class="header_ranking_h" style="text-align: center;">
+			                        <p>실시간 급상승 검색어</p>
+			                    </div>
+			                    <ul style="line-height: 100px;">
+			                    </ul>
+			                </div>
+			            </div>
+           			 </li>
+	                <li class="navi-li"><div class="header search" style="width:144px; line-height: 100px;"><span>검색</span></div></li>
+	                <li class="navi-li"><div class="header mypage" style="width:152px; line-height: 100px;"><span>마이페이지</span></div></li>
 	            </ul>
+	        </div>   
 	        </div>
-	        <div class="header realtime" style="width:9.6%; height:100px; text-align: left; position: relative;">
-	        	<div class="realtimeDiv">
-                	<span id="ranking" style="height: 20px; line-height: 35px;">실시간</span>
-          		</div>
-                <div class="header_ranking">
-                    <div class="header_ranking_h" style="text-align: center;">
-                        <p>실시간 급상승 검색어</p>
-                    </div>
-                    <ul style="line-height: 100px;">
-                    </ul>
-                </div>
-            </div>
-	        <div class="header search" style="width:7.7%; line-height: 100px;"><span>검색</span></div>
-	       
-		    <div class="header mypage" style="width:7.7%; line-height: 100px;"><span>마이페이지</span></div>
+	        <!--logo Fin-->
 	        
         </div>
         <div id="header-search" class="exception-header">
