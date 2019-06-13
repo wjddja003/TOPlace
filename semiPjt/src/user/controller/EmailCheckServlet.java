@@ -38,8 +38,8 @@ public class EmailCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String user="dmmn1156@naver.com";
-		String password ="lcj0119!@#";
+		String user="joubabo@naver.com";
+		String password ="dhgkfk1324!";
 		
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.naver.com");

@@ -18,23 +18,33 @@
 	  padding:20px; 
 	  border:4px solid #ddd; 
 	  position:absolute; 
-	  left:25px; 
+	  left:30px; 
 	  top:25px;
 	  z-index = 10; 
 	  background:#fff;
-	  width:200px;
-	  height: 50px;
+	  width:250px;
+	  height: 100px;
 	  font-size:12px;
 	}
-
 	#layerPopup button{
-	  cursor:pointer;
+	  	cursor:pointer;
 	}
 	.countTimeMinute{
 		color:red;
 	}
 	.countTimeSecond{
 		color:red;
+	}
+	.emailCheckClose{
+		border:none;
+		border-radius: 5px;
+		background-color: #f69b02;
+		color:#f7f7f7;
+		width: 50px;
+		height: 30px;
+	}
+	.emailCheckNum{
+		height: 25px;
 	}
 </style>
 </head>
@@ -44,8 +54,8 @@
 <h4>인증 번호 7자리를 입력하세요</h4>
 	<div class="container">
 		<form method="post" name="authenform" onsubmit="return check();">
-			<input type="text" name="authnum">
-			<input type="submit" class="btn btn-info" value="인증">
+			<input type="text" name="authnum" class="emailCheckNum">
+			<input type="submit" class="emailCheckClose" value="인증">
 			<span class="countTimeMinute"></span>
 			<span>:</span>
 			<span class="countTimeSecond"></span>
