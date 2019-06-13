@@ -209,7 +209,7 @@ section {
 	background: url(/img/bg.jpg) no-repeat center center;
 	background-size: cover;
 	background-repeat: no-repeat;
-	width: 100%;
+	width: 1903px;
 	height: 100%;
 }
 
@@ -251,6 +251,7 @@ section {
 }
 /*main section fin*/
 footer {
+	width:1903px;
 	 height: 240px;
 	 margin-top: 0px;
 	 background: #183058;  

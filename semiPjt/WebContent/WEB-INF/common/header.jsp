@@ -38,7 +38,7 @@
 			                </div>
 			            </div>
            			 </li>
-	                <li class="navi-li"><div class="header search" style="width:144px; line-height: 100px;"><span>검색</span></div></li>
+	                <li class="navi-li"><div class="header search" style="width:230px; line-height: 100px;"><span>검색</span></div></li>
 	                <li class="navi-li"><div class="header mypage" style="width:152px; line-height: 100px;"><span>마이페이지</span></div></li>
 	            </ul>
 	        </div>   
