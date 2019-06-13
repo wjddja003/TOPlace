@@ -105,10 +105,7 @@
 	<h1>공간등록</h1><br>
 	<!-- 프로세스바 -->
 	<div id="S_processBar" style="text-align:center;">
-		<div id="S_processBar-1">1. 공간 정보<br>공간 정보를 입력해주세요.</div>
-		<div id="S_processBar-2">2. 연락처 정보<br>연락처 정보를 입력해주세요.</div>
-		<div id="S_processBar-3">3. 이용 안내<br>이용 정보를 입력해주세요.</div>
-		<div id="S_processBar-4">4. 결제 사항<br>결제 사항을 입력해주세요.</div>
+		<div id="S_processBar-1">1. 공간 정보<br>공간 정보를 입력해주세요.</div><div id="S_processBar-2">2. 연락처 정보<br>연락처 정보를 입력해주세요.</div><div id="S_processBar-3">3. 이용 안내<br>이용 정보를 입력해주세요.</div><div id="S_processBar-4">4. 결제 사항<br>결제 사항을 입력해주세요.</div>
 	</div><!-- 프로세스바 -->
 		<br>
 		<br>
@@ -122,33 +119,34 @@
 	<form action="/insertSpace" method="post" enctype="multipart/form-data" onsubmit="return check()">
 		<!-- 프로세스1 -->
 		<div id="S_process-1">
-			<!-- 세션에서 호스트(멤버)정보 하나를 가져옴 -->
 			<input type="hidden" name="S_hostNum" id="S_hostNum" value="${sessionScope.host.hostNo }">
 			<br>
-			공간명 <span class="S_red">*</span><span class="S_condition" id="S_lengthspan1">0자/18자</span> <br>
+			
+			공간명 <span class="S_red">*</span><span class="S_condition" id="S_lengthspan1">0자/18자</span><br>
 			<input type="text" id="S_placeName" name="S_placeName" class="form-control" placeholder="공간명을 입력해주세요.">
 			<span id="S_opspan1"></span><span class="S_condition">사용가능 특수문자 : ( , ) , [ , ] , - , .(마침표), ,(쉼표)</span>
-			<br><br><br>
+			<br>
+			<br>
+			<br>
 			
 			<input type="hidden" name="S_kategorie1" id="S_kategorie1">
 			공간유형 <span class="S_red">*</span><br><span class="S_condition S_red">최소1개선택 &nbsp;최대5개선택</span>
 			<br>
 			<ul id="S_ul1">
-				<li>회의실</li>
-				<li>세미나실</li>
-				<li>다목적홀</li>
-				<li>작업실</li>
-				<li>레저시설</li>
-				<li>파티룸</li>
-				<li>공연장</li>
-				<li>연습실</li>
-				<li>카페</li>
-				<li>스터디룸</li>
-				<li>엠티장소</li>
-				<li>루프탑</li>
-			</ul><br><br><br><br><br><br><br><br><br>
-			
-			
+				<li>회의실</li><li>세미나실</li><li>다목적홀</li>
+				<li>작업실</li><li>레저시설</li><li>파티룸</li>
+				<li>공연장</li><li>연습실</li><li>카페</li>
+				<li>스터디룸</li><li>엠티장소</li><li>루프탑</li>
+			</ul>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 			
 			공간 한줄 소개  <span class="S_red">*</span><span class="S_condition" id="S_lengthspan2">0자/27자</span>
 			<input type="text" id="S_placeIntroduce1" name="S_placeIntroduce1" class="form-control" placeholder="공간을 소개하는 한 줄 문장을 입력해주세요.">
@@ -204,19 +202,18 @@
 			</div>
 			<br><br><br>
 			
-			이미지 <span class="S_red"> *</span><span class="S_condition">한 장당 최대 10MB <span class="S_red">(최소 3장)  (최대 10장)</span></span><br>
-			<%for(int i=1; i<11; i++){ %>	
-				
+			이미지 <span class="S_red"> *</span><span class="S_condition">한 장당 최대 10MB <span class="S_red">(최소 3장)  (최대 10장)</span></span><br>	
+			<c:forEach var="i" begin="1" end="10">	
 				<div style="display:inline;float:left;height:140px;margin-top:10px;margin-right:10px;">
-				<img id="S_img2img<%=i %>" width="100px" height="100px" >
-				<img id="S_img2x<%=i %>" width="100px" height="100px" style="display:none;">
+				<img id="S_img2img${i}" width="100px" height="100px" >
+				<img id="S_img2x${i}" width="100px" height="100px" style="display:none;">
 				<br>
 				<div class="S_filebox" style="display:inline; border:0;"> 
-				<label for="S_img2<%=i %>" class="btn btn-outline-warning" style="width:100px;"><%=i %>.업로드</label> 
-				<input type="file" id="S_img2<%=i %>" name="S_img2<%=i %>" onchange="loadImg2(this,<%=i %>)" accept="image/*">
+				<label for="S_img2${i}" class="btn btn-outline-warning" style="width:100px;">${i}.업로드</label> 
+				<input type="file" id="S_img2${i}" name="S_img2${i}" onchange="loadImg2(this,${i})" accept="image/*">
 				</div>
 				</div>
-			<%} %>
+			</c:forEach>
 			
 			<br><br>
 			<br><br>
@@ -300,12 +297,16 @@
 		
 		이용시간 <span class="S_red">*</span><br>
 		<select class="form-control" style="display:inline;width:46%;" id="S_start">
-		<% for(int i = 0 ; i<25; i++){ %>
-			<%if(i==0){%>
-				<option value="<%=i%>" selected><%=i %>시</option>
-			<% continue;}%>
-			<option value="<%=i%>"><%=i %>시</option>
-			<%} %>
+		<c:forEach var="i" begin="0" end="24">
+			<c:choose>
+			<c:when test="${i eq 0}">
+				<option value="${i }" selected>${i }시</option>
+			</c:when>
+			<c:otherwise>
+				<option value="${i }">${i }시</option>
+			</c:otherwise>
+			</c:choose>
+		</c:forEach>
 		</select>  
 		   부터  
 		 <select class="form-control" style="display:inline;width:47%;" id="S_end">
