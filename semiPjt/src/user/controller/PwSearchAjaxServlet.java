@@ -43,8 +43,8 @@ public class PwSearchAjaxServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
 		String email = request.getParameter("email");
-		String user="dmmn1156@naver.com";
-		String password ="dlckdwlr!@";
+		String user="joubabo@naver.com";
+		String password ="dhgkfk1324!";
 
 		
 		
@@ -105,19 +105,19 @@ public class PwSearchAjaxServlet extends HttpServlet {
 							"            </tr>\r\n" + 
 							"            <tr>\r\n" + 
 							"                <td>\r\n" + 
-							"                    <div class=\"mailContainer\" style=\"width:100%; text-align:center; border: 1px solid gray; background-color: floralwhite; \">\r\n" + 
+							"                    <div class=\"mailContainer\" style=\"width:100%; text-align:center; border: 1px solid gray; background-color: #183058; \">\r\n" + 
 							"                        <center>\r\n" + 
 							"                            <div class=\"mailheader\">\r\n" + 
-							"                                <p style=\"padding:15px; font-size: 30px; font-weight: 900;\"><span style=\"color:blue;\">TOPlace</span> 비밀번호 찾기 </p>\r\n" + 
+							"                                <p style=\"padding:15px; font-size: 30px; font-weight: 900; color:white;\"><span style=\"color:#f69b02;\">TOPlace</span> 비밀번호 찾기 </p>\r\n" + 
 							"                                <div class=\"mailContent\" style=\"background: white; border : 1px solid gray; width:85%\">\r\n" + 
-							"                                    <p style=\"padding:30px 0 0 0; font-weight: 700;\">안녕하세요 <span style=\"color:blue;\">고객님</span><br>TOPlace 비밀번호 찾기 위한  메일입니다.</p>\r\n" + 
+							"                                    <p style=\"padding:30px 0 0 0; font-weight: 700;\">안녕하세요 <span style=\"color:#f69b02;\">고객님</span><br>TOPlace 비밀번호 찾기 위한  메일입니다.</p>\r\n" + 
 							"                                    <p style=\"padding:20px 0 30px 0;\">입력해주신 정보에대한 임시비밀번호 입니다. <br> 꼭 로그인후 비밀번호 수정을 해주시기 바랍니다.</p>\r\n" + 
 							"                                    <div class=\"number\" style=\"width:90%; border-top:1px solid gray; height:100px; line-height:100px;\">\r\n" + 
 							"                                        <p style=\"font-size:20px; font-weight:700;\">임시 비밀번호 :"+ buf +"</p>\r\n" + 
 							"                                    </div>\r\n" + 
 							"                                </div>\r\n" + 
 							"                                <div class=\"mailfooter\" style=\"padding:10px; width:85%; font-size:12px; text-align:left;\">\r\n" + 
-							"                                    <p>* 이 메일은 발신전용 메일입니다. 타인이 고객님의 이메일 정보를 수집하여 입력 할 경우 메일이 발송될 수 있습니다.<br>잘못 수신된 메일이라면 TOPlace 고객센터로 연락 주시기 바랍니다.</p>\r\n" + 
+							"                                    <p style=\"color:white;\">* 이 메일은 발신전용 메일입니다. 타인이 고객님의 이메일 정보를 수집하여 입력 할 경우 메일이 발송될 수 있습니다.<br>잘못 수신된 메일이라면 TOPlace 고객센터로 연락 주시기 바랍니다.</p>\r\n" + 
 							"                                </div>\r\n" + 
 							"                            </div>\r\n" + 
 							"                        </center>\r\n" + 
