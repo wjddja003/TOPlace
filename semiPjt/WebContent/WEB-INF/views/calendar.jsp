@@ -1035,7 +1035,7 @@
                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#183058");
                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("color","#fff");
             }
-            if(month==parseInt(sysday.getMonth()+1) && i<=day){  //지금 이번달이 맞는지 또 입력되고 있는 날짜가 현재 날자보다 작은지 에따른 조건으로
+            if(month==parseInt(sysday.getMonth()+1) && i<=day && year==yearToday){  //지금 이번달이 맞는지 또 입력되고 있는 날짜가 현재 날자보다 작은지 에따른 조건으로
                if(i==dayToday){
                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#183058");
                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("color","#fff");
@@ -1124,15 +1124,11 @@
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
                 //기본 날짜 넣는 로직
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","white");
+                $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("color","#000");
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","pointer");
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).removeClass("inhibitDay");
                 //기존에 가지고있을 예약불가 처리 날짜 리셋
-                if(month==parseInt(sysday.getMonth()+1) && i<day && year==sysday.getFullYear()){
-                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#f7f7f7");
-                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
-                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).addClass("inhibitDay");
-                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>");
-                }
+                
                 //저번달 달력에 담아있을 예약불가 처리 날짜 리셋
                 for(var i2 = 0; i2<$(".calendar").eq(visibleMonth).find('td').length; i2++) {
                     if($(".calendar").eq(visibleMonth).find('td').eq(i2).find('p').text()==""){
@@ -1218,7 +1214,7 @@
                var price = "<fmt:formatNumber type='number' maxFractionDigits='3' value='${s.s_price1}' />";
                
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).html("<p>"+i+"</p>￦"+price);
-                if(month==monthToday && i==dayToday){
+                if(year==yearToday && month==monthToday && i==dayToday){
                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#183058");
                    $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("color","#fff");
                 }
@@ -1227,7 +1223,7 @@
                 $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).removeClass("inhibitDay");
                 
                 if(month==parseInt(sysday.getMonth()+1) && i<=day && year==sysday.getFullYear()){
-                   if(i==dayToday){
+                   if(year==yearToday && month==monthToday && i==dayToday){
                        $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("background-color","#183058");
                        $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("color","#fff");
                        $(".calendar").eq(visibleMonth).find('tr').eq(weeknum).find('td').eq(DOW).css("cursor","not-allowed");
