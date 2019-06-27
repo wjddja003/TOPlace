@@ -310,12 +310,16 @@
 		</select>  
 		   부터  
 		 <select class="form-control" style="display:inline;width:47%;" id="S_end">
-		<% for(int i = 0 ; i<25; i++){ %>
-			<%if(i==24){%>
-				<option value="<%=i%>" selected><%=i %>시</option>
-			<% continue;}%>
-			<option value="<%=i%>"><%=i %>시</option>
-			<%} %>
+		<c:forEach var="i" begin="0" end="24">
+			<c:choose>
+			<c:when test="${i eq 0}">
+				<option value="${i }" selected>${i }시</option>
+			</c:when>
+			<c:otherwise>
+				<option value="${i }">${i }시</option>
+			</c:otherwise>
+			</c:choose>
+		</c:forEach>
 		</select>
 		 까지
 		<input type="hidden" id="S_starthidden" name="S_start" value="0">

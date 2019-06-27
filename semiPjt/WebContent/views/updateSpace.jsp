@@ -335,25 +335,33 @@
 		
 		이용시간(수정) <span class="S_red">*</span><br>
 		<select class="form-control" style="display:inline;width:46%;" id="S_start">
-		<% for(int i = 0 ; i<25; i++){ %>
-			<%if(i==0){%>
-				<option value="<%=i%>" selected><%=i %>시</option>
-			<% continue;}%>
-			<option value="<%=i%>"><%=i %>시</option>
-			<%} %>
+		<c:forEach begin="0" end="24" var="i">
+			<c:choose>
+			<c:when test="${i eq 0 }">
+				<option value="${i }" selected>${i }시</option>
+			</c:when>
+			<c:otherwise>
+				<option value="${i }">${i }시</option>
+			</c:otherwise>
+			</c:choose>
+		</c:forEach>
 		</select>  
 		   부터  
 		 <select class="form-control" style="display:inline;width:47%;" id="S_end">
-		<% for(int i = 0 ; i<25; i++){ %>
-			<%if(i==24){%>
-				<option value="<%=i%>" selected><%=i %>시</option>
-			<% continue;}%>
-			<option value="<%=i%>"><%=i %>시</option>
-			<%} %>
+		<c:forEach begin="0" end="24" var="i">
+			<c:choose>
+			<c:when test="${i eq 0 }">
+				<option value="${i }" selected>${i }시</option>
+			</c:when>
+			<c:otherwise>
+				<option value="${i }">${i }시</option>
+			</c:otherwise>
+			</c:choose>
+		</c:forEach>
 		</select>
 		 까지
-		<input type="hidden" id="S_starthidden" name="S_start" value="<%=s.getS_start()%>">
-		<input type="hidden" id="S_endhidden" name="S_end" value="<%=s.getS_end()%>">
+		<input type="hidden" id="S_starthidden" name="S_start" value="${s.s_start }">
+		<input type="hidden" id="S_endhidden" name="S_end" value="${s.s_end }">
 		<br>
 		<br>
 		<br>
